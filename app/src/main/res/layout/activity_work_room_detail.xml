@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.shop.activity.WorkRoomDetailActivity">
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_50_dip">
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_44_dip"
+        android:background="@color/alpha_75_black"
+        android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3000"
+                android:textColor="@color/gray_E7370C"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/comment_60_dip"
+                android:textSize="@dimen/comment_18_size" />
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="@dimen/comment_100_dip"
+                android:layout_height="@dimen/comment_50_dip"
+                android:layout_weight="1"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_setting_breake"
+                android:gravity="center"
+                android:text="提交订单"
+                android:textColor="#fff" />
+    </RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="@dimen/comment_10_dip"
+            android:src="@drawable/icon_shopping_cart"
+           />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_above="@id/linearLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <include layout="@layout/top_common"/>
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview
+            android:id="@+id/whs_workroom_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <LinearLayout
+                    android:id="@+id/li_workroom_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="131dp">
+
+                        <ImageView android:layout_width="match_parent"
+                            android:layout_height="131dp"
+                            android:background="@drawable/icon_shop_banner">
+                        </ImageView>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_marginStart="10dp"
+                                android:textColor="@color/white"
+                                android:text="评分4.6  浏览量1128次  距离2.7km">
+                            </TextView>
+                        </RelativeLayout>
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/shop_detail_text"
+                        android:text="好物推荐">
+                    </TextView>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/re_recommendable_projects_shop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                    <View android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:background="@color/home_bottom_radio">
+                    </View>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/search2"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <LinearLayout
+                        android:id="@+id/li_workroom_xuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+                        <!--这里是悬停布局-->
+                        <include layout="@layout/common_top"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+                <!--这里是底部的布局-->
+                <include layout="@layout/common_bottom"/>
+
+            </LinearLayout>
+
+        </com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview>
+
+        <LinearLayout
+            android:id="@+id/search01"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
