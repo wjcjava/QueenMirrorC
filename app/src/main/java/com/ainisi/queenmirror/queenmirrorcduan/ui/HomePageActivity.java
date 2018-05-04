@@ -40,11 +40,10 @@ public class HomePageActivity extends BaseOneActivity  implements View.OnClickLi
     protected int setLayoutId() {
         return R.layout.activity_home_page;
     }
-
     @Override
     protected void initData() {
         mFragments = new ArrayList<>();
-        HomeFragment homeOneFragment = new HomeFragment();
+        HomeFragmentOne homeOneFragment = new HomeFragmentOne();
         ShopMallFragment categoryOneFragment = new ShopMallFragment();
         OrderFragment serviceOneFragment = new OrderFragment();
         MasterFragment mineOneFragment = new MasterFragment();
@@ -101,7 +100,6 @@ public class HomePageActivity extends BaseOneActivity  implements View.OnClickLi
         ll_daka.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

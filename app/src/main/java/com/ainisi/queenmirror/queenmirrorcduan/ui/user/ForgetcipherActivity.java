@@ -52,7 +52,7 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
     @Override
     protected void initView() {
         super.initView();
-        myCountDownTimer = new MyCountDownTimer(30000, 1000);
+        myCountDownTimer = new MyCountDownTimer(60000, 1000);
         initText();
 
         loginSee.setImageResource(R.drawable.icon_login_nosee);

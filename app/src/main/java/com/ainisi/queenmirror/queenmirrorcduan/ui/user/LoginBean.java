@@ -17,7 +17,6 @@ class LoginBean {
     private String errorCode;
     private String msg;
     private BodyBean body;
-
     public boolean isSuccess() {
         return success;
     }

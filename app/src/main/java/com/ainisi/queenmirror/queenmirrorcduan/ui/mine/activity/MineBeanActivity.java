@@ -21,9 +21,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- *
  * 我的魔豆
- *
  */
 public class MineBeanActivity extends BaseActivity implements HttpCallBack{
     @Bind(R.id.title_title)
@@ -48,10 +46,8 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack{
     @Override
     public void initView() {
         initText();
-
         initDate();
     }
-
     private void initText() {
         beantitle.setText(R.string.magic_bean);
         beantitle.setTextColor(Color.WHITE);
@@ -82,7 +78,6 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack{
             case R.id.iv_date:
                 startActivity(new Intent(this,BeanstalkActivity.class));
                 break;
-
         }
 
 
