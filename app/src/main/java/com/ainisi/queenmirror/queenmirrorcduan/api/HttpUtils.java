@@ -119,8 +119,6 @@ public class HttpUtils {
                     @Override
                     public void onBefore(BaseRequest request) {
                         super.onBefore(request);
-
-
                         if (showLoadingDialog)
                             httpCallBack.showLoadingDialog();
                     }
@@ -141,9 +139,7 @@ public class HttpUtils {
                                 httpCallBack.showErrorMessage(res);
                                 return;
                             }*/
-
-                            L.e("???????????? ?" + s);
-
+                            L.e("???????????? ?"+s);
                             //成功
                             httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {

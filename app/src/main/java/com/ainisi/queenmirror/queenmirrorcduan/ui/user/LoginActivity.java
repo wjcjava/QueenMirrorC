@@ -3,17 +3,11 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.user;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PurchaseActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -53,9 +47,10 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
             case R.id.title_back:
                 finish();
                 break;
+
             //注册
             case R.id.title_right:
-                //CeshiData();
+                CeshiData();
                 // Toast.makeText(mContext, "你点击了注册", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;

@@ -11,15 +11,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ainisi.queenmirror.common.commonutils.TUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.lzy.okgo.cache.CacheMode;
 
+import java.io.IOException;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
 /**
  * 注册
  */
@@ -76,8 +88,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 if (TextUtils.isEmpty(phoneNumber.getText())) {
                     T.show("手机号不能为空");
                 } else {
-                    //initValidation();
-                    inithttp();
+                    initValidation();
                     myCountDownTimer.start();
                 }
 
@@ -114,9 +125,8 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         }
     }
 
-    private void inithttp() {
 
-    }
+
 
     private void initRemoveText() {
         //手机号为空时隐藏
@@ -129,12 +139,12 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
     }
 
-    //    private void initValidation() {
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("telNo", phoneNumber.getText().toString().trim());
-//        HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-//    }
-//    @Override
+        private void initValidation() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("telNo", phoneNumber.getText().toString().trim());
+        HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+   @Override
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.VERIFY://获取验证码
@@ -172,7 +182,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             //重新给textview设置文字
             validation.setText("重新获取验证码");
             //设置可点击
-            //initValidation();
+            initValidation();
             validation.setClickable(true);
         }
     }
