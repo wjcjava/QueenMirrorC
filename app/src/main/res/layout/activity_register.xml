@@ -48,7 +48,6 @@
                 <ImageView
                     android:id="@+id/iv_remove_text"
                     android:layout_width="@dimen/comment_20_dip"
-                    android:visibility="gone"
                     android:layout_marginTop="@dimen/comment_12_dip"
                     android:layout_height="@dimen/comment_30_dip"
                     android:src="@drawable/icon_login_remove"

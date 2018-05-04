@@ -222,6 +222,7 @@
     <string name="_refund_amount">退款金额：</string>
     <string name="refund_instructions">退款说明：</string>
     <string name="refund_credentials">上传凭证</string>
+    <string name="city_suzhou">苏州</string>
 
 
 </resources>

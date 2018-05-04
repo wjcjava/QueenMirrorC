@@ -25,7 +25,16 @@ import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyShopAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.VerifyBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
@@ -38,9 +47,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.lzy.okgo.cache.CacheMode;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -51,7 +62,7 @@ import butterknife.OnClick;
  * 商城
  */
 
-public class ShopMallFragment extends BaseFragment {
+public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.banner)
     Banner banner;
     @Bind(R.id.iv_sort)
@@ -306,6 +317,7 @@ public class ShopMallFragment extends BaseFragment {
                 ivsort.setVisibility(View.VISIBLE);
                 break;
             case R.id.rb_sort:
+                CeshiData();
                 sc_home_scroll.smoothScrollTo(0, 1180);
               /*  if (sortFragment == null) {
                     sortFragment = new SortFragment();
@@ -377,6 +389,43 @@ public class ShopMallFragment extends BaseFragment {
         //提交事务
         //transaction.commit();
 
+
+    }
+    /**
+     * 测试
+     */
+    private void CeshiData() {
+
+        //传参数
+        HashMap<String,String> params = new HashMap<>();
+        params.put("telNo", "17600291072");
+
+        //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
+        HttpUtils.doPost(ACTION.VERIFY,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+    }
+
+    @Override
+    public void onSuccess(int action, String res){
+        switch (action){
+            case ACTION.VERIFY://注册
+                LoginCeshiBean verifyBean = GsonUtil.toObj(res,LoginCeshiBean.class);
+
+                L.e("??????"+verifyBean.getMsg());
+                break;
+            case ACTION.LOGIN://登录
+
+                break;
+        }
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
 
     }
 

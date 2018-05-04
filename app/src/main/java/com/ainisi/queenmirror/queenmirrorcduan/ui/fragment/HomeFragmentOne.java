@@ -26,8 +26,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.DetailActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.GDLocationUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
@@ -42,11 +42,13 @@ import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MarqueeView;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
+import com.amap.api.location.AMapLocation;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -80,6 +82,7 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
     LinearLayout li_home_screen_bottom;
 
 
+
     @Bind(R.id.sc_home_scroll)
     ScrollView sc_home_scroll;
 
@@ -101,10 +104,13 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
     ImageView imgSurface;
     @Bind(R.id.iv_uspension_surface)
     ImageView uspensionSurface;
+    @Bind(R.id.txt_bustling)
+    TextView  mLocation;
     View firstLayout;
 
+
     Handler handler = new Handler();
-    //综合排序
+    //综合排序定位
     SortFragment sortFragment;
     //销量最高
     SalesFragment salesFragment;
@@ -130,19 +136,12 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
     private boolean isClick;
     private GridViewAdapter gridadapter;
     private GridViewAdapter gridViewAdapter;
+    private String city;
 
     public HomeFragmentOne() {
     }
 
-   /* @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_home;
-    }
 
-    @Override
-    public void initPresenter() {
-
-    }*/
 
     @Override
     protected int setLayoutId() {
@@ -155,6 +154,9 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
         initDate();
         initQuee();
         initpopwindow();
+        // 定位工具初始化
+        GDLocationUtil.init(getActivity());
+        initLocation();
         sc_home_scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
@@ -171,6 +173,30 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
         listadapter = new ListViewAdapter(getContext());
         listView.setAdapter(listadapter);
     }
+
+    /**
+     *
+     */
+    private void initLocation() {
+        // 获取之前定位位置，如果之前未曾定位，则重新定位
+        GDLocationUtil.getLocation(new GDLocationUtil.MyLocationListener() {
+            @Override
+            public void result(AMapLocation location) {
+                //针对location进行相关操作，如location.getCity()，无需验证location是否为null;
+                city=location.getCity();
+                mLocation.setText(city);
+            }
+        });
+        // 获取当前位置，无论是否定位过，重新进行定位
+        GDLocationUtil.getCurrentLocation(new GDLocationUtil.MyLocationListener() {
+
+            @Override
+            public void result(AMapLocation location) {
+                //针对location进行相关操作，如location.getCity()，无需验证location是否为null;
+            }
+        });
+    }
+
     /**
      * 点击首页跑马灯效果
      */
@@ -186,6 +212,9 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
         });
 
     }
+
+
+
 
     @Override
     public void onResume() {

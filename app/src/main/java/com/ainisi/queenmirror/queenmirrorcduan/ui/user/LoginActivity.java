@@ -75,7 +75,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     private void CeshiData() {
         //传参数
         HashMap<String, String> params = new HashMap<>();
-        params.put("telNo", "17365387881");
+        params.put("telNo", "1");
         params.put("userPass", "1");
         //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
         HttpUtils.doPost(ACTION.REGIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
