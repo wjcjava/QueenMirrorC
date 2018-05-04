@@ -17,9 +17,16 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -50,6 +57,8 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         return R.layout.activity_register;
     }
 
+
+
     @Override
     protected void initView() {
         super.initView();
@@ -79,9 +88,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 if (TextUtils.isEmpty(phoneNumber.getText())) {
                     T.show("手机号不能为空");
                 } else {
-                    HashMap<String, String> params = new HashMap<>();
-                    params.put("telNo", phoneNumber.getText().toString().trim());
-                    HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, RegisterActivity.this);
+                    initValidation();
                     myCountDownTimer.start();
                 }
 
@@ -117,6 +124,10 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             click = true;
         }
     }
+
+
+
+
     private void initRemoveText() {
         //手机号为空时隐藏
         if (TextUtils.isEmpty(phoneNumber.getText())) {
@@ -128,7 +139,11 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
     }
 
-
+        private void initValidation() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("telNo", phoneNumber.getText().toString().trim());
+        HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
    @Override
     public void onSuccess(int action, String res) {
         switch (action) {
@@ -160,13 +175,14 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             validation.setClickable(false);
             validation.setText((l / 1000) + "s后重新获取");
         }
+
         //计时完毕的方法
         @Override
         public void onFinish() {
             //重新给textview设置文字
             validation.setText("重新获取验证码");
             //设置可点击
-
+            initValidation();
             validation.setClickable(true);
         }
     }

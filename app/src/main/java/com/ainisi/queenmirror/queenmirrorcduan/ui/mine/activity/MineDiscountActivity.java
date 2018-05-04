@@ -21,8 +21,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 //优惠券
 public class MineDiscountActivity extends BaseActivity {
-    @Bind(R.id.title_title)
-    TextView discounttitle;
+
     @Bind(R.id.mine_tab)
     TabLayout minetab;
     @Bind(R.id.mine_pager)
@@ -42,7 +41,7 @@ public class MineDiscountActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        discounttitle.setText(R.string.coupon);
+
         initDate();
 
         ViewPager viewPager = new ViewPager(getSupportFragmentManager(), minefrlist, list);

@@ -7,9 +7,8 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 
-/**
- * Created by john on 2018/5/4.
- */
+
+
 
 public class GDLocationUtil {
     private static AMapLocationClient mlocationClient;
