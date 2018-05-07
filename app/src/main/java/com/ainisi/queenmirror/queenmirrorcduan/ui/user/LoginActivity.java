@@ -50,7 +50,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
 
             //注册
             case R.id.title_right:
-                CeshiData();
+               // CeshiData();
                 // Toast.makeText(mContext, "你点击了注册", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
@@ -80,10 +80,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.REGIST://注册
-                LoginBean loginBean = GsonUtil.toObj(res, LoginBean.class);
-                String msg = loginBean.getMsg();
-                T.show(msg);
-                L.e("??????");
+
                 break;
 
             case ACTION.LOGIN://登录

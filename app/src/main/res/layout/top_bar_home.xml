@@ -14,7 +14,7 @@
         android:gravity="bottom">
 
         <TextView
-            android:id="@+id/txt_bustling"
+            android:id="@+id/tv_home_bustling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/comment_10_dip"
@@ -30,7 +30,7 @@
             android:gravity="right">
 
             <ImageView
-                android:id="@+id/img_search"
+                android:id="@+id/iv_home_search"
                 android:layout_width="@dimen/comment_40_dip"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/comment_5_dip"

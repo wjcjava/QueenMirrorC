@@ -184,7 +184,7 @@
                 />
                 <Button
                     android:layout_below="@id/view_three"
-                    android:id="@+id/user_reg_reg_view"
+                    android:id="@+id/bt_user_confirmregistration"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_44_dip"
                     android:layout_marginStart="@dimen/comment_20_dip"

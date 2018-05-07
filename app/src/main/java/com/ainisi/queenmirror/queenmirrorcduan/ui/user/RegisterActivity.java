@@ -19,16 +19,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.lzy.okgo.cache.CacheMode;
-
-import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -47,18 +43,20 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     TextView validation;
     @Bind(R.id.et_password)
     EditText passWord;
+    @Bind(R.id.et_validation)
+    EditText etValidation;
     @Bind(R.id.iv_login_see)
     ImageView loginSee;
     @Bind(R.id.iv_remove_text)
     ImageView removeText;
     private MyCountDownTimer myCountDownTimer;
     private boolean click;
+    private LoginCeshiBean ceshiBean;
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_register;
     }
-
 
 
     @Override
@@ -80,7 +78,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         registerTitle.setText(R.string.register);
     }
 
-    @OnClick({R.id.title_back, R.id.tv_validation, R.id.iv_remove_text, R.id.iv_login_see, R.id.user_reg_reg_view})
+    @OnClick({R.id.title_back, R.id.tv_validation, R.id.iv_remove_text, R.id.iv_login_see, R.id.bt_user_confirmregistration})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -103,11 +101,20 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             case R.id.iv_login_see:
                 initSee();
                 break;
-            case R.id.user_reg_reg_view:
+            case R.id.bt_user_confirmregistration:
                 if (TextUtils.isEmpty(phoneNumber.getText().toString().trim()) || TextUtils.isEmpty(validation.getText().toString().trim()) || TextUtils.isEmpty(passWord.getText().toString().trim())) {
                     Toast.makeText(this, "请将信息输入完整", Toast.LENGTH_SHORT).show();
                 } else {
-                    T.show("登陆成功");
+                    T.show("注册成功");
+                    HashMap<String, String> paramsRegister = new HashMap<>();
+                    paramsRegister.put("cellPhone",phoneNumber.getText().toString());
+                    paramsRegister.put("userPass",passWord.getText().toString());
+                    paramsRegister.put("contractConfirm","1");
+                    paramsRegister.put("inviteCode","");
+                    paramsRegister.put("ifFirst","0");
+                   // paramsRegister.put("verifyCode",ceshiBean.getBody().getVerifyCode());
+                    paramsRegister.put("verifyCodeCust",etValidation.getText().toString());
+                    HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
                 }
                 break;
         }
@@ -128,12 +135,11 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     }
 
 
-
-
     private void initRemoveText() {
         //手机号为空时隐藏
         if (TextUtils.isEmpty(phoneNumber.getText())) {
-            removeText.setVisibility(View.VISIBLE);     }
+            removeText.setVisibility(View.VISIBLE);
+        }
         //手机号为空时
         else {
             removeText.setVisibility(View.GONE);
@@ -141,24 +147,28 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
     }
 
-        private void initValidation() {
+    private void initValidation() {
         HashMap<String, String> params = new HashMap<>();
         params.put("telNo", phoneNumber.getText().toString().trim());
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
-   @Override
+    @Override
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.VERIFY://获取验证码
-                L.e("==============="+res.toString());
+                ceshiBean = GsonUtil.toObj(res,LoginCeshiBean.class);
+
+                L.e(ceshiBean.getMsg()+"      "+ ceshiBean.getErrorCode());
+                break;
+                case ACTION.REGIST:
+                    System.out.println(res);
+                    break;
         }
     }
-
     @Override
     public void showLoadingDialog() {
     }
-
     @Override
     public void showErrorMessage(String s) {
 
@@ -178,13 +188,14 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             validation.setClickable(false);
             validation.setText((l / 1000) + "s后重新获取");
         }
+
         //计时完毕的方法
         @Override
         public void onFinish() {
             //重新给textview设置文字
             validation.setText("重新获取验证码");
             //设置可点击
-            initValidation();
+            //initValidation();
             validation.setClickable(true);
         }
     }

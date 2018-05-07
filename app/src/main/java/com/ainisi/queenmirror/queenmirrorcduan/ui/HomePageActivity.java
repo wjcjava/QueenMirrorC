@@ -43,7 +43,7 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
     @Override
     protected void initData() {
         mFragments = new ArrayList<>();
-        HomeFragmentOne homeOneFragment = new HomeFragmentOne();
+        HomeFragment homeOneFragment = new HomeFragment();
         ShopMallFragment categoryOneFragment = new ShopMallFragment();
         OrderFragment serviceOneFragment = new OrderFragment();
         MasterFragment mineOneFragment = new MasterFragment();

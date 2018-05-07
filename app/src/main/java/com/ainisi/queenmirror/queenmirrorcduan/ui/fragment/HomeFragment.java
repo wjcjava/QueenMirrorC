@@ -5,15 +5,20 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyRecyclerCardviewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
@@ -22,10 +27,15 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.DetailActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.barlibrary.ImmersionBar;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MarqueeView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -38,6 +48,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by EWorld on 2018/3/6.
@@ -49,25 +60,26 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
     RecyclerView recyclerView;
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
+    @Bind(R.id.iv_uspension_surface)
+    ImageView surface;
     @Bind(R.id.layout_stick_header_main)
     LinearLayout layout_stick_header_main;
     @Bind(R.id.home_refresh)
     MaterialRefreshLayout home_refresh;
-
     LinearLayout li_top,layout_stick_header;
 
 
-    MyRecyclerCardviewAdapter myRecyclerCardviewAdapter;
+
+
 
     private int top = -1;
     private int mScrollY = 0;
-
+    private int type=0;
     List<SortBean> data;
     MarqueeView marqueeview;
     LinearLayoutManager layoutManager;
     int bannerHeight;
     private int mCurrentPosition = 0;
-
     String[] contentArray = new String[]{
             "恭喜杨小姐领取奔驰4s店优惠券一张",
             "恭喜李先生领取奶茶特饮优惠券一张",
@@ -75,6 +87,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
             "恭喜杨小姐领取奔驰4s店优惠券一张",
             "恭喜李先生领取奶茶特饮优惠券一张",
             "恭喜王小姐领取50元话费优惠券一张",};
+    MyRecyclerCardviewAdapter myRecyclerCardviewAdapter = new MyRecyclerCardviewAdapter(getActivity(),type);
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -104,7 +117,6 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        myRecyclerCardviewAdapter = new MyRecyclerCardviewAdapter(getActivity());
         recyclerView.setAdapter(myRecyclerCardviewAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -272,5 +284,33 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
                 .navigationBarColor(R.color.colorPrimary)
                 .init();
     }
+
+    @OnClick({R.id.tv_home_bustling,R.id.iv_home_search,R.id.iv_uspension_surface})
+    public void click(View view) {
+        switch (view.getId()) {
+            //我的位置
+            case R.id.tv_home_bustling:
+                //startProgressDialog();
+                break;
+            //搜索
+            case R.id.iv_home_search:
+                SearchActivity.startActivity(getContext());
+                break;
+                //瀑布流和流式切换
+            case R.id.iv_uspension_surface:
+
+                        MyRecyclerCardviewAdapter myRecyclerCardviewAdapter1 = new MyRecyclerCardviewAdapter(getActivity(),2);
+                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                        recyclerView.setAdapter(myRecyclerCardviewAdapter1);
+
+                        myRecyclerCardviewAdapter1.notifyDataSetChanged();
+
+
+                break;
+
+        }
+
+    }
+
 
 }

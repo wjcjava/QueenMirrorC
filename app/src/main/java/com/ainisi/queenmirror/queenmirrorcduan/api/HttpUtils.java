@@ -114,7 +114,6 @@ public class HttpUtils {
                 .tag(String.valueOf(action))
                 .cacheMode(cacheMode)
                 .upJson(jsonObject.toString())
-                .params(params, true)
                 .execute(new StringCallback() {
                     @Override
                     public void onBefore(BaseRequest request) {
@@ -127,13 +126,7 @@ public class HttpUtils {
                     public void onSuccess(String s, Call call, Response response) {
                         L.e("???????????? ?" + s);
                         try {
-                            s = response.body().toString();
-                            JSONObject jsonObject = new JSONObject(s);
-                            Boolean success = jsonObject.getBoolean("success");
-                            String state = jsonObject.getString("errorCode");
-                            String res = jsonObject.getString("msg");
 
-                            JSONObject body=jsonObject.getJSONObject("body");
                           /*  //失败
                             if (state != 200) {
                                 httpCallBack.showErrorMessage(res);
