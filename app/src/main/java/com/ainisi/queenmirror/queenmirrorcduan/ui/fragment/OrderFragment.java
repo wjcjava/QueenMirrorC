@@ -37,7 +37,7 @@ public class OrderFragment extends BaseFragment {
     private List<Fragment> pagerlist = new ArrayList<>();
 
     @Override
-    protected int getLayoutResource() {
+    protected int getLayoutResource()  {
         return R.layout.fragment_order;
     }
 
@@ -45,6 +45,8 @@ public class OrderFragment extends BaseFragment {
     public void initPresenter() {
 
     }
+
+
 
 
     @OnClick({R.id.title_photo})
@@ -99,7 +101,6 @@ public class OrderFragment extends BaseFragment {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
-
         tabStrip.setAccessible(true);
         LinearLayout llTab = null;
         try {

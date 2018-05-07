@@ -176,7 +176,7 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
         // 获取之前定位位置，如果之前未曾定位，则重新定位
         GDLocationUtil.getLocation(new GDLocationUtil.MyLocationListener() {
             @Override
-            public void result(AMapLocation location) {
+            public void result(AMapLocation location){
                 //针对location进行相关操作，如location.getCity()，无需验证location是否为null;
                 city=location.getCity();
                 mLocation.setText(city);
@@ -188,10 +188,10 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
             @Override
             public void result(AMapLocation location) {
                 //针对location进行相关操作，如location.getCity()，无需验证location是否为null;
+                mLocation.setText(location.getCity());
             }
         });
     }
-
     /**
      * 点击首页跑马灯效果
      */

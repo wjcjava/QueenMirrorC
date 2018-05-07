@@ -21,7 +21,6 @@ public class AppApplication extends BaseApplication {
        // PlatformConfig.setQQZone("1106548988", "ppRwmD6Zb8I2gZt3");
        // PlatformConfig.setWeixin(APP_ID, APP_SECRET);
     }
-
     @Override
     public void onCreate() {
         super.onCreate();

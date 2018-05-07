@@ -16,7 +16,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
  * Created by Mloong on 2017/11/25.
  */
 
-public class PurchaseListViewAdapter extends BaseAdapter {
+public class  PurchaseListViewAdapter extends BaseAdapter {
     private final LayoutInflater inflater;
     private Context context;
 

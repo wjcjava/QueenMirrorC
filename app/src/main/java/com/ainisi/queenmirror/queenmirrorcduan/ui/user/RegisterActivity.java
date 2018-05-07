@@ -1,10 +1,12 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.user;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -144,11 +146,12 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         params.put("telNo", phoneNumber.getText().toString().trim());
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
    @Override
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.VERIFY://获取验证码
-                Toast.makeText(this, res.toString().trim(), Toast.LENGTH_SHORT).show();
+                L.e("==============="+res.toString());
         }
     }
 
@@ -175,7 +178,6 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             validation.setClickable(false);
             validation.setText((l / 1000) + "s后重新获取");
         }
-
         //计时完毕的方法
         @Override
         public void onFinish() {

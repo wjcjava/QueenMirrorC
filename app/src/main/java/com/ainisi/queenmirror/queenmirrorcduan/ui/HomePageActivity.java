@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 
-public class HomePageActivity extends BaseOneActivity  implements View.OnClickListener, ViewPager.OnPageChangeListener{
+public class HomePageActivity extends BaseOneActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
 
     @Bind(R.id.viewPager)
     CustomViewPager viewPager;

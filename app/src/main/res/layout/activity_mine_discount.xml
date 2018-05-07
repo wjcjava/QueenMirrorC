@@ -22,6 +22,7 @@
             android:src="@mipmap/icon_back" />
 
         <RadioGroup
+
             android:layout_width="@dimen/comment_216_dip"
             android:layout_height="@dimen/comment_27_dip"
             android:layout_alignParentBottom="true"
@@ -31,6 +32,8 @@
             android:orientation="horizontal">
 
             <RadioButton
+
+                android:id="@+id/radio_preferential"
                 android:layout_width="@dimen/comment_108_dip"
                 android:layout_height="@dimen/comment_27_dip"
                 android:background="@drawable/radiobutton_background_checked"
@@ -40,6 +43,7 @@
                 android:textColor="@color/radiobutton_textcolor" />
 
             <RadioButton
+                android:id="@+id/radio_invincible"
                 android:layout_width="@dimen/comment_108_dip"
                 android:layout_height="@dimen/comment_27_dip"
                 android:background="@drawable/radiobutton_backgroundtwo_checked"
@@ -56,18 +60,18 @@
         android:layout_height="match_parent"
         android:layout_below="@id/ic_title">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/mine_tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/comment_10_dip"
-            android:background="@color/white" />
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/mine_tab"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/comment_10_dip"-->
+            <!--android:background="@color/white" />-->
 
         <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager
             android:id="@+id/mine_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/mine_tab"
+
             android:layout_marginTop="@dimen/comment_10_dip" />
     </RelativeLayout>
 </RelativeLayout>

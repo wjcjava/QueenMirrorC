@@ -54,7 +54,6 @@ public class WorkCreditAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
 
-
         return convertView;
     }
 
