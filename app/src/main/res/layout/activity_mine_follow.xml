@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.mine.activity.MineFollowActivity">
+
+    <include
+
+        android:id="@+id/ic_title"
+        layout="@layout/layout_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ic_title"
+        android:background="@color/alpha_05_black">
+
+        <RelativeLayout
+            android:id="@+id/re_follow"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tv_mine_follow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="@dimen/comment_10_dip"
+                android:text="当前区域商家" />
+        </RelativeLayout>
+
+        <com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout
+            android:id="@+id/rlm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/re_follow"
+            app:rll_header_hint_normal="下拉给我试试看"
+            app:rll_header_hint_ready="主淫我已经准备好了">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mine_follow_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/re_follow"
+                android:layout_marginTop="@dimen/comment_10_dip" />
+        </com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout>
+    </RelativeLayout>
+</RelativeLayout>
