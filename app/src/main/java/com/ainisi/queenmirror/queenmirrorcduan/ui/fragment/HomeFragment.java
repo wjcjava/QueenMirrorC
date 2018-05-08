@@ -2,6 +2,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,27 +11,34 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyRecyclerCardviewAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.DetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -47,6 +55,7 @@ import com.youth.banner.Banner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -55,7 +64,7 @@ import butterknife.OnClick;
  * 首页
  */
 
-public class HomeFragment extends BaseFragment implements HttpCallBack{
+public class HomeFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.rv_home_fragment)
     RecyclerView recyclerView;
     @Bind(R.id.toolbar)
@@ -66,28 +75,27 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
     LinearLayout layout_stick_header_main;
     @Bind(R.id.home_refresh)
     MaterialRefreshLayout home_refresh;
-    LinearLayout li_top,layout_stick_header;
+    @Bind(R.id.iv_sort)
+    ImageView ivsort;
+    @Bind(R.id.iv_sort1)
+    ImageView ivsort1;
+    @Bind(R.id.tv_home_comprehensive)
+    TextView hSort;
+    @Bind(R.id.li_sort_bottom)
+    LinearLayout sortHeard;
+    private int type = 0;
 
-
-
-
-
-    private int top = -1;
-    private int mScrollY = 0;
-    private int type=0;
     List<SortBean> data;
-    MarqueeView marqueeview;
     LinearLayoutManager layoutManager;
-    int bannerHeight;
-    private int mCurrentPosition = 0;
-    String[] contentArray = new String[]{
-            "恭喜杨小姐领取奔驰4s店优惠券一张",
-            "恭喜李先生领取奶茶特饮优惠券一张",
-            "恭喜王小姐领取50元话费优惠券一张",
-            "恭喜杨小姐领取奔驰4s店优惠券一张",
-            "恭喜李先生领取奶茶特饮优惠券一张",
-            "恭喜王小姐领取50元话费优惠券一张",};
-    MyRecyclerCardviewAdapter myRecyclerCardviewAdapter = new MyRecyclerCardviewAdapter(getActivity(),type);
+    int itemNum;
+
+    private List<ProblemBean> list = new ArrayList<>();
+    String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
+    private PopupWindow pop;
+    private View popview1;
+    private CustomPopWindow popWindow;
+    private MyRecyclerCardviewAdapter myRecyclerCardviewAdapter1;
+    private MyRecyclerCardviewAdapter myRecyclerCardviewAdapter;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -108,6 +116,44 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
             SortBean sortBean = new SortBean();
             data.add(sortBean);
         }
+
+        pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
+        popview1 = View.inflate(getActivity(), R.layout.pop_myitem, null);
+        initpop(popview1);
+        pop.setContentView(popview1);
+        pop.setBackgroundDrawable(new ColorDrawable(0));
+        pop.setOutsideTouchable(true);
+        pop.setAnimationStyle(R.style.CustomPopWindowStyle);
+        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                ivsort.setVisibility(View.VISIBLE);
+                ivsort1.setVisibility(View.GONE);
+            }
+        });
+        pop.dismiss();
+    }
+
+    private void initpop(View popview1) {
+        final RecyclerView ce = popview1.findViewById(R.id.rc_popview);
+        for (int i = 0; i < problem.length; i++) {
+            ProblemBean problemBean = new ProblemBean();
+            problemBean.setName(problem[i]);
+            list.add(problemBean);
+        }
+        ProblemAdapter problemAdapter = new ProblemAdapter(R.layout.item_pop_sort, list);
+        ce.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        ce.setAdapter(problemAdapter);
+        problemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                hSort.setText(problem[position]);
+                pop.dismiss();
+
+
+
+            }
+        });
     }
 
     @Override
@@ -117,20 +163,22 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        myRecyclerCardviewAdapter = new MyRecyclerCardviewAdapter(getContext(), type);
         recyclerView.setAdapter(myRecyclerCardviewAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                int currentposition= layoutManager.getPosition(layoutManager.getChildAt(0));
-                if(currentposition>=1){
+                int currentposition = layoutManager.getPosition(layoutManager.getChildAt(0));
+                if (currentposition >= 1) {
                     layout_stick_header_main.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     layout_stick_header_main.setVisibility(View.GONE);
                 }
             }
@@ -145,6 +193,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
 
                 home_refresh.finishRefresh();
             }
+
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
                 //上拉加载更多...
@@ -159,111 +208,11 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
         // 结束上拉刷新...
         home_refresh.finishRefreshLoadMore();*/
 
-
-
-
-
     }
 
-    private View headView,headView2;
-    private void addHeaderView() {
-        headView = LayoutInflater.from(mActivity).inflate(R.layout.activity_home_shop, (ViewGroup) recyclerView.getParent(), false);
-
-       /* headView2 = LayoutInflater.from(mActivity).inflate(R.layout.home_appbarlayout, (ViewGroup) recyclerView.getParent(), false);
-        homePageAdapter.addHeaderView(headView2);*/
-
-
-        layout_stick_header = headView.findViewById(R.id.layout_stick_header);
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                int currentposition= layoutManager.getPosition(layoutManager.getChildAt(0));
-                if(currentposition>=1){
-                    layout_stick_header_main.setVisibility(View.VISIBLE);
-                }else{
-                    layout_stick_header_main.setVisibility(View.GONE);
-                }
-            }
-        });
-        /**
-         * Banner
-         */
-        Banner banner = headView.findViewById(R.id.banner);
-
-        List<String> images = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
-        }
-        banner.setImageLoader(new GlideImageLoader());
-        banner.setImages(images);
-        banner.start();
-
-        marqueeview = headView.findViewById(R.id.marqueeview);
-        /**
-         * 跑马灯
-         */
-        initQuee();
-        LinearLayout linear_home_freetrial = headView.findViewById(R.id.linear_home_freetrial);
-        linear_home_freetrial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                CeshiData();
-
-            }
-        });
-    }
-
-
-    /**
-     * 点击首页跑马灯效果
-     */
-    private void initQuee() {
-        marqueeview.setTextArray(contentArray);
-        marqueeview.setOnItemClickListener(new MarqueeView.onItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                intent.putExtra("content", contentArray[position]);
-                startActivity(intent);
-            }
-        });
-
-    }
-    /**
-     * 测试
-     */
-    private void CeshiData() {
-
-        //传参数
-        HashMap<String,String> params = new HashMap<>();
-        params.put("telNo", "1");
-
-        //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
-        HttpUtils.doPost(ACTION.REGIST,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
-    }
 
     @Override
-    public void onSuccess(int action, String res){
-        switch (action){
-            case ACTION.REGIST://注册
-                LoginBean loginBean = GsonUtil.toObj(res,LoginBean.class);
-                String msg = loginBean.getMsg();
-                T.show(msg);
-                L.e("??????");
-                break;
-            case ACTION.LOGIN://登录
-
-                break;
-        }
+    public void onSuccess(int action, String res) {
 
     }
 
@@ -285,7 +234,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
                 .init();
     }
 
-    @OnClick({R.id.tv_home_bustling,R.id.iv_home_search,R.id.iv_uspension_surface})
+    @OnClick({R.id.tv_home_bustling, R.id.iv_home_search, R.id.iv_uspension_surface, R.id.iv_sort, R.id.iv_sort1,R.id.rb_screen})
     public void click(View view) {
         switch (view.getId()) {
             //我的位置
@@ -296,21 +245,74 @@ public class HomeFragment extends BaseFragment implements HttpCallBack{
             case R.id.iv_home_search:
                 SearchActivity.startActivity(getContext());
                 break;
-                //瀑布流和流式切换
+            //瀑布流和流式切换
             case R.id.iv_uspension_surface:
+                GridLayoutManager layoutManage = new GridLayoutManager(getActivity(), 2);
+                layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        if (position == 0 || position == 1) {
+                            return 2;
+                        } else {
 
-                        MyRecyclerCardviewAdapter myRecyclerCardviewAdapter1 = new MyRecyclerCardviewAdapter(getActivity(),2);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                        recyclerView.setAdapter(myRecyclerCardviewAdapter1);
+                            return 1;
 
-                        myRecyclerCardviewAdapter1.notifyDataSetChanged();
+                        }
 
+                    }
+                });
+                myRecyclerCardviewAdapter1 = new MyRecyclerCardviewAdapter(getActivity(), 2);
+                recyclerView.setLayoutManager(layoutManage);
+                recyclerView.setAdapter(myRecyclerCardviewAdapter1);
 
+                break;
+
+            case R.id.iv_sort:
+                ivsort.setVisibility(View.GONE);
+                ivsort1.setVisibility(View.VISIBLE);
+                pop.showAsDropDown(hSort);
+                inititem();
+                break;
+
+            case R.id.iv_sort1:
+                pop.dismiss();
+                ivsort.setVisibility(View.VISIBLE);
+                ivsort1.setVisibility(View.GONE);
+                inititem();
+                break;
+
+            case R.id.rb_screen:
+                View popview = View.inflate(getActivity(), R.layout.pop_right, null);
+                initview(popview);
+                popWindow = new CustomPopWindow.PopupWindowBuilder(getActivity())
+                        .setView(popview)
+                        .setFocusable(true)
+                        .size(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT)
+                        .setOutsideTouchable(true)
+                        .enableBackgroundDark(false)
+                        .setAnimationStyle(R.style.CustomPopWindowStyle)
+                        .create()
+                        .showAsDropDown(sortHeard);
                 break;
 
         }
 
     }
+    private void initview(final View popview) {
+        TextView eliminateTv = popview.findViewById(R.id.tv_eliminate);
+        TextView okTv = popview.findViewById(R.id.tv_ok);
+        eliminateTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popWindow.dissmiss();
 
+            }
+        });
+    }
+    public void inititem() {
+        if (itemNum > myRecyclerCardviewAdapter.getItemCount()) {
+            recyclerView.smoothScrollToPosition(itemNum);
+        }
+    }
 
 }

@@ -10,7 +10,6 @@
     <LinearLayout
         android:background="@color/white"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/comment_70_dip"
         android:layout_marginBottom="@dimen/comment_40_dip"
         android:paddingBottom="20dp"
         android:layout_width="match_parent"

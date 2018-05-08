@@ -45,7 +45,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/iv_sort"
+            android:id="@+id/li_hime_sort"
             style="@style/Recommend_layout"
             android:layout_height="@dimen/comment_40_dip">
 

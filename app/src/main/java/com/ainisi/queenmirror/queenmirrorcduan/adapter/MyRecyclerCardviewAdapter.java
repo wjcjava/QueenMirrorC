@@ -17,16 +17,21 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.Bean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.DetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MarqueeView;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.lzy.okgo.cache.CacheMode;
+import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +52,13 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
     private boolean isClick;
     private ListViewAdapter listadapter;
     int type;
-
+    String[] contentArray = new String[]{
+            "恭喜杨小姐领取奔驰4s店优惠券一张",
+            "恭喜李先生领取奶茶特饮优惠券一张",
+            "恭喜王小姐领取50元话费优惠券一张",
+            "恭喜杨小姐领取奔驰4s店优惠券一张",
+            "恭喜李先生领取奶茶特饮优惠券一张",
+            "恭喜王小姐领取50元话费优惠券一张",};
 
     public static enum ITEM_TYPE {
         ITEM_TYPE_Theme,
@@ -59,7 +70,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
     public List<Integer> mdatas;
     private TextView themeTitle;
 
-    public MyRecyclerCardviewAdapter(Context context,int type) {
+    public MyRecyclerCardviewAdapter(Context context, int type) {
         super();
         this.context = context;
         this.type = type;
@@ -82,11 +93,11 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
 
 
         } else if (viewType == ITEM_TYPE.ITEM_TYPE_Image.ordinal()) {
-            if(type==0){
+            if (type == 0) {
 
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_shortrecycler, parent, false);
                 return new VideoViewThreeHolder(view);
-            }else {
+            } else {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_waterfall, parent, false);
                 return new VideoViewThreeHolder(view);
             }
@@ -108,7 +119,10 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (holder instanceof VideoViewHolder) {
             ((VideoViewHolder) holder).surFace.setOnClickListener(this);
             ivSurFace = ((VideoViewHolder) holder).surFace;
+            ((VideoViewHolder) holder).linSort.setOnClickListener(this);
 
+        } else if (holder instanceof VideoViewThreeHolder) {
+            ((VideoViewThreeHolder) holder).homeShort.setOnClickListener(this);
         }
 
     }
@@ -125,12 +139,15 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             case R.id.linear_home_freetrial:
                 context.startActivity(new Intent(context, HomeFightaloneActivity.class));
                 break;
+            //店铺
+            case R.id.li_home_short:
+                context.startActivity(new Intent(context, WorkRoomDetailActivity.class));
 
+                break;
 
+            case R.id.li_hime_sort:
 
-
-
-
+                break;
         }
     }
 
@@ -157,7 +174,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         }
 
     }
-
     @Override
     public int getItemCount() {
         return 12;
@@ -166,34 +182,69 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class ThemeVideoHolder extends RecyclerView.ViewHolder {
 
+        MarqueeView marqueeview;
         LinearLayout home_freetrial;
         LinearLayout home_esthetics;
+        private final Banner banner;
 
         public ThemeVideoHolder(View itemView) {
             super(itemView);
             home_esthetics = itemView.findViewById(R.id.home_esthetics);
             home_freetrial = itemView.findViewById(R.id.linear_home_freetrial);
+            banner = itemView.findViewById(R.id.banner);
+            marqueeview = itemView.findViewById(R.id.marqueeview);
+            initBanner(banner);
+            initQuee();
         }
 
+        /**
+         * 点击首页跑马灯效果
+         */
+        private void initQuee() {
+            marqueeview.setTextArray(contentArray);
+            marqueeview.setOnItemClickListener(new MarqueeView.onItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    T.show("你点击" + position);
+                }
+            });
 
+        }
+
+    }
+
+    //轮播
+    private void initBanner(Banner banner) {
+        List<String> images = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
+        }
+        banner.setImageLoader(new GlideImageLoader());
+        banner.setImages(images);
+        banner.start();
     }
 
     public class VideoViewHolder extends RecyclerView.ViewHolder {
 
 
         private ImageView surFace;
+        private final LinearLayout linSort;
 
         public VideoViewHolder(View itemView) {
             super(itemView);
             surFace = itemView.findViewById(R.id.iv_surface);
+            linSort = itemView.findViewById(R.id.li_hime_sort);
 
         }
 
     }
 
     private class VideoViewThreeHolder extends RecyclerView.ViewHolder {
+        private LinearLayout homeShort;
+
         public VideoViewThreeHolder(View itemView) {
             super(itemView);
+            homeShort = itemView.findViewById(R.id.li_home_short);
         }
     }
 

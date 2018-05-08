@@ -126,7 +126,6 @@ public class EstheticsActivity extends BaseActivity {
 
 
     }
-
     private void initpop(View popview1) {
         final RecyclerView ce = popview1.findViewById(R.id.rc_popview);
         for (int i = 0; i < problem.length; i++) {
@@ -202,7 +201,6 @@ public class EstheticsActivity extends BaseActivity {
                         .setOutsideTouchable(true)
                         .setAnimationStyle(R.style.CustomPopWindowStyle)
                         .create()
-
                         .showAtLocation(hscreen, Gravity.RIGHT, 0, 0);
                 break;
             default:
