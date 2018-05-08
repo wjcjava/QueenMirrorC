@@ -10,8 +10,7 @@
     <LinearLayout
         android:id="@+id/home_layout"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:paddingTop="3dp"
+        android:layout_height="@dimen/comment_45_dip"
         android:layout_gravity="center_horizontal"
         android:background="@color/home_shop_middle"
         android:gravity="center_vertical"
@@ -112,7 +111,9 @@
 
         <LinearLayout
             android:id="@+id/line_surface"
-            style="@style/Recommend_layout"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="@dimen/comment_0_dip"
             android:layout_height="@dimen/comment_40_dip">
 
             <ImageView

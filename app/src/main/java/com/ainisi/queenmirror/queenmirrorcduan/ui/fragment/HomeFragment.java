@@ -1,9 +1,8 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,49 +10,28 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyRecyclerCardviewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
-import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.DetailActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.barlibrary.ImmersionBar;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.MarqueeView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
-import com.lzy.okgo.cache.CacheMode;
-import com.youth.banner.Banner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -102,12 +80,12 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         super.onViewCreated(view, savedInstanceState);
         ImmersionBar.setTitleBar(getActivity(), mToolbar);
     }
-
     @Override
     protected int setLayoutId() {
         return R.layout.home_fragment_new;
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void initData() {
         super.initData();
@@ -230,7 +208,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     protected void initImmersionBar() {
         super.initImmersionBar();
         mImmersionBar.statusBarColorTransformEnable(false)
-                .navigationBarColor(R.color.colorPrimary)
+                .navigationBarColor(R.color.alpha_95_black)
                 .init();
     }
 
@@ -289,9 +267,9 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                         .setFocusable(true)
                         .size(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT)
                         .setOutsideTouchable(true)
-                        .enableBackgroundDark(false)
                         .setAnimationStyle(R.style.CustomPopWindowStyle)
                         .create()
+
                         .showAsDropDown(sortHeard);
                 break;
 

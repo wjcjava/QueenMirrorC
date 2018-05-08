@@ -7,7 +7,7 @@
         android:layout_centerInParent="true"
         android:id="@+id/shoppingcat_num"
         android:textColor="@color/alpha_95_black"
-        android:textSize="@dimen/comment_20_size"
+        android:textSize="@dimen/comment_16_size"
         android:text="购物车(0)"
         android:layout_width="wrap_content"
         android:gravity="center"
@@ -15,7 +15,7 @@
 
         <TextView
             android:layout_alignParentRight="true"
-            android:textSize="@dimen/comment_20_size"
+            android:textSize="@dimen/comment_14_size"
             android:textColor="@color/alpha_80_black"
             android:text="..."
             android:gravity="center"

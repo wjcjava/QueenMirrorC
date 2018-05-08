@@ -10,7 +10,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qbw.log.XLog;
 
 import java.util.ArrayList;
@@ -54,6 +53,7 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
             @Override
             public void run() {
                 T.show("下拉成功");
+
                 mRefreshLoadMoreLayout.stopRefresh();
             }
         }, 200);
@@ -66,6 +66,7 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
             @Override
             public void run() {
                 T.show("上拉成功");
+
                 mRefreshLoadMoreLayout.stopLoadMore();
             }
         }, 1000);

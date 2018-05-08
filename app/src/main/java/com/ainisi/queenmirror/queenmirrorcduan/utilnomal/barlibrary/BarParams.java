@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class BarParams implements Cloneable {
     @ColorInt
-    public int statusBarColor = Color.TRANSPARENT; //状态栏颜色
+    public int statusBarColor = Color.BLACK; //状态栏颜色
     @ColorInt
     public int navigationBarColor = Color.BLACK;  //导航栏颜色
     @FloatRange(from = 0f, to = 1f)
@@ -37,7 +37,7 @@ public class BarParams implements Cloneable {
     public float viewAlpha = 0.0f;
     public boolean fits = false;                                   //解决标题栏与状态栏重叠问题
     @ColorInt
-    public int statusBarColorContentView = Color.TRANSPARENT;
+    public int statusBarColorContentView = Color.BLACK;
     @ColorInt
     public int statusBarColorContentViewTransform = Color.BLACK;
     @FloatRange(from = 0f, to = 1f)
