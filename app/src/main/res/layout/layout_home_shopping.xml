@@ -31,6 +31,7 @@
                     android:id="@+id/imageView4"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_214_dip"
+                    android:scaleType="fitXY"
                     android:src="@drawable/icon_full_chanpin" />
 
                 <RelativeLayout
@@ -43,18 +44,17 @@
                         android:id="@+id/full_cash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/textView"
-                        android:layout_alignBottom="@+id/textView"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/comment_27_dip"
                         android:drawableLeft="@drawable/icon_full_minbi"
                         android:text="58"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/comment_20_size"
+                        android:textSize="@dimen/comment_18_size"
+                        android:layout_centerVertical="true"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/tv_shopping_oldprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -62,7 +62,7 @@
                         android:layout_toEndOf="@+id/full_cash"
                         android:text="¥258"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/comment_16_size" />
+                        android:textSize="@dimen/comment_12_size" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -79,7 +79,7 @@
                         android:layout_marginTop="@dimen/comment_5_dip"
                         android:text="纯色美甲"
                         android:textColor="@color/alpha_95_black"
-                        android:textSize="@dimen/comment_16_size" />
+                        android:textSize="@dimen/comment_18_size" />
 
                     <TextView
                         android:id="@+id/tv_brief"
@@ -87,6 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@+id/tv_time"
                         android:layout_below="@+id/fullname"
+                        android:layout_marginTop="3dp"
                         android:text="2016年4月18日,算是第三次修改了,这个项目也算"
                         android:textSize="@dimen/comment_13_size" />
 
@@ -99,7 +100,7 @@
                         android:layout_marginBottom="@dimen/comment_15_dip"
                         android:layout_marginTop="@dimen/comment_28_dip"
                         android:text="服务时长：60分钟"
-                        android:textSize="@dimen/comment_13_size" />
+                        android:textSize="@dimen/comment_12_size" />
 
                     <TextView
                         android:id="@+id/textView4"
@@ -111,7 +112,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@+id/tv_time"
                         android:text="已浏览：48次"
-                        android:textSize="@dimen/comment_13_size" />
+                        android:textSize="@dimen/comment_12_size" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -130,6 +131,7 @@
                     android:layout_marginStart="@dimen/comment_15_dip"
                     android:layout_marginTop="@dimen/comment_15_dip"
                     android:text="项目详情"
+                    android:textColor="@color/alpha_85_black"
                     android:textSize="@dimen/comment_14_size" />
 
                 <View
@@ -137,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_1_dip"
                     android:layout_below="@id/tv_fullname"
-                    android:layout_marginTop="@dimen/comment_21_dip"
+                    android:layout_marginTop="@dimen/comment_10_dip"
                     android:background="@color/alpha_05_black" />
 
                 <TextView
@@ -149,7 +151,7 @@
                     android:layout_marginStart="@dimen/comment_15_dip"
                     android:layout_marginTop="@dimen/comment_14_dip"
                     android:text="2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算."
-                    android:textSize="@dimen/comment_14_size" />
+                    android:textSize="@dimen/comment_12_size" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -169,6 +171,7 @@
                     android:layout_marginStart="@dimen/comment_12_dip"
                     android:layout_marginTop="@dimen/comment_15_dip"
                     android:text="评价（3）"
+                    android:textSize="@dimen/comment_14_dip"
                     android:textColor="@color/gray_E7370C" />
 
                 <ImageView
@@ -184,11 +187,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/comment_10_dip"
-                    android:layout_marginTop="@dimen/comment_13_dip"
+                    android:layout_marginTop="@dimen/comment_18_dip"
                     android:layout_toEndOf="@id/img_pingfen"
+                    android:layout_marginStart="3dp"
                     android:text="4.5"
                     android:textColor="@color/gray_E7370C"
-                    android:textSize="@dimen/comment_16_size" />
+                    android:textSize="@dimen/comment_12_size" />
 
                 <ImageView
                     android:layout_width="@dimen/comment_8_dip"
@@ -228,6 +232,7 @@
                     android:layout_marginStart="@dimen/comment_12_dip"
                     android:layout_marginTop="@dimen/comment_15_dip"
                     android:text="精品推荐"
+                    android:textSize="@dimen/comment_14_dip"
                     android:textColor="@color/gray_E7370C" />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/full_recycler"

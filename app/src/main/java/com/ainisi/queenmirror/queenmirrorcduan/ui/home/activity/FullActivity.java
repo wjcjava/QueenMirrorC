@@ -1,6 +1,7 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 //商品详情
-public class FullActivity extends BaseActivity {
+public class FullActivity extends BaseNewActivity {
     @Bind(R.id.full_recycler)
     RecyclerView frecycler;
     @Bind(R.id.full_recyclertwo)
@@ -29,14 +31,14 @@ public class FullActivity extends BaseActivity {
     TextView fullTitle;
     @Bind(R.id.title_photo)
     ImageView fullPhoto;
+
+    @Bind(R.id.tv_shopping_oldprice)
+    TextView tv_shopping_oldprice;
     private List<SortBean> fulllist = new ArrayList<>();
     private List<SortBean> fulllist2 = new ArrayList<>();
     @Override
     public int getLayoutId() {
         return R.layout.activity_full;
-    }
-    @Override
-    public void initPresenter() {
     }
     @Override
     public void initView() {
@@ -70,6 +72,8 @@ public class FullActivity extends BaseActivity {
         fullTitle.setText("纯色美甲");
         fullPhoto.setImageResource(R.drawable.icon_full_fenxiang);
         fullPhoto.setVisibility(View.VISIBLE);
+
+        tv_shopping_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 
     @OnClick({R.id.tv_purchase, R.id.title_back,R.id.tv_full_shoppingcart})

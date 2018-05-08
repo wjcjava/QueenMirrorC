@@ -129,8 +129,10 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         reCoupu.setVisibility(View.VISIBLE);
                         WorkShopAdapter shopAdapter = new WorkShopAdapter(WorkRoomDetailActivity.this);
                         listShop.setAdapter(shopAdapter);
+                        listShop.setDividerHeight(0);
                         WorkSingleAdapter singleAdapter = new WorkSingleAdapter(WorkRoomDetailActivity.this);
                         listSingle.setAdapter(singleAdapter);
+                        listSingle.setDividerHeight(0);
                         break;
                 }
             }
