@@ -86,7 +86,7 @@
             android:layout_width="@dimen/comment_30_dip"
             android:layout_height="@dimen/comment_23_dip"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/comment_60_dip"
+            android:layout_marginRight="@dimen/comment_45_dip"
             android:layout_marginTop="@dimen/comment_28_dip"
             android:src="@mipmap/icon_mine_setup" />
         <ImageView
@@ -94,7 +94,7 @@
             android:layout_width="@dimen/comment_30_dip"
             android:layout_height="@dimen/comment_20_dip"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/comment_25_dip"
+            android:layout_marginEnd="@dimen/comment_11_dip"
             android:layout_marginTop="@dimen/comment_30_dip"
             android:src="@mipmap/message" />
     </RelativeLayout>

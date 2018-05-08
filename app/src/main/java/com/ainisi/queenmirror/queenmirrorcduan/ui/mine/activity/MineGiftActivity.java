@@ -3,23 +3,19 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 //邀请有奖
-public class MineGiftActivity extends BaseActivity {
+public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
 
     @Bind(R.id.title_title)
-    TextView giftTitle;
-    @Bind(R.id.titleimg_right)
-    ImageView giftTitleImage;
+    TextView title_title;
 
 
     public static void startActivity(Context context) {
@@ -31,29 +27,34 @@ public class MineGiftActivity extends BaseActivity {
     }
 
     @Override
-    public void initPresenter() {
-
-    }
-
-    @Override
     public void initView() {
-        giftTitle.setText("邀请好友");
-        giftTitleImage.setImageResource(R.mipmap.icon_mine_share);
+        title_title.setText("邀请好友");
     }
-    @OnClick({R.id.title_back,R.id.bt_confirm
-    })
-    public void click(View view) {
+    @OnClick({R.id.title_back})
+    public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
-
                 break;
             default:
                 break;
 
         }
+    }
 
+    @Override
+    public void onSuccess(int action, String res) {
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
 
     }
 }

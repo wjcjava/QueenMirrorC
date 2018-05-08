@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.MineMagessageFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.MineServiceFragment;
@@ -29,7 +30,7 @@ import butterknife.OnClick;
 服务中心
  */
 public class
-MineMyServiceActivity extends BaseActivity {
+MineMyServiceActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView serviceTitle;
     @Bind(R.id.tab_service)
@@ -51,23 +52,15 @@ MineMyServiceActivity extends BaseActivity {
     }
 
     @Override
-    public void initPresenter() {
-
-
-    }
-
-    @Override
     public void initView() {
         serviceTitle.setText("服务中心");
         initDate();
-
-
     }
 
     private void initDate() {
-        tablist.add("意见与反馈");
-        tablist.add("帮助");
-        tablist.add("信息");
+        tablist.add("常见问题");
+        tablist.add("优惠活动");
+        tablist.add("消息中心");
         serviceTab.addTab(serviceTab.newTab().setText(tablist.get(0)));
         serviceTab.addTab(serviceTab.newTab().setText(tablist.get(1)));
         serviceTab.addTab(serviceTab.newTab().setText(tablist.get(2)));

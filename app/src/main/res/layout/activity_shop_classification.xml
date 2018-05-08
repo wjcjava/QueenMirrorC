@@ -43,8 +43,6 @@
             android:layout_marginTop="@dimen/comment_18_dip"
             android:layout_marginEnd="@dimen/comment_14_dip"
             android:layout_alignParentRight="true"
-
-
             />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/re_recommendable_projects"
@@ -54,9 +52,16 @@
 
         </android.support.v7.widget.RecyclerView>
     </RelativeLayout>
+
+    <View android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/mine_back_gray"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/comment_10_dip">
+    </View>
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_marginTop="@dimen/comment_10_dip"
         android:layout_below="@id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,7 +72,7 @@
 
         <LinearLayout
             style="@style/Recommend_layout"
-            android:layout_height="@dimen/comment_40_dip">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/full_rb_sort"
@@ -97,7 +102,7 @@
         <TextView
             android:id="@+id/full_rb_sales"
             style="@style/Recommend_layout"
-            android:layout_height="@dimen/comment_40_dip"
+            android:layout_height="wrap_content"
             android:text="@string/sales"
             android:textColor="@color/alpha_90_black"
             android:textSize="@dimen/comment_12_size"/>
@@ -106,14 +111,14 @@
 
             android:id="@+id/full_rb_distance"
             style="@style/Recommend_layout"
-            android:layout_height="@dimen/comment_40_dip"
+            android:layout_height="wrap_content"
             android:text="@string/distance"
             android:textColor="@color/alpha_90_black"
             android:textSize="@dimen/comment_12_size" />
 
         <LinearLayout
             style="@style/Recommend_layout"
-            android:layout_height="@dimen/comment_40_dip"
+            android:layout_height="wrap_content"
             >
 
             <TextView
@@ -131,6 +136,14 @@
         </LinearLayout>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/mine_back_gray"
+        android:layout_marginStart="@dimen/comment_10_dip"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="@dimen/comment_10_dip">
+    </View>
     <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager
         android:id="@+id/pager_home_full"
         android:layout_below="@id/linearLayout"

@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -13,18 +14,13 @@ import butterknife.OnClick;
 /**
  * 帮助与反馈
  */
-public class MineProblemActivity extends BaseActivity {
+public class MineProblemActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView proTitle;
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_problem;
-    }
-
-    @Override
-    public void initPresenter() {
-
     }
 
     @Override

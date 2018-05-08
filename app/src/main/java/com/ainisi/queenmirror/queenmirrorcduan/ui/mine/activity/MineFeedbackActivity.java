@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -12,18 +13,13 @@ import butterknife.OnClick;
 /**
  * 意见与反馈
  */
-public class MineFeedbackActivity extends BaseActivity {
+public class MineFeedbackActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView feedTitle;
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_feedback;
-    }
-
-    @Override
-    public void initPresenter() {
-
     }
 
     @Override

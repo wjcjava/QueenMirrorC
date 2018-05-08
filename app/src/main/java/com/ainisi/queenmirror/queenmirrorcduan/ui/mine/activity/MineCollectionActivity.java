@@ -78,7 +78,7 @@ public class MineCollectionActivity extends BaseNewActivity implements RefreshLo
     }
 
     private void initText() {
-        colltitle.setText(R.string.help_and_feedback);
+        colltitle.setText(R.string.my_collection);
 
     }
 

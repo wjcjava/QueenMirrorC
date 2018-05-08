@@ -35,6 +35,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+/**
+ * 休闲娱乐
+ */
 public class ShopClassificationActivity extends BaseActivity {
     @Bind(R.id.full_rb_sort)
     TextView hSort;
@@ -55,11 +58,11 @@ public class ShopClassificationActivity extends BaseActivity {
     //综合排序
     FullshortFragment sortFragment = new FullshortFragment();
     //销量最高
-    FullsalesFragment salesFragment = new FullsalesFragment();
+    FullshortFragment salesFragment = new FullshortFragment();
     //距离最近
-    FulldistanFragment distanceFragment = new FulldistanFragment();
+    FullshortFragment distanceFragment = new FullshortFragment();
     //筛选
-    FullscreenFragment screenFragment = new FullscreenFragment();
+    FullshortFragment screenFragment = new FullshortFragment();
     private CustomPopWindow popWindow;
     private View popview1;
     private PopupWindow pop;
@@ -75,8 +78,8 @@ public class ShopClassificationActivity extends BaseActivity {
     }
     @Override
     public void initView() {
-       initDate();
-       initfragment();
+        initDate();
+        initfragment();
     }
     private void initfragment() {
         pagerList.add(sortFragment);

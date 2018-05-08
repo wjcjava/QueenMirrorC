@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/service_center"
     android:fitsSystemWindows="true"
     tools:context=".ui.mine.activity.MineMyServiceActivity">
     <include
@@ -15,11 +15,11 @@
         android:layout_below="@+id/ic_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <include
-        layout="@layout/layout_mine_service"/>
+        <include
+            layout="@layout/layout_mine_service"/>
     </RelativeLayout>
     <android.support.design.widget.TabLayout
-        
+
         android:id="@+id/tab_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_1_dip"
         android:layout_below="@id/tab_service"
+        android:visibility="invisible"
         android:background="@color/alpha_15_black" />
 
     <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager

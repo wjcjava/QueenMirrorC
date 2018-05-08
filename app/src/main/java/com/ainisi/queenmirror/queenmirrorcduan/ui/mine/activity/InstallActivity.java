@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.common.commonutils.ToastUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -16,7 +17,7 @@ import butterknife.OnClick;
 /**
  * 我的设置
  */
-public class InstallActivity extends BaseActivity {
+public class InstallActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView settitle;
     @Bind(R.id.iv_unselected)
@@ -32,11 +33,8 @@ public class InstallActivity extends BaseActivity {
         return R.layout.activity_install;
     }
     @Override
-    public void initPresenter() {
-    }
-    @Override
     public void initView() {
-        settitle.setText("隐私");
+        settitle.setText("设置");
     }
 
     @OnClick({R.id.title_back, R.id.iv_unselected,  R.id.layout_privacy

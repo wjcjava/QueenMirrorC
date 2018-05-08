@@ -104,6 +104,7 @@ public class MineFragment extends BaseFragment {
 
             //我的资产（女王卡）
             case R.id.ly_mine_foot:
+
                 MineQueenActivity.startActivity(getActivity());
                 break;
             //我的钱包

@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.fragment.HistorydiscountFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.fragment.MinediscountFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
@@ -21,7 +22,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 //优惠券
-public class MineDiscountActivity extends BaseActivity {
+public class MineDiscountActivity extends BaseNewActivity {
 
 //    @Bind(R.id.mine_tab)
 //    TabLayout minetab;
@@ -40,11 +41,6 @@ public class MineDiscountActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_discount;
-    }
-
-    @Override
-    public void initPresenter() {
-
     }
 
     @Override

@@ -6,17 +6,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseOneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragmentOne;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MasterFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MineFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.ShopMallFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomViewPager;
-
 import java.util.ArrayList;
 
 import butterknife.Bind;

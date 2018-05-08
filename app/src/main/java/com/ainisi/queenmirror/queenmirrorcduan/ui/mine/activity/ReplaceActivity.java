@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -15,7 +16,7 @@ import butterknife.OnClick;
 /**
  * 我的-设置-隐私
  */
-public class ReplaceActivity extends BaseActivity {
+public class ReplaceActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView replacetitle;
     @Bind(R.id.dynamic_selected)
@@ -34,11 +35,6 @@ public class ReplaceActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_replace;
-    }
-
-    @Override
-    public void initPresenter() {
-
     }
 
     @Override

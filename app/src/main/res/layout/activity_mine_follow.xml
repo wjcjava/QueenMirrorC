@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/mine_back_gray"
     android:fitsSystemWindows="true"
     tools:context=".ui.mine.activity.MineFollowActivity">
 
@@ -13,9 +13,30 @@
         android:id="@+id/ic_title"
         layout="@layout/layout_title" />
 
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerVertical="true">
+        <ImageView android:layout_width="253dp"
+            android:layout_height="137dp"
+            android:src="@drawable/shop_null">
+        </ImageView>
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="您还没有关注的店铺"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/comment_12_size"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/shop_text">
+        </TextView>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
         android:layout_below="@+id/ic_title"
         android:background="@color/alpha_05_black">
 

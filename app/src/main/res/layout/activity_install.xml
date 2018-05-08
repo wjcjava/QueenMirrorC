@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/mine_back_gray"
     tools:context=".ui.mine.activity.InstallActivity">
 
     <include
@@ -41,7 +41,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/privacy"
                 android:textColor="@color/alpha_95_black"
-                android:textSize="@dimen/comment_16_size" />
+                android:textSize="@dimen/comment_14_size" />
         </RelativeLayout>
 
         <View
@@ -67,7 +67,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/receiving_notification"
                 android:textColor="@color/alpha_95_black"
-                android:textSize="@dimen/comment_16_size" />
+                android:textSize="@dimen/comment_14_size" />
             <ImageView
                 android:id="@+id/iv_unselected"
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 android:layout_centerVertical="true"
                 android:text="关于我们"
                 android:textColor="@color/alpha_95_black"
-                android:textSize="@dimen/comment_16_size" />
+                android:textSize="@dimen/comment_14_size" />
 
             <ImageView
                 android:id="@+id/img_new"
@@ -139,7 +139,7 @@
                 android:text="当前版本"
                 android:layout_centerVertical="true"
                 android:textColor="@color/alpha_95_black"
-                android:textSize="@dimen/comment_16_size" />
+                android:textSize="@dimen/comment_14_size" />
 
             <TextView
                 android:id="@+id/iv_userphone"

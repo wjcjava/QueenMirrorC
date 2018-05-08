@@ -66,7 +66,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.banner)
     Banner banner;
     @Bind(R.id.iv_sort)
-    LinearLayout ivsort;
+    ImageView ivsort;
     @Bind(R.id.iv_sort1)
     ImageView ivsort1;
     @Bind(R.id.rb_sort)
@@ -135,8 +135,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     public void initPresenter() {
 
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override

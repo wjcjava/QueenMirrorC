@@ -81,7 +81,7 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
             sortBean.setDistance("875m");
             sortlist.add(sortBean);
         }
-        MyAdapter sortAdapter = new MyAdapter(R.layout.re_full_short, sortlist);
+        MyAdapter sortAdapter = new MyAdapter(R.layout.item_shortrecycler, sortlist);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recycler.setAdapter(sortAdapter);
     }

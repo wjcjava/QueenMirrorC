@@ -6,13 +6,15 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 
 /**
  * 我的——成为美业人
  */
-public class MineBeautyActivity extends BaseActivity {
+public class MineBeautyActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.title_title)
     TextView beautyTitle;
     @Bind(R.id.title_right)
@@ -26,14 +28,23 @@ public class MineBeautyActivity extends BaseActivity {
     }
 
     @Override
-    public void initPresenter() {
+    public void initView() {
+        beautyTitle.setText(R.string.beauty);
+        titleRight.setText(R.string.reservation);
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
 
     }
 
     @Override
-    public void initView() {
-        beautyTitle.setText(R.string.beauty);
+    public void showLoadingDialog() {
 
-        titleRight.setText(R.string.reservation);
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
     }
 }

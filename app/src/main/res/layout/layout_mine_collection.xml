@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/comment_5_dip"
-            android:text="@string/my_Tracks" />
+            android:text="我的主页" />
 
     </LinearLayout>
 

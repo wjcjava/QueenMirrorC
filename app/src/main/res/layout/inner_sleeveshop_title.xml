@@ -13,14 +13,14 @@
 
                 <ImageView
                     android:id="@+id/iv_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentLeft="true"
                     android:layout_marginBottom="@dimen/comment_10_dip"
                     android:layout_marginLeft="@dimen/comment_10_dip"
-                    android:layout_marginTop="@dimen/comment_25_dip"
+                    android:layout_marginTop="@dimen/comment_20_dip"
                     android:paddingRight="@dimen/comment_10_dip"
-                    app:srcCompat="@mipmap/icon_back" />
+                    app:srcCompat="@drawable/back_white" />
                 <TextView
                     android:id="@+id/newtitle_title"
                     android:layout_width="match_parent"
@@ -53,9 +53,11 @@
                     android:layout_below="@id/newtitle_title"
                     android:background="@drawable/activity_shop_search_shape"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/comment_10_dip"
+                    android:layout_marginTop="@dimen/comment_5_dip"
                     android:layout_marginStart="@dimen/comment_20_dip"
                     android:layout_marginBottom="@dimen/comment_9_dip"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginEnd="@dimen/comment_19_dip"
                     android:paddingEnd="@dimen/comment_20_dip"
                     android:layout_height="@dimen/comment_35_dip">
@@ -71,12 +73,10 @@
                             android:id="@+id/ed_keyword"
                             android:layout_toRightOf="@id/iv_keyword"
                             android:hint="请输入关键字搜索"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
                             android:paddingStart="@dimen/comment_10_dip"
                             android:layout_centerVertical="true"
                             android:background="@color/white"
-                            android:textSize="@dimen/comment_16_size"
+                            android:textSize="@dimen/comment_14_size"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                 </RelativeLayout>

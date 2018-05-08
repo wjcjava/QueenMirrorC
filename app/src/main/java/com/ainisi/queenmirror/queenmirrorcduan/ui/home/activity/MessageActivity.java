@@ -37,7 +37,7 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
         title.setTextColor(ContextCompat.getColor(this,R.color.alpha_95_black));
     }
 
-    @OnClick({R.id.title_back,R.id.layout_order
+    @OnClick({R.id.title_back,R.id.layout_order,R.id.layout_system,R.id.layout_hudong,R.id.layout_comment
     })
     public void click(View view) {
 
@@ -46,6 +46,9 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
                 finish();
                 break;
             case R.id.layout_order:
+            case R.id.layout_system:
+            case R.id.layout_hudong:
+            case R.id.layout_comment:
                 OrderMessageActivity.startActivity(MessageActivity.this);
                 break;
             default:

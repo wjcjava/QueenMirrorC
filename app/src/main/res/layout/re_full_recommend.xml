@@ -45,7 +45,7 @@
         android:layout_below="@id/tv_praise"
         android:layout_toRightOf="@id/tv_present_price"
         android:layout_width="wrap_content"
-        android:textColor="@color/alpha_05_black"
+        android:textColor="@color/alpha_15_black"
         android:layout_marginStart="@dimen/comment_5_dip"
         android:layout_marginTop="@dimen/comment_2_dip"
         android:layout_height="wrap_content"
