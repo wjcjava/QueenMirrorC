@@ -116,7 +116,9 @@
 
                 <LinearLayout
                     android:id="@+id/line_uspension_surface"
-                    style="@style/Recommend_layout"
+                    android:layout_width="@dimen/comment_0_dip"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:layout_height="@dimen/comment_40_dip">
 
                     <ImageView

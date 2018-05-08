@@ -4,8 +4,8 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -13,7 +13,7 @@ import butterknife.OnClick;
 /**
  * 我的订单
  */
-public class SubmitActivity extends BaseActivity {
+public class SubmitActivity extends BaseNewActivity{
     @Bind(R.id.img_wechat_unpayment)
     ImageView wcunpayment;
     @Bind(R.id.img_queen_unpayment)
@@ -33,10 +33,6 @@ public class SubmitActivity extends BaseActivity {
         return R.layout.activity_submit;
     }
 
-    @Override
-    public void initPresenter() {
-
-    }
 
     @Override
     public void initView() {

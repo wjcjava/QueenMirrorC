@@ -98,7 +98,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/li_home_meijia"
+                    android:id="@+id/li_home_nailart"
                     android:layout_width="@dimen/comment_0_dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -121,6 +121,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/li_home_haircustom"
                     android:layout_width="@dimen/comment_0_dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -143,6 +144,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/li_home_beauty"
                     android:layout_width="@dimen/comment_0_dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -165,6 +167,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/li_home_permanent"
                     android:layout_width="@dimen/comment_0_dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -200,6 +203,7 @@
             android:background="@color/white">
 
             <LinearLayout
+                android:id="@+id/li_home_newuserprg"
                 android:layout_width="@dimen/comment_0_dip"
                 android:layout_height="@dimen/comment_202_dip"
                 android:layout_weight="1"
@@ -291,6 +295,7 @@
                     android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/li_home_specialoffer"
                         android:layout_width="@dimen/comment_0_dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -330,6 +335,7 @@
                         android:background="@color/home_shop_middle" />
 
                     <LinearLayout
+                        android:id="@+id/li_home_goodshop"
                         android:layout_width="@dimen/comment_0_dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

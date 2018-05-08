@@ -1,25 +1,27 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-
 /**
  * Created by Administrator on 2018/3/19.
  */
-
 public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack {
     @Bind(R.id.sore_recycler)
     RecyclerView recycler;
@@ -54,7 +56,6 @@ public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.
         }, 200);
 
     }
-
     @Override
     public void onLoadMore() {
         handler.postDelayed(new Runnable() {
@@ -65,10 +66,8 @@ public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.
             }
         }, 1000);
     }
-
     @Override
     protected void initView() {
-
         for (int i = 0; i < 10; i++) {
             SortBean sortBean = new SortBean();
             sortBean.setName("MOCO美容美发沙龙");
@@ -81,6 +80,14 @@ public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.
         MyAdapter sortAdapter = new MyAdapter(R.layout.item_shortrecycler,sortlist);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recycler.setAdapter(sortAdapter);
+        sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                startActivity(new Intent(getActivity(), WorkRoomDetailActivity.class));
+
+            }
+        });
 
     }
 }

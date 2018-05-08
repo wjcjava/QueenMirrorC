@@ -151,7 +151,7 @@ public class EstheticsActivity extends BaseActivity {
     ,R.id.tv_more})
     public void click(View view) {
         switch (view.getId()) {
-            //搜素
+            //搜索
             case R.id.ed_keyword:
                 SearchActivity.startActivity(this);
                 break;

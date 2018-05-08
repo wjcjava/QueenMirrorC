@@ -2,6 +2,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.barlibrary.ImmersionBar;
@@ -80,6 +82,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         super.onViewCreated(view, savedInstanceState);
         ImmersionBar.setTitleBar(getActivity(), mToolbar);
     }
+
     @Override
     protected int setLayoutId() {
         return R.layout.home_fragment_new;
@@ -127,7 +130,6 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 hSort.setText(problem[position]);
                 pop.dismiss();
-
 
 
             }
@@ -180,14 +182,13 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                 home_refresh.finishRefresh();
             }
         });
-     /*   // 结束下拉刷新...
+     /*
+      // 结束下拉刷新...
         home_refresh.finishRefresh();
-
         // 结束上拉刷新...
         home_refresh.finishRefreshLoadMore();*/
 
     }
-
 
     @Override
     public void onSuccess(int action, String res) {
@@ -212,7 +213,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                 .init();
     }
 
-    @OnClick({R.id.tv_home_bustling, R.id.iv_home_search, R.id.iv_uspension_surface, R.id.iv_sort, R.id.iv_sort1,R.id.rb_screen})
+    @OnClick({R.id.tv_home_bustling, R.id.iv_home_search, R.id.iv_uspension_surface, R.id.iv_sort, R.id.iv_sort1, R.id.rb_screen, R.id.img_information})
     public void click(View view) {
         switch (view.getId()) {
             //我的位置
@@ -222,6 +223,10 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             //搜索
             case R.id.iv_home_search:
                 SearchActivity.startActivity(getContext());
+                break;
+            //消息
+            case R.id.img_information:
+                startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
             //瀑布流和流式切换
             case R.id.iv_uspension_surface:
@@ -276,6 +281,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         }
 
     }
+
     private void initview(final View popview) {
         TextView eliminateTv = popview.findViewById(R.id.tv_eliminate);
         TextView okTv = popview.findViewById(R.id.tv_ok);
@@ -287,6 +293,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
+
     public void inititem() {
         if (itemNum > myRecyclerCardviewAdapter.getItemCount()) {
             recyclerView.smoothScrollToPosition(itemNum);

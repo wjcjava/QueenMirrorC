@@ -96,7 +96,14 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         if (holder instanceof ThemeVideoHolder) {
             ((ThemeVideoHolder) holder).home_esthetics.setOnClickListener(this);
             ((ThemeVideoHolder) holder).home_freetrial.setOnClickListener(this);
+            ((ThemeVideoHolder) holder).home_nailart.setOnClickListener(this);
+            ((ThemeVideoHolder) holder).home_haircustom.setOnClickListener(this);
+            ((ThemeVideoHolder) holder).home_beauty.setOnClickListener(this);
+            ((ThemeVideoHolder) holder).home_permanent.setOnClickListener(this);
 
+            ((ThemeVideoHolder) holder).home_newuserprg.setOnClickListener(this);
+            ((ThemeVideoHolder) holder).home_specialoffer.setOnClickListener(this);
+            ((ThemeVideoHolder) holder).home_goodshop.setOnClickListener(this);
 
         } else if (holder instanceof VideoViewHolder) {
             ((VideoViewHolder) holder).surFace.setOnClickListener(this);
@@ -116,14 +123,43 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             case R.id.home_esthetics:
                 context.startActivity(new Intent(context, EstheticsActivity.class));
                 break;
+
+            //店铺
+            case R.id.li_home_short:
+                context.startActivity(new Intent(context, WorkRoomDetailActivity.class));
+                break;
+            //美手美甲
+            case R.id.li_home_nailart:
+                context.startActivity(new Intent(context, EstheticsActivity.class));
+                break;
+            //美发定制
+            case R.id.li_home_haircustom:
+                context.startActivity(new Intent(context, EstheticsActivity.class));
+                break;
+            //美容美体
+            case R.id.li_home_beauty:
+                context.startActivity(new Intent(context, EstheticsActivity.class));
+                break;
+            //半永久
+            case R.id.li_home_permanent:
+                context.startActivity(new Intent(context, EstheticsActivity.class));
+                break;
+            //新用户特权
+            case R.id.li_home_newuserprg:
+                T.show("新用户特权");
+                break;
+
             //免费试用（拼团）
             case R.id.linear_home_freetrial:
                 context.startActivity(new Intent(context, HomeFightaloneActivity.class));
                 break;
-            //店铺
-            case R.id.li_home_short:
-                context.startActivity(new Intent(context, WorkRoomDetailActivity.class));
-
+            //天天特价
+            case R.id.li_home_specialoffer:
+                T.show("天天特价");
+                break;
+            //人气好店
+            case R.id.li_home_goodshop:
+                T.show("人气好店");
                 break;
 
         }
@@ -163,11 +199,28 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         LinearLayout home_freetrial;
         LinearLayout home_esthetics;
         private final Banner banner;
+        private final LinearLayout home_nailart;
+        private final LinearLayout home_haircustom;
+        private final LinearLayout home_beauty;
+        private final LinearLayout home_permanent;
+        private final LinearLayout home_newuserprg;
+        private final LinearLayout home_specialoffer;
+        private final LinearLayout home_goodshop;
 
         public ThemeVideoHolder(View itemView) {
             super(itemView);
             home_esthetics = itemView.findViewById(R.id.home_esthetics);
             home_freetrial = itemView.findViewById(R.id.linear_home_freetrial);
+
+            home_nailart = itemView.findViewById(R.id.li_home_nailart);
+            home_haircustom = itemView.findViewById(R.id.li_home_haircustom);
+            home_beauty = itemView.findViewById(R.id.li_home_beauty);
+            home_permanent = itemView.findViewById(R.id.li_home_permanent);
+
+
+            home_newuserprg = itemView.findViewById(R.id.li_home_newuserprg);
+            home_specialoffer = itemView.findViewById(R.id.li_home_specialoffer);
+            home_goodshop = itemView.findViewById(R.id.li_home_goodshop);
             banner = itemView.findViewById(R.id.banner);
             marqueeview = itemView.findViewById(R.id.marqueeview);
             initBanner(banner);

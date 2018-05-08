@@ -5,15 +5,14 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.PurchaseListViewAdapter;
-
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 //提交订单
-public class PurchaseActivity extends BaseActivity {
+public class PurchaseActivity extends BaseNewActivity {
     @Bind(R.id.list_order)
     ListView listOrder;
     @Bind(R.id.title_title)
@@ -25,10 +24,6 @@ public class PurchaseActivity extends BaseActivity {
         return R.layout.activity_purchase;
     }
 
-    @Override
-    public void initPresenter() {
-
-    }
 
     @Override
     public void initView() {
