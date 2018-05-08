@@ -10,7 +10,6 @@ import android.view.View;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
@@ -20,8 +19,11 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-//评价
-public class MineEvaluateActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack {
+
+/**
+ * 我的评价
+ */
+public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack {
 
     @Bind(R.id.rc_evaluate)
     RecyclerView rcevaluate;
@@ -33,13 +35,17 @@ public class MineEvaluateActivity extends BaseNewActivity implements RefreshLoad
         context.startActivity(new Intent(context,MineEvaluateActivity.class));
     }
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_mine_evaluate;
     }
 
     @Override
-    protected void initView() {
-        super.initView();
+    public void initPresenter() {
+
+    }
+
+    @Override
+    public void initView() {
         for (int i = 0; i <8 ; i++) {
             SortBean sortBean=new SortBean();
             sortBean.setName("");
@@ -52,9 +58,7 @@ public class MineEvaluateActivity extends BaseNewActivity implements RefreshLoad
         rcevaluate.setAdapter(sortAdapter2);
     }
 
-    @Override
-    protected void initData() {
-        super.initData();
+    public void initData() {
         mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
                 .canLoadMore(true)
                 .autoLoadMore()

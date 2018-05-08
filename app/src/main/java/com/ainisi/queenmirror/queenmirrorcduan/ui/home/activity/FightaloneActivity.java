@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import butterknife.OnClick;
 /**
  * 拼单
  */
-public class FightaloneActivity extends BaseActivity {
+public class FightaloneActivity extends BaseNewActivity {
     @Bind(R.id.full_recycler)
     RecyclerView frecycler;
     @Bind(R.id.full_recyclertwo)
@@ -37,10 +38,6 @@ public class FightaloneActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_fightalone;
-    }
-
-    @Override
-    public void initPresenter() {
     }
 
     @Override
@@ -85,7 +82,7 @@ public class FightaloneActivity extends BaseActivity {
                 break;
             //拼单剩余人数（查看更多）
             case R.id.relative_look_more:
-                Toast.makeText(mContext, "您点击了我", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "您点击了我", Toast.LENGTH_SHORT).show();
                 break;
 
         }

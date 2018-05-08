@@ -11,7 +11,7 @@
     <include
 
         android:id="@+id/ic_title"
-        layout="@layout/layout_newtitle" />
+        layout="@layout/layout_title" />
 
     <RelativeLayout
         android:layout_width="match_parent"

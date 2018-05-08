@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.HomeFightaloneFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
@@ -15,7 +16,7 @@ import butterknife.OnClick;
 /**
  * 拼单
  */
-public class HomeFightaloneActivity extends BaseActivity {
+public class HomeFightaloneActivity extends BaseNewActivity {
     @Bind(R.id.tab_home_fightalone)
     TabLayout tabFightalone;
     @Bind(R.id.pager_home_fightalone)
@@ -28,9 +29,6 @@ public class HomeFightaloneActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_home_fightalone;
-    }
-    @Override
-    public void initPresenter() {
     }
     @Override
     public void initView() {

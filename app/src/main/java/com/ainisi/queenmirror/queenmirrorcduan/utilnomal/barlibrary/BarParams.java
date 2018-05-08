@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class BarParams implements Cloneable {
     @ColorInt
-    public int statusBarColor = Color.BLACK; //状态栏颜色
+    public int statusBarColor = Color.TRANSPARENT; //状态栏颜色
     @ColorInt
     public int navigationBarColor = Color.BLACK;  //导航栏颜色
     @FloatRange(from = 0f, to = 1f)

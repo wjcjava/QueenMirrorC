@@ -59,7 +59,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/comment_24_dip"
         android:layout_width="@dimen/comment_100_dip"
-        android:text="去拼单>"
+        android:text="去拼单 >"
         android:background="@drawable/icon_home_fightalone"
         android:textSize="@dimen/comment_15_size"
         android:gravity="center"
