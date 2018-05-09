@@ -4,8 +4,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -13,7 +13,7 @@ import butterknife.OnClick;
 /**
  * 添加银行卡
  */
-public class MineAddcartActivity extends BaseActivity {
+public class MineAddcartActivity extends BaseNewActivity{
     @Bind(R.id.title_title)
     TextView addcartTitle;
 
@@ -23,10 +23,7 @@ public class MineAddcartActivity extends BaseActivity {
         return R.layout.activity_mine_addcart;
     }
 
-    @Override
-    public void initPresenter() {
 
-    }
 
     @Override
     public void initView() {

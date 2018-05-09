@@ -7,9 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
@@ -23,7 +23,7 @@ import butterknife.OnClick;
 /**
  * 我的评价
  */
-public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack {
+public class MineEvaluateActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack {
 
     @Bind(R.id.rc_evaluate)
     RecyclerView rcevaluate;
@@ -39,10 +39,6 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
         return R.layout.activity_mine_evaluate;
     }
 
-    @Override
-    public void initPresenter() {
-
-    }
 
     @Override
     public void initView() {

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/comment_10_dip"
+    android:layout_height="@dimen/comment_100_dip">
+
+    <ImageView
+
+        android:id="@+id/iv_title"
+        android:layout_width="@dimen/comment_80_dip"
+        android:layout_height="@dimen/comment_80_dip"
+        android:src="@drawable/icon_mine_homepager"
+        android:layout_marginStart="@dimen/comment_19_dip"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
+        android:layout_marginTop="@dimen/comment_5_dip"
+        android:layout_marginEnd="@dimen/comment_27_dip"
+        android:layout_marginStart="@dimen/comment_13_dip"
+        android:layout_toRightOf="@+id/iv_title"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="文章标题文章标题文章标题文章标题"
+        android:textSize="@dimen/comment_16_size" />
+
+
+    <RelativeLayout
+        android:id="@+id/recycler"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/re_master_evaluation"
+        android:layout_marginEnd="@dimen/comment_15_dip"
+        android:layout_marginStart="@dimen/comment_15_dip"
+        android:gravity="right">
+        <RelativeLayout
+            android:id="@+id/re_big_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/comment_12_dip"
+            >
+
+        <ImageView
+            android:id="@+id/iv_big_share"
+            android:layout_width="@dimen/comment_12_dip"
+            android:layout_height="@dimen/comment_12_dip"
+            android:layout_marginTop="@dimen/comment_14_dip"
+            android:src="@drawable/icon_big_share" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_5_dip"
+                android:layout_marginTop="@dimen/comment_12_dip"
+                android:layout_toRightOf="@id/iv_big_share"
+                android:text="520"
+                android:textColor="@color/alpha_15_black"
+                android:textSize="@dimen/comment_12_size" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_big_massage"
+            android:layout_marginBottom="@dimen/comment_4_dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/re_big_share"
+            android:layout_marginStart="@dimen/comment_12_dip"
+            >
+
+            <ImageView
+                android:id="@+id/iv_big_massage"
+                android:layout_width="@dimen/comment_12_dip"
+                android:layout_height="@dimen/comment_12_dip"
+                android:layout_marginStart="@dimen/comment_12_dip"
+                android:layout_marginTop="@dimen/comment_14_dip"
+                android:src="@drawable/icon_big_message" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_5_dip"
+                android:layout_marginTop="@dimen/comment_12_dip"
+                android:layout_toRightOf="@id/iv_big_massage"
+                android:text="520"
+                android:textColor="@color/alpha_15_black"
+                android:textSize="@dimen/comment_12_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/comment_12_dip"
+            android:layout_toRightOf="@id/re_big_massage">
+
+            <ImageView
+                android:id="@+id/iv_big_praise"
+
+                android:layout_width="@dimen/comment_12_dip"
+                android:layout_height="@dimen/comment_12_dip"
+                android:layout_marginTop="@dimen/comment_14_dip"
+                android:src="@drawable/icon_big_unpraise" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_5_dip"
+                android:layout_marginTop="@dimen/comment_12_dip"
+                android:layout_toRightOf="@id/iv_big_praise"
+                android:text="520"
+                android:textColor="@color/alpha_15_black"
+                android:textSize="@dimen/comment_12_size" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

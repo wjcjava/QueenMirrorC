@@ -4,8 +4,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -13,7 +13,7 @@ import butterknife.OnClick;
 /**
  * 我的钱包—余额充值
  */
-public class MineRechargeActivity extends BaseActivity {
+public class MineRechargeActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView reTitle;
     @Override
@@ -21,10 +21,6 @@ public class MineRechargeActivity extends BaseActivity {
         return R.layout.activity_mine_recharge;
     }
 
-    @Override
-    public void initPresenter() {
-
-    }
 
     @Override
     public void initView() {

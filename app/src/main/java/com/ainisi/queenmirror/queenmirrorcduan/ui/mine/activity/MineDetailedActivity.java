@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.AllDetailFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.ExpenseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.IncomeDetailsFragment;
@@ -27,7 +27,7 @@ import butterknife.OnClick;
 /**
  * 我的钱包—余额—余额明细
  */
-public class MineDetailedActivity extends BaseActivity {
+public class MineDetailedActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView detailedTitle;
     @Bind(R.id.tab_detailed)
@@ -42,10 +42,7 @@ public class MineDetailedActivity extends BaseActivity {
         return R.layout.activity_mine_detailed;
     }
 
-    @Override
-    public void initPresenter() {
 
-    }
 
     @Override
     public void initView() {
