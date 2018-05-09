@@ -26,10 +26,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.barlibrary.ImmersionBar;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
@@ -51,7 +49,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
     @Bind(R.id.iv_uspension_surface)
-    ImageView surface;
+    public ImageView surface;
     @Bind(R.id.layout_stick_header_main)
     public LinearLayout layout_stick_header_main;
     @Bind(R.id.home_refresh)
@@ -63,23 +61,23 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.tv_home_comprehensive)
     public TextView hSort;
     @Bind(R.id.li_sort_bottom)
-    LinearLayout sortHeard;
+    public LinearLayout sortHeard;
 
     private int type = 0;
 
     List<SortBean> data;
     LinearLayoutManager layoutManager;
     int itemNum;
-
     private List<ProblemBean> list = new ArrayList<>();
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
     public PopupWindow pop;
-    private View popview1;
-    private CustomPopWindow popWindow;
+    public View popview1;
+    public PopupWindow popWindow;
     private MyRecyclerCardviewAdapter myRecyclerCardviewAdapter1;
     private MyRecyclerCardviewAdapter myRecyclerCardviewAdapter;
 
     public static HomeFragment instance = null;
+    public boolean onclick;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -92,6 +90,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     @Override
     protected int setLayoutId() {
         return R.layout.home_fragment_new;
+
     }
 
     @SuppressLint("NewApi")
@@ -119,6 +118,15 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             }
         });
         pop.dismiss();
+
+        View popview = View.inflate(getActivity(), R.layout.pop_right, null);
+        initview(popview);
+        popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
+
+        popWindow.setContentView(popview);
+        popWindow.setBackgroundDrawable(new ColorDrawable(0));
+        popWindow.setOutsideTouchable(true);
+        popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
     }
 
     private void initpop(View popview1) {
@@ -217,7 +225,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                 .navigationBarColor(R.color.alpha_95_black)
                 .init();
     }
-    boolean onclick;
+
     @OnClick({R.id.tv_home_bustling, R.id.iv_home_search, R.id.iv_uspension_surface, R.id.iv_sort, R.id.iv_sort1, R.id.rb_screen, R.id.img_information})
     public void click(View view) {
         switch (view.getId()) {
@@ -280,16 +288,17 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                 inititem();
                 break;
             case R.id.rb_screen:
-                View popview = View.inflate(getActivity(), R.layout.pop_right, null);
-                initview(popview);
-                popWindow = new CustomPopWindow.PopupWindowBuilder(getActivity())
-                        .setView(popview)
-                        .setFocusable(true)
-                        .size(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT)
-                        .setOutsideTouchable(true)
-                        .setAnimationStyle(R.style.CustomPopWindowStyle)
-                        .create()
-                        .showAsDropDown(sortHeard);
+
+//                popWindow = new CustomPopWindow.PopupWindowBuilder(getActivity())
+//                        .setView(popview)
+//                        .setFocusable(true)
+//                        .size(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT)
+//                        .setOutsideTouchable(true)
+//                        .setAnimationStyle(R.style.CustomPopWindowStyle)
+//                        .create()
+//                        .showAsDropDown(sortHeard);
+
+                popWindow.showAsDropDown(hSort);
                 break;
         }
 
@@ -299,7 +308,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         eliminateTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popWindow.dissmiss();
+                popWindow.dismiss();
 
             }
         });

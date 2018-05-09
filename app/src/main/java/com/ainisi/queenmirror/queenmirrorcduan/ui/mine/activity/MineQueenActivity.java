@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 //女王卡
-public class MineQueenActivity extends BaseNewActivity {
+public class MineQueenActivity extends BaseActivity {
     @Bind(R.id.title_title)
     TextView queentitle;
 
@@ -25,6 +25,10 @@ public class MineQueenActivity extends BaseNewActivity {
         return R.layout.activity_mine_queen;
     }
 
+    @Override
+    public void initPresenter() {
+
+    }
 
 
     @Override

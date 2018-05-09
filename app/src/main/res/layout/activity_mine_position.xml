@@ -51,13 +51,24 @@
                 android:src="@drawable/inco_workroom_add"
                 />
         </RelativeLayout>
-        <RadioGroup
+        <RelativeLayout
             android:layout_above="@id/layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/comment_2_dip"
+                android:background="@color/alpha_05_black"
 
+                />
+            <ListView
+                android:layout_below="@id/view1"
+                android:id="@+id/lv_mine_position"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
 
-        </RadioGroup>
+        </RelativeLayout>
 
     </RelativeLayout>
 </RelativeLayout>

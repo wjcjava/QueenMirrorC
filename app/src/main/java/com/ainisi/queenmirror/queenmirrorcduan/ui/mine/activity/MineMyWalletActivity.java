@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 //我的钱包
-public class MineMyWalletActivity extends BaseNewActivity {
+public class MineMyWalletActivity extends BaseActivity {
     @Bind(R.id.title_title)
     TextView wallTitle;
     @Bind(R.id.tv_balance)
@@ -28,6 +28,10 @@ public class MineMyWalletActivity extends BaseNewActivity {
         return R.layout.activity_mine_my_wallet;
     }
 
+    @Override
+    public void initPresenter() {
+
+    }
 
 
     @Override

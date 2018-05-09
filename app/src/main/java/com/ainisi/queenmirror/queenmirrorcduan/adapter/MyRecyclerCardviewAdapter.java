@@ -98,11 +98,12 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (holder instanceof VideoViewHolder) {
             ((VideoViewHolder) holder).surFace.setOnClickListener(this);
 
-            ((VideoViewHolder)holder).li_hime_sort.setOnClickListener(this);
+            ((VideoViewHolder) holder).li_hime_sort.setOnClickListener(this);
+            ((VideoViewHolder) holder).screen_bottom.setOnClickListener(this);
         } else if (holder instanceof VideoViewThreeHolder) {
-            if(type==0){
-            ((VideoViewThreeHolder) holder).homeShort.setOnClickListener(this);}
-            else {
+            if (type == 0) {
+                ((VideoViewThreeHolder) holder).homeShort.setOnClickListener(this);
+            } else {
                 return;
             }
         }
@@ -153,12 +154,24 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             case R.id.li_home_goodshop:
                 T.show("人气好店");
                 break;
-                //综合排序
+            //综合排序
             case R.id.li_hime_sort:
                 HomeFragment.instance.recyclerView.smoothScrollToPosition(6);
                 HomeFragment.instance.layout_stick_header_main.setVisibility(View.VISIBLE);
                 HomeFragment.instance.pop.showAsDropDown(HomeFragment.instance.hSort);
                 break;
+            //筛选
+            case R.id.li_home_screen_bottom:
+                HomeFragment.instance.recyclerView.smoothScrollToPosition(6);
+                HomeFragment.instance.layout_stick_header_main.setVisibility(View.VISIBLE);
+                HomeFragment.instance.popWindow.showAsDropDown(HomeFragment.instance.hSort);
+                break;
+            //瀑布流切换
+            case R.id.iv_surface:
+                HomeFragment.instance.recyclerView.smoothScrollToPosition(6);
+                HomeFragment.instance.layout_stick_header_main.setVisibility(View.VISIBLE);
+                HomeFragment.instance.onclick=false;
+
 
         }
     }
@@ -255,6 +268,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
     public class VideoViewHolder extends RecyclerView.ViewHolder {
 
 
+        LinearLayout screen_bottom;
         private ImageView surFace;
         LinearLayout li_hime_sort;
 
@@ -262,6 +276,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             super(itemView);
             surFace = itemView.findViewById(R.id.iv_surface);
             li_hime_sort = itemView.findViewById(R.id.li_hime_sort);
+            screen_bottom = itemView.findViewById(R.id.li_home_screen_bottom);
 
         }
 
@@ -272,9 +287,9 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
 
         public VideoViewThreeHolder(View itemView) {
             super(itemView);
-            if(type==0){
+            if (type == 0) {
                 homeShort = itemView.findViewById(R.id.li_home_short);
-            }else {
+            } else {
                 return;
             }
 

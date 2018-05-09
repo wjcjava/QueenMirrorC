@@ -8,10 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
-import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import butterknife.OnClick;
 /**
  * 我的魔豆
  */
-public class MineBeanActivity extends BaseNewActivity implements HttpCallBack{
+public class MineBeanActivity extends BaseActivity implements HttpCallBack{
     @Bind(R.id.title_title)
     TextView beantitle;
     @Bind(R.id.rc_bean)
@@ -38,6 +38,10 @@ public class MineBeanActivity extends BaseNewActivity implements HttpCallBack{
         return R.layout.activity_mine_dean;
     }
 
+    @Override
+    public void initPresenter() {
+
+    }
 
 
     @Override
