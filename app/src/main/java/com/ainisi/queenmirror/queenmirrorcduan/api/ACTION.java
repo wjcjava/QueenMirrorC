@@ -10,4 +10,6 @@ public interface ACTION {
     int LOGIN = 0x002;//登陆
     int VERIFY=0x003;//获取验证码
     int LIST=0x004;//测试
+
+    int ALLOFMYORDER = 0x005;//获取我的全部订单
 }

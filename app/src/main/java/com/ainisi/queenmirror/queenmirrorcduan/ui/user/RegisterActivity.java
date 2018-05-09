@@ -32,7 +32,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.title_title)
     TextView registerTitle;
     @Bind(R.id.tv_phonenumber)
-    TextView phoneNumber;
+    EditText phoneNumber;
     @Bind(R.id.tv_validation)
     TextView validation;
     @Bind(R.id.et_password)
@@ -83,14 +83,10 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                     T.show("手机号不能为空");
                 } else {
                     initValidation();
-                    myCountDownTimer.start();
                 }
-
                 break;
             case R.id.iv_remove_text:
-
                 initRemoveText();
-
                 break;
             case R.id.iv_login_see:
                 initSee();
@@ -128,10 +124,10 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         }
     }
 
-
     private void initRemoveText() {
+        phoneNumber.setText("");
         //手机号为空时隐藏
-        if (TextUtils.isEmpty(phoneNumber.getText())) {
+        if (!TextUtils.isEmpty(phoneNumber.getText())) {
             removeText.setVisibility(View.VISIBLE);
         }
         //手机号为空时
@@ -154,7 +150,13 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             case ACTION.VERIFY://获取验证码
                 ceshiBean = GsonUtil.toObj(res,LoginCeshiBean.class);
 
-                L.e(ceshiBean.getMsg()+"      "+ ceshiBean.getErrorCode());
+                if(ceshiBean.isSuccess()){
+                    myCountDownTimer.start();
+                    L.e(ceshiBean.getMsg()+"      "+ ceshiBean.getErrorCode());
+                }else{
+                    T.show("系统出错，请稍后再试");
+                }
+
                 break;
                 case ACTION.REGIST:
                     System.out.println(res);

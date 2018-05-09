@@ -309,6 +309,9 @@ public class HttpUtils {
             case ACTION.LIST:
                 actionUrl = UrlConstants.LIST;
                 break;
+                case ACTION.ALLOFMYORDER:
+                    actionUrl = UrlConstants.ALLOFMYORDER;
+                    break;
         }
         url.append(actionUrl);
         return url;

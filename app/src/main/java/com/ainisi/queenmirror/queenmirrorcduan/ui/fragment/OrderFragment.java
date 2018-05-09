@@ -46,9 +46,6 @@ public class OrderFragment extends BaseFragment {
 
     }
 
-
-
-
     @OnClick({R.id.title_photo})
     public void onClick(View view){
 

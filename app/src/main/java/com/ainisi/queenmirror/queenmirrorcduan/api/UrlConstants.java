@@ -20,4 +20,6 @@ public interface UrlConstants {
 
  String LIST="wg/a/api/ans/refund/refundApplyList";//测试（listce测试）
 
+ String ALLOFMYORDER = "wg/a/api/ans/order/orderList";//获取我的全部订单
+
 }

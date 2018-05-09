@@ -11,13 +11,18 @@ import android.widget.Toast;
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ScoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -27,7 +32,7 @@ import butterknife.Bind;
  * 全部订单
  */
 
-public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack {
+public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack,HttpCallBack{
     @Bind(R.id.rc_whole)
     RecyclerView whole;
     private List<SortBean> list = new ArrayList<>();
@@ -88,6 +93,42 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                 startActivity(new Intent(getActivity(), ScoreActivity.class));
             }
         });
+
+
+        doFirstData();
     }
 
+    /**
+     * 获取全部订单的数据
+     */
+    private void doFirstData() {
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("orderStatus", "");
+        params.put("pageNumber","1");
+        params.put("userId","1111");
+        params.put("pageSize","5");
+        HttpUtils.doPost(ACTION.ALLOFMYORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.ALLOFMYORDER:
+
+                break;
+        }
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }
