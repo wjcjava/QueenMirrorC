@@ -49,11 +49,13 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.iv_title, R.id.iv_install, R.id.img_information,
-            R.id.layout_collection, R.id.layout_follow, R.id.layout_foot, R.id.layout_evaluate, R.id.img_position, R.id.img_friends
-            , R.id.ly_mine_discount, R.id.ly_mine_foot, R.id.ly_mine_bean, R.id.layout_gift, R.id.layout_beauty, R.id.li_mine_homepage
-            , R.id.layout_problem, R.id.lay_service, R.id.ly_mine_wallet, R.id.li_mine_main_authentication
+            R.id.layout_collection, R.id.layout_follow, R.id.layout_foot,
+            R.id.layout_evaluate, R.id.img_position, R.id.img_friends,
+            R.id.ly_mine_discount, R.id.ly_mine_foot, R.id.ly_mine_bean,
+            R.id.layout_gift, R.id.layout_beauty, R.id.li_mine_homepage,
+            R.id.layout_problem, R.id.lay_service, R.id.ly_mine_wallet,
+            R.id.li_mine_main_authentication
     })
-
     public void click(View view) {
         switch (view.getId()) {
             //我要认证
@@ -109,7 +111,6 @@ public class MineFragment extends BaseFragment {
 
             //我的资产（女王卡）
             case R.id.ly_mine_foot:
-
                 MineQueenActivity.startActivity(getActivity());
                 break;
             //我的钱包

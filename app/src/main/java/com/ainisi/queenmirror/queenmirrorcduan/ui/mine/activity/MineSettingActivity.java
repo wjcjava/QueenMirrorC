@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 

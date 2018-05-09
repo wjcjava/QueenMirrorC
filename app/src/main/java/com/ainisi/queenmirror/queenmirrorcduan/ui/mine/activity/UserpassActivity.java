@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class UserpassActivity extends BaseActivity {
+public class UserpassActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView passtitle;
     public static void startActivity(Context context) {
@@ -22,10 +22,7 @@ public class UserpassActivity extends BaseActivity {
         return R.layout.activity_userpass;
     }
 
-    @Override
-    public void initPresenter() {
 
-    }
 
     @Override
     public void initView() {

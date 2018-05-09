@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 //修改用户名
-public class UserNameActivity extends BaseActivity {
+public class UserNameActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView usertitle;
     @Bind(R.id.title_right)
@@ -24,10 +24,6 @@ public class UserNameActivity extends BaseActivity {
         return R.layout.activity_user_name;
     }
 
-    @Override
-    public void initPresenter() {
-
-    }
 
     @Override
     public void initView() {

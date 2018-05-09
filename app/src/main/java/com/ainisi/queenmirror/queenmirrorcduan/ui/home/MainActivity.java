@@ -5,16 +5,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.RadioButton;
-import com.ainisi.queenmirror.common.base.BaseActivity;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseOneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragmentOne;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MasterFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MineFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.ShopMallFragment;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -48,16 +47,6 @@ public class MainActivity extends BaseOneActivity {
     protected int setLayoutId() {
         return R.layout.activity_home;
     }
-
-    /*@Override
-    public int getLayoutId() {
-        return R.layout.activity_home;
-    }
-
-    @Override
-    public void initPresenter() {
-
-    }*/
 
     @Override
     public void initView() {

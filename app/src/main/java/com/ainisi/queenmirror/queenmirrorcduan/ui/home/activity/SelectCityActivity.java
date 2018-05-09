@@ -6,12 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 /**
@@ -19,7 +21,7 @@ import butterknife.OnClick;
  * @function Created on 2017/8/4.
  * 位置
  */
-public class SelectCityActivity extends BaseActivity {
+public class SelectCityActivity extends BaseNewActivity{
     @Bind(R.id.title_title)
     TextView StTitle;
     @Bind(R.id.rc_selsctcity)
@@ -32,9 +34,7 @@ public class SelectCityActivity extends BaseActivity {
         return R.layout.activity_selectcity_layout;
     }
 
-    @Override
-    public void initPresenter() {
-    }
+
 
     @Override
     public void initView() {

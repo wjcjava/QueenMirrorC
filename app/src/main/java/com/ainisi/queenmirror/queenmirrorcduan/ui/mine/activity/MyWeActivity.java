@@ -1,10 +1,10 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
-public class MyWeActivity extends BaseActivity {
+public class MyWeActivity extends BaseNewActivity {
 
 
     @Override
@@ -12,10 +12,7 @@ public class MyWeActivity extends BaseActivity {
         return R.layout.activity_my_we;
     }
 
-    @Override
-    public void initPresenter() {
 
-    }
 
     @Override
     public void initView() {

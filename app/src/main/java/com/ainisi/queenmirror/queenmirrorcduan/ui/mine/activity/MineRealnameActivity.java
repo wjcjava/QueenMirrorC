@@ -1,12 +1,12 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 /**
  * 我的钱包-实名认证
  */
-public class MineRealnameActivity extends BaseActivity {
+public class MineRealnameActivity extends BaseNewActivity {
 
 
     @Override
@@ -14,10 +14,6 @@ public class MineRealnameActivity extends BaseActivity {
         return R.layout.activity_mine_realname;
     }
 
-    @Override
-    public void initPresenter() {
-
-    }
 
     @Override
     public void initView() {

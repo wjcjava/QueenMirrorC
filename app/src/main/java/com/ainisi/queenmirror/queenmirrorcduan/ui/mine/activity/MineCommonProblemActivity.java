@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import butterknife.OnClick;
 /**
  * 我的钱包—余额—常见问题
  */
-public class MineCommonProblemActivity extends BaseActivity {
+public class MineCommonProblemActivity extends BaseNewActivity {
     @Bind(R.id.rc_common)
     RecyclerView rccommon;
     @Bind(R.id.title_title)
@@ -33,10 +33,7 @@ public class MineCommonProblemActivity extends BaseActivity {
         return R.layout.activity_mine_common_problem;
     }
 
-    @Override
-    public void initPresenter() {
 
-    }
 
     @Override
     public void initView() {

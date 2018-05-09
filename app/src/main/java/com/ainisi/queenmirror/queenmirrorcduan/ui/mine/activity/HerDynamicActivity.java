@@ -3,8 +3,8 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -12,7 +12,7 @@ import butterknife.OnClick;
 /**
  * 动态（是否让看）
  */
-public class HerDynamicActivity extends BaseActivity
+public class HerDynamicActivity extends BaseNewActivity
 {
     @Bind(R.id.newtitle_title)
     TextView hertitle;
@@ -23,10 +23,7 @@ public class HerDynamicActivity extends BaseActivity
         return R.layout.activity_her_dynamic;
     }
 
-    @Override
-    public void initPresenter() {
 
-    }
 
     @Override
     public void initView() {

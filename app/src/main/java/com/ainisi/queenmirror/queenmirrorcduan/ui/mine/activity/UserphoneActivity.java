@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -14,7 +14,7 @@ import butterknife.OnClick;
 /**
  * 更换手机号
  */
-public class UserphoneActivity extends BaseActivity{
+public class UserphoneActivity extends BaseNewActivity{
     @Bind(R.id.title_title)
     TextView phonetitle;
     public static void startActivity(Context context) {
@@ -25,10 +25,7 @@ public class UserphoneActivity extends BaseActivity{
         return R.layout.activity_userphone;
     }
 
-    @Override
-    public void initPresenter() {
 
-    }
 
     @Override
     public void initView() {

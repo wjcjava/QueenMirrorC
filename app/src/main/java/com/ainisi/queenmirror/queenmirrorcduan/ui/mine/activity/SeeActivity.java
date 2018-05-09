@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.AssessedFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.RefundFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.WholeFragment;
@@ -28,7 +28,7 @@ import butterknife.OnClick;
 /**
  * 我的女王卡—查看订单信息
  */
-public class SeeActivity extends BaseActivity {
+public class SeeActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView seeTitle;
     @Bind(R.id.or_tab)
@@ -46,10 +46,7 @@ public class SeeActivity extends BaseActivity {
         return R.layout.activity_see;
     }
 
-    @Override
-    public void initPresenter() {
 
-    }
 
     @Override
     public void initView() {
