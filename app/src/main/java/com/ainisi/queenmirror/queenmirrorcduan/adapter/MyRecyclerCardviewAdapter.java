@@ -14,6 +14,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.Bean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
@@ -63,32 +64,22 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (viewType == ITEM_TYPE.ITEM_TYPE_Theme.ordinal()) {
-
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_home_shop, parent, false);
-
             return new ThemeVideoHolder(view);
-
         } else if (viewType == ITEM_TYPE.ITEM_TYPE_Video.ordinal()) {
-
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_appbarlayout, parent, false);
             return new VideoViewHolder(view);
-
-
         } else if (viewType == ITEM_TYPE.ITEM_TYPE_Image.ordinal()) {
             if (type == 0) {
-
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_shortrecycler, parent, false);
                 return new VideoViewThreeHolder(view);
             } else {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_waterfall, parent, false);
                 return new VideoViewThreeHolder(view);
             }
-
-
         }
         return null;
     }
-
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
@@ -100,7 +91,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             ((ThemeVideoHolder) holder).home_haircustom.setOnClickListener(this);
             ((ThemeVideoHolder) holder).home_beauty.setOnClickListener(this);
             ((ThemeVideoHolder) holder).home_permanent.setOnClickListener(this);
-
             ((ThemeVideoHolder) holder).home_newuserprg.setOnClickListener(this);
             ((ThemeVideoHolder) holder).home_specialoffer.setOnClickListener(this);
             ((ThemeVideoHolder) holder).home_goodshop.setOnClickListener(this);
@@ -108,7 +98,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (holder instanceof VideoViewHolder) {
             ((VideoViewHolder) holder).surFace.setOnClickListener(this);
 
-
+            ((VideoViewHolder)holder).li_hime_sort.setOnClickListener(this);
         } else if (holder instanceof VideoViewThreeHolder) {
             if(type==0){
             ((VideoViewThreeHolder) holder).homeShort.setOnClickListener(this);}
@@ -127,7 +117,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             case R.id.home_esthetics:
                 context.startActivity(new Intent(context, EstheticsActivity.class));
                 break;
-
             //店铺
             case R.id.li_home_short:
                 context.startActivity(new Intent(context, WorkRoomDetailActivity.class));
@@ -152,7 +141,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             case R.id.li_home_newuserprg:
                 T.show("新用户特权");
                 break;
-
             //免费试用（拼团）
             case R.id.linear_home_freetrial:
                 context.startActivity(new Intent(context, HomeFightaloneActivity.class));
@@ -164,6 +152,12 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             //人气好店
             case R.id.li_home_goodshop:
                 T.show("人气好店");
+                break;
+                //综合排序
+            case R.id.li_hime_sort:
+                HomeFragment.instance.recyclerView.smoothScrollToPosition(6);
+                HomeFragment.instance.layout_stick_header_main.setVisibility(View.VISIBLE);
+                HomeFragment.instance.pop.showAsDropDown(HomeFragment.instance.hSort);
                 break;
 
         }
@@ -211,6 +205,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         private final LinearLayout home_specialoffer;
         private final LinearLayout home_goodshop;
 
+
         public ThemeVideoHolder(View itemView) {
             super(itemView);
             home_esthetics = itemView.findViewById(R.id.home_esthetics);
@@ -227,6 +222,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             home_goodshop = itemView.findViewById(R.id.li_home_goodshop);
             banner = itemView.findViewById(R.id.banner);
             marqueeview = itemView.findViewById(R.id.marqueeview);
+
             initBanner(banner);
             initQuee();
         }
@@ -239,7 +235,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             marqueeview.setOnItemClickListener(new MarqueeView.onItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    T.show("你点击" + position);
+
                 }
             });
         }
@@ -260,12 +256,12 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
 
 
         private ImageView surFace;
-
+        LinearLayout li_hime_sort;
 
         public VideoViewHolder(View itemView) {
             super(itemView);
             surFace = itemView.findViewById(R.id.iv_surface);
-
+            li_hime_sort = itemView.findViewById(R.id.li_hime_sort);
 
         }
 
