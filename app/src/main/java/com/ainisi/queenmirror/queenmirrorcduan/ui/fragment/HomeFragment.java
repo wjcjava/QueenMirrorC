@@ -26,6 +26,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.barlibrary.ImmersionBar;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
@@ -46,13 +47,13 @@ import butterknife.OnClick;
 
 public class HomeFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.rv_home_fragment)
-    RecyclerView recyclerView;
+    public RecyclerView recyclerView;
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
     @Bind(R.id.iv_uspension_surface)
     ImageView surface;
     @Bind(R.id.layout_stick_header_main)
-    LinearLayout layout_stick_header_main;
+    public LinearLayout layout_stick_header_main;
     @Bind(R.id.home_refresh)
     MaterialRefreshLayout home_refresh;
     @Bind(R.id.iv_sort)
@@ -60,7 +61,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.iv_sort1)
     ImageView ivsort1;
     @Bind(R.id.tv_home_comprehensive)
-    TextView hSort;
+    public TextView hSort;
     @Bind(R.id.li_sort_bottom)
     LinearLayout sortHeard;
 
@@ -72,16 +73,20 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
 
     private List<ProblemBean> list = new ArrayList<>();
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
-    private PopupWindow pop;
+    public PopupWindow pop;
     private View popview1;
     private CustomPopWindow popWindow;
     private MyRecyclerCardviewAdapter myRecyclerCardviewAdapter1;
     private MyRecyclerCardviewAdapter myRecyclerCardviewAdapter;
 
+    public static HomeFragment instance = null;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ImmersionBar.setTitleBar(getActivity(), mToolbar);
+
+        instance = this;
     }
 
     @Override
@@ -131,7 +136,6 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 hSort.setText(problem[position]);
                 pop.dismiss();
-
 
             }
         });
@@ -302,7 +306,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     }
     public void inititem() {
         if (itemNum > myRecyclerCardviewAdapter.getItemCount()) {
-            recyclerView.smoothScrollToPosition(itemNum);
+            recyclerView.smoothScrollToPosition(2);
         }
     }
 

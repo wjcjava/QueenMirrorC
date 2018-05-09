@@ -39,8 +39,7 @@ public class MineSettingActivity extends BaseNewActivity {
         setText.setTextColor(ContextCompat.getColor(this,R.color.alpha_95_black));
     }
 
-    @OnClick({R.id.title_back
-    })
+    @OnClick({R.id.title_back})
     public void click(View view) {
 
         switch (view.getId()) {
