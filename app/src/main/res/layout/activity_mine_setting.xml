@@ -84,8 +84,9 @@
     <Button
         android:layout_below="@+id/tv_verification"
         android:text="@string/verification"
-        android:background="@drawable/ic_setting_breake"
-
+        android:background="@drawable/button_shap_queen"
+        android:textColor="@color/white"
+        android:textSize="@dimen/comment_14_size"
         android:layout_marginTop="@dimen/comment_30_dip"
         android:layout_marginLeft="@dimen/comment_20_dip"
         android:layout_marginRight="@dimen/comment_20_dip"

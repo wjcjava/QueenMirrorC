@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/comment_3_dip"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/comment_3_dip"
     android:orientation="vertical">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_title"
@@ -23,7 +23,7 @@
         android:layout_marginLeft="@dimen/comment_9_dip"
         android:layout_marginTop="@dimen/comment_15_dip"
         android:layout_toRightOf="@id/iv_title"
-        android:textSize="@dimen/comment_16_size"
+        android:textSize="@dimen/comment_14_size"
         android:text="纹身大师"
         android:textColor="@color/gray_E7370C" />
 
@@ -35,14 +35,15 @@
         android:layout_marginLeft="@dimen/comment_9_dip"
         android:layout_marginTop="@dimen/comment_6_dip"
         android:layout_toRightOf="@id/iv_title"
+        android:textSize="@dimen/comment_12_size"
         android:text="2小时前"
         />
     <ImageView
         android:layout_below="@id/text_name"
-        android:layout_width="@dimen/comment_64_dip"
+        android:layout_width="@dimen/comment_50_dip"
         android:layout_height="@dimen/comment_34_dip"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="@dimen/comment_14_dip"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/comment_28_dip"
         app:srcCompat="@drawable/icon_item_rueen"
         />
     <TextView
@@ -50,9 +51,9 @@
         android:layout_width="wrap_content"
         android:text="习近平在出席南海海域海上阅兵时强调：深入贯彻新时代党的强军思想 把人民海军全面建成世界一流海军"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="3"
         android:textColor="@color/alpha_95_black"
-        android:textSize="@dimen/comment_16_size"
+        android:textSize="@dimen/comment_14_size"
         android:layout_marginTop="@dimen/comment_10_dip"
         android:layout_below="@id/tv_upload_time"
         android:layout_marginStart="@dimen/comment_15_dip"
@@ -77,86 +78,97 @@
         android:layout_marginStart="@dimen/comment_15_dip"
         android:layout_marginEnd="@dimen/comment_16_dip"
         android:layout_below="@id/iv_master_shop"
-        android:layout_marginTop="@dimen/comment_3_dip"
+        android:layout_marginTop="@dimen/comment_8_dip"
         android:background="@color/alpha_05_black" />
-    <RelativeLayout
 
-        android:layout_below="@id/view"
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/comment_15_dip"
         android:layout_marginEnd="@dimen/comment_16_dip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_below="@id/view">
+
         <RelativeLayout
             android:id="@+id/re_forward_dynamic"
-            android:layout_marginStart="@dimen/comment_10_dip"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_marginBottom="@dimen/comment_14_dip"
-                android:id="@+id/iv_big_share"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/comment_10_dip">
 
+            <ImageView
+                android:id="@+id/iv_big_share"
                 android:layout_width="@dimen/comment_15_dip"
-                android:layout_marginTop="@dimen/comment_14_dip"
                 android:layout_height="@dimen/comment_15_dip"
-                android:src="@drawable/icon_big_share"
-                />
+                android:layout_marginBottom="@dimen/comment_14_dip"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_big_share" />
+
             <TextView
-                android:layout_toRightOf="@id/iv_big_share"
                 android:layout_width="wrap_content"
-                android:text="278"
-                android:textSize="@dimen/comment_16_size"
-                android:layout_marginLeft="@dimen/comment_10_dip"
-                android:layout_marginTop="@dimen/comment_10_dip"
                 android:layout_height="wrap_content"
-                />
+                android:layout_marginLeft="@dimen/comment_10_dip"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_big_share"
+                android:text="278"
+                android:textSize="@dimen/comment_12_size" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/re_comment"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_marginBottom="@dimen/comment_14_dip"
-                android:id="@+id/iv_big_massage"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
 
+            <ImageView
+                android:id="@+id/iv_big_massage"
                 android:layout_width="@dimen/comment_15_dip"
-                android:layout_marginTop="@dimen/comment_14_dip"
+                android:layout_centerVertical="true"
                 android:layout_height="@dimen/comment_15_dip"
-                android:src="@drawable/icon_big_message"
-                />
+                android:layout_marginBottom="@dimen/comment_14_dip"
+                android:src="@drawable/icon_big_message" />
+
             <TextView
-                android:layout_toRightOf="@id/iv_big_massage"
                 android:layout_width="wrap_content"
-                android:text="680"
-                android:textSize="@dimen/comment_16_size"
-                android:layout_marginLeft="@dimen/comment_10_dip"
-                android:layout_marginTop="@dimen/comment_10_dip"
                 android:layout_height="wrap_content"
-                />
+                android:layout_marginLeft="@dimen/comment_10_dip"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_big_massage"
+                android:text="680"
+                android:textSize="@dimen/comment_12_size" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_marginBottom="@dimen/comment_14_dip"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/iv_big_praise"
                 android:layout_width="@dimen/comment_15_dip"
-                android:layout_marginTop="@dimen/comment_14_dip"
                 android:layout_height="@dimen/comment_15_dip"
-                android:src="@drawable/icon_big_unpraise"
-                />
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_big_unpraise" />
+
             <TextView
-                android:layout_toRightOf="@id/iv_big_praise"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_big_praise"
                 android:text="2353"
                 android:textColor="@color/gray_E7370C"
-                android:textSize="@dimen/comment_16_size"
-                android:layout_marginLeft="@dimen/comment_10_dip"
-                android:layout_marginTop="@dimen/comment_10_dip"
-                android:layout_height="wrap_content"
-
+                android:textSize="@dimen/comment_12_size"
                 />
         </RelativeLayout>
     </RelativeLayout>
+
+    <View android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/mine_back_gray"
+        android:layout_below="@id/rl_bottom">
+    </View>
 </RelativeLayout>

@@ -13,6 +13,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomRatingBar;;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+/**
+ * 发表评价
+ */
 public class ScoreActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.title_title)
     TextView scoreTitle;

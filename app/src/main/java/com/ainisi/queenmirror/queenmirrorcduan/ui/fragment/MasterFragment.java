@@ -34,7 +34,6 @@ public class MasterFragment extends BaseFragment{
 
     }
 
-
     @Override
     protected void initView() {
         initDate();
@@ -54,6 +53,5 @@ public class MasterFragment extends BaseFragment{
             reBigshot.setAdapter(adapter);
 
         }
-
     }
 }

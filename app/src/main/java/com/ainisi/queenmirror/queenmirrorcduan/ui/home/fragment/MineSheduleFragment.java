@@ -67,7 +67,7 @@ public class MineSheduleFragment extends BaseFragment implements RefreshLoadMore
             @Override
             public void run() {
                 T.show("上拉成功");
-                mRefreshLoadMoreLayout.stopLoadMore();
+//                mRefreshLoadMoreLayout.stopLoadMore();
             }
         }, 1000);
     }
