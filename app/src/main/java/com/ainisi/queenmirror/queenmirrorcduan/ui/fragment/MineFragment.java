@@ -6,6 +6,7 @@ import android.view.View;
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.InstallActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineAuthenticationActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineBeanActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineBeautyActivity;
@@ -13,16 +14,15 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineCollectionAc
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineDiscountActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineEvaluateActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineFollowActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineFriendsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineGiftActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineHomepageActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineMyFootActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineMyServiceActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineMyWalletActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MinePositionActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineProblemActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineQueenActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineFriendsActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineMyFootActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MinePositionActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.PortraitActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.InstallActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.LoginActivity;
 
 import butterknife.OnClick;
@@ -47,10 +47,11 @@ public class MineFragment extends BaseFragment {
     protected void initView() {
 
     }
+
     @OnClick({R.id.iv_title, R.id.iv_install, R.id.img_information,
             R.id.layout_collection, R.id.layout_follow, R.id.layout_foot, R.id.layout_evaluate, R.id.img_position, R.id.img_friends
-            , R.id.ly_mine_discount, R.id.ly_mine_foot, R.id.ly_mine_bean, R.id.layout_gift, R.id.layout_beauty
-            , R.id.layout_problem, R.id.lay_service,R.id.ly_mine_wallet,R.id.li_mine_main_authentication
+            , R.id.ly_mine_discount, R.id.ly_mine_foot, R.id.ly_mine_bean, R.id.layout_gift, R.id.layout_beauty, R.id.li_mine_homepage
+            , R.id.layout_problem, R.id.lay_service, R.id.ly_mine_wallet, R.id.li_mine_main_authentication
     })
 
     public void click(View view) {
@@ -80,6 +81,10 @@ public class MineFragment extends BaseFragment {
             //关注店铺
             case R.id.layout_follow:
                 MineFollowActivity.startActivity(getActivity());
+                break;
+            //我的首页
+            case R.id.li_mine_homepage:
+                startActivity(new Intent(getActivity(), MineHomepageActivity.class));
                 break;
             //我的足迹
             case R.id.layout_foot:

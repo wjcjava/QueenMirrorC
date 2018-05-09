@@ -110,7 +110,11 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
 
 
         } else if (holder instanceof VideoViewThreeHolder) {
-            ((VideoViewThreeHolder) holder).homeShort.setOnClickListener(this);
+            if(type==0){
+            ((VideoViewThreeHolder) holder).homeShort.setOnClickListener(this);}
+            else {
+                return;
+            }
         }
 
     }
@@ -272,7 +276,12 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
 
         public VideoViewThreeHolder(View itemView) {
             super(itemView);
-            homeShort = itemView.findViewById(R.id.li_home_short);
+            if(type==0){
+                homeShort = itemView.findViewById(R.id.li_home_short);
+            }else {
+                return;
+            }
+
         }
     }
 

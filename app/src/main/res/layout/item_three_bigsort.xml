@@ -59,7 +59,7 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/img_shop"
+        android:id="@+id/iv_master_shop"
         android:layout_width="@dimen/comment_100_dip"
         android:layout_height="@dimen/comment_200_dip"
         android:layout_below="@id/tv_big_content"
@@ -76,7 +76,7 @@
         android:layout_height="1dp"
         android:layout_marginStart="@dimen/comment_15_dip"
         android:layout_marginEnd="@dimen/comment_16_dip"
-        android:layout_below="@id/img_shop"
+        android:layout_below="@id/iv_master_shop"
         android:layout_marginTop="@dimen/comment_3_dip"
         android:background="@color/alpha_05_black" />
     <RelativeLayout

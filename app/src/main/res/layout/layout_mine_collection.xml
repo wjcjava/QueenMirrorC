@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <LinearLayout
-
+        android:id="@+id/li_mine_homepage"
         android:layout_width="@dimen/comment_0_dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"

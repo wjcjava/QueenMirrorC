@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.BigshotBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.master.activity.DynamicActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.master.activity.MasterActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.master.activity.WriteCommentActivity;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public class RecyclerVarietyAdapter extends RecyclerView.Adapter {
     boolean flag;
 
     public RecyclerVarietyAdapter(Context contect, List<BigshotBean> data) {
-        this.context=contect;
+        this.context = contect;
         this.mData = data;
     }
 
@@ -87,15 +89,19 @@ public class RecyclerVarietyAdapter extends RecyclerView.Adapter {
         private final ImageView praise;
         private final RelativeLayout dynamic;
         private final RelativeLayout comment;
+        private final ImageView master_shop;
 
         public PullImageHolder(View itemView) {
             super(itemView);
             praise = itemView.findViewById(R.id.iv_big_praise);
             dynamic = itemView.findViewById(R.id.re_forward_dynamic);
             comment = itemView.findViewById(R.id.re_comment);
+            master_shop = itemView.findViewById(R.id.iv_master_shop);
             praise.setOnClickListener(this);
             dynamic.setOnClickListener(this);
             comment.setOnClickListener(this);
+            master_shop.setOnClickListener(this);
+
 
         }
 
@@ -120,7 +126,11 @@ public class RecyclerVarietyAdapter extends RecyclerView.Adapter {
                         praise.setImageResource(R.drawable.icon_big_praise);
                         flag = true;
                     }
-
+                    break;
+                //大咖内页
+                case R.id.iv_master_shop:
+                    context.startActivity(new Intent(context, MasterActivity.class));
+                    break;
                 default:
                     break;
 
@@ -132,6 +142,8 @@ public class RecyclerVarietyAdapter extends RecyclerView.Adapter {
         private final ImageView praise;
         private final RelativeLayout dynamic;
         private final RelativeLayout comment;
+        private final LinearLayout master_shop;
+
         public RightImageHolder(View itemView) {
             super(itemView);
 
@@ -139,9 +151,11 @@ public class RecyclerVarietyAdapter extends RecyclerView.Adapter {
             praise = itemView.findViewById(R.id.iv_big_praise);
             dynamic = itemView.findViewById(R.id.re_forward_dynamic);
             comment = itemView.findViewById(R.id.re_comment);
+            master_shop = itemView.findViewById(R.id.li_master_shop);
             praise.setOnClickListener(this);
             dynamic.setOnClickListener(this);
             comment.setOnClickListener(this);
+            master_shop.setOnClickListener(this);
 
         }
 
@@ -166,7 +180,11 @@ public class RecyclerVarietyAdapter extends RecyclerView.Adapter {
                         praise.setImageResource(R.drawable.icon_big_praise);
                         flag = true;
                     }
-
+                    break;
+                    //大咖内页
+                case R.id.li_master_shop:
+                    context.startActivity(new Intent(context, MasterActivity.class));
+                    break;
                 default:
                     break;
 
@@ -174,20 +192,23 @@ public class RecyclerVarietyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private class ThreeImageHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-    {
+    private class ThreeImageHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView praise;
         private final RelativeLayout dynamic;
         private final RelativeLayout comment;
+        private final ImageView master_shop;
+
         public ThreeImageHolder(View itemView) {
             super(itemView);
             praise = itemView.findViewById(R.id.iv_big_praise);
             dynamic = itemView.findViewById(R.id.re_forward_dynamic);
             comment = itemView.findViewById(R.id.re_comment);
+            master_shop=itemView.findViewById(R.id.iv_master_shop);
             praise.setOnClickListener(this);
             dynamic.setOnClickListener(this);
             comment.setOnClickListener(this);
+            master_shop.setOnClickListener(this);
 
         }
 
@@ -212,7 +233,12 @@ public class RecyclerVarietyAdapter extends RecyclerView.Adapter {
                         praise.setImageResource(R.drawable.icon_big_praise);
                         flag = true;
                     }
+                    break;
+                //大咖内页
+                case R.id.iv_master_shop:
 
+                    context.startActivity(new Intent(context, MasterActivity.class));
+                    break;
                 default:
                     break;
 

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
@@ -50,7 +49,9 @@ public class MineMyFootActivity extends BaseNewActivity implements RefreshLoadMo
     protected void initView() {
         super.initView();
         folltitle.setText("我的足迹");
+        folltitle.setTextSize(16);
         titleRight.setText("编辑");
+        titleRight.setTextSize(14);
 
         for (int i = 0; i < 10; i++) {
             SortBean sortBean = new SortBean();

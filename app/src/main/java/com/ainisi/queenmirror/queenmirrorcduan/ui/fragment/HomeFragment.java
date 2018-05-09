@@ -63,6 +63,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     TextView hSort;
     @Bind(R.id.li_sort_bottom)
     LinearLayout sortHeard;
+
     private int type = 0;
 
     List<SortBean> data;
@@ -212,7 +213,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                 .navigationBarColor(R.color.alpha_95_black)
                 .init();
     }
-
+    boolean onclick;
     @OnClick({R.id.tv_home_bustling, R.id.iv_home_search, R.id.iv_uspension_surface, R.id.iv_sort, R.id.iv_sort1, R.id.rb_screen, R.id.img_information})
     public void click(View view) {
         switch (view.getId()) {
@@ -231,23 +232,34 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             //瀑布流和流式切换
             case R.id.iv_uspension_surface:
                 GridLayoutManager layoutManage = new GridLayoutManager(getActivity(), 2);
-                layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                    @Override
-                    public int getSpanSize(int position) {
-                        if (position == 0 || position == 1) {
-                            return 2;
-                        } else {
 
-                            return 1;
+                if(onclick){
+                    myRecyclerCardviewAdapter1 = new MyRecyclerCardviewAdapter(getActivity(), 0);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+                    recyclerView.setAdapter(myRecyclerCardviewAdapter1);
+                    surface.setImageResource(R.drawable.icon_home_list);
+                    recyclerView.smoothScrollToPosition(2);
+                    onclick=false;
 
+                }else {
+                    recyclerView.smoothScrollToPosition(2);
+                    surface.setImageResource(R.drawable.icon_home_recycler);
+                    layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                        @Override
+                        public int getSpanSize(int position) {
+                            if (position == 0 || position == 1) {
+                                return 2;
+                            } else {
+                                return 1;
+                            }
                         }
+                    });
 
-                    }
-                });
-                myRecyclerCardviewAdapter1 = new MyRecyclerCardviewAdapter(getActivity(), 2);
-                recyclerView.setLayoutManager(layoutManage);
-                recyclerView.setAdapter(myRecyclerCardviewAdapter1);
-
+                    myRecyclerCardviewAdapter1 = new MyRecyclerCardviewAdapter(getActivity(), 2);
+                    recyclerView.setLayoutManager(layoutManage);
+                    recyclerView.setAdapter(myRecyclerCardviewAdapter1);
+                    onclick=true;
+                }
                 break;
 
             case R.id.iv_sort:
@@ -263,7 +275,6 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                 ivsort1.setVisibility(View.GONE);
                 inititem();
                 break;
-
             case R.id.rb_screen:
                 View popview = View.inflate(getActivity(), R.layout.pop_right, null);
                 initview(popview);
@@ -274,17 +285,13 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                         .setOutsideTouchable(true)
                         .setAnimationStyle(R.style.CustomPopWindowStyle)
                         .create()
-
                         .showAsDropDown(sortHeard);
                 break;
-
         }
 
     }
-
     private void initview(final View popview) {
         TextView eliminateTv = popview.findViewById(R.id.tv_eliminate);
-        TextView okTv = popview.findViewById(R.id.tv_ok);
         eliminateTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -293,7 +300,6 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
-
     public void inititem() {
         if (itemNum > myRecyclerCardviewAdapter.getItemCount()) {
             recyclerView.smoothScrollToPosition(itemNum);

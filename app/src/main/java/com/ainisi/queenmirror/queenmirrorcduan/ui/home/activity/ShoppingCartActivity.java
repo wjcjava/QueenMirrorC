@@ -5,11 +5,11 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ShopcatAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
@@ -19,18 +19,19 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.StoreInfo;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilTool;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilsLog;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.StatusBarUtil;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
  * 购物车
  */
-public class ShoppingCartActivity extends BaseNewActivity implements HttpCallBack,View.OnClickListener, ShopcatAdapter.CheckInterface, ShopcatAdapter.ModifyCountInterface, ShopcatAdapter.GroupEditorListener {
+public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBack,View.OnClickListener, ShopcatAdapter.CheckInterface, ShopcatAdapter.ModifyCountInterface, ShopcatAdapter.GroupEditorListener {
 
     @Bind(R.id.listView)
     ExpandableListView listView;

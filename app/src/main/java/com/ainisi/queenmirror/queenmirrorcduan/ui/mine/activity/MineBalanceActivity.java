@@ -5,8 +5,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -14,7 +14,7 @@ import butterknife.OnClick;
 /**
  * 钱包
  */
-public class MineBalanceActivity extends BaseActivity {
+public class MineBalanceActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView balanceTitle;
     @Bind(R.id.title_right)
@@ -26,10 +26,6 @@ public class MineBalanceActivity extends BaseActivity {
         return R.layout.activity_mine_balance;
     }
 
-    @Override
-    public void initPresenter() {
-
-    }
 
     @Override
     public void initView() {

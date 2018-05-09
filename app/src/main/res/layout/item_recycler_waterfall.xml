@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/comment_2_dip"
     android:paddingRight="@dimen/comment_2_dip"
     android:fitsSystemWindows="true"
+    android:id="@+id/li_home_short"
     android:background="@drawable/et_shap">
 
     <ImageView
