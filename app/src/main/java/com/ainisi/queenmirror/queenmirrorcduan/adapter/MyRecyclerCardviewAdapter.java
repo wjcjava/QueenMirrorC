@@ -204,7 +204,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
     public int getItemCount() {
         return 12;
     }
-
     public class ThemeVideoHolder extends RecyclerView.ViewHolder {
         MarqueeView marqueeview;
         LinearLayout home_freetrial;
@@ -217,25 +216,19 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         private final LinearLayout home_newuserprg;
         private final LinearLayout home_specialoffer;
         private final LinearLayout home_goodshop;
-
-
         public ThemeVideoHolder(View itemView) {
             super(itemView);
             home_esthetics = itemView.findViewById(R.id.home_esthetics);
             home_freetrial = itemView.findViewById(R.id.linear_home_freetrial);
-
             home_nailart = itemView.findViewById(R.id.li_home_nailart);
             home_haircustom = itemView.findViewById(R.id.li_home_haircustom);
             home_beauty = itemView.findViewById(R.id.li_home_beauty);
             home_permanent = itemView.findViewById(R.id.li_home_permanent);
-
-
             home_newuserprg = itemView.findViewById(R.id.li_home_newuserprg);
             home_specialoffer = itemView.findViewById(R.id.li_home_specialoffer);
             home_goodshop = itemView.findViewById(R.id.li_home_goodshop);
             banner = itemView.findViewById(R.id.banner);
             marqueeview = itemView.findViewById(R.id.marqueeview);
-
             initBanner(banner);
             initQuee();
         }

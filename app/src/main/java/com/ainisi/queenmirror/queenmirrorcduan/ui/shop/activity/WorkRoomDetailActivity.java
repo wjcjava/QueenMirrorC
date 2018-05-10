@@ -19,6 +19,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PurchaseActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 
@@ -162,9 +163,10 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         MyAdapter sortAdapter = new MyAdapter(R.layout.re_full_recommend, sortlist);
         re_recommendable_projects_shop.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         re_recommendable_projects_shop.setAdapter(sortAdapter);
+
     }
 
-    @OnClick({R.id.iv_common_back, R.id.tv_submit})
+    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.iv_title})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.iv_common_back:
@@ -173,6 +175,10 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             //提交订单
             case R.id.tv_submit:
                 startActivity(new Intent(this, PurchaseActivity.class));
+                break;
+            //购物车
+            case R.id.iv_title:
+                startActivity(new Intent(this, ShoppingCartActivity.class));
                 break;
         }
     }
