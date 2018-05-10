@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FulldistanFragment;
@@ -36,7 +36,7 @@ import butterknife.OnClick;
 /**
  * 美学汇（美甲美手）
  */
-public class EstheticsActivity extends BaseNewActivity {
+public class EstheticsActivity extends BaseActivity {
     @Bind(R.id.full_rb_sort)
     TextView hSort;
     @Bind(R.id.re_recommendable_projects)
@@ -72,6 +72,11 @@ public class EstheticsActivity extends BaseNewActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_esthetics;
+    }
+
+    @Override
+    public void initPresenter() {
+
     }
 
 

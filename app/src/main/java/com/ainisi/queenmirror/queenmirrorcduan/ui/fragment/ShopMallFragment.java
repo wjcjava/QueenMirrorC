@@ -64,9 +64,9 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     Banner banner;
     @Bind(R.id.iv_sort)
     ImageView ivsort;
-    @Bind(R.id.iv_sort1)
+    @Bind(R.id.iv_shop_sort1)
     ImageView ivsort1;
-    @Bind(R.id.rb_sort)
+    @Bind(R.id.tv_shop_sort)
     TextView hSort;
     @Bind(R.id.rb_sales)
     TextView hSales;
@@ -194,7 +194,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             public void onDismiss() {
                 ivsort.setVisibility(View.VISIBLE);
                 ivsort1.setVisibility(View.GONE);
-                setBackgroundAlpha(1.0f);
+
             }
         });
     }
@@ -294,11 +294,11 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             //综合选择
             case R.id.li_sort_bottom:
 
-                break;
             case R.id.iv_sort:
-                setBackgroundAlpha(0.5f);
+
                 ivsort.setVisibility(View.GONE);
                 ivsort1.setVisibility(View.VISIBLE);
+
                 if (hight >= 1180) {
                     pop.showAsDropDown(layout_stick_header_main);
                 } else {
@@ -307,7 +307,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 }
                 break;
             case R.id.iv_sort1:
-                pop.dismiss();
+
+                sc_home_scroll.smoothScrollTo(0, 1180);
                 ivsort1.setVisibility(View.GONE);
                 ivsort.setVisibility(View.VISIBLE);
                 break;
@@ -322,7 +323,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 }
                 hideFragment(salesFragment, transaction);
                 hideFragment(distanceFragment, transaction);*/
-//                hideFragment(screenFragment, transaction);
+//              hideFragment(screenFragment, transaction);
                 break;
             case R.id.rb_sales:
                 sc_home_scroll.smoothScrollTo(0, 1180);

@@ -77,7 +77,7 @@
              android:layout_height="@dimen/comment_40_dip">
 
             <TextView
-
+                android:id="@+id/tv_shop_sort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sort"
@@ -90,7 +90,7 @@
                 android:src="@drawable/arrow_dwon_blue" />
 
             <ImageView
-                android:id="@+id/iv_sort1"
+                android:id="@+id/iv_shop_sort1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
