@@ -79,7 +79,8 @@
                         android:layout_below="@+id/fullname"
                         android:layout_marginTop="3dp"
                         android:text="2016年4月18日,算是第三次修改了,这个项目也算"
-                        android:textSize="@dimen/comment_13_size" />
+                        android:textSize="@dimen/comment_13_size"
+                        tools:ignore="NotSibling" />
 
                     <TextView
                         android:id="@+id/tv_time"
@@ -90,7 +91,8 @@
                         android:layout_marginBottom="@dimen/comment_15_dip"
                         android:layout_marginTop="@dimen/comment_28_dip"
                         android:text="服务时长：60分钟"
-                        android:textSize="@dimen/comment_12_size" />
+                        android:textSize="@dimen/comment_12_size"
+                        tools:ignore="NotSibling" />
 
                     <TextView
                         android:id="@+id/textView4"

@@ -122,7 +122,6 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         View popview = View.inflate(getActivity(), R.layout.pop_right, null);
         initview(popview);
         popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
-
         popWindow.setContentView(popview);
         popWindow.setBackgroundDrawable(new ColorDrawable(0));
         popWindow.setOutsideTouchable(true);
@@ -176,6 +175,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                 }
             }
         });
+
         home_refresh.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {

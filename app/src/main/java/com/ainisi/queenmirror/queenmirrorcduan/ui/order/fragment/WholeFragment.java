@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -16,7 +15,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ScoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -33,13 +31,14 @@ import butterknife.Bind;
  * 全部订单
  */
 
-public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack,HttpCallBack{
+public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack, HttpCallBack {
     @Bind(R.id.rc_whole)
     RecyclerView whole;
     private List<SortBean> list = new ArrayList<>();
     private Handler handler = new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_sort_whole;
@@ -102,20 +101,19 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     /**
      * 获取全部订单的数据
      */
-    private void doFirstData() {
-
+    private void doFirstData(){
         HashMap<String, String> params = new HashMap<>();
         params.put("orderStatus", "");
-        params.put("pageNumber","1");
-        params.put("userId","1111");
-        params.put("pageSize","5");
+        params.put("pageNumber", "1");
+        params.put("userId", "1111");
+        params.put("pageSize", "5");
         HttpUtils.doPost(ACTION.ALLOFMYORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.ALLOFMYORDER:
 
                 break;
