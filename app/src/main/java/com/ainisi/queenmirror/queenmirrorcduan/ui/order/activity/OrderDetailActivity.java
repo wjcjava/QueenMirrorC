@@ -1,17 +1,21 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -47,11 +51,15 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
     }
 
 
-    @OnClick({R.id.iv_common_back})
+    @OnClick({R.id.iv_common_back,R.id.re_order_refund})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.iv_common_back:
                 finish();
+                break;
+            case R.id.re_order_refund:
+                //退款
+                startActivity(new Intent(this, ArefundActivity.class));
                 break;
         }
     }

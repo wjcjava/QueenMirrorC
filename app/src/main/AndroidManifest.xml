@@ -306,7 +306,8 @@
             //开发者申请的key</meta-data>
 
         <activity android:name=".ui.mine.activity.MineHomepageActivity" />
-        <activity android:name=".ui.master.activity.MasterActivity"></activity>
+        <activity android:name=".ui.master.activity.MasterActivity" />
+        <activity android:name=".ui.home.activity.HomeAdvertisingActivity"></activity>
     </application>
 
 </manifest>

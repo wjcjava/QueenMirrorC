@@ -8,18 +8,14 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.request.BaseRequest;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
-
 import org.json.JSONObject;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
-import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -132,7 +128,7 @@ public class HttpUtils {
                                 httpCallBack.showErrorMessage(res);
                                 return;
                             }*/
-                            L.e("???????????? ?"+s);
+                            L.e("???????????? ?" + s);
                             //成功
                             httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
@@ -295,23 +291,39 @@ public class HttpUtils {
         StringBuilder url = new StringBuilder(UrlConstants.BASE_URL);
         String actionUrl = "";
         switch (Action) {
-            case 0:
-                break;
-            case ACTION.REGIST://注册
+            //注册
+            case ACTION.REGIST:
                 actionUrl = UrlConstants.REGIST;
                 break;
-            case ACTION.LOGIN://登陆
+            //登陆
+            case ACTION.LOGIN:
                 actionUrl = UrlConstants.LOGIN;
                 break;
-            case ACTION.VERIFY://获取验证码
+            //获取验证码
+            case ACTION.VERIFY:
                 actionUrl = UrlConstants.VERIFY;
                 break;
+            //退款原因
             case ACTION.LIST:
                 actionUrl = UrlConstants.LIST;
                 break;
-                case ACTION.ALLOFMYORDER:
-                    actionUrl = UrlConstants.ALLOFMYORDER;
-                    break;
+            //获取我的全部订单
+            case ACTION.ALLOFMYORDER:
+                actionUrl = UrlConstants.ALLOFMYORDER;
+                break;
+            //首页的女王头条
+            case ACTION.HEADLINES:
+                actionUrl = UrlConstants.HEADLINES;
+                break;
+            //首页的行业分类
+            case ACTION.INDUSTRY:
+                actionUrl = UrlConstants.INDUSTRY;
+                break;
+            //首页banner广告
+            case ACTION.ADVERTISING:
+                actionUrl = UrlConstants.ADVERTISING;
+                break;
+
         }
         url.append(actionUrl);
         return url;

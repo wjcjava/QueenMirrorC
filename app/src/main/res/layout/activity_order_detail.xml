@@ -198,21 +198,25 @@
 
             </LinearLayout>
 
-            <RelativeLayout android:layout_width="match_parent"
+            <RelativeLayout
+                android:id="@+id/re_order_refund"
+                android:layout_width="match_parent"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
                 android:layout_height="@dimen/comment_45_dip"
                 android:background="@drawable/background_mine_auth">
+
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:text="申请退款"
-                    android:layout_centerInParent="true"
-                    android:textSize="@dimen/comment_14_dip"
-                    android:textColor="@color/white">
-                </TextView>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/comment_14_dip"></TextView>
             </RelativeLayout>
 
         </LinearLayout>

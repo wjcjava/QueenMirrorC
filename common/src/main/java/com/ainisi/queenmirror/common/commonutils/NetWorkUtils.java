@@ -1,5 +1,6 @@
 package com.ainisi.queenmirror.common.commonutils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,7 +23,7 @@ public class NetWorkUtils {
      */
     public static boolean isNetConnected(Context paramContext) {
         boolean i = false;
-        NetworkInfo localNetworkInfo = ((ConnectivityManager) paramContext
+        @SuppressLint("MissingPermission") NetworkInfo localNetworkInfo = ((ConnectivityManager) paramContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         if ((localNetworkInfo != null) && (localNetworkInfo.isAvailable()))
             return true;
@@ -35,7 +36,7 @@ public class NetWorkUtils {
     public static boolean isWifiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm != null) {
-            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            @SuppressLint("MissingPermission") NetworkInfo networkInfo = cm.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
                 return true;
             }
@@ -49,7 +50,7 @@ public class NetWorkUtils {
     public static boolean is3gConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm != null) {
-            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            @SuppressLint("MissingPermission") NetworkInfo networkInfo = cm.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
                 return true;
             }

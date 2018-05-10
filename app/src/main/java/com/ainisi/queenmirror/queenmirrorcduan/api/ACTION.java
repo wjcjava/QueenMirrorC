@@ -12,4 +12,9 @@ public interface ACTION {
     int LIST=0x004;//测试
 
     int ALLOFMYORDER = 0x005;//获取我的全部订单
+    int ADVERTISING=0x006;//首页banner广告
+    int HEADLINES=0x007;//首页的女王头条
+    int INDUSTRY=0x008;//首页的行业分类
+
+
 }

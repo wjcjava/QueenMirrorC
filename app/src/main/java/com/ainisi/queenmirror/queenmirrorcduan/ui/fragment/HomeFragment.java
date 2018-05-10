@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,19 +21,26 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyRecyclerCardviewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustry;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.LoadingDialog;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.barlibrary.ImmersionBar;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -78,6 +86,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
 
     public static HomeFragment instance = null;
     public boolean onclick;
+    private LoadingDialog dialog;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -92,11 +101,25 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         return R.layout.home_fragment_new;
 
     }
+    // 隐藏dialog
+    private Handler handler = new Handler(){
+        public void handleMessage(android.os.Message msg) {
 
+            dialog.dismiss();
+
+        };
+    };
     @SuppressLint("NewApi")
     @Override
     protected void initData() {
+        // 使用的时候只需要new出来就行，然后指定我们自定义的style
+        dialog = new LoadingDialog(getActivity(),R.style.mdialog);
+        // 显示的时候需要show()出来
+        dialog.show();
+        // 使用handler发送一个延时的消息，模拟耗时操作
+        handler.sendEmptyMessageDelayed(88, 8000);
         super.initData();
+        inithttp();
         data = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             SortBean sortBean = new SortBean();
@@ -127,6 +150,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         popWindow.setOutsideTouchable(true);
         popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
     }
+
 
     private void initpop(View popview1) {
         final RecyclerView ce = popview1.findViewById(R.id.rc_popview);
@@ -203,8 +227,21 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
 
     }
 
+    private void inithttp() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("tabType", "2");
+        hashMap.put("tabFather", "0");
+        HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     @Override
     public void onSuccess(int action, String res) {
+        switch (action) {
+            //首页的行业分类
+            case ACTION.INDUSTRY:
+               HomeIndustry ceshiBean = GsonUtil.toObj(res, HomeIndustry.class);
+                break;
+        }
 
     }
 
@@ -245,15 +282,15 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             case R.id.iv_uspension_surface:
                 GridLayoutManager layoutManage = new GridLayoutManager(getActivity(), 2);
 
-                if(onclick){
+                if (onclick) {
                     myRecyclerCardviewAdapter1 = new MyRecyclerCardviewAdapter(getActivity(), 0);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                     recyclerView.setAdapter(myRecyclerCardviewAdapter1);
                     surface.setImageResource(R.drawable.icon_home_list);
                     recyclerView.smoothScrollToPosition(2);
-                    onclick=false;
+                    onclick = false;
 
-                }else {
+                } else {
                     recyclerView.smoothScrollToPosition(2);
                     surface.setImageResource(R.drawable.icon_home_recycler);
                     layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -270,7 +307,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
                     myRecyclerCardviewAdapter1 = new MyRecyclerCardviewAdapter(getActivity(), 2);
                     recyclerView.setLayoutManager(layoutManage);
                     recyclerView.setAdapter(myRecyclerCardviewAdapter1);
-                    onclick=true;
+                    onclick = true;
                 }
                 break;
 
@@ -303,6 +340,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         }
 
     }
+
     private void initview(final View popview) {
         TextView eliminateTv = popview.findViewById(R.id.tv_eliminate);
         eliminateTv.setOnClickListener(new View.OnClickListener() {
@@ -313,6 +351,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
+
     public void inititem() {
         if (itemNum > myRecyclerCardviewAdapter.getItemCount()) {
             recyclerView.smoothScrollToPosition(2);
