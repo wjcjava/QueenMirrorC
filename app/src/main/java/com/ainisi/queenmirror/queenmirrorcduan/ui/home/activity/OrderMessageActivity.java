@@ -30,7 +30,7 @@ import butterknife.OnClick;
 /**
  * 我的订单信息
  */
-public class OrderMessageActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack,HttpCallBack {
+public class OrderMessageActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack, HttpCallBack {
     @Bind(R.id.title_title)
     TextView title;
     @Bind(R.id.recycler_ordmessage)
@@ -68,19 +68,17 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
          * showLastRefreshTime 是否显示上次刷新时间（默认不显示）
          * multiTask 下拉刷新上拉加载更多可同时进行（默认下拉刷新和上拉加载更多不能同时进行）
          */
+        mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
+                .canLoadMore(true)
+                .autoLoadMore()
 
-            mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
-                    .canLoadMore(true)
-                    .autoLoadMore()
-
-                    .showLastRefreshTime(
-                            RefreshLoadMoreLayout.class,
-                            "yyyy-MM-dd")
-                    .multiTask());
+                .showLastRefreshTime(
+                        RefreshLoadMoreLayout.class,
+                        "yyyy-MM-dd")
+                .multiTask());
 
 
     }
-
 
 
     @Override
@@ -122,16 +120,17 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
 
 
     }
-    public void  inithttp(){
-        HashMap<String,String> hashMap=new HashMap<>();
-        hashMap.put("userId","12421");
-        hashMap.put("messageType","1");
-        HttpUtils.doPost(ACTION.MESSAGELIST,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+
+    public void inithttp() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("userId", "12421");
+        hashMap.put("messageType", "1");
+        HttpUtils.doPost(ACTION.MESSAGELIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.MESSAGELIST:
                 for (int i = 0; i < 6; i++) {
                     messageListBean = GsonUtil.toObj(res, MessageListBean.class);

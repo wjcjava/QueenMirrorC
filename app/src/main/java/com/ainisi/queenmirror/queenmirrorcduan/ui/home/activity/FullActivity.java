@@ -9,20 +9,27 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.CommentsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 //商品详情
-public class FullActivity extends BaseNewActivity {
+public class FullActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.full_recycler)
     RecyclerView frecycler;
     @Bind(R.id.full_recyclertwo)
@@ -35,11 +42,22 @@ public class FullActivity extends BaseNewActivity {
     @Bind(R.id.tv_shopping_oldprice)
     TextView tv_shopping_oldprice;
     private List<SortBean> fulllist = new ArrayList<>();
-    private List<SortBean> fulllist2 = new ArrayList<>();
+    private List<CommentsBean> fulllist2 = new ArrayList<>();
+    private CommentsBean commentsBean;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_full;
     }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        inithttp();
+    }
+
+
+
     @Override
     public void initView() {
         initText();
@@ -55,17 +73,7 @@ public class FullActivity extends BaseNewActivity {
         MyAdapter sortAdapter = new MyAdapter(R.layout.item_fullrecycler,fulllist);
         frecycler.setLayoutManager(new GridLayoutManager(this, 2));
         frecycler.setAdapter(sortAdapter);
-        for (int i = 0; i < 8; i++) {
-            SortBean sortBean = new SortBean();
-            sortBean.setName("");
-            sortBean.setTime("");
-            sortBean.setDistance("");
-            fulllist2.add(sortBean);
-        }
-        MyAdapter sortAdapter2 = new MyAdapter(R.layout.item_fullrecyclertwo,fulllist2);
 
-        frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        frecyclertwo.setAdapter(sortAdapter2);
     }
 
     private void initText() {
@@ -92,6 +100,39 @@ public class FullActivity extends BaseNewActivity {
                 break;
         }
 
+
+    }
+    private void inithttp() {
+        HashMap<String,String> hashMap=new HashMap<>();
+        hashMap.put("goodsId","111");
+        hashMap.put("pageNumber","2");
+        HttpUtils.doPost(ACTION.EVALUATION,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+
+    }
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.EVALUATION:
+
+                for (int i = 0; i < 8; i++) {
+                    commentsBean = GsonUtil.toObj(res, CommentsBean.class);
+                    fulllist2.add(commentsBean);
+                }
+                CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo,fulllist2);
+                frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                frecyclertwo.setAdapter(sortAdapter2);
+                break;
+        }
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
 
     }
 }

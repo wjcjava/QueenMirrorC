@@ -22,7 +22,7 @@
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/sote_name"
+                    android:id="@+id/foot_name"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/comment_20_dip"
                     android:gravity="bottom"

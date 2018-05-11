@@ -39,6 +39,6 @@ public class LoadingDialog  extends Dialog {
         super.setContentView(dialog_view);
 
         // 点击dialog外侧不会消失
-        this.setCanceledOnTouchOutside(false);
+        this.setCanceledOnTouchOutside(true);
     }
 }

@@ -41,6 +41,12 @@ public interface UrlConstants {
 
     String MINECOLLECTION = "api/ans/cust/userCollectList";//获取我的收藏列表
 
+    String MYFOOT="api/ans/cust/userViewList";//我的足迹
+
+    String EVALUATION="api/ec/goods/goodsCommentsList";//商品的评价数据
+
+    String MERCHANTS="api/ans/shop/shopCommentsList";//商家的评价数据
+
 
     String MINEINSHOP = "api/ans/cust/userFollowList";//获取我关注的店铺
 

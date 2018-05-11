@@ -24,6 +24,8 @@ public interface ACTION {
 
     int  MESSAGELIST=0x009;//首页消息列表
 
+    int MYFOOT=0X010;//我的足迹
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表
@@ -38,7 +40,9 @@ public interface ACTION {
 
     int MINECOLLECTION = 0x111;//获取我的收藏
 
+    int EVALUATION=0x011;//商品的评价数据
 
+    int MERCHANTS=0x12;//商家的评价数据
 
     int MINEINSHOP = 0x112;//获取我关注的店铺
 

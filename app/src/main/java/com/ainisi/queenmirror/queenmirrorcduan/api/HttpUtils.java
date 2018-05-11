@@ -321,21 +321,27 @@ public class HttpUtils {
             case ACTION.ADVERTISING:
                 actionUrl = UrlConstants.ADVERTISING;
                 break;
+            //商城中商家列表
             case ACTION.SHOPLIST:
                 actionUrl = UrlConstants.SHOPLIST;
                 break;
+            //商家推荐商品列表
             case ACTION.SHOPTUIJIANLIST:
                 actionUrl = UrlConstants.SHOPTUIJIANLIST;
                 break;
+            //商家所卖商品列表
             case ACTION.SHOPSALEPRODUCT:
                 actionUrl = UrlConstants.SHOPSALEPRODUCT;
                 break;
+            //获取门店信用数据
             case ACTION.SHOPXINYONG:
                 actionUrl = UrlConstants.SHOPXINYONG;
                 break;
+            //获取商家具体信息
             case ACTION.SHOPDETAILDATA:
                 actionUrl = UrlConstants.SHOPDETAILDATA;
                 break;
+            //获取我的收藏
             case ACTION.MINECOLLECTION:
                 actionUrl = UrlConstants.MINECOLLECTION;
                 break;
@@ -347,6 +353,19 @@ public class HttpUtils {
             //首页的消息列表
             case ACTION.MESSAGELIST:
                 actionUrl = UrlConstants.MESSAGELIST;
+                break;
+            //我的足迹
+            case ACTION.MYFOOT:
+                actionUrl = UrlConstants.MYFOOT;
+                break;
+
+            //商品的评价数据
+            case ACTION.EVALUATION:
+                actionUrl=UrlConstants.EVALUATION;
+                break;
+            //商家的评价数据
+            case ACTION.MERCHANTS:
+                actionUrl=UrlConstants.MERCHANTS;
                 break;
 
             case ACTION.MINEINSHOP:

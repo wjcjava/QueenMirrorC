@@ -9,20 +9,26 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.adapter.MyFootAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.MineFootBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 //我的足迹
-public class MineMyFootActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack {
+public class MineMyFootActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack, HttpCallBack {
 
     @Bind(R.id.mine_foot_recycler)
     RecyclerView recycler;
@@ -33,7 +39,7 @@ public class MineMyFootActivity extends BaseNewActivity implements RefreshLoadMo
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     private Handler handler = new Handler();
-    List<SortBean> sortlist = new ArrayList<>();
+    List<MineFootBean> sortlist = new ArrayList<>();
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineMyFootActivity.class));
@@ -53,25 +59,13 @@ public class MineMyFootActivity extends BaseNewActivity implements RefreshLoadMo
         titleRight.setText("编辑");
         titleRight.setTextSize(14);
 
-        for (int i = 0; i < 10; i++) {
-            SortBean sortBean = new SortBean();
-            sortBean.setName("MOCO美容美发沙龙");
-            sortBean.setTime("营业时间 9:00-20:00");
-            sortBean.setLogo(R.drawable.ic_sortrecyle_logo);
-            sortBean.setStars(R.drawable.icon_home_recommend);
-            sortBean.setDistance("875m");
-            sortlist.add(sortBean);
-        }
-
-        MyAdapter sortAdapter = new MyAdapter(R.layout.item_fullshortrecycler,sortlist);
-        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recycler.setAdapter(sortAdapter);
 
     }
 
     @Override
     protected void initData() {
         super.initData();
+        inithttp();
         mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
                 .canLoadMore(true)
                 .autoLoadMore()
@@ -82,15 +76,16 @@ public class MineMyFootActivity extends BaseNewActivity implements RefreshLoadMo
                 .multiTask());
     }
 
+
     @OnClick({R.id.title_back
     })
     public void click(View view) {
 
         switch (view.getId()) {
             case R.id.title_back:
+
                 finish();
                 break;
-
         }
 
 
@@ -116,5 +111,42 @@ public class MineMyFootActivity extends BaseNewActivity implements RefreshLoadMo
                 mRefreshLoadMoreLayout.stopLoadMore();
             }
         }, 1000);
+    }
+
+    private void inithttp() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("userId", "111");
+        hashMap.put("pageNumber", "1");
+        HttpUtils.doPost(ACTION.MYFOOT, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
+
+        switch (action) {
+            //我的足迹
+            case ACTION.MYFOOT:
+                for (int i = 0; i < 6; i++) {
+                    MineFootBean sortBean = GsonUtil.toObj(res,MineFootBean.class);
+                    sortlist.add(sortBean);
+                }
+
+                MyFootAdapter sortAdapter = new MyFootAdapter(R.layout.item_fullshortrecycler, sortlist);
+                recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                recycler.setAdapter(sortAdapter);
+                break;
+        }
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
     }
 }
