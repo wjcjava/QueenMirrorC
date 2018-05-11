@@ -8,13 +8,10 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.request.BaseRequest;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
-
 import org.json.JSONObject;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -131,7 +128,7 @@ public class HttpUtils {
                                 httpCallBack.showErrorMessage(res);
                                 return;
                             }*/
-                            L.e("???????????? ?"+s);
+                            L.e("???????????? ?" + s);
                             //成功
                             httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
@@ -347,6 +344,11 @@ public class HttpUtils {
             //首页的消息类型列表
             case ACTION.MESSAGE:
                 actionUrl = UrlConstants.MESSAGE;
+                break;
+
+            //首页的消息列表
+            case ACTION.MESSAGELIST:
+                actionUrl = UrlConstants.MESSAGELIST;
                 break;
 
         }

@@ -14,6 +14,16 @@ public interface ACTION {
 
     int LIST=0x004;//测试
 
+    int ADVERTISING=0x005;//首页banner广告
+
+    int HEADLINES=0x006;//首页的女王头条
+
+    int INDUSTRY=0x007;//首页的行业分类
+
+    int MESSAGE=0x008;//首页的消息类型列表
+
+    int  MESSAGELIST=0x009;//首页消息列表
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表
@@ -28,12 +38,7 @@ public interface ACTION {
 
     int MINECOLLECTION = 0x111;//获取我的收藏
 
-    int ADVERTISING=0x006;//首页banner广告
 
-    int HEADLINES=0x007;//首页的女王头条
-
-    int INDUSTRY=0x008;//首页的行业分类
-    int MESSAGE=0x009;//首页的消息类型列表
 
 
 }

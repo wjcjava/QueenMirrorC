@@ -39,7 +39,7 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
     }
     @Override
     public int getLayoutId() {
-        return R.layout.activity_meage;
+        return R.layout.activity_home_message;
     }
 
     @Override
@@ -96,10 +96,9 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
             case ACTION.MESSAGE:
                 messageBean = GsonUtil.toObj(res, HomeMessageBean.class);
                 tvOrder.setText(messageBean.getBody().getMessageTypeListData().get(0).getDict().getLabel());
-                tvInteractive.setText(messageBean.getBody().getMessageTypeListData().get(0).getDict().getLabel());
-                tvSystem.setText(messageBean.getBody().getMessageTypeListData().get(0).getDict().getLabel());
-                tvReview.setText(messageBean.getBody().getMessageTypeListData().get(0).getDict().getLabel());
-
+                tvInteractive.setText(messageBean.getBody().getMessageTypeListData().get(1).getDict().getLabel());
+                tvSystem.setText(messageBean.getBody().getMessageTypeListData().get(2).getDict().getLabel());
+                tvReview.setText(messageBean.getBody().getMessageTypeListData().get(3).getDict().getLabel());
                 break;
 
         }
