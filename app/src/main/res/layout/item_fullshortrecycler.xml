@@ -6,8 +6,6 @@
     android:layout_height="@dimen/comment_97_dip"
     android:orientation="vertical">
 
-
-
         <LinearLayout
             android:gravity="center"
             android:layout_width="match_parent"
@@ -41,6 +39,7 @@
                         android:layout_height="@dimen/comment_20_dip"
                         android:src="@drawable/ic_sortrecyke_stars" />
                     <TextView
+                        android:id="@+id/tv_mine_follow_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/comment_12_size"

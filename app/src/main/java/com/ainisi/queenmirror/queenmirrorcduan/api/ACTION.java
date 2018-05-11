@@ -40,5 +40,12 @@ public interface ACTION {
 
 
 
+    int MINEINSHOP = 0x112;//获取我关注的店铺
+
+    int GUANZHUSHOP = 0x113;//关注店铺
+
+    int CANCELGUANZHUSHOP = 0x114;//取消关注店铺
+
+    int JUBAOSHOP = 0x115;//举报商家
 
 }

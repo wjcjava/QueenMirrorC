@@ -120,7 +120,6 @@ public class HttpUtils {
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        L.e("???????????? ?" + s);
                         try {
 
                           /*  //失败
@@ -128,7 +127,6 @@ public class HttpUtils {
                                 httpCallBack.showErrorMessage(res);
                                 return;
                             }*/
-                            L.e("???????????? ?" + s);
                             //成功
                             httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
@@ -351,6 +349,18 @@ public class HttpUtils {
                 actionUrl = UrlConstants.MESSAGELIST;
                 break;
 
+            case ACTION.MINEINSHOP:
+                actionUrl = UrlConstants.MINEINSHOP;
+                break;
+            case ACTION.GUANZHUSHOP:
+                actionUrl = UrlConstants.GUANZHUSHOP;
+                break;
+            case ACTION.CANCELGUANZHUSHOP:
+                actionUrl = UrlConstants.CANCELGUANZHUSHOP;
+                break;
+            case ACTION.JUBAOSHOP:
+                actionUrl = UrlConstants.JUBAOSHOP;
+                break;
         }
         url.append(actionUrl);
         return url;

@@ -136,6 +136,7 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
     <TextView
+        android:id="@+id/tv_workroom_service_jubao"
         android:background="@color/white"
         android:text="举报商家"
         android:layout_marginTop="@dimen/comment_83_dip"

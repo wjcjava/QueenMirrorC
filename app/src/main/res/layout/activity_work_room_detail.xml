@@ -82,6 +82,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:layout_alignParentBottom="true">
                             <TextView
                                 android:layout_width="wrap_content"
@@ -89,9 +90,27 @@
                                 android:textSize="12dp"
                                 android:layout_marginBottom="3dp"
                                 android:layout_marginStart="10dp"
+                                android:layout_centerVertical="true"
                                 android:textColor="@color/white"
                                 android:text="评分4.6  浏览量1128次  距离2.7km">
                             </TextView>
+
+                            <TextView
+                                android:id="@+id/tv_work_detail_guanzhu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="10dp"
+                                android:background="@drawable/button_shap_queen"
+                                android:text="关注"
+                                android:textSize="12sp"
+                                android:textColor="@color/white"
+                                android:paddingBottom="3dp"
+                                android:paddingTop="3dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp">
+                            </TextView>
+
                         </RelativeLayout>
                     </RelativeLayout>
                     <TextView

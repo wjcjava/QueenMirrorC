@@ -6,31 +6,50 @@ import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.MineFollowAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.MineFollowBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-//关注店铺
-public class MineFollowActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack {
+
+/**
+ *
+ * 关注店铺
+ */
+public class MineFollowActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack,HttpCallBack{
     @Bind(R.id.mine_follow_recycler)
     RecyclerView recycler;
     @Bind(R.id.title_title)
     TextView folltitle;
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+    @Bind(R.id.li_mine_follow_none)
+    LinearLayout li_mine_follow_none;
+
+    List<MineFollowBean.BodyBean.CommentsListDataBean> commentsListDataBeanList = new ArrayList<>();
+
+    int pageNumber = 1;
     private Handler handler = new Handler();
-    List<SortBean> sortlist=new ArrayList<>();
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineFollowActivity.class));
     }
@@ -40,23 +59,42 @@ public class MineFollowActivity extends BaseNewActivity implements RefreshLoadMo
     }
 
     @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.MINEINSHOP:
+
+                L.e("++++++++++++++++++++"+res);
+                MineFollowBean mineFollowBean = GsonUtil.toObj(res,MineFollowBean.class);
+                commentsListDataBeanList = mineFollowBean.getBody().getCommentsListData();
+
+                if(commentsListDataBeanList.size()>0){
+                    li_mine_follow_none.setVisibility(View.GONE);
+
+                    L.e("......................");
+                    MineFollowAdapter sortAdapter=new MineFollowAdapter(R.layout.item_fullshortrecycler,commentsListDataBeanList);
+                    recycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+                    recycler.setAdapter(sortAdapter);
+                }else{
+                    li_mine_follow_none.setVisibility(View.VISIBLE);
+                }
+
+                break;
+        }
+    }
+    @Override
+    protected void doFirstRequest() {
+        super.doFirstRequest();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("pageNumber", pageNumber+"");
+        params.put("userId", "111");
+        params.put("pageSize", "10");
+        HttpUtils.doPost(ACTION.MINEINSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    @Override
     protected void initView() {
         super.initView();
         folltitle.setText("关注店铺");
-
-        for (int i = 0; i <10 ; i++) {
-            SortBean sortBean=new SortBean();
-            sortBean.setName("MOCO美容美发沙龙");
-            sortBean.setTime("营业时间 9:00-20:00");
-            sortBean.setLogo(R.drawable.ic_sortrecyle_logo);
-            sortBean.setStars(R.drawable.icon_home_recommend);
-            sortBean.setDistance("875m");
-            sortlist.add(sortBean);
-        }
-
-        MyAdapter sortAdapter=new MyAdapter(R.layout.item_fullshortrecycler,sortlist);
-        recycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        recycler.setAdapter(sortAdapter);
     }
 
     @Override
@@ -108,5 +146,15 @@ public class MineFollowActivity extends BaseNewActivity implements RefreshLoadMo
                 mRefreshLoadMoreLayout.stopLoadMore();
             }
         }, 1000);
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
     }
 }

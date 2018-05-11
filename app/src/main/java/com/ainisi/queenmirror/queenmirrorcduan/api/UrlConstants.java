@@ -42,4 +42,12 @@ public interface UrlConstants {
     String MINECOLLECTION = "api/ans/cust/userCollectList";//获取我的收藏列表
 
 
+    String MINEINSHOP = "api/ans/cust/userFollowList";//获取我关注的店铺
+
+    String GUANZHUSHOP = "api/ans/shop/followShop";//关注店铺
+
+    String CANCELGUANZHUSHOP = "api/ans/shop/unFollowShop";//取消关注店铺
+
+    String JUBAOSHOP = "api/ans/shop/complainShop";//举报商家
+
 }

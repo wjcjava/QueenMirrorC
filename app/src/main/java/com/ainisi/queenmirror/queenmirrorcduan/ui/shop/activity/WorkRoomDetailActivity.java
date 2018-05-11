@@ -25,10 +25,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopTuijianBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopXinyongBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PurchaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -84,6 +86,11 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     TextView tv_work_detail_time;
     @Bind(R.id.tv_work_detail_introduce)
     TextView tv_work_detail_introduce;
+    @Bind(R.id.tv_workroom_service_jubao)
+    TextView tv_workroom_service_jubao;
+
+    @Bind(R.id.tv_work_detail_guanzhu)
+    TextView tv_work_detail_guanzhu;
 
     List<SortBean> sortlist = new ArrayList<>();
     List<String> tabList = new ArrayList<>();
@@ -153,6 +160,30 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 tv_work_detail_introduce.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief().toString());
 
                 break;
+            case ACTION.GUANZHUSHOP://关注店铺
+
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    T.show(successBean.getMsg());
+                    tv_work_detail_guanzhu.setText("取消关注");
+                }else{
+                    T.show(successBean.getMsg());
+                }
+                break;
+            case ACTION.CANCELGUANZHUSHOP://取消关注店铺
+                SuccessBean cancelsuccessBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(cancelsuccessBean.isSuccess()){
+                    T.show(cancelsuccessBean.getMsg());
+                    tv_work_detail_guanzhu.setText("关注");
+                }else{
+                    T.show(cancelsuccessBean.getMsg());
+                }
+                break;
+            case ACTION.JUBAOSHOP:
+                /**
+                 * 接口还需要修改
+                 */
+                break;
         }
     }
     /**
@@ -196,6 +227,36 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("id", shopId);//商家ID
         HttpUtils.doPost(ACTION.SHOPDETAILDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
+    /**
+     * 关注店铺
+     */
+    private void guanzhuData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("shopId", shopId);//商家ID
+        params.put("userId","111");
+        HttpUtils.doPost(ACTION.GUANZHUSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 取消关注
+     */
+    private void cancelGuanzhuData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("shopId", shopId);//商家ID
+        params.put("userId","111");
+        HttpUtils.doPost(ACTION.CANCELGUANZHUSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 举报商家
+     */
+    private void jubaoData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("complainInfo", shopId);//商家ID
+        HttpUtils.doPost(ACTION.JUBAOSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     private void initTab() {
         listView.setVisibility(View.VISIBLE);
         tabList.add("门店服务");
@@ -274,7 +335,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     }
 
-    @OnClick({R.id.iv_common_back, R.id.tv_submit})
+    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.tv_work_detail_guanzhu,R.id.tv_workroom_service_jubao})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.iv_common_back:
@@ -287,6 +348,23 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             //购物车
             case R.id.iv_title:
                 startActivity(new Intent(this, ShoppingCartActivity.class));
+                break;
+            /**
+             * 关注店铺
+             */
+            case R.id.tv_work_detail_guanzhu:
+                /**
+                 * 这里应该判断是否登录，有没有关注过
+                 */
+
+                if(tv_work_detail_guanzhu.getText().equals("关注")){
+                    guanzhuData();//关注
+                }else{
+                    cancelGuanzhuData();//取消关注
+                }
+                break;
+            case R.id.tv_workroom_service_jubao:
+                jubaoData();
                 break;
         }
     }
