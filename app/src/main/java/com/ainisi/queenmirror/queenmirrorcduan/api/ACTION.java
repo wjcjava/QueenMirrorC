@@ -15,6 +15,7 @@ public interface ACTION {
     int ADVERTISING=0x006;//首页banner广告
     int HEADLINES=0x007;//首页的女王头条
     int INDUSTRY=0x008;//首页的行业分类
+    int MESSAGE=0x009;//首页的消息类型列表
 
 
 }

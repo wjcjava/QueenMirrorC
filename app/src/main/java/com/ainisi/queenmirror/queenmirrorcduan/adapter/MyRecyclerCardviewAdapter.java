@@ -2,7 +2,6 @@ package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +19,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeAdvertisingActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertising;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlines;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustry;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.LoadingDialog;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MarqueeView;
@@ -46,7 +44,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
     private final Context context;
     private MarqueeView marqueeview;
     List<Bean.BodyBean.ApiRefundListBean> apiRefundList = new ArrayList<>();
-    private HomeIndustry homeIndustry;
+    private HomeIndustryBean homeIndustryBean;
     int type;
 
     private TextView esthetics;
@@ -54,11 +52,10 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
     private TextView haircustom;
     private TextView beauty;
     private TextView permanent;
-    private HomeHeadlines homeHeadlines;
+    private HomeHeadlinesBean homeHeadlinesBean;
     private String[] contentArray;
-    private HomeAdvertising homeAdvertising;
+    private HomeAdvertisingBean homeAdvertisingBean;
     private Banner banner;
-    private LoadingDialog dialog;
 
 
     public static enum ITEM_TYPE {
@@ -137,14 +134,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
-
-    private Handler handler = new Handler(){
-        public void handleMessage(android.os.Message msg) {
-            // 隐藏dialog
-            dialog.dismiss();
-
-        };
-    };
     //item的点击事件
     @Override
     public void onClick(View view) {
@@ -242,7 +231,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
 
         LinearLayout home_freetrial;
         LinearLayout home_esthetics;
-
         private final LinearLayout home_nailart;
         private final LinearLayout home_haircustom;
         private final LinearLayout home_beauty;
@@ -302,39 +290,35 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
 
         switch (action) {
             case ACTION.LIST:
-                dialog.dismiss();
                 Bean bean = GsonUtil.toObj(res, Bean.class);
                 T.show(bean.getMsg());
                 Bean.BodyBean body = bean.getBody();
                 apiRefundList = body.getApiRefundList();
-
                 L.e("获取列表中为什么退款的原因   " + apiRefundList.get(0).getRefundReasonLabel());
                 T.show(apiRefundList.get(0).getRefundReasonLabel());
-
                 Bean.BodyBean.ApiRefundListBean.AnsCustRefundBean ansCustRefundBean = apiRefundList.get(0).getAnsCustRefund();
-
                 L.e("???????????????????????   获取列表中对象中的ID信息  " + ansCustRefundBean.getId());
                 break;
             //首页的行业分类
             case ACTION.INDUSTRY:
-                homeIndustry = GsonUtil.toObj(res, HomeIndustry.class);
-                esthetics.setText(homeIndustry.getBody().getCategoryListData().get(0).getEcCategory().getTabName());
-                nailart.setText(homeIndustry.getBody().getCategoryListData().get(1).getEcCategory().getTabName());
-                haircustom.setText(homeIndustry.getBody().getCategoryListData().get(2).getEcCategory().getTabName());
-                beauty.setText(homeIndustry.getBody().getCategoryListData().get(3).getEcCategory().getTabName());
-                permanent.setText(homeIndustry.getBody().getCategoryListData().get(4).getEcCategory().getTabName());
+                homeIndustryBean = GsonUtil.toObj(res, HomeIndustryBean.class);
+                esthetics.setText(homeIndustryBean.getBody().getCategoryListData().get(0).getEcCategory().getTabName());
+                nailart.setText(homeIndustryBean.getBody().getCategoryListData().get(1).getEcCategory().getTabName());
+                haircustom.setText(homeIndustryBean.getBody().getCategoryListData().get(2).getEcCategory().getTabName());
+                beauty.setText(homeIndustryBean.getBody().getCategoryListData().get(3).getEcCategory().getTabName());
+                permanent.setText(homeIndustryBean.getBody().getCategoryListData().get(4).getEcCategory().getTabName());
                 break;
             //首页的女王头条
             case ACTION.HEADLINES:
-                homeHeadlines = GsonUtil.toObj(res, HomeHeadlines.class);
-                contentArray = new String[]{homeHeadlines.getBody().getTopListData().get(0).getEcTop().getTopName(),
-                        homeHeadlines.getBody().getTopListData().get(1).getEcTop().getTopName(),
-                        homeHeadlines.getBody().getTopListData().get(2).getEcTop().getTopName()};
+                homeHeadlinesBean = GsonUtil.toObj(res, HomeHeadlinesBean.class);
+                contentArray = new String[]{homeHeadlinesBean.getBody().getTopListData().get(0).getEcTop().getTopName(),
+                        homeHeadlinesBean.getBody().getTopListData().get(1).getEcTop().getTopName(),
+                        homeHeadlinesBean.getBody().getTopListData().get(2).getEcTop().getTopName()};
                 marqueeview.setTextArray(contentArray);
                 break;
             //首页banner广告
             case ACTION.ADVERTISING:
-                homeAdvertising = GsonUtil.toObj(res, HomeAdvertising.class);
+                homeAdvertisingBean = GsonUtil.toObj(res, HomeAdvertisingBean.class);
                 List<String> images = new ArrayList<>();
                 for (int i = 0; i < 4; i++) {
                     images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
@@ -347,7 +331,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                     @Override
                     public void OnBannerClick(int position) {
                        Intent intent=new Intent(context, HomeAdvertisingActivity.class);
-                       intent.putExtra("weburl",homeAdvertising.getBody().getAdvertisementListData().get(0).getEcAdvertisement().getAdUrl());
+                       intent.putExtra("weburl", homeAdvertisingBean.getBody().getAdvertisementListData().get(0).getEcAdvertisement().getAdUrl());
                        context.startActivity(intent);
                     }
                 });

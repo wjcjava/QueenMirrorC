@@ -18,4 +18,5 @@ public interface UrlConstants {
     String ADVERTISING = "/api/ec/common/advertisementList";//首页banner广告
     String HEADLINES = "/api/ec/common/topList";//首页的女王头条
     String INDUSTRY = "/api/ec/common/categoryList";//首页的行业分类
+    String MESSAGE="/api/ec/message/messageTypeList";//首页的消息类型列表
 }

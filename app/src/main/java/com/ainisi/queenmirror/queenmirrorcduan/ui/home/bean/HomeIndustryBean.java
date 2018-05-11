@@ -6,7 +6,7 @@ import java.util.List;
  * Created by john on 2018/5/10.
  */
 
-public class HomeIndustry {
+public class HomeIndustryBean {
 
     /**
      * success : true

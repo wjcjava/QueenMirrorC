@@ -323,6 +323,10 @@ public class HttpUtils {
             case ACTION.ADVERTISING:
                 actionUrl = UrlConstants.ADVERTISING;
                 break;
+            //首页的消息类型列表
+            case ACTION.MESSAGE:
+                actionUrl = UrlConstants.MESSAGE;
+                break;
 
         }
         url.append(actionUrl);

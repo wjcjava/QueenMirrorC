@@ -21,26 +21,20 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyRecyclerCardviewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
-import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustry;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.LoadingDialog;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.barlibrary.ImmersionBar;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
-import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -92,10 +86,8 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ImmersionBar.setTitleBar(getActivity(), mToolbar);
-
         instance = this;
     }
-
     @Override
     protected int setLayoutId() {
         return R.layout.home_fragment_new;
@@ -104,9 +96,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
     // 隐藏dialog
     private Handler handler = new Handler(){
         public void handleMessage(android.os.Message msg) {
-
             dialog.dismiss();
-
         };
     };
     @SuppressLint("NewApi")
@@ -117,15 +107,14 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
         // 显示的时候需要show()出来
         dialog.show();
         // 使用handler发送一个延时的消息，模拟耗时操作
-        handler.sendEmptyMessageDelayed(88, 8000);
+        handler.sendEmptyMessageDelayed(88, 7000);
         super.initData();
-        inithttp();
+
         data = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             SortBean sortBean = new SortBean();
             data.add(sortBean);
         }
-
         pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
         popview1 = View.inflate(getActivity(), R.layout.pop_myitem, null);
         initpop(popview1);
@@ -227,21 +216,11 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
 
     }
 
-    private void inithttp() {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("tabType", "2");
-        hashMap.put("tabFather", "0");
-        HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-    }
+
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action) {
-            //首页的行业分类
-            case ACTION.INDUSTRY:
-               HomeIndustry ceshiBean = GsonUtil.toObj(res, HomeIndustry.class);
-                break;
-        }
+
 
     }
 
@@ -274,7 +253,7 @@ public class HomeFragment extends BaseFragment implements HttpCallBack {
             case R.id.iv_home_search:
                 SearchActivity.startActivity(getContext());
                 break;
-            //消息
+            //消息类型
             case R.id.img_information:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
