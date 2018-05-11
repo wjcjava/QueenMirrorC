@@ -90,7 +90,6 @@ public class BeanstalkActivity extends BaseNewActivity implements HttpCallBack {
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 //                获取dp的年月日的值，在textView上显示出来
                 c.set(year, monthOfYear, dayOfMonth);
-
                 name.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
             }
         });

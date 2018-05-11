@@ -1,6 +1,5 @@
 package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;

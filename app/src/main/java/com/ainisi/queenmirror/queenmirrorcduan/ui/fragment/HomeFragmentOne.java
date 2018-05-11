@@ -56,7 +56,7 @@ import butterknife.OnClick;
 
 public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
 
-    @Bind(R.id.banner)
+  /*  @Bind(R.id.banner)
     Banner banner;
     @Bind(R.id.iv_sort)
     LinearLayout ivsort;
@@ -169,9 +169,9 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
         listView.setAdapter(listadapter);
     }
 
-    /**
+    *//**
      *
-     */
+     *//*
     private void initLocation() {
         // 获取之前定位位置，如果之前未曾定位，则重新定位
         GDLocationUtil.getLocation(new GDLocationUtil.MyLocationListener() {
@@ -192,9 +192,9 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
             }
         });
     }
-    /**
+    *//**
      * 点击首页跑马灯效果
-     */
+     *//*
     private void initQuee() {
         marqueeView.setTextArray(contentArray);
         marqueeView.setOnItemClickListener(new MarqueeView.onItemClickListener() {
@@ -240,11 +240,6 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
         });
     }
 
-    /**
-     * 设置添加屏幕的背景透明度
-     *
-     * @param bgAlpha 屏幕透明度0.0-1.0 1表示完全不透明
-     */
     public void setBackgroundAlpha(float bgAlpha) {
         WindowManager.LayoutParams lp = getActivity().getWindow()
                 .getAttributes();
@@ -378,18 +373,18 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
                 startActivity(new Intent(getActivity(),HomeFightaloneActivity.class));
                 break;
             case R.id.rb_sort:
-              /*  if (sortFragment == null) {
+              *//*  if (sortFragment == null) {
                     sortFragment = new SortFragment();
                     transaction.add(R.id.fl_home_recommend_layout, sortFragment);
                 } else {
                     transaction.show(sortFragment);
                 }
                 hideFragment(salesFragment, transaction);
-                hideFragment(distanceFragment, transaction);*/
+                hideFragment(distanceFragment, transaction);*//*
 //                hideFragment(screenFragment, transaction);
                 break;
             case R.id.rb_sales:
-            /*    if (salesFragment == null) {
+            *//*    if (salesFragment == null) {
                     salesFragment = new SalesFragment();
                     transaction.add(R.id.fl_home_recommend_layout, salesFragment);
                 } else {
@@ -397,11 +392,11 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
                 }
                 hideFragment(sortFragment, transaction);
 //                hideFragment(screenFragment, transaction);
-                hideFragment(distanceFragment, transaction);*/
+                hideFragment(distanceFragment, transaction);*//*
                 break;
             case R.id.rb_distance:
 
-               /* if (distanceFragment == null) {
+               *//* if (distanceFragment == null) {
                     distanceFragment = new DistanceFragment();
                     transaction.add(R.id.fl_home_recommend_layout, distanceFragment);
                 } else {
@@ -409,7 +404,7 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
                 }
                 hideFragment(sortFragment, transaction);
                 hideFragment(salesFragment, transaction);
-//                hideFragment(screenFragment, transaction);*/
+//                hideFragment(screenFragment, transaction);*//*
                 break;
             case R.id.li_home_screen:
                 break;
@@ -440,8 +435,6 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
                         .setAnimationStyle(R.style.CustomPopWindowStyle)
                         .create()
                         .showAsDropDown(layout_stick_header_main);
-
-
                 break;
             default:
                 break;
@@ -468,7 +461,7 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
         if (null != fragment) {
             transaction.hide(fragment);
         }
-    }
+    }*/
 
     @Override
     public void onSuccess(int action, String res) {
@@ -483,5 +476,10 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
     @Override
     public void showErrorMessage(String s) {
 
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return 0;
     }
 }

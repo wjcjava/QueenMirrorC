@@ -21,9 +21,11 @@ import butterknife.OnClick;
 public class MinePaymentsettingActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView settingTitle;
+
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MinePaymentsettingActivity.class));
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_paymentsetting;
@@ -39,8 +41,7 @@ public class MinePaymentsettingActivity extends BaseNewActivity {
         settingTitle.setTextColor(ContextCompat.getColor(this,R.color.alpha_95_black));
     }
 
-    @OnClick({R.id.title_back,R.id.layout_setting
-    })
+    @OnClick({R.id.title_back,R.id.layout_setting})
     public void click(View view) {
 
         switch (view.getId()) {
@@ -52,10 +53,6 @@ public class MinePaymentsettingActivity extends BaseNewActivity {
                 break;
             default:
                 break;
-
-
         }
-
-
     }
 }

@@ -139,7 +139,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_head"
-
             android:layout_marginStart="@dimen/comment_13_dip"
             android:orientation="horizontal">
 

@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
@@ -30,15 +29,15 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopMallListBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.DistanceFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.ScreenFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SortFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopClassificationActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
@@ -46,7 +45,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
 import com.youth.banner.Banner;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,9 +117,32 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     String[] textTitle = {"休闲娱乐", "银行保险", "珠宝首饰", "医疗保健", "运动健身", "婚庆摄影", "汽车服务", "教育培训"};
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
 
-    int hight;//标记ScrollView移动的距离
+    int hight,pageNumber=1;//标记ScrollView移动的距离
     private boolean isClick;
     private GridViewAdapter gridViewAdapter;
+
+    List<ShopMallListBean.BodyBean.ShopListBean> shopListNew = new ArrayList<>();
+
+    @Override
+    public void onSuccess(int action, String res){
+        switch (action){
+            case ACTION.SHOPLIST://登录
+
+                ShopMallListBean shopMallListBean = GsonUtil.toObj(res,ShopMallListBean.class);
+
+                if(shopMallListBean.isSuccess()){
+                    shopListNew = shopMallListBean.getBody().getShopList();
+
+                    listadapter = new ListViewAdapter(getContext(),shopListNew);
+                    listView.setAdapter(listadapter);
+                }else{
+                    T.show(shopMallListBean.getMsg());
+                }
+                break;
+        }
+
+    }
+
 
     @Override
     protected int getLayoutResource() {
@@ -136,7 +157,10 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
-
+        /**
+         * 获取首页数据
+         */
+        doFirstData();
 
         initDate();
         initpopwindow();
@@ -156,9 +180,18 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             }
         });
 
-        listadapter = new ListViewAdapter(getContext());
-        listView.setAdapter(listadapter);
 
+    }
+
+    /**
+     * 获取数据
+     */
+    private void doFirstData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("enableFlag", "1");//有效标记
+        params.put("pageNumber", pageNumber+"");
+        params.put("contentByTitle", "");//画面检索输入框输入的内容
+        HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     private void initImgTitle() {
@@ -257,7 +290,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_surface:
                 if (isClick) {
                     isClick = false;
-                    listadapter = new ListViewAdapter(getContext());
+                    listadapter = new ListViewAdapter(getContext(),shopListNew);
                     listView.setAdapter(listadapter);
                     gridView.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
@@ -274,7 +307,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_uspension_surface:
                 if (isClick) {
                     isClick = false;
-                    listadapter = new ListViewAdapter(getContext());
+                    listadapter = new ListViewAdapter(getContext(),shopListNew);
                     listView.setAdapter(listadapter);
                     gridView.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
@@ -313,7 +346,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 ivsort.setVisibility(View.VISIBLE);
                 break;
             case R.id.rb_sort:
-                CeshiData();
                 sc_home_scroll.smoothScrollTo(0, 1180);
               /*  if (sortFragment == null) {
                     sortFragment = new SortFragment();
@@ -385,33 +417,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         //提交事务
         //transaction.commit();
 
-
-    }
-    /**
-     * 测试
-     */
-    private void CeshiData() {
-
-        //传参数
-        HashMap<String,String> params = new HashMap<>();
-        params.put("telNo", "17600291072");
-
-        //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
-        HttpUtils.doPost(ACTION.VERIFY,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
-    }
-
-    @Override
-    public void onSuccess(int action, String res){
-        switch (action){
-            case ACTION.VERIFY://注册
-                LoginCeshiBean verifyBean = GsonUtil.toObj(res,LoginCeshiBean.class);
-
-                L.e("??????"+verifyBean.getMsg());
-                break;
-            case ACTION.LOGIN://登录
-
-                break;
-        }
 
     }
 

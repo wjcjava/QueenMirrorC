@@ -8,10 +8,13 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.request.BaseRequest;
 
-import org.json.JSONObject;
-
 import java.io.File;
 import java.util.ArrayList;
+
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -128,7 +131,7 @@ public class HttpUtils {
                                 httpCallBack.showErrorMessage(res);
                                 return;
                             }*/
-                            L.e("???????????? ?" + s);
+                            L.e("???????????? ?"+s);
                             //成功
                             httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
@@ -291,19 +294,17 @@ public class HttpUtils {
         StringBuilder url = new StringBuilder(UrlConstants.BASE_URL);
         String actionUrl = "";
         switch (Action) {
-            //注册
-            case ACTION.REGIST:
+            case 0:
+                break;
+            case ACTION.REGIST://注册
                 actionUrl = UrlConstants.REGIST;
                 break;
-            //登陆
-            case ACTION.LOGIN:
+            case ACTION.LOGIN://登陆
                 actionUrl = UrlConstants.LOGIN;
                 break;
-            //获取验证码
-            case ACTION.VERIFY:
+            case ACTION.VERIFY://获取验证码
                 actionUrl = UrlConstants.VERIFY;
                 break;
-            //退款原因
             case ACTION.LIST:
                 actionUrl = UrlConstants.LIST;
                 break;
@@ -323,7 +324,24 @@ public class HttpUtils {
             case ACTION.ADVERTISING:
                 actionUrl = UrlConstants.ADVERTISING;
                 break;
-
+            case ACTION.SHOPLIST:
+                actionUrl = UrlConstants.SHOPLIST;
+                break;
+            case ACTION.SHOPTUIJIANLIST:
+                actionUrl = UrlConstants.SHOPTUIJIANLIST;
+                break;
+            case ACTION.SHOPSALEPRODUCT:
+                actionUrl = UrlConstants.SHOPSALEPRODUCT;
+                break;
+            case ACTION.SHOPXINYONG:
+                actionUrl = UrlConstants.SHOPXINYONG;
+                break;
+            case ACTION.SHOPDETAILDATA:
+                actionUrl = UrlConstants.SHOPDETAILDATA;
+                break;
+            case ACTION.MINECOLLECTION:
+                actionUrl = UrlConstants.MINECOLLECTION;
+                break;
         }
         url.append(actionUrl);
         return url;

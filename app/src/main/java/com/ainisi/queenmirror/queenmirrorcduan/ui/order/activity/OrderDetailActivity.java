@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.OrderDetailListAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.Bean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 
 import java.util.ArrayList;
@@ -28,8 +31,20 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
     TextView tv_common_title;
     @Bind(R.id.rv_orderdetail_order)
     RecyclerView rv_orderdetail_order;
+    @Bind(R.id.tv_order_detail_ordernum)
+    TextView tv_order_detail_ordernum;
+    @Bind(R.id.tv_order_detail_tel)
+    TextView tv_order_detail_tel;
+    @Bind(R.id.tv_order_detail_ordertime)
+    TextView tv_order_detail_ordertime;
+    @Bind(R.id.tv_orderdetail_heji)
+    TextView tv_orderdetail_heji;
 
     private List<SortBean> list=new ArrayList<>();
+
+    String orderNo,orderTel,orderTime,OrderHeji;
+
+    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsOrderBean.ApiOrderDetailsListBean> getApiOrderDetailsList = new ArrayList();
 
     @Override
     protected int getLayoutId() {
@@ -39,13 +54,24 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
     @Override
     protected void initView() {
         super.initView();
+
+        Intent intentGet = getIntent();
+        getApiOrderDetailsList = (List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsOrderBean.ApiOrderDetailsListBean>) intentGet.getSerializableExtra("lstBean");
+        orderNo = intentGet.getStringExtra("orderNo");
+        orderTel = intentGet.getStringExtra("orderTel");
+        orderTime = intentGet.getStringExtra("orderTime");
+        OrderHeji = intentGet.getStringExtra("OrderHeji");
+
         tv_common_title.setText("订单详情页");
 
-        for (int i = 0; i <4 ; i++) {
-            SortBean sortBean=new SortBean();
-            list.add(sortBean);
-        }
-        MyAdapter sbmitWholeAdapter=new MyAdapter(R.layout.order_detail_listitem,list);
+
+        tv_order_detail_ordernum.setText("订单号码："+orderNo);
+        tv_order_detail_tel.setText("手机号码："+orderTel);
+        tv_order_detail_ordertime.setText("付款时间："+orderTime);
+
+        tv_orderdetail_heji.setText("￥"+OrderHeji);
+
+        OrderDetailListAdapter sbmitWholeAdapter=new OrderDetailListAdapter(R.layout.order_detail_listitem,getApiOrderDetailsList);
         rv_orderdetail_order.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL,false));
         rv_orderdetail_order.setAdapter(sbmitWholeAdapter);
     }
