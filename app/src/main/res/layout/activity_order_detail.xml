@@ -155,7 +155,9 @@
                     android:textSize="@dimen/comment_14_dip"
                     android:textColor="@color/alpha_60_black">
                 </TextView>
-                <TextView android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_order_detail_ordernum"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="订单号码：20000001180120501"
                     android:layout_marginStart="10dp"
@@ -163,7 +165,9 @@
                     android:textSize="@dimen/comment_12_dip"
                     android:textColor="@color/alpha_45_black">
                 </TextView>
-                <TextView android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_order_detail_tel"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="手机号码：12345678901"
                     android:layout_marginStart="10dp"
@@ -171,7 +175,9 @@
                     android:textSize="@dimen/comment_12_dip"
                     android:textColor="@color/alpha_45_black">
                 </TextView>
-                <TextView android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_order_detail_ordertime"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="付款时间：2018-05-01"
                     android:layout_marginStart="10dp"

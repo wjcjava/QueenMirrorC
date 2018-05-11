@@ -4,7 +4,7 @@
     <!-- app主色调-->
     <color name="white">#ffffff</color>
     <color name="bg_gray">#9b9d9a</color>
-    <color name="gray_E7370C">#D55B74</color>
+    <color name="gray_E7370C">#FFC471F5</color>
     <color name="color_666666">#666666</color>
     <color name="color_d0d0d0">#d0d0d0</color>
     <color name="tranparent">#00000000</color>

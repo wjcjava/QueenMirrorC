@@ -11,19 +11,29 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.ShopTuijianAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.WorkCreditAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.WorkRoomAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.WorkShopAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.WorkSingleAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopDetailDataBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopTuijianBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopXinyongBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PurchaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -66,9 +76,26 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     RelativeLayout reCoupu;
     @Bind(R.id.re_infor_massage)
     RelativeLayout reMassage;
+    @Bind(R.id.tv_work_detail_hangye)
+    TextView tv_work_detail_hangye;
+    @Bind(R.id.tv_work_detail_address)
+    TextView tv_work_detail_address;
+    @Bind(R.id.tv_work_detail_time)
+    TextView tv_work_detail_time;
+    @Bind(R.id.tv_work_detail_introduce)
+    TextView tv_work_detail_introduce;
+
     List<SortBean> sortlist = new ArrayList<>();
     List<String> tabList = new ArrayList<>();
     private WorkRoomAdapter listadapter;
+    int pageNumber = 1,pageSum;
+    String shopName,shopId;
+    private WorkCreditAdapter creditAdapter;
+
+    List<ShopTuijianBean.BodyBean.ApiEcGoodsBasicListBean> apiEcGoodsBasicList = new ArrayList<>();
+    List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiGoodsList = new ArrayList<>();
+
+    List<ShopXinyongBean.BodyBean.ApiShopScoreListBean> apiShopScoreList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -79,15 +106,98 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     protected void initView() {
         super.initView();
         initTab();
-        tv_common_title.setText("MOCO形象工作室");
+        Intent intent = getIntent();
+        shopName = intent.getStringExtra("shopName");
+        shopId = intent.getStringExtra("shopId");
+        tv_common_title.setText(shopName);
         whs_workroom_scroll.setOnScrollListener(this);
+
+        doFirstData();
+
+        doGetSaleShop();
+
+    }
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.SHOPTUIJIANLIST://获取商家推荐商品列表
+                ShopTuijianBean shopTuijianBean = GsonUtil.toObj(res,ShopTuijianBean.class);
+
+                apiEcGoodsBasicList = shopTuijianBean.getBody().getApiEcGoodsBasicList();
+
+                ShopTuijianAdapter sortAdapter = new ShopTuijianAdapter(R.layout.re_full_recommend, apiEcGoodsBasicList);
+                re_recommendable_projects_shop.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+                re_recommendable_projects_shop.setAdapter(sortAdapter);
+                break;
+            case ACTION.SHOPSALEPRODUCT://获取商家所卖商品列表
+                ShopSalesProduct shopSalesProduct = GsonUtil.toObj(res,ShopSalesProduct.class);
+
+                apiGoodsList = shopSalesProduct.getBody().getApiGoodsList();
+                pageSum = shopSalesProduct.getBody().getPageSum();
+
+                listadapter = new WorkRoomAdapter(WorkRoomDetailActivity.this,apiGoodsList);
+                listView.setAdapter(listadapter);
+                break;
+            case ACTION.SHOPXINYONG://获取门店信用
+                ShopXinyongBean shopXinyongBean = GsonUtil.toObj(res,ShopXinyongBean.class);
+                apiShopScoreList = shopXinyongBean.getBody().getApiShopScoreList();
+                creditAdapter = new WorkCreditAdapter(WorkRoomDetailActivity.this,apiShopScoreList);
+                listView.setAdapter(creditAdapter);
+                break;
+            case ACTION.SHOPDETAILDATA://获取商家具体信息
+                ShopDetailDataBean shopDetailDataBean = GsonUtil.toObj(res,ShopDetailDataBean.class);
+
+                tv_work_detail_hangye.setText(shopDetailDataBean.getBody().getApiShop().getIndustryCateLabel());
+                tv_work_detail_address.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopAddr());
+                tv_work_detail_time.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getOpenTime()+"-"+shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getCloseTime());
+                tv_work_detail_introduce.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief().toString());
+
+                break;
+        }
+    }
+    /**
+     * 获取商家所卖商品的数据
+     */
+    private void doGetSaleShop() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("saleFlag", "2");//上架标记（2：上架）
+        params.put("pageNumber", pageNumber+"");
+        params.put("shopId", shopId);//商家ID
+        params.put("contentByTitle","");//画面检索输入框输入的内容
+        params.put("pageSize","10");
+        HttpUtils.doPost(ACTION.SHOPSALEPRODUCT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
+    /**
+     * 获取商家推荐商品列表
+     */
+    private void doFirstData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("saleFlag", "2");//上架标记（2：上架）
+        params.put("pageNumber", pageNumber+"");
+        params.put("shopId", shopId);//商家ID
+        HttpUtils.doPost(ACTION.SHOPTUIJIANLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
 
+    /**
+     * 获取门店信用数据
+     */
+    private void getXinyongData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", shopId);//商家ID
+        HttpUtils.doPost(ACTION.SHOPXINYONG, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 获取商家具体信息
+     */
+    private void getShopDetailData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", shopId);//商家ID
+        HttpUtils.doPost(ACTION.SHOPDETAILDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
     private void initTab() {
         listView.setVisibility(View.VISIBLE);
-        listadapter = new WorkRoomAdapter(WorkRoomDetailActivity.this);
-        listView.setAdapter(listadapter);
         tabList.add("门店服务");
         tabList.add("门店信用");
         tabList.add("商家信息");
@@ -98,8 +208,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         tabWorkRoom.addTab(tabWorkRoom.newTab().setText(tabList.get(3)));
         tabWorkRoom.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
-            private WorkCreditAdapter creditAdapter;
-
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
@@ -108,7 +216,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         listView.setVisibility(View.VISIBLE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
-                        listadapter = new WorkRoomAdapter(WorkRoomDetailActivity.this);
+                        listadapter = new WorkRoomAdapter(WorkRoomDetailActivity.this,apiGoodsList);
                         listView.setAdapter(listadapter);
                         break;
                     //门店信用
@@ -116,14 +224,22 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         listView.setVisibility(View.VISIBLE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
-                        creditAdapter = new WorkCreditAdapter(WorkRoomDetailActivity.this);
-                        listView.setAdapter(creditAdapter);
+
+                        /**
+                         * 获取门店信用数据
+                         */
+                        getXinyongData();
+
                         break;
                     //商家信息
                     case 2:
                         listView.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.VISIBLE);
+                        /**
+                         * 获取商家具体信息
+                         */
+                        getShopDetailData();
                         break;
                     //优惠券
                     case 3:
@@ -156,17 +272,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     protected void initData() {
         super.initData();
 
-        for (int i = 0; i < 10; i++) {
-            SortBean sortBean = new SortBean();
-            sortlist.add(sortBean);
-        }
-        MyAdapter sortAdapter = new MyAdapter(R.layout.re_full_recommend, sortlist);
-        re_recommendable_projects_shop.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        re_recommendable_projects_shop.setAdapter(sortAdapter);
-
     }
 
-    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.iv_title})
+    @OnClick({R.id.iv_common_back, R.id.tv_submit})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.iv_common_back:
@@ -181,11 +289,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 startActivity(new Intent(this, ShoppingCartActivity.class));
                 break;
         }
-    }
-
-    @Override
-    public void onSuccess(int action, String res) {
-
     }
 
     @Override

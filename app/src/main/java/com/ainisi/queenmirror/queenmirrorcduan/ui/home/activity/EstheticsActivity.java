@@ -1,4 +1,5 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
+
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -10,10 +11,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FulldistanFragment;
@@ -24,10 +27,13 @@ import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.OnClick;
+
 /**
  * 美学汇（美甲美手）
  */
@@ -71,8 +77,8 @@ public class EstheticsActivity extends BaseActivity {
 
     @Override
     public void initPresenter() {
-
     }
+
     @Override
     public void initView() {
         initDate();
