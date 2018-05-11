@@ -26,9 +26,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopTuijianBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopXinyongBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PurchaseActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
