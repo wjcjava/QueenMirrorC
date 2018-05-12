@@ -1,57 +1,7 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
-import android.os.Handler;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
-import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
-
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.DetailActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.GDLocationUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.DistanceFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SalesFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.ScreenFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SortFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.MarqueeView;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
-import com.amap.api.location.AMapLocation;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.youth.banner.Banner;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import butterknife.Bind;
-import butterknife.OnClick;
 
 
 public class HomeFragmentOne extends BaseFragment implements HttpCallBack{

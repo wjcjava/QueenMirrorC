@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--昼夜模式主色调-->
     <attr name="dayNightBackground" format="color|reference" />
     <attr name="dayNightBackgroundOne" format="color|reference" />
@@ -22,7 +22,18 @@
         <attr name="dayNightFiveTextColorAttr" format="string|reference"/><!--切换三级字体颜色属性-->
         <attr name="dayNightBackgroundDrawableAttr" format="string|reference"/><!--切换背景图片属性-->
     </declare-styleable>
+    <!--跑马灯-->
+    <declare-styleable name="MarqueeStyle">
+        <attr name="marqueeTextSize" format="dimension"/>
+        <attr name="marqueeTextColor" format="color"/>
+        <attr name="marqueeInterval" format="integer|reference"/>
+        <attr name="marqueeTextGravity" >
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
 
+    </declare-styleable>
 
     <!--图形制作-->
     <declare-styleable name="MultiShapeView">
@@ -49,4 +60,5 @@
         <attr name="loading" format="reference" />
         <attr name="dismissOnComplete" format="boolean"/>
     </declare-styleable>
+
 </resources>

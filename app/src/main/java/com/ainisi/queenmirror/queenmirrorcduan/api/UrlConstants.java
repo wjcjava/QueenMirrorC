@@ -8,7 +8,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 public interface UrlConstants {
 
     // String BASE_URL = "http://116.62.204.235:8080/";
-    String BASE_URL = "http://192.168.50.194:8080/wg/a/";//测试路径
+    String BASE_URL = "http://192.168.30.155:8080/wg/a/";//测试路径
     String ADVERTISING = "api/ec/common/advertisementList";//首页banner广告
 
     String HEADLINES = "api/ec/common/topList";//首页的女王头条
@@ -47,6 +47,7 @@ public interface UrlConstants {
 
     String MERCHANTS="api/ans/shop/shopCommentsList";//商家的评价数据
 
+    String CLASSIFICATION="api/ans/shop/shoplistByCategory";//商家分类列表
 
     String MINEINSHOP = "api/ans/cust/userFollowList";//获取我关注的店铺
 
@@ -60,5 +61,6 @@ public interface UrlConstants {
 
     String COMMENDGOODS="api/ans/shop/recommendGoodsList";//商家推荐商品的数据
 
-    String SHOPINDUSTRY="api/ans/shop/shopIndustryListGet";
+
+
 }

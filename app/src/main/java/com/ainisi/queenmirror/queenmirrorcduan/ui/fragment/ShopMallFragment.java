@@ -37,8 +37,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.ScreenFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SortFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopClassificationActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.DetailsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
@@ -124,30 +123,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private GridViewAdapter gridViewAdapter;
 
     List<ShopMallListBean.BodyBean.ShopListBean> shopListNew = new ArrayList<>();
-
-    @Override
-    public void onSuccess(int action, String res) {
-        switch (action) {
-            case ACTION.SHOPLIST://登录
-
-                ShopMallListBean shopMallListBean = GsonUtil.toObj(res, ShopMallListBean.class);
-
-                if (shopMallListBean.isSuccess()) {
-                    shopListNew = shopMallListBean.getBody().getShopList();
-
-                    listadapter = new ListViewAdapter(getContext(), shopListNew);
-                    listView.setAdapter(listadapter);
-                } else {
-                    T.show(shopMallListBean.getMsg());
-                }
-                break;
-
-            case ACTION.SHOPINDUSTRY:
-
-                break;
-        }
-
-    }
+    private DetailsBean detailsBean;
 
 
     @Override
@@ -198,7 +174,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         params.put("pageNumber", pageNumber + "");
         params.put("contentByTitle", "");//画面检索输入框输入的内容
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-        HttpUtils.doPost(ACTION.SHOPINDUSTRY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+
     }
 
     private void initImgTitle() {
@@ -252,6 +228,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     }
 
     private void initDate() {
+
         List<Integer> images = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             images.add(R.drawable.icon_shop_banner);
@@ -260,6 +237,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         banner.setImages(images);
         banner.start();
     }
+
+
 
     private void initpop(View popview1) {
         final RecyclerView ce = popview1.findViewById(R.id.rc_popview);
@@ -270,6 +249,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             problemBean.setName(problem[i]);
             list.add(problemBean);
         }
+
         ProblemAdapter problemAdapter = new ProblemAdapter(R.layout.item_pop_sort, list);
         ce.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         ce.setAdapter(problemAdapter);
@@ -306,7 +286,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     imgSurface.setImageResource(R.drawable.icon_home_recycler);
                     gridView.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
-                    gridViewAdapter = new GridViewAdapter(getContext());
+                    gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
                     gridView.setAdapter(gridViewAdapter);
                     isClick = true;
                 }
@@ -323,7 +303,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     uspensionSurface.setImageResource(R.drawable.icon_home_recycler);
                     gridView.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
-                    gridViewAdapter = new GridViewAdapter(getContext());
+                    gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
                     gridView.setAdapter(gridViewAdapter);
                     isClick = true;
                 }
@@ -427,6 +407,12 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
 
     }
 
+    private List<DetailsBean> drtalist=new ArrayList<>();
+    @Override
+    public void onSuccess(int action, String res) {
+
+
+    }
     @Override
     public void showLoadingDialog() {
 

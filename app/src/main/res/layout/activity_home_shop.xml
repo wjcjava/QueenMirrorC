@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
@@ -43,22 +41,6 @@
                     android:background="@color/alpha_05_black">
                 </View>
 
-                <com.ainisi.queenmirror.queenmirrorcduan.utils.MarqueeView
-                    android:id="@+id/marqueeview"
-                    android:layout_toEndOf="@id/view_homeshop_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/comment_25_dip"
-                    android:layout_marginEnd="@dimen/comment_10_dip"
-                    android:layout_marginStart="@dimen/comment_8_dip"
-                    android:background="@color/white"
-                    app:textSize="@dimen/comment_14_size"
-                    app:textColor="@color/home_queen_text_color"
-                    app:paddingLeft="@dimen/comment_5_dip"
-                    app:paddingTopBottom="@dimen/comment_5_dip"
-                    app:startDelayTime="2000"
-                    app:reRepeatDelayTime="2000"
-                    app:itemAnimationTime="2000"
-                    />
             </RelativeLayout>
 
             <View

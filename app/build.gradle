@@ -31,6 +31,7 @@ android {
             maven {
                 url 'https://jitpack.io'
                 'https://dl.bintray.com/wangyuwei/maven'
+
             }
         }
     }

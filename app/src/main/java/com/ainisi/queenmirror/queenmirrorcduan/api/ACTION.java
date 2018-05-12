@@ -25,6 +25,16 @@ public interface ACTION {
 
     int MYFOOT=0X010;//我的足迹
 
+    int EVALUATION=0x011;//商品的评价数据
+
+    int MERCHANTS=0x012;//商家的评价数据
+
+    int REFUND=0x013;//获取退款列表
+
+    int COMMENDGOODS=0x014;//商家推荐商品的数据
+
+    int CLASSIFICATION=0x015;//商家分类列表
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表
@@ -39,10 +49,6 @@ public interface ACTION {
 
     int MINECOLLECTION = 0x111;//获取我的收藏
 
-    int EVALUATION=0x011;//商品的评价数据
-
-    int MERCHANTS=0x012;//商家的评价数据
-
     int MINEINSHOP = 0x112;//获取我关注的店铺
 
     int GUANZHUSHOP = 0x113;//关注店铺
@@ -51,10 +57,7 @@ public interface ACTION {
 
     int JUBAOSHOP = 0x115;//举报商家
 
-    int REFUND=0x013;//获取退款列表
 
-    int COMMENDGOODS=0x014;//商家推荐商品的数据
 
-    int SHOPINDUSTRY=0X015;//商家所属行业数据
 
 }

@@ -13,7 +13,6 @@
     <ImageView
         android:layout_marginTop="@dimen/comment_5_dip"
         android:id="@+id/iv_shop"
-        android:layout_centerHorizontal="true"
         android:layout_width="@dimen/comment_110_dip"
         android:layout_height="@dimen/comment_110_dip"
         app:srcCompat="@drawable/ic_sortrecyle_logo" />
@@ -24,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_shop"
         android:layout_marginStart="@dimen/comment_10_dip"
-        android:layout_centerHorizontal="true"
         android:text="MOCO美容美发沙龙"
         android:maxLines="1"
         android:ellipsize="end"
@@ -35,7 +33,6 @@
         android:layout_width="@dimen/comment_44_dip"
         android:layout_height="@dimen/comment_18_dip"
         android:layout_below="@id/tv_shopName"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_marginTop="@dimen/comment_3_dip"
         app:srcCompat="@drawable/icon_item_rueen" />
@@ -45,7 +42,6 @@
         android:layout_width="@dimen/comment_50_dip"
         android:layout_height="@dimen/comment_10_dip"
         android:layout_below="@id/iv_queen"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/comment_3_dip"
         android:layout_marginStart="@dimen/comment_10_dip"
         app:srcCompat="@drawable/ic_sortrecyke_stars" />
@@ -53,7 +49,6 @@
         android:layout_below="@id/iv_xingxing"
         android:layout_width="wrap_content"
         android:layout_marginTop="@dimen/comment_3_dip"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/comment_10_dip"
         android:textSize="@dimen/comment_12_size"
         android:textColor="@color/alpha_95_black"

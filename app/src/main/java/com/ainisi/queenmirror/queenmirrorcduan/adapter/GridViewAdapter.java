@@ -8,21 +8,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.DetailsBean;
+
+import java.util.List;
 
 /**
  * Created by Mloong on 2017/11/25.
  */
 
-public class GridViewAdapter extends BaseAdapter {
-    private final LayoutInflater inflater;
+public class GridViewAdapter extends BaseAdapter{
+    private final List<DetailsBean> list;
     private Context context;
 
-    public GridViewAdapter(Context context) {
+    public GridViewAdapter(Context context, List<DetailsBean> list) {
         this.context = context;
-        inflater = LayoutInflater.from(context);
+        this.list =list;
+
+
     }
     @Override
     public int getCount() {
@@ -48,7 +54,8 @@ public class GridViewAdapter extends BaseAdapter {
             holder = new ViewHolder();
 
 
-            convertView = inflater.inflate(R.layout.item_recycler_waterfall, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_recycler_waterfall, parent, false);
+            holder.shopName =convertView.findViewById(R.id.tv_shopName);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -60,12 +67,22 @@ public class GridViewAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
+
+
+
+
         return convertView;
+
     }
-
-
     //就是View的持有
     public final class ViewHolder{
+       TextView shopName;
 
     }
+
+
+
+
+
+
 }

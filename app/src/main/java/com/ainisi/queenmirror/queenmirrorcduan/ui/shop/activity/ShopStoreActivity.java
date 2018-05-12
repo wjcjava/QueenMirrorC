@@ -3,14 +3,11 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,9 +16,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ProductActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +59,7 @@ public class ShopStoreActivity extends BaseNewActivity{
 
     @Override
     protected void initData() {
+        inithttp();
         super.initData();
         for (int i = 0; i <6 ; i++) {
             SortBean sortBean=new SortBean();
@@ -77,6 +73,8 @@ public class ShopStoreActivity extends BaseNewActivity{
         reBoutique.setAdapter(myAdapter1);
 
     }
+
+
     @OnClick({R.id.title_back,R.id.re_product_two,R.id.re_invincible})
     public void click(View view) {
         switch (view.getId()) {
@@ -108,4 +106,8 @@ public class ShopStoreActivity extends BaseNewActivity{
 
 
     }
+    private void inithttp() {
+
+    }
+
 }

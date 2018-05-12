@@ -63,19 +63,6 @@
         <attr name="ddmenuUnselectedIcon" format="reference"/>
     </declare-styleable>
 
-    <!--跑马灯-->
-
-    <declare-styleable name="MarqueeViewStyle">
-        <attr name="textSize" format="dimension" />
-        <attr name="textColor" format="color" />
-        <attr name="paddingLeft" format="dimension" />
-        <attr name="paddingTop" format="dimension" />
-        <attr name="paddingBottom" format="dimension" />
-        <attr name="paddingTopBottom" format="dimension"/>
-        <attr name="startDelayTime" format="integer"/>
-        <attr name="reRepeatDelayTime" format="integer"/>
-        <attr name="itemAnimationTime" format="integer"/>
-    </declare-styleable>
     <attr name="aspectRatio" format="float|reference"/>
     <declare-styleable name="AspectRatioImageView">
         <attr name="aspectRatio" />
@@ -148,5 +135,6 @@
         <attr name="rll_footer_no_more_data" format="string" />
         <attr name="rll_footer_height" format="dimension" />
     </declare-styleable>
+
 
 </resources>

@@ -28,7 +28,6 @@
                 android:layout_height="70dp">
                 <TextView
                     android:id="@+id/sort_name"
-                    android:text="MOCO美容美发沙龙"
                     android:textSize="@dimen/comment_14_size"
                     android:textColor="#000"
                     android:gravity="bottom"
@@ -48,7 +47,6 @@
                     android:gravity="bottom"
                     android:id="@+id/sort_time"
                     android:textSize="@dimen/comment_10_size"
-                    android:text="营业时间：9:00 - 20:00"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" />
             </LinearLayout>

@@ -19,6 +19,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeAdvertisingActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
@@ -27,7 +28,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.MarqueeView;
 import com.lzy.okgo.cache.CacheMode;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
@@ -42,7 +42,8 @@ import java.util.List;
 public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements HttpCallBack, View.OnClickListener {
 
     private final Context context;
-    private MarqueeView marqueeview;
+    private TextView sortName;
+    private TextView sortTime;
     List<Bean.BodyBean.ApiRefundListBean> apiRefundList = new ArrayList<>();
     private HomeIndustryBean homeIndustryBean;
     int type;
@@ -56,15 +57,13 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
     private String[] contentArray;
     private HomeAdvertisingBean homeAdvertisingBean;
     private Banner banner;
-
+    private ArrayList<String> marqueeList=new ArrayList<>();
 
     public static enum ITEM_TYPE {
         ITEM_TYPE_Theme,
         ITEM_TYPE_Video,
         ITEM_TYPE_Image
     }
-
-
     public MyRecyclerCardviewAdapter(Context context, int type) {
         super();
         this.context = context;
@@ -123,6 +122,17 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         }
 
         inithttp();
+        initshophttp();
+    }
+
+    private void initshophttp() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("enableFlag", "0");
+        params.put("pageNumber", "1");
+        params.put("contentByTitle", "");
+        params.put("categoryId", "0");
+        HttpUtils.doPost(ACTION.CLASSIFICATION,params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+
     }
 
     private void inithttp() {
@@ -256,7 +266,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             beauty = itemView.findViewById(R.id.tv_home_beauty);
             permanent = itemView.findViewById(R.id.tv_home_permanent);
             banner = itemView.findViewById(R.id.banner);
-            marqueeview = itemView.findViewById(R.id.marqueeview);
+            //marqueeview = itemView.findViewById(R.id.marqueeview);
         }
     }
     public class VideoViewHolder extends RecyclerView.ViewHolder {
@@ -278,6 +288,8 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             super(itemView);
             if (type == 0) {
                 homeShort = itemView.findViewById(R.id.li_home_short);
+                sortName =itemView.findViewById(R.id.sort_name);
+                sortTime =itemView.findViewById(R.id.sort_time);
             } else {
                 return;
             }
@@ -314,6 +326,17 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                 }
 
                 break;
+
+            case ACTION.CLASSIFICATION:
+               ClassificationBean classificationBean= GsonUtil.toObj(res, ClassificationBean.class);
+               if(classificationBean.isSuccess()){
+                   sortName.setText(classificationBean.getBody().getShopListData().get(0).getAnsShopBasic().getShopName());
+                   sortTime.setText(classificationBean.getBody().getShopListData().get(0).getAnsShopBasic().getCloseTime());
+               }else {
+                   T.show(classificationBean.getMsg());
+               }
+
+                break;
             //首页的女王头条
             case ACTION.HEADLINES:
                 homeHeadlinesBean = GsonUtil.toObj(res, HomeHeadlinesBean.class);
@@ -321,7 +344,11 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                     contentArray = new String[]{homeHeadlinesBean.getBody().getTopListData().get(0).getEcTop().getTopName(),
                             homeHeadlinesBean.getBody().getTopListData().get(1).getEcTop().getTopName(),
                             homeHeadlinesBean.getBody().getTopListData().get(2).getEcTop().getTopName()};
-                    marqueeview.setTextArray(contentArray);
+                    for (int i = 0; i <contentArray.length ; i++) {
+
+                    }
+//                    marqueeList.add(contentArray[0]);
+//                    marqueeview.setMarqueeData(marqueeList);
                 }else {
                     T.show(homeHeadlinesBean.getMsg());
                 }
@@ -356,9 +383,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         }
     }
 
-    /**
-     * 点击首页跑马灯效果
-     */
 
 
     @Override

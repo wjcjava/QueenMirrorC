@@ -349,7 +349,6 @@ public class HttpUtils {
             case ACTION.MESSAGE:
                 actionUrl = UrlConstants.MESSAGE;
                 break;
-
             //首页的消息列表
             case ACTION.MESSAGELIST:
                 actionUrl = UrlConstants.MESSAGELIST;
@@ -358,7 +357,6 @@ public class HttpUtils {
             case ACTION.MYFOOT:
                 actionUrl = UrlConstants.MYFOOT;
                 break;
-
             //商品的评价数据
             case ACTION.EVALUATION:
                 actionUrl = UrlConstants.EVALUATION;
@@ -385,16 +383,17 @@ public class HttpUtils {
                 break;
             //获取退款列表
             case ACTION.REFUND:
-                actionUrl=UrlConstants.REFUND;
+                actionUrl = UrlConstants.REFUND;
                 break;
             //商家推荐商品的数据
             case ACTION.COMMENDGOODS:
-                actionUrl=UrlConstants.COMMENDGOODS;
+                actionUrl = UrlConstants.COMMENDGOODS;
                 break;
-            //商家所属行业数据
-            case ACTION.SHOPINDUSTRY:
-                actionUrl=UrlConstants.SHOPINDUSTRY;
+                //商家商品分类列表
+            case ACTION.CLASSIFICATION:
+                actionUrl = UrlConstants.CLASSIFICATION;
                 break;
+
 
         }
         url.append(actionUrl);
