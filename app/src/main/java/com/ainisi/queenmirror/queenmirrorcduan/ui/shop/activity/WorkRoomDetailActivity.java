@@ -119,14 +119,25 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         tv_common_title.setText(shopName);
         whs_workroom_scroll.setOnScrollListener(this);
 
+        doAddliulanData();
+
         doFirstData();
 
         doGetSaleShop();
 
     }
+
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
+            case ACTION.ADDLIULAN:
+                SuccessBean successBeans = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBeans.isSuccess()){
+                    T.show(successBeans.getMsg());//成功
+                }else{
+                    T.show(successBeans.getMsg());
+                }
+                break;
             case ACTION.SHOPTUIJIANLIST://获取商家推荐商品列表
                 ShopTuijianBean shopTuijianBean = GsonUtil.toObj(res,ShopTuijianBean.class);
 
@@ -186,6 +197,16 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 break;
         }
     }
+
+    /**
+     * 添加浏览次数
+     */
+    private void doAddliulanData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("shopId", shopId);//商家ID
+        HttpUtils.doPost(ACTION.ADDLIULAN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     /**
      * 获取商家所卖商品的数据
      */

@@ -383,18 +383,23 @@ public class HttpUtils {
                 break;
             //获取退款列表
             case ACTION.REFUND:
-                actionUrl = UrlConstants.REFUND;
+                actionUrl=UrlConstants.REFUND;
                 break;
             //商家推荐商品的数据
             case ACTION.COMMENDGOODS:
-                actionUrl = UrlConstants.COMMENDGOODS;
+                actionUrl=UrlConstants.COMMENDGOODS;
                 break;
-                //商家商品分类列表
-            case ACTION.CLASSIFICATION:
-                actionUrl = UrlConstants.CLASSIFICATION;
+            //商家所属行业数据
+            case ACTION.SHOPINDUSTRY:
+                actionUrl=UrlConstants.SHOPINDUSTRY;
                 break;
 
-
+            case ACTION.ADDLIULAN:
+                actionUrl = UrlConstants.ADDLIULAN;
+                break;
+            case ACTION.ADDGOODSLIULAN:
+                actionUrl = UrlConstants.ADDGOODSLIULAN;
+                break;
         }
         url.append(actionUrl);
         return url;

@@ -58,6 +58,10 @@ public interface ACTION {
     int JUBAOSHOP = 0x115;//举报商家
 
 
+    int ADDLIULAN = 0x116;//商家浏览次数
 
+    int ADDGOODSLIULAN = 0x117;//商品浏览次数增加
+
+    int SHOPINDUSTRY=0X015;//商家所属行业数据
 
 }

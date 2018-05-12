@@ -29,7 +29,7 @@
                 android:paddingLeft="@dimen/comment_10_dip"
                 android:layout_centerVertical="true"
                 app:srcCompat="@android:drawable/ic_search_category_default" />
-            <EditText
+            <TextView
                 android:id="@+id/ed_keyword"
                 android:layout_toRightOf="@id/iv_keyword"
                 android:hint="请输入关键字搜索"

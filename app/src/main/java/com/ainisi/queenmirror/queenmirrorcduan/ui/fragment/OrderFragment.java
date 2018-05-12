@@ -82,7 +82,7 @@ public class OrderFragment extends BaseFragment {
         pagerlist.add(new WholeFragment());
         pagerlist.add(new WholeFragment());
 
-        ViewPager viewPager = new ViewPager(getActivity().getSupportFragmentManager(), pagerlist, tablist);
+        ViewPager viewPager = new ViewPager(getChildFragmentManager(), pagerlist, tablist);
         omypager.setAdapter(viewPager);
         omypager.setScanScroll(true);
 

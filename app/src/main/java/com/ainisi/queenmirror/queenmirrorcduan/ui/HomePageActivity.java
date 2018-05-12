@@ -54,8 +54,9 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
 
     @Override
     protected void initView() {
+        viewPager.setScroll(false);
         viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(0);
         ll_home.setSelected(true);
     }
 
@@ -72,6 +73,7 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
                 break;
             case 1:
                 tabSelected(ll_category);
+
                 break;
             case 2:
                 tabSelected(ll_service);

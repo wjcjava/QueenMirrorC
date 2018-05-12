@@ -18,7 +18,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
@@ -28,7 +30,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-//商品详情
+/**
+ * 商品详情
+ */
 public class FullActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.full_recycler)
     RecyclerView frecycler;
@@ -56,7 +60,22 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         inithttp();
     }
 
+    @Override
+    protected void doFirstRequest() {
+        super.doFirstRequest();
 
+        doAddDetailData();
+
+    }
+
+    /**
+     * 商品浏览次数增加
+     */
+    private void doAddDetailData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("goodsId", "0b5e8db1e94b4c44b3075940bc67a2e9");//商家ID
+        HttpUtils.doPost(ACTION.ADDGOODSLIULAN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
 
     @Override
     public void initView() {
@@ -119,6 +138,14 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo,fulllist2);
                 frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 frecyclertwo.setAdapter(sortAdapter2);
+                break;
+            case ACTION.ADDGOODSLIULAN:
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    T.show(successBean.getMsg());
+                }else{
+                    T.show(successBean.getMsg());
+                }
                 break;
         }
 

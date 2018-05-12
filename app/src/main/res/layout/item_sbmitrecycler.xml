@@ -18,31 +18,38 @@
         android:layout_marginTop="@dimen/comment_18_dip"
         app:srcCompat="@drawable/icon_home_beautiful" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/comment_10_dip"
+        android:orientation="vertical"
         android:layout_toEndOf="@+id/img_title">
 
-        <TextView
-            android:id="@+id/tv_shangpin"
-            android:layout_width="wrap_content"
+        <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/comment_13_dip"
-            android:layout_marginTop="@dimen/comment_10_dip"
-            android:text="思妍丽美发苏州中心"
-            android:textColor="@color/alpha_95_black"
-            android:textSize="@dimen/comment_16_size"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/tv_shangpin"
-            android:layout_marginEnd="@dimen/comment_14_dip"
-            android:text="订单已付款"
-            android:textSize="@dimen/comment_14_size" />
+            <TextView
+                android:id="@+id/tv_shangpin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_13_dip"
+                android:layout_marginTop="@dimen/comment_10_dip"
+                android:text="思妍丽美发苏州中心"
+                android:textColor="@color/alpha_95_black"
+                android:textSize="@dimen/comment_16_size"/>
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:layout_gravity="bottom"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_shangpin"
+                android:layout_marginEnd="@dimen/comment_14_dip"
+                android:text="订单已付款"
+                android:textSize="@dimen/comment_14_size" />
+        </LinearLayout>
 
         <View
 
@@ -55,85 +62,109 @@
             android:layout_marginTop="@dimen/comment_10_dip"
             android:background="@color/alpha_05_black" />
 
-        <TextView
-            android:id="@+id/tv_taocan"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/view4"
-            android:layout_below="@+id/view4"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_taocan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_13_dip"
+                android:layout_marginTop="@dimen/comment_13_dip"
+                android:text="单人美甲套餐"
+                android:textSize="@dimen/comment_14_size" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/comment_13_dip"
+                android:layout_gravity="bottom"
+                android:gravity="end"
+                android:text="X1"
+                android:textSize="@dimen/comment_14_size"/>
+        </LinearLayout>
+
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_xijian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_13_dip"
+                android:layout_marginTop="@dimen/comment_16_dip"
+                android:text="单人洗剪吹"
+                android:textSize="@dimen/comment_14_size" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/comment_13_dip"
+                android:layout_gravity="bottom"
+                android:gravity="end"
+                android:text="X1"
+                android:textSize="@dimen/comment_14_size" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_tangran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/comment_13_dip"
+                android:layout_marginStart="@dimen/comment_13_dip"
+                android:text="单人烫染"
+                android:textSize="@dimen/comment_14_size" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/comment_13_dip"
+                android:layout_gravity="bottom"
+                android:gravity="end"
+                android:text="X1"
+                android:textSize="@dimen/comment_14_size" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/comment_13_dip"
-            android:text="单人美甲套餐"
-            android:textSize="@dimen/comment_14_size" />
+            android:layout_marginStart="@dimen/comment_13_dip"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_head"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_height="wrap_content"
+                android:text="共三个，商品实付"
+                android:textSize="@dimen/comment_12_size" />
 
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tv_taocan"
-            android:layout_alignEnd="@+id/tv_submit"
-            android:text="X1"
-            android:textSize="@dimen/comment_14_size"/>
+            <TextView
+                android:id="@+id/tv_jiage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/comment_15_dip"
+                android:layout_marginEnd="@dimen/comment_25_dip"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="bottom"
+                android:gravity="end"
+                android:text="¥568.00"
+                android:textColor="@color/alpha_95_black"
+                android:textSize="@dimen/comment_14_size"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_xijian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_taocan"
-            android:layout_below="@+id/tv_taocan"
-            android:layout_marginTop="@dimen/comment_16_dip"
-            android:text="单人洗剪吹"
-            android:textSize="@dimen/comment_14_size" />
-
-
-        <TextView
-            android:id="@+id/tv_tangran"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_xijian"
-            android:layout_below="@+id/tv_xijian"
-            android:layout_marginTop="@dimen/comment_15_dip"
-            android:text="单人烫染"
-            android:textSize="@dimen/comment_14_size" />
-
-        <TextView
-            android:id="@+id/textView29"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tv_xijian"
-            android:layout_alignEnd="@+id/textView19"
-            android:text="X1"
-            android:textSize="@dimen/comment_14_size" />
-
-        <TextView
-            android:id="@+id/textView30"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tv_tangran"
-            android:layout_alignEnd="@+id/textView29"
-            android:text="X1"
-            android:textSize="@dimen/comment_14_size" />
-
-        <TextView
-            android:id="@+id/tv_jiage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/textView30"
-            android:layout_marginRight="@dimen/comment_25_dip"
-            android:layout_marginTop="@dimen/comment_15_dip"
-            android:text="¥568.00"
-            android:textColor="@color/alpha_95_black"
-            android:textSize="@dimen/comment_14_size"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tv_jiage"
-            android:layout_toStartOf="@+id/tv_submit"
-            android:text="共三个，商品实付"
-            android:textSize="@dimen/comment_12_size" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -176,5 +207,5 @@
                 android:layout_height="@dimen/comment_30_dip"
                 android:layout_weight="1" />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
