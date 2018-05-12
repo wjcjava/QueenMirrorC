@@ -27,7 +27,7 @@ public interface UrlConstants {
 
     String LIST = "api/ans/refund/refundApplyList";//测试（listce测试）
 
-    String ALLOFMYORDER = "api/ans/order/orderList";//获取我的全部订单
+    String ALLOFMYORDER = "api/ans/order/orderListOnly";//获取我的全部订单
 
     String SHOPLIST = "api/ans/shop/list";//商城中商家列表
 

@@ -20,8 +20,7 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
     @Override
     protected void convert(BaseViewHolder helper, OrderMyAllOrderBean.BodyBean.ApiOrderListBean item) {
 
-        OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsShopBasicBean ansShopBasicBean = item.getAnsShopBasic();
-        L.e("测试的数据"+ansShopBasicBean);
+        OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsShopBasicBeanX ansShopBasicBean = item.getAnsShopBasic();
 
         if(ansShopBasicBean == null){
 
@@ -33,7 +32,7 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
             double amountNum = 0;
 
             if(apiOrderDetailsList.size() == 1){
-                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getGoodsIdName())
+                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getAnsOrderDetails().getPurchaseNumber())
                         .setGone(R.id.tv_xijian,false)
                         .setGone(R.id.tv_tangran,false)
@@ -41,26 +40,26 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                         .setGone(R.id.textView30,false);
 
             }else if(apiOrderDetailsList.size() == 2){
-                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getGoodsIdName())
+                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getGoodsIdName())
+                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getAnsOrderDetails().getPurchaseNumber())
                         .setGone(R.id.tv_tangran,false)
                         .setGone(R.id.textView30,false);
 
             }else if(apiOrderDetailsList.size() == 3){
-                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getGoodsIdName())
+                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getGoodsIdName())
+                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getGoodsIdName())
+                        .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView30,"X "+apiOrderDetailsList.get(2).getAnsOrderDetails().getPurchaseNumber());
             }else{
-                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getGoodsIdName())
+                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getGoodsIdName())
+                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getGoodsIdName())
+                        .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getEcGoodsBasic().getGoodsName())
                         .setText(R.id.textView30,"X "+apiOrderDetailsList.get(2).getAnsOrderDetails().getPurchaseNumber());
             }
 

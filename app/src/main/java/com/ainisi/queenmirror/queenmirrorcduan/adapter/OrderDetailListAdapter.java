@@ -19,7 +19,7 @@ public class OrderDetailListAdapter extends BaseQuickAdapter<OrderMyAllOrderBean
     protected void convert(BaseViewHolder helper, OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsOrderBean.ApiOrderDetailsListBean item) {
 
         helper.setText(R.id.tv_order_detail_price,"￥"+item.getAnsOrderDetails().getUnitPrice())
-        .setText(R.id.tv_order_detail_name,item.getGoodsIdName())
+        .setText(R.id.tv_order_detail_name,item.getEcGoodsBasic().getGoodsName())
         .setText(R.id.tv_order_detail_number,"X "+item.getAnsOrderDetails().getPurchaseNumber());
     }
 }
