@@ -65,8 +65,13 @@ public interface UrlConstants {
     String COMMENDGOODS="api/ans/shop/recommendGoodsList";//商家推荐商品的数据
 
     String SHOPINDUSTRY="api/ans/shop/shopIndustryListGet";
+
     String ADDLIULAN = "api/ec/goods/shopBrowsesChange";//商家浏览次数增加
 
     String ADDGOODSLIULAN = "api/ec/goods/goodsBrowsesChange";//商品浏览次数增加
+
+    String COLLECTIONPRODUCT = "api/ec/goods/collectGoods";//收藏商品
+
+    String CANCELCOLLECTION = "api/ec/goods/unCollectGoods";//取消收藏商品
 
 }

@@ -64,4 +64,8 @@ public interface ACTION {
 
     int SHOPINDUSTRY=0X015;//商家所属行业数据
 
+    int COLLECTIONPRODUCT = 0x118;//收藏商品
+
+    int CANCELCOLLECTION = 0x119;//取消收藏商品
+
 }

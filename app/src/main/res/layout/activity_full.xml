@@ -70,10 +70,13 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_full_collection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/comment_40_dip"
                 android:layout_marginTop="@dimen/comment_10_dip"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
                 android:layout_toRightOf="@id/re_full_shop"
                 android:gravity="center">
 

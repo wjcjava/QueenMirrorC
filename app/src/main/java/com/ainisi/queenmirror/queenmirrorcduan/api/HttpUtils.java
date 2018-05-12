@@ -400,6 +400,12 @@ public class HttpUtils {
             case ACTION.ADDGOODSLIULAN:
                 actionUrl = UrlConstants.ADDGOODSLIULAN;
                 break;
+            case ACTION.COLLECTIONPRODUCT:
+                actionUrl = UrlConstants.COLLECTIONPRODUCT;
+                break;
+            case ACTION.CANCELCOLLECTION:
+                actionUrl = UrlConstants.CANCELCOLLECTION;
+                break;
         }
         url.append(actionUrl);
         return url;

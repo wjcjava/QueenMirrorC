@@ -30,6 +30,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PurchaseActivity
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.lzy.okgo.cache.CacheMode;
@@ -91,6 +92,8 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     @Bind(R.id.tv_work_detail_guanzhu)
     TextView tv_work_detail_guanzhu;
+    @Bind(R.id.rl_full_collection)
+    RelativeLayout rl_full_collection;
 
     List<SortBean> sortlist = new ArrayList<>();
     List<String> tabList = new ArrayList<>();
@@ -98,6 +101,8 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     int pageNumber = 1,pageSum;
     String shopName,shopId;
     private WorkCreditAdapter creditAdapter;
+
+    boolean isColl = false;
 
     List<ShopTuijianBean.BodyBean.ApiEcGoodsBasicListBean> apiEcGoodsBasicList = new ArrayList<>();
     List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiGoodsList = new ArrayList<>();
@@ -130,12 +135,30 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
-            case ACTION.ADDLIULAN:
+            case ACTION.ADDLIULAN://添加浏览量
                 SuccessBean successBeans = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBeans.isSuccess()){
                     T.show(successBeans.getMsg());//成功
                 }else{
                     T.show(successBeans.getMsg());
+                }
+                break;
+            case ACTION.COLLECTIONPRODUCT://收藏商品
+                isColl = true;
+                SuccessBean successBean1 = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean1.isSuccess()){
+                    T.show(successBean1.getMsg());//成功
+                }else{
+                    T.show(successBean1.getMsg());
+                }
+                break;
+            case ACTION.CANCELCOLLECTION:
+                isColl = false;
+                SuccessBean successBean2 = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean2.isSuccess()){
+                    T.show(successBean2.getMsg());//成功
+                }else{
+                    T.show(successBean2.getMsg());
                 }
                 break;
             case ACTION.SHOPTUIJIANLIST://获取商家推荐商品列表
@@ -278,6 +301,27 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         HttpUtils.doPost(ACTION.JUBAOSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
+    /**
+     * 收藏商品
+     */
+    private void getCollectionData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", "111");//
+        params.put("goodsId","0b5e8db1e94b4c44b3075940bc67a2e9");
+        HttpUtils.doPost(ACTION.COLLECTIONPRODUCT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 取消收藏商品
+     */
+    private void getCancleCollectionData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", "111");//
+        params.put("goodsId","0b5e8db1e94b4c44b3075940bc67a2e9");
+        HttpUtils.doPost(ACTION.CANCELCOLLECTION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+
     private void initTab() {
         listView.setVisibility(View.VISIBLE);
         tabList.add("门店服务");
@@ -356,9 +400,17 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     }
 
-    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.tv_work_detail_guanzhu,R.id.tv_workroom_service_jubao})
+    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.tv_work_detail_guanzhu,R.id.tv_workroom_service_jubao,R.id.rl_full_collection})
     public void OnClick(View view) {
         switch (view.getId()) {
+            case R.id.rl_full_collection:
+                L.e("点击收藏。。。。。。。。。。。。。。。。。。");
+                if(isColl){
+                    getCancleCollectionData();
+                }else {
+                    getCollectionData();
+                }
+                break;
             case R.id.iv_common_back:
                 finish();
                 break;
