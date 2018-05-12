@@ -64,11 +64,13 @@ public class OrderFragment extends BaseFragment {
     }
     private void initDate() {
         tablist.add("全部订单");
+        tablist.add("待付款");
+        tablist.add("待接单");
+        tablist.add("服务中");
         tablist.add("待评价");
+        tablist.add("已完成");
         tablist.add("退款");
-        for (int i = 0; i < tablist.size(); i++) {
-            otablayout.addTab(otablayout.newTab().setText(tablist.get(i)));
-        }
+
         /**
          //全部订单
          //待评价
@@ -77,10 +79,21 @@ public class OrderFragment extends BaseFragment {
         pagerlist.add(new WholeFragment());
         pagerlist.add(new AssessedFragment());
         pagerlist.add(new RefundFragment());
+        pagerlist.add(new WholeFragment());
+        pagerlist.add(new WholeFragment());
+        pagerlist.add(new WholeFragment());
+        pagerlist.add(new WholeFragment());
+
         ViewPager viewPager = new ViewPager(getActivity().getSupportFragmentManager(), pagerlist, tablist);
         omypager.setAdapter(viewPager);
         omypager.setScanScroll(true);
         otablayout.setupWithViewPager(omypager);
+
+
+        for (int i = 0; i < tablist.size(); i++) {
+            otablayout.addTab(otablayout.newTab().setText(tablist.get(i)));
+        }
+
         otablayout.post(new Runnable() {
             @Override
             public void run() {
