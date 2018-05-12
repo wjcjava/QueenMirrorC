@@ -56,4 +56,6 @@ public interface UrlConstants {
 
     String JUBAOSHOP = "api/ans/shop/complainShop";//举报商家
 
+    String REFUND="api/ans/refund/refundApplyList";//获取退款列表
+
 }

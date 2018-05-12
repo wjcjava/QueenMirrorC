@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/comment_40_dip"
             android:layout_marginRight="@dimen/comment_40_dip"
+
             android:textColor="@color/white"
             android:textSize="@dimen/comment_18_size"
             android:layout_centerInParent="true"
@@ -42,6 +43,7 @@
         <android.support.design.widget.TabLayout
             android:layout_marginTop="@dimen/comment_5_dip"
             android:id="@+id/or_tab"
+            app:tabMode="scrollable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_photo"

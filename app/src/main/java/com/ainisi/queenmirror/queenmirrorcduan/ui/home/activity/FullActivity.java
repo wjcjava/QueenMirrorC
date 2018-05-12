@@ -73,9 +73,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         MyAdapter sortAdapter = new MyAdapter(R.layout.item_fullrecycler,fulllist);
         frecycler.setLayoutManager(new GridLayoutManager(this, 2));
         frecycler.setAdapter(sortAdapter);
-
     }
-
     private void initText() {
         fullTitle.setText("纯色美甲");
         fullPhoto.setImageResource(R.drawable.icon_full_fenxiang);

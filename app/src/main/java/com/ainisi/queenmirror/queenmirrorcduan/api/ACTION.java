@@ -4,7 +4,6 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
  * 作者： jl
  *
  */
-
 public interface ACTION {
     int REGIST = 0x001;//注册
 
@@ -42,7 +41,7 @@ public interface ACTION {
 
     int EVALUATION=0x011;//商品的评价数据
 
-    int MERCHANTS=0x12;//商家的评价数据
+    int MERCHANTS=0x012;//商家的评价数据
 
     int MINEINSHOP = 0x112;//获取我关注的店铺
 
@@ -51,5 +50,7 @@ public interface ACTION {
     int CANCELGUANZHUSHOP = 0x114;//取消关注店铺
 
     int JUBAOSHOP = 0x115;//举报商家
+
+    int REFUND=0x013;//获取退款列表
 
 }

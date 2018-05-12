@@ -6,18 +6,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.RefundAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ArefundActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.order.bean.RefundBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -27,13 +32,15 @@ import butterknife.Bind;
  * 退款
  */
 
-public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack {
+public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack ,HttpCallBack{
     @Bind(R.id.rc_refund)
     RecyclerView refund;
-    private List<SortBean> list=new ArrayList<>();
+    private List<RefundBean> list=new ArrayList<>();
     private Handler handler = new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+    private RefundBean refundBean;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_sort_refund;
@@ -74,20 +81,48 @@ public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayou
 
     @Override
     protected void initView() {
-        for (int i = 0; i <10 ; i++) {
-            SortBean sortBean=new SortBean();
-            list.add(sortBean);
+        inithttp();
+
+    }
+
+    private void inithttp() {
+        HashMap<String,String> hashMap=new HashMap<>();
+        hashMap.put("userId","111");
+        HttpUtils.doPost(ACTION.REFUND,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.REFUND:
+                for (int i = 0; i <10 ; i++) {
+                    refundBean = GsonUtil.toObj(res, RefundBean.class);
+                    list.add(refundBean);
+                }
+                RefundAdapter sbmitWholeAdapter=new RefundAdapter(R.layout.item_refundrecycler,list);
+                refund.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL,false));
+                refund.setAdapter(sbmitWholeAdapter);
+                sbmitWholeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        //退款
+                        startActivity(new Intent(getActivity(), ArefundActivity.class));
+                    }
+                });
+
+
+                break;
         }
-        MyAdapter sbmitWholeAdapter=new MyAdapter(R.layout.item_refundrecycler,list);
-        refund.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL,false));
-        refund.setAdapter(sbmitWholeAdapter);
-        sbmitWholeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                //退款
-                startActivity(new Intent(getActivity(), ArefundActivity.class));
-            }
-        });
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
 
     }
 }

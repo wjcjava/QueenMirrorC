@@ -361,24 +361,31 @@ public class HttpUtils {
 
             //商品的评价数据
             case ACTION.EVALUATION:
-                actionUrl=UrlConstants.EVALUATION;
+                actionUrl = UrlConstants.EVALUATION;
                 break;
             //商家的评价数据
             case ACTION.MERCHANTS:
-                actionUrl=UrlConstants.MERCHANTS;
+                actionUrl = UrlConstants.MERCHANTS;
                 break;
-
+            //获取我关注的店铺
             case ACTION.MINEINSHOP:
                 actionUrl = UrlConstants.MINEINSHOP;
                 break;
+            //关注店铺
             case ACTION.GUANZHUSHOP:
                 actionUrl = UrlConstants.GUANZHUSHOP;
                 break;
+            //取消关注店铺
             case ACTION.CANCELGUANZHUSHOP:
                 actionUrl = UrlConstants.CANCELGUANZHUSHOP;
                 break;
+            //举报商家
             case ACTION.JUBAOSHOP:
                 actionUrl = UrlConstants.JUBAOSHOP;
+                break;
+            //获取退款列表
+            case ACTION.REFUND:
+                actionUrl=UrlConstants.REFUND;
                 break;
         }
         url.append(actionUrl);

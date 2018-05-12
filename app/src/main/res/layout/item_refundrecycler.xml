@@ -48,7 +48,7 @@
         />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_refund_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/comment_10_dip"
@@ -66,15 +66,15 @@
         android:layout_marginTop="@dimen/comment_12_dip"
         android:text="商品描述商品描述商品描述"
         android:textSize="@dimen/comment_12_size"
-        android:layout_below="@+id/textView6"
-        android:layout_alignStart="@+id/textView6" />
+        android:layout_below="@+id/tv_refund_name"
+        android:layout_alignStart="@+id/tv_refund_name" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@+id/tv_refund_name"
         android:layout_marginEnd="@dimen/comment_12_dip"
         android:text="X1"
         android:textSize="@dimen/comment_14_size" />
