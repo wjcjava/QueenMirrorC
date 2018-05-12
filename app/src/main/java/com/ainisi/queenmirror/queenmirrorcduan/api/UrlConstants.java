@@ -58,4 +58,7 @@ public interface UrlConstants {
 
     String REFUND="api/ans/refund/refundApplyList";//获取退款列表
 
+    String COMMENDGOODS="api/ans/shop/recommendGoodsList";//商家推荐商品的数据
+
+    String SHOPINDUSTRY="api/ans/shop/shopIndustryListGet";
 }

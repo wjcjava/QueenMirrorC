@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
@@ -45,6 +46,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
 import com.youth.banner.Banner;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -110,34 +112,38 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private View popview1;
     private List<ShopBean> shopList = new ArrayList<>();
     private List<ProblemBean> list = new ArrayList<>();
-    private int[] imgTitle = {R.drawable.icon_shop_entertainment, R.drawable.icon_shop_bank_insurance, R.drawable.icon_shop_jewellery,
-            R.drawable.icon_shop_medicalcare, R.drawable.icon_shop_motion, R.drawable.icon_shop_photography, R.drawable.icon_shop_service
-            , R.drawable.icon_shop_train
+    private int[] imgTitle = {R.drawable.icon_shop_entertainment, R.drawable.icon_shop_bank_insurance,
+            R.drawable.icon_shop_jewellery, R.drawable.icon_shop_medicalcare, R.drawable.icon_shop_motion,
+            R.drawable.icon_shop_photography, R.drawable.icon_shop_service, R.drawable.icon_shop_train
     };
     String[] textTitle = {"休闲娱乐", "银行保险", "珠宝首饰", "医疗保健", "运动健身", "婚庆摄影", "汽车服务", "教育培训"};
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
 
-    int hight,pageNumber=1;//标记ScrollView移动的距离
+    int hight, pageNumber = 1;//标记ScrollView移动的距离
     private boolean isClick;
     private GridViewAdapter gridViewAdapter;
 
     List<ShopMallListBean.BodyBean.ShopListBean> shopListNew = new ArrayList<>();
 
     @Override
-    public void onSuccess(int action, String res){
-        switch (action){
+    public void onSuccess(int action, String res) {
+        switch (action) {
             case ACTION.SHOPLIST://登录
 
-                ShopMallListBean shopMallListBean = GsonUtil.toObj(res,ShopMallListBean.class);
+                ShopMallListBean shopMallListBean = GsonUtil.toObj(res, ShopMallListBean.class);
 
-                if(shopMallListBean.isSuccess()){
+                if (shopMallListBean.isSuccess()) {
                     shopListNew = shopMallListBean.getBody().getShopList();
 
-                    listadapter = new ListViewAdapter(getContext(),shopListNew);
+                    listadapter = new ListViewAdapter(getContext(), shopListNew);
                     listView.setAdapter(listadapter);
-                }else{
+                } else {
                     T.show(shopMallListBean.getMsg());
                 }
+                break;
+
+            case ACTION.SHOPINDUSTRY:
+
                 break;
         }
 
@@ -189,9 +195,10 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private void doFirstData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("enableFlag", "1");//有效标记
-        params.put("pageNumber", pageNumber+"");
+        params.put("pageNumber", pageNumber + "");
         params.put("contentByTitle", "");//画面检索输入框输入的内容
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        HttpUtils.doPost(ACTION.SHOPINDUSTRY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     private void initImgTitle() {
@@ -290,7 +297,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_surface:
                 if (isClick) {
                     isClick = false;
-                    listadapter = new ListViewAdapter(getContext(),shopListNew);
+                    listadapter = new ListViewAdapter(getContext(), shopListNew);
                     listView.setAdapter(listadapter);
                     gridView.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
@@ -307,7 +314,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_uspension_surface:
                 if (isClick) {
                     isClick = false;
-                    listadapter = new ListViewAdapter(getContext(),shopListNew);
+                    listadapter = new ListViewAdapter(getContext(), shopListNew);
                     listView.setAdapter(listadapter);
                     gridView.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);

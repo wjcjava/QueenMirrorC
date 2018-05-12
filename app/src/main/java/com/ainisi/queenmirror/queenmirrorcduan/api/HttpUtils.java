@@ -387,6 +387,15 @@ public class HttpUtils {
             case ACTION.REFUND:
                 actionUrl=UrlConstants.REFUND;
                 break;
+            //商家推荐商品的数据
+            case ACTION.COMMENDGOODS:
+                actionUrl=UrlConstants.COMMENDGOODS;
+                break;
+            //商家所属行业数据
+            case ACTION.SHOPINDUSTRY:
+                actionUrl=UrlConstants.SHOPINDUSTRY;
+                break;
+
         }
         url.append(actionUrl);
         return url;

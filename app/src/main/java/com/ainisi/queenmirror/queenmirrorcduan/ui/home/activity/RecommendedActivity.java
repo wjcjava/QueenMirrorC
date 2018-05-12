@@ -1,22 +1,24 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.CommendGoodsAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.qbw.log.XLog;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -25,14 +27,15 @@ import butterknife.OnClick;
 /**
  * 更多
  */
-public class RecommendedActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack {
+public class RecommendedActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack ,HttpCallBack{
     @Bind(R.id.re_recommended)
     RecyclerView reRecommended;
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     private Handler handler = new Handler();
-    private List<SortBean> beanList = new ArrayList<>();
-    private MyAdapter myAdapter;
+    private List<CommendGoodBean> beanList = new ArrayList<>();
+    private CommendGoodsAdapter myAdapter;
+    private CommendGoodBean goodBean;
 
 
     @Override
@@ -89,14 +92,10 @@ public class RecommendedActivity extends BaseNewActivity implements RefreshLoadM
     @Override
     protected void initData() {
         super.initData();
-        for (int i = 0; i < 6; i++) {
-            SortBean sortBean = new SortBean();
-            beanList.add(sortBean);
-        }
-        myAdapter = new MyAdapter(R.layout.item_shortrecycler, beanList);
-        reRecommended.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        reRecommended.setAdapter(myAdapter);
+        inithttp();
+
     }
+
 
 
 
@@ -114,5 +113,45 @@ public class RecommendedActivity extends BaseNewActivity implements RefreshLoadM
 
 
     }
+    private void inithttp() {
+        HashMap<String,String> hashMap=new HashMap();
+        hashMap.put("saleFlag","2");
+        hashMap.put("pageNumber","1");
+        hashMap.put("shopId","111");
+        HttpUtils.doPost(ACTION.COMMENDGOODS,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
 
+
+
+    }
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.COMMENDGOODS:
+                goodBean = GsonUtil.toObj(res, CommendGoodBean.class);
+                if(goodBean.isSuccess()){
+                    for (int i = 0; i < 6; i++) {
+
+                        beanList.add(goodBean);
+                    }
+                    myAdapter = new CommendGoodsAdapter(R.layout.item_shortrecycler, beanList);
+
+                    reRecommended.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                    reRecommended.setAdapter(myAdapter);
+                }else {
+                    T.show(goodBean.getMsg());
+                }
+
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }

@@ -53,4 +53,8 @@ public interface ACTION {
 
     int REFUND=0x013;//获取退款列表
 
+    int COMMENDGOODS=0x014;//商家推荐商品的数据
+
+    int SHOPINDUSTRY=0X015;//商家所属行业数据
+
 }

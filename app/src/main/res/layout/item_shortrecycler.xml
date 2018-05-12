@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="70dp">
                 <TextView
-                    android:id="@+id/sote_name"
+                    android:id="@+id/sort_name"
                     android:text="MOCO美容美发沙龙"
                     android:textSize="@dimen/comment_14_size"
                     android:textColor="#000"

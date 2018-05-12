@@ -302,39 +302,55 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             //首页的行业分类
             case ACTION.INDUSTRY:
                 homeIndustryBean = GsonUtil.toObj(res, HomeIndustryBean.class);
-                esthetics.setText(homeIndustryBean.getBody().getCategoryListData().get(0).getEcCategory().getTabName());
-                nailart.setText(homeIndustryBean.getBody().getCategoryListData().get(1).getEcCategory().getTabName());
-                haircustom.setText(homeIndustryBean.getBody().getCategoryListData().get(2).getEcCategory().getTabName());
-                beauty.setText(homeIndustryBean.getBody().getCategoryListData().get(3).getEcCategory().getTabName());
-                permanent.setText(homeIndustryBean.getBody().getCategoryListData().get(4).getEcCategory().getTabName());
+                if(homeIndustryBean.isSuccess()){
+                    esthetics.setText(homeIndustryBean.getBody().getCategoryListData().get(0).getEcCategory().getTabName());
+                    nailart.setText(homeIndustryBean.getBody().getCategoryListData().get(1).getEcCategory().getTabName());
+                    haircustom.setText(homeIndustryBean.getBody().getCategoryListData().get(2).getEcCategory().getTabName());
+                    beauty.setText(homeIndustryBean.getBody().getCategoryListData().get(3).getEcCategory().getTabName());
+                    permanent.setText(homeIndustryBean.getBody().getCategoryListData().get(4).getEcCategory().getTabName());
+                }
+                else {
+                    T.show(homeIndustryBean.getMsg());
+                }
+
                 break;
             //首页的女王头条
             case ACTION.HEADLINES:
                 homeHeadlinesBean = GsonUtil.toObj(res, HomeHeadlinesBean.class);
-                contentArray = new String[]{homeHeadlinesBean.getBody().getTopListData().get(0).getEcTop().getTopName(),
-                        homeHeadlinesBean.getBody().getTopListData().get(1).getEcTop().getTopName(),
-                        homeHeadlinesBean.getBody().getTopListData().get(2).getEcTop().getTopName()};
-                marqueeview.setTextArray(contentArray);
+                if(homeHeadlinesBean.isSuccess()){
+                    contentArray = new String[]{homeHeadlinesBean.getBody().getTopListData().get(0).getEcTop().getTopName(),
+                            homeHeadlinesBean.getBody().getTopListData().get(1).getEcTop().getTopName(),
+                            homeHeadlinesBean.getBody().getTopListData().get(2).getEcTop().getTopName()};
+                    marqueeview.setTextArray(contentArray);
+                }else {
+                    T.show(homeHeadlinesBean.getMsg());
+                }
+
                 break;
             //首页banner广告
             case ACTION.ADVERTISING:
                 homeAdvertisingBean = GsonUtil.toObj(res, HomeAdvertisingBean.class);
-                List<String> images = new ArrayList<>();
-                for (int i = 0; i < 4; i++) {
-                    images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
-                }
-                banner.setImageLoader(new GlideImageLoader());
-                banner.setImages(images);
-
-                banner.start();
-                banner.setOnBannerListener(new OnBannerListener() {
-                    @Override
-                    public void OnBannerClick(int position) {
-                       Intent intent=new Intent(context, HomeAdvertisingActivity.class);
-                       intent.putExtra("weburl", homeAdvertisingBean.getBody().getAdvertisementListData().get(0).getEcAdvertisement().getAdUrl());
-                       context.startActivity(intent);
+                if(homeAdvertisingBean.isSuccess()){
+                    List<String> images = new ArrayList<>();
+                    for (int i = 0; i < 4; i++) {
+                        images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
                     }
-                });
+                    banner.setImageLoader(new GlideImageLoader());
+                    banner.setImages(images);
+
+                    banner.start();
+                    banner.setOnBannerListener(new OnBannerListener() {
+                        @Override
+                        public void OnBannerClick(int position) {
+                            Intent intent=new Intent(context, HomeAdvertisingActivity.class);
+                            intent.putExtra("weburl", homeAdvertisingBean.getBody().getAdvertisementListData().get(0).getEcAdvertisement().getAdUrl());
+                            context.startActivity(intent);
+                        }
+                    });
+
+                }else {
+                    T.show(homeAdvertisingBean.getMsg());
+                }
 
                 break;
         }
