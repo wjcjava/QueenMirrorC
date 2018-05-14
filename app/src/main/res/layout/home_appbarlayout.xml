@@ -38,7 +38,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/comment_3_dip"
         android:layout_marginRight="@dimen/comment_3_dip"
-        android:layout_marginTop="@dimen/comment_10_dip"
         android:background="#FFF"
         android:gravity="bottom"
         android:orientation="horizontal">
@@ -120,7 +119,7 @@
                 android:id="@+id/iv_surface"
                 android:layout_width="@dimen/comment_15_dip"
                 android:layout_height="@dimen/comment_12_dip"
-                app:srcCompat="@drawable/icon_home_list" />
+                app:srcCompat="@drawable/icon_home_recycler" />
         </LinearLayout>
 
     </LinearLayout>

@@ -17,6 +17,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
@@ -33,7 +34,7 @@ import butterknife.OnClick;
 /**
  * 商品详情
  */
-public class FullActivity extends BaseNewActivity implements HttpCallBack {
+public class FullActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.full_recycler)
     RecyclerView frecycler;
     @Bind(R.id.full_recyclertwo)
@@ -51,6 +52,8 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     private CommendGoodBean goodBean;
     private FullGoodsAdapter myAdapter;
 
+    boolean isColl = false;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_full;
@@ -60,7 +63,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     protected void initData() {
         super.initData();
         inithttp();
-        initshophttp();
     }
 
     @Override
@@ -86,7 +88,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
 
 
     }
-
     private void initText() {
         fullTitle.setText("纯色美甲");
         fullPhoto.setImageResource(R.drawable.icon_full_fenxiang);
@@ -105,7 +106,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
             case R.id.tv_purchase:
                 startActivity(new Intent(FullActivity.this, PurchaseActivity.class));
                 break;
-            //加入购物车
+                //加入购物车
             case R.id.tv_full_shoppingcart:
                 startActivity(new Intent(this, ShoppingCartActivity.class));
                 break;
@@ -121,36 +122,33 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
         hashMap1.put("shopId", "111");
         HttpUtils.doPost(ACTION.COMMENDGOODS, hashMap1, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
-
     }
 
     private void inithttp() {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("goodsId", "111");
-        hashMap.put("pageNumber", "2");
-        HttpUtils.doPost(ACTION.EVALUATION, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-
+        HashMap<String,String> hashMap=new HashMap<>();
+        hashMap.put("goodsId","111");
+        hashMap.put("pageNumber","2");
+        HttpUtils.doPost(ACTION.EVALUATION,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
 
     }
-
     @Override
     public void onSuccess(int action, String res) {
-        switch (action) {
+        switch (action){
             case ACTION.EVALUATION:
 
                 for (int i = 0; i < 8; i++) {
                     commentsBean = GsonUtil.toObj(res, CommentsBean.class);
                     fulllist2.add(commentsBean);
                 }
-                CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo, fulllist2);
+                CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo,fulllist2);
                 frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 frecyclertwo.setAdapter(sortAdapter2);
                 break;
             case ACTION.ADDGOODSLIULAN:
-                SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
-                if (successBean.isSuccess()) {
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
                     T.show(successBean.getMsg());
-                } else {
+                }else{
                     T.show(successBean.getMsg());
                 }
 
@@ -171,6 +169,24 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                     T.show(goodBean.getMsg());
                 }
 
+                break;
+            case ACTION.COLLECTIONPRODUCT://收藏商品
+                isColl = true;
+                SuccessBean successBean1 = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean1.isSuccess()){
+                    T.show(successBean1.getMsg());//成功
+                }else{
+                    T.show(successBean1.getMsg());
+                }
+                break;
+            case ACTION.CANCELCOLLECTION:
+                isColl = false;
+                SuccessBean successBean2 = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean2.isSuccess()){
+                    T.show(successBean2.getMsg());//成功
+                }else{
+                    T.show(successBean2.getMsg());
+                }
                 break;
         }
 

@@ -6,9 +6,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseOneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeNewFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MasterFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MineFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
@@ -40,7 +42,7 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
     @Override
     protected void initData() {
         mFragments = new ArrayList<>();
-        HomeFragment homeOneFragment = new HomeFragment();
+        HomeNewFragment homeOneFragment = new HomeNewFragment();
         ShopMallFragment categoryOneFragment = new ShopMallFragment();
         OrderFragment serviceOneFragment = new OrderFragment();
         MasterFragment mineOneFragment = new MasterFragment();

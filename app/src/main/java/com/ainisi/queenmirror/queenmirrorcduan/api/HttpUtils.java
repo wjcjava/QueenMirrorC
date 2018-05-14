@@ -389,10 +389,6 @@ public class HttpUtils {
             case ACTION.COMMENDGOODS:
                 actionUrl = UrlConstants.COMMENDGOODS;
                 break;
-            //商家所属行业数据
-            case ACTION.SHOPINDUSTRY:
-                actionUrl = UrlConstants.SHOPINDUSTRY;
-                break;
             //商家浏览次数
             case ACTION.ADDLIULAN:
                 actionUrl = UrlConstants.ADDLIULAN;

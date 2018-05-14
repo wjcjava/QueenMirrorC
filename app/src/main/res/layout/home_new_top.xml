@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/comment_125_dip"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:paddingStart="@dimen/comment_10_dip"
+            android:paddingBottom="@dimen/comment_5_dip"
+            android:paddingTop="@dimen/comment_5_dip">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/comment_85_dip"
+                android:layout_height="@dimen/comment_25_dip"
+                android:src="@drawable/icon_home_ancrown" />
+            <View
+                android:id="@+id/view_homeshop_view"
+                android:layout_width="@dimen/comment_2_dip"
+                android:layout_height="18dp"
+                android:layout_toEndOf="@id/imageView"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/comment_8_dip"
+                android:background="@color/alpha_05_black">
+            </View>
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                android:id="@+id/mv_home_marqueeView"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@id/view_homeshop_view"
+                android:layout_marginStart="@dimen/comment_8_dip"
+                app:mvAnimDuration="1000"
+                app:mvDirection="bottom_to_top"
+                app:mvInterval="3000"
+                app:mvTextColor="@color/alpha_75_black"
+                app:mvTextSize="12sp"
+                app:mvSingleLine="true">
+            </com.sunfusheng.marqueeview.MarqueeView>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/comment_330_dip"
+            android:layout_height="@dimen/comment_2_dip"
+            android:layout_gravity="center"
+            android:background="@color/alpha_05_black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/comment_10_dip"
+            android:paddingTop="@dimen/comment_10_dip">
+
+            <LinearLayout
+                android:id="@+id/li_home_esthetics"
+                android:layout_width="@dimen/comment_0_dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+
+                    android:layout_width="@dimen/comment_35_dip"
+                    android:layout_height="@dimen/comment_39_dip"
+                    android:src="@drawable/icon_home_meixuehui" />
+
+                <TextView
+                    android:id="@+id/tv_home_esthetics"
+                    android:textSize="@dimen/comment_12_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/comment_2_dip"
+                    android:gravity="center"
+                    android:textColor="@color/home_queen_middle_color"
+                    android:text="@string/aesthetic_remittance" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/li_home_nailart"
+                android:layout_width="@dimen/comment_0_dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/comment_35_dip"
+                    android:layout_height="@dimen/comment_39_dip"
+                    android:src="@drawable/icon_home_manicure" />
+
+                <TextView
+                    android:id="@+id/tv_home_nailart"
+                    android:textSize="@dimen/comment_12_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/comment_2_dip"
+                    android:gravity="center"
+                    android:textColor="@color/home_queen_middle_color"
+                    android:text="@string/manicure" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/li_home_haircustom"
+                android:layout_width="@dimen/comment_0_dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/comment_35_dip"
+                    android:layout_height="@dimen/comment_39_dip"
+                    android:src="@drawable/icon_home_hairdcus" />
+
+                <TextView
+                    android:id="@+id/tv_home_haircustom"
+                    android:textSize="@dimen/comment_12_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/home_queen_middle_color"
+                    android:layout_marginTop="@dimen/comment_2_dip"
+                    android:text="@string/hairdressing_custom" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/li_home_beauty"
+                android:layout_width="@dimen/comment_0_dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/comment_35_dip"
+                    android:layout_height="@dimen/comment_39_dip"
+                    android:src="@drawable/icon_home_meirongmeiti" />
+
+                <TextView
+                    android:textSize="@dimen/comment_12_size"
+                    android:id="@+id/tv_home_beauty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/comment_2_dip"
+                    android:gravity="center"
+                    android:textColor="@color/home_queen_middle_color"
+                    android:text="@string/cosmetology_and_body" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/li_home_permanent"
+                android:layout_width="@dimen/comment_0_dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/comment_35_dip"
+                    android:layout_height="@dimen/comment_39_dip"
+                    android:src="@drawable/icon_home_lipstick" />
+
+                <TextView
+                    android:textSize="@dimen/comment_12_size"
+                    android:id="@+id/tv_home_permanent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/comment_2_dip"
+                    android:gravity="center"
+                    android:textColor="@color/home_queen_middle_color"
+                    android:text="@string/semi_permanent" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/home_shop_middle">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/li_home_newuserprg"
+            android:layout_width="@dimen/comment_0_dip"
+            android:layout_height="@dimen/comment_202_dip"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/comment_10_dip"
+            android:gravity="center|top"
+            android:background="@drawable/home_middle_one"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/comment_202_dip"
+            android:background="@color/home_shop_middle" />
+
+        <LinearLayout
+            android:layout_width="@dimen/comment_0_dip"
+            android:layout_height="@dimen/comment_202_dip"
+            android:layout_weight="1"
+            android:gravity="center|top"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/linear_home_freetrial"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/home_middle_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/home_shop_middle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/li_home_specialoffer"
+                    android:layout_width="@dimen/comment_0_dip"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/home_middle_three"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/home_shop_middle" />
+
+                <LinearLayout
+                    android:id="@+id/li_home_goodshop"
+                    android:layout_width="@dimen/comment_0_dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_middle_four"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/home_shop_middle">
+
+        <TextView
+            android:id="@+id/middle_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/alpha_85_black"
+            android:textSize="@dimen/comment_14_size"
+            android:text="推荐活动">
+        </TextView>
+
+        <View
+            android:layout_width="@dimen/comment_50_dip"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toLeftOf="@id/middle_home"
+            android:background="@color/alpha_15_black">
+        </View>
+
+        <View
+            android:layout_width="@dimen/comment_50_dip"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@id/middle_home"
+            android:background="@color/alpha_15_black">
+        </View>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <ImageView android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_middle_five">
+        </ImageView>
+        <View android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/home_shop_middle">
+        </View>
+        <ImageView android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_middle_six">
+        </ImageView>
+        <View android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/home_shop_middle">
+        </View>
+        <ImageView android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_middle_seven">
+        </ImageView>
+
+    </LinearLayout>
+
+    <ImageView android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/home_middle_eight">
+    </ImageView>
+    <View android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_10_dip"
+        android:background="@color/home_shop_middle">
+    </View>
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner_middle"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/comment_125_dip"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/home_shop_middle">
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/everyday_new">
+        </ImageView>
+    </RelativeLayout>
+
+    <com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView
+        android:id="@+id/rv_home_new_every"
+        android:layout_width="match_parent"
+        android:paddingEnd="5dp"
+        android:layout_height="wrap_content">
+    </com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView>
+
+    <include layout="@layout/home_appbarlayout" />
+
+
+</LinearLayout>

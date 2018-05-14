@@ -68,7 +68,7 @@ public interface ACTION {
 
     int ADDGOODSLIULAN = 0x117;//商品浏览次数增加
 
-    int SHOPINDUSTRY=0X015;//商家所属行业数据
+    int SHOPINDUSTRY=0X016;//商家所属行业数据
 
     int COLLECTIONPRODUCT = 0x118;//收藏商品
 

@@ -266,7 +266,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             beauty = itemView.findViewById(R.id.tv_home_beauty);
             permanent = itemView.findViewById(R.id.tv_home_permanent);
             banner = itemView.findViewById(R.id.banner);
-            //marqueeview = itemView.findViewById(R.id.marqueeview);
         }
     }
     public class VideoViewHolder extends RecyclerView.ViewHolder {
