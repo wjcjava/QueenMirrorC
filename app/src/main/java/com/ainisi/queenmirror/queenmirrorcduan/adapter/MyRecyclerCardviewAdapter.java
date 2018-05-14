@@ -134,7 +134,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
         HttpUtils.doPost(ACTION.CLASSIFICATION,params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
-
     private void inithttp() {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("tabType", "2");
@@ -154,7 +153,8 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                 break;
             //店铺
             case R.id.li_home_short:
-                context.startActivity(new Intent(context, WorkRoomDetailActivity.class));
+
+             context.startActivity(new Intent(context, WorkRoomDetailActivity.class));
                 break;
             //美手美甲
             case R.id.li_home_nailart:
@@ -288,15 +288,13 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             super(itemView);
             if (type == 0) {
                 homeShort = itemView.findViewById(R.id.li_home_short);
-                sortName =itemView.findViewById(R.id.sort_name);
-                sortTime =itemView.findViewById(R.id.sort_time);
+                sortName =itemView.findViewById(R.id.tv_sort_name);
+                sortTime =itemView.findViewById(R.id.tv_sort_time);
             } else {
                 return;
             }
-
         }
     }
-
     @Override
     public void onSuccess(int action, String res) {
 
@@ -324,9 +322,7 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                 else {
                     T.show(homeIndustryBean.getMsg());
                 }
-
                 break;
-
             case ACTION.CLASSIFICATION:
                ClassificationBean classificationBean= GsonUtil.toObj(res, ClassificationBean.class);
                if(classificationBean.isSuccess()){
@@ -335,7 +331,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                }else {
                    T.show(classificationBean.getMsg());
                }
-
                 break;
             //首页的女王头条
             case ACTION.HEADLINES:
@@ -347,12 +342,9 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                     for (int i = 0; i <contentArray.length ; i++) {
 
                     }
-//                    marqueeList.add(contentArray[0]);
-//                    marqueeview.setMarqueeData(marqueeList);
                 }else {
                     T.show(homeHeadlinesBean.getMsg());
                 }
-
                 break;
             //首页banner广告
             case ACTION.ADVERTISING:

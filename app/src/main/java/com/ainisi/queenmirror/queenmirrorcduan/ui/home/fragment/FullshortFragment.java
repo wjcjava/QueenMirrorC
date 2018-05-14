@@ -5,18 +5,22 @@ import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.FullShortAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.lzy.okgo.cache.CacheMode;
 import com.qbw.log.XLog;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -26,10 +30,10 @@ import butterknife.Bind;
  * 综合排序
  */
 
-public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack{
+public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack,HttpCallBack{
     @Bind(R.id.full_sore_recycler)
     RecyclerView recycler;
-    List<SortBean> sortlist = new ArrayList<>();
+    List<ClassificationBean> sortlist = new ArrayList<>();
     private Handler handler=new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
@@ -49,7 +53,6 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
                         "yyyy-MM-dd")
                 .multiTask());
     }
-
     @Override
     public void onRefresh() {
         XLog.v("onRefresh");
@@ -77,24 +80,53 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
     }
     @Override
     protected void initView() {
-        for (int i = 0; i < 10; i++) {
-            SortBean sortBean = new SortBean();
-            sortBean.setName("MOCO美容美发沙龙");
-            sortBean.setTime("营业时间 9:00-20:00");
-            sortBean.setLogo(R.drawable.ic_sortrecyle_logo);
-            sortBean.setStars(R.drawable.icon_home_recommend);
-            sortBean.setDistance("875m");
-            sortlist.add(sortBean);
-        }
-        MyAdapter sortAdapter = new MyAdapter(R.layout.item_shortrecycler, sortlist);
-        recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        recycler.setAdapter(sortAdapter);
-        sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getActivity(), WorkRoomDetailActivity.class));
-            }
-        });
+        inithttp();
+
     }
 
+    private void inithttp() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("enableFlag", "0");
+        params.put("pageNumber", "1");
+        params.put("contentByTitle", "");
+        params.put("categoryId", "0");
+        HttpUtils.doPost(ACTION.CLASSIFICATION,params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.CLASSIFICATION:
+                ClassificationBean classificationBean= GsonUtil.toObj(res, ClassificationBean.class);
+
+                if(classificationBean.isSuccess()){
+                    for (int i = 0; i < classificationBean.getBody().getShopListData().size(); i++) {
+                        sortlist.add(classificationBean);
+                    }
+                    FullShortAdapter sortAdapter = new FullShortAdapter(R.layout.item_shortrecycler, sortlist);
+                    recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                    recycler.setAdapter(sortAdapter);
+                    sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            startActivity(new Intent(getActivity(), WorkRoomDetailActivity.class));
+                        }
+                    });
+
+                }else {
+                    T.show(classificationBean.getMsg());
+                }
+                break;
+        }
+    }
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }

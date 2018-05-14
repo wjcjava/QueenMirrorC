@@ -383,28 +383,47 @@ public class HttpUtils {
                 break;
             //获取退款列表
             case ACTION.REFUND:
-                actionUrl=UrlConstants.REFUND;
+                actionUrl = UrlConstants.REFUND;
                 break;
             //商家推荐商品的数据
             case ACTION.COMMENDGOODS:
-                actionUrl=UrlConstants.COMMENDGOODS;
+                actionUrl = UrlConstants.COMMENDGOODS;
                 break;
             //商家所属行业数据
             case ACTION.SHOPINDUSTRY:
-                actionUrl=UrlConstants.SHOPINDUSTRY;
+                actionUrl = UrlConstants.SHOPINDUSTRY;
                 break;
-
+            //商家浏览次数
             case ACTION.ADDLIULAN:
                 actionUrl = UrlConstants.ADDLIULAN;
                 break;
+            //商品浏览次数增加
             case ACTION.ADDGOODSLIULAN:
                 actionUrl = UrlConstants.ADDGOODSLIULAN;
                 break;
+            //收藏商品
             case ACTION.COLLECTIONPRODUCT:
                 actionUrl = UrlConstants.COLLECTIONPRODUCT;
                 break;
+            //取消收藏商品
             case ACTION.CANCELCOLLECTION:
                 actionUrl = UrlConstants.CANCELCOLLECTION;
+                break;
+            //商家分类列表
+            case ACTION.CLASSIFICATION:
+                actionUrl = UrlConstants.CLASSIFICATION;
+                break;
+            //搜索标签信息
+            case ACTION.LABEL:
+                actionUrl = UrlConstants.LABEL;
+                break;
+            //商家列表分类
+            case ACTION.MERCHANTSLIST:
+                actionUrl = UrlConstants.MERCHANTSLIST;
+                break;
+            //活动商品列表
+            case ACTION.ACTIVITYGOODS:
+                actionUrl=UrlConstants.ACTIVITYGOODS;
                 break;
         }
         url.append(actionUrl);

@@ -33,7 +33,13 @@ public interface ACTION {
 
     int COMMENDGOODS=0x014;//商家推荐商品的数据
 
-    int CLASSIFICATION=0x015;//商家分类列表
+    int CLASSIFICATION=0x016;//商家分类列表
+
+    int LABEL=0x017;//搜索标签信息
+
+    int MERCHANTSLIST=0x018;//商家列表分类(接口失败)
+
+    int ACTIVITYGOODS=0X019;//活动商品列表
 
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
@@ -67,5 +73,7 @@ public interface ACTION {
     int COLLECTIONPRODUCT = 0x118;//收藏商品
 
     int CANCELCOLLECTION = 0x119;//取消收藏商品
+
+
 
 }

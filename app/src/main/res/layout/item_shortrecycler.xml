@@ -27,14 +27,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="70dp">
                 <TextView
-                    android:id="@+id/sort_name"
+                    android:id="@+id/tv_sort_name"
                     android:textSize="@dimen/comment_14_size"
                     android:textColor="#000"
                     android:gravity="bottom"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" />
                 <ImageView
-                    android:id="@+id/sort_shart"
+                    android:id="@+id/iv_sort_shart"
                     android:src="@drawable/ic_sortrecyke_stars"
                     android:layout_width="wrap_content"
                     android:layout_height="10dp" />
@@ -45,7 +45,7 @@
                     android:layout_height="20dp" />
                 <TextView
                     android:gravity="bottom"
-                    android:id="@+id/sort_time"
+                    android:id="@+id/tv_sort_time"
                     android:textSize="@dimen/comment_10_size"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" />

@@ -10,13 +10,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.LabelBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.FlowLayout;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.StatusBarUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.lzy.okgo.cache.CacheMode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -26,7 +31,7 @@ import butterknife.OnClick;
  * 搜索
  */
 
-public class SearchActivity extends BaseNewActivity {
+public class SearchActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.title_title)
     TextView title;
     @Bind(R.id.titleimg_right)
@@ -39,10 +44,10 @@ public class SearchActivity extends BaseNewActivity {
     RelativeLayout poplayout;
     @Bind(R.id.title_layout)
     LinearLayout titlelayout;
-
+    @Bind(R.id.et_title)
+    TextView etTitle;
     @Bind(R.id.his_flowLayout)
     FlowLayout his_flowLayout;
-    private List<SortBean> list=new ArrayList<>();
     public static void startActivity(Context context) {
         Intent in = new Intent(context, SearchActivity.class);
         context.startActivity(in);
@@ -60,7 +65,10 @@ public class SearchActivity extends BaseNewActivity {
         initHot();
         initHistory();
         initHotTag();
+        inithttp();
     }
+
+
     private void initHot() {
 
     }
@@ -77,12 +85,15 @@ public class SearchActivity extends BaseNewActivity {
     }
 
 
-    @OnClick({R.id.title_back
+    @OnClick({R.id.title_back,R.id.title_search
     })
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
+                break;
+            case R.id.title_search:
+                T.show("你点击了我");
                 break;
             default:
                 break;
@@ -93,14 +104,49 @@ public class SearchActivity extends BaseNewActivity {
      * 热门搜索
      */
     private void initHotTag() {
-        String[] mStrings = {"apple", "百度CEO", "阿里巴巴", "绩效股", "中国股市", "美团", "google", "淘宝", "雷军 小米公司", "大疆无人机"};
-        his_flowLayout.setColorful(false);//设置是否是多彩的颜色
-        his_flowLayout.setData(mStrings);
-        his_flowLayout.setOnTagClickListener(new FlowLayout.OnTagClickListener() {
-            @Override
-            public void TagClick(String text) {
-            }
-        });
+
+    }
+    private void inithttp() {
+        HashMap<String,String> params=new HashMap<>();
+        params.put("tabCategory","2");
+        params.put("belongCate","");
+        HttpUtils.doPost(ACTION.LABEL,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.LABEL:
+                LabelBean labelBean=GsonUtil.toObj(res, LabelBean.class);
+                if(labelBean.isSuccess()){
+                    String[] mStrings=new String[labelBean.getBody().getTabListData().size()];
+                    for (int i = 0; i <labelBean.getBody().getTabListData().size() ; i++) {
+                        mStrings[i]=labelBean.getBody().getTabListData().get(i).getEcTab().getTabName();
+                    }
+                    his_flowLayout.setColorful(false);//设置是否是多彩的颜色
+                    his_flowLayout.setData(mStrings);
+                    his_flowLayout.setOnTagClickListener(new FlowLayout.OnTagClickListener() {
+                        @Override
+                        public void TagClick(String text) {
+                            etTitle.setText(text);
+                        }
+                    });
+                }else {
+                    T.show(labelBean.getMsg());
+                }
+                break;
+        }
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }

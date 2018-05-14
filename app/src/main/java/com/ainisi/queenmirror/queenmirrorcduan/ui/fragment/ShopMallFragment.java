@@ -147,6 +147,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         initDate();
         initpopwindow();
         initImgTitle();
+        initshopList();
 
         sc_home_scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
@@ -163,6 +164,13 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         });
 
 
+    }
+
+    private void initshopList() {
+        HashMap<String,String> params=new HashMap<>();
+        params.put("categoryId","");
+        params.put("pageNumber","");
+        HttpUtils.doPost(ACTION.MERCHANTSLIST,params,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
     /**
@@ -369,7 +377,9 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
 //                hideFragment(screenFragment, transaction);*/
                 break;
             case R.id.li_home_screen:
+                break;
             case R.id.rb_screen:
+                break;
             case R.id.li_home_screen_bottom:
 
 //                if (screenFragment == null) {
@@ -410,7 +420,12 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private List<DetailsBean> drtalist=new ArrayList<>();
     @Override
     public void onSuccess(int action, String res) {
+        switch (action){
+            //商城列表分类
+            case ACTION.MERCHANTSLIST:
 
+                break;
+        }
 
     }
     @Override
