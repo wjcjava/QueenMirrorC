@@ -2,7 +2,6 @@ package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
@@ -13,9 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopMallListBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;

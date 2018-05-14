@@ -24,8 +24,8 @@ public class FullShortAdapter extends BaseQuickAdapter<ClassificationBean, BaseV
     protected void convert(BaseViewHolder helper, ClassificationBean item) {
         List<ClassificationBean.BodyBean.ShopListDataBean> list = item.getBody().getShopListData();
 
-            helper.setText(R.id.tv_sort_name, list.get(0).getAnsShopBasic().getShopName());
-            helper.setText(R.id.tv_sort_time, list.get(0).getAnsShopBasic().getCloseTime());
+            helper.setText(R.id.sort_name, list.get(0).getAnsShopBasic().getShopName());
+            helper.setText(R.id.sort_time, list.get(0).getAnsShopBasic().getCloseTime());
 
     }
 }

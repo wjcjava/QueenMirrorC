@@ -68,7 +68,9 @@
             android:scrollbars="vertical"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <include layout="@layout/home_new_top" />
+            <include
+
+                layout="@layout/home_new_top" />
 
             <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview
                 android:id="@+id/nl_home_list_view"
