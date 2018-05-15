@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.GoodsActivity">
+    tools:context="com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShopsActivity">
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/re_home_goods"
+        android:id="@+id/re_home_shops"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

@@ -126,7 +126,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         HttpUtils.doPost(ACTION.HEADLINES, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//头条
         HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//Banner
     }
-
     /**
      * 获取首页底部商家列表
      */
@@ -138,8 +137,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         params.put("categoryId", "0");
         HttpUtils.doPost(ACTION.CLASSIFICATION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
-
     @SuppressLint("NewApi")
     @Override
     protected void initView() {

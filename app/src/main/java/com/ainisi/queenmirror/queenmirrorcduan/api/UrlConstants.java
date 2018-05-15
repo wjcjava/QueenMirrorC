@@ -80,7 +80,7 @@ public interface UrlConstants {
 
     String ACTIVITYGOODS="api/ec/common/goodsListByActivity";//商品活动列表
 
-    String ACTIVITYSHOPS="";//参与活动的商家列表
+    String ACTIVITYSHOPS="api/ec/common/shopListByActivity";//参与活动的商家列表
 
     String SHOPCARTADD="api/ans/cust/shopCartAdd";//加入购物车
 

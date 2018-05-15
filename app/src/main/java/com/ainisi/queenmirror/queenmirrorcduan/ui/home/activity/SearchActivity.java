@@ -93,7 +93,7 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack{
                 finish();
                 break;
             case R.id.title_search:
-                T.show("你点击了我");
+
                 break;
             default:
                 break;

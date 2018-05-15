@@ -423,7 +423,7 @@ public class HttpUtils {
                 break;
             //活动商家列表
             case ACTION.ACTIVITYSHOPS:
-
+                actionUrl=UrlConstants.ACTIVITYSHOPS;
                 break;
             //加入购物车
             case ACTION.SHOPCARTADD:
