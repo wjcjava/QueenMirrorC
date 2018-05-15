@@ -13,14 +13,15 @@ import java.util.List;
  * Created by john on 2018/5/11.
  */
 
-public class CommentsAdapter extends BaseQuickAdapter<CommentsBean,BaseViewHolder> {
+public class CommentsAdapter extends BaseQuickAdapter<CommentsBean.BodyBean.ApiGoodsCommentsListBean,BaseViewHolder> {
 
-    public CommentsAdapter(int layoutResId, @Nullable List<CommentsBean> data) {
+
+    public CommentsAdapter(int layoutResId, @Nullable List<CommentsBean.BodyBean.ApiGoodsCommentsListBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, CommentsBean item) {
-        helper.setText(R.id.tv_name,item.getBody().getApiGoodsCommentsList().get(0).getGoodsIdName());
+    protected void convert(BaseViewHolder helper, CommentsBean.BodyBean.ApiGoodsCommentsListBean item) {
+        helper.setText(R.id.tv_name,item.getGoodsIdName());
     }
 }

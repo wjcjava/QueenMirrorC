@@ -13,18 +13,17 @@ import java.util.List;
  * Created by john on 2018/5/12.
  */
 
-public class CommendGoodsAdapter extends BaseQuickAdapter<CommendGoodBean,BaseViewHolder> {
+public class CommendGoodsAdapter extends BaseQuickAdapter<CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean,BaseViewHolder> {
 
-    public CommendGoodsAdapter(int layoutResId, @Nullable List<CommendGoodBean> data) {
+    public CommendGoodsAdapter(int layoutResId, @Nullable List<CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, CommendGoodBean item) {
-        helper.setText(R.id.sort_name,item.getBody().getApiEcGoodsBasicList().get(0).getEcGoodsBasic().getGoodsName());
-        helper.setText(R.id.sort_time,item.getBody().getApiEcGoodsBasicList().get(0).getEcGoodsBasic().getUpdateDate());
-
-
+    protected void convert(BaseViewHolder helper, CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean item) {
+        helper.setText(R.id.sort_name,item.getEcGoodsBasic().getGoodsName());
+        helper.setText(R.id.sort_time,item.getEcGoodsBasic().getUpdateDate());
 
     }
+
 }

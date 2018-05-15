@@ -37,6 +37,8 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
     private Handler handler=new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+    private List<ClassificationBean.BodyBean.ShopListDataBean> classList;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_fullshort;
@@ -101,10 +103,8 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
                 ClassificationBean classificationBean= GsonUtil.toObj(res, ClassificationBean.class);
 
                 if(classificationBean.isSuccess()){
-                    for (int i = 0; i < classificationBean.getBody().getShopListData().size(); i++) {
-                        sortlist.add(classificationBean);
-                    }
-                    FullShortAdapter sortAdapter = new FullShortAdapter(R.layout.item_shortrecycler, sortlist);
+                   classList=classificationBean.getBody().getShopListData();
+                    FullShortAdapter sortAdapter = new FullShortAdapter(R.layout.item_shortrecycler, classList);
                     recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                     recycler.setAdapter(sortAdapter);
                     sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

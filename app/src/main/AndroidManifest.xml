@@ -47,6 +47,13 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
+    <!-- 支付权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -62,6 +69,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
         <activity
             android:name=".ui.home.activity.SelectCityActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -307,7 +325,8 @@
 
         <activity android:name=".ui.mine.activity.MineHomepageActivity" />
         <activity android:name=".ui.master.activity.MasterActivity" />
-        <activity android:name=".ui.home.activity.HomeAdvertisingActivity"></activity>
+        <activity android:name=".ui.home.activity.HomeAdvertisingActivity" />
+        <activity android:name=".ui.home.activity.GoodsActivity"></activity>
     </application>
 
 </manifest>

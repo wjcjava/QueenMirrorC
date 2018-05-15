@@ -5,12 +5,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.CommendGoodsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
-import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -27,7 +27,7 @@ import butterknife.OnClick;
 /**
  * 更多
  */
-public class RecommendedActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack ,HttpCallBack{
+public class RecommendedActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack ,HttpCallBack{
     @Bind(R.id.re_recommended)
     RecyclerView reRecommended;
     @Bind(R.id.rlm)
@@ -39,13 +39,18 @@ public class RecommendedActivity extends BaseNewActivity implements RefreshLoadM
 
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_recommended;
     }
 
     @Override
-    protected void initView() {
-        super.initView();
+    public void initPresenter() {
+
+    }
+
+    @Override
+    public void initView() {
+
         initRefresh();
     }
 
@@ -89,9 +94,9 @@ public class RecommendedActivity extends BaseNewActivity implements RefreshLoadM
         }, 1000);
     }
 
-    @Override
-    protected void initData() {
-        super.initData();
+
+    public void initData() {
+
         inithttp();
 
     }
@@ -129,11 +134,8 @@ public class RecommendedActivity extends BaseNewActivity implements RefreshLoadM
             case ACTION.COMMENDGOODS:
                 goodBean = GsonUtil.toObj(res, CommendGoodBean.class);
                 if(goodBean.isSuccess()){
-                    for (int i = 0; i < 6; i++) {
-
-                        beanList.add(goodBean);
-                    }
-                    myAdapter = new CommendGoodsAdapter(R.layout.item_shortrecycler, beanList);
+                List<CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean> list = goodBean.getBody().getApiEcGoodsBasicList();
+                    myAdapter = new CommendGoodsAdapter(R.layout.item_shortrecycler, list);
 
                     reRecommended.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     reRecommended.setAdapter(myAdapter);

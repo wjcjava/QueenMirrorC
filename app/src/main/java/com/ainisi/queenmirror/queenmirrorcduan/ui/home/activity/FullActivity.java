@@ -17,14 +17,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,8 +44,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
 
     @Bind(R.id.tv_shopping_oldprice)
     TextView tv_shopping_oldprice;
-    private List<CommendGoodBean> fulllist = new ArrayList<>();
-    private List<CommentsBean> fulllist2 = new ArrayList<>();
     private CommentsBean commentsBean;
     private CommendGoodBean goodBean;
     private FullGoodsAdapter myAdapter;
@@ -85,6 +81,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     @Override
     public void initView() {
         initText();
+        initshophttp();
 
 
     }
@@ -131,16 +128,16 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         HttpUtils.doPost(ACTION.EVALUATION,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
 
     }
+
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
             case ACTION.EVALUATION:
 
-                for (int i = 0; i < 8; i++) {
-                    commentsBean = GsonUtil.toObj(res, CommentsBean.class);
-                    fulllist2.add(commentsBean);
-                }
-                CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo,fulllist2);
+
+                commentsBean = GsonUtil.toObj(res, CommentsBean.class);
+                List<CommentsBean.BodyBean.ApiGoodsCommentsListBean> commList = commentsBean.getBody().getApiGoodsCommentsList();
+                CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo,commList);
                 frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 frecyclertwo.setAdapter(sortAdapter2);
                 break;
@@ -158,11 +155,8 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
             case ACTION.COMMENDGOODS:
                 goodBean = GsonUtil.toObj(res, CommendGoodBean.class);
                 if(goodBean.isSuccess()){
-                    for (int i = 0; i < 6; i++) {
-
-                        fulllist.add(goodBean);
-                    }
-                    myAdapter = new FullGoodsAdapter(R.layout.item_fullrecycler, fulllist);
+                    List<CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean> list = goodBean.getBody().getApiEcGoodsBasicList();
+                    myAdapter = new FullGoodsAdapter(R.layout.item_fullrecycler, list);
                     frecycler.setLayoutManager(new GridLayoutManager(this, 2));
                     frecycler.setAdapter(myAdapter);
                 }else {

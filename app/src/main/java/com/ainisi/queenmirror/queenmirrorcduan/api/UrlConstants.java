@@ -74,10 +74,14 @@ public interface UrlConstants {
 
     String CANCELCOLLECTION = "api/ec/goods/unCollectGoods";//取消收藏商品
 
-    String LABEL="/api/ec/common/tabList";//搜索标签信息
+    String LABEL="api/ec/common/tabList";//搜索标签信息
 
-    String  MERCHANTSLIST="/api/ans/shop/recommendListByCondition";//商家列表分类
+    String  MERCHANTSLIST="api/ans/shop/recommendListByCondition";//商家列表分类
 
-    String ACTIVITYGOODS="/api/ec/common/goodsListByActivity";//商品活动列表
+    String ACTIVITYGOODS="api/ec/common/goodsListByActivity";//商品活动列表
+
+    String ACTIVITYSHOPS="";//参与活动的商家列表
+
+    String SHOPCARTADD="api/ans/cust/shopCartAdd";//加入购物车
 
 }

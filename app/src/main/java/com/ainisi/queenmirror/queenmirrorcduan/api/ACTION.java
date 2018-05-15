@@ -39,7 +39,11 @@ public interface ACTION {
 
     int MERCHANTSLIST=0x018;//商家列表分类(接口失败)
 
-    int ACTIVITYGOODS=0X019;//活动商品列表
+    int ACTIVITYGOODS=0x019;//参与活动的商品列表
+
+    int ACTIVITYSHOPS=0x020;//参与活动的商家列表
+
+    int SHOPCARTADD=0x021;//加入购物车
 
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
@@ -63,16 +67,15 @@ public interface ACTION {
 
     int JUBAOSHOP = 0x115;//举报商家
 
-
     int ADDLIULAN = 0x116;//商家浏览次数
 
     int ADDGOODSLIULAN = 0x117;//商品浏览次数增加
 
-    int SHOPINDUSTRY=0X016;//商家所属行业数据
-
     int COLLECTIONPRODUCT = 0x118;//收藏商品
 
     int CANCELCOLLECTION = 0x119;//取消收藏商品
+
+
 
 
 

@@ -2,14 +2,11 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Build;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -95,7 +92,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.sc_home_scroll)
     ScrollInterceptScrollView sc_home_scroll;
     @Bind(R.id.tv_home_bustling)
-    TextView  mLocation;
+    TextView mLocation;
     private String city;
     private HomeIndustryBean homeIndustryBean;
     private HomeHeadlinesBean homeHeadlinesBean;
@@ -158,13 +155,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
                 // 没有权限，申请权限。
-                initDialog();
-
-
+                // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
+                ActivityCompat.requestPermissions(getActivity()
+                        ,new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 100);
             } else {
-                // 有权限了，去放肆吧。
-//                        Toast.makeText(getActivity(), "有权限", Toast.LENGTH_SHORT).show();
-                // 定位工具初始化
                 GDLocationUtil.init(getActivity());
                 initLocation();
             }
@@ -188,7 +182,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 startActivity(new Intent(getActivity(), FullActivity.class));
             }
         });
-
         sc_home_scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
@@ -200,38 +193,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 }
             }
         });
-
     }
 
-    private void initDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("手机未开通定位权限");
-        builder.setMessage("建议开通");
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-               dialog.dismiss();
-            }
-        });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent localIntent = new Intent();
-                localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                if (Build.VERSION.SDK_INT >= 9) {
-                    localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-                    localIntent.setData(Uri.fromParts("package", getActivity().getPackageName(), null));
-                } else if (Build.VERSION.SDK_INT <= 8) {
-                    localIntent.setAction(Intent.ACTION_VIEW);
-                    localIntent.setClassName("com.android.settings","com.android.settings.InstalledAppDetails");
-                    localIntent.putExtra("com.android.settings.ApplicationPkgName", getActivity().getPackageName());
-                }
-                startActivity(localIntent);
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+
+
+
 
     @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
             R.id.line_surface, R.id.line_uspension_surface, R.id.iv_home_search, R.id.img_information})
