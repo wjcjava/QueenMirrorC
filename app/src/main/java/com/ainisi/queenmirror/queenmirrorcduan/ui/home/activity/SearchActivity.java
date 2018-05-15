@@ -67,10 +67,7 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack{
         initHotTag();
         inithttp();
     }
-
-
     private void initHot() {
-
     }
     private void initHistory() {
 

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -143,28 +141,13 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         /**
          * 获取首页部分数据
          */
+
         getBannerData();
 
         getShopData();
-        lm = (LocationManager) getActivity().getSystemService(getActivity().LOCATION_SERVICE);
-        boolean ok = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (ok) {//开了定位服务
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                // 没有权限，申请权限。
-                // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
-                ActivityCompat.requestPermissions(getActivity()
-                        ,new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 100);
-            } else {
-                GDLocationUtil.init(getActivity());
-                initLocation();
-            }
-        } else {
-            Toast.makeText(getActivity(), "系统检测到未开启GPS定位服务", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivityForResult(intent, 1315);
-        }
+
+
+
 
         for (int i = 0; i < 10; i++) {
             SortBean sortBean = new SortBean();
@@ -192,9 +175,26 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // 没有权限，申请权限。
+            // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
+            ActivityCompat.requestPermissions(getActivity()
+                    ,new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 100);
+        } else {
 
-
-
+            GDLocationUtil.init(getActivity());
+            GDLocationUtil.getCurrentLocation(new GDLocationUtil.MyLocationListener() {
+                @Override
+                public void result(AMapLocation location) {
+                    mLocation.setText(location.getCity());
+                }
+            });
+        }
+    }
 
     @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
             R.id.line_surface, R.id.line_uspension_surface, R.id.iv_home_search, R.id.img_information})
@@ -349,27 +349,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     }
 
 
-    private void initLocation() {
-        // 获取之前定位位置，如果之前未曾定位，则重新定位
-        GDLocationUtil.getLocation(new GDLocationUtil.MyLocationListener() {
-            @Override
-            public void result(AMapLocation location) {
-                //针对location进行相关操作，如location.getCity()，无需验证location是否为null;
-                city = location.getCity();
 
-                mLocation.setText(city);
-            }
-        });
-        // 获取当前位置，无论是否定位过，重新进行定位
-        GDLocationUtil.getCurrentLocation(new GDLocationUtil.MyLocationListener() {
-
-            @Override
-            public void result(AMapLocation location) {
-                //针对location进行相关操作，如location.getCity()，无需验证location是否为null;
-                mLocation.setText(location.getCity());
-            }
-        });
-    }
 
     @Override
     public void showLoadingDialog() {

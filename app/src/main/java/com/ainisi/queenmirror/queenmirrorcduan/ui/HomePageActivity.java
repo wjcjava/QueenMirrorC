@@ -74,7 +74,6 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
                 break;
             case 1:
                 tabSelected(ll_category);
-
                 break;
             case 2:
                 tabSelected(ll_service);

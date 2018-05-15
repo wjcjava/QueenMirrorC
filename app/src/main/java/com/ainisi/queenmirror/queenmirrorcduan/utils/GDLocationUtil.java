@@ -11,89 +11,95 @@ import com.amap.api.location.AMapLocationListener;
 
 
 public class GDLocationUtil {
-    private static AMapLocationClient mlocationClient;
-    public static AMapLocationClientOption mLocationOption = null;
-    public static AMapLocation sLocation = null;
     /**
+     * 客户端
+     */
+    private static AMapLocationClient aMapLocationClient = null;
+    /**
+     * 参数
+     */
+    private static AMapLocationClientOption aMapLocationClientOption = null;
+    /**
+     * 监听设置标志
+     */
+    private static boolean setListener;
+
+    /**
+     * 定位初始化（Application之onCreate调一次）
      *
-     * @Title: init
-     * @Description: 初始化地图导航，在Application onCreate中调用，只需调用一次
      * @param context
      */
     public static void init(Context context) {
-        // 声明mLocationOption对象
-        mlocationClient = new AMapLocationClient(context);
-        // 初始化定位参数
-        mLocationOption = new AMapLocationClientOption();
-        // 设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        // 设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(2000);
-        // 设置定位参数
-        mlocationClient.setLocationOption(mLocationOption);
-        // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-        // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-        // 在定位结束后，在合适的生命周期调用onDestroy()方法
-        // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
+        // 客户端
+        aMapLocationClient = new AMapLocationClient(context);
+        // 参数
+        aMapLocationClientOption = new AMapLocationClientOption();
+        // 高精度定位模式
+        aMapLocationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        // setOnceLocationLatest(boolean b)接口true，定位SDK返回近3s精度最高结果
+        // true则setOnceLocation(boolean b)接口被设true，反之不，默认false
+        aMapLocationClientOption.setOnceLocationLatest(true);
+        // 定位间隔默认2000ms，最低1000
+        aMapLocationClientOption.setInterval(2000);
+        // 返回地址信息（默认返回）
+        aMapLocationClientOption.setNeedAddress(true);
+        // 允许模拟位置（默认true）
+        aMapLocationClientOption.setMockEnable(true);
+        // 超时默认30000ms，建议不低8000
+        aMapLocationClientOption.setHttpTimeOut(20000);
+        // 关闭缓存机制
+        aMapLocationClientOption.setLocationCacheEnable(false);
+        // 强制刷新WIFI（默认强制）
+        aMapLocationClientOption.setWifiScan(true);
+        // 传感器
+        aMapLocationClientOption.setSensorEnable(true);
+        // 客户端设参数
+        aMapLocationClient.setLocationOption(aMapLocationClientOption);
     }
+
     /**
-     *
-     * @ClassName: MyLocationListener
-     * @Description: 定位结果回调
-     * @author frank.fun@qq.com
-     * @date 2017年1月8日 下午1:53:11
-     *
+     * 定位结果回调
      */
     public interface MyLocationListener {
-        public void result(AMapLocation location);
+        /**
+         * result
+         *
+         * @param location
+         */
+        void result(AMapLocation location);
     }
+
     /**
+     * 位置获取（重发获取请求）
      *
-     * @Title: getLocation
-     * @Description: 获取位置，如果之前获取过定位结果，则不会重复获取
-     * @param listener
-     */
-    public static void getLocation(MyLocationListener listener) {
-        if (sLocation == null) {
-            getCurrentLocation(listener);
-        } else {
-            listener.result(sLocation);
-        }
-    }
-    /**
-     *
-     * @Title: getCurrentLocation
-     * @Description: 获取位置，重新发起获取位置请求
      * @param listener
      */
     public static void getCurrentLocation(final MyLocationListener listener) {
-        if (mlocationClient==null) {
+        if (aMapLocationClient == null) {
             return;
         }
-        // 设置定位监听
-        mlocationClient.setLocationListener(new AMapLocationListener() {
+        // 仅设一次防多设致结果重复输出
+        if (!setListener) {
+            aMapLocationClient.setLocationListener(new AMapLocationListener() {
 
-            @Override
-            public void onLocationChanged(AMapLocation location) {
-                if (location != null) {
-                    //定位成功，取消定位
-                    mlocationClient.stopLocation();
-                    sLocation=location;
-                    listener.result(location);
-                }else {
-                    //获取定位数据失败
+                @Override
+                public void onLocationChanged(AMapLocation location) {
+                    if (location != null) {
+                        aMapLocationClient.stopLocation();
+                        listener.result(location);
+                    }
                 }
-            }
-        });
+            });
+            setListener = true;
+        }
         // 启动定位
-        mlocationClient.startLocation();
+        aMapLocationClient.startLocation();
     }
+
     /**
-     *
-     * @Title: destroy
-     * @Description: 销毁定位，必须在退出程序时调用，否则定位会发生异常
+     * 客户端销毁（退出程序调用防定位异常）
      */
     public static void destroy() {
-        mlocationClient.onDestroy();
+        aMapLocationClient.onDestroy();
     }
 }

@@ -10,6 +10,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import butterknife.Bind;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * 发表评论
+ */
 public class DynamicActivity extends BaseNewActivity {
     @Bind(R.id.iv_title)
     CircleImageView imgTitle;
