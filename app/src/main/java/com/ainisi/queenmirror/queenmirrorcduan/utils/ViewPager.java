@@ -1,9 +1,10 @@
 package com.ainisi.queenmirror.queenmirrorcduan.utils;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 
 import java.util.List;
 

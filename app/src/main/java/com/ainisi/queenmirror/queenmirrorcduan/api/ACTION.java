@@ -75,8 +75,16 @@ public interface ACTION {
 
     int CANCELCOLLECTION = 0x119;//取消收藏商品
 
+    int ADDTOCAT = 0x120;//加入购物车
 
+    int GETCITYLIST = 0x121;//获取开通城市列表
 
+    int GETPRODUCTDETAIL = 0x122;//商品详情
 
+    int GETSHOPPINDCART = 0x123;//搜索购物车
+
+    int CHANGENUMBERCART = 0x124;//改变购物车数量问题
+
+    int DELETESHOPCART = 0x125;//删除购物车
 
 }

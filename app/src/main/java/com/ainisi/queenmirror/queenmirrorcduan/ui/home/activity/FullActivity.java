@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -17,9 +18,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ProductDetailBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -44,11 +47,29 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
 
     @Bind(R.id.tv_shopping_oldprice)
     TextView tv_shopping_oldprice;
+    @Bind(R.id.rl_full_collection)
+    RelativeLayout rl_full_collection;
+    @Bind(R.id.iv_full_collection)
+    ImageView iv_full_collection;
+
+    @Bind(R.id.full_cash)
+    TextView full_cash;
+    @Bind(R.id.tv_brief)
+    TextView tv_brief;
+    @Bind(R.id.tv_time)
+    TextView tv_time;
+    @Bind(R.id.textView4)
+    TextView textView4;
+    @Bind(R.id.tv_introduction)
+    TextView tv_introduction;
+    @Bind(R.id.tv_full_shoppingcart)
+    TextView tv_full_shoppingcart;
     private CommentsBean commentsBean;
     private CommendGoodBean goodBean;
     private FullGoodsAdapter myAdapter;
 
     boolean isColl = false;
+    String goodsId,shopId;
 
     @Override
     public int getLayoutId() {
@@ -58,15 +79,29 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     @Override
     protected void initData() {
         super.initData();
+        Intent intent = this.getIntent();
+        goodsId = intent.getStringExtra("goodsId");
+        shopId = intent.getStringExtra("shopId");
+
         inithttp();
+
+        getProductDetailData();
     }
 
     @Override
     protected void doFirstRequest() {
         super.doFirstRequest();
-
         doAddDetailData();
+    }
 
+    /**
+     * 获取商品详情信息
+     */
+    private void getProductDetailData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", goodsId);//商品ID
+        params.put("userId","111");//UID    可以不传
+        HttpUtils.doPost(ACTION.GETPRODUCTDETAIL, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     /**
@@ -74,27 +109,79 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
      */
     private void doAddDetailData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("goodsId", "0b5e8db1e94b4c44b3075940bc67a2e9");//商家ID
+        params.put("goodsId", goodsId);//商品ID  0b5e8db1e94b4c44b3075940bc67a2e9
         HttpUtils.doPost(ACTION.ADDGOODSLIULAN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 商家推荐商品的数据
+     */
+    private void initshophttp() {
+        HashMap<String, String> hashMap1 = new HashMap();
+        hashMap1.put("saleFlag", "2");
+        hashMap1.put("pageNumber", "1");
+        hashMap1.put("shopId", shopId);//shopId  111
+        hashMap1.put("pageSize","10");
+        HttpUtils.doPost(ACTION.COMMENDGOODS, hashMap1, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 商品的评价数据
+     */
+    private void inithttp() {
+        HashMap<String,String> hashMap=new HashMap<>();
+        hashMap.put("goodsId",goodsId);
+        hashMap.put("pageNumber","1");
+        hashMap.put("pageSize","10");
+        HttpUtils.doPost(ACTION.EVALUATION,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+    }
+
+
+    /**
+     * 收藏商品
+     */
+    private void getCollectionData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", "111");//
+        params.put("goodsId", goodsId);
+        HttpUtils.doPost(ACTION.COLLECTIONPRODUCT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 取消收藏商品
+     */
+    private void getCancleCollectionData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", "111");//
+        params.put("goodsId", goodsId);
+        HttpUtils.doPost(ACTION.CANCELCOLLECTION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 添加购物车
+     */
+    private void AddCatData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("custId", "111");//用户ID
+        params.put("goodsId", goodsId);
+        params.put("unitPrice",full_cash.getText().toString().substring(1,full_cash.getText().toString().length()));//价格
+        params.put("purchaseNumber","1");//数量
+        HttpUtils.doPost(ACTION.ADDTOCAT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void initView() {
         initText();
         initshophttp();
-
-
     }
     private void initText() {
-        fullTitle.setText("纯色美甲");
         fullPhoto.setImageResource(R.drawable.icon_full_fenxiang);
         fullPhoto.setVisibility(View.VISIBLE);
-
         tv_shopping_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 
-    @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart})
-    public void click(View view) {
+    @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart,R.id.rl_full_collection})
+    public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
@@ -103,52 +190,67 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
             case R.id.tv_purchase:
                 startActivity(new Intent(FullActivity.this, PurchaseActivity.class));
                 break;
-                //加入购物车
+            //加入购物车
             case R.id.tv_full_shoppingcart:
-                startActivity(new Intent(this, ShoppingCartActivity.class));
+                AddCatData();
+                break;
+                //收藏
+            case R.id.rl_full_collection:
+                if(isColl){
+                    getCancleCollectionData();
+                }else{
+                    getCollectionData();
+                }
                 break;
         }
-
-
-    }
-
-    private void initshophttp() {
-        HashMap<String, String> hashMap1 = new HashMap();
-        hashMap1.put("saleFlag", "2");
-        hashMap1.put("pageNumber", "1");
-        hashMap1.put("shopId", "111");
-        HttpUtils.doPost(ACTION.COMMENDGOODS, hashMap1, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-
-    }
-
-    private void inithttp() {
-        HashMap<String,String> hashMap=new HashMap<>();
-        hashMap.put("goodsId","111");
-        hashMap.put("pageNumber","2");
-        HttpUtils.doPost(ACTION.EVALUATION,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
-
     }
 
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
+            /**
+             * 加入购物车
+             */
+            case ACTION.ADDTOCAT:
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    T.show(successBean.getMsg());
+                    startActivity(new Intent(this, ShoppingCartActivity.class));
+                }else{
+                    T.show(successBean.getMsg());
+                }
+                break;
+            /**
+             * 商品详情
+             */
+            case ACTION.GETPRODUCTDETAIL:
+                ProductDetailBean productDetailBean = GsonUtil.toObj(res,ProductDetailBean.class);
+
+                full_cash.setText("￥"+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsPrice());
+                tv_shopping_oldprice.setText("￥"+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getOfflinePrice());
+                tv_shopping_oldprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
+
+                tv_brief.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsBrief());
+                tv_time.setText("服务时长："+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getServiceTime());
+                textView4.setText("已浏览："+"200"+"次");
+              //  tv_introduction.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsDetails().toString());
+
+                fullTitle.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsName());
+                break;
             case ACTION.EVALUATION:
-
-
                 commentsBean = GsonUtil.toObj(res, CommentsBean.class);
                 List<CommentsBean.BodyBean.ApiGoodsCommentsListBean> commList = commentsBean.getBody().getApiGoodsCommentsList();
                 CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo,commList);
                 frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 frecyclertwo.setAdapter(sortAdapter2);
                 break;
-            case ACTION.ADDGOODSLIULAN:
-                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean.isSuccess()){
-                    T.show(successBean.getMsg());
+            case ACTION.ADDGOODSLIULAN://添加浏览量
+                SuccessBean successBean1 = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean1.isSuccess()){
+                    T.show(successBean1.getMsg());
                 }else{
-                    T.show(successBean.getMsg());
+                    T.show(successBean1.getMsg());
                 }
-
 
                 break;
             //商家商品推荐
@@ -166,24 +268,28 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 break;
             case ACTION.COLLECTIONPRODUCT://收藏商品
                 isColl = true;
-                SuccessBean successBean1 = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean1.isSuccess()){
-                    T.show(successBean1.getMsg());//成功
+                SuccessBean successBean2 = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean2.isSuccess()){
+                    iv_full_collection.setImageResource(R.drawable.collection_bein);
+                  //collection_bein
+                    T.show(successBean2.getMsg());//成功
                 }else{
-                    T.show(successBean1.getMsg());
+                    iv_full_collection.setImageResource(R.drawable.icon_full_collection);
+                    T.show(successBean2.getMsg());
                 }
                 break;
             case ACTION.CANCELCOLLECTION:
                 isColl = false;
-                SuccessBean successBean2 = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean2.isSuccess()){
-                    T.show(successBean2.getMsg());//成功
+                SuccessBean successBean3 = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean3.isSuccess()){
+                    iv_full_collection.setImageResource(R.drawable.icon_full_collection);
+                    T.show(successBean3.getMsg());//成功
                 }else{
-                    T.show(successBean2.getMsg());
+                    iv_full_collection.setImageResource(R.drawable.collection_bein);
+                    T.show(successBean3.getMsg());
                 }
                 break;
         }
-
     }
 
     @Override

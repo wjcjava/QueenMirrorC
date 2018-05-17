@@ -287,8 +287,8 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             super(itemView);
             if (type == 0) {
                 homeShort = itemView.findViewById(R.id.li_home_short);
-                sortName =itemView.findViewById(R.id.sort_name);
-                sortTime =itemView.findViewById(R.id.sort_time);
+                sortName =itemView.findViewById(R.id.tv_sort_name);
+                sortTime =itemView.findViewById(R.id.tv_sort_time);
             } else {
                 return;
             }

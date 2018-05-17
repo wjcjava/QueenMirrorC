@@ -21,6 +21,7 @@ public abstract class BaseOneActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
+
         //绑定控件
         ButterKnife.bind(this);
         //初始化沉浸式

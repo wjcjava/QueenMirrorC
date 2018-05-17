@@ -12,6 +12,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActi
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.AssessedFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.RefundFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.WholeFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
 
@@ -31,8 +32,13 @@ public class OrderFragment extends BaseFragment {
     NoScrollViewPager omypager;
     @Bind(R.id.title_photo)
     ImageView title_photo;
+
+    public String order_state="";
+
     private List<String> tablist = new ArrayList<>();
     private List<Fragment> pagerlist = new ArrayList<>();
+
+    public int pos ;
 
     @Override
     protected int getLayoutResource()  {
@@ -43,7 +49,6 @@ public class OrderFragment extends BaseFragment {
     public void initPresenter() {
 
     }
-
     @OnClick({R.id.title_photo})
     public void onClick(View view){
 
@@ -61,42 +66,38 @@ public class OrderFragment extends BaseFragment {
         initDate();
     }
     private void initDate() {
-        tablist.add("全部订单");
-        tablist.add("待付款");
-        tablist.add("待接单");
-        tablist.add("服务中");
-        tablist.add("待评价");
-        tablist.add("已完成");
-        tablist.add("退款");
 
+        if(tablist.size() == 0){
+            tablist.add("全部订单");
+            tablist.add("待付款");
+            tablist.add("待接单");
+            tablist.add("服务中");
+            tablist.add("待评价");
+            tablist.add("已完成");
+            tablist.add("退款");
+        }
         /**
          //全部订单
          //待评价
          //退款
          */
-        pagerlist.add(new WholeFragment());
-        pagerlist.add(new AssessedFragment());
-        pagerlist.add(new RefundFragment());
-        pagerlist.add(new WholeFragment());
-        pagerlist.add(new WholeFragment());
-        pagerlist.add(new WholeFragment());
-        pagerlist.add(new WholeFragment());
+        if(pagerlist.size() == 0){
+            pagerlist.add(new WholeFragment().newInstance(""));
+            pagerlist.add(new WholeFragment().newInstance("UP"));
+            pagerlist.add(new WholeFragment().newInstance("UT"));
+            pagerlist.add(new WholeFragment().newInstance("US"));
+            pagerlist.add(new WholeFragment().newInstance("UC"));
+            pagerlist.add(new WholeFragment().newInstance("FN"));
+            pagerlist.add(new RefundFragment());
+        }
 
-        ViewPager viewPager = new ViewPager(getChildFragmentManager(), pagerlist, tablist);
+        ViewPager viewPager = new ViewPager(this.getChildFragmentManager(), pagerlist, tablist);
         omypager.setAdapter(viewPager);
         omypager.setScanScroll(true);
-
-
 
         for (int i = 0; i < tablist.size(); i++) {
             otablayout.addTab(otablayout.newTab().setText(tablist.get(i)));
         }
         otablayout.setupWithViewPager(omypager);
-
     }
-
-
-
-
-
 }

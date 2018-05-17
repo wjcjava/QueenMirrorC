@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:id="@+id/rl_workroom_list"
     android:layout_height="@dimen/comment_120_dip"
     android:background="@drawable/et_shap">
 
@@ -132,11 +133,14 @@
         android:textSize="@dimen/comment_14_size" />
 
     <ImageView
-        android:layout_width="@dimen/comment_20_dip"
-        android:layout_height="@dimen/comment_20_dip"
+        android:id="@+id/iv_workroom_add_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_30_dip"
         android:layout_alignParentRight="true"
         android:layout_below="@id/relativeLayout"
         android:layout_marginEnd="@dimen/comment_35_dip"
-        android:layout_marginTop="@dimen/comment_19_dip"
-        android:src="@drawable/inco_workroom_add"/>
+        android:padding="@dimen/comment_5_dip"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="@dimen/comment_15_dip"
+        android:src="@drawable/inco_workroom_add" />
 </RelativeLayout>

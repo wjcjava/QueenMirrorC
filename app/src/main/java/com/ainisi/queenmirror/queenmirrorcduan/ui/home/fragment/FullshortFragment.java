@@ -33,12 +33,10 @@ import butterknife.Bind;
 public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack,HttpCallBack{
     @Bind(R.id.full_sore_recycler)
     RecyclerView recycler;
-    List<ClassificationBean> sortlist = new ArrayList<>();
+    List<ClassificationBean.BodyBean.ShopListDataBean> sortlist = new ArrayList<>();
     private Handler handler=new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
-    private List<ClassificationBean.BodyBean.ShopListDataBean> classList;
-
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_fullshort;
@@ -92,6 +90,7 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
         params.put("pageNumber", "1");
         params.put("contentByTitle", "");
         params.put("categoryId", "0");
+        params.put("pageSize","10");
         HttpUtils.doPost(ACTION.CLASSIFICATION,params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
@@ -103,8 +102,9 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
                 ClassificationBean classificationBean= GsonUtil.toObj(res, ClassificationBean.class);
 
                 if(classificationBean.isSuccess()){
-                   classList=classificationBean.getBody().getShopListData();
-                    FullShortAdapter sortAdapter = new FullShortAdapter(R.layout.item_shortrecycler, classList);
+                    sortlist = classificationBean.getBody().getShopListData();
+
+                    FullShortAdapter sortAdapter = new FullShortAdapter(getActivity(),R.layout.item_shortrecycler, sortlist);
                     recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                     recycler.setAdapter(sortAdapter);
                     sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

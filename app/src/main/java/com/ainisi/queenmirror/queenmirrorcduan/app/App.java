@@ -13,11 +13,8 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
-
-
 import java.io.IOException;
 import java.util.logging.Level;
-
 import okhttp3.Authenticator;
 import okhttp3.Credentials;
 import okhttp3.Request;
@@ -38,9 +35,12 @@ public class App extends MultiDexApplication {
         super.onCreate();
         ViewTarget.setTagId(R.id.glide_tag);
 
-        /*JPushInterface.setDebugMode(true);
-        JPushInterface.init(this);*/
-
+      /*  //设置LOG开关，默认为false
+        UMConfigure.setLogEnabled(true);
+        //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
+        UMConfigure.init(this, "5afa51818f4a9d296100014b", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
+                "38c62f307e5bf45492df19e86ddc4dbb");
+        //PushSDK初始化(如使用推送SDK，必须调用此方法)*/
 
         //L.e("...................adadassaasdasdasdasdasd..............................."+JPushInterface.getRegistrationID(this));
 

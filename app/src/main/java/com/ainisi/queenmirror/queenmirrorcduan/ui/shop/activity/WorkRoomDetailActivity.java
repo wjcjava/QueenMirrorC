@@ -92,8 +92,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     @Bind(R.id.tv_work_detail_guanzhu)
     TextView tv_work_detail_guanzhu;
-    @Bind(R.id.rl_full_collection)
-    RelativeLayout rl_full_collection;
 
     List<SortBean> sortlist = new ArrayList<>();
     List<String> tabList = new ArrayList<>();
@@ -163,7 +161,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 break;
             case ACTION.SHOPTUIJIANLIST://获取商家推荐商品列表
                 ShopTuijianBean shopTuijianBean = GsonUtil.toObj(res,ShopTuijianBean.class);
-
                 apiEcGoodsBasicList = shopTuijianBean.getBody().getApiEcGoodsBasicList();
 
                 ShopTuijianAdapter sortAdapter = new ShopTuijianAdapter(R.layout.re_full_recommend, apiEcGoodsBasicList);
@@ -182,8 +179,15 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             case ACTION.SHOPXINYONG://获取门店信用
                 ShopXinyongBean shopXinyongBean = GsonUtil.toObj(res,ShopXinyongBean.class);
                 apiShopScoreList = shopXinyongBean.getBody().getApiShopScoreList();
-                creditAdapter = new WorkCreditAdapter(WorkRoomDetailActivity.this,apiShopScoreList);
-                listView.setAdapter(creditAdapter);
+                /**
+                 *
+                 */
+                if(apiShopScoreList.size()>0){
+                    creditAdapter = new WorkCreditAdapter(WorkRoomDetailActivity.this,apiShopScoreList);
+                    listView.setAdapter(creditAdapter);
+                }else{
+                    T.show("暂无数据");
+                }
                 break;
             case ACTION.SHOPDETAILDATA://获取商家具体信息
                 ShopDetailDataBean shopDetailDataBean = GsonUtil.toObj(res,ShopDetailDataBean.class);
@@ -400,17 +404,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     }
 
-    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.tv_work_detail_guanzhu,R.id.tv_workroom_service_jubao,R.id.rl_full_collection})
+    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.tv_work_detail_guanzhu,R.id.tv_workroom_service_jubao})
     public void OnClick(View view) {
         switch (view.getId()) {
-            case R.id.rl_full_collection:
-                L.e("点击收藏。。。。。。。。。。。。。。。。。。");
-                if(isColl){
-                    getCancleCollectionData();
-                }else {
-                    getCollectionData();
-                }
-                break;
             case R.id.iv_common_back:
                 finish();
                 break;
@@ -429,13 +425,13 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 /**
                  * 这里应该判断是否登录，有没有关注过
                  */
-
                 if(tv_work_detail_guanzhu.getText().equals("关注")){
                     guanzhuData();//关注
                 }else{
                     cancelGuanzhuData();//取消关注
                 }
                 break;
+                //举报
             case R.id.tv_workroom_service_jubao:
                 jubaoData();
                 break;
@@ -452,16 +448,13 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     }
 
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         // TODO Auto-generated method stub
 
-
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
             searchLayoutTop = li_workroom_top.getBottom();// 获取searchLayout的顶部位置
-
         }
     }
 

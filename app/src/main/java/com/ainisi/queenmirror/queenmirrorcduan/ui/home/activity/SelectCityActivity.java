@@ -8,10 +8,20 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.SelectCityAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SelectCityBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeNewFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -21,59 +31,73 @@ import butterknife.OnClick;
  * @function Created on 2017/8/4.
  * 位置
  */
-public class SelectCityActivity extends BaseNewActivity{
+public class SelectCityActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.title_title)
     TextView StTitle;
     @Bind(R.id.rc_selsctcity)
     RecyclerView HmSelecity;
-
-    private List<SortBean> sortlist = new ArrayList<>();
+    @Bind(R.id.tv_select_city_gps)
+    TextView tv_select_city_gps;
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_selectcity_layout;
     }
 
-
-
     @Override
     public void initView() {
-        StTitle.setText(R.string.search_the_shop);
+        StTitle.setText("选择城市");
+
         initDate();
 
     }
-
     private void initDate() {
-        for (int i = 0; i < 10; i++) {
-            SortBean sortBean = new SortBean();
-            sortBean.setName("MOCO美容美发沙龙");
-            sortBean.setTime("营业时间 9:00-20:00");
-            sortBean.setLogo(R.drawable.ic_sortrecyle_logo);
-            sortBean.setStars(R.drawable.icon_home_recommend);
-            sortBean.setDistance("875m");
-            sortlist.add(sortBean);
-        }
-
-        MyAdapter sortAdapter = new MyAdapter( R.layout.item_rcselect,sortlist);
-        HmSelecity.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        HmSelecity.setAdapter(sortAdapter);
-
+        HashMap<String, String> hashMap = new HashMap<>();
+        HttpUtils.doPost(ACTION.GETCITYLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//获取已开通城市
     }
-
-    @OnClick({R.id.title_back
-    })
+    @OnClick({R.id.title_back,R.id.tv_select_city_gps})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
+            case R.id.tv_select_city_gps:
+                HomeNewFragment.instance.mLocation.setText(tv_select_city_gps.getText().toString()+" ");
+                SelectCityActivity.this.finish();
+                break;
             default:
                 break;
-
         }
+    }
 
+    @Override
+    public void onSuccess(int action, String res) {
+
+        switch (action){
+            case ACTION.GETCITYLIST:
+                final SelectCityBean selectCityBean = GsonUtil.toObj(res,SelectCityBean.class);
+                SelectCityAdapter sortAdapter = new SelectCityAdapter( R.layout.activity_city_layout,selectCityBean.getBody().getCityListData());
+                HmSelecity.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                HmSelecity.setAdapter(sortAdapter);
+
+                sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        HomeNewFragment.instance.mLocation.setText(selectCityBean.getBody().getCityListData().get(position).getArea().getName()+" ");
+                        SelectCityActivity.this.finish();
+                    }
+                });
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
 
     }
 
+    @Override
+    public void showErrorMessage(String s) {
 
+    }
 }
