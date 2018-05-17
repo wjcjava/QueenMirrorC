@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -74,11 +73,11 @@ public class AssessedFragment extends BaseFragment implements RefreshLoadMoreLay
 
     @Override
     protected void initView() {
-        for (int i = 0; i <10 ; i++) {
+        for (int i = 0; i <1 ; i++) {
             SortBean sortBean=new SortBean();
             list.add(sortBean);
         }
-        MyAdapter sbmitWholeAdapter=new MyAdapter(R.layout.item_sbmitrecycler,list);
+        MyAdapter sbmitWholeAdapter=new MyAdapter(R.layout.item_assessed,list);
         assessde.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL,false));
         assessde.setAdapter(sbmitWholeAdapter);
         sbmitWholeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

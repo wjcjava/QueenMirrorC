@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
@@ -19,6 +19,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
+
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -92,20 +93,17 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 initSee();
                 break;
             case R.id.bt_user_confirmregistration:
-                if (TextUtils.isEmpty(phoneNumber.getText().toString().trim()) || TextUtils.isEmpty(validation.getText().toString().trim()) || TextUtils.isEmpty(passWord.getText().toString().trim())) {
-                    Toast.makeText(this, "请将信息输入完整", Toast.LENGTH_SHORT).show();
-                } else {
-                    T.show("注册成功");
+
                     HashMap<String, String> paramsRegister = new HashMap<>();
-                    paramsRegister.put("cellPhone",phoneNumber.getText().toString());
-                    paramsRegister.put("userPass",passWord.getText().toString());
+                    paramsRegister.put("cellPhone",phoneNumber.getText().toString().trim());
+                    paramsRegister.put("userPass",passWord.getText().toString().trim());
                     paramsRegister.put("contractConfirm","1");
                     paramsRegister.put("inviteCode","");
                     paramsRegister.put("ifFirst","0");
-                   // paramsRegister.put("verifyCode",ceshiBean.getBody().getVerifyCode());
-                    paramsRegister.put("verifyCodeCust",etValidation.getText().toString());
+                    paramsRegister.put("verifyCode",ceshiBean.getBody().getVerifyCode());
+                    paramsRegister.put("verifyCodeCust",etValidation.getText().toString().trim());
                     HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-                }
+
                 break;
         }
     }
@@ -143,7 +141,6 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
@@ -153,6 +150,8 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 if(ceshiBean.isSuccess()){
                     myCountDownTimer.start();
                     L.e(ceshiBean.getMsg()+"      "+ ceshiBean.getErrorCode());
+                    T.show(ceshiBean.getBody().getVerifyCode());
+                    etValidation.setText(ceshiBean.getBody().getVerifyCode());
                 }else{
                     T.show("系统出错，请稍后再试");
                 }

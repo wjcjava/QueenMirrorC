@@ -10,6 +10,7 @@
 
     <com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView
         android:layout_width="match_parent"
+
         android:background="@color/alpha_05_black"
         android:layout_height="wrap_content">
 
@@ -17,13 +18,9 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/root_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <RelativeLayout
 
-                android:background="@color/gray_cccccc"
+            <RelativeLayout
+                android:id="@+id/root_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -69,9 +66,8 @@
                         android:text="@string/mondelNumber"
                         android:textSize="@dimen/comment_15_dip" />
                 </RelativeLayout>
-
             </RelativeLayout>
-            </android.support.design.widget.AppBarLayout>
+
             <ImageView
                 android:id="@+id/iv_model_my"
                 android:layout_width="@dimen/comment_330_dip"

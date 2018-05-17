@@ -26,7 +26,7 @@ public interface UrlConstants {
 
     String VERIFY = "api/ans/login/verifyCodeGet";//请求方法名(获取验证码)
 
-    String LOGIN = "userinfoApi/userLogin";//登录
+    String LOGIN = "api/ans/login/userLogin";//登录
 
     String LIST = "api/ans/refund/refundApplyList";//测试（listce测试）
 

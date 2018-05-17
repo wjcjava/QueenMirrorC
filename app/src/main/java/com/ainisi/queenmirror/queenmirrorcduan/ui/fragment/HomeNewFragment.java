@@ -93,7 +93,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.tv_home_bustling)
     public
     TextView mLocation;
-    private String city;
+
     private HomeIndustryBean homeIndustryBean;
     private HomeHeadlinesBean homeHeadlinesBean;
     private HomeAdvertisingBean homeAdvertisingBean;

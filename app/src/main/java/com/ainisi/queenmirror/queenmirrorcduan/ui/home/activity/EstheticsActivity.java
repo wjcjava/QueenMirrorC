@@ -15,22 +15,18 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.EstheticsAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
-import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FulldistanFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullsalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullscreenFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullshortFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
@@ -48,7 +44,7 @@ import butterknife.OnClick;
 /**
  * 美学汇（美甲美手）
  */
-public class EstheticsActivity extends BaseActivity implements HttpCallBack{
+public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     @Bind(R.id.full_rb_sort)
     TextView hSort;
     @Bind(R.id.re_recommendable_projects)
@@ -67,7 +63,6 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
     NoScrollViewPager fullpager;
     @Bind(R.id.newtitle_title)
     TextView newtitle_title;
-
     //综合排序
     FullshortFragment sortFragment = new FullshortFragment();
     //销量最高
@@ -80,11 +75,10 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
     private View popview1;
     private PopupWindow pop;
     private List<Fragment> pagerList = new ArrayList<>();
-
     List<EstheticsBean.BodyBean.ApiShopListBean> apiShopList = new ArrayList<>();
     private List<ProblemBean> list = new ArrayList<>();
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
-    String shop_name,categoryId;
+    String shop_name, categoryId;
     int pageNumber = 1;
     EstheticsAdapter sortAdapter;
     @Override
@@ -98,25 +92,25 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.MERCHANTSLIST:
-                EstheticsBean estheticsBean = GsonUtil.toObj(res,EstheticsBean.class);
+                EstheticsBean estheticsBean = GsonUtil.toObj(res, EstheticsBean.class);
                 apiShopList = estheticsBean.getBody().getApiShopList();
-                if(estheticsBean.isSuccess()){
-                    sortAdapter =new EstheticsAdapter(R.layout.re_full_recommend,apiShopList);
-                    reProjects.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+                if (estheticsBean.isSuccess()) {
+                    sortAdapter = new EstheticsAdapter(R.layout.re_full_recommend, apiShopList);
+                    reProjects.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
                     reProjects.setAdapter(sortAdapter);
 
                     sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                             Intent intent = new Intent(EstheticsActivity.this, WorkRoomDetailActivity.class);
-                            intent.putExtra("shopName",apiShopList.get(position).getAnsShopBasic().getShopName());
-                            intent.putExtra("shopId",apiShopList.get(position).getAnsShopBasic().getId());
+                            intent.putExtra("shopName", apiShopList.get(position).getAnsShopBasic().getShopName());
+                            intent.putExtra("shopId", apiShopList.get(position).getAnsShopBasic().getId());
                             startActivity(intent);
                         }
                     });
-                }else{
+                } else {
                     T.show(estheticsBean.getMsg());
                 }
                 break;
@@ -129,22 +123,19 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
         shop_name = intent.getStringExtra("shop_name");
         newtitle_title.setText(shop_name);
         categoryId = intent.getStringExtra("categoryId");
-
         getTuijianData();
-
         initDate();
         initfragment();
     }
-
     /**
      * 获取推荐好店的数据
      */
     private void getTuijianData() {
-        HashMap<String,String> hashMap=new HashMap();
-        hashMap.put("categoryId",categoryId);
-        hashMap.put("pageNumber",pageNumber+"");
-        hashMap.put("pageSize","10");
-        HttpUtils.doPost(ACTION.MERCHANTSLIST,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> hashMap = new HashMap();
+        hashMap.put("categoryId", categoryId);
+        hashMap.put("pageNumber", pageNumber + "");
+        hashMap.put("pageSize", "10");
+        HttpUtils.doPost(ACTION.MERCHANTSLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     private void initfragment() {
@@ -174,9 +165,8 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
             }
         });
         pop.dismiss();
-
-
     }
+
     private void initpop(View popview1) {
         final RecyclerView ce = popview1.findViewById(R.id.rc_popview);
         for (int i = 0; i < problem.length; i++) {
@@ -184,7 +174,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
             problemBean.setName(problem[i]);
             list.add(problemBean);
         }
-        ProblemAdapter problemAdapter = new ProblemAdapter(R.layout.item_pop_sort,list);
+        ProblemAdapter problemAdapter = new ProblemAdapter(R.layout.item_pop_sort, list);
         ce.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         ce.setAdapter(problemAdapter);
         problemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -196,9 +186,9 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
         });
     }
 
-    @OnClick({R.id.ed_keyword,R.id.iv_back,R.id.full_rb_sort, R.id.full_rb_sales,
+    @OnClick({R.id.ed_keyword, R.id.iv_back, R.id.full_rb_sort, R.id.full_rb_sales,
             R.id.full_rb_distance, R.id.full_rb_screen, R.id.iv_sort, R.id.iv_sort1
-            ,R.id.tv_more})
+            , R.id.tv_more})
     public void click(View view) {
         switch (view.getId()) {
             //搜索
@@ -214,7 +204,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
 //                break;
             //更多
             case R.id.tv_more:
-                startActivity(new Intent(this,RecommendedActivity.class));
+                startActivity(new Intent(this, RecommendedActivity.class));
                 break;
             //综合选择
             case R.id.iv_sort:
@@ -258,6 +248,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
 
         }
     }
+
     private void initview(final View popview) {
         TextView eliminateTv = popview.findViewById(R.id.tv_eliminate);
         TextView okTv = popview.findViewById(R.id.tv_ok);
@@ -273,4 +264,10 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack{
     @Override
     public void showLoadingDialog() {
 
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }
