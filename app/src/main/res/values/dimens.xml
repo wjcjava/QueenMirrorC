@@ -110,6 +110,11 @@
     <dimen name="comment_216_dip">216dp</dimen>
     <dimen name="comment_212_dip">212dp</dimen>
     <dimen name="comment_42_dip">42dp</dimen>
+    <dimen name="comment_345_dip">345dp</dimen>
+    <dimen name="comment_102_dip">102sp</dimen>
+    <dimen name="comment_73_dip">73dp</dimen>
+    <dimen name="comment_86_dip">86dp</dimen>
+    <dimen name="comment_235_dip">235dp</dimen>
 
 
 </resources>

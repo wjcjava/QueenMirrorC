@@ -326,7 +326,11 @@
         <activity android:name=".ui.master.activity.MasterActivity" />
         <activity android:name=".ui.home.activity.HomeAdvertisingActivity" />
         <activity android:name=".ui.home.activity.GoodsActivity" />
-        <activity android:name=".ui.home.activity.ShopsActivity"></activity>
+        <activity android:name=".ui.home.activity.ShopsActivity" />
+        <activity android:name=".ui.home.activity.MondelActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent"
+            />
     </application>
 
 </manifest>

@@ -29,7 +29,7 @@ public class AllDetailFragment extends BaseFragment implements RefreshLoadMoreLa
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     private Handler handler = new Handler();
-    private List<SortBean> list=new ArrayList<>();
+    private List<SortBean> list = new ArrayList<>();
 
     @Override
     protected int getLayoutResource() {
@@ -41,7 +41,6 @@ public class AllDetailFragment extends BaseFragment implements RefreshLoadMoreLa
         mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
                 .canLoadMore(true)
                 .autoLoadMore()
-
                 .showLastRefreshTime(
                         RefreshLoadMoreLayout.class,
                         "yyyy-MM-dd")
@@ -49,19 +48,17 @@ public class AllDetailFragment extends BaseFragment implements RefreshLoadMoreLa
 
     }
 
-
-
     @Override
     protected void initView() {
-        for (int i = 0; i <8 ; i++) {
-            SortBean sortBean=new SortBean();
+        for (int i = 0; i < 8; i++) {
+            SortBean sortBean = new SortBean();
             sortBean.setName("");
             sortBean.setTime("");
             sortBean.setDistance("");
             list.add(sortBean);
         }
-        MyAdapter sortAdapter2=new MyAdapter(R.layout.item_rcbean,list);
-        detailrecycle.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        MyAdapter sortAdapter2 = new MyAdapter(R.layout.item_rcbean, list);
+        detailrecycle.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         detailrecycle.setAdapter(sortAdapter2);
 
     }

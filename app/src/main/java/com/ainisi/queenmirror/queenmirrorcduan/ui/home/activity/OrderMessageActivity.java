@@ -114,11 +114,7 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
                 break;
             default:
                 break;
-
-
         }
-
-
     }
 
     public void inithttp() {

@@ -6,6 +6,7 @@ import android.view.View;
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MondelActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.InstallActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineAuthenticationActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineBeanActivity;
@@ -54,7 +55,7 @@ public class MineFragment extends BaseFragment {
             R.id.ly_mine_discount, R.id.ly_mine_foot, R.id.ly_mine_bean,
             R.id.layout_gift, R.id.layout_beauty, R.id.li_mine_homepage,
             R.id.layout_problem, R.id.lay_service, R.id.ly_mine_wallet,
-            R.id.li_mine_main_authentication
+            R.id.li_mine_main_authentication, R.id.li_mine_model
     })
     public void click(View view) {
         switch (view.getId()) {
@@ -136,6 +137,10 @@ public class MineFragment extends BaseFragment {
             //客服
             case R.id.lay_service:
                 getActivity().startActivity(new Intent(getActivity(), MineMyServiceActivity.class));
+                break;
+            //魔豆商城
+            case R.id.li_mine_model:
+                getActivity().startActivity(new Intent(getActivity(), MondelActivity.class));
                 break;
             default:
                 break;

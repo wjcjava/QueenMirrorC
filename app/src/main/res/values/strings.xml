@@ -225,6 +225,10 @@
     <string name="city_suzhou">苏州</string>
     <string name="my_address">我的地址</string>
     <string name="MyHomepage">我的主页</string>
+    <string name="Modelshop">魔豆商城</string>
+    <string name="mondelNumber">我的魔豆数</string>
+    <string name="mondelService">魔豆服务</string>
+    <string name="exchangeShop">兑换好物</string>
 
 
 </resources>

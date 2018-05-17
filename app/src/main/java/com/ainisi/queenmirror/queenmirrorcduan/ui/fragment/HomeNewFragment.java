@@ -174,7 +174,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -185,7 +184,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             ActivityCompat.requestPermissions(getActivity()
                     ,new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 100);
         } else {
-
             GDLocationUtil.init(getActivity());
             GDLocationUtil.getCurrentLocation(new GDLocationUtil.MyLocationListener() {
                 @Override
