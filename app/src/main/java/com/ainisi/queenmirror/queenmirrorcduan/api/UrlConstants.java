@@ -82,6 +82,16 @@ public interface UrlConstants {
 
     String ACTIVITYSHOPS="api/ec/common/shopListByActivity";//参与活动的商家列表
 
-    String SHOPCARTADD="api/ans/cust/shopCartAdd";//加入购物车
+    String SHOPCARTADD="api/ans/cart/shopCartAdd";//加入购物车
+    String ADDTOCAT = "api/ans/cart/shopCartAdd";//加入购物车
 
+    String GETCITYLIST = "api/ec/city/cityList";//获取城市列表
+
+    String GETPRODUCTDETAIL = "api/ec/goods/details";//获取商品详情
+
+    String GETSHOPPINDCART = "api/ans/cart/shopCartGet";//搜索购物车
+
+    String CHANGENUMBERCART = "api/ans/cart/shopCartNumEdit";//改变购物车数量
+
+    String DELETESHOPCART = "api/ans/cart/shopCartDelete";//删除购物车
 }

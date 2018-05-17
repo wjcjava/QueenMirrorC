@@ -13,15 +13,22 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.GoodsInfo;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.StoreInfo;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilTool;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilsLog;
+import com.lzy.okgo.cache.CacheMode;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +40,7 @@ import butterknife.ButterKnife;
  * 购物车适配器
  */
 
-public class ShopcatAdapter extends BaseExpandableListAdapter {
+public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCallBack{
     private List<StoreInfo> groups;
     //这个String对应着StoreInfo的Id，也就是店铺的Id
     private Map<String, List<GoodsInfo>> childrens;
@@ -42,6 +49,8 @@ public class ShopcatAdapter extends BaseExpandableListAdapter {
     private ModifyCountInterface modifyCountInterface;
     private GroupEditorListener groupEditorListener;
     private int count = 0;
+
+    String cartId;
     private boolean flag=true; //组的编辑按钮是否可见，true可见，false不可见
     public ShopcatAdapter(List<StoreInfo> groups, Map<String, List<GoodsInfo>> childrens, Context mcontext) {
         this.groups = groups;
@@ -121,7 +130,13 @@ public class ShopcatAdapter extends BaseExpandableListAdapter {
         final GoodsInfo child = (GoodsInfo) getChild(groupPosition, childPosition);
         if (child != null) {
 
+            cartId = child.getId();
+
             childViewHolder.goodsNum.setText(String.valueOf(child.getCount()));
+
+            childViewHolder.tv_shop_name.setText(child.getName());
+            childViewHolder.tv_shop_cart_price.setText("￥"+child.getPrice());
+
             childViewHolder.goodsImage.setImageResource(R.drawable.icon_home_beautiful);
             //设置打折前的原价
             SpannableString spannableString = new SpannableString("￥" + child.getPrime_price() + "");
@@ -140,13 +155,21 @@ public class ShopcatAdapter extends BaseExpandableListAdapter {
             childViewHolder.increaseGoodsNum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /**
+                     * 点击加号
+                     */
                     modifyCountInterface.doIncrease(groupPosition, childPosition, childViewHolder.goodsNum, childViewHolder.singleCheckBox.isChecked());
+
+                    doNumberData();
+
                 }
             });
             childViewHolder.reduceGoodsNum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     modifyCountInterface.doDecrease(groupPosition, childPosition, childViewHolder.goodsNum, childViewHolder.singleCheckBox.isChecked());
+
+                    doNumberData();
                 }
             });
             childViewHolder.goodsNum.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +183,40 @@ public class ShopcatAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    /**
+     * 点击改变数量，通知服务器
+     */
+    private void doNumberData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", "111");//用户ID
+        params.put("num", count+"");
+        params.put("cartId",cartId);
+        HttpUtils.doPost(ACTION.CHANGENUMBERCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.CHANGENUMBERCART:
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                }else{
+                    T.show(successBean.getMsg());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
     /**
      *
      * @param groupPosition
@@ -204,6 +261,8 @@ public class ShopcatAdapter extends BaseExpandableListAdapter {
                     num.setText(String.valueOf(number));
                     child.setCount(number);
                     modifyCountInterface.doUpdate(groupPosition,childPosition,showCountView,isChecked);
+
+                    doNumberData();
                     dialog.dismiss();
                 }
             }
@@ -366,6 +425,10 @@ public class ShopcatAdapter extends BaseExpandableListAdapter {
         TextView goodsNum;
         @Bind(R.id.increase_goods_Num)
         TextView increaseGoodsNum;
+        @Bind(R.id.tv_shop_name)
+        TextView tv_shop_name;
+        @Bind(R.id.tv_shop_cart_price)
+        TextView tv_shop_cart_price;
 
 
         public ChildViewHolder(View view) {

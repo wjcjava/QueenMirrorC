@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="70dp">
                 <TextView
-                    android:id="@+id/sort_name"
+                    android:id="@+id/tv_sort_name"
                     android:textSize="@dimen/comment_14_size"
                     android:textColor="#000"
                     android:gravity="bottom"
@@ -45,7 +45,7 @@
                     android:layout_height="20dp" />
                 <TextView
                     android:gravity="bottom"
-                    android:id="@+id/sort_time"
+                    android:id="@+id/tv_sort_time"
                     android:textSize="@dimen/comment_10_size"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" />

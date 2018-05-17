@@ -12,13 +12,21 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ShopcatAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.GoodsInfo;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.StoreInfo;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilTool;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilsLog;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.StatusBarUtil;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +68,9 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     private ShopcatAdapter adapter;
     private List<StoreInfo> groups; //组元素的列表
     private Map<String, List<GoodsInfo>> childs; //子元素的列表
+    ShoppingCartBean shoppingCartBean;
+
+    String delIds="";
 
     @Override
     protected int getLayoutId() {
@@ -69,7 +80,20 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
 
     @Override
     public void onSuccess(int action, String res) {
-
+        switch (action){
+            case ACTION.GETSHOPPINDCART:
+                shoppingCartBean = GsonUtil.toObj(res,ShoppingCartBean.class);
+                initEvents();
+                break;
+            case ACTION.DELETESHOPCART:
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    T.show(successBean.getMsg());
+                }else{
+                    T.show(successBean.getMsg());
+                }
+                break;
+        }
     }
 
     @Override
@@ -86,26 +110,51 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     protected void initView() {
         super.initView();
 
-        initEvents();
+        getShopCartData();
+
     }
 
+    /**
+     * 获取购物车数据
+     */
+    private void getShopCartData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("custId", "111");//用户ID
+        HttpUtils.doPost(ACTION.GETSHOPPINDCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 删除购物车数据
+     */
+    private void DeleteShopCartData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", "111");//用户ID
+        params.put("delIds",delIds);
+        HttpUtils.doPost(ACTION.DELETESHOPCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
 
     private void initEvents() {
+
+        List<ShoppingCartBean.BodyBean.ShopListBean.ApiAnsCustCartListBean> apiAnsCustCartListBeans = new ArrayList<>();
 
         mcontext = this;
         groups = new ArrayList<StoreInfo>();
         childs = new HashMap<String, List<GoodsInfo>>();
-        for (int i = 0; i < 5; i++) {
-            groups.add(new StoreInfo(i + "", "MOCO形象工作室>"));
+        for (int i = 0; i < shoppingCartBean.getBody().getShopList().size(); i++) {
+            groups.add(new StoreInfo(i + "", shoppingCartBean.getBody().getShopList().get(i).getShopName()));
             List<GoodsInfo> goods = new ArrayList<>();
-            for (int j = 0; j <= i; j++) {
-                int[] img = {R.drawable.icon_home_beautiful, R.drawable.icon_home_beautiful, R.drawable.icon_home_beautiful, R.drawable.icon_home_beautiful, R.drawable.icon_home_beautiful, R.drawable.icon_home_beautiful};
+
+            apiAnsCustCartListBeans = shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList();
+            for (int j = 0; j < shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().size(); j++) {
+                int img = R.drawable.icon_home_beautiful;
                 //i-j 就是商品的id， 对应着第几个店铺的第几个商品，1-1 就是第一个店铺的第一个商品,价格,在加商品时的数量
-                goods.add(new GoodsInfo(i + "-" + j, "商品", groups.get(i).getName() + "的第" + (j + 1) + "个商品", 138.00 + 0, 138+ 0, "第一排", "出头天者", img[j], 0));
+                goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), "第一排", "出头天者", img, 1));
             }
 
             childs.put(groups.get(i).getId(), goods);
         }
+
+        setCartNum();
 
         actionBarEdit.setOnClickListener(this);
 
@@ -140,7 +189,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     @Override
     protected void onResume() {
         super.onResume();
-        setCartNum();
+       // setCartNum();
     }
 
     /**
@@ -161,7 +210,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         if (count == 0) {
             clearCart();
         } else {
-            shoppingcatNum.setText("购物车(" + count + ")");
+            shoppingcatNum.setText("购物车");
         }
 
     }
@@ -178,6 +227,8 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      * 1.不要边遍历边删除,容易出现数组越界的情况
      * 2.把将要删除的对象放进相应的容器中，待遍历完，用removeAll的方式进行删除
      */
+    List<GoodsInfo> toBeDeleteChilds;
+    List<GoodsInfo> childde;
     private void doDelete() {
         List<StoreInfo> toBeDeleteGroups = new ArrayList<StoreInfo>(); //待删除的组元素
         for (int i = 0; i < groups.size(); i++) {
@@ -185,16 +236,23 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
             if (group.isChoosed()) {
                 toBeDeleteGroups.add(group);
             }
-            List<GoodsInfo> toBeDeleteChilds = new ArrayList<GoodsInfo>();//待删除的子元素
-            List<GoodsInfo> child = childs.get(group.getId());
-            for (int j = 0; j < child.size(); j++) {
-                if (child.get(j).isChoosed()) {
-                    toBeDeleteChilds.add(child.get(j));
+            toBeDeleteChilds = new ArrayList<GoodsInfo>();//待删除的子元素
+            childde = childs.get(group.getId());
+            for (int j = 0; j < childde.size(); j++) {
+                if (childde.get(j).isChoosed()) {
+                    toBeDeleteChilds.add(childde.get(j));
+
+                    delIds = delIds+childde.get(j).getId()+",";
                 }
             }
-            child.removeAll(toBeDeleteChilds);
         }
+        childde.removeAll(toBeDeleteChilds);
         groups.removeAll(toBeDeleteGroups);
+
+        /**
+         * 删除购物车数据
+         */
+        DeleteShopCartData();
         //重新设置购物车
         setCartNum();
         adapter.notifyDataSetChanged();
@@ -314,8 +372,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         }
         adapter.notifyDataSetChanged();
         calulate();
-
-
     }
 
     public void doUpdate(int groupPosition, int childPosition, View showCountView, boolean isChecked) {
@@ -325,8 +381,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         ((TextView) showCountView).setText(String.valueOf(count));
         adapter.notifyDataSetChanged();
         calulate();
-
-
     }
 
     @Override
@@ -450,7 +504,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         if (mtotalCount == 0) {
             setCartNum();
         } else {
-            shoppingcatNum.setText("购物车(" + mtotalCount + ")");
+            shoppingcatNum.setText("购物车");
         }
 
 

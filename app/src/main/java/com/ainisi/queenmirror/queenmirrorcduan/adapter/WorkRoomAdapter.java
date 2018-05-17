@@ -1,6 +1,7 @@
 package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -8,20 +9,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Mloong on 2017/11/25.
  */
 
-public class WorkRoomAdapter extends BaseAdapter {
+public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
     private final LayoutInflater inflater;
     private Context context;
     List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiGoodsList = new ArrayList<>();
@@ -48,7 +61,7 @@ public class WorkRoomAdapter extends BaseAdapter {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ViewHolder holder;
         if (convertView == null) {
@@ -62,6 +75,8 @@ public class WorkRoomAdapter extends BaseAdapter {
             holder.tv_browse = convertView.findViewById(R.id.tv_browse);
             holder.tv_price = convertView.findViewById(R.id.tv_price);
             holder.tv_workroom_service_price = convertView.findViewById(R.id.tv_workroom_service_price);
+            holder.iv_workroom_add_cat = convertView.findViewById(R.id.iv_workroom_add_cat);
+            holder.rl_workroom_list = convertView.findViewById(R.id.rl_workroom_list);
 
             convertView.setTag(holder);
         }else{
@@ -85,7 +100,64 @@ public class WorkRoomAdapter extends BaseAdapter {
         holder.tv_workroom_service_price.setText("￥"+apiGoodsList.get(position).getEcGoodsBasic().getOfflinePrice());
         holder.tv_workroom_service_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
 
+        holder.iv_workroom_add_cat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddCatData();
+            }
+        });
+
+        holder.rl_workroom_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, FullActivity.class);
+                L.e("!@@@@@@@@@@@@@@"+apiGoodsList.get(position).getId()+"");
+
+                intent.putExtra("goodsId",apiGoodsList.get(position).getEcGoodsBasic().getId()+"");
+                intent.putExtra("shopId",apiGoodsList.get(position).getEcGoodsBasic().getShopId()+"");
+                context.startActivity(intent);
+            }
+        });
+
         return convertView;
+    }
+
+    /**
+     * 添加购物车
+     */
+    private void AddCatData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("custId", "111");//
+        params.put("goodsId", "0b5e8db1e94b4c44b3075940bc67a2e9");
+        params.put("unitPrice","20");
+        params.put("purchaseNumber","1");
+        HttpUtils.doPost(ACTION.ADDTOCAT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.ADDTOCAT:
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    T.show(successBean.getMsg());
+                }else{
+                    T.show(successBean.getMsg());
+                }
+
+                break;
+        }
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
     }
 
 
@@ -98,5 +170,7 @@ public class WorkRoomAdapter extends BaseAdapter {
         private TextView tv_browse;
         private TextView tv_price;
         private TextView tv_workroom_service_price;
+        private ImageView iv_workroom_add_cat;
+        private RelativeLayout rl_workroom_list;
     }
 }

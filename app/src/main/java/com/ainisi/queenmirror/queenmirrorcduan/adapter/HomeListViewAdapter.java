@@ -2,6 +2,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +58,18 @@ public class HomeListViewAdapter extends BaseAdapter {
             holder = new ViewHolder();
 
             convertView = inflater.inflate(R.layout.item_shortrecycler, parent, false);
-            holder.sort_time = convertView.findViewById(R.id.sort_time);
-            holder.sort_name = convertView.findViewById(R.id.sort_name);
+            holder.sort_time = convertView.findViewById(R.id.tv_sort_time);
+            holder.sort_name = convertView.findViewById(R.id.tv_sort_name);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, WorkRoomDetailActivity.class);
+                    intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
+                    intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
+                    context.startActivity(intent);
+                }
+            });
 
             convertView.setTag(holder);
         }else{

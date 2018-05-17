@@ -21,8 +21,8 @@ public class CommendGoodsAdapter extends BaseQuickAdapter<CommendGoodBean.BodyBe
 
     @Override
     protected void convert(BaseViewHolder helper, CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean item) {
-        helper.setText(R.id.sort_name,item.getEcGoodsBasic().getGoodsName());
-        helper.setText(R.id.sort_time,item.getEcGoodsBasic().getUpdateDate());
+        helper.setText(R.id.tv_sort_name,item.getEcGoodsBasic().getGoodsName());
+        helper.setText(R.id.tv_sort_time,item.getEcGoodsBasic().getUpdateDate());
 
     }
 

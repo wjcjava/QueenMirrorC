@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.DetailsBean;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ViewHolder holder;
         if (convertView == null) {
@@ -60,7 +61,9 @@ public class HomepageGridViewAdapter extends BaseAdapter{
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ShopStoreActivity.class);
+                    Intent intent = new Intent(context, WorkRoomDetailActivity.class);
+                    intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
+                    intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
                     context.startActivity(intent);
                 }
             });

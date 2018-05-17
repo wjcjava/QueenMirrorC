@@ -14,21 +14,32 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.EstheticsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FulldistanFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullsalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullscreenFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullshortFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -37,7 +48,7 @@ import butterknife.OnClick;
 /**
  * 美学汇（美甲美手）
  */
-public class EstheticsActivity extends BaseActivity {
+public class EstheticsActivity extends BaseActivity implements HttpCallBack{
     @Bind(R.id.full_rb_sort)
     TextView hSort;
     @Bind(R.id.re_recommendable_projects)
@@ -54,6 +65,8 @@ public class EstheticsActivity extends BaseActivity {
     ImageView ivsort1;
     @Bind(R.id.pager_home_full)
     NoScrollViewPager fullpager;
+    @Bind(R.id.newtitle_title)
+    TextView newtitle_title;
 
     //综合排序
     FullshortFragment sortFragment = new FullshortFragment();
@@ -67,9 +80,13 @@ public class EstheticsActivity extends BaseActivity {
     private View popview1;
     private PopupWindow pop;
     private List<Fragment> pagerList = new ArrayList<>();
-    List<SortBean> sortlist=new ArrayList<>();
+
+    List<EstheticsBean.BodyBean.ApiShopListBean> apiShopList = new ArrayList<>();
     private List<ProblemBean> list = new ArrayList<>();
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
+    String shop_name,categoryId;
+    int pageNumber = 1;
+    EstheticsAdapter sortAdapter;
     @Override
     public int getLayoutId() {
         return R.layout.activity_esthetics;
@@ -80,11 +97,56 @@ public class EstheticsActivity extends BaseActivity {
     }
 
     @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.MERCHANTSLIST:
+                EstheticsBean estheticsBean = GsonUtil.toObj(res,EstheticsBean.class);
+                apiShopList = estheticsBean.getBody().getApiShopList();
+                if(estheticsBean.isSuccess()){
+                    sortAdapter =new EstheticsAdapter(R.layout.re_full_recommend,apiShopList);
+                    reProjects.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+                    reProjects.setAdapter(sortAdapter);
+
+                    sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            Intent intent = new Intent(EstheticsActivity.this, WorkRoomDetailActivity.class);
+                            intent.putExtra("shopName",apiShopList.get(position).getAnsShopBasic().getShopName());
+                            intent.putExtra("shopId",apiShopList.get(position).getAnsShopBasic().getId());
+                            startActivity(intent);
+                        }
+                    });
+                }else{
+                    T.show(estheticsBean.getMsg());
+                }
+                break;
+        }
+    }
+
+    @Override
     public void initView() {
+        Intent intent = this.getIntent();
+        shop_name = intent.getStringExtra("shop_name");
+        newtitle_title.setText(shop_name);
+        categoryId = intent.getStringExtra("categoryId");
+
+        getTuijianData();
+
         initDate();
         initfragment();
-       
     }
+
+    /**
+     * 获取推荐好店的数据
+     */
+    private void getTuijianData() {
+        HashMap<String,String> hashMap=new HashMap();
+        hashMap.put("categoryId",categoryId);
+        hashMap.put("pageNumber",pageNumber+"");
+        hashMap.put("pageSize","10");
+        HttpUtils.doPost(ACTION.MERCHANTSLIST,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+    }
+
     private void initfragment() {
         pagerList.add(sortFragment);
         pagerList.add(salesFragment);
@@ -97,19 +159,6 @@ public class EstheticsActivity extends BaseActivity {
 
     private void initDate() {
 
-        for (int i = 0; i <10 ; i++) {
-            SortBean sortBean=new SortBean();
-            sortlist.add(sortBean);
-        }
-        MyAdapter sortAdapter=new MyAdapter(R.layout.re_full_recommend,sortlist);
-        reProjects.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        reProjects.setAdapter(sortAdapter);
-        sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(EstheticsActivity.this, FullActivity.class));
-            }
-        });
         pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
         popview1 = View.inflate(this, R.layout.pop_myitem, null);
         initpop(popview1);
@@ -147,10 +196,9 @@ public class EstheticsActivity extends BaseActivity {
         });
     }
 
-
     @OnClick({R.id.ed_keyword,R.id.iv_back,R.id.full_rb_sort, R.id.full_rb_sales,
             R.id.full_rb_distance, R.id.full_rb_screen, R.id.iv_sort, R.id.iv_sort1
-    ,R.id.tv_more})
+            ,R.id.tv_more})
     public void click(View view) {
         switch (view.getId()) {
             //搜索
@@ -222,5 +270,13 @@ public class EstheticsActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void showLoadingDialog() {
 
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }

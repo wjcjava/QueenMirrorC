@@ -429,6 +429,24 @@ public class HttpUtils {
             case ACTION.SHOPCARTADD:
                 actionUrl=UrlConstants.SHOPCARTADD;
                 break;
+            case ACTION.ADDTOCAT:
+                actionUrl = UrlConstants.ADDTOCAT;
+                break;
+            case ACTION.GETCITYLIST:
+                actionUrl = UrlConstants.GETCITYLIST;
+                break;
+            case ACTION.GETPRODUCTDETAIL:
+                actionUrl = UrlConstants.GETPRODUCTDETAIL;
+                break;
+            case ACTION.GETSHOPPINDCART:
+                actionUrl = UrlConstants.GETSHOPPINDCART;
+                break;
+            case ACTION.CHANGENUMBERCART:
+                actionUrl = UrlConstants.CHANGENUMBERCART;
+                break;
+            case ACTION.DELETESHOPCART:
+                actionUrl = UrlConstants.DELETESHOPCART;
+                break;
         }
         url.append(actionUrl);
         return url;

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.location.LocationManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivit
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeAdvertisingActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
@@ -90,6 +92,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.sc_home_scroll)
     ScrollInterceptScrollView sc_home_scroll;
     @Bind(R.id.tv_home_bustling)
+    public
     TextView mLocation;
     private String city;
     private HomeIndustryBean homeIndustryBean;
@@ -101,10 +104,14 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     int hight;
     boolean type = false;
     ClassificationBean classificationBean;
+    Intent intent;
     private LocationManager lm;
+
+    public static HomeNewFragment instance = null;
 
     @Override
     protected int getLayoutResource() {
+        instance = this;
         return R.layout.activity_home_new_fragment;
     }
 
@@ -133,6 +140,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         params.put("pageNumber", "1");
         params.put("contentByTitle", "");
         params.put("categoryId", "0");
+        params.put("pageSize","10");
         HttpUtils.doPost(ACTION.CLASSIFICATION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
     @SuppressLint("NewApi")
@@ -141,13 +149,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         /**
          * 获取首页部分数据
          */
-
         getBannerData();
 
         getShopData();
-
-
-
 
         for (int i = 0; i < 10; i++) {
             SortBean sortBean = new SortBean();
@@ -175,6 +179,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         });
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -195,28 +200,46 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             });
         }
     }
-
-    @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
-            R.id.line_surface, R.id.line_uspension_surface, R.id.iv_home_search, R.id.img_information})
-    public void onClick(View view) {
-        switch (view.getId()) {
+    @OnClick({R.id.li_home_esthetics,R.id.li_home_nailart,R.id.li_home_haircustom,R.id.li_home_beauty,R.id.li_home_permanent,R.id.linear_home_freetrial,
+            R.id.line_surface,R.id.line_uspension_surface,R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.tv_home_bustling:
+                intent = new Intent(getActivity(),SelectCityActivity.class);
+                startActivity(intent);
+                break;
             /**
              * 行业分类
              */
             case R.id.li_home_esthetics:
-                startActivity(new Intent(getActivity(), EstheticsActivity.class));
+                intent = new Intent(getActivity(), EstheticsActivity.class);
+                intent.putExtra("categoryId",homeIndustryBean.getBody().getCategoryListData().get(0).getEcCategory().getId());
+                intent.putExtra("shop_name",tv_home_esthetics.getText().toString());
+                startActivity(intent);
                 break;
             case R.id.li_home_nailart:
-                startActivity(new Intent(getActivity(), EstheticsActivity.class));
+                intent = new Intent(getActivity(), EstheticsActivity.class);
+                intent.putExtra("categoryId",homeIndustryBean.getBody().getCategoryListData().get(1).getEcCategory().getId());
+                intent.putExtra("shop_name",tv_home_nailart.getText().toString());
+                startActivity(intent);
                 break;
             case R.id.li_home_haircustom:
-                startActivity(new Intent(getActivity(), EstheticsActivity.class));
+                intent = new Intent(getActivity(), EstheticsActivity.class);
+                intent.putExtra("categoryId",homeIndustryBean.getBody().getCategoryListData().get(2).getEcCategory().getId());
+                intent.putExtra("shop_name",tv_home_haircustom.getText().toString());
+                startActivity(intent);
                 break;
             case R.id.li_home_beauty:
-                startActivity(new Intent(getActivity(), EstheticsActivity.class));
+                intent = new Intent(getActivity(), EstheticsActivity.class);
+                intent.putExtra("categoryId",homeIndustryBean.getBody().getCategoryListData().get(3).getEcCategory().getId());
+                intent.putExtra("shop_name",tv_home_beauty.getText().toString());
+                startActivity(intent);
                 break;
             case R.id.li_home_permanent:
-                startActivity(new Intent(getActivity(), EstheticsActivity.class));
+                intent = new Intent(getActivity(), EstheticsActivity.class);
+                intent.putExtra("categoryId",homeIndustryBean.getBody().getCategoryListData().get(4).getEcCategory().getId());
+                intent.putExtra("shop_name",tv_home_permanent.getText().toString());
+                startActivity(intent);
                 break;
             /**
              * 拼团
@@ -248,9 +271,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
                     HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), classificationBean.getBody().getShopListData());
                     nl_home_list_view.setAdapter(homeListViewAdapter);
-
                 }
-
                 break;
             //搜索
             case R.id.iv_home_search:

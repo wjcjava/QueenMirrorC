@@ -1,6 +1,7 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
@@ -46,10 +48,19 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     double amountNum;
     int pageSum,pageNumber = 1;
     List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> apiOrderList = new ArrayList();
+    String state;
 
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_sort_whole;
+    }
+
+    public WholeFragment newInstance(String flag){
+        Bundle bundle = new Bundle();
+        bundle.putString("state", flag);
+        WholeFragment testFm = new WholeFragment();
+        testFm.setArguments(bundle);
+        return testFm;
     }
 
     @Override
@@ -71,6 +82,14 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                 doFirstData();
             }
         }, 200);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //T.show("pos   "+OrderFragment.instance.pos);
+       // doFirstData();
     }
 
     @Override
@@ -96,9 +115,16 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     /**
      * 获取全部订单的数据
      */
-    private void doFirstData(){
+    public void doFirstData(){
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            state = bundle.getString("state");
+        }
+        //T.show("@@@@   "+OrderFragment.instance.order_state);
+        T.show("@@@@@@@@@ " +state);
+
         HashMap<String, String> params = new HashMap<>();
-        params.put("orderStatus", "");
+        params.put("orderStatus", state);
         params.put("pageNumber", pageNumber+"");
         params.put("userId", "1111");
         params.put("pageSize", "10");
@@ -114,7 +140,6 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                 OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res,OrderMyAllOrderBean.class);
 
                 if(orderMyAllOrderBean.isSuccess()){
-
 
                     pageSum = orderMyAllOrderBean.getBody().getPageSum();
                     apiOrderList = orderMyAllOrderBean.getBody().getApiOrderList();
