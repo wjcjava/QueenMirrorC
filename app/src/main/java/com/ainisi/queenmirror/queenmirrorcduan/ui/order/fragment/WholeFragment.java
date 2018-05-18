@@ -121,7 +121,6 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
             state = bundle.getString("state");
         }
         //T.show("@@@@   "+OrderFragment.instance.order_state);
-        T.show("@@@@@@@@@ " +state);
 
         HashMap<String, String> params = new HashMap<>();
         params.put("orderStatus", state);

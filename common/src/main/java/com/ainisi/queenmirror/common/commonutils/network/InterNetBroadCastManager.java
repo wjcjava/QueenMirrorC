@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import com.ainisi.queenmirror.common.commonutils.ToastUtils;
 import com.ainisi.queenmirror.common.commonwidget.CommonDialog;
@@ -19,9 +20,12 @@ import static com.ainisi.queenmirror.common.commonutils.network.NetWorkUtils.NO_
 
 public class InterNetBroadCastManager extends BroadcastReceiver {
     private CommonDialog dialog;
+    private Context context;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        this.context = context;
         NetworkInfo.State wifiState = null;
         NetworkInfo.State mobileState = null;
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -70,7 +74,9 @@ public class InterNetBroadCastManager extends BroadcastReceiver {
     private void dissMissDialog() {
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
-            ToastUtils.showShotToast("您的网络又回来啦(:");
+            Toast.makeText(context,"您的网络又回来啦(:",Toast.LENGTH_SHORT).show();
+
+           // ToastUtils.showShotToast("您的网络又回来啦(:");
         }
     }
 

@@ -24,17 +24,13 @@ public class PurchaseActivity extends BaseNewActivity {
         return R.layout.activity_purchase;
     }
 
-
     @Override
     public void initView() {
         purtitle.setText("提交订单");
         listadapter = new PurchaseListViewAdapter(this);
         listOrder.setAdapter(listadapter);
-
-
     }
-    @OnClick({R.id.tv_submit,R.id.title_back
-    })
+    @OnClick({R.id.tv_submit,R.id.title_back})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -45,8 +41,5 @@ public class PurchaseActivity extends BaseNewActivity {
                 startActivity(new Intent(PurchaseActivity.this,SubmitActivity.class));
                 break;
         }
-
-
     }
-
 }

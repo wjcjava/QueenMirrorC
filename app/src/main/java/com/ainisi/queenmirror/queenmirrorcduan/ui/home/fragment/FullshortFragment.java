@@ -33,7 +33,7 @@ import butterknife.Bind;
 public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack,HttpCallBack{
     @Bind(R.id.full_sore_recycler)
     RecyclerView recycler;
-    List<ClassificationBean.BodyBean.ShopListDataBean> sortlist = new ArrayList<>();
+    List<ClassificationBean.BodyBean.ShopListBean> sortlist = new ArrayList<>();
     private Handler handler=new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
@@ -102,7 +102,7 @@ public class FullshortFragment extends BaseFragment implements RefreshLoadMoreLa
                 ClassificationBean classificationBean= GsonUtil.toObj(res, ClassificationBean.class);
 
                 if(classificationBean.isSuccess()){
-                    sortlist = classificationBean.getBody().getShopListData();
+                    sortlist = classificationBean.getBody().getShopList();
 
                     FullShortAdapter sortAdapter = new FullShortAdapter(getActivity(),R.layout.item_shortrecycler, sortlist);
                     recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

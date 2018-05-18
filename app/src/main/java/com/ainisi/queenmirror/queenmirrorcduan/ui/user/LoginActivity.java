@@ -1,15 +1,26 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.user;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.telephony.TelephonyManager;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.HomePageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -23,9 +34,18 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     TextView loginTitle;
     @Bind(R.id.title_right)
     TextView loginRighrTitle;
+    @Bind(R.id.et_login_pghone)
+    public EditText et_login_pghone;
+    @Bind(R.id.bt_login_submit)
+    Button bt_login_submit;
+    @Bind(R.id.et_login_pass)
+    EditText et_login_pass;
+    public static LoginActivity instance = null;
+    String deviceToken;
 
     @Override
     protected int getLayoutId() {
+        instance = this;
         return R.layout.activity_login;
     }
 
@@ -35,59 +55,86 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
         initTitle();
     }
 
-
     private void initTitle() {
         loginTitle.setText(R.string.login);
         loginRighrTitle.setText(R.string.register);
+
+        //获取手机token值  唯一设备码
+        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        deviceToken = TelephonyMgr.getDeviceId();
     }
 
-    @OnClick({R.id.title_back, R.id.title_right, R.id.tv_forgetcipher})
+    @OnClick({R.id.title_back, R.id.title_right, R.id.tv_forgetcipher,R.id.bt_login_submit})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
-
             //注册
             case R.id.title_right:
-               // CeshiData();
-                // Toast.makeText(mContext, "你点击了注册", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
-
             //忘记密码
             case R.id.tv_forgetcipher:
                 startActivity(new Intent(this, ForgetcipherActivity.class));
                 break;
+            /**
+             * 登录按钮
+             */
+            case R.id.bt_login_submit:
+                if(et_login_pghone.getText().toString().equals("")||et_login_pass.getText().toString().equals("")){
+                    T.show("请完善相关信息");
+                }else{
+                    LoginData();
+                }
+                break;
         }
     }
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-    }
+
     /**
-     * 测试
+     * 登录数据
      */
-    private void CeshiData() {
+    private void LoginData() {
         //传参数
         HashMap<String, String> params = new HashMap<>();
-        params.put("telNo", "1");
-        params.put("userPass", "1");
+        params.put("deviceToken", deviceToken);
+        params.put("cellPhone", et_login_pghone.getText().toString());
+        params.put("userPass",et_login_pass.getText().toString());
         //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
-        HttpUtils.doPost(ACTION.REGIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        HttpUtils.doPost(ACTION.LOGIN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
     }
 
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
-            case ACTION.REGIST://注册
-
-                break;
-
             case ACTION.LOGIN://登录
-
+                LoginBean loginBean = GsonUtil.toObj(res,LoginBean.class);
+                if(loginBean.isSuccess()){
+                    SP.put(LoginActivity.this, SpContent.UserId ,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getId());
+                    SP.put(LoginActivity.this,SpContent.UserCall,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getCellPhone());
+                    SP.put(LoginActivity.this,SpContent.UserName,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getUserName());
+                    SP.put(LoginActivity.this,SpContent.isLogin,"1");
+                    Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                    startActivity(intent);
+                }else{
+                    T.show(loginBean.getMsg());
+                }
                 break;
         }
-
     }
 
     @Override
@@ -99,6 +146,4 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     public void showErrorMessage(String s) {
 
     }
-
-
 }

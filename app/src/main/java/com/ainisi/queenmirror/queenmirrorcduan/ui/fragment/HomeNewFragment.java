@@ -35,7 +35,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GDLocationUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
@@ -124,7 +126,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private void getBannerData() {
 
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("tabType", "2");
+        hashMap.put("tabType", "2");//type  2代表美业    4代表异业
         hashMap.put("tabFather", "0");
         HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
         HttpUtils.doPost(ACTION.HEADLINES, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//头条
@@ -135,12 +137,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
      */
     private void getShopData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("enableFlag", "0");
         params.put("pageNumber", "1");
         params.put("contentByTitle", "");
-        params.put("categoryId", "0");
         params.put("pageSize","10");
-        HttpUtils.doPost(ACTION.CLASSIFICATION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        params.put("shopCate","1");
+        HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
     @SuppressLint("NewApi")
     @Override
@@ -180,6 +181,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Override
     public void onResume() {
         super.onResume();
+
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // 没有权限，申请权限。
@@ -256,9 +258,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     nl_home_list_view.setVisibility(View.GONE);
                     gv_home_gridView.setVisibility(View.VISIBLE);
 
-                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopListData());
-                    gv_home_gridView.setAdapter(gridViewAdapter);
+                    if(classificationBean.getBody().getShopList().size()>0){
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                        gv_home_gridView.setAdapter(gridViewAdapter);
+                    }else{
 
+                    }
                 } else {
                     iv_surface.setImageResource(R.drawable.icon_home_list);
                     iv_uspension_surface.setImageResource(R.drawable.icon_home_list);
@@ -266,8 +271,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     nl_home_list_view.setVisibility(View.VISIBLE);
                     gv_home_gridView.setVisibility(View.GONE);
 
-                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), classificationBean.getBody().getShopListData());
-                    nl_home_list_view.setAdapter(homeListViewAdapter);
+                    if(classificationBean.getBody().getShopList().size()>0){
+                        HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                        nl_home_list_view.setAdapter(homeListViewAdapter);
+                    }
+
                 }
                 break;
             //搜索
@@ -299,15 +307,15 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
                 break;
             //商家分类列表
-            case ACTION.CLASSIFICATION:
-
-                L.e("....." + res);
+            case ACTION.SHOPLIST:
                 classificationBean = GsonUtil.toObj(res, ClassificationBean.class);
                 if (classificationBean.isSuccess()) {
-
-                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopListData());
-                    gv_home_gridView.setAdapter(gridViewAdapter);
-
+                    if(classificationBean.getBody().getShopList().size()>0){
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                        gv_home_gridView.setAdapter(gridViewAdapter);
+                    }else{
+                        T.show("暂无店铺信息");
+                    }
                 } else {
                     T.show(classificationBean.getMsg());
                 }

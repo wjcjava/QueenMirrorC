@@ -47,6 +47,7 @@
                 android:src="@mipmap/icon_login_phone" />
 
             <EditText
+                android:id="@+id/et_login_pghone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/comment_25_dip"
                 android:layout_marginStart="@dimen/comment_14_dip"
@@ -79,13 +80,14 @@
                 android:src="@mipmap/icon_login_password" />
 
             <EditText
+                android:id="@+id/et_login_pass"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/comment_24_dip"
                 android:layout_below="@id/view"
                 android:layout_marginBottom="@dimen/comment_10_dip"
                 android:layout_marginStart="@dimen/comment_14_dip"
                 android:layout_marginTop="@dimen/comment_16_dip"
-                android:inputType="number"
+                android:inputType="textPassword"
                 android:maxLength="11"
                 android:layout_toRightOf="@id/iv_password"
                 android:background="@color/white"
@@ -131,7 +133,7 @@
                 android:layout_alignParentRight="true"
                 />
             <Button
-                android:id="@+id/bt_login"
+                android:id="@+id/bt_login_submit"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_choice"
                 android:layout_marginTop="@dimen/comment_15_dip"

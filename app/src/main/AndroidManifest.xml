@@ -38,8 +38,6 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <!-- 用于访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 用于读取手机当前的状态 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 用于写入缓存数据到扩展存储卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 用于申请调用A-GPS模块 -->
@@ -52,13 +50,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <!--【可选】如果需要设置前台是否显示通知，需要设置这个权限-->
     <uses-permission android:name="android.permission.GET_TASKS" />
+
 
     <application
         android:name=".app.App"

@@ -26,6 +26,7 @@
             app:civ_border_width="@dimen/comment_2_dip" />
 
         <TextView
+            android:id="@+id/tv_mine_uername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/comment_10_dip"

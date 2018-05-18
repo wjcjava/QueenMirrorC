@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomepageGridViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyShopAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
@@ -32,12 +34,17 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopMallListBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.DistanceFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.ScreenFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SortFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopClassificationActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.DetailsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
@@ -84,8 +91,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ListViewAdapter listadapter;
     @Bind(R.id.list_view)
     NoScrollListview listView;
-    @Bind(R.id.gridView)
-    NoScrollGridView gridView;
     @Bind(R.id.layout_stick_header_main)
     LinearLayout layout_stick_header_main;
     @Bind(R.id.layout_stick_header)
@@ -96,6 +101,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ImageView imgSurface;
     @Bind(R.id.iv_uspension_surface)
     ImageView uspensionSurface;
+    @Bind(R.id.shop_gridView)
+    NoScrollGridView shop_gridView;
     //综合排序
     SortFragment sortFragment;
     //销量最高
@@ -104,6 +111,9 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     DistanceFragment distanceFragment;
     //筛选
     ScreenFragment screenFragment;
+
+    ClassificationBean classificationBean;
+    private HomeIndustryBean homeIndustryBean;
 
     private FragmentManager fm;
     private CustomPopWindow popWindow;
@@ -120,11 +130,10 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
 
     int hight, pageNumber = 1;//标记ScrollView移动的距离
     private boolean isClick;
-    private GridViewAdapter gridViewAdapter;
+    //private GridViewAdapter gridViewAdapter;
 
     List<ShopMallListBean.BodyBean.ShopListBean> shopListNew = new ArrayList<>();
     private DetailsBean detailsBean;
-
 
     @Override
     protected int getLayoutResource() {
@@ -143,7 +152,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
          * 获取首页数据
          */
         doFirstData();
-
+        getYiyeData();
         initDate();
         initpopwindow();
         initImgTitle();
@@ -162,8 +171,17 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 }
             }
         });
+    }
 
+    /**
+     * 获取异业分类数据
+     */
+    private void getYiyeData() {
 
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("tabType", "4");//type  2代表美业    4代表异业
+        hashMap.put("tabFather", "0");
+        HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
     }
 
     private void initshopList() {
@@ -178,31 +196,16 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
      */
     private void doFirstData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("enableFlag", "1");//有效标记
         params.put("pageNumber", pageNumber + "");
         params.put("contentByTitle", "");//画面检索输入框输入的内容
+        params.put("pageSize","10");
+        params.put("shopCate","2");
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-
     }
 
     private void initImgTitle() {
-        for (int i = 0; i < 8; i++) {
-            ShopBean shopBean = new ShopBean();
-            shopBean.setImageTitle(imgTitle[i]);
-            shopBean.setTextName(textTitle[i]);
-            shopList.add(shopBean);
-        }
-        MyShopAdapter myShopAdapter = new MyShopAdapter(R.layout.re_shopmall_shop, shopList);
-        shopRecycle.setLayoutManager(new GridLayoutManager(getActivity(), 4));
-        shopRecycle.setAdapter(myShopAdapter);
-        myShopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getActivity(), ShopClassificationActivity.class));
-            }
-        });
-    }
 
+    }
 
     private void initpopwindow() {
         pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
@@ -285,34 +288,47 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_surface:
                 if (isClick) {
                     isClick = false;
-                    listadapter = new ListViewAdapter(getContext(), shopListNew);
-                    listView.setAdapter(listadapter);
-                    gridView.setVisibility(View.GONE);
+                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    listView.setAdapter(homeListViewAdapter);
+
+                    /*listadapter = new ListViewAdapter(getContext(), shopListNew);
+                    listView.setAdapter(listadapter);*/
+                    shop_gridView.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
                     imgSurface.setImageResource(R.drawable.icon_home_list);
                 } else {
                     imgSurface.setImageResource(R.drawable.icon_home_recycler);
-                    gridView.setVisibility(View.VISIBLE);
+                    shop_gridView.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
-                    gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
-                    gridView.setAdapter(gridViewAdapter);
+
+                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    shop_gridView.setAdapter(gridViewAdapter);
+
+                    /*gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
+                    shop_gridView.setAdapter(gridViewAdapter);*/
                     isClick = true;
                 }
                 break;
             case R.id.line_uspension_surface:
                 if (isClick) {
                     isClick = false;
-                    listadapter = new ListViewAdapter(getContext(), shopListNew);
-                    listView.setAdapter(listadapter);
-                    gridView.setVisibility(View.GONE);
+                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    listView.setAdapter(homeListViewAdapter);
+                  /*  listadapter = new ListViewAdapter(getContext(), shopListNew);
+                    listView.setAdapter(listadapter);*/
+                    shop_gridView.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
                     uspensionSurface.setImageResource(R.drawable.icon_home_list);
                 } else {
                     uspensionSurface.setImageResource(R.drawable.icon_home_recycler);
-                    gridView.setVisibility(View.VISIBLE);
+                    shop_gridView.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
-                    gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
-                    gridView.setAdapter(gridViewAdapter);
+
+                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    shop_gridView.setAdapter(gridViewAdapter);
+
+                   /* gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
+                    shop_gridView.setAdapter(gridViewAdapter);*/
                     isClick = true;
                 }
                 break;
@@ -382,17 +398,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 break;
             case R.id.li_home_screen_bottom:
 
-//                if (screenFragment == null) {
-//                    screenFragment = new ScreenFragment();
-//                    transaction.add(R.id.fl_home_recommend_layout, screenFragment);
-//                } else {
-//                    transaction.show(screenFragment);
-//                }
-//                hideFragment(sortFragment, transaction);
-//                hideFragment(salesFragment, transaction);
-//                hideFragment(distanceFragment, transaction);
-                // coorHm.setVisibility(View.INVISIBLE);
-
                 sc_home_scroll.smoothScrollTo(0, 1180);
                 View popview = View.inflate(getActivity(), R.layout.pop_right, null);
 
@@ -405,25 +410,58 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                         .setAnimationStyle(R.style.CustomPopWindowStyle)
                         .create()
                         .showAsDropDown(layout_stick_header_main);
-
-
                 break;
             default:
                 break;
         }
-        //提交事务
-        //transaction.commit();
-
-
     }
 
     private List<DetailsBean> drtalist=new ArrayList<>();
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
-            //商城列表分类
-            case ACTION.MERCHANTSLIST:
+            /**
+             * 获取异业分类数据
+             */
+            case ACTION.INDUSTRY:
 
+                homeIndustryBean = GsonUtil.toObj(res, HomeIndustryBean.class);
+
+                L.e("@@@@@@@@@@@@@@    "+homeIndustryBean.getBody().getCategoryListData().size()+"    "+homeIndustryBean.getBody().getCategoryListData().get(0).getEcCategory().getTabName());
+                for (int i = 0; i < homeIndustryBean.getBody().getCategoryListData().size(); i++) {
+                    ShopBean shopBean = new ShopBean();
+                    shopBean.setImageTitle(imgTitle[i]);
+                    shopBean.setTextName(homeIndustryBean.getBody().getCategoryListData().get(i).getEcCategory().getTabName());
+                    shopList.add(shopBean);
+                }
+                MyShopAdapter myShopAdapter = new MyShopAdapter(R.layout.re_shopmall_shop, shopList);
+                shopRecycle.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+                shopRecycle.setAdapter(myShopAdapter);
+                myShopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        startActivity(new Intent(getActivity(), ShopClassificationActivity.class));
+                    }
+                });
+                break;
+            //商城列表分类
+            case ACTION.SHOPLIST:
+                classificationBean = GsonUtil.toObj(res, ClassificationBean.class);
+                if (classificationBean.isSuccess()) {
+
+                    L.e("$$$$$$$   "+res);
+
+                    if(classificationBean.getBody().getShopList().size()>0){
+
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                        shop_gridView.setAdapter(gridViewAdapter);
+                    }else{
+                        T.show("暂无店铺信息");
+                    }
+
+                } else {
+                    T.show(classificationBean.getMsg());
+                }
                 break;
         }
 

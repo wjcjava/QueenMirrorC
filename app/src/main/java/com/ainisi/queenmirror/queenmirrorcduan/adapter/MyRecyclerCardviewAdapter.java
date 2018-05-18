@@ -325,8 +325,8 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
             case ACTION.CLASSIFICATION:
                ClassificationBean classificationBean= GsonUtil.toObj(res, ClassificationBean.class);
                if(classificationBean.isSuccess()){
-                   sortName.setText(classificationBean.getBody().getShopListData().get(0).getAnsShopBasic().getShopName());
-                   sortTime.setText(classificationBean.getBody().getShopListData().get(0).getAnsShopBasic().getCloseTime());
+                   sortName.setText(classificationBean.getBody().getShopList().get(0).getAnsShopBasic().getShopName());
+                   sortTime.setText(classificationBean.getBody().getShopList().get(0).getAnsShopBasic().getCloseTime());
                }else {
                    T.show(classificationBean.getMsg());
                }

@@ -14,6 +14,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
@@ -47,6 +48,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     private MyCountDownTimer myCountDownTimer;
     private boolean click;
     private LoginCeshiBean ceshiBean;
+    String vConfig = "";
 
     @Override
     protected int getLayoutId() {
@@ -94,16 +96,18 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 break;
             case R.id.bt_user_confirmregistration:
 
+                if(phoneNumber.getText().toString().trim().equals("")||passWord.getText().toString().trim().equals("")||etValidation.getText().toString().trim().equals("")){
+                    T.show("请完善相关信息");
+                }else{
                     HashMap<String, String> paramsRegister = new HashMap<>();
                     paramsRegister.put("cellPhone",phoneNumber.getText().toString().trim());
                     paramsRegister.put("userPass",passWord.getText().toString().trim());
                     paramsRegister.put("contractConfirm","1");
-                    paramsRegister.put("inviteCode","");
                     paramsRegister.put("ifFirst","0");
-                    paramsRegister.put("verifyCode",ceshiBean.getBody().getVerifyCode());
+                    paramsRegister.put("verifyCode",vConfig);
                     paramsRegister.put("verifyCodeCust",etValidation.getText().toString().trim());
                     HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-
+                }
                 break;
         }
     }
@@ -138,7 +142,6 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     private void initValidation() {
         HashMap<String, String> params = new HashMap<>();
         params.put("telNo", phoneNumber.getText().toString().trim());
-
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
     @Override
@@ -149,17 +152,22 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
                 if(ceshiBean.isSuccess()){
                     myCountDownTimer.start();
-                    L.e(ceshiBean.getMsg()+"      "+ ceshiBean.getErrorCode());
-                    T.show(ceshiBean.getBody().getVerifyCode());
-                    etValidation.setText(ceshiBean.getBody().getVerifyCode());
+                    vConfig = ceshiBean.getBody().getVerifyCode();
                 }else{
                     T.show("系统出错，请稍后再试");
                 }
-
                 break;
-                case ACTION.REGIST:
-                    System.out.println(res);
-                    break;
+            case ACTION.REGIST:
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+
+                if(successBean.isSuccess()){
+                    T.show(successBean.getMsg());
+                    RegisterActivity.this.finish();
+                    LoginActivity.instance.et_login_pghone.setText(phoneNumber.getText().toString().trim());
+                }else{
+                    T.show(successBean.getMsg());
+                }
+                break;
         }
     }
     @Override

@@ -26,9 +26,9 @@ import java.util.List;
 public class HomeListViewAdapter extends BaseAdapter {
     private final LayoutInflater inflater;
     private Context context;
-    List<ClassificationBean.BodyBean.ShopListDataBean> ShopListData = new ArrayList<>();
+    List<ClassificationBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
 
-    public HomeListViewAdapter(Context context,List<ClassificationBean.BodyBean.ShopListDataBean> ShopListData) {
+    public HomeListViewAdapter(Context context,List<ClassificationBean.BodyBean.ShopListBean> ShopListData) {
         this.context = context;
         this.ShopListData = ShopListData;
         inflater = LayoutInflater.from(context);

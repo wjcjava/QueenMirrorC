@@ -401,10 +401,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     @Override
     protected void initData() {
         super.initData();
-
     }
 
-    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.tv_work_detail_guanzhu,R.id.tv_workroom_service_jubao})
+    @OnClick({R.id.iv_common_back, R.id.tv_submit,R.id.tv_work_detail_guanzhu,R.id.tv_workroom_service_jubao,R.id.iv_title})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.iv_common_back:

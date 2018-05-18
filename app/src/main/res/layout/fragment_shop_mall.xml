@@ -26,12 +26,11 @@
    <com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView
        android:layout_below="@id/app_bar"
        android:id="@+id/sc_home_scroll"
-       android:scrollbars="vertical"
+       android:scrollbars="none"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
       <LinearLayout
           android:layout_width="match_parent"
-          android:scrollbars="vertical"
           android:layout_height="wrap_content"
           android:orientation="vertical">
          <include layout="@layout/activity_shop_mall" />
@@ -42,8 +41,8 @@
              android:layout_height="wrap_content">
          </com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview>
          <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView
-             android:id="@+id/gridView"
-             android:numColumns="3"
+             android:id="@+id/shop_gridView"
+             android:numColumns="2"
              android:layout_width="match_parent"
              android:layout_height="wrap_content">
          </com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView>

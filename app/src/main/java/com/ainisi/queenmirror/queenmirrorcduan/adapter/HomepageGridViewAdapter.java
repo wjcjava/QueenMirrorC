@@ -25,9 +25,9 @@ import java.util.List;
 
 public class HomepageGridViewAdapter extends BaseAdapter{
     private Context context;
-    List<ClassificationBean.BodyBean.ShopListDataBean> ShopListData = new ArrayList<>();
+    List<ClassificationBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
 
-    public HomepageGridViewAdapter(Context context,List<ClassificationBean.BodyBean.ShopListDataBean> ShopListData) {
+    public HomepageGridViewAdapter(Context context,List<ClassificationBean.BodyBean.ShopListBean> ShopListData) {
         this.context = context;
         this.ShopListData = ShopListData;
     }

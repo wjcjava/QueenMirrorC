@@ -11,8 +11,8 @@ public class ClassificationBean {
     /**
      * success : true
      * errorCode : 0
-     * msg : 获取商家列表按分类成功
-     * body : {"ShopListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopBasic":{"id":"111","isNewRecord":false,"remarks":null,"createDate":"2018-05-07 14:24:02","updateDate":"2018-05-12 09:32:38","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"shopActivity":null,"shopFeature":null,"queenCard":"0","shopTab":null,"shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","ifLicence":"1","shopLegal":"","legalIdc":"48675519930101354X","legalAddress":null,"taxNumber":null,"businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":null,"geoY":null,"updatePgm":"ApiLoginController"},"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"},"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":5,"enableFlag":null},"ecGoodsBasic":null,"ansSalesVolume":null,"ecShopScore":null,"ecCategory":null,"contractConfirmLabel":null,"ifSignLabel":"否","shopFeatureLabel":null,"queenCardLabel":"否","shopCateLabel":"美业","industryCateLabel":"美业","ifLicenceLabel":null,"businessFlagLabel":"正常","enableFlagLabel":"无效","signFlagLabel":"商家自开店","distanceScope":0,"contentByTitle":null,"sortKey":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopBasic":{"id":"525cc9935e8c41fba9448acd0df7067d","isNewRecord":false,"remarks":null,"createDate":"2018-05-07 14:24:02","updateDate":"2018-05-07 14:24:02","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"shopActivity":null,"shopFeature":null,"queenCard":"0","shopTab":null,"shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"姑苏区观前街南1001号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜","contactsTel":"15852855880","ifLicence":"1","shopLegal":"姜","legalIdc":"321129219980203278X","legalAddress":null,"taxNumber":null,"businessLicence":"2112XSDHKAS224","shopCharge":"姜","chargeIdc":"321087218968210902","chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":null,"geoY":null,"updatePgm":"ApiLoginController"},"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"},"ansShopBrowses":null,"ecGoodsBasic":null,"ansSalesVolume":null,"ecShopScore":null,"ecCategory":null,"contractConfirmLabel":null,"ifSignLabel":"否","shopFeatureLabel":null,"queenCardLabel":"否","shopCateLabel":"美业","industryCateLabel":"美业","ifLicenceLabel":null,"businessFlagLabel":"正常","enableFlagLabel":"无效","signFlagLabel":"商家自开店","distanceScope":0,"contentByTitle":null,"sortKey":null}]}
+     * msg : 获取数据成功
+     * body : {"shopList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopManager":null,"ansShopBasic":{"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":null,"contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null},"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"},"ansCustFollow":null,"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":178,"enableFlag":null},"ecCategory":null,"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"contractConfirmLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"contentByTitle":null,"ifContractLabel":null,"signFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopManager":null,"ansShopBasic":{"id":"8ce86e581ecb4a39910f943758321656","isNewRecord":false,"remarks":null,"createDate":"2018-05-09 17:26:23","updateDate":"2018-05-16 13:57:50","merchantId":null,"contractConfirm":"1","ifContract":"0","shopName":"琳美甲","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":"你一个个羞涩","shopAccounce":"但不会把饭吃个够","ifNew":"1","shopBanner":null,"shopActivity":null,"shopFeature":null,"queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"美甲","belongCity":"337289fd68bb4af980141cae1446869f","addrProvince":"江苏省","addrCity":"苏州市","addrDistrict":"相城区","shopAddr":"艾尼斯","openTime":"10:00","closeTime":"22:00","serviceTel":"18260178836","shopContacts":"杨","contactsTel":"18260178836","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"杨","legalIdc":"340826199203293410","legalAddress":null,"taxNumber":null,"businessLicence":"123456","shopCharge":"","chargeIdc":"","chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":"2018-05-09 17:26:23","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":null,"geoY":null,"updatePgm":"1","apiAnsCustCartList":null},"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"相城区","sort":30,"code":null,"type":null,"parentId":"0"},"ansCustFollow":null,"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":80,"enableFlag":null},"ecCategory":null,"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"contractConfirmLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"contentByTitle":null,"ifContractLabel":null,"signFlagLabel":null}]}
      */
 
     private boolean success;
@@ -53,43 +53,43 @@ public class ClassificationBean {
     }
 
     public static class BodyBean {
-        private List<ShopListDataBean> ShopListData;
+        private List<ShopListBean> shopList;
 
-        public List<ShopListDataBean> getShopListData() {
-            return ShopListData;
+        public List<ShopListBean> getShopList() {
+            return shopList;
         }
 
-        public void setShopListData(List<ShopListDataBean> ShopListData) {
-            this.ShopListData = ShopListData;
+        public void setShopList(List<ShopListBean> shopList) {
+            this.shopList = shopList;
         }
 
-        public static class ShopListDataBean {
+        public static class ShopListBean {
             /**
              * id : null
              * isNewRecord : true
              * remarks : null
              * createDate : null
              * updateDate : null
-             * ansShopBasic : {"id":"111","isNewRecord":false,"remarks":null,"createDate":"2018-05-07 14:24:02","updateDate":"2018-05-12 09:32:38","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"shopActivity":null,"shopFeature":null,"queenCard":"0","shopTab":null,"shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","ifLicence":"1","shopLegal":"","legalIdc":"48675519930101354X","legalAddress":null,"taxNumber":null,"businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":null,"geoY":null,"updatePgm":"ApiLoginController"}
+             * ansShopManager : null
+             * ansShopBasic : {"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":null,"contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null}
              * area : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"}
-             * ansShopBrowses : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":5,"enableFlag":null}
-             * ecGoodsBasic : null
-             * ansSalesVolume : null
-             * ecShopScore : null
+             * ansCustFollow : null
+             * ansShopBrowses : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":178,"enableFlag":null}
              * ecCategory : null
+             * nameIdentifyLabel : null
+             * sexLabel : null
+             * loginFlagLabel : null
              * contractConfirmLabel : null
-             * ifSignLabel : 否
              * shopFeatureLabel : null
-             * queenCardLabel : 否
-             * shopCateLabel : 美业
-             * industryCateLabel : 美业
+             * queenCardLabel : null
+             * shopCateLabel : null
+             * industryCateLabel : null
              * ifLicenceLabel : null
-             * businessFlagLabel : 正常
-             * enableFlagLabel : 无效
-             * signFlagLabel : 商家自开店
-             * distanceScope : 0
+             * businessFlagLabel : null
+             * enableFlagLabel : null
              * contentByTitle : null
-             * sortKey : null
+             * ifContractLabel : null
+             * signFlagLabel : null
              */
 
             private Object id;
@@ -97,26 +97,26 @@ public class ClassificationBean {
             private Object remarks;
             private Object createDate;
             private Object updateDate;
+            private Object ansShopManager;
             private AnsShopBasicBean ansShopBasic;
             private AreaBean area;
+            private Object ansCustFollow;
             private AnsShopBrowsesBean ansShopBrowses;
-            private Object ecGoodsBasic;
-            private Object ansSalesVolume;
-            private Object ecShopScore;
             private Object ecCategory;
+            private Object nameIdentifyLabel;
+            private Object sexLabel;
+            private Object loginFlagLabel;
             private Object contractConfirmLabel;
-            private String ifSignLabel;
             private Object shopFeatureLabel;
-            private String queenCardLabel;
-            private String shopCateLabel;
-            private String industryCateLabel;
+            private Object queenCardLabel;
+            private Object shopCateLabel;
+            private Object industryCateLabel;
             private Object ifLicenceLabel;
-            private String businessFlagLabel;
-            private String enableFlagLabel;
-            private String signFlagLabel;
-            private int distanceScope;
+            private Object businessFlagLabel;
+            private Object enableFlagLabel;
             private Object contentByTitle;
-            private Object sortKey;
+            private Object ifContractLabel;
+            private Object signFlagLabel;
 
             public Object getId() {
                 return id;
@@ -158,6 +158,14 @@ public class ClassificationBean {
                 this.updateDate = updateDate;
             }
 
+            public Object getAnsShopManager() {
+                return ansShopManager;
+            }
+
+            public void setAnsShopManager(Object ansShopManager) {
+                this.ansShopManager = ansShopManager;
+            }
+
             public AnsShopBasicBean getAnsShopBasic() {
                 return ansShopBasic;
             }
@@ -174,36 +182,20 @@ public class ClassificationBean {
                 this.area = area;
             }
 
+            public Object getAnsCustFollow() {
+                return ansCustFollow;
+            }
+
+            public void setAnsCustFollow(Object ansCustFollow) {
+                this.ansCustFollow = ansCustFollow;
+            }
+
             public AnsShopBrowsesBean getAnsShopBrowses() {
                 return ansShopBrowses;
             }
 
             public void setAnsShopBrowses(AnsShopBrowsesBean ansShopBrowses) {
                 this.ansShopBrowses = ansShopBrowses;
-            }
-
-            public Object getEcGoodsBasic() {
-                return ecGoodsBasic;
-            }
-
-            public void setEcGoodsBasic(Object ecGoodsBasic) {
-                this.ecGoodsBasic = ecGoodsBasic;
-            }
-
-            public Object getAnsSalesVolume() {
-                return ansSalesVolume;
-            }
-
-            public void setAnsSalesVolume(Object ansSalesVolume) {
-                this.ansSalesVolume = ansSalesVolume;
-            }
-
-            public Object getEcShopScore() {
-                return ecShopScore;
-            }
-
-            public void setEcShopScore(Object ecShopScore) {
-                this.ecShopScore = ecShopScore;
             }
 
             public Object getEcCategory() {
@@ -214,20 +206,36 @@ public class ClassificationBean {
                 this.ecCategory = ecCategory;
             }
 
+            public Object getNameIdentifyLabel() {
+                return nameIdentifyLabel;
+            }
+
+            public void setNameIdentifyLabel(Object nameIdentifyLabel) {
+                this.nameIdentifyLabel = nameIdentifyLabel;
+            }
+
+            public Object getSexLabel() {
+                return sexLabel;
+            }
+
+            public void setSexLabel(Object sexLabel) {
+                this.sexLabel = sexLabel;
+            }
+
+            public Object getLoginFlagLabel() {
+                return loginFlagLabel;
+            }
+
+            public void setLoginFlagLabel(Object loginFlagLabel) {
+                this.loginFlagLabel = loginFlagLabel;
+            }
+
             public Object getContractConfirmLabel() {
                 return contractConfirmLabel;
             }
 
             public void setContractConfirmLabel(Object contractConfirmLabel) {
                 this.contractConfirmLabel = contractConfirmLabel;
-            }
-
-            public String getIfSignLabel() {
-                return ifSignLabel;
-            }
-
-            public void setIfSignLabel(String ifSignLabel) {
-                this.ifSignLabel = ifSignLabel;
             }
 
             public Object getShopFeatureLabel() {
@@ -238,27 +246,27 @@ public class ClassificationBean {
                 this.shopFeatureLabel = shopFeatureLabel;
             }
 
-            public String getQueenCardLabel() {
+            public Object getQueenCardLabel() {
                 return queenCardLabel;
             }
 
-            public void setQueenCardLabel(String queenCardLabel) {
+            public void setQueenCardLabel(Object queenCardLabel) {
                 this.queenCardLabel = queenCardLabel;
             }
 
-            public String getShopCateLabel() {
+            public Object getShopCateLabel() {
                 return shopCateLabel;
             }
 
-            public void setShopCateLabel(String shopCateLabel) {
+            public void setShopCateLabel(Object shopCateLabel) {
                 this.shopCateLabel = shopCateLabel;
             }
 
-            public String getIndustryCateLabel() {
+            public Object getIndustryCateLabel() {
                 return industryCateLabel;
             }
 
-            public void setIndustryCateLabel(String industryCateLabel) {
+            public void setIndustryCateLabel(Object industryCateLabel) {
                 this.industryCateLabel = industryCateLabel;
             }
 
@@ -270,36 +278,20 @@ public class ClassificationBean {
                 this.ifLicenceLabel = ifLicenceLabel;
             }
 
-            public String getBusinessFlagLabel() {
+            public Object getBusinessFlagLabel() {
                 return businessFlagLabel;
             }
 
-            public void setBusinessFlagLabel(String businessFlagLabel) {
+            public void setBusinessFlagLabel(Object businessFlagLabel) {
                 this.businessFlagLabel = businessFlagLabel;
             }
 
-            public String getEnableFlagLabel() {
+            public Object getEnableFlagLabel() {
                 return enableFlagLabel;
             }
 
-            public void setEnableFlagLabel(String enableFlagLabel) {
+            public void setEnableFlagLabel(Object enableFlagLabel) {
                 this.enableFlagLabel = enableFlagLabel;
-            }
-
-            public String getSignFlagLabel() {
-                return signFlagLabel;
-            }
-
-            public void setSignFlagLabel(String signFlagLabel) {
-                this.signFlagLabel = signFlagLabel;
-            }
-
-            public int getDistanceScope() {
-                return distanceScope;
-            }
-
-            public void setDistanceScope(int distanceScope) {
-                this.distanceScope = distanceScope;
             }
 
             public Object getContentByTitle() {
@@ -310,33 +302,44 @@ public class ClassificationBean {
                 this.contentByTitle = contentByTitle;
             }
 
-            public Object getSortKey() {
-                return sortKey;
+            public Object getIfContractLabel() {
+                return ifContractLabel;
             }
 
-            public void setSortKey(Object sortKey) {
-                this.sortKey = sortKey;
+            public void setIfContractLabel(Object ifContractLabel) {
+                this.ifContractLabel = ifContractLabel;
+            }
+
+            public Object getSignFlagLabel() {
+                return signFlagLabel;
+            }
+
+            public void setSignFlagLabel(Object signFlagLabel) {
+                this.signFlagLabel = signFlagLabel;
             }
 
             public static class AnsShopBasicBean {
                 /**
                  * id : 111
                  * isNewRecord : false
-                 * remarks : null
+                 * remarks :
                  * createDate : 2018-05-07 14:24:02
-                 * updateDate : 2018-05-12 09:32:38
+                 * updateDate : 2018-05-16 13:57:50
+                 * merchantId : null
                  * contractConfirm : 1
                  * ifContract : 0
                  * shopName : 美美理发店
-                 * shortName : null
-                 * shopNo : null
-                 * marketAssistant : null
-                 * shopBrief : null
-                 * shopAccounce : null
-                 * shopActivity : null
-                 * shopFeature : null
+                 * shortName :
+                 * shopNo : 132
+                 * marketAssistant :
+                 * shopBrief : 专业美发
+                 * shopAccounce : 全面不休息
+                 * ifNew : 0
+                 * shopBanner : null
+                 * shopActivity : 111
+                 * shopFeature : 131
                  * queenCard : 0
-                 * shopTab : null
+                 * shopTab : 美甲美手,美容美体
                  * shopCate : 1
                  * industryCate : 1
                  * belongCity : 17e8e72326574a0ea94b15d6eeddbb6d
@@ -349,44 +352,50 @@ public class ClassificationBean {
                  * serviceTel : 15852855888
                  * shopContacts : 姜超
                  * contactsTel : 15852855880
+                 * contactsMail : null
                  * ifLicence : 1
-                 * shopLegal :
+                 * shopProperty : 00
+                 * shopLegal : 132
                  * legalIdc : 48675519930101354X
-                 * legalAddress : null
-                 * taxNumber : null
+                 * legalAddress : 12
+                 * taxNumber : 213456
                  * businessLicence : A23791637529664
                  * shopCharge : 陈伟霆
                  * chargeIdc : 321087218968210902
-                 * chargeIdp : null
-                 * shopLogo : null
-                 * shopPhoto : null
-                 * shopEnvPhoto : null
+                 * chargeIdp : 213456776543
+                 * shopLogo :
+                 * shopPhoto :
+                 * shopEnvPhoto :
                  * joinTime : 2018-05-07 14:24:02
                  * businessFlag : 1
                  * enableFlag : 1
                  * signFlag : 1
-                 * geoX : null
-                 * geoY : null
-                 * updatePgm : ApiLoginController
+                 * geoX : 12.230000
+                 * geoY : 14.200000
+                 * updatePgm : 1
+                 * apiAnsCustCartList : null
                  */
 
                 private String id;
                 private boolean isNewRecord;
-                private Object remarks;
+                private String remarks;
                 private String createDate;
                 private String updateDate;
+                private Object merchantId;
                 private String contractConfirm;
                 private String ifContract;
                 private String shopName;
-                private Object shortName;
-                private Object shopNo;
-                private Object marketAssistant;
-                private Object shopBrief;
-                private Object shopAccounce;
-                private Object shopActivity;
-                private Object shopFeature;
+                private String shortName;
+                private String shopNo;
+                private String marketAssistant;
+                private String shopBrief;
+                private String shopAccounce;
+                private String ifNew;
+                private Object shopBanner;
+                private String shopActivity;
+                private String shopFeature;
                 private String queenCard;
-                private Object shopTab;
+                private String shopTab;
                 private String shopCate;
                 private String industryCate;
                 private String belongCity;
@@ -399,25 +408,28 @@ public class ClassificationBean {
                 private String serviceTel;
                 private String shopContacts;
                 private String contactsTel;
+                private Object contactsMail;
                 private String ifLicence;
+                private String shopProperty;
                 private String shopLegal;
                 private String legalIdc;
-                private Object legalAddress;
-                private Object taxNumber;
+                private String legalAddress;
+                private String taxNumber;
                 private String businessLicence;
                 private String shopCharge;
                 private String chargeIdc;
-                private Object chargeIdp;
-                private Object shopLogo;
-                private Object shopPhoto;
-                private Object shopEnvPhoto;
+                private String chargeIdp;
+                private String shopLogo;
+                private String shopPhoto;
+                private String shopEnvPhoto;
                 private String joinTime;
                 private String businessFlag;
                 private String enableFlag;
                 private String signFlag;
-                private Object geoX;
-                private Object geoY;
+                private String geoX;
+                private String geoY;
                 private String updatePgm;
+                private Object apiAnsCustCartList;
 
                 public String getId() {
                     return id;
@@ -435,11 +447,11 @@ public class ClassificationBean {
                     this.isNewRecord = isNewRecord;
                 }
 
-                public Object getRemarks() {
+                public String getRemarks() {
                     return remarks;
                 }
 
-                public void setRemarks(Object remarks) {
+                public void setRemarks(String remarks) {
                     this.remarks = remarks;
                 }
 
@@ -457,6 +469,14 @@ public class ClassificationBean {
 
                 public void setUpdateDate(String updateDate) {
                     this.updateDate = updateDate;
+                }
+
+                public Object getMerchantId() {
+                    return merchantId;
+                }
+
+                public void setMerchantId(Object merchantId) {
+                    this.merchantId = merchantId;
                 }
 
                 public String getContractConfirm() {
@@ -483,59 +503,75 @@ public class ClassificationBean {
                     this.shopName = shopName;
                 }
 
-                public Object getShortName() {
+                public String getShortName() {
                     return shortName;
                 }
 
-                public void setShortName(Object shortName) {
+                public void setShortName(String shortName) {
                     this.shortName = shortName;
                 }
 
-                public Object getShopNo() {
+                public String getShopNo() {
                     return shopNo;
                 }
 
-                public void setShopNo(Object shopNo) {
+                public void setShopNo(String shopNo) {
                     this.shopNo = shopNo;
                 }
 
-                public Object getMarketAssistant() {
+                public String getMarketAssistant() {
                     return marketAssistant;
                 }
 
-                public void setMarketAssistant(Object marketAssistant) {
+                public void setMarketAssistant(String marketAssistant) {
                     this.marketAssistant = marketAssistant;
                 }
 
-                public Object getShopBrief() {
+                public String getShopBrief() {
                     return shopBrief;
                 }
 
-                public void setShopBrief(Object shopBrief) {
+                public void setShopBrief(String shopBrief) {
                     this.shopBrief = shopBrief;
                 }
 
-                public Object getShopAccounce() {
+                public String getShopAccounce() {
                     return shopAccounce;
                 }
 
-                public void setShopAccounce(Object shopAccounce) {
+                public void setShopAccounce(String shopAccounce) {
                     this.shopAccounce = shopAccounce;
                 }
 
-                public Object getShopActivity() {
+                public String getIfNew() {
+                    return ifNew;
+                }
+
+                public void setIfNew(String ifNew) {
+                    this.ifNew = ifNew;
+                }
+
+                public Object getShopBanner() {
+                    return shopBanner;
+                }
+
+                public void setShopBanner(Object shopBanner) {
+                    this.shopBanner = shopBanner;
+                }
+
+                public String getShopActivity() {
                     return shopActivity;
                 }
 
-                public void setShopActivity(Object shopActivity) {
+                public void setShopActivity(String shopActivity) {
                     this.shopActivity = shopActivity;
                 }
 
-                public Object getShopFeature() {
+                public String getShopFeature() {
                     return shopFeature;
                 }
 
-                public void setShopFeature(Object shopFeature) {
+                public void setShopFeature(String shopFeature) {
                     this.shopFeature = shopFeature;
                 }
 
@@ -547,11 +583,11 @@ public class ClassificationBean {
                     this.queenCard = queenCard;
                 }
 
-                public Object getShopTab() {
+                public String getShopTab() {
                     return shopTab;
                 }
 
-                public void setShopTab(Object shopTab) {
+                public void setShopTab(String shopTab) {
                     this.shopTab = shopTab;
                 }
 
@@ -651,12 +687,28 @@ public class ClassificationBean {
                     this.contactsTel = contactsTel;
                 }
 
+                public Object getContactsMail() {
+                    return contactsMail;
+                }
+
+                public void setContactsMail(Object contactsMail) {
+                    this.contactsMail = contactsMail;
+                }
+
                 public String getIfLicence() {
                     return ifLicence;
                 }
 
                 public void setIfLicence(String ifLicence) {
                     this.ifLicence = ifLicence;
+                }
+
+                public String getShopProperty() {
+                    return shopProperty;
+                }
+
+                public void setShopProperty(String shopProperty) {
+                    this.shopProperty = shopProperty;
                 }
 
                 public String getShopLegal() {
@@ -675,19 +727,19 @@ public class ClassificationBean {
                     this.legalIdc = legalIdc;
                 }
 
-                public Object getLegalAddress() {
+                public String getLegalAddress() {
                     return legalAddress;
                 }
 
-                public void setLegalAddress(Object legalAddress) {
+                public void setLegalAddress(String legalAddress) {
                     this.legalAddress = legalAddress;
                 }
 
-                public Object getTaxNumber() {
+                public String getTaxNumber() {
                     return taxNumber;
                 }
 
-                public void setTaxNumber(Object taxNumber) {
+                public void setTaxNumber(String taxNumber) {
                     this.taxNumber = taxNumber;
                 }
 
@@ -715,35 +767,35 @@ public class ClassificationBean {
                     this.chargeIdc = chargeIdc;
                 }
 
-                public Object getChargeIdp() {
+                public String getChargeIdp() {
                     return chargeIdp;
                 }
 
-                public void setChargeIdp(Object chargeIdp) {
+                public void setChargeIdp(String chargeIdp) {
                     this.chargeIdp = chargeIdp;
                 }
 
-                public Object getShopLogo() {
+                public String getShopLogo() {
                     return shopLogo;
                 }
 
-                public void setShopLogo(Object shopLogo) {
+                public void setShopLogo(String shopLogo) {
                     this.shopLogo = shopLogo;
                 }
 
-                public Object getShopPhoto() {
+                public String getShopPhoto() {
                     return shopPhoto;
                 }
 
-                public void setShopPhoto(Object shopPhoto) {
+                public void setShopPhoto(String shopPhoto) {
                     this.shopPhoto = shopPhoto;
                 }
 
-                public Object getShopEnvPhoto() {
+                public String getShopEnvPhoto() {
                     return shopEnvPhoto;
                 }
 
-                public void setShopEnvPhoto(Object shopEnvPhoto) {
+                public void setShopEnvPhoto(String shopEnvPhoto) {
                     this.shopEnvPhoto = shopEnvPhoto;
                 }
 
@@ -779,19 +831,19 @@ public class ClassificationBean {
                     this.signFlag = signFlag;
                 }
 
-                public Object getGeoX() {
+                public String getGeoX() {
                     return geoX;
                 }
 
-                public void setGeoX(Object geoX) {
+                public void setGeoX(String geoX) {
                     this.geoX = geoX;
                 }
 
-                public Object getGeoY() {
+                public String getGeoY() {
                     return geoY;
                 }
 
-                public void setGeoY(Object geoY) {
+                public void setGeoY(String geoY) {
                     this.geoY = geoY;
                 }
 
@@ -801,6 +853,14 @@ public class ClassificationBean {
 
                 public void setUpdatePgm(String updatePgm) {
                     this.updatePgm = updatePgm;
+                }
+
+                public Object getApiAnsCustCartList() {
+                    return apiAnsCustCartList;
+                }
+
+                public void setApiAnsCustCartList(Object apiAnsCustCartList) {
+                    this.apiAnsCustCartList = apiAnsCustCartList;
                 }
             }
 
@@ -928,7 +988,7 @@ public class ClassificationBean {
                  * createDate : null
                  * updateDate : null
                  * shopId : null
-                 * browseCounts : 5
+                 * browseCounts : 178
                  * enableFlag : null
                  */
 

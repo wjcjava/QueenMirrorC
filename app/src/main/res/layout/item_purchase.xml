@@ -32,7 +32,6 @@
         <ImageView
             android:layout_width="@dimen/comment_7_dip"
             android:layout_height="@dimen/comment_12_dip"
-
             android:layout_marginStart="@dimen/comment_5_dip"
             android:layout_marginTop="@dimen/comment_18_dip"
             android:layout_toRightOf="@id/purchase_shop_name"
@@ -68,6 +67,7 @@
                 android:layout_marginStart="@dimen/comment_10_dip"
                 android:layout_marginTop="@dimen/comment_16_dip"
                 android:layout_toRightOf="@id/iv_purchase_title"
+                android:textSize="@dimen/comment_14_size"
                 android:text="深层清洁加补水" />
 
             <TextView
@@ -79,8 +79,9 @@
                 android:layout_marginTop="@dimen/comment_18_dip"
                 android:layout_toRightOf="@id/iv_purchase_title"
                 android:text="¥138"
+                android:textStyle="bold"
                 android:textColor="@color/gray_E7370C"
-                android:textSize="@dimen/comment_20_size" />
+                android:textSize="@dimen/comment_15_size" />
 
             <TextView
                 android:id="@+id/tv_purchase_originalprice"
@@ -91,8 +92,7 @@
                 android:layout_marginTop="@dimen/comment_22_dip"
                 android:layout_toRightOf="@id/tv_purchase_presentprice"
                 android:text="¥138"
-
-                android:textSize="@dimen/comment_16_size" />
+                android:textSize="@dimen/comment_14_size" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 android:layout_marginEnd="@dimen/comment_20_dip"
                 android:layout_marginTop="@dimen/comment_10_dip"
                 android:text="X1"
-                android:textSize="@dimen/comment_20_size" />
+                android:textSize="@dimen/comment_16_size" />
         </RelativeLayout>
 
         <View
@@ -146,8 +146,9 @@
                 android:layout_marginTop="@dimen/comment_18_dip"
                 android:layout_toRightOf="@id/iv_purchase_titletwo"
                 android:text="¥138"
+                android:textStyle="bold"
                 android:textColor="@color/gray_E7370C"
-                android:textSize="@dimen/comment_20_size" />
+                android:textSize="@dimen/comment_14_size" />
 
             <TextView
                 android:id="@+id/tv_purchase_originalpricetwo"
@@ -158,8 +159,7 @@
                 android:layout_marginTop="@dimen/comment_22_dip"
                 android:layout_toRightOf="@id/tv_purchase_presentpricetwo"
                 android:text="¥138"
-
-                android:textSize="@dimen/comment_16_size" />
+                android:textSize="@dimen/comment_14_size" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -169,7 +169,7 @@
                 android:layout_marginEnd="@dimen/comment_20_dip"
                 android:layout_marginTop="@dimen/comment_10_dip"
                 android:text="X1"
-                android:textSize="@dimen/comment_20_size" />
+                android:textSize="@dimen/comment_16_size" />
         </RelativeLayout>
 
         <View
@@ -180,82 +180,5 @@
             android:layout_marginStart="@dimen/comment_22_dip"
             android:layout_marginTop="@dimen/comment_13_dip" />
 
-        <RelativeLayout
-            android:id="@+id/recycler_three"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_40_dip"
-            android:layout_below="@+id/view_three">
-
-            <TextView
-                android:id="@+id/tv_voucher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/comment_22_dip"
-                android:text="单品券选择"
-
-                />
-
-            <TextView
-                android:id="@+id/tv_newpress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/comment_35_dip"
-                android:text="无可用单品券" />
-
-            <ImageView
-                android:id="@+id/img_new"
-                android:layout_width="@dimen/comment_7_dip"
-                android:layout_height="@dimen/comment_12_dip"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/comment_20_dip"
-                app:srcCompat="@drawable/icon_full_right" />
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/view_four"
-            style="@style/dash_line"
-            android:layout_below="@id/recycler_three"
-            android:layout_marginEnd="@dimen/comment_22_dip"
-            android:layout_marginStart="@dimen/comment_22_dip"
-            android:layout_marginTop="@dimen/comment_13_dip" />
-
-        <RelativeLayout
-            android:id="@+id/recycler_four"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_40_dip"
-            android:layout_below="@+id/view_four">
-
-            <TextView
-                android:id="@+id/tv_shop_voucher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/comment_22_dip"
-                android:text="单品券选择"
-
-                />
-
-            <TextView
-                android:id="@+id/tv_shop_ticket"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/comment_35_dip"
-                android:text="有一张单品券可用" />
-
-            <ImageView
-
-                android:layout_width="@dimen/comment_7_dip"
-                android:layout_height="@dimen/comment_12_dip"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/comment_20_dip"
-                app:srcCompat="@drawable/icon_full_right" />
-        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

@@ -33,7 +33,6 @@ public class ToastUtils {
         return mInstance;
     }
 
-
     /**
      * 短时间显示吐司
      *

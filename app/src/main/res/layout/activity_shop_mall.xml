@@ -19,6 +19,7 @@
             android:layout_marginStart="@dimen/comment_19_dip"
             android:layout_marginBottom="@dimen/comment_9_dip"
             android:layout_marginEnd="@dimen/comment_19_dip"
+            android:visibility="gone"
             android:paddingEnd="@dimen/comment_10_dip"
             android:layout_height="@dimen/comment_32_dip">
 
