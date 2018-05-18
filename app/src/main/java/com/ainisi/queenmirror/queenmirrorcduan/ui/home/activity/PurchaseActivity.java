@@ -12,7 +12,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import butterknife.Bind;
 import butterknife.OnClick;
 //提交订单
-public class PurchaseActivity extends BaseNewActivity {
+public class PurchaseActivity extends BaseNewActivity{
     @Bind(R.id.list_order)
     ListView listOrder;
     @Bind(R.id.title_title)

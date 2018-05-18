@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
@@ -30,17 +31,20 @@ import butterknife.OnClick;
 /**
  * 我的评价
  */
-public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack,HttpCallBack {
+public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack, HttpCallBack {
 
     @Bind(R.id.rc_evaluate)
     RecyclerView rcevaluate;
-    private List<SortBean> list=new ArrayList<>();
+    private List<SortBean> list = new ArrayList<>();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     private Handler handler = new Handler();
+    private View evaluateView;
+
     public static void startActivity(Context context) {
-        context.startActivity(new Intent(context,MineEvaluateActivity.class));
+        context.startActivity(new Intent(context, MineEvaluateActivity.class));
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_evaluate;
@@ -52,10 +56,12 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
     }
 
 
-
-
     @Override
     public void initView() {
+        initReply();
+    }
+
+    private void initReply() {
 
     }
 
@@ -108,26 +114,27 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
     }
 
     private void inithttp() {
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("userId","111");
-        parames.put("pageNumber","1");
-        HttpUtils.doPost(ACTION.MYCOMMENTS,parames, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("userId", "111");
+        parames.put("pageNumber", "1");
+        HttpUtils.doPost(ACTION.MYCOMMENTS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.MYCOMMENTS:
-               MyCommentsBean commentsBean= GsonUtil.toObj(res, MyCommentsBean.class);
+                MyCommentsBean commentsBean = GsonUtil.toObj(res, MyCommentsBean.class);
+                evaluateView = LayoutInflater.from(this).inflate(R.layout.item_evaluate, null);
                 List<MyCommentsBean.BodyBean.CommentsListDataBean> commentList = commentsBean.getBody().getCommentsListData();
-               if(commentsBean.isSuccess()){
-                   MyCommentsAdapter sortAdapter2=new MyCommentsAdapter(R.layout.item_evaluate,commentList);
-                   rcevaluate.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-                   rcevaluate.setAdapter(sortAdapter2);
-               }else {
-                   T.show(commentsBean.getMsg());
-               }
+                if (commentsBean.isSuccess()) {
+                    MyCommentsAdapter sortAdapter2 = new MyCommentsAdapter(R.layout.item_evaluate, commentList);
+                    rcevaluate.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                    rcevaluate.setAdapter(sortAdapter2);
+                } else {
+                    T.show(commentsBean.getMsg());
+                }
                 break;
         }
     }

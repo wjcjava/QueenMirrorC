@@ -9,334 +9,343 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SubmitActivity">
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/alpha_05_black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
 
-        android:layout_height="wrap_content"
-        android:background="@drawable/et_shap"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_shap"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/comment_10_dip">
+
+
+                <ImageView
+                    android:id="@+id/title_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/comment_10_dip"
+                    android:layout_marginLeft="@dimen/comment_10_dip"
+                    android:layout_marginTop="@dimen/comment_25_dip"
+                    android:paddingRight="@dimen/comment_10_dip"
+                    android:src="@mipmap/icon_back" />
+
+                <TextView
+                    android:id="@+id/newtitle_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/title_back"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/comment_10_dip"
+                    android:layout_marginLeft="@dimen/comment_40_dip"
+                    android:layout_marginRight="@dimen/comment_40_dip"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="@dimen/comment_5_dip"
+                    android:text="@string/payment_order"
+                    android:textColor="@color/alpha_95_black"
+                    android:textSize="@dimen/comment_18_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/newtitle_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/comment_10_dip"
+                    android:text="@string/remaining_time"
+                    android:textSize="@dimen/comment_14_size" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="@dimen/comment_20_dip"
+                    android:layout_height="@dimen/comment_20_dip"
+                    android:layout_alignEnd="@+id/newtitle_title"
+                    android:layout_below="@+id/textView10"
+                    android:layout_marginEnd="@dimen/comment_67_dip"
+                    android:layout_marginTop="@dimen/comment_10_dip"
+                    android:background="@color/alpha_95_black"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="@dimen/comment_20_dip"
+                    android:layout_height="@dimen/comment_20_dip"
+                    android:layout_alignBottom="@+id/textView13"
+                    android:layout_alignStart="@+id/newtitle_title"
+                    android:layout_marginLeft="@dimen/comment_13_dip"
+                    android:background="@color/alpha_95_black"
+                    android:gravity="center"
+                    android:text="4"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView120"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView18"
+                    android:layout_marginBottom="@dimen/comment_2_dip"
+                    android:layout_marginLeft="@dimen/comment_6_dip"
+                    android:layout_toEndOf="@+id/textView18"
+                    android:text=":"
+                    android:textColor="@color/alpha_90_black" />
+
+
+                <TextView
+                    android:id="@+id/textView131"
+                    android:layout_width="@dimen/comment_20_dip"
+                    android:layout_height="@dimen/comment_20_dip"
+                    android:layout_alignEnd="@+id/newtitle_title"
+                    android:layout_below="@+id/textView10"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/comment_10_dip"
+                    android:background="@color/alpha_95_black"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView181"
+                    android:layout_width="@dimen/comment_20_dip"
+                    android:layout_height="@dimen/comment_20_dip"
+                    android:layout_alignBottom="@+id/textView13"
+                    android:layout_alignStart="@id/textView131"
+                    android:layout_marginLeft="23dp"
+                    android:background="@color/alpha_95_black"
+                    android:gravity="center"
+                    android:text="4"
+
+                    android:textColor="@color/white" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/comment_25_dip">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_title"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="@dimen/comment_10_dip"
+                    android:src="@drawable/icon_portrait"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="@dimen/comment_2_dip" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/comment_5_dip"
+                    android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@+id/iv_title"
+                    android:text="¥222"
+                    android:textColor="@color/alpha_90_black"
+                    android:textSize="@dimen/comment_16_size" />
+
+                <TextView
+                    android:id="@+id/tv_shop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name"
+                    android:layout_marginLeft="@dimen/comment_5_dip"
+                    android:layout_marginTop="@dimen/comment_3_dip"
+                    android:layout_toRightOf="@+id/iv_title"
+                    android:text="Dear Kin形象工作室"
+                    android:textSize="@dimen/comment_14_size" />
+            </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/comment_10_dip">
+            android:layout_marginBottom="@dimen/comment_20_dip"
+            android:layout_marginTop="@dimen/comment_20_dip"
+            android:background="@color/alpha_05_black">
+
+            <RelativeLayout
+                android:id="@+id/recycler_wechat"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/comment_50_dip"
+                android:background="@drawable/et_shap">
+
+                <ImageView
+                    android:id="@+id/img_wechat"
+                    android:layout_width="@dimen/comment_18_dip"
+                    android:layout_height="@dimen/comment_17_dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/comment_13_dip"
+                    android:layout_marginTop="@dimen/comment_17_dip"
+                    app:srcCompat="@drawable/icon_submit_wechat" />
+
+                <TextView
+                    android:id="@+id/tv_wechat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/comment_13_dip"
+                    android:layout_marginTop="@dimen/comment_17_dip"
+                    android:layout_toRightOf="@id/img_wechat"
+                    android:text="@string/wechat_payment" />
+
+                <ImageView
+                    android:id="@+id/img_wechat_unpayment"
+                    android:layout_width="@dimen/comment_25_dip"
+                    android:layout_height="@dimen/comment_25_dip"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/comment_22_dip"
+                    android:layout_marginTop="@dimen/comment_13_dip"
+                    android:src="@drawable/icon_unchecked" />
+
+                <ImageView
+                    android:id="@+id/img_wechat_payment"
+                    android:layout_width="@dimen/comment_25_dip"
+                    android:layout_height="@dimen/comment_25_dip"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/comment_22_dip"
+                    android:layout_marginTop="@dimen/comment_13_dip"
+                    android:src="@drawable/icon_checked"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/recycler_alipay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/comment_50_dip"
+                android:layout_below="@id/recycler_wechat"
+                android:layout_marginTop="@dimen/comment_4_dip"
+                android:background="@drawable/et_shap">
+
+                <ImageView
+                    android:id="@+id/img_alipay"
+                    android:layout_width="@dimen/comment_18_dip"
+                    android:layout_height="@dimen/comment_17_dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/comment_13_dip"
+                    android:layout_marginTop="@dimen/comment_17_dip"
+                    app:srcCompat="@drawable/icon_alipay" />
+
+                <TextView
+                    android:id="@+id/tv_alipay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/comment_13_dip"
+                    android:layout_marginTop="@dimen/comment_17_dip"
+                    android:layout_toRightOf="@id/img_alipay"
+                    android:text="@string/wechat_alipay" />
+
+                <ImageView
+                    android:id="@+id/img_alipay_unalipay"
+                    android:layout_width="@dimen/comment_25_dip"
+                    android:layout_height="@dimen/comment_25_dip"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/comment_22_dip"
+                    android:layout_marginTop="@dimen/comment_13_dip"
+                    android:src="@drawable/icon_unchecked" />
+
+                <ImageView
+                    android:id="@+id/img_wechat_alipay"
+                    android:layout_width="@dimen/comment_25_dip"
+                    android:layout_height="@dimen/comment_25_dip"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/comment_22_dip"
+                    android:layout_marginTop="@dimen/comment_13_dip"
+                    android:src="@drawable/icon_checked"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/comment_50_dip"
+                android:layout_below="@+id/recycler_alipay"
+                android:layout_marginTop="@dimen/comment_4_dip"
+                android:background="@drawable/et_shap">
+
+                <ImageView
+                    android:id="@+id/img_queen"
+                    android:layout_width="@dimen/comment_18_dip"
+                    android:layout_height="@dimen/comment_17_dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/comment_13_dip"
+                    android:layout_marginTop="@dimen/comment_17_dip"
+                    app:srcCompat="@drawable/icon_submit_queen" />
 
 
-            <ImageView
-                android:id="@+id/title_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="@dimen/comment_10_dip"
-                android:layout_marginLeft="@dimen/comment_10_dip"
-                android:layout_marginTop="@dimen/comment_25_dip"
-                android:paddingRight="@dimen/comment_10_dip"
-                android:src="@mipmap/icon_back" />
+                <TextView
+                    android:id="@+id/tv_queen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/comment_13_dip"
+                    android:layout_marginTop="@dimen/comment_17_dip"
+                    android:layout_toRightOf="@id/img_queen"
+                    android:text="@string/queen_payment"
 
-            <TextView
-                android:id="@+id/newtitle_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/title_back"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/comment_10_dip"
-                android:layout_marginLeft="@dimen/comment_40_dip"
-                android:layout_marginRight="@dimen/comment_40_dip"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingTop="@dimen/comment_5_dip"
-                android:text="@string/payment_order"
-                android:textColor="@color/alpha_95_black"
-                android:textSize="@dimen/comment_18_size"
-                android:textStyle="bold" />
+                    />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/newtitle_title"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/comment_10_dip"
-                android:text="@string/remaining_time"
-                android:textSize="@dimen/comment_14_size" />
+                <ImageView
+                    android:id="@+id/img_queen_unpayment"
+                    android:layout_width="@dimen/comment_25_dip"
+                    android:layout_height="@dimen/comment_25_dip"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/comment_22_dip"
+                    android:layout_marginTop="@dimen/comment_13_dip"
+                    android:src="@drawable/icon_unchecked" />
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="@dimen/comment_20_dip"
-                android:layout_height="@dimen/comment_20_dip"
-                android:layout_alignEnd="@+id/newtitle_title"
-                android:layout_below="@+id/textView10"
-                android:layout_marginEnd="@dimen/comment_67_dip"
-                android:layout_marginTop="@dimen/comment_10_dip"
-                android:background="@color/alpha_95_black"
-                android:gravity="center"
-                android:text="1"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="@dimen/comment_20_dip"
-                android:layout_height="@dimen/comment_20_dip"
-                android:layout_alignBottom="@+id/textView13"
-                android:layout_alignStart="@+id/newtitle_title"
-                android:layout_marginLeft="@dimen/comment_13_dip"
-                android:background="@color/alpha_95_black"
-                android:gravity="center"
-                android:text="4"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/textView120"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView18"
-                android:layout_marginBottom="@dimen/comment_2_dip"
-                android:layout_marginLeft="@dimen/comment_6_dip"
-                android:layout_toEndOf="@+id/textView18"
-                android:text=":"
-                android:textColor="@color/alpha_90_black" />
-
-
-            <TextView
-                android:id="@+id/textView131"
-                android:layout_width="@dimen/comment_20_dip"
-                android:layout_height="@dimen/comment_20_dip"
-                android:layout_alignEnd="@+id/newtitle_title"
-                android:layout_below="@+id/textView10"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="@dimen/comment_10_dip"
-                android:background="@color/alpha_95_black"
-                android:gravity="center"
-                android:text="5"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/textView181"
-                android:layout_width="@dimen/comment_20_dip"
-                android:layout_height="@dimen/comment_20_dip"
-                android:layout_alignBottom="@+id/textView13"
-                android:layout_alignStart="@id/textView131"
-                android:layout_marginLeft="23dp"
-                android:background="@color/alpha_95_black"
-                android:gravity="center"
-                android:text="4"
-
-                android:textColor="@color/white" />
-
-
+                <ImageView
+                    android:id="@+id/img_queen_payment"
+                    android:layout_width="@dimen/comment_25_dip"
+                    android:layout_height="@dimen/comment_25_dip"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/comment_22_dip"
+                    android:layout_marginTop="@dimen/comment_13_dip"
+                    android:src="@drawable/icon_checked"
+                    android:visibility="gone" />
+            </RelativeLayout>
         </RelativeLayout>
 
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/comment_25_dip">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_title"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="@dimen/comment_10_dip"
-                android:src="@drawable/icon_portrait"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="@dimen/comment_2_dip" />
+        <LinearLayout
+            android:id="@+id/payV2"
+            android:layout_width="@dimen/comment_350_dip"
+            android:layout_height="@dimen/comment_50_dip"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_marginTop="@dimen/comment_40_dip"
+            android:background="@mipmap/icon_login_squareness"
+            android:gravity="center"
+            android:onClick="payV2"
+            tools:ignore="HardcodedText,OnClick">
 
             <TextView
-                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/comment_5_dip"
-                android:layout_marginTop="7dp"
-                android:layout_toRightOf="@+id/iv_title"
-                android:text="¥222"
-                android:textColor="@color/alpha_90_black"
+                android:text="@string/confirmation_of_payment"
+                android:textColor="@color/white"
+                android:textSize="@dimen/comment_12_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/comment_10_dip"
+                android:text="¥222.00"
+                android:textColor="@color/white"
                 android:textSize="@dimen/comment_16_size" />
-
-            <TextView
-                android:id="@+id/tv_shop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_name"
-                android:layout_marginLeft="@dimen/comment_5_dip"
-                android:layout_marginTop="@dimen/comment_3_dip"
-                android:layout_toRightOf="@+id/iv_title"
-                android:text="Dear Kin形象工作室"
-                android:textSize="@dimen/comment_14_size" />
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/comment_20_dip"
-        android:layout_marginTop="@dimen/comment_20_dip"
-        android:background="@color/alpha_05_black">
-
-        <RelativeLayout
-            android:id="@+id/recycler_wechat"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_50_dip"
-            android:background="@drawable/et_shap">
-
-            <ImageView
-                android:id="@+id/img_wechat"
-                android:layout_width="@dimen/comment_18_dip"
-                android:layout_height="@dimen/comment_17_dip"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/comment_13_dip"
-                android:layout_marginTop="@dimen/comment_17_dip"
-                app:srcCompat="@drawable/icon_submit_wechat" />
-
-            <TextView
-                android:id="@+id/tv_wechat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/comment_13_dip"
-                android:layout_marginTop="@dimen/comment_17_dip"
-                android:layout_toRightOf="@id/img_wechat"
-                android:text="@string/wechat_payment" />
-
-            <ImageView
-                android:id="@+id/img_wechat_unpayment"
-                android:layout_width="@dimen/comment_25_dip"
-                android:layout_height="@dimen/comment_25_dip"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/comment_22_dip"
-                android:layout_marginTop="@dimen/comment_13_dip"
-                android:src="@drawable/icon_unchecked" />
-            <ImageView
-                android:id="@+id/img_wechat_payment"
-                android:layout_width="@dimen/comment_25_dip"
-                android:layout_height="@dimen/comment_25_dip"
-                android:layout_alignParentEnd="true"
-                android:visibility="gone"
-                android:layout_marginEnd="@dimen/comment_22_dip"
-                android:layout_marginTop="@dimen/comment_13_dip"
-                android:src="@drawable/icon_checked" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/recycler_alipay"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_50_dip"
-            android:layout_below="@id/recycler_wechat"
-            android:layout_marginTop="@dimen/comment_4_dip"
-            android:background="@drawable/et_shap">
-
-            <ImageView
-                android:id="@+id/img_alipay"
-                android:layout_width="@dimen/comment_18_dip"
-                android:layout_height="@dimen/comment_17_dip"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/comment_13_dip"
-                android:layout_marginTop="@dimen/comment_17_dip"
-                app:srcCompat="@drawable/icon_submit_wechat" />
-
-            <TextView
-                android:id="@+id/tv_alipay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/comment_13_dip"
-                android:layout_marginTop="@dimen/comment_17_dip"
-                android:layout_toRightOf="@id/img_alipay"
-                android:text="@string/wechat_alipay" />
-
-            <ImageView
-                android:id="@+id/img_wechat_unalipay"
-                android:layout_width="@dimen/comment_25_dip"
-                android:layout_height="@dimen/comment_25_dip"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/comment_22_dip"
-                android:layout_marginTop="@dimen/comment_13_dip"
-                android:src="@drawable/icon_unchecked" />
-            <ImageView
-                android:id="@+id/img_wechat_alipay"
-                android:layout_width="@dimen/comment_25_dip"
-                android:layout_height="@dimen/comment_25_dip"
-                android:layout_alignParentEnd="true"
-                android:visibility="gone"
-                android:layout_marginEnd="@dimen/comment_22_dip"
-                android:layout_marginTop="@dimen/comment_13_dip"
-                android:src="@drawable/icon_checked" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_50_dip"
-            android:layout_below="@+id/recycler_alipay"
-            android:layout_marginTop="@dimen/comment_4_dip"
-            android:background="@drawable/et_shap">
-
-            <ImageView
-                android:id="@+id/img_queen"
-                android:layout_width="@dimen/comment_18_dip"
-                android:layout_height="@dimen/comment_17_dip"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/comment_13_dip"
-                android:layout_marginTop="@dimen/comment_17_dip"
-                app:srcCompat="@drawable/icon_submit_queen" />
-
-
-            <TextView
-                android:id="@+id/tv_queen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/comment_13_dip"
-                android:layout_marginTop="@dimen/comment_17_dip"
-                android:layout_toRightOf="@id/img_queen"
-                android:text="@string/queen_payment"
-
-                />
-
-            <ImageView
-                android:id="@+id/img_queen_unpayment"
-                android:layout_width="@dimen/comment_25_dip"
-                android:layout_height="@dimen/comment_25_dip"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/comment_22_dip"
-                android:layout_marginTop="@dimen/comment_13_dip"
-                android:src="@drawable/icon_unchecked" />
-            <ImageView
-                android:id="@+id/img_queen_payment"
-                android:layout_width="@dimen/comment_25_dip"
-                android:layout_height="@dimen/comment_25_dip"
-                android:layout_alignParentEnd="true"
-                android:visibility="gone"
-                android:layout_marginEnd="@dimen/comment_22_dip"
-                android:layout_marginTop="@dimen/comment_13_dip"
-                android:src="@drawable/icon_checked" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="@dimen/comment_350_dip"
-        android:layout_height="@dimen/comment_50_dip"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/comment_40_dip"
-        android:background="@mipmap/icon_login_squareness"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/confirmation_of_payment"
-            android:textColor="@color/white"
-            android:textSize="@dimen/comment_12_size" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/comment_10_dip"
-            android:text="¥222.00"
-            android:textColor="@color/white"
-            android:textSize="@dimen/comment_16_size" />
-    </LinearLayout>
-</LinearLayout>
 </LinearLayout>
