@@ -64,8 +64,6 @@ public interface UrlConstants {
 
     String COMMENDGOODS="api/ans/shop/recommendGoodsList";//商家推荐商品的数据
 
-    String SHOPINDUSTRY="api/ans/shop/shopIndustryListGet";
-
     String ADDLIULAN = "api/ec/goods/shopBrowsesChange";//商家浏览次数增加
 
     String ADDGOODSLIULAN = "api/ec/goods/goodsBrowsesChange";//商品浏览次数增加
@@ -83,6 +81,7 @@ public interface UrlConstants {
     String ACTIVITYSHOPS="api/ec/common/shopListByActivity";//参与活动的商家列表
 
     String SHOPCARTADD="api/ans/cart/shopCartAdd";//加入购物车
+
     String ADDTOCAT = "api/ans/cart/shopCartAdd";//加入购物车
 
     String GETCITYLIST = "api/ec/city/cityList";//获取城市列表
@@ -94,4 +93,8 @@ public interface UrlConstants {
     String CHANGENUMBERCART = "api/ans/cart/shopCartNumEdit";//改变购物车数量
 
     String DELETESHOPCART = "api/ans/cart/shopCartDelete";//删除购物车
+
+    String MYCOMMENTS="api/ans/cust/userCommentsList";//我的评论
+
+
 }

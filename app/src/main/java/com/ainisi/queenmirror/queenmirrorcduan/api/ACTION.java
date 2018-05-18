@@ -45,6 +45,8 @@ public interface ACTION {
 
     int SHOPCARTADD=0x021;//加入购物车
 
+    int MYCOMMENTS=0x22;//我的评论
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

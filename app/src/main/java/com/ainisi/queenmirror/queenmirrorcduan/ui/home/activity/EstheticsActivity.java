@@ -149,7 +149,6 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     }
 
     private void initDate() {
-
         pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
         popview1 = View.inflate(this, R.layout.pop_myitem, null);
         initpop(popview1);
@@ -198,10 +197,6 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
             case R.id.iv_back:
                 finish();
                 break;
-//            //订单详情
-//            case R.id.full_guijiao:
-//                startActivity(new Intent(this, FullActivity.class));
-//                break;
             //更多
             case R.id.tv_more:
                 startActivity(new Intent(this, RecommendedActivity.class));

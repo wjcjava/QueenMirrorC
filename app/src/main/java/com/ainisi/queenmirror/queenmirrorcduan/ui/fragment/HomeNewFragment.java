@@ -177,8 +177,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
-
-
     @Override
     public void onResume() {
         super.onResume();

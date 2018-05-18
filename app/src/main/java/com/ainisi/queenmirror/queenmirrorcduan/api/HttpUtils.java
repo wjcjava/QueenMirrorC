@@ -423,11 +423,11 @@ public class HttpUtils {
                 break;
             //活动商家列表
             case ACTION.ACTIVITYSHOPS:
-                actionUrl=UrlConstants.ACTIVITYSHOPS;
+                actionUrl = UrlConstants.ACTIVITYSHOPS;
                 break;
             //加入购物车
             case ACTION.SHOPCARTADD:
-                actionUrl=UrlConstants.SHOPCARTADD;
+                actionUrl = UrlConstants.SHOPCARTADD;
                 break;
             case ACTION.ADDTOCAT:
                 actionUrl = UrlConstants.ADDTOCAT;
@@ -446,6 +446,10 @@ public class HttpUtils {
                 break;
             case ACTION.DELETESHOPCART:
                 actionUrl = UrlConstants.DELETESHOPCART;
+                break;
+            //我的评论
+            case ACTION.MYCOMMENTS:
+                actionUrl=UrlConstants.MYCOMMENTS;
                 break;
         }
         url.append(actionUrl);

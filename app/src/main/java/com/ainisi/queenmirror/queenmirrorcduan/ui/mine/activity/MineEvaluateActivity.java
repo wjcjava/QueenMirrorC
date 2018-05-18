@@ -9,12 +9,19 @@ import android.view.View;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyCommentsAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.MyCommentsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -23,7 +30,7 @@ import butterknife.OnClick;
 /**
  * 我的评价
  */
-public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack {
+public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack,HttpCallBack {
 
     @Bind(R.id.rc_evaluate)
     RecyclerView rcevaluate;
@@ -41,22 +48,15 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
 
     @Override
     public void initPresenter() {
-
+        inithttp();
     }
+
+
 
 
     @Override
     public void initView() {
-        for (int i = 0; i <8 ; i++) {
-            SortBean sortBean=new SortBean();
-            sortBean.setName("");
-            sortBean.setTime("");
-            sortBean.setDistance("");
-            list.add(sortBean);
-        }
-        MyAdapter sortAdapter2=new MyAdapter(R.layout.item_evaluate,list);
-        rcevaluate.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        rcevaluate.setAdapter(sortAdapter2);
+
     }
 
     public void initData() {
@@ -105,5 +105,40 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
                 mRefreshLoadMoreLayout.stopLoadMore();
             }
         }, 1000);
+    }
+
+    private void inithttp() {
+        HashMap<String,String> parames=new HashMap<>();
+        parames.put("userId","111");
+        parames.put("pageNumber","1");
+        HttpUtils.doPost(ACTION.MYCOMMENTS,parames, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.MYCOMMENTS:
+               MyCommentsBean commentsBean= GsonUtil.toObj(res, MyCommentsBean.class);
+                List<MyCommentsBean.BodyBean.CommentsListDataBean> commentList = commentsBean.getBody().getCommentsListData();
+               if(commentsBean.isSuccess()){
+                   MyCommentsAdapter sortAdapter2=new MyCommentsAdapter(R.layout.item_evaluate,commentList);
+                   rcevaluate.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+                   rcevaluate.setAdapter(sortAdapter2);
+               }else {
+                   T.show(commentsBean.getMsg());
+               }
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
     }
 }

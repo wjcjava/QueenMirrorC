@@ -9,7 +9,6 @@ import android.content.IntentFilter;
  * @author weikailiang
  * @function Created on 2017/7/10.
  */
-
 public class NetWorkUtils {
     /*
    手机网络变化广播监听
