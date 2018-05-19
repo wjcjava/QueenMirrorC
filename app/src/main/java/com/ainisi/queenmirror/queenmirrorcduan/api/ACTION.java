@@ -89,4 +89,8 @@ public interface ACTION {
 
     int DELETESHOPCART = 0x125;//删除购物车
 
+    int CHANGEPASSWORD = 0x126;//修改密码
+
+    int LOGINOUT = 0x127;//退出登录账号
+
 }

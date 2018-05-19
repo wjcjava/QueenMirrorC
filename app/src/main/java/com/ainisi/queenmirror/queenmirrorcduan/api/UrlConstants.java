@@ -96,5 +96,7 @@ public interface UrlConstants {
 
     String MYCOMMENTS="api/ans/cust/userCommentsList";//我的评论
 
+    String CHANGEPASSWORD = "api/ans/cust/userModifyPass";//修改密码
 
+    String LOGINOUT = "api/ans/login/userlogout";//退出登录账号
 }

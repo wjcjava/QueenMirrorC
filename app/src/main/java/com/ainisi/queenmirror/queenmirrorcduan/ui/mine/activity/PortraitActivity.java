@@ -16,25 +16,43 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.common.commonutils.ToastUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MineFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.LQRPhotoSelectUtils;
 import com.bumptech.glide.Glide;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.io.File;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
 
 //我的账号
-public class PortraitActivity extends BaseNewActivity implements View.OnClickListener {
+public class PortraitActivity extends BaseNewActivity implements View.OnClickListener,HttpCallBack {
     @Bind(R.id.title_title)
     TextView title;
     @Bind(R.id.iv_title)
     ImageView ivTitle;
+    @Bind(R.id.iv_portrait_head)
+    CircleImageView iv_portrait_head;
+    @Bind(R.id.tv_portrait_loginout)
+    TextView tv_portrait_loginout;
+    @Bind(R.id.tv_portrait_username)
+    TextView tv_portrait_username;
     private CustomPopWindow popWindow;
     private LQRPhotoSelectUtils mLqrPhotoSelectUtils;
 
@@ -59,6 +77,8 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
             }
         }, false);//true裁剪，false不裁剪
 
+        //Glide.with(this).load(SP.get(this,SpContent.UserName,"")).into(iv_portrait_head);
+        tv_portrait_username.setText(SP.get(this,SpContent.UserName,"")+"");
     }
 
     @Override
@@ -72,16 +92,19 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
         return R.layout.activity_portrait;
     }
 
-    @OnClick({R.id.layout_userimg, R.id.layout_username, R.id.layout_password, R.id.layout_passphone, R.id.title_back})
+    @OnClick({R.id.layout_userimg, R.id.layout_username, R.id.layout_password, R.id.layout_passphone, R.id.title_back,R.id.tv_portrait_loginout})
     public void click(View view) {
         switch (view.getId()) {
+            case R.id.tv_portrait_loginout:
+                LoadOutData();
+                break;
             case R.id.title_back:
                 finish();
                 break;
             case R.id.layout_userimg:
                 View popview = View.inflate(this, R.layout.alert_dialog, null);
                 //弹出popWindow时，背景是否变暗
-// 控制亮度
+                // 控制亮度
                 popWindow = new CustomPopWindow.PopupWindowBuilder(this)
                         .setView(popview)
                         .setFocusable(true)
@@ -92,7 +115,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                         .setAnimationStyle(R.style.CustomPopWindowStyle)
                         .create()
                         .showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM, 0, 0);
-                        initPopview(popview);
+                initPopview(popview);
                 break;
             //修改用户名
             case R.id.layout_username:
@@ -110,6 +133,15 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                 break;
         }
 
+    }
+
+    /**
+     * 退出当前账号
+     */
+    private void LoadOutData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("telNo", SP.get(this,SpContent.UserCall,"")+"");
+        HttpUtils.doPost(ACTION.LOGINOUT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     private void initPopview(View popview) {
@@ -130,8 +162,8 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                 PermissionGen.with(PortraitActivity.this)
                         .addRequestCode(LQRPhotoSelectUtils.REQ_TAKE_PHOTO)
                         .permissions(Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.CAMERA
                         ).request();
                 popWindow.dissmiss();
                 break;
@@ -220,4 +252,30 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
     }
 
 
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.LOGINOUT:
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    SP.put(this, SpContent.isLogin,"0");
+                    SP.put(this, SpContent.UserId,"0");
+                    SP.put(this, SpContent.UserName,"");
+                    finish();
+                }else{
+                    T.show(successBean.getMsg());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }

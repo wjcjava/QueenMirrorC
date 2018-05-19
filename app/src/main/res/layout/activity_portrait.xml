@@ -30,7 +30,7 @@
             android:layout_height="@dimen/comment_50_dip">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_title"
+                android:id="@+id/iv_portrait_head"
                 android:layout_width="@dimen/comment_40_dip"
                 android:layout_height="@dimen/comment_40_dip"
                 android:layout_centerVertical="true"
@@ -89,7 +89,7 @@
                 android:textSize="@dimen/comment_16_size" />
 
             <TextView
-                android:id="@+id/tv_username"
+                android:id="@+id/tv_portrait_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -202,6 +202,7 @@
     </RelativeLayout>
     </RelativeLayout>
     <TextView
+        android:id="@+id/tv_portrait_loginout"
         android:background="@drawable/et_shap"
         android:text="退出登录"
         android:gravity="center"

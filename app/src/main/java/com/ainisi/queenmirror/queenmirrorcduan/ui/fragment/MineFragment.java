@@ -43,6 +43,7 @@ public class MineFragment extends BaseFragment {
     @Bind(R.id.tv_mine_uername)
     TextView tv_mine_uername;
     boolean isLogin = false;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_mine;
@@ -54,7 +55,8 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView() {
+    public void onResume() {
+        super.onResume();
         if(SP.get(getActivity(), SpContent.isLogin,"0").toString().equals("1")){
             isLogin = true;
             tv_mine_uername.setText(SP.get(getActivity(),SpContent.UserName,"")+"");
@@ -62,6 +64,11 @@ public class MineFragment extends BaseFragment {
             isLogin = false;
             tv_mine_uername.setText("点击登录");
         }
+    }
+
+    @Override
+    protected void initView() {
+
     }
     @OnClick({R.id.iv_title, R.id.iv_install, R.id.img_information,
             R.id.layout_collection, R.id.layout_follow, R.id.layout_foot,

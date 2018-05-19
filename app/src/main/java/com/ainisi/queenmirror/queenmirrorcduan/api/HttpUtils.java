@@ -451,6 +451,12 @@ public class HttpUtils {
             case ACTION.MYCOMMENTS:
                 actionUrl=UrlConstants.MYCOMMENTS;
                 break;
+            case ACTION.CHANGEPASSWORD:
+                actionUrl = UrlConstants.CHANGEPASSWORD;
+                break;
+            case ACTION.LOGINOUT:
+                actionUrl = UrlConstants.LOGINOUT;
+                break;
         }
         url.append(actionUrl);
         return url;
