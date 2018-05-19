@@ -10,12 +10,11 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        manifestPlaceholders = [qqappid: "tencent100424468"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
-
             //APP的build.gradle设置支持的SO库架构                用来管理so大小文件ndk过滤
-
             abiFilters 'armeabi', 'armeabi-v7a', 'x86'
         }
     }
@@ -54,7 +53,6 @@ android {
         }
     }
 
-
 }
 
 dependencies {
@@ -92,4 +90,11 @@ dependencies {
     compile 'com.sunfusheng:marqueeview:1.3.3'
     compile project(':common')
     compile files('libs/alipaySdk-20180403.jar')
+
+    compile 'com.umeng.sdk:share-core:latest.integration'
+    compile 'com.umeng.sdk:share-wechat:latest.integration'
+    compile 'com.umeng.sdk:share-sina:latest.integration'
+    compile 'com.umeng.sdk:shareboard-widget:latest.integration'
+    compile 'com.umeng.sdk:common:latest.integration'
+    compile 'com.umeng.sdk:share-qq:6.9.1.1'
 }

@@ -21,6 +21,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
@@ -105,6 +106,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     int hight;
     boolean type = false;
     ClassificationBean classificationBean;
+
+    ShopListHomeBean shopListHomeBean;
     Intent intent;
     private LocationManager lm;
 
@@ -258,8 +261,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     nl_home_list_view.setVisibility(View.GONE);
                     gv_home_gridView.setVisibility(View.VISIBLE);
 
-                    if(classificationBean.getBody().getShopList().size()>0){
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    if(classificationBean.getBody().getShopListData().size()>0){
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                         gv_home_gridView.setAdapter(gridViewAdapter);
                     }else{
 
@@ -271,8 +274,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     nl_home_list_view.setVisibility(View.VISIBLE);
                     gv_home_gridView.setVisibility(View.GONE);
 
-                    if(classificationBean.getBody().getShopList().size()>0){
-                        HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    if(classificationBean.getBody().getShopListData().size()>0){
+                        HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                         nl_home_list_view.setAdapter(homeListViewAdapter);
                     }
 
@@ -308,16 +311,16 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 break;
             //商家分类列表
             case ACTION.SHOPLIST:
-                classificationBean = GsonUtil.toObj(res, ClassificationBean.class);
-                if (classificationBean.isSuccess()) {
-                    if(classificationBean.getBody().getShopList().size()>0){
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
+                if (shopListHomeBean.isSuccess()) {
+                    if(shopListHomeBean.getBody().getShopList().size()>0){
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                         gv_home_gridView.setAdapter(gridViewAdapter);
                     }else{
                         T.show("暂无店铺信息");
                     }
                 } else {
-                    T.show(classificationBean.getMsg());
+                    T.show(shopListHomeBean.getMsg());
                 }
 
                 break;

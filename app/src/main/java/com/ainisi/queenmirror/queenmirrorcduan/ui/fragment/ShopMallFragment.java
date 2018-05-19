@@ -32,6 +32,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopMallListBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
@@ -113,6 +114,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ScreenFragment screenFragment;
 
     ClassificationBean classificationBean;
+
+    ShopListHomeBean shopListHomeBean;
     private HomeIndustryBean homeIndustryBean;
 
     private FragmentManager fm;
@@ -288,7 +291,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_surface:
                 if (isClick) {
                     isClick = false;
-                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                     listView.setAdapter(homeListViewAdapter);
 
                     /*listadapter = new ListViewAdapter(getContext(), shopListNew);
@@ -301,7 +304,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     shop_gridView.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
 
-                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                     shop_gridView.setAdapter(gridViewAdapter);
 
                     /*gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
@@ -312,7 +315,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_uspension_surface:
                 if (isClick) {
                     isClick = false;
-                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(),  shopListHomeBean.getBody().getShopList());
                     listView.setAdapter(homeListViewAdapter);
                   /*  listadapter = new ListViewAdapter(getContext(), shopListNew);
                     listView.setAdapter(listadapter);*/
@@ -324,7 +327,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     shop_gridView.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
 
-                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                     shop_gridView.setAdapter(gridViewAdapter);
 
                    /* gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
@@ -446,14 +449,14 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 break;
             //商城列表分类
             case ACTION.SHOPLIST:
-                classificationBean = GsonUtil.toObj(res, ClassificationBean.class);
-                if (classificationBean.isSuccess()) {
+                shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
+                if (shopListHomeBean.isSuccess()) {
 
                     L.e("$$$$$$$   "+res);
 
-                    if(classificationBean.getBody().getShopList().size()>0){
+                    if(shopListHomeBean.getBody().getShopList().size()>0){
 
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), classificationBean.getBody().getShopList());
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                         shop_gridView.setAdapter(gridViewAdapter);
                     }else{
                         T.show("暂无店铺信息");

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.CommentsAdapter;
@@ -23,9 +24,19 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,7 +80,10 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     private FullGoodsAdapter myAdapter;
 
     boolean isColl = false;
-    String goodsId,shopId;
+    String goodsId,shopId,isLogin,userId;
+
+    private ShareAction mShareAction;
+    private UMShareListener mShareListener;
 
     @Override
     public int getLayoutId() {
@@ -83,9 +97,97 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         goodsId = intent.getStringExtra("goodsId");
         shopId = intent.getStringExtra("shopId");
 
+        isLogin = SP.get(FullActivity.this, SpContent.isLogin,"0").toString();
+
+        userId = SP.get(FullActivity.this,SpContent.UserId,"0").toString();
+
         inithttp();
 
         getProductDetailData();
+
+        mShareListener = new CustomShareListener(this);
+        mShareAction = new ShareAction(FullActivity.this).setDisplayList(
+                SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
+                SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
+        ) .setShareboardclickCallback(new ShareBoardlistener() {
+            @Override
+            public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+                UMWeb web = new UMWeb("http://baidu.com");
+                web.setTitle("来自女王魔镜");
+                web.setDescription("来自女王魔镜内容");
+                web.setThumb(new UMImage(FullActivity.this, R.mipmap.fill));
+                new ShareAction(FullActivity.this).withMedia(web)
+                        .setPlatform(share_media)
+                        .setCallback(mShareListener)
+                        .share();
+            }
+        });
+    }
+
+    private static class CustomShareListener implements UMShareListener {
+
+        private WeakReference<FullActivity> mActivity;
+
+        private CustomShareListener(FullActivity activity) {
+            mActivity = new WeakReference(activity);
+        }
+
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+
+        }
+
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(mActivity.get(), platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
+                if (platform != SHARE_MEDIA.MORE && platform != SHARE_MEDIA.SMS
+                        && platform != SHARE_MEDIA.EMAIL
+                        && platform != SHARE_MEDIA.FLICKR
+                        && platform != SHARE_MEDIA.FOURSQUARE
+                        && platform != SHARE_MEDIA.TUMBLR
+                        && platform != SHARE_MEDIA.POCKET
+                        && platform != SHARE_MEDIA.PINTEREST
+                        && platform != SHARE_MEDIA.INSTAGRAM
+                        && platform != SHARE_MEDIA.GOOGLEPLUS
+                        && platform != SHARE_MEDIA.YNOTE
+                        && platform != SHARE_MEDIA.EVERNOTE) {
+                    Toast.makeText(mActivity.get(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            if (platform != SHARE_MEDIA.MORE && platform != SHARE_MEDIA.SMS
+                    && platform != SHARE_MEDIA.EMAIL
+                    && platform != SHARE_MEDIA.FLICKR
+                    && platform != SHARE_MEDIA.FOURSQUARE
+                    && platform != SHARE_MEDIA.TUMBLR
+                    && platform != SHARE_MEDIA.POCKET
+                    && platform != SHARE_MEDIA.PINTEREST
+                    && platform != SHARE_MEDIA.INSTAGRAM
+                    && platform != SHARE_MEDIA.GOOGLEPLUS
+                    && platform != SHARE_MEDIA.YNOTE
+                    && platform != SHARE_MEDIA.EVERNOTE) {
+                Toast.makeText(mActivity.get(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            }
+
+            if (t != null){
+                L.e("throw","throw:"+t.getMessage());
+
+            }
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+
+            Toast.makeText(mActivity.get(), platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -100,7 +202,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     private void getProductDetailData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("id", goodsId);//商品ID
-        params.put("userId","111");//UID    可以不传
+        params.put("userId",userId);//UID    可以不传
         HttpUtils.doPost(ACTION.GETPRODUCTDETAIL, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -136,13 +238,12 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         HttpUtils.doPost(ACTION.EVALUATION,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
-
     /**
      * 收藏商品
      */
     private void getCollectionData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("userId", "111");//
+        params.put("userId", userId);//
         params.put("goodsId", goodsId);
         HttpUtils.doPost(ACTION.COLLECTIONPRODUCT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -152,7 +253,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
      */
     private void getCancleCollectionData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("userId", "111");//
+        params.put("userId", userId);//
         params.put("goodsId", goodsId);
         HttpUtils.doPost(ACTION.CANCELCOLLECTION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -162,7 +263,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
      */
     private void AddCatData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("custId", "111");//用户ID
+        params.put("custId", userId);//用户ID
         params.put("goodsId", goodsId);
         params.put("unitPrice",full_cash.getText().toString().substring(1,full_cash.getText().toString().length()));//价格
         params.put("purchaseNumber","1");//数量
@@ -180,9 +281,15 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         tv_shopping_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 
-    @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart,R.id.rl_full_collection})
+    @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart,R.id.rl_full_collection,R.id.title_photo})
     public void OnClick(View view) {
         switch (view.getId()) {
+            /**
+             * 分享
+             */
+            case R.id.title_photo:
+                mShareAction.open();
+                break;
             case R.id.title_back:
                 finish();
                 break;
@@ -192,14 +299,22 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 break;
             //加入购物车
             case R.id.tv_full_shoppingcart:
-                AddCatData();
-                break;
-                //收藏
-            case R.id.rl_full_collection:
-                if(isColl){
-                    getCancleCollectionData();
+                if(isLogin.equals("1")) {
+                    AddCatData();
                 }else{
-                    getCollectionData();
+                    T.show("请您先登录APP");
+                }
+                break;
+            //收藏
+            case R.id.rl_full_collection:
+                if(isLogin.equals("1")){
+                    if(isColl){
+                        getCancleCollectionData();
+                    }else{
+                        getCollectionData();
+                    }
+                }else{
+                    T.show("请您先登录APP");
                 }
                 break;
         }
@@ -226,6 +341,14 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
             case ACTION.GETPRODUCTDETAIL:
                 ProductDetailBean productDetailBean = GsonUtil.toObj(res,ProductDetailBean.class);
 
+                String isCollection = productDetailBean.getBody().getIfCollect();
+                if(isCollection.equals("1")){
+                    isColl = true;
+                    iv_full_collection.setImageResource(R.drawable.collection_bein);
+                }else{
+                    isColl = false;
+                    iv_full_collection.setImageResource(R.drawable.icon_full_collection);
+                }
                 full_cash.setText("￥"+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsPrice());
                 tv_shopping_oldprice.setText("￥"+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getOfflinePrice());
                 tv_shopping_oldprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
@@ -233,7 +356,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 tv_brief.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsBrief());
                 tv_time.setText("服务时长："+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getServiceTime());
                 textView4.setText("已浏览："+"200"+"次");
-              //  tv_introduction.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsDetails().toString());
+                //  tv_introduction.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsDetails().toString());
 
                 fullTitle.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsName());
                 break;
@@ -271,14 +394,14 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 SuccessBean successBean2 = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean2.isSuccess()){
                     iv_full_collection.setImageResource(R.drawable.collection_bein);
-                  //collection_bein
+                    //collection_bein
                     T.show(successBean2.getMsg());//成功
                 }else{
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
                     T.show(successBean2.getMsg());
                 }
                 break;
-            case ACTION.CANCELCOLLECTION:
+            case ACTION.CANCELCOLLECTION://取消收藏
                 isColl = false;
                 SuccessBean successBean3 = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean3.isSuccess()){

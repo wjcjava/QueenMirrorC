@@ -23,8 +23,6 @@ import butterknife.OnClick;
 public class MessageActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.title_title)
     TextView title;
-    @Bind(R.id.tv_order)
-    TextView tvOrder;
     @Bind(R.id.tv_message_interactive)
     TextView tvInteractive;
     @Bind(R.id.tv_message_system)
@@ -66,15 +64,13 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
         title.setTextColor(ContextCompat.getColor(this,R.color.alpha_95_black));
     }
 
-    @OnClick({R.id.title_back,R.id.layout_order,R.id.layout_message_interactive,R.id.layout_message_system,R.id.layout_message_review
+    @OnClick({R.id.title_back,R.id.layout_message_interactive,R.id.layout_message_system,R.id.layout_message_review
     })
     public void click(View view) {
 
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
-                break;
-            case R.id.layout_order:
                 break;
             case R.id.layout_message_interactive:
                 break;
@@ -95,10 +91,9 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
             //首页消息类型列表
             case ACTION.MESSAGE:
                 messageBean = GsonUtil.toObj(res, HomeMessageBean.class);
-                tvOrder.setText(messageBean.getBody().getMessageTypeListData().get(0).getDict().getLabel());
-                tvInteractive.setText(messageBean.getBody().getMessageTypeListData().get(1).getDict().getLabel());
-                tvSystem.setText(messageBean.getBody().getMessageTypeListData().get(2).getDict().getLabel());
-                tvReview.setText(messageBean.getBody().getMessageTypeListData().get(3).getDict().getLabel());
+                tvInteractive.setText(messageBean.getBody().getMessageTypeListData().get(0).getDict().getLabel());
+                tvSystem.setText(messageBean.getBody().getMessageTypeListData().get(1).getDict().getLabel());
+                tvReview.setText(messageBean.getBody().getMessageTypeListData().get(2).getDict().getLabel());
                 break;
 
         }

@@ -8,7 +8,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 public interface UrlConstants {
 
     // String BASE_URL = "http://116.62.204.235:8080/";
-    //String BASE_URL = "http://192.168.50.194:8080/wg/a/";//测试路径     张作西
+   // String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
 
     String BASE_URL = "http://192.168.30.155:8080/wg/a/";
 

@@ -1,13 +1,15 @@
 package com.ainisi.queenmirror.queenmirrorcduan.bean;
 
-public class ShopDetailDataBean {
+import java.util.List;
+
+public class ShopListHomeBean {
 
 
     /**
      * success : true
      * errorCode : 0
      * msg : 获取数据成功
-     * body : {"ifFollow":"0","apiShop":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopManager":null,"ansShopBasic":{"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":"1","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null},"ansMerchantInfo":null,"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"},"ansCustFollow":null,"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":211,"enableFlag":null},"ecCategory":null,"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"contractConfirmLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"contentByTitle":null,"ifContractLabel":null,"signFlagLabel":null}}
+     * body : {"shopList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopManager":null,"ansShopBasic":{"id":"cae05c5a5b39443a9d903bb4d6a01fa9","isNewRecord":false,"remarks":null,"createDate":"2018-05-07 13:19:29","updateDate":"2018-05-16 13:57:50","merchantId":null,"contractConfirm":"1","ifContract":"0","shopName":"途虎养车","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":"啦咯摸摸","shopAccounce":"肯做我","ifNew":"0","shopBanner":null,"shopActivity":null,"shopFeature":null,"queenCard":"0","shopTab":"汽车美容","shopCate":"2","industryCate":"1","belongCity":"337289fd68bb4af980141cae1446869f","addrProvince":"江苏省","addrCity":"苏州市","addrDistrict":"相城区","shopAddr":"春申湖中路","openTime":"10:00","closeTime":"22:00","serviceTel":"13861332934","shopContacts":"陈","contactsTel":"13861332934","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"","legalIdc":"","legalAddress":null,"taxNumber":null,"businessLicence":"","shopCharge":"陈","chargeIdc":"340826199203293410","chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":"2018-05-07 13:19:29","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":null,"geoY":null,"updatePgm":"1","apiAnsCustCartList":null},"ansMerchantInfo":null,"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"相城区","sort":30,"code":null,"type":null,"parentId":"0"},"ansCustFollow":null,"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":89,"enableFlag":null},"ecCategory":null,"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"contractConfirmLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"contentByTitle":null,"ifContractLabel":null,"signFlagLabel":null}]}
      */
 
     private boolean success;
@@ -48,31 +50,17 @@ public class ShopDetailDataBean {
     }
 
     public static class BodyBean {
-        /**
-         * ifFollow : 0
-         * apiShop : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopManager":null,"ansShopBasic":{"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":"1","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null},"ansMerchantInfo":null,"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"},"ansCustFollow":null,"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":211,"enableFlag":null},"ecCategory":null,"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"contractConfirmLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"contentByTitle":null,"ifContractLabel":null,"signFlagLabel":null}
-         */
+        private List<ShopListBean> shopList;
 
-        private String ifFollow;
-        private ApiShopBean apiShop;
-
-        public String getIfFollow() {
-            return ifFollow;
+        public List<ShopListBean> getShopList() {
+            return shopList;
         }
 
-        public void setIfFollow(String ifFollow) {
-            this.ifFollow = ifFollow;
+        public void setShopList(List<ShopListBean> shopList) {
+            this.shopList = shopList;
         }
 
-        public ApiShopBean getApiShop() {
-            return apiShop;
-        }
-
-        public void setApiShop(ApiShopBean apiShop) {
-            this.apiShop = apiShop;
-        }
-
-        public static class ApiShopBean {
+        public static class ShopListBean {
             /**
              * id : null
              * isNewRecord : true
@@ -80,11 +68,11 @@ public class ShopDetailDataBean {
              * createDate : null
              * updateDate : null
              * ansShopManager : null
-             * ansShopBasic : {"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":"1","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null}
+             * ansShopBasic : {"id":"cae05c5a5b39443a9d903bb4d6a01fa9","isNewRecord":false,"remarks":null,"createDate":"2018-05-07 13:19:29","updateDate":"2018-05-16 13:57:50","merchantId":null,"contractConfirm":"1","ifContract":"0","shopName":"途虎养车","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":"啦咯摸摸","shopAccounce":"肯做我","ifNew":"0","shopBanner":null,"shopActivity":null,"shopFeature":null,"queenCard":"0","shopTab":"汽车美容","shopCate":"2","industryCate":"1","belongCity":"337289fd68bb4af980141cae1446869f","addrProvince":"江苏省","addrCity":"苏州市","addrDistrict":"相城区","shopAddr":"春申湖中路","openTime":"10:00","closeTime":"22:00","serviceTel":"13861332934","shopContacts":"陈","contactsTel":"13861332934","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"","legalIdc":"","legalAddress":null,"taxNumber":null,"businessLicence":"","shopCharge":"陈","chargeIdc":"340826199203293410","chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":"2018-05-07 13:19:29","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":null,"geoY":null,"updatePgm":"1","apiAnsCustCartList":null}
              * ansMerchantInfo : null
-             * area : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"}
+             * area : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"相城区","sort":30,"code":null,"type":null,"parentId":"0"}
              * ansCustFollow : null
-             * ansShopBrowses : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":211,"enableFlag":null}
+             * ansShopBrowses : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":89,"enableFlag":null}
              * ecCategory : null
              * nameIdentifyLabel : null
              * sexLabel : null
@@ -339,80 +327,80 @@ public class ShopDetailDataBean {
 
             public static class AnsShopBasicBean {
                 /**
-                 * id : 111
+                 * id : cae05c5a5b39443a9d903bb4d6a01fa9
                  * isNewRecord : false
-                 * remarks :
-                 * createDate : 2018-05-07 14:24:02
+                 * remarks : null
+                 * createDate : 2018-05-07 13:19:29
                  * updateDate : 2018-05-16 13:57:50
-                 * merchantId : 1
+                 * merchantId : null
                  * contractConfirm : 1
                  * ifContract : 0
-                 * shopName : 美美理发店
-                 * shortName :
-                 * shopNo : 132
-                 * marketAssistant :
-                 * shopBrief : 专业美发
-                 * shopAccounce : 全面不休息
+                 * shopName : 途虎养车
+                 * shortName : null
+                 * shopNo : null
+                 * marketAssistant : null
+                 * shopBrief : 啦咯摸摸
+                 * shopAccounce : 肯做我
                  * ifNew : 0
                  * shopBanner : null
-                 * shopActivity : 111
-                 * shopFeature : 131
+                 * shopActivity : null
+                 * shopFeature : null
                  * queenCard : 0
-                 * shopTab : 美甲美手,美容美体
-                 * shopCate : 1
+                 * shopTab : 汽车美容
+                 * shopCate : 2
                  * industryCate : 1
-                 * belongCity : 17e8e72326574a0ea94b15d6eeddbb6d
+                 * belongCity : 337289fd68bb4af980141cae1446869f
                  * addrProvince : 江苏省
-                 * addrCity : 南京市
-                 * addrDistrict : 雨花台区
-                 * shopAddr : 雨花路1008号
-                 * openTime : 10:00:00
-                 * closeTime : 22:00:00
-                 * serviceTel : 15852855888
-                 * shopContacts : 姜超
-                 * contactsTel : 15852855880
+                 * addrCity : 苏州市
+                 * addrDistrict : 相城区
+                 * shopAddr : 春申湖中路
+                 * openTime : 10:00
+                 * closeTime : 22:00
+                 * serviceTel : 13861332934
+                 * shopContacts : 陈
+                 * contactsTel : 13861332934
                  * contactsMail : null
                  * ifLicence : 1
                  * shopProperty : 00
-                 * shopLegal : 132
-                 * legalIdc : 48675519930101354X
-                 * legalAddress : 12
-                 * taxNumber : 213456
-                 * businessLicence : A23791637529664
-                 * shopCharge : 陈伟霆
-                 * chargeIdc : 321087218968210902
-                 * chargeIdp : 213456776543
-                 * shopLogo :
-                 * shopPhoto :
-                 * shopEnvPhoto :
-                 * joinTime : 2018-05-07 14:24:02
+                 * shopLegal :
+                 * legalIdc :
+                 * legalAddress : null
+                 * taxNumber : null
+                 * businessLicence :
+                 * shopCharge : 陈
+                 * chargeIdc : 340826199203293410
+                 * chargeIdp : null
+                 * shopLogo : null
+                 * shopPhoto : null
+                 * shopEnvPhoto : null
+                 * joinTime : 2018-05-07 13:19:29
                  * businessFlag : 1
                  * enableFlag : 1
                  * signFlag : 1
-                 * geoX : 12.230000
-                 * geoY : 14.200000
+                 * geoX : null
+                 * geoY : null
                  * updatePgm : 1
                  * apiAnsCustCartList : null
                  */
 
                 private String id;
                 private boolean isNewRecord;
-                private String remarks;
+                private Object remarks;
                 private String createDate;
                 private String updateDate;
-                private String merchantId;
+                private Object merchantId;
                 private String contractConfirm;
                 private String ifContract;
                 private String shopName;
-                private String shortName;
-                private String shopNo;
-                private String marketAssistant;
+                private Object shortName;
+                private Object shopNo;
+                private Object marketAssistant;
                 private String shopBrief;
                 private String shopAccounce;
                 private String ifNew;
                 private Object shopBanner;
-                private String shopActivity;
-                private String shopFeature;
+                private Object shopActivity;
+                private Object shopFeature;
                 private String queenCard;
                 private String shopTab;
                 private String shopCate;
@@ -432,21 +420,21 @@ public class ShopDetailDataBean {
                 private String shopProperty;
                 private String shopLegal;
                 private String legalIdc;
-                private String legalAddress;
-                private String taxNumber;
+                private Object legalAddress;
+                private Object taxNumber;
                 private String businessLicence;
                 private String shopCharge;
                 private String chargeIdc;
-                private String chargeIdp;
-                private String shopLogo;
-                private String shopPhoto;
-                private String shopEnvPhoto;
+                private Object chargeIdp;
+                private Object shopLogo;
+                private Object shopPhoto;
+                private Object shopEnvPhoto;
                 private String joinTime;
                 private String businessFlag;
                 private String enableFlag;
                 private String signFlag;
-                private String geoX;
-                private String geoY;
+                private Object geoX;
+                private Object geoY;
                 private String updatePgm;
                 private Object apiAnsCustCartList;
 
@@ -466,11 +454,11 @@ public class ShopDetailDataBean {
                     this.isNewRecord = isNewRecord;
                 }
 
-                public String getRemarks() {
+                public Object getRemarks() {
                     return remarks;
                 }
 
-                public void setRemarks(String remarks) {
+                public void setRemarks(Object remarks) {
                     this.remarks = remarks;
                 }
 
@@ -490,11 +478,11 @@ public class ShopDetailDataBean {
                     this.updateDate = updateDate;
                 }
 
-                public String getMerchantId() {
+                public Object getMerchantId() {
                     return merchantId;
                 }
 
-                public void setMerchantId(String merchantId) {
+                public void setMerchantId(Object merchantId) {
                     this.merchantId = merchantId;
                 }
 
@@ -522,27 +510,27 @@ public class ShopDetailDataBean {
                     this.shopName = shopName;
                 }
 
-                public String getShortName() {
+                public Object getShortName() {
                     return shortName;
                 }
 
-                public void setShortName(String shortName) {
+                public void setShortName(Object shortName) {
                     this.shortName = shortName;
                 }
 
-                public String getShopNo() {
+                public Object getShopNo() {
                     return shopNo;
                 }
 
-                public void setShopNo(String shopNo) {
+                public void setShopNo(Object shopNo) {
                     this.shopNo = shopNo;
                 }
 
-                public String getMarketAssistant() {
+                public Object getMarketAssistant() {
                     return marketAssistant;
                 }
 
-                public void setMarketAssistant(String marketAssistant) {
+                public void setMarketAssistant(Object marketAssistant) {
                     this.marketAssistant = marketAssistant;
                 }
 
@@ -578,19 +566,19 @@ public class ShopDetailDataBean {
                     this.shopBanner = shopBanner;
                 }
 
-                public String getShopActivity() {
+                public Object getShopActivity() {
                     return shopActivity;
                 }
 
-                public void setShopActivity(String shopActivity) {
+                public void setShopActivity(Object shopActivity) {
                     this.shopActivity = shopActivity;
                 }
 
-                public String getShopFeature() {
+                public Object getShopFeature() {
                     return shopFeature;
                 }
 
-                public void setShopFeature(String shopFeature) {
+                public void setShopFeature(Object shopFeature) {
                     this.shopFeature = shopFeature;
                 }
 
@@ -746,19 +734,19 @@ public class ShopDetailDataBean {
                     this.legalIdc = legalIdc;
                 }
 
-                public String getLegalAddress() {
+                public Object getLegalAddress() {
                     return legalAddress;
                 }
 
-                public void setLegalAddress(String legalAddress) {
+                public void setLegalAddress(Object legalAddress) {
                     this.legalAddress = legalAddress;
                 }
 
-                public String getTaxNumber() {
+                public Object getTaxNumber() {
                     return taxNumber;
                 }
 
-                public void setTaxNumber(String taxNumber) {
+                public void setTaxNumber(Object taxNumber) {
                     this.taxNumber = taxNumber;
                 }
 
@@ -786,35 +774,35 @@ public class ShopDetailDataBean {
                     this.chargeIdc = chargeIdc;
                 }
 
-                public String getChargeIdp() {
+                public Object getChargeIdp() {
                     return chargeIdp;
                 }
 
-                public void setChargeIdp(String chargeIdp) {
+                public void setChargeIdp(Object chargeIdp) {
                     this.chargeIdp = chargeIdp;
                 }
 
-                public String getShopLogo() {
+                public Object getShopLogo() {
                     return shopLogo;
                 }
 
-                public void setShopLogo(String shopLogo) {
+                public void setShopLogo(Object shopLogo) {
                     this.shopLogo = shopLogo;
                 }
 
-                public String getShopPhoto() {
+                public Object getShopPhoto() {
                     return shopPhoto;
                 }
 
-                public void setShopPhoto(String shopPhoto) {
+                public void setShopPhoto(Object shopPhoto) {
                     this.shopPhoto = shopPhoto;
                 }
 
-                public String getShopEnvPhoto() {
+                public Object getShopEnvPhoto() {
                     return shopEnvPhoto;
                 }
 
-                public void setShopEnvPhoto(String shopEnvPhoto) {
+                public void setShopEnvPhoto(Object shopEnvPhoto) {
                     this.shopEnvPhoto = shopEnvPhoto;
                 }
 
@@ -850,19 +838,19 @@ public class ShopDetailDataBean {
                     this.signFlag = signFlag;
                 }
 
-                public String getGeoX() {
+                public Object getGeoX() {
                     return geoX;
                 }
 
-                public void setGeoX(String geoX) {
+                public void setGeoX(Object geoX) {
                     this.geoX = geoX;
                 }
 
-                public String getGeoY() {
+                public Object getGeoY() {
                     return geoY;
                 }
 
-                public void setGeoY(String geoY) {
+                public void setGeoY(Object geoY) {
                     this.geoY = geoY;
                 }
 
@@ -891,7 +879,7 @@ public class ShopDetailDataBean {
                  * createDate : null
                  * updateDate : null
                  * parentIds : null
-                 * name : 雨花台区
+                 * name : 相城区
                  * sort : 30
                  * code : null
                  * type : null
@@ -1007,7 +995,7 @@ public class ShopDetailDataBean {
                  * createDate : null
                  * updateDate : null
                  * shopId : null
-                 * browseCounts : 211.0
+                 * browseCounts : 89
                  * enableFlag : null
                  */
 
@@ -1017,7 +1005,7 @@ public class ShopDetailDataBean {
                 private Object createDate;
                 private Object updateDate;
                 private Object shopId;
-                private double browseCounts;
+                private int browseCounts;
                 private Object enableFlag;
 
                 public Object getId() {
@@ -1068,11 +1056,11 @@ public class ShopDetailDataBean {
                     this.shopId = shopId;
                 }
 
-                public double getBrowseCounts() {
+                public int getBrowseCounts() {
                     return browseCounts;
                 }
 
-                public void setBrowseCounts(double browseCounts) {
+                public void setBrowseCounts(int browseCounts) {
                     this.browseCounts = browseCounts;
                 }
 

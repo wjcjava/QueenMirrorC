@@ -1,5 +1,6 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.user;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -49,6 +50,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     private boolean click;
     private LoginCeshiBean ceshiBean;
     String vConfig = "";
+    String nickName,headPic,openId,loginToken,where,loginFlag;
 
     @Override
     protected int getLayoutId() {
@@ -61,6 +63,18 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         super.initView();
         myCountDownTimer = new MyCountDownTimer(60000, 1000);
         inidTitle();
+
+        Intent intent = this.getIntent();
+        where = intent.getStringExtra("where");
+
+        if(where.equals("third")){
+            nickName = intent.getStringExtra("nickName");
+            headPic = intent.getStringExtra("headPic");
+            openId = intent.getStringExtra("openId");
+            loginToken = intent.getStringExtra("loginToken");
+            loginFlag = intent.getStringExtra("loginFlag");
+        }else{
+        }
     }
 
     @Override
@@ -162,8 +176,17 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
                 if(successBean.isSuccess()){
                     T.show(successBean.getMsg());
-                    RegisterActivity.this.finish();
-                    LoginActivity.instance.et_login_pghone.setText(phoneNumber.getText().toString().trim());
+                    if(where.equals("third")){
+                        Intent intent = new Intent(RegisterActivity.this,GuanLianActivity.class);
+                        intent.putExtra("nickName",nickName);
+                        intent.putExtra("headPic",headPic);
+                        intent.putExtra("openId",openId);
+                        intent.putExtra("loginToken",loginToken);
+                        intent.putExtra("loginFlag",loginFlag);
+                        startActivity(intent);
+                    }else{
+                        RegisterActivity.this.finish();
+                    }
                 }else{
                     T.show(successBean.getMsg());
                 }

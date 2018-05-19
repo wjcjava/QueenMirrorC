@@ -18,17 +18,17 @@ import java.util.List;
  * Created by john on 2018/5/12.
  */
 
-public class FullShortAdapter extends BaseQuickAdapter<ClassificationBean.BodyBean.ShopListBean, BaseViewHolder> {
+public class FullShortAdapter extends BaseQuickAdapter<ClassificationBean.BodyBean.ShopListDataBean, BaseViewHolder> {
 
     Context context;
 
-    public FullShortAdapter(Context context,int layoutResId, @Nullable List<ClassificationBean.BodyBean.ShopListBean> data) {
+    public FullShortAdapter(Context context,int layoutResId, @Nullable List<ClassificationBean.BodyBean.ShopListDataBean> data) {
         super(layoutResId, data);
         this.context = context;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final ClassificationBean.BodyBean.ShopListBean item) {
+    protected void convert(BaseViewHolder helper, final ClassificationBean.BodyBean.ShopListDataBean item) {
 
         helper.setText(R.id.tv_sort_name, item.getAnsShopBasic().getShopName());
         helper.setText(R.id.tv_sort_time, item.getAnsShopBasic().getCloseTime());

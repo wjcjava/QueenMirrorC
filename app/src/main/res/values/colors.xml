@@ -142,4 +142,6 @@
     <color name="service_center">#FFFBFBFB</color>
     <color name="Light_blue">#FF8ECDF7</color>
 
+    <color name="third_login">#FFFF0000</color>
+
 </resources>

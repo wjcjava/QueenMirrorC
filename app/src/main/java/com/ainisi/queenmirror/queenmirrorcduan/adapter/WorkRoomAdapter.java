@@ -23,6 +23,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -38,6 +40,8 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
     private final LayoutInflater inflater;
     private Context context;
     List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiGoodsList = new ArrayList<>();
+
+    int pos_cart;
 
     public WorkRoomAdapter(Context context,List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiGoodsList ) {
         this.context = context;
@@ -103,7 +107,13 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
         holder.iv_workroom_add_cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddCatData();
+
+                pos_cart = position;
+                if(SP.get(context, SpContent.isLogin,"0").toString().equals("1")){
+                    AddCatData();
+                }else{
+                    T.show("请您先登录APP");
+                }
             }
         });
 
@@ -111,8 +121,6 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, FullActivity.class);
-                L.e("!@@@@@@@@@@@@@@"+apiGoodsList.get(position).getId()+"");
-
                 intent.putExtra("goodsId",apiGoodsList.get(position).getEcGoodsBasic().getId()+"");
                 intent.putExtra("shopId",apiGoodsList.get(position).getEcGoodsBasic().getShopId()+"");
                 context.startActivity(intent);
@@ -127,9 +135,9 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
      */
     private void AddCatData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("custId", "111");//
-        params.put("goodsId", "0b5e8db1e94b4c44b3075940bc67a2e9");
-        params.put("unitPrice","20");
+        params.put("custId", SP.get(context,SpContent.UserId,"").toString());//
+        params.put("goodsId", apiGoodsList.get(pos_cart).getEcGoodsBasic().getId());
+        params.put("unitPrice",apiGoodsList.get(pos_cart).getEcGoodsBasic().getGoodsPrice());
         params.put("purchaseNumber","1");
         HttpUtils.doPost(ACTION.ADDTOCAT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -144,7 +152,6 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
                 }else{
                     T.show(successBean.getMsg());
                 }
-
                 break;
         }
 

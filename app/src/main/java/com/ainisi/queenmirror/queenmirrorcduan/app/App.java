@@ -13,6 +13,9 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import okhttp3.Authenticator;
@@ -35,12 +38,13 @@ public class App extends MultiDexApplication {
         super.onCreate();
         ViewTarget.setTagId(R.id.glide_tag);
 
-      /*  //设置LOG开关，默认为false
+        //设置LOG开关，默认为false
         UMConfigure.setLogEnabled(true);
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
-        UMConfigure.init(this, "5afa51818f4a9d296100014b", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
+        UMConfigure.init(this, "5a13e4fbf29d982a16000037", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
                 "38c62f307e5bf45492df19e86ddc4dbb");
-        //PushSDK初始化(如使用推送SDK，必须调用此方法)*/
+        //init(Context context,String appkey,String channel,int deviceType,String pushSecret)
+        //PushSDK初始化(如使用推送SDK，必须调用此方法)
 
         //L.e("...................adadassaasdasdasdasdasd..............................."+JPushInterface.getRegistrationID(this));
 
@@ -127,6 +131,13 @@ public class App extends MultiDexApplication {
             e.printStackTrace();
         }
 
+    }
+
+    {
+        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
+        //豆瓣RENREN平台目前只能在服务器端配置
+        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
     }
 
 }

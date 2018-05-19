@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/mine_back_gray"
+    tools:context=".ui.user.LoginThirdActivity">
+
+    <include layout="@layout/layout_title"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_title"
+        android:layout_width="@dimen/comment_60_dip"
+        android:layout_height="@dimen/comment_60_dip"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="@dimen/comment_5_dip"
+        android:layout_toStartOf="@+id/img_replace"
+        android:src="@drawable/icon_portrait"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/comment_2_dip" />
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/comment_16_size"
+        android:textColor="@color/alpha_95_black"
+        android:text="请关联一个女王魔镜账号"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/comment_20_dip">
+    </TextView>
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/comment_14_size"
+        android:textColor="@color/alpha_70_black"
+        android:text="还没有女王魔镜账号？"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="@dimen/comment_20_dip">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_third_login_regist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/comment_14_size"
+        android:textColor="@color/gray_E7370C"
+        android:gravity="center"
+        android:text="注册账号"
+        android:padding="8dp"
+        android:layout_marginEnd="@dimen/comment_20_dip"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_third_login"
+        android:layout_marginStart="@dimen/comment_20_dip">
+    </TextView>
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/comment_14_size"
+        android:textColor="@color/alpha_70_black"
+        android:text="已有女王魔镜账号？"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="@dimen/comment_20_dip">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_third_login_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/comment_14_size"
+        android:textColor="@color/gray_E7370C"
+        android:text="立即关联"
+        android:gravity="center"
+        android:padding="8dp"
+        android:background="@drawable/button_third_login"
+        android:layout_marginEnd="@dimen/comment_20_dip"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="@dimen/comment_20_dip">
+    </TextView>
+
+</LinearLayout>

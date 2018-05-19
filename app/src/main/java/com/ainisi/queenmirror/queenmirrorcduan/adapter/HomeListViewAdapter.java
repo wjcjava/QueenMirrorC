@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 
@@ -26,9 +27,9 @@ import java.util.List;
 public class HomeListViewAdapter extends BaseAdapter {
     private final LayoutInflater inflater;
     private Context context;
-    List<ClassificationBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
+    List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
 
-    public HomeListViewAdapter(Context context,List<ClassificationBean.BodyBean.ShopListBean> ShopListData) {
+    public HomeListViewAdapter(Context context,List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData) {
         this.context = context;
         this.ShopListData = ShopListData;
         inflater = LayoutInflater.from(context);

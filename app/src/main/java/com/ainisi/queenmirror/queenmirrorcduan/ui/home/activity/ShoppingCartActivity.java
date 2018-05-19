@@ -22,6 +22,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.StoreInfo;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilTool;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilsLog;
@@ -119,7 +121,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      */
     private void getShopCartData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("custId", "111");//用户ID
+        params.put("custId", SP.get(ShoppingCartActivity.this, SpContent.UserId,"")+"");//用户ID
         HttpUtils.doPost(ACTION.GETSHOPPINDCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -128,7 +130,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      */
     private void DeleteShopCartData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("userId", "111");//用户ID
+        params.put("userId", SP.get(ShoppingCartActivity.this, SpContent.UserId,"")+"");//用户ID
         params.put("delIds",delIds);
         HttpUtils.doPost(ACTION.DELETESHOPCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }

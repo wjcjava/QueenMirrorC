@@ -8,11 +8,12 @@ import java.util.List;
 
 public class ClassificationBean {
 
+
     /**
      * success : true
      * errorCode : 0
-     * msg : 获取数据成功
-     * body : {"shopList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopManager":null,"ansShopBasic":{"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":null,"contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null},"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"},"ansCustFollow":null,"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":178,"enableFlag":null},"ecCategory":null,"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"contractConfirmLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"contentByTitle":null,"ifContractLabel":null,"signFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopManager":null,"ansShopBasic":{"id":"8ce86e581ecb4a39910f943758321656","isNewRecord":false,"remarks":null,"createDate":"2018-05-09 17:26:23","updateDate":"2018-05-16 13:57:50","merchantId":null,"contractConfirm":"1","ifContract":"0","shopName":"琳美甲","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":"你一个个羞涩","shopAccounce":"但不会把饭吃个够","ifNew":"1","shopBanner":null,"shopActivity":null,"shopFeature":null,"queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"美甲","belongCity":"337289fd68bb4af980141cae1446869f","addrProvince":"江苏省","addrCity":"苏州市","addrDistrict":"相城区","shopAddr":"艾尼斯","openTime":"10:00","closeTime":"22:00","serviceTel":"18260178836","shopContacts":"杨","contactsTel":"18260178836","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"杨","legalIdc":"340826199203293410","legalAddress":null,"taxNumber":null,"businessLicence":"123456","shopCharge":"","chargeIdc":"","chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":"2018-05-09 17:26:23","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":null,"geoY":null,"updatePgm":"1","apiAnsCustCartList":null},"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"相城区","sort":30,"code":null,"type":null,"parentId":"0"},"ansCustFollow":null,"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":80,"enableFlag":null},"ecCategory":null,"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"contractConfirmLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"contentByTitle":null,"ifContractLabel":null,"signFlagLabel":null}]}
+     * msg : 获取商家列表按分类数据成功
+     * body : {"pageSum":1,"ShopListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopBasic":{"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":"1","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null},"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"},"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":201,"enableFlag":null},"ecGoodsBasic":null,"ansSalesVolume":null,"ecShopScore":null,"ecCategory":null,"contractConfirmLabel":null,"ifSignLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"signFlagLabel":null,"distanceScope":null,"contentByTitle":null,"sortKey":null,"list":null,"distanceShopId":null}]}
      */
 
     private boolean success;
@@ -53,33 +54,46 @@ public class ClassificationBean {
     }
 
     public static class BodyBean {
-        private List<ShopListBean> shopList;
+        /**
+         * pageSum : 1
+         * ShopListData : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansShopBasic":{"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":"1","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null},"area":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"},"ansShopBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":201,"enableFlag":null},"ecGoodsBasic":null,"ansSalesVolume":null,"ecShopScore":null,"ecCategory":null,"contractConfirmLabel":null,"ifSignLabel":null,"shopFeatureLabel":null,"queenCardLabel":null,"shopCateLabel":null,"industryCateLabel":null,"ifLicenceLabel":null,"businessFlagLabel":null,"enableFlagLabel":null,"signFlagLabel":null,"distanceScope":null,"contentByTitle":null,"sortKey":null,"list":null,"distanceShopId":null}]
+         */
 
-        public List<ShopListBean> getShopList() {
-            return shopList;
+        private int pageSum;
+        private List<ShopListDataBean> ShopListData;
+
+        public int getPageSum() {
+            return pageSum;
         }
 
-        public void setShopList(List<ShopListBean> shopList) {
-            this.shopList = shopList;
+        public void setPageSum(int pageSum) {
+            this.pageSum = pageSum;
         }
 
-        public static class ShopListBean {
+        public List<ShopListDataBean> getShopListData() {
+            return ShopListData;
+        }
+
+        public void setShopListData(List<ShopListDataBean> ShopListData) {
+            this.ShopListData = ShopListData;
+        }
+
+        public static class ShopListDataBean {
             /**
              * id : null
              * isNewRecord : true
              * remarks : null
              * createDate : null
              * updateDate : null
-             * ansShopManager : null
-             * ansShopBasic : {"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":null,"contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null}
+             * ansShopBasic : {"id":"111","isNewRecord":false,"remarks":"","createDate":"2018-05-07 14:24:02","updateDate":"2018-05-16 13:57:50","merchantId":"1","contractConfirm":"1","ifContract":"0","shopName":"美美理发店","shortName":"","shopNo":"132","marketAssistant":"","shopBrief":"专业美发","shopAccounce":"全面不休息","ifNew":"0","shopBanner":null,"shopActivity":"111","shopFeature":"131","queenCard":"0","shopTab":"美甲美手,美容美体","shopCate":"1","industryCate":"1","belongCity":"17e8e72326574a0ea94b15d6eeddbb6d","addrProvince":"江苏省","addrCity":"南京市","addrDistrict":"雨花台区","shopAddr":"雨花路1008号","openTime":"10:00:00","closeTime":"22:00:00","serviceTel":"15852855888","shopContacts":"姜超","contactsTel":"15852855880","contactsMail":null,"ifLicence":"1","shopProperty":"00","shopLegal":"132","legalIdc":"48675519930101354X","legalAddress":"12","taxNumber":"213456","businessLicence":"A23791637529664","shopCharge":"陈伟霆","chargeIdc":"321087218968210902","chargeIdp":"213456776543","shopLogo":"","shopPhoto":"","shopEnvPhoto":"","joinTime":"2018-05-07 14:24:02","businessFlag":"1","enableFlag":"1","signFlag":"1","geoX":"12.230000","geoY":"14.200000","updatePgm":"1","apiAnsCustCartList":null}
              * area : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"parentIds":null,"name":"雨花台区","sort":30,"code":null,"type":null,"parentId":"0"}
-             * ansCustFollow : null
-             * ansShopBrowses : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":178,"enableFlag":null}
+             * ansShopBrowses : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"shopId":null,"browseCounts":201,"enableFlag":null}
+             * ecGoodsBasic : null
+             * ansSalesVolume : null
+             * ecShopScore : null
              * ecCategory : null
-             * nameIdentifyLabel : null
-             * sexLabel : null
-             * loginFlagLabel : null
              * contractConfirmLabel : null
+             * ifSignLabel : null
              * shopFeatureLabel : null
              * queenCardLabel : null
              * shopCateLabel : null
@@ -87,9 +101,12 @@ public class ClassificationBean {
              * ifLicenceLabel : null
              * businessFlagLabel : null
              * enableFlagLabel : null
-             * contentByTitle : null
-             * ifContractLabel : null
              * signFlagLabel : null
+             * distanceScope : null
+             * contentByTitle : null
+             * sortKey : null
+             * list : null
+             * distanceShopId : null
              */
 
             private Object id;
@@ -97,16 +114,15 @@ public class ClassificationBean {
             private Object remarks;
             private Object createDate;
             private Object updateDate;
-            private Object ansShopManager;
             private AnsShopBasicBean ansShopBasic;
             private AreaBean area;
-            private Object ansCustFollow;
             private AnsShopBrowsesBean ansShopBrowses;
+            private Object ecGoodsBasic;
+            private Object ansSalesVolume;
+            private Object ecShopScore;
             private Object ecCategory;
-            private Object nameIdentifyLabel;
-            private Object sexLabel;
-            private Object loginFlagLabel;
             private Object contractConfirmLabel;
+            private Object ifSignLabel;
             private Object shopFeatureLabel;
             private Object queenCardLabel;
             private Object shopCateLabel;
@@ -114,9 +130,12 @@ public class ClassificationBean {
             private Object ifLicenceLabel;
             private Object businessFlagLabel;
             private Object enableFlagLabel;
-            private Object contentByTitle;
-            private Object ifContractLabel;
             private Object signFlagLabel;
+            private Object distanceScope;
+            private Object contentByTitle;
+            private Object sortKey;
+            private Object list;
+            private Object distanceShopId;
 
             public Object getId() {
                 return id;
@@ -158,14 +177,6 @@ public class ClassificationBean {
                 this.updateDate = updateDate;
             }
 
-            public Object getAnsShopManager() {
-                return ansShopManager;
-            }
-
-            public void setAnsShopManager(Object ansShopManager) {
-                this.ansShopManager = ansShopManager;
-            }
-
             public AnsShopBasicBean getAnsShopBasic() {
                 return ansShopBasic;
             }
@@ -182,20 +193,36 @@ public class ClassificationBean {
                 this.area = area;
             }
 
-            public Object getAnsCustFollow() {
-                return ansCustFollow;
-            }
-
-            public void setAnsCustFollow(Object ansCustFollow) {
-                this.ansCustFollow = ansCustFollow;
-            }
-
             public AnsShopBrowsesBean getAnsShopBrowses() {
                 return ansShopBrowses;
             }
 
             public void setAnsShopBrowses(AnsShopBrowsesBean ansShopBrowses) {
                 this.ansShopBrowses = ansShopBrowses;
+            }
+
+            public Object getEcGoodsBasic() {
+                return ecGoodsBasic;
+            }
+
+            public void setEcGoodsBasic(Object ecGoodsBasic) {
+                this.ecGoodsBasic = ecGoodsBasic;
+            }
+
+            public Object getAnsSalesVolume() {
+                return ansSalesVolume;
+            }
+
+            public void setAnsSalesVolume(Object ansSalesVolume) {
+                this.ansSalesVolume = ansSalesVolume;
+            }
+
+            public Object getEcShopScore() {
+                return ecShopScore;
+            }
+
+            public void setEcShopScore(Object ecShopScore) {
+                this.ecShopScore = ecShopScore;
             }
 
             public Object getEcCategory() {
@@ -206,36 +233,20 @@ public class ClassificationBean {
                 this.ecCategory = ecCategory;
             }
 
-            public Object getNameIdentifyLabel() {
-                return nameIdentifyLabel;
-            }
-
-            public void setNameIdentifyLabel(Object nameIdentifyLabel) {
-                this.nameIdentifyLabel = nameIdentifyLabel;
-            }
-
-            public Object getSexLabel() {
-                return sexLabel;
-            }
-
-            public void setSexLabel(Object sexLabel) {
-                this.sexLabel = sexLabel;
-            }
-
-            public Object getLoginFlagLabel() {
-                return loginFlagLabel;
-            }
-
-            public void setLoginFlagLabel(Object loginFlagLabel) {
-                this.loginFlagLabel = loginFlagLabel;
-            }
-
             public Object getContractConfirmLabel() {
                 return contractConfirmLabel;
             }
 
             public void setContractConfirmLabel(Object contractConfirmLabel) {
                 this.contractConfirmLabel = contractConfirmLabel;
+            }
+
+            public Object getIfSignLabel() {
+                return ifSignLabel;
+            }
+
+            public void setIfSignLabel(Object ifSignLabel) {
+                this.ifSignLabel = ifSignLabel;
             }
 
             public Object getShopFeatureLabel() {
@@ -294,6 +305,22 @@ public class ClassificationBean {
                 this.enableFlagLabel = enableFlagLabel;
             }
 
+            public Object getSignFlagLabel() {
+                return signFlagLabel;
+            }
+
+            public void setSignFlagLabel(Object signFlagLabel) {
+                this.signFlagLabel = signFlagLabel;
+            }
+
+            public Object getDistanceScope() {
+                return distanceScope;
+            }
+
+            public void setDistanceScope(Object distanceScope) {
+                this.distanceScope = distanceScope;
+            }
+
             public Object getContentByTitle() {
                 return contentByTitle;
             }
@@ -302,20 +329,28 @@ public class ClassificationBean {
                 this.contentByTitle = contentByTitle;
             }
 
-            public Object getIfContractLabel() {
-                return ifContractLabel;
+            public Object getSortKey() {
+                return sortKey;
             }
 
-            public void setIfContractLabel(Object ifContractLabel) {
-                this.ifContractLabel = ifContractLabel;
+            public void setSortKey(Object sortKey) {
+                this.sortKey = sortKey;
             }
 
-            public Object getSignFlagLabel() {
-                return signFlagLabel;
+            public Object getList() {
+                return list;
             }
 
-            public void setSignFlagLabel(Object signFlagLabel) {
-                this.signFlagLabel = signFlagLabel;
+            public void setList(Object list) {
+                this.list = list;
+            }
+
+            public Object getDistanceShopId() {
+                return distanceShopId;
+            }
+
+            public void setDistanceShopId(Object distanceShopId) {
+                this.distanceShopId = distanceShopId;
             }
 
             public static class AnsShopBasicBean {
@@ -325,7 +360,7 @@ public class ClassificationBean {
                  * remarks :
                  * createDate : 2018-05-07 14:24:02
                  * updateDate : 2018-05-16 13:57:50
-                 * merchantId : null
+                 * merchantId : 1
                  * contractConfirm : 1
                  * ifContract : 0
                  * shopName : 美美理发店
@@ -381,7 +416,7 @@ public class ClassificationBean {
                 private String remarks;
                 private String createDate;
                 private String updateDate;
-                private Object merchantId;
+                private String merchantId;
                 private String contractConfirm;
                 private String ifContract;
                 private String shopName;
@@ -471,11 +506,11 @@ public class ClassificationBean {
                     this.updateDate = updateDate;
                 }
 
-                public Object getMerchantId() {
+                public String getMerchantId() {
                     return merchantId;
                 }
 
-                public void setMerchantId(Object merchantId) {
+                public void setMerchantId(String merchantId) {
                     this.merchantId = merchantId;
                 }
 
@@ -988,7 +1023,7 @@ public class ClassificationBean {
                  * createDate : null
                  * updateDate : null
                  * shopId : null
-                 * browseCounts : 178
+                 * browseCounts : 201
                  * enableFlag : null
                  */
 

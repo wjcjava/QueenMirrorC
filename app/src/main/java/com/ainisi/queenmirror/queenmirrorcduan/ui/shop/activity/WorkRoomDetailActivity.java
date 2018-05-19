@@ -31,6 +31,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActi
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.lzy.okgo.cache.CacheMode;
@@ -89,6 +91,8 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     TextView tv_work_detail_introduce;
     @Bind(R.id.tv_workroom_service_jubao)
     TextView tv_workroom_service_jubao;
+    @Bind(R.id.tv_workdetail_topfenshu)
+    TextView tv_workdetail_topfenshu;
 
     @Bind(R.id.tv_work_detail_guanzhu)
     TextView tv_work_detail_guanzhu;
@@ -100,12 +104,17 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     String shopName,shopId;
     private WorkCreditAdapter creditAdapter;
 
+    String isLogin,userId;
     boolean isColl = false;
 
     List<ShopTuijianBean.BodyBean.ApiEcGoodsBasicListBean> apiEcGoodsBasicList = new ArrayList<>();
     List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiGoodsList = new ArrayList<>();
 
     List<ShopXinyongBean.BodyBean.ApiShopScoreListBean> apiShopScoreList = new ArrayList<>();
+
+    ShopDetailDataBean shopDetailDataBean;
+
+    String top_detail;
 
     @Override
     protected int getLayoutId() {
@@ -115,6 +124,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     @Override
     protected void initView() {
         super.initView();
+
+        isLogin = (String) SP.get(WorkRoomDetailActivity.this, SpContent.isLogin,"");
+
         initTab();
         Intent intent = getIntent();
         shopName = intent.getStringExtra("shopName");
@@ -128,6 +140,15 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
         doGetSaleShop();
 
+        /**
+         * 获取门店信用数据
+         */
+        getXinyongData();
+
+        /**
+         * 获取商家具体信息
+         */
+        getShopDetailData();
     }
 
     @Override
@@ -179,24 +200,26 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             case ACTION.SHOPXINYONG://获取门店信用
                 ShopXinyongBean shopXinyongBean = GsonUtil.toObj(res,ShopXinyongBean.class);
                 apiShopScoreList = shopXinyongBean.getBody().getApiShopScoreList();
-                /**
-                 *
-                 */
-                if(apiShopScoreList.size()>0){
-                    creditAdapter = new WorkCreditAdapter(WorkRoomDetailActivity.this,apiShopScoreList);
-                    listView.setAdapter(creditAdapter);
-                }else{
-                    T.show("暂无数据");
-                }
+
+                top_detail = top_detail+"评分" + apiShopScoreList.get(0).getEcShopScore().getShopScore();
+
                 break;
             case ACTION.SHOPDETAILDATA://获取商家具体信息
-                ShopDetailDataBean shopDetailDataBean = GsonUtil.toObj(res,ShopDetailDataBean.class);
+                shopDetailDataBean = GsonUtil.toObj(res,ShopDetailDataBean.class);
+                top_detail = top_detail+"  浏览量"+shopDetailDataBean.getBody().getApiShop().getAnsShopBrowses().getBrowseCounts()+"次";
+                tv_workdetail_topfenshu.setText(top_detail);
 
-                tv_work_detail_hangye.setText(shopDetailDataBean.getBody().getApiShop().getIndustryCateLabel());
-                tv_work_detail_address.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopAddr());
-                tv_work_detail_time.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getOpenTime()+"-"+shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getCloseTime());
-                tv_work_detail_introduce.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief().toString());
-
+                if(shopDetailDataBean.getBody().getIfFollow().equals("1")){
+                    /**
+                     * 已关注
+                     */
+                    tv_work_detail_guanzhu.setText("取消关注");
+                }else{
+                    /**
+                     * 未关注
+                     */
+                    tv_work_detail_guanzhu.setText("关注");
+                }
                 break;
             case ACTION.GUANZHUSHOP://关注店铺
 
@@ -255,6 +278,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("saleFlag", "2");//上架标记（2：上架）
         params.put("pageNumber", pageNumber+"");
         params.put("shopId", shopId);//商家ID
+        params.put("pageSize","10");
         HttpUtils.doPost(ACTION.SHOPTUIJIANLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -282,7 +306,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     private void guanzhuData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("shopId", shopId);//商家ID
-        params.put("userId","111");
+        params.put("userId",userId);
         HttpUtils.doPost(ACTION.GUANZHUSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -292,7 +316,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     private void cancelGuanzhuData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("shopId", shopId);//商家ID
-        params.put("userId","111");
+        params.put("userId",userId);
         HttpUtils.doPost(ACTION.CANCELGUANZHUSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -304,27 +328,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("complainInfo", shopId);//商家ID
         HttpUtils.doPost(ACTION.JUBAOSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
-    /**
-     * 收藏商品
-     */
-    private void getCollectionData() {
-        HashMap<String, String> params = new HashMap<>();
-        params.put("userId", "111");//
-        params.put("goodsId", "0b5e8db1e94b4c44b3075940bc67a2e9");
-        HttpUtils.doPost(ACTION.COLLECTIONPRODUCT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-    }
-
-    /**
-     * 取消收藏商品
-     */
-    private void getCancleCollectionData() {
-        HashMap<String, String> params = new HashMap<>();
-        params.put("userId", "111");//
-        params.put("goodsId", "0b5e8db1e94b4c44b3075940bc67a2e9");
-        HttpUtils.doPost(ACTION.CANCELCOLLECTION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-    }
-
 
     private void initTab() {
         listView.setVisibility(View.VISIBLE);
@@ -355,21 +358,28 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
 
-                        /**
-                         * 获取门店信用数据
-                         */
-                        getXinyongData();
 
+                        /**
+                         *
+                         */
+                        if(apiShopScoreList.size()>0){
+                            creditAdapter = new WorkCreditAdapter(WorkRoomDetailActivity.this,apiShopScoreList);
+                            listView.setAdapter(creditAdapter);
+                        }else{
+                            T.show("暂无数据");
+                        }
                         break;
                     //商家信息
                     case 2:
                         listView.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.VISIBLE);
-                        /**
-                         * 获取商家具体信息
-                         */
-                        getShopDetailData();
+
+                        tv_work_detail_hangye.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab());
+                        tv_work_detail_address.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopAddr());
+                        tv_work_detail_time.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getOpenTime()+"-"+shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getCloseTime());
+                        tv_work_detail_introduce.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief().toString());
+
                         break;
                     //优惠券
                     case 3:
@@ -421,13 +431,17 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
              * 关注店铺
              */
             case R.id.tv_work_detail_guanzhu:
-                /**
-                 * 这里应该判断是否登录，有没有关注过
-                 */
-                if(tv_work_detail_guanzhu.getText().equals("关注")){
-                    guanzhuData();//关注
+
+                if(isLogin.equals("1")){
+
+                    userId = (String) SP.get(WorkRoomDetailActivity.this,SpContent.UserId,"");
+                    if(tv_work_detail_guanzhu.getText().equals("关注")){
+                        guanzhuData();//关注
+                    }else{
+                        cancelGuanzhuData();//取消关注
+                    }
                 }else{
-                    cancelGuanzhuData();//取消关注
+                    T.show("请您先登录APP");
                 }
                 break;
                 //举报

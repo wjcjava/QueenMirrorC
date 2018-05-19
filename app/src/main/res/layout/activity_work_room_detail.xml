@@ -85,6 +85,7 @@
                                 android:layout_marginBottom="5dp"
                                 android:layout_alignParentBottom="true">
                                 <TextView
+                                    android:id="@+id/tv_workdetail_topfenshu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="12dp"
