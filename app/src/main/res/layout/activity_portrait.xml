@@ -97,7 +97,7 @@
                 android:layout_marginEnd="@dimen/comment_30_dip"
                 android:text="dugujun001"
                 android:textColor="@color/alpha_95_black"
-                android:textSize="@dimen/comment_16_size" />
+                android:textSize="@dimen/comment_14_size" />
 
             <ImageView
                 android:id="@+id/iv_username"

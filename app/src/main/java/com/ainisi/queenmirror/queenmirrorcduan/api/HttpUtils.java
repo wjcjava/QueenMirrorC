@@ -457,6 +457,9 @@ public class HttpUtils {
             case ACTION.LOGINOUT:
                 actionUrl = UrlConstants.LOGINOUT;
                 break;
+            case ACTION.CHANGENAME:
+                actionUrl = UrlConstants.CHANGENAME;
+                break;
         }
         url.append(actionUrl);
         return url;

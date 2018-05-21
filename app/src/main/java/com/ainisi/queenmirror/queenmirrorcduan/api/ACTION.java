@@ -93,4 +93,6 @@ public interface ACTION {
 
     int LOGINOUT = 0x127;//退出登录账号
 
+    int CHANGENAME = 0x128;//用户修改用户名
+
 }

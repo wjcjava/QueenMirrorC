@@ -67,6 +67,11 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
         init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tv_portrait_username.setText(SP.get(this,SpContent.UserName,"")+"");
+    }
 
     private void init() {
         // 1、创建LQRPhotoSelectUtils（一个Activity对应一个LQRPhotoSelectUtils）
@@ -78,7 +83,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
         }, false);//true裁剪，false不裁剪
 
         //Glide.with(this).load(SP.get(this,SpContent.UserName,"")).into(iv_portrait_head);
-        tv_portrait_username.setText(SP.get(this,SpContent.UserName,"")+"");
+
     }
 
     @Override

@@ -99,4 +99,6 @@ public interface UrlConstants {
     String CHANGEPASSWORD = "api/ans/cust/userModifyPass";//修改密码
 
     String LOGINOUT = "api/ans/login/userlogout";//退出登录账号
+
+    String CHANGENAME = "api/ans/cust/userNameModify";//用户修改用户名
 }
