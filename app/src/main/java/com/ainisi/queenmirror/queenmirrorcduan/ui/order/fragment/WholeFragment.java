@@ -65,13 +65,6 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
 
     @Override
     public void initPresenter() {
-       /* mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
-                .canLoadMore(true)
-                .autoLoadMore()
-                .showLastRefreshTime(
-                        RefreshLoadMoreLayout.class,
-                        "yyyy-MM-dd")
-                .multiTask());*/
     }
 
     @Override
@@ -87,9 +80,6 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     @Override
     public void onResume() {
         super.onResume();
-
-        //T.show("pos   "+OrderFragment.instance.pos);
-       // doFirstData();
     }
 
     @Override
@@ -120,8 +110,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
         if(bundle != null){
             state = bundle.getString("state");
         }
-        //T.show("@@@@   "+OrderFragment.instance.order_state);
-
+        L.e("**********************************************"+state);
         HashMap<String, String> params = new HashMap<>();
         params.put("orderStatus", state);
         params.put("pageNumber", pageNumber+"");
@@ -134,17 +123,16 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.ALLOFMYORDER:
-              /*  mRefreshLoadMoreLayout.stopRefresh();
-                mRefreshLoadMoreLayout.stopLoadMore();*/
+
+                L.e("&&&&&& "+res);
                 OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res,OrderMyAllOrderBean.class);
 
                 if(orderMyAllOrderBean.isSuccess()){
 
                     pageSum = orderMyAllOrderBean.getBody().getPageSum();
                     apiOrderList = orderMyAllOrderBean.getBody().getApiOrderList();
-           // case ACTION.ALLOFMYORDER:
 
-                    OrderAllAdapter sbmitWholeAdapter = new OrderAllAdapter(R.layout.item_sbmitrecycler, apiOrderList);
+                    OrderAllAdapter sbmitWholeAdapter = new OrderAllAdapter(getActivity(),R.layout.item_sbmitrecycler, apiOrderList);
                     whole.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
                     whole.setAdapter(sbmitWholeAdapter);
 
@@ -157,7 +145,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                             }
                             Intent intent = new Intent(getActivity(),OrderDetailActivity.class);
                             intent.putExtra("orderNo", apiOrderList.get(position).getAnsOrder().getOrderNo());
-                            intent.putExtra("orderTel",apiOrderList.get(position).getAnsShopBasic().getServiceTel());
+                            //intent.putExtra("orderTel",apiOrderList.get(position).getAnsShopBasic().);
                             intent.putExtra("orderTime",apiOrderList.get(position).getAnsOrder().getOrderTime());
                             intent.putExtra("OrderHeji",amountNum+"");
                             intent.putExtra("lstBean", (Serializable)apiOrderList.get(position).getAnsOrder().getApiOrderDetailsList());

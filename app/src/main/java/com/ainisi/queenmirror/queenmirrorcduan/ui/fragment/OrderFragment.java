@@ -62,7 +62,6 @@ public class OrderFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
         initDate();
     }
     private void initDate() {

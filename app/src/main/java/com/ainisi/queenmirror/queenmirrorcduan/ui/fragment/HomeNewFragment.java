@@ -5,14 +5,16 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
@@ -21,6 +23,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.NewsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
@@ -35,7 +38,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
@@ -58,6 +60,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
@@ -96,6 +100,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.tv_home_bustling)
     public
     TextView mLocation;
+    @Bind(R.id.img_information)
+    ImageView img_information;
 
     private HomeIndustryBean homeIndustryBean;
     private HomeHeadlinesBean homeHeadlinesBean;
@@ -146,9 +152,26 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         params.put("shopCate","1");
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-    @SuppressLint("NewApi")
+
+    /**
+     * 获取新消息提示
+     */
+    private void getNewNewsData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");
+        params.put("messageType", "");
+        HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true,this);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
+
+        /**
+         * 获取新消息提示
+         */
+        getNewNewsData();
+
         /**
          * 获取首页部分数据
          */
@@ -181,6 +204,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -295,6 +319,34 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
+            //获取新消息提示
+            case ACTION.GETNEWNEWS:
+                NewsBean newsBean = GsonUtil.toObj(res, NewsBean.class);
+
+                if(newsBean.isSuccess()){
+                    if(newsBean.getBody().getIsRead().equals("0")){
+
+                    }else{
+                        QBadgeView badgeView = new QBadgeView(getActivity());
+                        badgeView.bindTarget(img_information);
+                        badgeView.setBadgeTextSize(10,false);
+                        badgeView.setBadgeText("");
+                        badgeView.setBadgeTextColor(this.getResources().getColor(R.color.white));
+                        badgeView.setBadgeGravity(Gravity.END | Gravity.TOP);
+                        badgeView.setBadgeBackgroundColor(this.getResources().getColor(R.color.colorPri));
+
+                        badgeView.setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                            @Override
+                            public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+
+                            }
+                        });
+                    }
+                }else{
+                    T.show(newsBean.getMsg());
+                }
+
+                break;
             //首页的行业分类
             case ACTION.INDUSTRY:
                 homeIndustryBean = GsonUtil.toObj(res, HomeIndustryBean.class);

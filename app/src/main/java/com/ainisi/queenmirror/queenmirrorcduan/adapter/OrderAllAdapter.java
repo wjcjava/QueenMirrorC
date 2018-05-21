@@ -1,6 +1,9 @@
 package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
@@ -12,21 +15,73 @@ import java.util.List;
 
 public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBean.ApiOrderListBean,BaseViewHolder> {
 
+    Context context;
 
-    public OrderAllAdapter(int layoutResId, @Nullable List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> data) {
+    public OrderAllAdapter(Context context,int layoutResId, @Nullable List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> data) {
         super(layoutResId, data);
+        this.context = context;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void convert(BaseViewHolder helper, OrderMyAllOrderBean.BodyBean.ApiOrderListBean item) {
 
-        OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsShopBasicBeanX ansShopBasicBean = item.getAnsShopBasic();
-
+        //OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsShopBasicBeanX ansShopBasicBean = item.getAnsShopBasic();
+/*
         if(ansShopBasicBean == null){
 
         }else{
 
-            helper.setText(R.id.tv_shangpin,ansShopBasicBean.getShopName());
+            helper.setText(R.id.tv_shangpin,ansShopBasicBean.getShopName());*/
+
+            if(item.getAnsOrder().getOrderStatus().equals("UP")){
+                //待付款
+                helper.setText(R.id.tv_order_tuikuan,"付款")
+                        .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
+                        .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
+                        .setText(R.id.tv_order_again,"取消")
+                        .setGone(R.id.tv_order_like, false);
+            }else if(item.getAnsOrder().getOrderStatus().equals("UT")){
+//待接单
+                helper.setText(R.id.tv_order_tuikuan,"退款")
+                        .setGone(R.id.tv_order_again,false)
+                        .setGone(R.id.tv_order_like, false);
+
+            }else if(item.getAnsOrder().getOrderStatus().equals("FT")){
+//已接单
+                helper.setText(R.id.tv_order_tuikuan,"查看订单")
+                        .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
+                        .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
+                        .setText(R.id.tv_order_again,"退款")
+                        .setGone(R.id.tv_order_like, false);
+            }else if(item.getAnsOrder().getOrderStatus().equals("US")){
+//待服务
+                helper.setText(R.id.tv_order_tuikuan,"查看订单")
+                        .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
+                        .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
+                        .setText(R.id.tv_order_again,"退款")
+                        .setGone(R.id.tv_order_like, false);
+            }else if(item.getAnsOrder().getOrderStatus().equals("FN")){
+//已完成
+                helper.setGone(R.id.tv_order_tuikuan,false)
+                        .setGone(R.id.tv_order_again,false)
+                        .setGone(R.id.tv_order_like, false);
+            }else if(item.getAnsOrder().getOrderStatus().equals("UC")){
+//待评价
+                helper.setText(R.id.tv_order_tuikuan,"评价")
+                        .setGone(R.id.tv_order_again,false)
+                        .setGone(R.id.tv_order_like, false);
+            }else if(item.getAnsOrder().getOrderStatus().equals("CA")){
+//已取消
+            }else if(item.getAnsOrder().getOrderStatus().equals("PR")){
+//部分退款中
+            }else if(item.getAnsOrder().getOrderStatus().equals("PF")){
+//部分已退款
+            }else if(item.getAnsOrder().getOrderStatus().equals("RA")){
+//退款中
+            }else if(item.getAnsOrder().getOrderStatus().equals("RF")){
+//已退款
+            }
 
             List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsOrderBean.ApiOrderDetailsListBean> apiOrderDetailsList = item.getAnsOrder().getApiOrderDetailsList();
             double amountNum = 0;
@@ -77,7 +132,7 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
 
 
 
-        }
+        //}
 
     }
 }

@@ -101,4 +101,6 @@ public interface UrlConstants {
     String LOGINOUT = "api/ans/login/userlogout";//退出登录账号
 
     String CHANGENAME = "api/ans/cust/userNameModify";//用户修改用户名
+
+    String GETNEWNEWS = "api/ec/message/newMessageAlert";//获取新消息提示
 }

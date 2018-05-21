@@ -46,7 +46,7 @@
             app:tabMode="scrollable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_photo"
+            android:layout_below="@id/title_title"
             app:tabIndicatorColor="@color/white"
             app:tabTextColor="@color/white"
             android:layout_marginBottom="@dimen/comment_5_dip"

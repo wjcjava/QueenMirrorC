@@ -460,6 +460,9 @@ public class HttpUtils {
             case ACTION.CHANGENAME:
                 actionUrl = UrlConstants.CHANGENAME;
                 break;
+            case ACTION.GETNEWNEWS:
+                actionUrl = UrlConstants.GETNEWNEWS;
+                break;
         }
         url.append(actionUrl);
         return url;

@@ -95,4 +95,6 @@ public interface ACTION {
 
     int CHANGENAME = 0x128;//用户修改用户名
 
+    int GETNEWNEWS = 0x129;//获取新消息提示
+
 }
