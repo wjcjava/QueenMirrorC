@@ -463,6 +463,12 @@ public class HttpUtils {
             case ACTION.GETNEWNEWS:
                 actionUrl = UrlConstants.GETNEWNEWS;
                 break;
+            case ACTION.CHECKOPENID:
+                actionUrl = UrlConstants.CHECKOPENID;
+                break;
+            case ACTION.THIRDLOGINONE:
+                actionUrl = UrlConstants.THIRDLOGINONE;
+                break;
         }
         url.append(actionUrl);
         return url;

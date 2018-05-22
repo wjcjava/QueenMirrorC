@@ -18,6 +18,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginThridOpenidBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.HomePageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
@@ -156,7 +157,55 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                     T.show(loginBean.getMsg());
                 }
                 break;
+            case ACTION.THIRDLOGINONE:
+                LoginBean loginBean1 = GsonUtil.toObj(res,LoginBean.class);
+                if(loginBean1.isSuccess()){
+                    SP.put(LoginActivity.this, SpContent.UserId ,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getId());
+                    SP.put(LoginActivity.this,SpContent.UserCall,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getCellPhone());
+                    SP.put(LoginActivity.this,SpContent.UserName,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getUserName());
+                    SP.put(LoginActivity.this,SpContent.isLogin,"1");
+                    Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                    startActivity(intent);
+                }else{
+                    T.show(loginBean1.getMsg());
+                }
+                break;
+            case ACTION.CHECKOPENID:
+                LoginThridOpenidBean loginThridOpenidBean = GsonUtil.toObj(res, LoginThridOpenidBean.class);
+                if(loginThridOpenidBean.isSuccess()){
+                    String isExists = loginThridOpenidBean.getBody().getExists();
+
+                    if(isExists.equals("0")){
+                        //不存在
+                        Intent intent = new Intent(LoginActivity.this,LoginThirdActivity.class);
+                        intent.putExtra("nickName",nickName);
+                        intent.putExtra("headPic",headPic);
+                        intent.putExtra("openId",openId);
+                        intent.putExtra("loginToken",loginToken);
+                        intent.putExtra("loginFlag",loginFlag);
+                        startActivity(intent);
+                    }else{
+                        //存在
+                        ThirdLoginData();
+                    }
+                }else{
+                    T.show(loginThridOpenidBean.getMsg());
+                }
+                break;
         }
+    }
+
+    /**
+     * 第三方直接登录
+     */
+    private void ThirdLoginData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("loginFlag", loginFlag);
+        params.put("openId", openId);
+        params.put("loginToken",loginToken);
+        params.put("deviceToken",deviceToken);
+        //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
+        HttpUtils.doPost(ACTION.THIRDLOGINONE, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
@@ -206,13 +255,8 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                         }
                     }
 
-                    Intent intent = new Intent(LoginActivity.this,LoginThirdActivity.class);
-                    intent.putExtra("nickName",nickName);
-                    intent.putExtra("headPic",headPic);
-                    intent.putExtra("openId",openId);
-                    intent.putExtra("loginToken",loginToken);
-                    intent.putExtra("loginFlag",loginFlag);
-                    startActivity(intent);
+                    CheckOpenIdData();
+
                 }
 
                 @Override
@@ -235,6 +279,17 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
             T.show("取消了");
         }
     };
+
+    /**
+     * 第三方登录OpenId检验
+     */
+    private void CheckOpenIdData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("loginFlag", loginFlag);
+        params.put("openId", openId);
+        //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
+        HttpUtils.doPost(ACTION.CHECKOPENID, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

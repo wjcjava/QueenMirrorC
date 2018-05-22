@@ -97,4 +97,8 @@ public interface ACTION {
 
     int GETNEWNEWS = 0x129;//获取新消息提示
 
+    int CHECKOPENID = 0x130;//第三方登录检验openID
+
+    int  THIRDLOGINONE = 0x131;//第三方直接登录
+
 }
