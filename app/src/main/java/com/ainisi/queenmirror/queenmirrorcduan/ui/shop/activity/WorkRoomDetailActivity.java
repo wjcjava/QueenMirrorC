@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ShopTuijianAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.WorkCreditAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.WorkRoomAdapter;
@@ -28,9 +27,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PurchaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ShopDiscounBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -115,6 +114,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     ShopDetailDataBean shopDetailDataBean;
 
     String top_detail;
+    private WorkShopAdapter shopAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -149,6 +149,18 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
          * 获取商家具体信息
          */
         getShopDetailData();
+        /**
+         * 商家优惠券
+         */
+        geeshopDiscoun();
+    }
+    private void geeshopDiscoun() {
+        HashMap<String,String> params=new HashMap<>();
+        params.put("cpCate","1");
+        params.put("cpScope","1");
+        params.put("shopId","12");
+        params.put("userId","1");
+        HttpUtils.doPost(ACTION.SHOPDISCOUN,params,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
     @Override
@@ -244,6 +256,15 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 /**
                  * 接口还需要修改
                  */
+                break;
+            case ACTION.SHOPDISCOUN:
+                ShopDiscounBean discounBean=GsonUtil.toObj(res, ShopDiscounBean.class);
+                if(discounBean.isSuccess()){
+                    List<ShopDiscounBean.BodyBean.CouponListDataBean> list = discounBean.getBody().getCouponListData();
+                    shopAdapter = new WorkShopAdapter(WorkRoomDetailActivity.this,list);
+                }else {
+                    T.show(discounBean.getMsg());
+                }
                 break;
         }
     }
@@ -385,7 +406,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         listView.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.VISIBLE);
-                        WorkShopAdapter shopAdapter = new WorkShopAdapter(WorkRoomDetailActivity.this);
+
                         listShop.setAdapter(shopAdapter);
                         listShop.setDividerHeight(0);
                         WorkSingleAdapter singleAdapter = new WorkSingleAdapter(WorkRoomDetailActivity.this);

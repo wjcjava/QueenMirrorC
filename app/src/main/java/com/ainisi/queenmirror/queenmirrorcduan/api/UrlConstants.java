@@ -107,4 +107,6 @@ public interface UrlConstants {
     String CHECKOPENID = "api/ans/login/snsShopOpenIdCheck";//第三方登录检验OpenId
 
     String THIRDLOGINONE = "api/ans/login/snsUserLogin";//第三方直接登录
+
+    String SHOPDISCOUN="api/ans/coupon/couponList";//商家优惠券
 }

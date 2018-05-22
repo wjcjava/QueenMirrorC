@@ -47,6 +47,8 @@ public interface ACTION {
 
     int MYCOMMENTS=0x22;//我的评论
 
+    int SHOPDISCOUN=0x23;//商家优惠券
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

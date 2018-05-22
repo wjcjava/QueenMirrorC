@@ -449,7 +449,7 @@ public class HttpUtils {
                 break;
             //我的评论
             case ACTION.MYCOMMENTS:
-                actionUrl=UrlConstants.MYCOMMENTS;
+                actionUrl = UrlConstants.MYCOMMENTS;
                 break;
             case ACTION.CHANGEPASSWORD:
                 actionUrl = UrlConstants.CHANGEPASSWORD;
@@ -468,6 +468,10 @@ public class HttpUtils {
                 break;
             case ACTION.THIRDLOGINONE:
                 actionUrl = UrlConstants.THIRDLOGINONE;
+                break;
+            //商家优惠券
+            case ACTION.SHOPDISCOUN:
+                actionUrl = UrlConstants.SHOPDISCOUN;
                 break;
         }
         url.append(actionUrl);
