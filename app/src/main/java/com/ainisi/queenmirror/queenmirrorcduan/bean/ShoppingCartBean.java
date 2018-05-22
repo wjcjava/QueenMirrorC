@@ -9,7 +9,7 @@ public class ShoppingCartBean {
      * success : true
      * errorCode : 0
      * msg : 获取数据成功
-     * body : {"shopList":[{"id":"111","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"merchantId":null,"contractConfirm":null,"ifContract":null,"shopName":"美美理发店","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"ifNew":null,"shopBanner":null,"shopActivity":null,"shopFeature":null,"queenCard":null,"shopTab":null,"shopCate":null,"industryCate":null,"belongCity":null,"addrProvince":null,"addrCity":null,"addrDistrict":null,"shopAddr":null,"openTime":null,"closeTime":null,"serviceTel":null,"shopContacts":null,"contactsTel":null,"contactsMail":null,"ifLicence":null,"shopProperty":null,"shopLegal":null,"legalIdc":null,"legalAddress":null,"taxNumber":null,"businessLicence":null,"shopCharge":null,"chargeIdc":null,"chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":null,"businessFlag":null,"enableFlag":null,"signFlag":null,"geoX":null,"geoY":null,"updatePgm":null,"apiAnsCustCartList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustCart":{"id":"0356b07ff737423687bd61ea46bae83b","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","goodId":"111","unitPrice":20,"purchaseNumber":1,"cartTime":"2018-05-16 18:58:53"},"ecGoodsBasic":{"id":"111","isNewRecord":false,"remarks":null,"createDate":"2018-05-08 10:21:05","updateDate":"2018-05-08 10:21:05","goodsCate":"美发定制","goodsType":"0","goodsName":"测试3","goodsNo":null,"goodsBrief":"啊啊啊啊","serviceTime":"60分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"美发定制","goodsStorage":null,"goodsPrice":"33.00","offlinePrice":"90.00","marketPrice":null,"salesPrice":null,"promotionPrice":null,"goodsActivity":null,"goodsBanner":null,"shopId":"111","saleFlag":"2","approveBy":null,"approveDate":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController"},"ansShopBasic":null}]}]}
+     * body : {"shopList":[{"id":"8997e0d39bdc44c0bbd7da58371d9385","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"merchantId":null,"contractConfirm":null,"ifContract":null,"shopName":"Lhkh美甲","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"ifNew":null,"shopBanner":null,"shopActivity":null,"shopFeature":null,"queenCard":null,"shopTab":null,"shopCate":null,"industryCate":null,"belongCity":null,"addrProvince":null,"addrCity":null,"addrDistrict":null,"shopAddr":null,"openTime":null,"closeTime":null,"serviceTel":null,"shopContacts":null,"contactsTel":null,"contactsMail":null,"ifLicence":null,"shopProperty":null,"shopLegal":null,"legalIdc":null,"legalIdp":null,"legalProvince":null,"legalCity":null,"legalDistrict":null,"legalAddress":null,"taxNumber":null,"businessLicence":null,"shopCharge":null,"chargeIdc":null,"chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":null,"businessFlag":null,"enableFlag":null,"signFlag":null,"geoX":null,"geoY":null,"updatePgm":null,"apiAnsCustCartList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustCart":{"id":"8647b45e349d4ef2976314ad813d1ff0","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"6d1a95218382460aa8ea0db4c0acd9a1","goodId":"833d6471141d45d49f41f2d225d3e6ff","unitPrice":0.03,"purchaseNumber":4,"cartTime":"2018-05-22 15:42:36"},"ecGoodsBasic":{"id":"833d6471141d45d49f41f2d225d3e6ff","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 15:28:35","updateDate":"2018-05-22 15:28:35","goodsCate":"美甲美手","goodsType":"0","goodsName":"美甲","goodsNo":null,"goodsBrief":"专业美甲","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"AESDGFVBN","goodsStorage":null,"goodsPrice":"0.03","offlinePrice":"55.00","marketPrice":null,"salesPrice":null,"promotionPrice":null,"goodsActivity":null,"goodsBanner":null,"shopId":"8997e0d39bdc44c0bbd7da58371d9385","saleFlag":"2","approveBy":null,"approveDate":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController"},"ansShopBasic":null}]}]}
      */
 
     private boolean success;
@@ -62,7 +62,7 @@ public class ShoppingCartBean {
 
         public static class ShopListBean {
             /**
-             * id : 111
+             * id : 8997e0d39bdc44c0bbd7da58371d9385
              * isNewRecord : false
              * remarks : null
              * createDate : null
@@ -70,7 +70,7 @@ public class ShoppingCartBean {
              * merchantId : null
              * contractConfirm : null
              * ifContract : null
-             * shopName : 美美理发店
+             * shopName : Lhkh美甲
              * shortName : null
              * shopNo : null
              * marketAssistant : null
@@ -99,6 +99,10 @@ public class ShoppingCartBean {
              * shopProperty : null
              * shopLegal : null
              * legalIdc : null
+             * legalIdp : null
+             * legalProvince : null
+             * legalCity : null
+             * legalDistrict : null
              * legalAddress : null
              * taxNumber : null
              * businessLicence : null
@@ -115,7 +119,7 @@ public class ShoppingCartBean {
              * geoX : null
              * geoY : null
              * updatePgm : null
-             * apiAnsCustCartList : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustCart":{"id":"0356b07ff737423687bd61ea46bae83b","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","goodId":"111","unitPrice":20,"purchaseNumber":1,"cartTime":"2018-05-16 18:58:53"},"ecGoodsBasic":{"id":"111","isNewRecord":false,"remarks":null,"createDate":"2018-05-08 10:21:05","updateDate":"2018-05-08 10:21:05","goodsCate":"美发定制","goodsType":"0","goodsName":"测试3","goodsNo":null,"goodsBrief":"啊啊啊啊","serviceTime":"60分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"美发定制","goodsStorage":null,"goodsPrice":"33.00","offlinePrice":"90.00","marketPrice":null,"salesPrice":null,"promotionPrice":null,"goodsActivity":null,"goodsBanner":null,"shopId":"111","saleFlag":"2","approveBy":null,"approveDate":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController"},"ansShopBasic":null}]
+             * apiAnsCustCartList : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustCart":{"id":"8647b45e349d4ef2976314ad813d1ff0","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"6d1a95218382460aa8ea0db4c0acd9a1","goodId":"833d6471141d45d49f41f2d225d3e6ff","unitPrice":0.03,"purchaseNumber":4,"cartTime":"2018-05-22 15:42:36"},"ecGoodsBasic":{"id":"833d6471141d45d49f41f2d225d3e6ff","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 15:28:35","updateDate":"2018-05-22 15:28:35","goodsCate":"美甲美手","goodsType":"0","goodsName":"美甲","goodsNo":null,"goodsBrief":"专业美甲","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"AESDGFVBN","goodsStorage":null,"goodsPrice":"0.03","offlinePrice":"55.00","marketPrice":null,"salesPrice":null,"promotionPrice":null,"goodsActivity":null,"goodsBanner":null,"shopId":"8997e0d39bdc44c0bbd7da58371d9385","saleFlag":"2","approveBy":null,"approveDate":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController"},"ansShopBasic":null}]
              */
 
             private String id;
@@ -155,6 +159,10 @@ public class ShoppingCartBean {
             private Object shopProperty;
             private Object shopLegal;
             private Object legalIdc;
+            private Object legalIdp;
+            private Object legalProvince;
+            private Object legalCity;
+            private Object legalDistrict;
             private Object legalAddress;
             private Object taxNumber;
             private Object businessLicence;
@@ -469,6 +477,38 @@ public class ShoppingCartBean {
                 this.legalIdc = legalIdc;
             }
 
+            public Object getLegalIdp() {
+                return legalIdp;
+            }
+
+            public void setLegalIdp(Object legalIdp) {
+                this.legalIdp = legalIdp;
+            }
+
+            public Object getLegalProvince() {
+                return legalProvince;
+            }
+
+            public void setLegalProvince(Object legalProvince) {
+                this.legalProvince = legalProvince;
+            }
+
+            public Object getLegalCity() {
+                return legalCity;
+            }
+
+            public void setLegalCity(Object legalCity) {
+                this.legalCity = legalCity;
+            }
+
+            public Object getLegalDistrict() {
+                return legalDistrict;
+            }
+
+            public void setLegalDistrict(Object legalDistrict) {
+                this.legalDistrict = legalDistrict;
+            }
+
             public Object getLegalAddress() {
                 return legalAddress;
             }
@@ -612,8 +652,8 @@ public class ShoppingCartBean {
                  * remarks : null
                  * createDate : null
                  * updateDate : null
-                 * ansCustCart : {"id":"0356b07ff737423687bd61ea46bae83b","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","goodId":"111","unitPrice":20,"purchaseNumber":1,"cartTime":"2018-05-16 18:58:53"}
-                 * ecGoodsBasic : {"id":"111","isNewRecord":false,"remarks":null,"createDate":"2018-05-08 10:21:05","updateDate":"2018-05-08 10:21:05","goodsCate":"美发定制","goodsType":"0","goodsName":"测试3","goodsNo":null,"goodsBrief":"啊啊啊啊","serviceTime":"60分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"美发定制","goodsStorage":null,"goodsPrice":"33.00","offlinePrice":"90.00","marketPrice":null,"salesPrice":null,"promotionPrice":null,"goodsActivity":null,"goodsBanner":null,"shopId":"111","saleFlag":"2","approveBy":null,"approveDate":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController"}
+                 * ansCustCart : {"id":"8647b45e349d4ef2976314ad813d1ff0","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"6d1a95218382460aa8ea0db4c0acd9a1","goodId":"833d6471141d45d49f41f2d225d3e6ff","unitPrice":0.03,"purchaseNumber":4,"cartTime":"2018-05-22 15:42:36"}
+                 * ecGoodsBasic : {"id":"833d6471141d45d49f41f2d225d3e6ff","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 15:28:35","updateDate":"2018-05-22 15:28:35","goodsCate":"美甲美手","goodsType":"0","goodsName":"美甲","goodsNo":null,"goodsBrief":"专业美甲","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"AESDGFVBN","goodsStorage":null,"goodsPrice":"0.03","offlinePrice":"55.00","marketPrice":null,"salesPrice":null,"promotionPrice":null,"goodsActivity":null,"goodsBanner":null,"shopId":"8997e0d39bdc44c0bbd7da58371d9385","saleFlag":"2","approveBy":null,"approveDate":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController"}
                  * ansShopBasic : null
                  */
 
@@ -692,16 +732,16 @@ public class ShoppingCartBean {
 
                 public static class AnsCustCartBean {
                     /**
-                     * id : 0356b07ff737423687bd61ea46bae83b
+                     * id : 8647b45e349d4ef2976314ad813d1ff0
                      * isNewRecord : false
                      * remarks : null
                      * createDate : null
                      * updateDate : null
-                     * custId : 111
-                     * goodId : 111
-                     * unitPrice : 20
-                     * purchaseNumber : 1
-                     * cartTime : 2018-05-16 18:58:53
+                     * custId : 6d1a95218382460aa8ea0db4c0acd9a1
+                     * goodId : 833d6471141d45d49f41f2d225d3e6ff
+                     * unitPrice : 0.03
+                     * purchaseNumber : 4
+                     * cartTime : 2018-05-22 15:42:36
                      */
 
                     private String id;
@@ -711,7 +751,7 @@ public class ShoppingCartBean {
                     private Object updateDate;
                     private String custId;
                     private String goodId;
-                    private int unitPrice;
+                    private double unitPrice;
                     private int purchaseNumber;
                     private String cartTime;
 
@@ -771,11 +811,11 @@ public class ShoppingCartBean {
                         this.goodId = goodId;
                     }
 
-                    public int getUnitPrice() {
+                    public double getUnitPrice() {
                         return unitPrice;
                     }
 
-                    public void setUnitPrice(int unitPrice) {
+                    public void setUnitPrice(double unitPrice) {
                         this.unitPrice = unitPrice;
                     }
 
@@ -798,31 +838,31 @@ public class ShoppingCartBean {
 
                 public static class EcGoodsBasicBean {
                     /**
-                     * id : 111
+                     * id : 833d6471141d45d49f41f2d225d3e6ff
                      * isNewRecord : false
                      * remarks : null
-                     * createDate : 2018-05-08 10:21:05
-                     * updateDate : 2018-05-08 10:21:05
-                     * goodsCate : 美发定制
+                     * createDate : 2018-05-22 15:28:35
+                     * updateDate : 2018-05-22 15:28:35
+                     * goodsCate : 美甲美手
                      * goodsType : 0
-                     * goodsName : 测试3
+                     * goodsName : 美甲
                      * goodsNo : null
-                     * goodsBrief : 啊啊啊啊
-                     * serviceTime : 60分钟
+                     * goodsBrief : 专业美甲
+                     * serviceTime : 90分钟
                      * goodsDetails : null
                      * goodsThumb : null
                      * goodsPic : null
                      * goodsShow : null
-                     * goodsTab : 美发定制
+                     * goodsTab : AESDGFVBN
                      * goodsStorage : null
-                     * goodsPrice : 33.00
-                     * offlinePrice : 90.00
+                     * goodsPrice : 0.03
+                     * offlinePrice : 55.00
                      * marketPrice : null
                      * salesPrice : null
                      * promotionPrice : null
                      * goodsActivity : null
                      * goodsBanner : null
-                     * shopId : 111
+                     * shopId : 8997e0d39bdc44c0bbd7da58371d9385
                      * saleFlag : 2
                      * approveBy : null
                      * approveDate : null

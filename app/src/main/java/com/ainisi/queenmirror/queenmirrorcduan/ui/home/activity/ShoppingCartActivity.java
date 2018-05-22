@@ -150,7 +150,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
             for (int j = 0; j < shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().size(); j++) {
                 int img = R.drawable.icon_home_beautiful;
                 //i-j 就是商品的id， 对应着第几个店铺的第几个商品，1-1 就是第一个店铺的第一个商品,价格,在加商品时的数量
-                goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), "第一排", "出头天者", img, 1));
+                goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), "第一排", "出头天者", img, apiAnsCustCartListBeans.get(j).getAnsCustCart().getPurchaseNumber()));
             }
 
             childs.put(groups.get(i).getId(), goods);

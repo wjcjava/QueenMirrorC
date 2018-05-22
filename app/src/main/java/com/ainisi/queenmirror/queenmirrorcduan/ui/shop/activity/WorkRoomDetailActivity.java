@@ -358,7 +358,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
 
-
                         /**
                          *
                          */

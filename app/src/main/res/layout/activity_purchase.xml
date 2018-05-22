@@ -16,7 +16,6 @@
         android:id="@+id/ic_title"
         layout="@layout/layout_title"/>
     <LinearLayout
-
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_44_dip"
@@ -87,6 +86,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
     <RelativeLayout
+        android:id="@+id/rl_purchase_top"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_55_dip">

@@ -355,7 +355,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.user.LoginThirdActivity" />
-        <activity android:name=".ui.user.GuanLianActivity"></activity>
+        <activity android:name=".ui.user.GuanLianActivity" />
+        <activity android:name=".ui.shop.activity.SelectLinkPeopleActivity"></activity>
     </application>
 
 </manifest>
