@@ -238,6 +238,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         HttpUtils.doPost(ACTION.EVALUATION,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
+
     /**
      * 收藏商品
      */
@@ -282,6 +283,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     }
 
     @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart,R.id.rl_full_collection,R.id.title_photo})
+
     public void OnClick(View view) {
         switch (view.getId()) {
             /**

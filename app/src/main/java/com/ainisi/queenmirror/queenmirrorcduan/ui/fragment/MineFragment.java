@@ -172,12 +172,12 @@ public class MineFragment extends BaseFragment {
                 break;
             //优惠券
             case R.id.ly_mine_discount:
-                if(isLogin){
+                //if(isLogin){
                     MineDiscountActivity.startActivity(getActivity());
-                }else{
-                    T.show("请先进行登录");
-                    startActivity(new Intent(getContext(), LoginActivity.class));
-                }
+//                }else{
+//                    T.show("请先进行登录");
+//                    startActivity(new Intent(getContext(), LoginActivity.class));
+//                }
                 break;
             //我的资产（女王卡）
             case R.id.ly_mine_foot:

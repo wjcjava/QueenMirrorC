@@ -60,6 +60,7 @@ public class ShopStoreActivity extends BaseNewActivity{
     @Override
     protected void initData() {
         inithttp();
+
         super.initData();
         for (int i = 0; i <6 ; i++) {
             SortBean sortBean=new SortBean();

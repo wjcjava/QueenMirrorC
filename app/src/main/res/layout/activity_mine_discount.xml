@@ -52,23 +52,9 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/ic_title">
-
-        <!--<android.support.design.widget.TabLayout-->
-            <!--android:id="@+id/mine_tab"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="@dimen/comment_10_dip"-->
-            <!--android:background="@color/white" />-->
-
-        <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager
-            android:id="@+id/mine_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:layout_marginTop="@dimen/comment_5_dip" />
-    </RelativeLayout>
+  <FrameLayout
+      android:id="@+id/fr_mine_discount"
+      android:layout_below="@id/ic_title"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
 </RelativeLayout>

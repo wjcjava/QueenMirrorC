@@ -2,21 +2,14 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.fragment.HistorydiscountFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.fragment.MinediscountFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.FragmentUtil;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -24,19 +17,11 @@ import butterknife.OnClick;
 //优惠券
 public class MineDiscountActivity extends BaseNewActivity {
 
-//    @Bind(R.id.mine_tab)
-//    TabLayout minetab;
-    @Bind(R.id.mine_pager)
-    NoScrollViewPager minepager;
+    private MinediscountFragment minediscountFragment;
+    private HistorydiscountFragment historydiscountFragment;
     @Bind(R.id.radio_preferential)
-    RadioButton coupon;
-    //    @Bind(R.id.radio_preferential)
-//    RadioButton preFerential;
-//    @Bind(R.id.radio_invincible)
-//    RadioButton inVincible;
-    private List<Fragment> minefrlist = new ArrayList<>();
-    private List<String> list = new ArrayList<>();
-    private ViewPager viewPager;
+    RadioButton preferential;
+
 
     @Override
     public int getLayoutId() {
@@ -46,29 +31,27 @@ public class MineDiscountActivity extends BaseNewActivity {
     @Override
     public void initView() {
 
-        initDate();
-
-        viewPager = new ViewPager(getSupportFragmentManager(), minefrlist,null);
-        minepager.setAdapter(viewPager);
-        minepager.setScanScroll(false);
-       // minetab.setupWithViewPager(minepager);
-        coupon.setChecked(true);
+        initshowdiscountFragment();
 
     }
 
-    private void initDate() {
-        //我的优惠券
-        minefrlist.add(new MinediscountFragment());
-        //历史优惠券
-        minefrlist.add(new HistorydiscountFragment());
-//        list.add("我的优惠券");
-//        list.add("历史优惠券");
-//        minetab.addTab(minetab.newTab().setText(list.get(0).toString().trim()));
-//        minetab.addTab(minetab.newTab().setText(list.get(1).toString().trim()));
+    private void initshowdiscountFragment() {
+        preferential.setChecked(true);
+        if (minediscountFragment == null) {
+            minediscountFragment = new MinediscountFragment();
+
+        }
+        FragmentUtil.showFragment(this, R.id.fr_mine_discount, minediscountFragment);
     }
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineDiscountActivity.class));
+    }
+
+    @Override
+    protected void initData() {
+
+
     }
 
     @OnClick({R.id.title_back, R.id.radio_preferential, R.id.radio_invincible})
@@ -78,10 +61,13 @@ public class MineDiscountActivity extends BaseNewActivity {
                 finish();
                 break;
             case R.id.radio_preferential:
-                viewPager.getItem(0);
+                initshowdiscountFragment();
                 break;
             case R.id.radio_invincible:
-                viewPager.getItem(1);
+                if (historydiscountFragment == null) {
+                    historydiscountFragment = new HistorydiscountFragment();
+                }
+                FragmentUtil.showFragment(this, R.id.fr_mine_discount, historydiscountFragment);
                 break;
             default:
                 break;

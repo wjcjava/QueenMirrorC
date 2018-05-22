@@ -1,8 +1,6 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.user;
 
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -11,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
@@ -29,8 +26,6 @@ import butterknife.OnClick;
  * 忘记密码
  */
 public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBack {
-
-
     @Bind(R.id.title_title)
     TextView loginTitle;
     @Bind(R.id.tv_phonenumber)

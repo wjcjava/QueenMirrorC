@@ -1,7 +1,6 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
@@ -30,9 +30,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivit
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeAdvertisingActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
@@ -359,7 +359,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 } else {
                     T.show(homeIndustryBean.getMsg());
                 }
-
                 break;
             //商家分类列表
             case ACTION.SHOPLIST:
@@ -428,8 +427,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 break;
         }
     }
-
-
 
 
     @Override

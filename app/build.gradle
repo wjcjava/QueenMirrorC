@@ -99,4 +99,5 @@ dependencies {
     compile 'com.umeng.sdk:share-qq:6.9.1.1'
 
     compile 'q.rorbin:badgeview:1.1.3'
+
 }

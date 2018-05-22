@@ -24,7 +24,6 @@ public class OrderInfoUtil2_0 {
 	 */
 	public static Map<String, String> buildAuthInfoMap(String pid, String app_id, String target_id, boolean rsa2) {
 		Map<String, String> keyValues = new HashMap<String, String>();
-
 		// 商户签约拿到的app_id，如：2013081700024223
 		keyValues.put("app_id", app_id);
 
@@ -136,6 +135,7 @@ public class OrderInfoUtil2_0 {
 	 * 
 	 * @return
 	 */
+
 	public static String getSign(Map<String, String> map, String rsaKey, boolean rsa2) {
 		List<String> keys = new ArrayList<String>(map.keySet());
 		// key排序

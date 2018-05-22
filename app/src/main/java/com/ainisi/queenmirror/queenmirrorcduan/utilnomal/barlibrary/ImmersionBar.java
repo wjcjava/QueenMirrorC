@@ -27,8 +27,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
-
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -42,7 +40,7 @@ import java.util.Set;
  * Created by gyf on 2017/05/09.
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
-public class ImmersionBar {
+public class ImmersionBar{
 
     private static Map<String, BarParams> mMap = new HashMap<>();
     private static Map<String, BarParams> mTagMap = new HashMap<>();
