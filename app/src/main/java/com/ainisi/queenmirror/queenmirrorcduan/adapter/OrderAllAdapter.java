@@ -2,11 +2,13 @@ package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ConfirmRefundActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -54,6 +56,16 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                         .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
                         .setText(R.id.tv_order_again,"退款")
                         .setGone(R.id.tv_order_like, false);
+
+                helper.setOnClickListener(R.id.tv_order_again, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, ConfirmRefundActivity.class);
+
+                        context.startActivity(intent);
+                    }
+                });
+
             }else if(item.getAnsOrder().getOrderStatus().equals("US")){
 //待服务
                 helper.setText(R.id.tv_order_tuikuan,"查看订单")

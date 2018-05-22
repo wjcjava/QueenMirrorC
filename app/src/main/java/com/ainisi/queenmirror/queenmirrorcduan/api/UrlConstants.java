@@ -103,4 +103,8 @@ public interface UrlConstants {
     String CHANGENAME = "api/ans/cust/userNameModify";//用户修改用户名
 
     String GETNEWNEWS = "api/ec/message/newMessageAlert";//获取新消息提示
+
+    String CHECKOPENID = "api/ans/login/snsShopOpenIdCheck";//第三方登录检验OpenId
+
+    String THIRDLOGINONE = "api/ans/login/snsUserLogin";//第三方直接登录
 }

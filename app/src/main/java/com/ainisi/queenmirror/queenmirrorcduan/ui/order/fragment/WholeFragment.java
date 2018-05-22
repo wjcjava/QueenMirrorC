@@ -110,7 +110,6 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
         if(bundle != null){
             state = bundle.getString("state");
         }
-        L.e("**********************************************"+state);
         HashMap<String, String> params = new HashMap<>();
         params.put("orderStatus", state);
         params.put("pageNumber", pageNumber+"");
@@ -124,7 +123,6 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
         switch (action) {
             case ACTION.ALLOFMYORDER:
 
-                L.e("&&&&&& "+res);
                 OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res,OrderMyAllOrderBean.class);
 
                 if(orderMyAllOrderBean.isSuccess()){

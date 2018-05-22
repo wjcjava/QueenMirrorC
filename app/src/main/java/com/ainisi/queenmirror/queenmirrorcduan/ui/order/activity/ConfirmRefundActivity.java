@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,21 @@ public class ConfirmRefundActivity extends BaseNewActivity{
     RecyclerView recyclerView;
     @Bind(R.id.title_title)
     TextView areTitle;
+    /**
+     * 退款金额
+     */
+    @Bind(R.id.tv_confirm_amount)
+    TextView tv_confirm_amount;
+    /**
+     * 退款说明
+     */
+    @Bind(R.id.et_confirm_backresuion)
+    EditText et_confirm_backresuion;
+
+    @Bind(R.id.tv_arefund_select)
+    TextView tv_arefund_select;
+
+
     private List<SortBean> list = new ArrayList<>();
     @Override
     protected int getLayoutId() {
@@ -39,7 +57,6 @@ public class ConfirmRefundActivity extends BaseNewActivity{
         super.initView();
         areTitle.setText(R.string.arefund);
     }
-
     @Override
     protected void initData() {
         super.initData();
@@ -51,7 +68,7 @@ public class ConfirmRefundActivity extends BaseNewActivity{
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
         recyclerView.setAdapter(sbmitWholeAdapter);
     }
-    @OnClick({R.id.title_back, R.id.layout_arefund_reason})
+    @OnClick({R.id.title_back, R.id.layout_arefund_reason,R.id.bt_confirm_refund})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -60,6 +77,16 @@ public class ConfirmRefundActivity extends BaseNewActivity{
             //退款原因
             case R.id.layout_arefund_reason:
                 startActivity(new Intent(this,RefundReasonActivity.class));
+                break;
+            /**
+             * 提交
+             */
+            case R.id.bt_confirm_refund:
+                if(tv_arefund_select.getText().toString().equals("")||tv_arefund_select.getText().toString().equals("请选择")){
+                    T.show("请选择退款原因");
+                }else{
+
+                }
                 break;
         }
     }
