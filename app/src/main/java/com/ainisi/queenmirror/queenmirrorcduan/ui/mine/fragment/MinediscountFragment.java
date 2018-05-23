@@ -87,8 +87,6 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
     @Override
     protected void initView() {
         initDate();
-
-
         /**
          * 商品所领取优惠券
          */
@@ -117,9 +115,7 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
                 break;
         }
     }
-
     private void initDate() {
-
         tabList.add("已领取优惠券");
         tabList.add("已使用优惠券");
         tabList.add("已过期优惠券");
@@ -130,22 +126,18 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
             //这里使用到反射，拿到Tab对象后获取Class
             Class c = tab.getClass();
             try {
-
                 Field field = c.getDeclaredField("mView");
                 field.setAccessible(true);
                 final View view = (View) field.get(tab);
                 if (view == null) return;
                 view.setTag(i);
                 view.setOnClickListener(new View.OnClickListener() {
-
                     private int position;
-
                     @Override
                     public void onClick(View v) {
                         position = (int) view.getTag();
                         //这里就可以根据业务需求处理点击事件了。
                         if (position == 0) {
-
                             disrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                             disrecycler.setAdapter(sortAdapter);
                         } else if (position == 1) {
@@ -165,11 +157,8 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
 
 
         }
-
-
         setIndicator(tabDistance, 10, 10);
     }
-
     public void setIndicator(TabLayout tabs, int leftDip, int rightDip) {
         Class<?> tabLayout = tabs.getClass();
         Field tabStrip = null;
@@ -200,9 +189,6 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
             child.invalidate();
         }
     }
-
-
-
     @Override
     public void showLoadingDialog() {
 

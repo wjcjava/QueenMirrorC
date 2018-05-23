@@ -7,14 +7,32 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.QueenDeiailsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.lzy.okgo.cache.CacheMode;
+
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 //女王卡
-public class MineQueenActivity extends BaseActivity {
+public class MineQueenActivity extends BaseActivity implements HttpCallBack{
     @Bind(R.id.title_title)
     TextView queentitle;
+    @Bind(R.id.tv_queen_name)
+    TextView queenName;
+    @Bind(R.id.tv_queen_wallet)
+    TextView queenWallet;
+    @Bind(R.id.tv_queen_phone)
+    TextView queenPhone;
+    @Bind(R.id.tv_queen_money)
+    TextView queenMoney;
+    private QueenDeiailsBean deiailsBean;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineQueenActivity.class));
@@ -34,7 +52,10 @@ public class MineQueenActivity extends BaseActivity {
     @Override
     public void initView() {
         queentitle.setText("我的女王卡");
+        inithttp();
     }
+
+
 
     @OnClick({R.id.title_back, R.id.bt_recharge,R.id.bt_see
     })
@@ -57,6 +78,42 @@ public class MineQueenActivity extends BaseActivity {
 
         }
 
+
+    }
+    private void inithttp() {
+        HashMap<String,String> parames=new HashMap<>();
+        parames.put("userId","123");
+        HttpUtils.doPost(ACTION.QUEENDETAILS,parames, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+
+    }
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+
+            case ACTION.QUEENDETAILS:
+                deiailsBean = GsonUtil.toObj(res, QueenDeiailsBean.class);
+                if(deiailsBean.isSuccess()){
+                    QueenDeiailsBean.BodyBean.QueenCardDataBean.AnsQueenCardBean dataBean = deiailsBean.getBody().getQueenCardData().getAnsQueenCard();
+                    queenName.setText(dataBean.getCustId());
+                    queenWallet.setText(dataBean.getCardNo());
+                    queenPhone.setText(dataBean.getCardNo());
+                    queenMoney.setText(dataBean.getCustId());
+
+                }else {
+                    T.show(deiailsBean.getMsg());
+                }
+                break;
+        }
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
 
     }
 }

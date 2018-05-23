@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
@@ -21,7 +20,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.LoginThridOpenidBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.HomePageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -29,7 +27,6 @@ import com.lzy.okgo.cache.CacheMode;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.utils.SocializeUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -123,7 +120,6 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                 break;
         }
     }
-
     /**
      * 登录数据
      */

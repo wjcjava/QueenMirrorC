@@ -477,6 +477,17 @@ public class HttpUtils {
             case ACTION.RECEIVEDISCOUN:
                 actionUrl = UrlConstants.RECEIVEDISCOUN;
                 break;
+            //可以优惠券列表（订单）
+            case ACTION.LISTFOEUSE:
+                /**
+                 * 接口未调试
+                 */
+                actionUrl = UrlConstants.LISTFOEUSE;
+                break;
+            //女王卡详情
+            case ACTION.QUEENDETAILS:
+                actionUrl=UrlConstants.QUEENDETAILS;
+                break;
         }
         url.append(actionUrl);
         return url;

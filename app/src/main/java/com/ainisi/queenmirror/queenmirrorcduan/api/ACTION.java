@@ -51,6 +51,10 @@ public interface ACTION {
 
     int RECEIVEDISCOUN=0X24;//商家所领取优惠券
 
+    int LISTFOEUSE=0x25;//可以优惠券列表（订单）
+
+    int QUEENDETAILS=0x26;//女王卡详情
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

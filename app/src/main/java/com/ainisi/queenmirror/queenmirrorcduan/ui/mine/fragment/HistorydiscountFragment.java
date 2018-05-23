@@ -64,12 +64,10 @@ public class HistorydiscountFragment extends BaseFragment implements RefreshLoad
             }
         }, 1000);
     }
-
     @Override
     protected void initView() {
         initDate();
     }
-
     private void initDate() {
         for (int i = 0; i <6 ; i++) {
             SortBean sortBean=new SortBean();

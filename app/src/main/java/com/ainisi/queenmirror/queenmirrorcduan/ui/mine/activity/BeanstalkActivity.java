@@ -46,9 +46,6 @@ public class BeanstalkActivity extends BaseNewActivity implements HttpCallBack {
     RelativeLayout redatepicker;
     @Bind(R.id.view_one)
     View viewone;
-    private int day;
-    private int month;
-    private int year;
     private boolean isClick;
     private Calendar c;
 

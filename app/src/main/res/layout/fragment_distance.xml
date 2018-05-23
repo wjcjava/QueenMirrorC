@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/alpha_05_black"
+    android:background="@color/white"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_mine_distance"
         android:background="@color/white"
+
         app:tabIndicatorColor="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout
         android:id="@+id/rlm"
+        android:background="@color/alpha_05_black"
         android:layout_below="@id/ic_title"
         android:layout_width="match_parent"
         app:rll_header_hint_normal="下拉给我试试看"

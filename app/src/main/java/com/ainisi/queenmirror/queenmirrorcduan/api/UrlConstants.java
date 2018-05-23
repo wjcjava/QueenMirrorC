@@ -112,4 +112,7 @@ public interface UrlConstants {
 
     String RECEIVEDISCOUN="api/ans/coupon/custCouponList";//商家所领取优惠券
 
+    String LISTFOEUSE="api/ans/coupon/couponListForUse";//可以优惠券列表（订单）
+
+    String QUEENDETAILS="api/ans/queen/queenCardDetails";//女王卡详情
 }

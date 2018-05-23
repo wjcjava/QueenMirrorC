@@ -2,6 +2,8 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.RadioButton;
 
@@ -21,6 +23,8 @@ public class MineDiscountActivity extends BaseNewActivity {
     private HistorydiscountFragment historydiscountFragment;
     @Bind(R.id.radio_preferential)
     RadioButton preferential;
+    private FragmentManager manager;
+    private FragmentTransaction transaction;
 
 
     @Override
@@ -37,11 +41,10 @@ public class MineDiscountActivity extends BaseNewActivity {
 
     private void initshowdiscountFragment() {
         preferential.setChecked(true);
-        if (minediscountFragment == null) {
-            minediscountFragment = new MinediscountFragment();
-
-        }
-        FragmentUtil.showFragment(this, R.id.fr_mine_discount, minediscountFragment);
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.add(R.id.fr_mine_discount, new MinediscountFragment());
+        transaction.commit();
     }
 
     public static void startActivity(Context context) {
@@ -61,7 +64,11 @@ public class MineDiscountActivity extends BaseNewActivity {
                 finish();
                 break;
             case R.id.radio_preferential:
-                initshowdiscountFragment();
+                if (minediscountFragment == null) {
+            minediscountFragment = new MinediscountFragment();
+
+        }
+        FragmentUtil.showFragment(this, R.id.fr_mine_discount, minediscountFragment);
                 break;
             case R.id.radio_invincible:
                 if (historydiscountFragment == null) {

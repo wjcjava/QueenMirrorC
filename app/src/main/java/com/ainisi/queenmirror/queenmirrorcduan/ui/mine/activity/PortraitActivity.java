@@ -10,18 +10,14 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
-import com.ainisi.queenmirror.common.commonutils.ToastUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MineFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
@@ -42,11 +38,9 @@ import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
 
 //我的账号
-public class PortraitActivity extends BaseNewActivity implements View.OnClickListener,HttpCallBack {
+public class PortraitActivity extends BaseNewActivity implements View.OnClickListener, HttpCallBack {
     @Bind(R.id.title_title)
     TextView title;
-    @Bind(R.id.iv_title)
-    ImageView ivTitle;
     @Bind(R.id.iv_portrait_head)
     CircleImageView iv_portrait_head;
     @Bind(R.id.tv_portrait_loginout)
@@ -70,7 +64,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        tv_portrait_username.setText(SP.get(this,SpContent.UserName,"")+"");
+        tv_portrait_username.setText(SP.get(this, SpContent.UserName, "") + "");
     }
 
     private void init() {
@@ -78,7 +72,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
         mLqrPhotoSelectUtils = new LQRPhotoSelectUtils(this, new LQRPhotoSelectUtils.PhotoSelectListener() {
             @Override
             public void onFinish(File outputFile, Uri outputUri) {
-                Glide.with(PortraitActivity.this).load(outputUri).into(ivTitle);
+                Glide.with(PortraitActivity.this).load(outputUri).into(iv_portrait_head);
             }
         }, false);//true裁剪，false不裁剪
 
@@ -97,7 +91,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
         return R.layout.activity_portrait;
     }
 
-    @OnClick({R.id.layout_userimg, R.id.layout_username, R.id.layout_password, R.id.layout_passphone, R.id.title_back,R.id.tv_portrait_loginout})
+    @OnClick({R.id.layout_userimg, R.id.layout_username, R.id.layout_password, R.id.layout_passphone, R.id.title_back, R.id.tv_portrait_loginout})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.tv_portrait_loginout:
@@ -145,7 +139,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
      */
     private void LoadOutData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("telNo", SP.get(this,SpContent.UserCall,"")+"");
+        params.put("telNo", SP.get(this, SpContent.UserCall, "") + "");
         HttpUtils.doPost(ACTION.LOGINOUT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -170,6 +164,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                 Manifest.permission.CAMERA
                         ).request();
+
                 popWindow.dissmiss();
                 break;
             //相册选择
@@ -187,6 +182,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                 break;
         }
     }
+
     @PermissionSuccess(requestCode = LQRPhotoSelectUtils.REQ_TAKE_PHOTO)
     private void takePhoto() {
         mLqrPhotoSelectUtils.takePhoto();
@@ -259,15 +255,15 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.LOGINOUT:
-                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean.isSuccess()){
-                    SP.put(this, SpContent.isLogin,"0");
-                    SP.put(this, SpContent.UserId,"0");
-                    SP.put(this, SpContent.UserName,"");
-                    finish();
-                }else{
+                SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
+                if (successBean.isSuccess()) {
+                    SP.put(this, SpContent.isLogin, "0");
+                    SP.put(this, SpContent.UserId, "0");
+                    SP.put(this, SpContent.UserName, "");
+                    //finish();
+                } else {
                     T.show(successBean.getMsg());
                 }
                 break;
