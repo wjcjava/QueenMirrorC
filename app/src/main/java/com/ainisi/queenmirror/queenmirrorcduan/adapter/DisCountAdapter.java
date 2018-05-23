@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ReceiveDiscounBean;
+
+import java.util.List;
 
 /**
  * Created by john on 2018/5/22.
@@ -17,7 +20,10 @@ public class DisCountAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     private final Context context;
+    private final List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> list;
     private LayoutInflater myLayoutinflater;
+
+
 
     //建立枚举 4个item类型
     public enum ITEM_TYPE {
@@ -27,8 +33,9 @@ public class DisCountAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ITEM4
     }
 
-    public DisCountAdapter(Context context) {
+    public DisCountAdapter(Context context,List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> list) {
         this.context = context;
+        this.list=list;
 
     }
 
@@ -73,7 +80,7 @@ public class DisCountAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
         //itme2的逻辑操作
         else if(holder instanceof Item2ViewHolder){
-
+            ((Item2ViewHolder) holder).discount.setText(list.get(0).getCpCreateInfo().getCpName());
         }
         //itme3的逻辑操作
         else if(holder instanceof Item3ViewHolder){
@@ -90,7 +97,7 @@ public class DisCountAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
     //item1 的ViewHolder
     public static class Item1ViewHolder extends RecyclerView.ViewHolder{
-        TextView mTextView;
+
         public Item1ViewHolder(View itemView) {
             super(itemView);
 
@@ -99,8 +106,11 @@ public class DisCountAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     //item2 的ViewHolder
     public static class Item2ViewHolder extends RecyclerView.ViewHolder{
 
+        private final TextView discount;
+
         public Item2ViewHolder(View itemView) {
             super(itemView);
+            discount = itemView.findViewById(R.id.tv_discount);
 
         }
     }

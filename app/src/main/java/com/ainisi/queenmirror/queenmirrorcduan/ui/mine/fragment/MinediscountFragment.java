@@ -14,11 +14,18 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.DisCountAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.Overduedapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.UseAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ReceiveDiscounBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -28,7 +35,7 @@ import butterknife.Bind;
  * 我的优惠券
  */
 
-public class MinediscountFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack {
+public class MinediscountFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack ,HttpCallBack{
     @Bind(R.id.rey_distance)
     RecyclerView disrecycler;
     @Bind(R.id.tab_mine_distance)
@@ -37,6 +44,7 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
     private Handler handler = new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+    private DisCountAdapter sortAdapter;
 
     @Override
     protected int getLayoutResource() {
@@ -79,13 +87,36 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
     @Override
     protected void initView() {
         initDate();
-        DisCountAdapter sortAdapter = new DisCountAdapter(getActivity());
-        disrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        disrecycler.setAdapter(sortAdapter);
 
+
+        /**
+         * 商品所领取优惠券
+         */
+        getReceiveDiscoun();
 
     }
 
+    private void getReceiveDiscoun(){
+        HashMap<String,String> params=new HashMap<>();
+        params.put("userId","1");//用户ID
+        HttpUtils.doPost(ACTION.RECEIVEDISCOUN,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+    }
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.RECEIVEDISCOUN:
+                ReceiveDiscounBean receiveBean=GsonUtil.toObj(res, ReceiveDiscounBean.class);
+                if(receiveBean.isSuccess()){
+                    List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> receiveList = receiveBean.getBody().getCustCouponListData();
+                    sortAdapter = new DisCountAdapter(getActivity(),receiveList);
+                    disrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                    disrecycler.setAdapter(sortAdapter);
+                }else {
+                    T.show(receiveBean.getMsg());
+                }
+                break;
+        }
+    }
 
     private void initDate() {
 
@@ -114,7 +145,7 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
                         position = (int) view.getTag();
                         //这里就可以根据业务需求处理点击事件了。
                         if (position == 0) {
-                            DisCountAdapter sortAdapter = new DisCountAdapter(getActivity());
+
                             disrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                             disrecycler.setAdapter(sortAdapter);
                         } else if (position == 1) {
@@ -171,4 +202,14 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
     }
 
 
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }

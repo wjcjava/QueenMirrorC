@@ -473,6 +473,10 @@ public class HttpUtils {
             case ACTION.SHOPDISCOUN:
                 actionUrl = UrlConstants.SHOPDISCOUN;
                 break;
+            //商家所领取优惠券
+            case ACTION.RECEIVEDISCOUN:
+                actionUrl = UrlConstants.RECEIVEDISCOUN;
+                break;
         }
         url.append(actionUrl);
         return url;

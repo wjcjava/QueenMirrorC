@@ -19,10 +19,10 @@ import java.util.List;
  */
 
 public class WorkShopAdapter extends BaseAdapter {
+
     private final LayoutInflater inflater;
     private final List<ShopDiscounBean.BodyBean.CouponListDataBean> list;
     private Context context;
-
     public WorkShopAdapter(Context context, List<ShopDiscounBean.BodyBean.CouponListDataBean> list) {
         this.context = context;
         this.list=list;
@@ -50,9 +50,7 @@ public class WorkShopAdapter extends BaseAdapter {
         final ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-
             convertView = inflater.inflate(R.layout.re_workroom_coupon, parent, false);
-
             holder.counName=convertView.findViewById(R.id.tv_shop_discount);
             holder.couneMoney=convertView.findViewById(R.id.tv_shop_money);
             holder.couneConditions=convertView.findViewById(R.id.tv_coune_conditions);

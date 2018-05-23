@@ -49,7 +49,6 @@ public class GoodsActivity extends BaseNewActivity implements HttpCallBack {
                 if(goodsBean.isSuccess()){
                     List<GoodsBean.BodyBean.ActivityListDataBean> goodsList = goodsBean.getBody().getActivityListData();
                     //写操作
-
                 }else {
                     T.show(goodsBean.getMsg());
                 }

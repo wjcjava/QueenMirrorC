@@ -109,4 +109,7 @@ public interface UrlConstants {
     String THIRDLOGINONE = "api/ans/login/snsUserLogin";//第三方直接登录
 
     String SHOPDISCOUN="api/ans/coupon/couponList";//商家优惠券
+
+    String RECEIVEDISCOUN="api/ans/coupon/custCouponList";//商家所领取优惠券
+
 }

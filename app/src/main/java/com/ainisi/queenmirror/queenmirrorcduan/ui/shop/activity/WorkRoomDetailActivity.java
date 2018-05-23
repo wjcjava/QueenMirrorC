@@ -115,6 +115,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     String top_detail;
     private WorkShopAdapter shopAdapter;
+    private Object receiveDiscoun;
 
     @Override
     protected int getLayoutId() {
@@ -125,7 +126,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     protected void initView() {
         super.initView();
 
-        isLogin = (String) SP.get(WorkRoomDetailActivity.this, SpContent.isLogin,"");
+        isLogin = (String) SP.get(WorkRoomDetailActivity.this, SpContent.isLogin, "");
 
         initTab();
         Intent intent = getIntent();
@@ -153,13 +154,14 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
          * 商家优惠券
          */
         geeshopDiscoun();
+
     }
     private void geeshopDiscoun() {
         HashMap<String,String> params=new HashMap<>();
         params.put("cpCate","1");
         params.put("cpScope","1");
-        params.put("shopId","12");
-        params.put("userId","1");
+        params.put("shopId","12");//商品ID
+        params.put("userId","1");//用户ID
         HttpUtils.doPost(ACTION.SHOPDISCOUN,params,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
@@ -505,4 +507,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             }
         }
     }
+
+
 }
