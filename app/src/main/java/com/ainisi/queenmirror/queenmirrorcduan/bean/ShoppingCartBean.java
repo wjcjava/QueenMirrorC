@@ -62,7 +62,7 @@ public class ShoppingCartBean {
 
         public static class ShopListBean {
             /**
-             * id : 8997e0d39bdc44c0bbd7da58371d9385
+             * id : 8997e0d39bdc44c0bbd7da58371d9385       商家ID
              * isNewRecord : false
              * remarks : null
              * createDate : null

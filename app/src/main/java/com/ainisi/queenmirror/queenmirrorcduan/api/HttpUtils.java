@@ -488,6 +488,9 @@ public class HttpUtils {
             case ACTION.QUEENDETAILS:
                 actionUrl=UrlConstants.QUEENDETAILS;
                 break;
+            case ACTION.UPLOADORDER:
+                actionUrl = UrlConstants.UPLOADORDER;
+                break;
         }
         url.append(actionUrl);
         return url;

@@ -42,7 +42,7 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
 
     String orderNo,orderTel,orderTime,OrderHeji;
 
-    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsOrderBean.ApiOrderDetailsListBean> getApiOrderDetailsList = new ArrayList();
+    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean> getApiOrderDetailsList = new ArrayList();
 
     @Override
     protected int getLayoutId() {
@@ -54,7 +54,7 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
         super.initView();
 
         Intent intentGet = getIntent();
-        getApiOrderDetailsList = (List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsOrderBean.ApiOrderDetailsListBean>) intentGet.getSerializableExtra("lstBean");
+        getApiOrderDetailsList = (List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean>) intentGet.getSerializableExtra("lstBean");
         orderNo = intentGet.getStringExtra("orderNo");
         orderTel = intentGet.getStringExtra("orderTel");
         orderTime = intentGet.getStringExtra("orderTime");
@@ -65,7 +65,7 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
 
         tv_order_detail_ordernum.setText("订单号码："+orderNo);
         tv_order_detail_tel.setText("手机号码："+orderTel);
-        tv_order_detail_ordertime.setText("付款时间："+orderTime);
+        tv_order_detail_ordertime.setText("下单时间："+orderTime);
 
         tv_orderdetail_heji.setText("￥"+OrderHeji);
 

@@ -10,14 +10,17 @@ import android.widget.LinearLayout;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.OrderAllAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -111,7 +114,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
         params.put("orderStatus", state);
         params.put("pageNumber", pageNumber+"");
         params.put("userId", "1111");
-//        params.put("pageSize", "10");
+        params.put("pageSize", "10");
         HttpUtils.doPost(ACTION.ALLOFMYORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
      }
 
@@ -135,15 +138,15 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                             amountNum = 0;
-                            for(int i=0;i<apiOrderList.get(position).getAnsOrder().getApiOrderDetailsList().size();i++){
-                                amountNum  = amountNum + Double.parseDouble(apiOrderList.get(position).getAnsOrder().getApiOrderDetailsList().get(i).getAnsOrderDetails().getSumAmount());
+                            for(int i=0;i<apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().size();i++){
+                                amountNum  = amountNum + Double.parseDouble(apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().get(i).getIntfAnsOrderDetails().getSumAmount());
                             }
                             Intent intent = new Intent(getActivity(),OrderDetailActivity.class);
-                            intent.putExtra("orderNo", apiOrderList.get(position).getAnsOrder().getOrderNo());
-                            //intent.putExtra("orderTel",apiOrderList.get(position).getAnsShopBasic().);
-                            intent.putExtra("orderTime",apiOrderList.get(position).getAnsOrder().getOrderTime());
+                            intent.putExtra("orderNo", apiOrderList.get(position).getIntfAnsOrder().getOrderNo());
+                            intent.putExtra("orderTel",apiOrderList.get(position).getIntfAnsShopBasic().getServiceTel());
+                            intent.putExtra("orderTime",apiOrderList.get(position).getIntfAnsOrder().getOrderTime());
                             intent.putExtra("OrderHeji",amountNum+"");
-                            intent.putExtra("lstBean", (Serializable)apiOrderList.get(position).getAnsOrder().getApiOrderDetailsList());
+                            intent.putExtra("lstBean", (Serializable)apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList());
                             startActivity(intent);
                         }
                     });

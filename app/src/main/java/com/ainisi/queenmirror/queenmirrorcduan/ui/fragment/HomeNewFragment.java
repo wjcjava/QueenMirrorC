@@ -111,7 +111,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     List<SortBean> sortlist = new ArrayList<>();
     int hight;
     boolean type = false;
-    ClassificationBean classificationBean;
 
     ShopListHomeBean shopListHomeBean;
     Intent intent;
@@ -285,7 +284,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     nl_home_list_view.setVisibility(View.GONE);
                     gv_home_gridView.setVisibility(View.VISIBLE);
 
-                    if(classificationBean.getBody().getShopListData().size()>0){
+                    if(shopListHomeBean.getBody().getShopList().size()>0){
                         HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                         gv_home_gridView.setAdapter(gridViewAdapter);
                     }else{
@@ -298,11 +297,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     nl_home_list_view.setVisibility(View.VISIBLE);
                     gv_home_gridView.setVisibility(View.GONE);
 
-                    if(classificationBean.getBody().getShopListData().size()>0){
+                    if(shopListHomeBean.getBody().getShopList().size()>0){
                         HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                         nl_home_list_view.setAdapter(homeListViewAdapter);
                     }
-
                 }
                 break;
             //搜索

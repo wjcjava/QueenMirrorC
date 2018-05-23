@@ -35,112 +35,113 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
         }else{
 
             helper.setText(R.id.tv_shangpin,ansShopBasicBean.getShopName());*/
+        helper.setText(R.id.tv_shangpin,item.getIntfAnsShopBasic().getShopName());
 
-            if(item.getAnsOrder().getOrderStatus().equals("UP")){
-                //待付款
-                helper.setText(R.id.tv_order_tuikuan,"付款")
-                        .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
-                        .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
-                        .setText(R.id.tv_order_again,"取消")
-                        .setGone(R.id.tv_order_like, false);
-            }else if(item.getAnsOrder().getOrderStatus().equals("UT")){
+        if(item.getIntfAnsOrder().getOrderStatus().equals("UP")){
+            //待付款
+            helper.setText(R.id.tv_order_tuikuan,"付款")
+                    .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
+                    .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
+                    .setText(R.id.tv_order_again,"取消")
+                    .setGone(R.id.tv_order_like, false);
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("UT")){
 //待接单
-                helper.setText(R.id.tv_order_tuikuan,"退款")
-                        .setGone(R.id.tv_order_again,false)
-                        .setGone(R.id.tv_order_like, false);
+            helper.setText(R.id.tv_order_tuikuan,"退款")
+                    .setGone(R.id.tv_order_again,false)
+                    .setGone(R.id.tv_order_like, false);
 
-            }else if(item.getAnsOrder().getOrderStatus().equals("FT")){
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("FT")){
 //已接单
-                helper.setText(R.id.tv_order_tuikuan,"查看订单")
-                        .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
-                        .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
-                        .setText(R.id.tv_order_again,"退款")
-                        .setGone(R.id.tv_order_like, false);
+            helper.setText(R.id.tv_order_tuikuan,"查看订单")
+                    .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
+                    .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
+                    .setText(R.id.tv_order_again,"退款")
+                    .setGone(R.id.tv_order_like, false);
 
-                helper.setOnClickListener(R.id.tv_order_again, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(context, ConfirmRefundActivity.class);
+            helper.setOnClickListener(R.id.tv_order_again, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ConfirmRefundActivity.class);
 
-                        context.startActivity(intent);
-                    }
-                });
+                    context.startActivity(intent);
+                }
+            });
 
-            }else if(item.getAnsOrder().getOrderStatus().equals("US")){
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("US")){
 //待服务
-                helper.setText(R.id.tv_order_tuikuan,"查看订单")
-                        .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
-                        .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
-                        .setText(R.id.tv_order_again,"退款")
-                        .setGone(R.id.tv_order_like, false);
-            }else if(item.getAnsOrder().getOrderStatus().equals("FN")){
+            helper.setText(R.id.tv_order_tuikuan,"查看订单")
+                    .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
+                    .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
+                    .setText(R.id.tv_order_again,"退款")
+                    .setGone(R.id.tv_order_like, false);
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("FN")){
 //已完成
-                helper.setGone(R.id.tv_order_tuikuan,false)
-                        .setGone(R.id.tv_order_again,false)
-                        .setGone(R.id.tv_order_like, false);
-            }else if(item.getAnsOrder().getOrderStatus().equals("UC")){
+            helper.setGone(R.id.tv_order_tuikuan,false)
+                    .setGone(R.id.tv_order_again,false)
+                    .setGone(R.id.tv_order_like, false);
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("UC")){
 //待评价
-                helper.setText(R.id.tv_order_tuikuan,"评价")
-                        .setGone(R.id.tv_order_again,false)
-                        .setGone(R.id.tv_order_like, false);
-            }else if(item.getAnsOrder().getOrderStatus().equals("CA")){
+            helper.setText(R.id.tv_order_tuikuan,"评价")
+                    .setGone(R.id.tv_order_again,false)
+                    .setGone(R.id.tv_order_like, false);
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("CA")){
 //已取消
-            }else if(item.getAnsOrder().getOrderStatus().equals("PR")){
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("PR")){
 //部分退款中
-            }else if(item.getAnsOrder().getOrderStatus().equals("PF")){
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("PF")){
 //部分已退款
-            }else if(item.getAnsOrder().getOrderStatus().equals("RA")){
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("RA")){
 //退款中
-            }else if(item.getAnsOrder().getOrderStatus().equals("RF")){
+        }else if(item.getIntfAnsOrder().getOrderStatus().equals("RF")){
 //已退款
-            }
+        }
 
-            List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.AnsOrderBean.ApiOrderDetailsListBean> apiOrderDetailsList = item.getAnsOrder().getApiOrderDetailsList();
-            double amountNum = 0;
+        List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean> apiOrderDetailsList = item.getIntfAnsOrder().getApiOrderDetailsList();
+        double amountNum = 0;
 
-            if(apiOrderDetailsList.size() == 1){
-                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getAnsOrderDetails().getPurchaseNumber())
-                        .setGone(R.id.tv_xijian,false)
-                        .setGone(R.id.tv_tangran,false)
-                        .setGone(R.id.textView29,false)
-                        .setGone(R.id.textView30,false);
+        if(apiOrderDetailsList.size() == 1){
+            helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getIntfAnsOrderDetails().getPurchaseNumber())
+                    .setGone(R.id.tv_xijian,false)
+                    .setGone(R.id.tv_tangran,false)
+                    .setGone(R.id.textView29,false)
+                    .setGone(R.id.textView30,false);
 
-            }else if(apiOrderDetailsList.size() == 2){
-                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getAnsOrderDetails().getPurchaseNumber())
-                        .setGone(R.id.tv_tangran,false)
-                        .setGone(R.id.textView30,false);
+        }else if(apiOrderDetailsList.size() == 2){
+            helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getIntfAnsOrderDetails().getPurchaseNumber())
+                    .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getIntfAnsOrderDetails().getPurchaseNumber())
+                    .setGone(R.id.tv_tangran,false)
+                    .setGone(R.id.textView30,false);
 
-            }else if(apiOrderDetailsList.size() == 3){
-                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView30,"X "+apiOrderDetailsList.get(2).getAnsOrderDetails().getPurchaseNumber());
-            }else{
-                helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getAnsOrderDetails().getPurchaseNumber())
-                        .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getEcGoodsBasic().getGoodsName())
-                        .setText(R.id.textView30,"X "+apiOrderDetailsList.get(2).getAnsOrderDetails().getPurchaseNumber());
-            }
+        }else if(apiOrderDetailsList.size() == 3){
+            helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getIntfAnsOrderDetails().getPurchaseNumber())
+                    .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getIntfAnsOrderDetails().getPurchaseNumber())
+                    .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView30,"X "+apiOrderDetailsList.get(2).getIntfAnsOrderDetails().getPurchaseNumber());
+        }else{
+            helper.setText(R.id.tv_taocan,apiOrderDetailsList.get(0).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView19,"X "+apiOrderDetailsList.get(0).getIntfAnsOrderDetails().getPurchaseNumber())
+                    .setText(R.id.tv_xijian,apiOrderDetailsList.get(1).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView29,"X "+apiOrderDetailsList.get(1).getIntfAnsOrderDetails().getPurchaseNumber())
+                    .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getIntfAnsOrderDetails().getGoodsName())
+                    .setText(R.id.textView30,"X "+apiOrderDetailsList.get(2).getIntfAnsOrderDetails().getPurchaseNumber());
+        }
 
-            for(int i=0;i<apiOrderDetailsList.size();i++){
-                amountNum = amountNum + Double.parseDouble(apiOrderDetailsList.get(i).getAnsOrderDetails().getSumAmount());
-            }
+        for(int i=0;i<apiOrderDetailsList.size();i++){
+            amountNum = amountNum + Double.parseDouble(apiOrderDetailsList.get(i).getIntfAnsOrderDetails().getSumAmount());
+        }
 
-            if(apiOrderDetailsList.size() > 3){
-                helper.setText(R.id.tv_head,"...                        共"+apiOrderDetailsList.size()+"个，商品实付")
-                        .setText(R.id.tv_jiage,"￥"+ amountNum);
-            }else{
-                helper.setText(R.id.tv_head,".共"+apiOrderDetailsList.size()+"个，商品实付")
-                        .setText(R.id.tv_jiage,"￥"+ amountNum);
-            }
+        if(apiOrderDetailsList.size() > 3){
+            helper.setText(R.id.tv_head,"...                        共"+apiOrderDetailsList.size()+"个，商品实付")
+                    .setText(R.id.tv_jiage,"￥"+ amountNum);
+        }else{
+            helper.setText(R.id.tv_head,".共"+apiOrderDetailsList.size()+"个，商品实付")
+                    .setText(R.id.tv_jiage,"￥"+ amountNum);
+        }
 
 
 

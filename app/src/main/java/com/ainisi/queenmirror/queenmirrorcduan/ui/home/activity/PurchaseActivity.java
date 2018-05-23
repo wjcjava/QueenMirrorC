@@ -12,12 +12,17 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderDetailsListInfoBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderPurchaseBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.SelectLinkPeopleActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.google.gson.Gson;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
@@ -44,10 +49,17 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
     TextView tv_sex;
     @Bind(R.id.tv_phone)
     TextView tv_phone;
+    @Bind(R.id.tv_shopping_cart_number)
+    TextView tv_shopping_cart_number;
 
     ShoppingCartBean shoppingCartBean;
     List<ShoppingCartBean.BodyBean.ShopListBean> shopList = new ArrayList<>();
-    String lick_name,lick_phone,link_sex;
+    String lick_name,lick_phone,link_sex,shopId;
+
+    List<OrderDetailsListInfoBean> orderDetailsListInfo;
+
+    List<OrderPurchaseBean> orderPurchaseBeans ;
+    double end_price;
 
     @Override
     public int getLayoutId() {
@@ -97,20 +109,72 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
                 break;
             //提交订单
             case R.id.tv_submit:
+
+                UploadData();
+
                 startActivity(new Intent(PurchaseActivity.this,SubmitActivity.class));
                 break;
         }
     }
 
+    /**
+     * 提交订单
+     */
+    private void UploadData() {
+        Gson gson = new Gson();
+        String str = gson.toJson(orderPurchaseBeans);
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("orderInfo", str);
+        params.put("userId",SP.get(PurchaseActivity.this,SpContent.UserId,"")+"");
+        params.put("platform","3");
+        params.put("cpId","");
+        HttpUtils.doPost(ACTION.UPLOADORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
+            case ACTION.UPLOADORDER://提交订单
+
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    T.show(successBean.getMsg());
+                }else{
+                    T.show(successBean.getMsg());
+                }
+                break;
             case ACTION.GETSHOPPINDCART:
-
                 shoppingCartBean = GsonUtil.toObj(res,ShoppingCartBean.class);
-
                 shopList = shoppingCartBean.getBody().getShopList();
-                L.e("@@@@@    "+shopList);
+
+                orderPurchaseBeans = new ArrayList<>();
+                for(int i=0;i<shopList.size();i++){
+
+                    orderDetailsListInfo = new ArrayList<>();
+                    for(int j=0;j<shopList.get(i).getApiAnsCustCartList().size();j++){
+
+                        end_price = end_price + (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice();
+                        OrderDetailsListInfoBean orderDetailsListInfoBean = new OrderDetailsListInfoBean();
+                        orderDetailsListInfoBean.setGoodsId(shopList.get(i).getApiAnsCustCartList().get(j).getEcGoodsBasic().getId());
+                        orderDetailsListInfoBean.setPurchaseNumber(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber()+"");
+                        orderDetailsListInfoBean.setUnitPrice(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice()+"");
+                        orderDetailsListInfoBean.setSumAmount((double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice()+"");
+
+                        orderDetailsListInfo.add(orderDetailsListInfoBean);
+                    }
+                    shopId = shopList.get(i).getId();
+
+                    OrderPurchaseBean orderPurchaseBean = new OrderPurchaseBean();
+                    orderPurchaseBean.setShopId(shopId);
+                    orderPurchaseBean.setOrderDetailsListInfo(orderDetailsListInfo);
+
+                    orderPurchaseBeans.add(orderPurchaseBean);
+
+                    Gson gson = new Gson();
+                    String str = gson.toJson(orderPurchaseBeans);
+                }
+                tv_shopping_cart_number.setText("￥"+end_price);
                 listadapter = new PurchaseListViewAdapter(this,shopList);
                 listOrder.setAdapter(listadapter);
                 break;

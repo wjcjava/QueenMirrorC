@@ -107,6 +107,8 @@ public interface ACTION {
 
     int CHECKOPENID = 0x130;//第三方登录检验openID
 
-    int  THIRDLOGINONE = 0x131;//第三方直接登录
+    int THIRDLOGINONE = 0x131;//第三方直接登录
+
+    int UPLOADORDER = 0x132;//提交订单
 
 }

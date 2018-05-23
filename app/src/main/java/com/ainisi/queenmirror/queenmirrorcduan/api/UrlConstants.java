@@ -115,4 +115,6 @@ public interface UrlConstants {
     String LISTFOEUSE="api/ans/coupon/couponListForUse";//可以优惠券列表（订单）
 
     String QUEENDETAILS="api/ans/queen/queenCardDetails";//女王卡详情
+
+    String UPLOADORDER = "api/ans/order/orderSubmit";//提交订单
 }
