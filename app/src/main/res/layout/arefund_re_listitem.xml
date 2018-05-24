@@ -8,7 +8,6 @@
         android:id="@+id/box_goods"
         android:layout_width="@dimen/comment_16_dip"
         android:layout_height="@dimen/comment_16_dip"
-     
         android:layout_marginStart="@dimen/comment_20_dip"
         android:layout_marginTop="@dimen/comment_25_dip"
         android:background="@drawable/purchase_checkbox"
@@ -18,7 +17,6 @@
         android:id="@+id/iv_shop"
         android:layout_width="@dimen/comment_40_dip"
         android:layout_height="@dimen/comment_40_dip"
-       
         android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_marginTop="@dimen/comment_10_dip"
         android:layout_toRightOf="@id/box_goods"
@@ -28,7 +26,6 @@
         android:id="@+id/tv_shop_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       
         android:layout_marginStart="@dimen/comment_5_dip"
         android:layout_marginTop="@dimen/comment_15_dip"
         android:layout_toRightOf="@id/iv_shop"
@@ -36,6 +33,7 @@
         android:textSize="@dimen/comment_14_size" />
 
     <TextView
+        android:id="@+id/tv_arefund_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_shop_name"
@@ -44,6 +42,7 @@
         android:text="X1"
         android:textSize="@dimen/comment_12_size" />
     <TextView
+        android:id="@+id/tv_arefund_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_shop_name"

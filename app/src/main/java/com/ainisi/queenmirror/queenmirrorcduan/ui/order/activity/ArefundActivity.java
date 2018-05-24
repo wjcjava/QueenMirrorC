@@ -10,10 +10,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.AreFundAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.AreFundBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +31,15 @@ import butterknife.OnClick;
 public class ArefundActivity extends BaseNewActivity {
     @Bind(R.id.re_arefund)
     RecyclerView areRecyclerView;
-
     @Bind(R.id.title_title)
     TextView areTitle;
 
-    private List<SortBean> list = new ArrayList<>();
+    AreFundBean areFundBean;
+    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean> getApiOrderDetailsList = new ArrayList();
+    List<AreFundBean> areFundBeanList = new ArrayList<>();
+
+    List<AreFundBean> areFundCheckList;
+
 
     @Override
     protected int getLayoutId() {
@@ -41,19 +50,30 @@ public class ArefundActivity extends BaseNewActivity {
     protected void initView() {
         super.initView();
         areTitle.setText(R.string.arefund);
+        Intent intentGet = getIntent();
+        getApiOrderDetailsList = (List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean>) intentGet.getSerializableExtra("lstBean");
 
+        for(int i=0;i<getApiOrderDetailsList.size();i++){
+            areFundBean = new AreFundBean();
+            AreFundBean.IntfAnsOrderDetailsBean  intfAnsOrderDetailsBean = new AreFundBean.IntfAnsOrderDetailsBean();
+            intfAnsOrderDetailsBean.setGoodsId(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getGoodsId());
+            intfAnsOrderDetailsBean.setGoodsName(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getGoodsName());
+            intfAnsOrderDetailsBean.setPurchaseNumber(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getPurchaseNumber());
+            intfAnsOrderDetailsBean.setUnitPrice(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getUnitPrice());
+            intfAnsOrderDetailsBean.setSumAmount(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getSumAmount());
+            areFundBean.setIntfAnsOrderDetails(intfAnsOrderDetailsBean);
+            areFundBean.setCheck(false);
+            areFundBeanList.add(areFundBean);
+        }
+
+        AreFundAdapter areFundAdapter = new AreFundAdapter(R.layout.arefund_re_listitem,areFundBeanList);
+        areRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
+        areRecyclerView.setAdapter(areFundAdapter);
     }
 
     @Override
     protected void initData() {
         super.initData();
-        for (int i = 0; i < 4; i++) {
-            SortBean sortBean = new SortBean();
-            list.add(sortBean);
-        }
-        MyAdapter sbmitWholeAdapter = new MyAdapter(R.layout.arefund_re_listitem, list);
-        areRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
-        areRecyclerView.setAdapter(sbmitWholeAdapter);
     }
 
     @OnClick({R.id.title_back, R.id.bt_confirm_refund})
@@ -62,9 +82,32 @@ public class ArefundActivity extends BaseNewActivity {
             case R.id.title_back:
                 finish();
                 break;
-           //确认退款
+            //确认退款
             case R.id.bt_confirm_refund:
-            startActivity(new Intent(this,ConfirmRefundActivity.class));
+                areFundCheckList = new ArrayList<>();
+                for(int i = 0;i<areFundBeanList.size();i++){
+                    if(areFundBeanList.get(i).isCheck()){
+
+                        areFundBean = new AreFundBean();
+                        AreFundBean.IntfAnsOrderDetailsBean  intfAnsOrderDetailsBean = new AreFundBean.IntfAnsOrderDetailsBean();
+                        intfAnsOrderDetailsBean.setGoodsId(areFundBeanList.get(i).getIntfAnsOrderDetails().getGoodsId());
+                        intfAnsOrderDetailsBean.setGoodsName(areFundBeanList.get(i).getIntfAnsOrderDetails().getGoodsName());
+                        intfAnsOrderDetailsBean.setPurchaseNumber(areFundBeanList.get(i).getIntfAnsOrderDetails().getPurchaseNumber());
+                        intfAnsOrderDetailsBean.setUnitPrice(areFundBeanList.get(i).getIntfAnsOrderDetails().getUnitPrice());
+                        intfAnsOrderDetailsBean.setSumAmount(areFundBeanList.get(i).getIntfAnsOrderDetails().getSumAmount());
+                        areFundBean.setIntfAnsOrderDetails(intfAnsOrderDetailsBean);
+                        areFundCheckList.add(areFundBean);
+                    }
+                }
+
+                if(areFundCheckList.size() >0){
+                    Intent intent = new Intent(this,ConfirmRefundActivity.class);
+                    intent.putExtra("lstBean", (Serializable)areFundCheckList);
+                    startActivity(intent);
+                }else{
+                    T.show("请选择需要退款的商品");
+                }
+
                 break;
         }
     }

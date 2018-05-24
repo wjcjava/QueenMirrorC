@@ -12,8 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.ConfirmRefundAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.AreFundBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 
@@ -43,12 +46,14 @@ public class ConfirmRefundActivity extends BaseNewActivity{
     EditText et_confirm_backresuion;
 
     @Bind(R.id.tv_arefund_select)
-    TextView tv_arefund_select;
+    public TextView tv_arefund_select;
+    List<AreFundBean> areFundCheckList = new ArrayList<>();
+    public static ConfirmRefundActivity instance = null;
+    double amount = 0;
 
-
-    private List<SortBean> list = new ArrayList<>();
     @Override
     protected int getLayoutId() {
+        instance = this;
         return R.layout.activity_confirm_refund;
     }
 
@@ -56,18 +61,25 @@ public class ConfirmRefundActivity extends BaseNewActivity{
     protected void initView() {
         super.initView();
         areTitle.setText(R.string.arefund);
+
+        Intent intentGet = getIntent();
+        areFundCheckList = (List<AreFundBean>) intentGet.getSerializableExtra("lstBean");
+
+        for(int i=0;i<areFundCheckList.size();i++){
+            amount = amount + Double.parseDouble(areFundCheckList.get(i).getIntfAnsOrderDetails().getSumAmount());
+        }
+
+        tv_confirm_amount.setText("￥"+amount);
+
+        ConfirmRefundAdapter confirmRefundAdapter = new ConfirmRefundAdapter(R.layout.confirmrefund_re_listitem,areFundCheckList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
+        recyclerView.setAdapter(confirmRefundAdapter);
     }
     @Override
     protected void initData() {
         super.initData();
-        for (int i = 0; i < 4; i++) {
-            SortBean sortBean = new SortBean();
-            list.add(sortBean);
-        }
-        MyAdapter sbmitWholeAdapter = new MyAdapter(R.layout.confirmrefund_re_listitem, list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
-        recyclerView.setAdapter(sbmitWholeAdapter);
     }
+
     @OnClick({R.id.title_back, R.id.layout_arefund_reason,R.id.bt_confirm_refund})
     public void onClick(View view) {
         switch (view.getId()) {

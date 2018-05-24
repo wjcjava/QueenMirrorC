@@ -43,8 +43,6 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     RecyclerView whole;
     private List<SortBean> list = new ArrayList<>();
     private Handler handler = new Handler();
-   /* @Bind(R.id.rlm)
-    RefreshLoadMoreLayout mRefreshLoadMoreLayout;*/
     double amountNum;
     int pageSum,pageNumber = 1;
     List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> apiOrderList = new ArrayList();
@@ -122,18 +120,13 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.ALLOFMYORDER:
-
                 OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res,OrderMyAllOrderBean.class);
-
                 if(orderMyAllOrderBean.isSuccess()){
-
                     pageSum = orderMyAllOrderBean.getBody().getPageSum();
                     apiOrderList = orderMyAllOrderBean.getBody().getApiOrderList();
-
                     OrderAllAdapter sbmitWholeAdapter = new OrderAllAdapter(getActivity(),R.layout.item_sbmitrecycler, apiOrderList);
                     whole.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
                     whole.setAdapter(sbmitWholeAdapter);
-
                     sbmitWholeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -141,6 +134,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                             for(int i=0;i<apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().size();i++){
                                 amountNum  = amountNum + Double.parseDouble(apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().get(i).getIntfAnsOrderDetails().getSumAmount());
                             }
+
                             Intent intent = new Intent(getActivity(),OrderDetailActivity.class);
                             intent.putExtra("orderNo", apiOrderList.get(position).getIntfAnsOrder().getOrderNo());
                             intent.putExtra("orderTel",apiOrderList.get(position).getIntfAnsShopBasic().getServiceTel());
@@ -151,11 +145,9 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                         }
                     });
                 }else{
-                    //这里是获取失败的情况
                     T.show(orderMyAllOrderBean.getMsg());
                 }
                 break;
-          //      break;
         }
     }
 

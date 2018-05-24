@@ -22,6 +22,7 @@
             android:textSize="@dimen/comment_15_size" />
 
         <CheckBox
+            android:id="@+id/check_refundreason_check"
             android:layout_width="@dimen/comment_21_dip"
             android:layout_height="@dimen/comment_21_dip"
             android:layout_alignParentEnd="true"

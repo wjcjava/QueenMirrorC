@@ -14,6 +14,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,9 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
                 break;
             case R.id.re_order_refund:
                 //退款
-                startActivity(new Intent(this, ArefundActivity.class));
+                Intent intent = new Intent(this,ArefundActivity.class);
+                intent.putExtra("lstBean", (Serializable)getApiOrderDetailsList);
+                startActivity(intent);
                 break;
         }
     }

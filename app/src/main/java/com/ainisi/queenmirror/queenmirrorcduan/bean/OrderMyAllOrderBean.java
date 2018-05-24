@@ -51,7 +51,7 @@ public class OrderMyAllOrderBean implements Serializable{
         this.body = body;
     }
 
-    public static class BodyBean {
+    public static class BodyBean implements Serializable{
         /**
          * pageSum : 7
          * apiOrderList : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":{"id":"111","shopName":"琳美甲","shopLogo":null,"serviceTel":null},"intfAnsOrder":{"id":"1111","orderNo":"11290052","orderStatus":"RF","cpAmount":null,"afterAmount":null,"orderTime":1525404540000,"apiOrderDetailsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"444","goodsName":"美容美发","unitPrice":"111.00","purchaseNumber":"4","sumAmount":"444.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"222","goodsName":"美妆","unitPrice":"111.00","purchaseNumber":"2","sumAmount":"222.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"555","goodsName":"美发","unitPrice":"111.00","purchaseNumber":"5","sumAmount":"555.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"111","goodsName":"自然堂","unitPrice":"111.00","purchaseNumber":"1","sumAmount":"111.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"333","goodsName":"法宣","unitPrice":"111.00","purchaseNumber":"3","sumAmount":"333.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null}]},"intfAnsCustBasic":{"id":"1111","cellPhone":"111111111"},"intfCpCreateInfo":{"cpScope":"1","cpName":"ainisi"},"ansOrder":null,"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":null,"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":{"id":"111","shopName":"琳美甲","shopLogo":null,"serviceTel":null},"intfAnsOrder":{"id":"2222","orderNo":"11285916","orderStatus":"UP","cpAmount":null,"afterAmount":null,"orderTime":1525404540000,"apiOrderDetailsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"333","goodsName":"mimi","unitPrice":"111.00","purchaseNumber":"3","sumAmount":"333.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null}]},"intfAnsCustBasic":{"id":"1111","cellPhone":"111111111"},"intfCpCreateInfo":null,"ansOrder":null,"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":null,"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":{"id":"111","shopName":"琳美甲","shopLogo":null,"serviceTel":null},"intfAnsOrder":{"id":"3333","orderNo":"11290052","orderStatus":"RF","cpAmount":null,"afterAmount":null,"orderTime":1525404540000,"apiOrderDetailsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"333","goodsName":"ANS","unitPrice":"111.00","purchaseNumber":"3","sumAmount":"333.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null}]},"intfAnsCustBasic":{"id":"1111","cellPhone":"111111111"},"intfCpCreateInfo":null,"ansOrder":null,"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":null,"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":{"id":"111","shopName":"琳美甲","shopLogo":null,"serviceTel":null},"intfAnsOrder":{"id":"5555","orderNo":"11290052","orderStatus":"RF","cpAmount":null,"afterAmount":null,"orderTime":1525404540000,"apiOrderDetailsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"333","goodsName":"流行","unitPrice":"111.00","purchaseNumber":"3","sumAmount":"333.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null}]},"intfAnsCustBasic":{"id":"1111","cellPhone":"111111111"},"intfCpCreateInfo":null,"ansOrder":null,"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":null,"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":{"id":"111","shopName":"琳美甲","shopLogo":null,"serviceTel":null},"intfAnsOrder":{"id":"4444","orderNo":"11290052","orderStatus":"FN","cpAmount":null,"afterAmount":null,"orderTime":1525404540000,"apiOrderDetailsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"333","goodsName":"流星雨","unitPrice":"111.00","purchaseNumber":"3","sumAmount":"333.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null}]},"intfAnsCustBasic":{"id":"1111","cellPhone":"111111111"},"intfCpCreateInfo":null,"ansOrder":null,"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":null,"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":{"id":"111","shopName":"琳美甲","shopLogo":null,"serviceTel":null},"intfAnsOrder":{"id":"6666","orderNo":"11290052","orderStatus":"RF","cpAmount":null,"afterAmount":null,"orderTime":1525404540000,"apiOrderDetailsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"333","goodsName":"啦啦","unitPrice":"111.00","purchaseNumber":"3","sumAmount":"333.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null}]},"intfAnsCustBasic":{"id":"1111","cellPhone":"111111111"},"intfCpCreateInfo":null,"ansOrder":null,"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":null,"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":{"id":"111","shopName":"琳美甲","shopLogo":null,"serviceTel":null},"intfAnsOrder":{"id":"7777","orderNo":"11290052","orderStatus":"UF","cpAmount":null,"afterAmount":null,"orderTime":1525404540000,"apiOrderDetailsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsOrderDetails":{"goodsId":"7777","goodsName":"米妮","unitPrice":"111.00","purchaseNumber":"3","sumAmount":"333.00","cpAmount":null,"afterAmount":null},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"detailsStatusLabel":null}]},"intfAnsCustBasic":{"id":"1111","cellPhone":"111111111"},"intfCpCreateInfo":null,"ansOrder":null,"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":null,"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null}]
@@ -76,7 +76,7 @@ public class OrderMyAllOrderBean implements Serializable{
             this.apiOrderList = apiOrderList;
         }
 
-        public static class ApiOrderListBean {
+        public static class ApiOrderListBean implements Serializable{
             /**
              * id : null
              * isNewRecord : true
@@ -325,7 +325,7 @@ public class OrderMyAllOrderBean implements Serializable{
                 this.enableFlagLabel = enableFlagLabel;
             }
 
-            public static class IntfAnsShopBasicBean {
+            public static class IntfAnsShopBasicBean implements Serializable{
                 /**
                  * id : 111
                  * shopName : 琳美甲
@@ -371,7 +371,7 @@ public class OrderMyAllOrderBean implements Serializable{
                 }
             }
 
-            public static class IntfAnsOrderBean {
+            public static class IntfAnsOrderBean implements Serializable{
                 /**
                  * id : 1111
                  * orderNo : 11290052
@@ -446,7 +446,7 @@ public class OrderMyAllOrderBean implements Serializable{
                     this.apiOrderDetailsList = apiOrderDetailsList;
                 }
 
-                public static class ApiOrderDetailsListBean {
+                public static class ApiOrderDetailsListBean implements Serializable{
                     /**
                      * id : null
                      * isNewRecord : true
@@ -551,7 +551,7 @@ public class OrderMyAllOrderBean implements Serializable{
                         this.detailsStatusLabel = detailsStatusLabel;
                     }
 
-                    public static class IntfAnsOrderDetailsBean {
+                    public static class IntfAnsOrderDetailsBean implements Serializable{
                         /**
                          * goodsId : 444
                          * goodsName : 美容美发
@@ -629,7 +629,7 @@ public class OrderMyAllOrderBean implements Serializable{
                 }
             }
 
-            public static class IntfAnsCustBasicBean {
+            public static class IntfAnsCustBasicBean implements Serializable{
                 /**
                  * id : 1111
                  * cellPhone : 111111111
@@ -655,7 +655,7 @@ public class OrderMyAllOrderBean implements Serializable{
                 }
             }
 
-            public static class IntfCpCreateInfoBean {
+            public static class IntfCpCreateInfoBean implements Serializable{
                 /**
                  * cpScope : 1
                  * cpName : ainisi

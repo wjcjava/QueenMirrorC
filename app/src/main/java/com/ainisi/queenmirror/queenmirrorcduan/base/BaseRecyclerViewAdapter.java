@@ -226,6 +226,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
             view.setVisibility(visible);
             return this;
         }
+
         public BaseViewHolder setOnClickListener(int resId, View.OnClickListener onClickListener) {
             View view;
             if (views.get(resId) == null) {

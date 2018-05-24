@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp">
     <ImageView
         android:id="@+id/iv_shop"
         android:layout_width="@dimen/comment_40_dip"
@@ -16,7 +16,6 @@
         android:id="@+id/tv_shop_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="@dimen/comment_5_dip"
         android:layout_marginTop="@dimen/comment_5_dip"
         android:layout_toRightOf="@id/iv_shop"
@@ -24,6 +23,7 @@
         android:textSize="@dimen/comment_14_size" />
 
     <TextView
+        android:id="@+id/tv_confirm_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_shop_name"
@@ -32,6 +32,7 @@
         android:text="X1"
         android:textSize="@dimen/comment_12_size" />
     <TextView
+        android:id="@+id/tv_confirm_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_shop_name"
@@ -44,7 +45,6 @@
         android:layout_below="@id/iv_shop"
         android:layout_marginTop="@dimen/comment_5_dip"
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/comment_5_dip"
         android:layout_height="@dimen/comment_2_dip"
         android:background="@color/alpha_05_black"
         />

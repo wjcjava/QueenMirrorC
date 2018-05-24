@@ -28,12 +28,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
-
         android:background="@color/alpha_05_black">
         <TextView
-
             android:id="@+id/tv_refund_goods"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,8 +44,7 @@
             android:background="@color/white"
             android:id="@+id/re_arefund"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
             android:id="@+id/layout_arefund_reason"
