@@ -486,10 +486,22 @@ public class HttpUtils {
                 break;
             //女王卡详情
             case ACTION.QUEENDETAILS:
-                actionUrl=UrlConstants.QUEENDETAILS;
+                actionUrl = UrlConstants.QUEENDETAILS;
                 break;
             case ACTION.UPLOADORDER:
                 actionUrl = UrlConstants.UPLOADORDER;
+                break;
+            //忘记密码
+            case ACTION.FORGOTPASSWORD:
+                actionUrl = UrlConstants.FORGOTPASSWORD;
+                break;
+            //确认手机号是否已注册
+            case ACTION.PHONECHECK:
+                actionUrl = UrlConstants.PHONECHECK;
+                break;
+            //优惠券领取
+            case ACTION.COUPONGET:
+                actionUrl=UrlConstants.COUPONGET;
                 break;
         }
         url.append(actionUrl);

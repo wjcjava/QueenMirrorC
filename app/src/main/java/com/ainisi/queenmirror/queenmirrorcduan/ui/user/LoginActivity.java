@@ -72,13 +72,15 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
         //获取手机token值  唯一设备码
         TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+
             // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
+            //    ActivityCompat#requestPermissions2
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         deviceToken = TelephonyMgr.getDeviceId();
@@ -114,6 +116,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                 UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.QQ, authListener);
                 loginFlag = "2";
                 break;
+
             case R.id.user_reg_wechat_login_view:
                 UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.WEIXIN, authListener);
                 loginFlag = "1";
@@ -143,20 +146,23 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
             case ACTION.LOGIN://登录
                 LoginBean loginBean = GsonUtil.toObj(res,LoginBean.class);
                 if(loginBean.isSuccess()){
-                    SP.put(LoginActivity.this, SpContent.UserId ,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getId());
+                    SP.put(LoginActivity.this,SpContent.UserId ,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getId());
                     SP.put(LoginActivity.this,SpContent.UserCall,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getCellPhone());
                     SP.put(LoginActivity.this,SpContent.UserName,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getUserName());
                     SP.put(LoginActivity.this,SpContent.isLogin,"1");
                     Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                     startActivity(intent);
                 }else{
+
                     T.show(loginBean.getMsg());
+
                 }
                 break;
+            //第三方直接登录
             case ACTION.THIRDLOGINONE:
                 LoginBean loginBean1 = GsonUtil.toObj(res,LoginBean.class);
                 if(loginBean1.isSuccess()){
-                    SP.put(LoginActivity.this, SpContent.UserId ,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getId());
+                    SP.put(LoginActivity.this,SpContent.UserId ,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getId());
                     SP.put(LoginActivity.this,SpContent.UserCall,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getCellPhone());
                     SP.put(LoginActivity.this,SpContent.UserName,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getUserName());
                     SP.put(LoginActivity.this,SpContent.isLogin,"1");
@@ -170,7 +176,6 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                 LoginThridOpenidBean loginThridOpenidBean = GsonUtil.toObj(res, LoginThridOpenidBean.class);
                 if(loginThridOpenidBean.isSuccess()){
                     String isExists = loginThridOpenidBean.getBody().getExists();
-
                     if(isExists.equals("0")){
                         //不存在
                         Intent intent = new Intent(LoginActivity.this,LoginThirdActivity.class);

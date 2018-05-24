@@ -55,6 +55,12 @@ public interface ACTION {
 
     int QUEENDETAILS=0x26;//女王卡详情
 
+    int FORGOTPASSWORD=0x27;//忘记密码
+
+    int PHONECHECK=0x28;//确认手机号是否已注册
+
+    int COUPONGET=0x29;//优惠券领取
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表
@@ -110,5 +116,8 @@ public interface ACTION {
     int THIRDLOGINONE = 0x131;//第三方直接登录
 
     int UPLOADORDER = 0x132;//提交订单
+
+
+
 
 }

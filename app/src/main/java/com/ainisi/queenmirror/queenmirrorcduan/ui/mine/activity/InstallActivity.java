@@ -6,10 +6,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
-import com.ainisi.queenmirror.common.commonutils.ToastUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.lzy.okgo.cache.CacheMode;
+
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -17,13 +26,12 @@ import butterknife.OnClick;
 /**
  * 我的设置
  */
-public class InstallActivity extends BaseNewActivity {
+public class InstallActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.title_title)
     TextView settitle;
     @Bind(R.id.iv_unselected)
     ImageView unselscetd;
     private boolean isClick;
-
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, InstallActivity.class));
     }
@@ -36,8 +44,11 @@ public class InstallActivity extends BaseNewActivity {
     public void initView() {
         settitle.setText("设置");
     }
-
-    @OnClick({R.id.title_back, R.id.iv_unselected,  R.id.layout_privacy
+    @Override
+    protected void initData() {
+        super.initData();
+    }
+    @OnClick({R.id.title_back, R.id.iv_unselected,  R.id.layout_privacy,R.id.tv_install_loginout
     })
     public void click(View view) {
 
@@ -58,11 +69,47 @@ public class InstallActivity extends BaseNewActivity {
                     isClick=true;
                 }
                 break;
+            case R.id.tv_install_loginout:
+                initParams();
+                break;
             default:
                 break;
 
         }
+    }
 
+    /**
+     * 退出登录
+     */
+    private void initParams() {
+        HashMap<String,String> params=new HashMap<>();
+        params.put("telNo", SP.get(this, SpContent.UserCall,"0")+"");
+        HttpUtils.doPost(ACTION.LOGINOUT,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+    }
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.LOGINOUT:
+                SuccessBean successBean= GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    SP.put(this, SpContent.isLogin, "0");
+                    SP.put(this, SpContent.UserId, "0");
+                    SP.put(this, SpContent.UserName, "");
+                    finish();
+                }else {
+                    T.show(successBean.getMsg());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
 
     }
 }

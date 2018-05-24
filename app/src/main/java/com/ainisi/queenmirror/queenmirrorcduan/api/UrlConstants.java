@@ -96,7 +96,7 @@ public interface UrlConstants {
 
     String MYCOMMENTS="api/ans/cust/userCommentsList";//我的评论
 
-    String CHANGEPASSWORD = "api/ans/cust/userModifyPass";//修改密码
+    String CHANGEPASSWORD = "api/ans/login/userModifyPass";//修改密码
 
     String LOGINOUT = "api/ans/login/userlogout";//退出登录账号
 
@@ -117,4 +117,10 @@ public interface UrlConstants {
     String QUEENDETAILS="api/ans/queen/queenCardDetails";//女王卡详情
 
     String UPLOADORDER = "api/ans/order/orderSubmit";//提交订单
+
+    String PHONECHECK="api/ans/login/phoneCheck";//确认手机号是否已注册
+
+    String FORGOTPASSWORD="api/ans/login/userForgotPass";//忘记密码
+
+    String COUPONGET="api/ans/coupon/couponGet";//优惠券领取
 }

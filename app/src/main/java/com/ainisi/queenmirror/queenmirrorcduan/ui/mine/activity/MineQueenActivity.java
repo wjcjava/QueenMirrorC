@@ -77,8 +77,6 @@ public class MineQueenActivity extends BaseActivity implements HttpCallBack{
                 break;
 
         }
-
-
     }
     private void inithttp() {
         HashMap<String,String> parames=new HashMap<>();
@@ -89,7 +87,6 @@ public class MineQueenActivity extends BaseActivity implements HttpCallBack{
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
-
             case ACTION.QUEENDETAILS:
                 deiailsBean = GsonUtil.toObj(res, QueenDeiailsBean.class);
                 if(deiailsBean.isSuccess()){

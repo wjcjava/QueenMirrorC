@@ -356,7 +356,8 @@
         </activity>
         <activity android:name=".ui.user.LoginThirdActivity" />
         <activity android:name=".ui.user.GuanLianActivity" />
-        <activity android:name=".ui.shop.activity.SelectLinkPeopleActivity"></activity>
+        <activity android:name=".ui.shop.activity.SelectLinkPeopleActivity" />
+        <activity android:name=".ui.home.activity.SystemActivity"></activity>
     </application>
 
 </manifest>

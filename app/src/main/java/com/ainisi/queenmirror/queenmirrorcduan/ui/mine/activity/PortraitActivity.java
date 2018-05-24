@@ -74,7 +74,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
             public void onFinish(File outputFile, Uri outputUri) {
                 Glide.with(PortraitActivity.this).load(outputUri).into(iv_portrait_head);
             }
-        }, false);//true裁剪，false不裁剪
+        }, true);//true裁剪，false不裁剪
 
         //Glide.with(this).load(SP.get(this,SpContent.UserName,"")).into(iv_portrait_head);
 
@@ -262,7 +262,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                     SP.put(this, SpContent.isLogin, "0");
                     SP.put(this, SpContent.UserId, "0");
                     SP.put(this, SpContent.UserName, "");
-                    //finish();
+                    finish();
                 } else {
                     T.show(successBean.getMsg());
                 }

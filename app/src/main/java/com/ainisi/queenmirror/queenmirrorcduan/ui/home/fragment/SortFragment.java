@@ -45,6 +45,7 @@ public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.
                 .multiTask());
     }
 
+
     @Override
     public void onRefresh() {
         handler.postDelayed(new Runnable() {

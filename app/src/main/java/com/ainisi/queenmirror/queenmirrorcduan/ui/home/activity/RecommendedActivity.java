@@ -100,10 +100,6 @@ public class RecommendedActivity extends BaseActivity implements RefreshLoadMore
         inithttp();
 
     }
-
-
-
-
     @OnClick({R.id.title_back
     })
     public void click(View view) {

@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -14,7 +14,7 @@ import butterknife.OnClick;
 /**
  * 我的钱包—充值功能
  */
-public class RechargeActivity extends BaseNewActivity {
+public class RechargeActivity extends BaseActivity {
     @Bind(R.id.title_title)
     TextView reTitle;
     public static void startActivity(Context context) {
@@ -23,6 +23,11 @@ public class RechargeActivity extends BaseNewActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_recharge;
+    }
+
+    @Override
+    public void initPresenter() {
+
     }
 
 

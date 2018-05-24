@@ -13,6 +13,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeMessageBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.HashMap;
@@ -29,6 +32,7 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
     TextView tvSystem;
     @Bind(R.id.tv_message_review)
     TextView tvReview;
+    boolean isLogin=false;
 
     private HomeMessageBean messageBean;
 
@@ -44,6 +48,16 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
     public void initView() {
         initText();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(SP.get(this, SpContent.isLogin,"0").toString().equals("1")){
+            isLogin=true;
+        }else {
+            isLogin=false;
+        }
     }
 
     @Override
@@ -72,12 +86,31 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
             case R.id.title_back:
                 finish();
                 break;
+                //订单消息
             case R.id.layout_message_interactive:
+                if(isLogin){
+                    OrderMessageActivity.startActivity(MessageActivity.this);
+                }else {
+                    T.show("请登录");
+                }
+
                 break;
+                //互动信息
             case R.id.layout_message_system:
+                if(isLogin){
+                    OrderMessageActivity.startActivity(MessageActivity.this);
+                }else {
+                    T.show("请登录");
+                }
                 break;
+                //系统消息
             case R.id.layout_message_review:
-                OrderMessageActivity.startActivity(MessageActivity.this);
+                if(isLogin){
+                    startActivity(new Intent(this,SystemActivity.class));
+                }else {
+                    T.show("请登录");
+                }
+
                 break;
             default:
                 break;

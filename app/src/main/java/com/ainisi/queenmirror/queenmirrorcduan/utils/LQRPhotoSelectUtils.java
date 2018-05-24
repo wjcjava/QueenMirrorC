@@ -28,7 +28,7 @@ public class LQRPhotoSelectUtils {
     private String imgPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + String.valueOf(System.currentTimeMillis()) + ".jpg";
     //FileProvider的主机名：一般是包名+".fileprovider"，严格上是build.gradle中defaultConfig{}中applicationId对应的值+".fileprovider"
     private String AUTHORITIES = "packageName" + ".fileprovider";
-    private boolean mShouldCrop = false;//是否要裁剪（默认不裁剪）
+    private boolean mShouldCrop = true;//是否要裁剪（默认不裁剪）
     private Uri mOutputUri = null;
     private File mInputFile;
     private File mOutputFile = null;

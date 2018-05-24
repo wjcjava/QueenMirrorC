@@ -51,9 +51,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void initPresenter() {
-
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -66,9 +64,9 @@ public class MineFragment extends BaseFragment {
         }
     }
 
+
     @Override
     protected void initView() {
-
     }
     @OnClick({R.id.iv_title, R.id.iv_install, R.id.img_information,
             R.id.layout_collection, R.id.layout_follow, R.id.layout_foot,
@@ -101,7 +99,12 @@ public class MineFragment extends BaseFragment {
                 break;
             //设置
             case R.id.iv_install:
-                InstallActivity.startActivity(getActivity());
+                if(isLogin){
+                    InstallActivity.startActivity(getActivity());
+                }else {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                }
+
                 break;
             //信息
             case R.id.img_information:

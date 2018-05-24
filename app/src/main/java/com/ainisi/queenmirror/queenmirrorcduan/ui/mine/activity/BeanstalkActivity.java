@@ -128,15 +128,15 @@ public class BeanstalkActivity extends BaseNewActivity implements HttpCallBack {
             case R.id.re_branstalk:
                 if (isClick) {
                     isClick = false;
-                    monte.setText(R.string.Monthlysettlement);
                     hidePicker(datePicker);
+                    monte.setText(R.string.Bytheday);
                     date.setVisibility(View.VISIBLE);
                     viewone.setVisibility(View.VISIBLE);
                     linearDate.setVisibility(View.GONE);
                 } else {
                     isClick = true;
                     showPicker(datePicker);
-                    monte.setText(R.string.Bytheday);
+                    monte.setText(R.string.Monthlysettlement);
                     date.setVisibility(View.GONE);
                     linearDate.setVisibility(View.VISIBLE);
                     viewone.setVisibility(View.GONE);

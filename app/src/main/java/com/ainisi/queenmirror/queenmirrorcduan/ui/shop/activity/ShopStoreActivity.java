@@ -14,11 +14,21 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.CouponGetBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -27,7 +37,7 @@ import butterknife.OnClick;
 /**
  * 异业
  */
-public class ShopStoreActivity extends BaseNewActivity{
+public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.iv_shop)
     ImageView ivShop;
     @Bind(R.id.title_title)
@@ -38,7 +48,7 @@ public class ShopStoreActivity extends BaseNewActivity{
     //网友评论
     @Bind(R.id.recycler_boutique)
     RecyclerView reBoutique;
-
+    boolean isLogin=false;
     private List<SortBean> beanList=new ArrayList<>();
     private CustomPopWindow popWindow;
 
@@ -56,10 +66,21 @@ public class ShopStoreActivity extends BaseNewActivity{
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(SP.get(this, SpContent.isLogin,"0").toString().equals("1")){
+            isLogin = true;
+
+        }else{
+            isLogin = false;
+
+        }
+    }
 
     @Override
     protected void initData() {
-        inithttp();
+
 
         super.initData();
         for (int i = 0; i <6 ; i++) {
@@ -96,6 +117,7 @@ public class ShopStoreActivity extends BaseNewActivity{
                         .setAnimationStyle(R.style.CustomPopWindowStyle)
                         .create()
                         .showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM, 0, 0);
+                        initgetId(popview);
                 break;
             case R.id.re_product_two:
                 startActivity(new Intent(this, ProductActivity.class));
@@ -105,10 +127,53 @@ public class ShopStoreActivity extends BaseNewActivity{
 
         }
 
+    }
+
+    private void initgetId(View popview) {
+        popview.findViewById(R.id.tv_shop_couponget).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isLogin){
+                    inithttp();
+                }else {
+                    T.show("您未登陆请先登陆");
+                }
+
+            }
+        });
 
     }
+
     private void inithttp() {
+        HashMap<String,String> params=new HashMap<>();
+        params.put("cpId","1cf04904fa064c4294453ce39c506be1");//优惠券ID
+        params.put("userId", SP.get(this, SpContent.UserName,"").toString()+"");//用户ID
+        params.put("shopId","19");//商品ID
+        HttpUtils.doPost(ACTION.COUPONGET,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
 
     }
 
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.COUPONGET:
+                CouponGetBean couponGetBean=GsonUtil.toObj(res, CouponGetBean.class);
+                if(couponGetBean.isSuccess()){
+                    T.show(couponGetBean.getMsg());
+                }else {
+                    T.show(couponGetBean.getMsg());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }

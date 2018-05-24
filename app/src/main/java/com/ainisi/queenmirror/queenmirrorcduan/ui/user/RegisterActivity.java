@@ -17,8 +17,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.PhoneCheckBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -109,21 +109,17 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 initSee();
                 break;
             case R.id.bt_user_confirmregistration:
+                initcheck();
 
-                if(phoneNumber.getText().toString().trim().equals("")||passWord.getText().toString().trim().equals("")||etValidation.getText().toString().trim().equals("")){
-                    T.show("请完善相关信息");
-                }else{
-                    HashMap<String, String> paramsRegister = new HashMap<>();
-                    paramsRegister.put("cellPhone",phoneNumber.getText().toString().trim());
-                    paramsRegister.put("userPass",passWord.getText().toString().trim());
-                    paramsRegister.put("contractConfirm","1");
-                    paramsRegister.put("ifFirst","0");
-                    paramsRegister.put("verifyCode",vConfig);
-                    paramsRegister.put("verifyCodeCust",etValidation.getText().toString().trim());
-                    HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-                }
                 break;
         }
+    }
+
+    private void initcheck() {
+        HashMap<String,String> params=new HashMap<>();
+        params.put("cellPhone",phoneNumber.getText().toString().trim());
+        HttpUtils.doPost(ACTION.PHONECHECK,params,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+
     }
 
     private void initSee() {
@@ -163,15 +159,16 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         switch (action) {
             case ACTION.VERIFY://获取验证码
                 ceshiBean = GsonUtil.toObj(res,LoginCeshiBean.class);
-
                 if(ceshiBean.isSuccess()){
                     myCountDownTimer.start();
                     vConfig = ceshiBean.getBody().getVerifyCode();
-                }else{
+                }
+
+                else{
                     T.show("系统出错，请稍后再试");
                 }
                 break;
-            case ACTION.REGIST:
+            case ACTION.REGIST://注册
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
 
                 if(successBean.isSuccess()){
@@ -190,6 +187,30 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 }else{
                     T.show(successBean.getMsg());
                 }
+                break;
+            case ACTION.PHONECHECK:
+               PhoneCheckBean checkBean= GsonUtil.toObj(res, PhoneCheckBean.class);
+               if(checkBean.isSuccess()){
+                   boolean exists = checkBean.getBody().isExists();
+                   if(exists==true){
+                     T.show("此手机号已注册过请勿再次注册");
+                   }else {
+                       if(phoneNumber.getText().toString().trim().equals("")||passWord.getText().toString().trim().equals("")||etValidation.getText().toString().trim().equals("")){
+                           T.show("请完善相关信息");
+                       }else{
+                           HashMap<String, String> paramsRegister = new HashMap<>();
+                           paramsRegister.put("cellPhone",phoneNumber.getText().toString().trim());
+                           paramsRegister.put("userPass",passWord.getText().toString().trim());
+                           paramsRegister.put("contractConfirm","1");
+                           paramsRegister.put("ifFirst","0");
+                           paramsRegister.put("verifyCode",vConfig);
+                           paramsRegister.put("verifyCodeCust",etValidation.getText().toString().trim());
+                           HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+                       }
+                   }
+               }else {
+                   T.show(checkBean.getMsg());
+               }
                 break;
         }
     }

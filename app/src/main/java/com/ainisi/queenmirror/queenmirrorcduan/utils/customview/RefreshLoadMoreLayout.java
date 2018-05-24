@@ -3,7 +3,6 @@ package com.ainisi.queenmirror.queenmirrorcduan.utils.customview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -969,6 +968,8 @@ public class RefreshLoadMoreLayout extends ViewGroup {
     }
 
     public interface CallBack {
+
+
         void onRefresh();
 
         void onLoadMore();

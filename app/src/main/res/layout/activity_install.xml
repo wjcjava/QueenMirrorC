@@ -152,4 +152,16 @@
                 />
         </RelativeLayout>
     </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_install_loginout"
+        android:background="@drawable/ic_setting_breake"
+        android:text="退出登录"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/comment_16_size"
+        android:layout_width="@dimen/comment_300_dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/comment_25_dip"
+        android:layout_height="@dimen/comment_40_dip" />
 </RelativeLayout>

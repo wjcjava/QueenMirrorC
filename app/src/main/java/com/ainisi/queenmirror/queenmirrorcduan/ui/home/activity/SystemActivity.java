@@ -1,7 +1,5 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,58 +7,37 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MessageListAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
-import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
-import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MessageListBean;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
-import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
-/**
- * 我的订单信息
- */
-public class OrderMessageActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack, HttpCallBack {
+//系统消息
+public class SystemActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack{
     @Bind(R.id.title_title)
     TextView title;
-    @Bind(R.id.recycler_ordmessage)
-    RecyclerView ordrecycler;
+    @Bind(R.id.recycler_systemmessage)
+    RecyclerView systemRecyclerView;
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
-    private Handler handler = new Handler();
-    private List<MessageListBean> list = new ArrayList<>();
-    private MessageListBean messageListBean;
-
-    public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, OrderMessageActivity.class));
-    }
-
+    private Handler handler=new Handler();
+    private List<SortBean> systemList=new ArrayList<>();
     @Override
     public int getLayoutId() {
-        return R.layout.activity_order_mgs;
+        return R.layout.activity_system;
     }
-
 
     @Override
     protected void initView() {
         super.initView();
-
-    }
-
-    @Override
-    protected void initData() {
-        super.initData();
-        inithttp();
+        title.setText("系统消息");
         /**
          * canRefresh 是否下拉刷新
          * canLoadMore 是否上拉加载更多
@@ -76,11 +53,21 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
                         RefreshLoadMoreLayout.class,
                         "yyyy-MM-dd")
                 .multiTask());
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        for (int i = 0; i < 10; i++) {
+            SortBean sortBean=new SortBean();
+            systemList.add(sortBean);
+        }
+        MyAdapter adapter=new MyAdapter(R.layout.item_oremesage,systemList);
+        systemRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        systemRecyclerView.setAdapter(adapter);
 
 
     }
-
-
     @Override
     public void onRefresh() {
         handler.postDelayed(new Runnable() {
@@ -102,8 +89,6 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
             }
         }, 1000);
     }
-
-
     @OnClick({R.id.title_back
     })
     public void click(View view) {
@@ -115,39 +100,5 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
             default:
                 break;
         }
-    }
-
-    public void inithttp() {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("userId", "12421");
-        hashMap.put("messageType", "1");
-        HttpUtils.doPost(ACTION.MESSAGELIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-    }
-
-    @Override
-    public void onSuccess(int action, String res) {
-        switch (action) {
-            case ACTION.MESSAGELIST:
-                for (int i = 0; i < 6; i++) {
-                    messageListBean = GsonUtil.toObj(res, MessageListBean.class);
-                    list.add(messageListBean);
-                }
-                MessageListAdapter sortAdapter = new MessageListAdapter(R.layout.item_oremesage, list);
-                ordrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-                ordrecycler.setAdapter(sortAdapter);
-                title.setText(R.string.message_center);
-                break;
-        }
-
-    }
-
-    @Override
-    public void showLoadingDialog() {
-
-    }
-
-    @Override
-    public void showErrorMessage(String s) {
-
     }
 }
