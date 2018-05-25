@@ -6,6 +6,24 @@ public class OrderDetailsListInfoBean {
     String purchaseNumber;
     String unitPrice;
     String sumAmount;
+    String discountAmount;
+    String usePoints;
+
+    public String getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(String discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public String getUsePoints() {
+        return usePoints;
+    }
+
+    public void setUsePoints(String usePoints) {
+        this.usePoints = usePoints;
+    }
 
     public String getGoodsId() {
         return goodsId;

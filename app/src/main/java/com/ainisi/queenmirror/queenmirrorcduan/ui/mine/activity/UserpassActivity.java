@@ -14,6 +14,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.HashMap;
@@ -67,8 +68,8 @@ public class UserpassActivity extends BaseNewActivity implements HttpCallBack{
     private void changeData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("cellPhone", et_userpass_phone.getText().toString().trim());
-        params.put("userPass",et_userpass_pass.getText().toString());
-        params.put("oldUserPass",et_userpass_verification.getText().toString());
+        params.put("userPass", MD5.md5(et_userpass_pass.getText().toString()+"MYN888"));
+        params.put("oldUserPass",MD5.md5(et_userpass_verification.getText().toString()+"MYN888"));
         HttpUtils.doPost(ACTION.CHANGEPASSWORD, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 

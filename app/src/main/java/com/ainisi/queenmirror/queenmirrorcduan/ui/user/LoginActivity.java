@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,11 +24,14 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -131,7 +135,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
         HashMap<String, String> params = new HashMap<>();
         params.put("deviceToken", deviceToken);
         params.put("cellPhone", et_login_pghone.getText().toString());
-        params.put("userPass",et_login_pass.getText().toString());
+        params.put("userPass", MD5.md5(et_login_pass.getText().toString()+ "MYN888"));
         //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
         HttpUtils.doPost(ACTION.LOGIN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -153,7 +157,6 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                     Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                     startActivity(intent);
                 }else{
-
                     T.show(loginBean.getMsg());
 
                 }

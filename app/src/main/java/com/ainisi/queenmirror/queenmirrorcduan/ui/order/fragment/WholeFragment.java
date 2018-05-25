@@ -21,6 +21,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -111,7 +113,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
         HashMap<String, String> params = new HashMap<>();
         params.put("orderStatus", state);
         params.put("pageNumber", pageNumber+"");
-        params.put("userId", "1111");
+        params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");
         params.put("pageSize", "10");
         HttpUtils.doPost(ACTION.ALLOFMYORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
      }

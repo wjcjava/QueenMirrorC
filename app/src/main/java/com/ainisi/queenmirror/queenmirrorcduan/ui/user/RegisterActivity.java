@@ -20,8 +20,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.PhoneCheckBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -200,7 +203,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                        }else{
                            HashMap<String, String> paramsRegister = new HashMap<>();
                            paramsRegister.put("cellPhone",phoneNumber.getText().toString().trim());
-                           paramsRegister.put("userPass",passWord.getText().toString().trim());
+                           paramsRegister.put("userPass", MD5.md5(passWord.getText().toString()+"MYN888"));
                            paramsRegister.put("contractConfirm","1");
                            paramsRegister.put("ifFirst","0");
                            paramsRegister.put("verifyCode",vConfig);

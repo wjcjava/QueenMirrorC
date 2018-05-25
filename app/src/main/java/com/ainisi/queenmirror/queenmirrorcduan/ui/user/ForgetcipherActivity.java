@@ -19,6 +19,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.ForgetCipherBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.HashMap;
@@ -107,7 +108,7 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
                     parames.put("cellPhone",phoneNumber.getText().toString().trim());
                     parames.put("verifyCode",vConfig);
                     parames.put("verifyCodeCust",etvalidation.getText().toString().trim());
-                    parames.put("userPass",passWord.getText().toString());
+                    parames.put("userPass", MD5.md5(passWord.getText().toString()+"MYN888"));
                     HttpUtils.doPost(ACTION.FORGOTPASSWORD,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
                 }
                 break;
