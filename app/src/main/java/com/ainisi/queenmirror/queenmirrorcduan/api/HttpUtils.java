@@ -128,7 +128,7 @@ public class HttpUtils {
                                 return;
                             }*/
                             //成功
-                            httpCallBack.onSuccess(action, s);
+                             httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -501,7 +501,11 @@ public class HttpUtils {
                 break;
             //优惠券领取
             case ACTION.COUPONGET:
-                actionUrl=UrlConstants.COUPONGET;
+                actionUrl = UrlConstants.COUPONGET;
+                break;
+            //客户端绑定第三方账号
+            case ACTION.USERBIND:
+                actionUrl = UrlConstants.USERBIND;
                 break;
         }
         url.append(actionUrl);

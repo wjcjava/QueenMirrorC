@@ -14,7 +14,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MasterFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MineFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.ShopMallFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomViewPager;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -134,6 +138,8 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
         linearLayout.setSelected(true);
     }
 
+
+
     private class MyAdapter extends FragmentPagerAdapter {
         MyAdapter(FragmentManager fm) {
             super(fm);
@@ -149,4 +155,21 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
             return mFragments.size();
         }
     }
+    private long exitTime = 0;
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - exitTime > 2000) {
+            T.show("在点击一次退出应用");
+            exitTime = System.currentTimeMillis();
+            if(SP.get(this, SpContent.Remember,"").equals("0")){
+                SP.put(this, SpContent.isLogin, "0");
+            }
+        } else {
+            finish();
+            System.exit(0);
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
+    }
+
+
 }

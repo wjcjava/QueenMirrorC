@@ -82,6 +82,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     boolean isColl = false;
     String goodsId,shopId,isLogin,userId;
 
+
     private ShareAction mShareAction;
     private UMShareListener mShareListener;
 
@@ -359,7 +360,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 tv_time.setText("服务时长："+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getServiceTime());
                 textView4.setText("已浏览："+"200"+"次");
                 //  tv_introduction.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsDetails().toString());
-
                 fullTitle.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsName());
                 break;
             case ACTION.EVALUATION:

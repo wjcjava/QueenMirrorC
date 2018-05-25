@@ -51,7 +51,6 @@ public class InstallActivity extends BaseNewActivity implements HttpCallBack{
     @OnClick({R.id.title_back, R.id.iv_unselected,  R.id.layout_privacy,R.id.tv_install_loginout
     })
     public void click(View view) {
-
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
@@ -71,13 +70,13 @@ public class InstallActivity extends BaseNewActivity implements HttpCallBack{
                 break;
             case R.id.tv_install_loginout:
                 initParams();
+
                 break;
             default:
                 break;
 
         }
     }
-
     /**
      * 退出登录
      */

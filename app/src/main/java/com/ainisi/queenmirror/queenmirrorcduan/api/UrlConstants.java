@@ -8,9 +8,9 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 public interface UrlConstants {
 
     // String BASE_URL = "http://116.62.204.235:8080/";
-   String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
+   //String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
 
-    //String BASE_URL = "http://192.168.30.155:8080/wg/a/";
+    String BASE_URL = "http://192.168.30.155:8080/wg/a/";
 
     String ADVERTISING = "api/ec/common/advertisementList";//首页banner广告
 
@@ -123,4 +123,6 @@ public interface UrlConstants {
     String FORGOTPASSWORD="api/ans/login/userForgotPass";//忘记密码
 
     String COUPONGET="api/ans/coupon/couponGet";//优惠券领取
+
+    String USERBIND="api/ans/login/snsUserBindingAccount";//客户端绑定第三方账号
 }

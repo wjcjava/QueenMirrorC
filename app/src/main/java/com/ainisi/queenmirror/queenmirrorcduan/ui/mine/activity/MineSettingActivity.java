@@ -18,33 +18,47 @@ import butterknife.OnClick;
 public class MineSettingActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView setText;
+    @Bind(R.id.tv_pay_modify)
+    TextView payModify;
+    @Bind(R.id.tv_pay_back)
+    TextView payBack;
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineSettingActivity.class));
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_setting;
     }
 
-
     @Override
     public void initView() {
-
         initText();
 
     }
 
     private void initText() {
-        setText.setText(R.string.paymentpassword);
-        setText.setTextColor(ContextCompat.getColor(this,R.color.alpha_95_black));
+        setText.setText(R.string.payment_setting);
+        setText.setTextColor(ContextCompat.getColor(this, R.color.alpha_95_black));
     }
 
-    @OnClick({R.id.title_back})
+    @OnClick({R.id.title_back, R.id.layout_pay_modify, R.id.layout_pay_back})
     public void click(View view) {
 
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
+                break;
+            //修改支付密码
+            case R.id.layout_pay_modify:
+                Intent intent=new Intent(this,ModifyPayActivity.class);
+                startActivity(intent);
+                break;
+            //找回支付密码
+            case R.id.layout_pay_back:
+                Intent intent1=new Intent(this,BackPayActivity.class);
+                intent1.putExtra("payback",payBack.getText().toString().trim());
+                startActivity(intent1);
                 break;
             default:
                 break;

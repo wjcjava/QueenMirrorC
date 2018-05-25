@@ -93,21 +93,20 @@ public class GuanLianActivity extends BaseNewActivity implements HttpCallBack{
         //传参数
         HashMap<String, String> params = new HashMap<>();
         params.put("loginFlag", loginFlag);
-        params.put("nickName", nickName);
-        params.put("headPic",headPic);
         params.put("openId",openId);
         params.put("loginToken",loginToken);
-        params.put("bindingTel",gl_et_login_pghone.getText().toString());
+        params.put("cellPhone",gl_et_login_pghone.getText().toString());
         params.put("userPass",gl_et_login_pass.getText().toString());
-        params.put("contractConfirm","1");
-        params.put("ifFirst","0");
-        params.put("deviceToken",deviceToken);
         //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
-        HttpUtils.doPost(ACTION.LOGIN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        HttpUtils.doPost(ACTION.USERBIND, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
     @Override
     public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.USERBIND:
 
+                break;
+        }
     }
 
     @Override

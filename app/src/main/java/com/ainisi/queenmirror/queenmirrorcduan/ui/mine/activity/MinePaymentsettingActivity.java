@@ -7,7 +7,6 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
@@ -48,8 +47,10 @@ public class MinePaymentsettingActivity extends BaseNewActivity {
             case R.id.title_back:
                 finish();
                 break;
+                //设置支付密码
             case R.id.layout_setting:
-                MineSettingActivity.startActivity(this);
+                startActivity(new Intent(this,ModifyPayActivity.class));
+
                 break;
             default:
                 break;

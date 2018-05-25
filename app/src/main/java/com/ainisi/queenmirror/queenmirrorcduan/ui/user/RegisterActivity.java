@@ -23,8 +23,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -166,7 +164,6 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                     myCountDownTimer.start();
                     vConfig = ceshiBean.getBody().getVerifyCode();
                 }
-
                 else{
                     T.show("系统出错，请稍后再试");
                 }

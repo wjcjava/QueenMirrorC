@@ -229,6 +229,12 @@
     <string name="mondelNumber">我的魔豆数</string>
     <string name="mondelService">魔豆服务</string>
     <string name="exchangeShop">兑换好物</string>
+    <string name="user_nickname">昵称</string>
+    <string name="modify_payment_password">修改支付密码</string>
+    <string name="back_payment_password">找回支付密码</string>
+    <string name="add_login_number">请输入登陆账号</string>
+    <string name="add_login_password">请输入登陆密码</string>
+    <string name="add_pay_password" >请输入支付密码</string>
 
 
 </resources>

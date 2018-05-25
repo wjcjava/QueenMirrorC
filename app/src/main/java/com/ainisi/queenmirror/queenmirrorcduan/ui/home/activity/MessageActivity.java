@@ -35,6 +35,9 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
     boolean isLogin=false;
 
     private HomeMessageBean messageBean;
+    private String interactine;
+    private String systemMessage;
+    private String orderMessage;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context,MessageActivity.class));
@@ -89,7 +92,9 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
                 //订单消息
             case R.id.layout_message_interactive:
                 if(isLogin){
-                    OrderMessageActivity.startActivity(MessageActivity.this);
+                    Intent intent=new Intent(this,OrderMessageActivity.class);
+                    intent.putExtra("ordermessage",interactine);
+                    startActivity(intent);
                 }else {
                     T.show("请登录");
                 }
@@ -98,7 +103,9 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
                 //互动信息
             case R.id.layout_message_system:
                 if(isLogin){
-                    OrderMessageActivity.startActivity(MessageActivity.this);
+                    Intent intent=new Intent(this,InteractiveMessageActivity.class);
+                    intent.putExtra("interact",systemMessage);
+                    startActivity(intent);
                 }else {
                     T.show("请登录");
                 }
@@ -106,7 +113,9 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
                 //系统消息
             case R.id.layout_message_review:
                 if(isLogin){
-                    startActivity(new Intent(this,SystemActivity.class));
+                    Intent intent=new Intent(this,SystemActivity.class);
+                    intent.putExtra("system",orderMessage);
+                    startActivity(intent);
                 }else {
                     T.show("请登录");
                 }
@@ -124,10 +133,18 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
             //首页消息类型列表
             case ACTION.MESSAGE:
                 messageBean = GsonUtil.toObj(res, HomeMessageBean.class);
-                tvInteractive.setText(messageBean.getBody().getMessageTypeListData().get(0).getDict().getLabel());
-                tvSystem.setText(messageBean.getBody().getMessageTypeListData().get(1).getDict().getLabel());
-                tvReview.setText(messageBean.getBody().getMessageTypeListData().get(2).getDict().getLabel());
-                break;
+                if(messageBean.isSuccess()){
+                    interactine=messageBean.getBody().getMessageTypeListData().get(0).getDict().getLabel();
+                    orderMessage=messageBean.getBody().getMessageTypeListData().get(1).getDict().getLabel();
+                    systemMessage=messageBean.getBody().getMessageTypeListData().get(2).getDict().getLabel();
+                    tvInteractive.setText(interactine);
+                    tvSystem.setText(systemMessage);
+                    tvReview.setText(orderMessage);
+                    break;
+                }else {
+                    T.show(messageBean.getMsg());
+                }
+
 
         }
 

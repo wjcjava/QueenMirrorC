@@ -60,13 +60,11 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
         super.initView();
         init();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         tv_portrait_username.setText(SP.get(this, SpContent.UserName, "") + "");
     }
-
     private void init() {
         // 1、创建LQRPhotoSelectUtils（一个Activity对应一个LQRPhotoSelectUtils）
         mLqrPhotoSelectUtils = new LQRPhotoSelectUtils(this, new LQRPhotoSelectUtils.PhotoSelectListener() {
@@ -74,7 +72,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
             public void onFinish(File outputFile, Uri outputUri) {
                 Glide.with(PortraitActivity.this).load(outputUri).into(iv_portrait_head);
             }
-        }, true);//true裁剪，false不裁剪
+        }, false);//true裁剪，false不裁剪
 
         //Glide.with(this).load(SP.get(this,SpContent.UserName,"")).into(iv_portrait_head);
 
@@ -238,15 +236,12 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                 startActivity(intent);
             }
         });
-
         //添加取消按钮点击事件
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
-
         //使用构建器创建出对话框对象
         AlertDialog dialog = builder.create();
         dialog.show();//显示对话框

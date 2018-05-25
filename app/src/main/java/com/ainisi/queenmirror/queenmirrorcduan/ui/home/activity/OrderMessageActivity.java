@@ -40,6 +40,7 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
     private Handler handler = new Handler();
     private List<MessageListBean> list = new ArrayList<>();
     private MessageListBean messageListBean;
+    private String orderMessage;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, OrderMessageActivity.class));
@@ -54,6 +55,8 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
     @Override
     protected void initView() {
         super.initView();
+        orderMessage=getIntent().getStringExtra("ordermessage");
+        title.setText(orderMessage);
 
     }
 
@@ -135,7 +138,6 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
                 MessageListAdapter sortAdapter = new MessageListAdapter(R.layout.item_oremesage, list);
                 ordrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 ordrecycler.setAdapter(sortAdapter);
-                title.setText(R.string.message_center);
                 break;
         }
 

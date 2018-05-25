@@ -18,6 +18,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.ForgetCipherBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
@@ -39,7 +41,6 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
     EditText etvalidation;
     @Bind(R.id.et_password)
     EditText passWord;
-
     @Bind(R.id.iv_login_see)
     ImageView loginSee;
     @Bind(R.id.tv_validation)
@@ -101,9 +102,11 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
                 }
                 break;
             case R.id.bt_user_forgotpassword:
+
                 if (TextUtils.isEmpty(phoneNumber.getText().toString()) || TextUtils.isEmpty(validation.getText().toString()) || TextUtils.isEmpty(passWord.getText().toString())) {
                     T.show("请输入完整信息");
                 } else {
+                    T.show(SP.get(this, SpContent.UserName,""));
                     HashMap<String, String> parames = new HashMap<>();
                     parames.put("cellPhone",phoneNumber.getText().toString().trim());
                     parames.put("verifyCode",vConfig);

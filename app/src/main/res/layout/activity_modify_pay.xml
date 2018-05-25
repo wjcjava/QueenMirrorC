@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.ModifyPayActivity">
+    <include
+        android:id="@+id/ic_title"
+        layout="@layout/layout_title" />
+
+    <TextView
+        android:id="@+id/tv_system_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_50_dip"
+        android:layout_below="@id/ic_title"
+        android:layout_marginStart="@dimen/comment_20_dip"
+        android:gravity="center"
+        android:text="登录账号"
+        android:textSize="@dimen/comment_14_size" />
+
+    <EditText
+        android:id="@+id/et_system_phone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_50_dip"
+        android:layout_below="@id/ic_title"
+        android:layout_marginEnd="@dimen/comment_20_dip"
+        android:layout_toRightOf="@id/tv_system_phone"
+        android:background="@color/white"
+        android:gravity="center|right"
+        android:hint="@string/add_login_number"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:textSize="@dimen/comment_14_size" />
+
+    <View
+        android:id="@+id/v1_pass"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/et_system_phone"
+        android:layout_marginLeft="@dimen/comment_20_dip"
+        android:layout_marginRight="@dimen/comment_20_dip"
+        android:background="@color/alpha_20_black" />
+
+    <TextView
+        android:id="@+id/tv_system_verification"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_50_dip"
+        android:layout_below="@id/v1_pass"
+        android:layout_marginStart="@dimen/comment_20_dip"
+        android:gravity="center"
+        android:text="登录密码"
+        android:textSize="@dimen/comment_14_size" />
+
+    <EditText
+        android:id="@+id/et_system_verification"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_50_dip"
+        android:layout_below="@+id/v1_pass"
+        android:layout_marginEnd="@dimen/comment_20_dip"
+        android:layout_toRightOf="@id/tv_system_verification"
+        android:background="@color/white"
+        android:gravity="center|right"
+        android:hint="@string/add_login_password"
+        android:inputType="number"
+        android:textSize="@dimen/comment_14_size" />
+
+    <View
+        android:id="@+id/v2_pass"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/et_system_verification"
+        android:layout_marginLeft="@dimen/comment_20_dip"
+        android:layout_marginRight="@dimen/comment_20_dip"
+        android:background="@color/alpha_20_black" />
+    <TextView
+        android:id="@+id/tv_system_password"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_50_dip"
+        android:layout_below="@id/v2_pass"
+        android:layout_marginStart="@dimen/comment_20_dip"
+        android:gravity="center"
+        android:text="支付密码"
+        android:textSize="@dimen/comment_14_size" />
+    <EditText
+        android:id="@+id/et_system_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_50_dip"
+        android:layout_below="@+id/v2_pass"
+        android:gravity="center|right"
+        android:layout_marginEnd="@dimen/comment_20_dip"
+        android:layout_toRightOf="@id/tv_system_password"
+        android:background="@color/white"
+        android:hint="@string/add_pay_password"
+        android:inputType="numberPassword|number"
+        android:textSize="@dimen/comment_14_size" />
+    <TextView
+        android:id="@+id/text"
+        android:layout_marginTop="@dimen/comment_10_dip"
+        android:layout_marginStart="@dimen/comment_20_dip"
+        android:text="该密码用于银行卡，女王卡。钱包支付"
+        android:layout_below="@id/et_system_password"
+        android:layout_width="match_parent"
+        android:textColor="@color/alpha_30_black"
+        android:layout_height="wrap_content"
+
+        />
+
+    <TextView
+
+        android:id="@+id/tv_ok_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_45_dip"
+        android:layout_below="@+id/text"
+        android:layout_marginLeft="@dimen/comment_30_dip"
+        android:layout_marginRight="@dimen/comment_30_dip"
+        android:layout_marginTop="@dimen/comment_20_dip"
+        android:background="@drawable/ic_setting_breake"
+        android:gravity="center"
+        android:text="@string/determine"
+        android:textColor="@color/white" />
+</RelativeLayout>

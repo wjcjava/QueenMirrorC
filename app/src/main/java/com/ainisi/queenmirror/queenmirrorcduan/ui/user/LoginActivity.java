@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,8 +30,6 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -55,7 +53,8 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     ImageView user_reg_qq_login_view;
     @Bind(R.id.user_reg_wechat_login_view)
     ImageView user_reg_wechat_login_view;
-
+    @Bind(R.id.check_choice)
+    CheckBox choice;
     String deviceToken,nickName,headPic,openId,loginToken,loginFlag;
 
     @Override
@@ -67,6 +66,8 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     protected void initView() {
         super.initView();
         initTitle();
+        choice.setChecked(true);
+
     }
 
     private void initTitle() {
@@ -113,7 +114,15 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                 if(et_login_pghone.getText().toString().equals("")||et_login_pass.getText().toString().equals("")){
                     T.show("请完善相关信息");
                 }else{
-                    LoginData();
+
+                    if(choice.isChecked()){
+                        SP.remove(this,SpContent.Remember);
+                        LoginData();
+                    }
+                    else {
+                        SP.put(this,SpContent.Remember,"0");
+                        LoginData();
+                    }
                 }
                 break;
             case R.id.user_reg_qq_login_view:
@@ -262,7 +271,6 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                     CheckOpenIdData();
 
                 }
-
                 @Override
                 public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
                 }
@@ -299,5 +307,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode,resultCode,data);
+
+
     }
 }

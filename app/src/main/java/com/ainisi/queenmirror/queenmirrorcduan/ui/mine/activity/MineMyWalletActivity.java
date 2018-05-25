@@ -68,7 +68,9 @@ public class MineMyWalletActivity extends BaseActivity {
 
             //支付设置
             case R.id.rc_setup:
-                MinePaymentsettingActivity.startActivity(this);
+
+                startActivity(new Intent(this,MinePaymentsettingActivity.class));
+
                 break;
             default:
                 break;

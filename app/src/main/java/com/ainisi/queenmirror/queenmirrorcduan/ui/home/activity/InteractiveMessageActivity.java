@@ -19,28 +19,27 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-//系统消息
-public class SystemActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack{
+public class InteractiveMessageActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack{
+    @Bind(R.id.recycler_interactivemessage)
+    RecyclerView interactRecyclerView;
     @Bind(R.id.title_title)
-    TextView title;
-    @Bind(R.id.recycler_systemmessage)
-    RecyclerView systemRecyclerView;
+    TextView interactTitle;
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+    private String interact;
     private Handler handler=new Handler();
     private List<SortBean> systemList=new ArrayList<>();
-    private String systemMessage;
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_system;
+    protected int getLayoutId() {
+        return R.layout.interactive_message;
     }
 
     @Override
     protected void initView() {
         super.initView();
-        systemMessage=getIntent().getStringExtra("system");
-        title.setText(systemMessage);
+        interact=getIntent().getStringExtra("interact");
+        interactTitle.setText(interact);
         /**
          * canRefresh 是否下拉刷新
          * canLoadMore 是否上拉加载更多
@@ -65,12 +64,13 @@ public class SystemActivity extends BaseNewActivity implements RefreshLoadMoreLa
             SortBean sortBean=new SortBean();
             systemList.add(sortBean);
         }
-        MyAdapter adapter=new MyAdapter(R.layout.item_system,systemList);
-        systemRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        systemRecyclerView.setAdapter(adapter);
+        MyAdapter adapter=new MyAdapter(R.layout.item_interactive,systemList);
+        interactRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        interactRecyclerView.setAdapter(adapter);
 
 
     }
+
     @Override
     public void onRefresh() {
         handler.postDelayed(new Runnable() {
