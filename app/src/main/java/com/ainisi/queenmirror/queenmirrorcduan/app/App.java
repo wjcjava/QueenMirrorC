@@ -18,6 +18,7 @@ import com.umeng.socialize.PlatformConfig;
 
 import java.io.IOException;
 import java.util.logging.Level;
+
 import okhttp3.Authenticator;
 import okhttp3.Credentials;
 import okhttp3.Request;
@@ -36,15 +37,18 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
         ViewTarget.setTagId(R.id.glide_tag);
 
         //设置LOG开关，默认为false
         UMConfigure.setLogEnabled(true);
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
-        UMConfigure.init(this, "5a13e4fbf29d982a16000037", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
-                "38c62f307e5bf45492df19e86ddc4dbb");
+//        UMConfigure.init(this, "5a13e4fbf29d982a16000037", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
+//                "38c62f307e5bf45492df19e86ddc4dbb");
         //init(Context context,String appkey,String channel,int deviceType,String pushSecret)
-        //PushSDK初始化(如使用推送SDK，必须调用此方法)
+        //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
+
+
 
         //L.e("...................adadassaasdasdasdasdasd..............................."+JPushInterface.getRegistrationID(this));
 

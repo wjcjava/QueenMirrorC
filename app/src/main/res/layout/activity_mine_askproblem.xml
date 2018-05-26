@@ -10,18 +10,16 @@
     <include
         android:id="@+id/ic_title"
         layout="@layout/layout_title"/>
-    <RelativeLayout
-        android:layout_below="@+id/ic_title"
+    <View
+        android:layout_below="@id/ic_title"
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <TextView
-
+        android:layout_height="@dimen/comment_2_dip"
+        android:background="@color/alpha_05_black"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/re_problem"
+        android:layout_below="@id/view"
         android:layout_width="match_parent"
-        android:text="尚未添加常见问题"
-        android:textColor="@color/alpha_95_black"
-        android:textStyle="bold"
-        android:textSize="@dimen/comment_14_size"
-        android:gravity="center"
-        android:layout_height="match_parent" />
-    </RelativeLayout>
+        android:layout_height="match_parent"/>
 </RelativeLayout>

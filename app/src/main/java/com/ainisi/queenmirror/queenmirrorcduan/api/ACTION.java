@@ -63,6 +63,8 @@ public interface ACTION {
 
     int USERBIND=0x30;//客户端绑定第三方账号
 
+    int PROBLEMLIST=0x31;//常见问题分类
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

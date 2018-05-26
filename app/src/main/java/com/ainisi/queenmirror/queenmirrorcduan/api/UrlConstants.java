@@ -125,4 +125,6 @@ public interface UrlConstants {
     String COUPONGET="api/ans/coupon/couponGet";//优惠券领取
 
     String USERBIND="api/ans/login/snsUserBindingAccount";//客户端绑定第三方账号
+
+    String PROBLEMLIST="api/ec/help/questionCategoryList";//常见问题分类
 }

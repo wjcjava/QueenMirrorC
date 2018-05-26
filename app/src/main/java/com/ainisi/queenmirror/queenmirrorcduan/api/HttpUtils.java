@@ -128,7 +128,7 @@ public class HttpUtils {
                                 return;
                             }*/
                             //成功
-                             httpCallBack.onSuccess(action, s);
+                            httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -281,7 +281,6 @@ public class HttpUtils {
             url.append(params.get(key));
             url.append("&");
         }
-
         return url.toString();
     }
 
@@ -506,6 +505,10 @@ public class HttpUtils {
             //客户端绑定第三方账号
             case ACTION.USERBIND:
                 actionUrl = UrlConstants.USERBIND;
+                break;
+            //常见问题分类
+            case ACTION.PROBLEMLIST:
+                actionUrl = UrlConstants.PROBLEMLIST;
                 break;
         }
         url.append(actionUrl);
