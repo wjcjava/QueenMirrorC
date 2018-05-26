@@ -228,15 +228,13 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
-
-        //计时过程  
+        //计时过程
         @Override
         public void onTick(long l) {
-            //防止计时过程中重复点击  
+            //防止计时过程中重复点击
             validation.setClickable(false);
             validation.setText((l / 1000) + "s后重新获取");
         }
-
         //计时完毕的方法
         @Override
         public void onFinish() {
