@@ -5,13 +5,13 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.PurchaseListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.AreFundBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderDetailsListInfoBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderPurchaseBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
@@ -76,6 +76,9 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
     protected void onResume() {
         super.onResume();
 
+        Intent intent = this.getIntent();
+        shoppingCartBean = (ShoppingCartBean) intent.getSerializableExtra("cartBean");
+
         lick_name = SP.get(this,SpContent.Lickname,"")+"";
         lick_phone = SP.get(this,SpContent.LickPhone,"")+"";
         link_sex = SP.get(this,SpContent.LickSex,"")+"";
@@ -94,9 +97,42 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
      * 获取购物车数据
      */
     private void getShopCartData() {
-        HashMap<String, String> params = new HashMap<>();
-        params.put("custId", SP.get(PurchaseActivity.this, SpContent.UserId,"")+"");//用户ID
-        HttpUtils.doPost(ACTION.GETSHOPPINDCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        shopList = shoppingCartBean.getBody().getShopList();
+
+        orderPurchaseBeans = new ArrayList<>();
+        for(int i=0;i<shopList.size();i++){
+            cartId = "";
+            orderDetailsListInfo = new ArrayList<>();
+            for(int j=0;j<shopList.get(i).getApiAnsCustCartList().size();j++){
+                L.e(shopList.get(i).getApiAnsCustCartList().get(j).getEcGoodsBasic().getGoodsPrice());
+
+                end_price = end_price + (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice();
+                OrderDetailsListInfoBean orderDetailsListInfoBean = new OrderDetailsListInfoBean();
+                orderDetailsListInfoBean.setGoodsId(shopList.get(i).getApiAnsCustCartList().get(j).getEcGoodsBasic().getId());
+                orderDetailsListInfoBean.setPurchaseNumber(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber()+"");
+                orderDetailsListInfoBean.setUnitPrice(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice()+"");
+                orderDetailsListInfoBean.setSumAmount((double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice()+"");
+                orderDetailsListInfoBean.setDiscountAmount("");
+                orderDetailsListInfoBean.setUsePoints("");
+
+                orderDetailsListInfo.add(orderDetailsListInfoBean);
+
+                cartId = cartId + shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getId()+",";
+            }
+            shopId = shopList.get(i).getId();
+
+            OrderPurchaseBean orderPurchaseBean = new OrderPurchaseBean();
+            orderPurchaseBean.setShopId(shopId);
+            orderPurchaseBean.setCpId("");
+            orderPurchaseBean.setCpMethod("");
+            orderPurchaseBean.setCartIds(cartId);
+            orderPurchaseBean.setOrderDetailsListInfo(orderDetailsListInfo);
+
+            orderPurchaseBeans.add(orderPurchaseBean);
+        }
+        tv_shopping_cart_number.setText("￥"+end_price);
+        listadapter = new PurchaseListViewAdapter(this,shopList);
+        listOrder.setAdapter(listadapter);
     }
 
     @OnClick({R.id.tv_submit,R.id.title_back,R.id.rl_purchase_top})
@@ -111,7 +147,6 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
             //提交订单
             case R.id.tv_submit:
                 UploadData();
-                startActivity(new Intent(PurchaseActivity.this,SubmitActivity.class));
                 break;
         }
     }
@@ -137,48 +172,11 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
 
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
+                    startActivity(new Intent(PurchaseActivity.this,SubmitActivity.class));
                     T.show(successBean.getMsg());
                 }else{
                     T.show(successBean.getMsg());
                 }
-                break;
-            case ACTION.GETSHOPPINDCART:
-                shoppingCartBean = GsonUtil.toObj(res,ShoppingCartBean.class);
-                shopList = shoppingCartBean.getBody().getShopList();
-
-                orderPurchaseBeans = new ArrayList<>();
-                for(int i=0;i<shopList.size();i++){
-                    cartId = "";
-                    orderDetailsListInfo = new ArrayList<>();
-                    for(int j=0;j<shopList.get(i).getApiAnsCustCartList().size();j++){
-
-                        end_price = end_price + (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice();
-                        OrderDetailsListInfoBean orderDetailsListInfoBean = new OrderDetailsListInfoBean();
-                        orderDetailsListInfoBean.setGoodsId(shopList.get(i).getApiAnsCustCartList().get(j).getEcGoodsBasic().getId());
-                        orderDetailsListInfoBean.setPurchaseNumber(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber()+"");
-                        orderDetailsListInfoBean.setUnitPrice(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice()+"");
-                        orderDetailsListInfoBean.setSumAmount((double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice()+"");
-                        orderDetailsListInfoBean.setDiscountAmount("0");
-                        orderDetailsListInfoBean.setUsePoints("0");
-
-                        orderDetailsListInfo.add(orderDetailsListInfoBean);
-
-                        cartId = cartId + shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getId()+",";
-                    }
-                    shopId = shopList.get(i).getId();
-
-                    OrderPurchaseBean orderPurchaseBean = new OrderPurchaseBean();
-                    orderPurchaseBean.setShopId(shopId);
-                    orderPurchaseBean.setCpId("");
-                    orderPurchaseBean.setCpMethod("");
-                    orderPurchaseBean.setCartIds(cartId);
-                    orderPurchaseBean.setOrderDetailsListInfo(orderDetailsListInfo);
-
-                    orderPurchaseBeans.add(orderPurchaseBean);
-                }
-                tv_shopping_cart_number.setText("￥"+end_price);
-                listadapter = new PurchaseListViewAdapter(this,shopList);
-                listOrder.setAdapter(listadapter);
                 break;
         }
     }

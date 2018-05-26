@@ -21,6 +21,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
@@ -148,13 +149,12 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
             case ACTION.ADDTOCAT:
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
-                    T.show(successBean.getMsg());
+                   WorkRoomDetailActivity.instance.getShopCartData();
                 }else{
                     T.show(successBean.getMsg());
                 }
                 break;
         }
-
     }
 
     @Override

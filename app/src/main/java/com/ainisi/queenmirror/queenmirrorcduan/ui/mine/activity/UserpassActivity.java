@@ -60,8 +60,6 @@ public class UserpassActivity extends BaseNewActivity implements HttpCallBack{
                 break;
         }
     }
-
-
     /**
      * 修改密码
      */

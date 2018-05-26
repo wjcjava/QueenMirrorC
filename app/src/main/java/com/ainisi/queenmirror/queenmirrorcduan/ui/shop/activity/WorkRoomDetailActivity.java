@@ -23,6 +23,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopDetailDataBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopTuijianBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopXinyongBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PurchaseActivity;
@@ -36,6 +37,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -117,8 +119,12 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     private WorkShopAdapter shopAdapter;
     private Object receiveDiscoun;
 
+    ShoppingCartBean shoppingCartBean;
+    public static WorkRoomDetailActivity instance = null;
+
     @Override
     protected int getLayoutId() {
+        instance = this;
         return R.layout.activity_work_room_detail;
     }
 
@@ -155,7 +161,22 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
          */
         geeshopDiscoun();
 
+        /**
+         * 获取购物车信息
+         */
+        getShopCartData();
+
     }
+
+    /**
+     * 获取购物车信息
+     */
+    public void getShopCartData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("custId", SP.get(WorkRoomDetailActivity.this, SpContent.UserId,"")+"");//用户ID
+        HttpUtils.doPost(ACTION.GETSHOPPINDCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     private void geeshopDiscoun() {
         HashMap<String,String> params=new HashMap<>();
         params.put("cpCate","1");
@@ -168,6 +189,10 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
+            case ACTION.GETSHOPPINDCART:
+                shoppingCartBean = GsonUtil.toObj(res,ShoppingCartBean.class);
+
+                break;
             case ACTION.ADDLIULAN://添加浏览量
                 SuccessBean successBeans = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBeans.isSuccess()){
@@ -443,7 +468,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 break;
             //提交订单
             case R.id.tv_submit:
-                startActivity(new Intent(this, PurchaseActivity.class));
+                Intent intent = new Intent(this,PurchaseActivity.class);
+                intent.putExtra("cartBean",(Serializable) shoppingCartBean);
+                startActivity(intent);
                 break;
             //购物车
             case R.id.iv_title:

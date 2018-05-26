@@ -1,8 +1,9 @@
 package com.ainisi.queenmirror.queenmirrorcduan.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ShoppingCartBean {
+public class ShoppingCartBean implements Serializable{
 
 
     /**
@@ -49,7 +50,7 @@ public class ShoppingCartBean {
         this.body = body;
     }
 
-    public static class BodyBean {
+    public static class BodyBean implements Serializable{
         private List<ShopListBean> shopList;
 
         public List<ShopListBean> getShopList() {
@@ -60,7 +61,7 @@ public class ShoppingCartBean {
             this.shopList = shopList;
         }
 
-        public static class ShopListBean {
+        public static class ShopListBean implements Serializable{
             /**
              * id : 8997e0d39bdc44c0bbd7da58371d9385       商家ID
              * isNewRecord : false
@@ -645,7 +646,7 @@ public class ShoppingCartBean {
                 this.apiAnsCustCartList = apiAnsCustCartList;
             }
 
-            public static class ApiAnsCustCartListBean {
+            public static class ApiAnsCustCartListBean implements Serializable{
                 /**
                  * id : null
                  * isNewRecord : true
@@ -730,7 +731,7 @@ public class ShoppingCartBean {
                     this.ansShopBasic = ansShopBasic;
                 }
 
-                public static class AnsCustCartBean {
+                public static class AnsCustCartBean implements Serializable{
                     /**
                      * id : 8647b45e349d4ef2976314ad813d1ff0
                      * isNewRecord : false
@@ -836,7 +837,7 @@ public class ShoppingCartBean {
                     }
                 }
 
-                public static class EcGoodsBasicBean {
+                public static class EcGoodsBasicBean implements Serializable{
                     /**
                      * id : 833d6471141d45d49f41f2d225d3e6ff
                      * isNewRecord : false

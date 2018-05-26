@@ -2,11 +2,13 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilsLog;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.StatusBarUtil;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +58,8 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     TextView delGoods;
     @Bind(R.id.ll_cart)
     LinearLayout llCart;
+    @Bind(R.id.title_shopcart_back)
+    ImageView title_shopcart_back;
 
     @Bind(R.id.shoppingcat_num)
     TextView shoppingcatNum;
@@ -73,6 +78,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     ShoppingCartBean shoppingCartBean;
 
     String delIds="";
+    List<ShoppingCartBean.BodyBean.ShopListBean> shopList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -112,8 +118,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     protected void initView() {
         super.initView();
 
-        getShopCartData();
-
     }
 
     /**
@@ -145,21 +149,16 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         for (int i = 0; i < shoppingCartBean.getBody().getShopList().size(); i++) {
             groups.add(new StoreInfo(i + "", shoppingCartBean.getBody().getShopList().get(i).getShopName()));
             List<GoodsInfo> goods = new ArrayList<>();
-
             apiAnsCustCartListBeans = shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList();
             for (int j = 0; j < shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().size(); j++) {
                 int img = R.drawable.icon_home_beautiful;
                 //i-j 就是商品的id， 对应着第几个店铺的第几个商品，1-1 就是第一个店铺的第一个商品,价格,在加商品时的数量
                 goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), "第一排", "出头天者", img, apiAnsCustCartListBeans.get(j).getAnsCustCart().getPurchaseNumber()));
             }
-
             childs.put(groups.get(i).getId(), goods);
         }
-
         setCartNum();
-
         actionBarEdit.setOnClickListener(this);
-
         adapter = new ShopcatAdapter(groups, childs, mcontext);
         adapter.setCheckInterface(this);//关键步骤1：设置复选框的接口
         adapter.setModifyCountInterface(this); //关键步骤2:设置增删减的接口
@@ -191,7 +190,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     @Override
     protected void onResume() {
         super.onResume();
-       // setCartNum();
+        getShopCartData();
     }
 
     /**
@@ -243,7 +242,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
             for (int j = 0; j < childde.size(); j++) {
                 if (childde.get(j).isChoosed()) {
                     toBeDeleteChilds.add(childde.get(j));
-
                     delIds = delIds+childde.get(j).getId()+",";
                 }
             }
@@ -390,10 +388,13 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
 
     }
 
-    @OnClick({R.id.all_checkBox, R.id.go_pay,  R.id.del_goods})
+    @OnClick({R.id.all_checkBox, R.id.go_pay,  R.id.del_goods,R.id.title_shopcart_back})
     public void onClick(View view) {
         AlertDialog dialog;
         switch (view.getId()) {
+            case R.id.title_shopcart_back:
+                finish();
+                break;
             case R.id.all_checkBox:
                 doCheckAll();
                 break;
@@ -402,21 +403,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
                     UtilTool.toast(mcontext, "请选择要支付的商品");
                     return;
                 }
-                dialog = new AlertDialog.Builder(mcontext).create();
-                dialog.setMessage("总计:" + mtotalCount + "种商品，" + mtotalPrice + "元");
-                dialog.setButton(DialogInterface.BUTTON_POSITIVE, "支付", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        return;
-                    }
-                });
-                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        return;
-                    }
-                });
-                dialog.show();
+                calulates();
                 break;
             case R.id.del_goods:
                 if (mtotalCount == 0) {
@@ -446,6 +433,42 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
                 break;
         }
     }
+
+
+    /**
+     * 这里删除的是购物车未选中相关信息
+     */
+    //思路:当子元素=0，那么组元素也要删除
+    private void calulates(){
+
+
+        for(int i=0; i < groups.size(); i++){
+            StoreInfo group = groups.get(i);
+            List<GoodsInfo> child = childs.get(group.getId());
+
+            for (int j = 0; j < child.size(); j++) {
+                GoodsInfo good = child.get(j);
+
+                if (good.isChoosed()) {
+                }else{
+                    shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().remove(j);
+                    child.remove(j);
+
+                    if (child.size() == 0) {
+                        shoppingCartBean.getBody().getShopList().remove(i);
+                    }
+                    j--;
+                }
+            }
+        }
+
+        Intent intent = new Intent(ShoppingCartActivity.this,PurchaseActivity.class);
+        intent.putExtra("cartBean", (Serializable)shoppingCartBean);
+        startActivity(intent);
+    }
+
+
+
 
     /**
      * ActionBar标题上点编辑的时候，只显示每一个店铺的商品修改界面
@@ -508,7 +531,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         } else {
             shoppingcatNum.setText("购物车");
         }
-
 
     }
 

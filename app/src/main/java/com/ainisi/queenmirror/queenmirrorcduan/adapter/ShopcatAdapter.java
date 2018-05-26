@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -105,13 +106,17 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
         }
         final StoreInfo group = (StoreInfo) getGroup(groupPosition);
         groupViewHolder.storeName.setText(group.getName());
-        groupViewHolder.storeCheckBox.setOnClickListener(new View.OnClickListener() {
+
+        groupViewHolder.storeCheckBox.setOnCheckedChangeListener(null);
+
+        groupViewHolder.storeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                group.setChoosed(((CheckBox) v).isChecked());
-                checkInterface.checkGroup(groupPosition, ((CheckBox) v).isChecked());
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                group.setChoosed(b);
+                checkInterface.checkGroup(groupPosition, b);
             }
         });
+
         groupViewHolder.storeCheckBox.setChecked(group.isChoosed());
         return convertView;
     }
@@ -144,14 +149,26 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
             spannableString.setSpan(span,0,spannableString.length()-1+1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
             childViewHolder.singleCheckBox.setChecked(child.isChoosed());
-            childViewHolder.singleCheckBox.setOnClickListener(new View.OnClickListener() {
+
+            childViewHolder.singleCheckBox.setOnCheckedChangeListener(null);
+
+            childViewHolder.singleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        child.setChoosed(b);
+                        childViewHolder.singleCheckBox.setChecked(b);
+                        checkInterface.checkChild(groupPosition, childPosition, b);
+                }
+            });
+
+        /*    childViewHolder.singleCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     child.setChoosed(((CheckBox) v).isChecked());
                     childViewHolder.singleCheckBox.setChecked(((CheckBox) v).isChecked());
                     checkInterface.checkChild(groupPosition, childPosition, ((CheckBox) v).isChecked());
                 }
-            });
+            });*/
             childViewHolder.increaseGoodsNum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
