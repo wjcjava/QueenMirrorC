@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relayout_problem"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_50_dip"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/problem_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="@dimen/comment_20_dip"
+            android:text="意见"
+            android:textColor="@color/alpha_95_black"
+            android:textSize="@dimen/comment_15_size" />
+
+        <CheckBox
+            android:id="@+id/check_problem"
+            android:layout_width="@dimen/comment_50_dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:button="@drawable/checkbox_problem"
+            android:padding="@dimen/comment_15_dip" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_answer"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relayout_problem"
+        android:text="
+Android Filter筛选ListView并且筛选内容变色
+
+微信中有筛选功能，且筛选内容会变色，感觉挺酷的，研究了一下。我首先想到的是遍历每一个数据，如果包含就把它添加到List中，然后用SpannableStringBuilder 类使筛选的内容变色。后来发...
+
+gaolei1201 gaolei1201
+
+2015-10-04 20:06:01
+
+阅读数：3649
+" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_2_dip"
+        android:layout_below="@id/text"
+        android:background="@color/alpha_05_black"
+
+        />
+</RelativeLayout>

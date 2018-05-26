@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
@@ -23,7 +24,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.GoodsInfo;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.StoreInfo;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilTool;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilsLog;
@@ -41,7 +41,7 @@ import butterknife.ButterKnife;
  * 购物车适配器
  */
 
-public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCallBack{
+public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCallBack {
     private List<StoreInfo> groups;
     //这个String对应着StoreInfo的Id，也就是店铺的Id
     private Map<String, List<GoodsInfo>> childrens;
@@ -52,12 +52,14 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
     private int count = 0;
 
     String cartId;
-    private boolean flag=true; //组的编辑按钮是否可见，true可见，false不可见
+    private boolean flag = true; //组的编辑按钮是否可见，true可见，false不可见
+
     public ShopcatAdapter(List<StoreInfo> groups, Map<String, List<GoodsInfo>> childrens, Context mcontext) {
         this.groups = groups;
         this.childrens = childrens;
         this.mcontext = mcontext;
     }
+
     @Override
     public int getGroupCount() {
         return groups.size();
@@ -94,6 +96,7 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
     public boolean hasStableIds() {
         return false;
     }
+
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final GroupViewHolder groupViewHolder;
@@ -134,30 +137,23 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
 
         final GoodsInfo child = (GoodsInfo) getChild(groupPosition, childPosition);
         if (child != null) {
-
             cartId = child.getId();
-
             childViewHolder.goodsNum.setText(String.valueOf(child.getCount()));
-
             childViewHolder.tv_shop_name.setText(child.getName());
-            childViewHolder.tv_shop_cart_price.setText("￥"+child.getPrice());
-
+            childViewHolder.tv_shop_cart_price.setText("￥" + child.getPrice());
             childViewHolder.goodsImage.setImageResource(R.drawable.icon_home_beautiful);
             //设置打折前的原价
             SpannableString spannableString = new SpannableString("￥" + child.getPrime_price() + "");
             StrikethroughSpan span = new StrikethroughSpan();
-            spannableString.setSpan(span,0,spannableString.length()-1+1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-
+            spannableString.setSpan(span, 0, spannableString.length() - 1 + 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
             childViewHolder.singleCheckBox.setChecked(child.isChoosed());
-
             childViewHolder.singleCheckBox.setOnCheckedChangeListener(null);
-
             childViewHolder.singleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        child.setChoosed(b);
-                        childViewHolder.singleCheckBox.setChecked(b);
-                        checkInterface.checkChild(groupPosition, childPosition, b);
+                    child.setChoosed(b);
+                    childViewHolder.singleCheckBox.setChecked(b);
+                    checkInterface.checkChild(groupPosition, childPosition, b);
                 }
             });
 
@@ -192,7 +188,7 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
             childViewHolder.goodsNum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showDialog(groupPosition,childPosition,childViewHolder.goodsNum,childViewHolder.singleCheckBox.isChecked(),child);
+                    showDialog(groupPosition, childPosition, childViewHolder.goodsNum, childViewHolder.singleCheckBox.isChecked(), child);
                 }
             });
 
@@ -206,19 +202,19 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
     private void doNumberData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("userId", "111");//用户ID
-        params.put("num", count+"");
-        params.put("cartId",cartId);
+        params.put("num", count + "");
+        params.put("cartId", cartId);
         HttpUtils.doPost(ACTION.CHANGENUMBERCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.CHANGENUMBERCART:
-                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean.isSuccess()){
-                }else{
+                SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
+                if (successBean.isSuccess()) {
+                } else {
                     T.show(successBean.getMsg());
                 }
                 break;
@@ -234,33 +230,33 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
     public void showErrorMessage(String s) {
 
     }
+
     /**
-     *
      * @param groupPosition
      * @param childPosition
      * @param showCountView
      * @param isChecked
      * @param child
      */
-    private void showDialog(final int groupPosition, final int childPosition, final View showCountView, final  boolean isChecked, final  GoodsInfo child) {
-        final AlertDialog.Builder alertDialog_Builder=new AlertDialog.Builder(mcontext);
-        View view= LayoutInflater.from(mcontext).inflate(R.layout.dialog_change_num,null);
-        final AlertDialog dialog=alertDialog_Builder.create();
+    private void showDialog(final int groupPosition, final int childPosition, final View showCountView, final boolean isChecked, final GoodsInfo child) {
+        final AlertDialog.Builder alertDialog_Builder = new AlertDialog.Builder(mcontext);
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_change_num, null);
+        final AlertDialog dialog = alertDialog_Builder.create();
         dialog.setView(view);//errored,这里是dialog，不是alertDialog_Buidler
-        count=child.getCount();
-        final EditText num= (EditText) view.findViewById(R.id.dialog_num);
-        num.setText(count+"");
+        count = child.getCount();
+        final EditText num = (EditText) view.findViewById(R.id.dialog_num);
+        num.setText(count + "");
         //自动弹出键盘
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                UtilTool.showKeyboard(mcontext,showCountView);
+                UtilTool.showKeyboard(mcontext, showCountView);
             }
         });
-        final TextView increase= (TextView) view.findViewById(R.id.dialog_increaseNum);
-        final TextView DeIncrease=(TextView)view.findViewById(R.id.dialog_reduceNum);
-        final TextView pButton= (TextView) view.findViewById(R.id.dialog_Pbutton);
-        final TextView nButton= (TextView) view.findViewById(R.id.dialog_Nbutton);
+        final TextView increase = (TextView) view.findViewById(R.id.dialog_increaseNum);
+        final TextView DeIncrease = (TextView) view.findViewById(R.id.dialog_reduceNum);
+        final TextView pButton = (TextView) view.findViewById(R.id.dialog_Pbutton);
+        final TextView nButton = (TextView) view.findViewById(R.id.dialog_Nbutton);
         nButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -270,14 +266,14 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
         pButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number= Integer.parseInt(num.getText().toString().trim());
-                if(number==0){
+                int number = Integer.parseInt(num.getText().toString().trim());
+                if (number == 0) {
                     dialog.dismiss();
-                }else{
-                    UtilsLog.i("数量="+number+"");
+                } else {
+                    UtilsLog.i("数量=" + number + "");
                     num.setText(String.valueOf(number));
                     child.setCount(number);
-                    modifyCountInterface.doUpdate(groupPosition,childPosition,showCountView,isChecked);
+                    modifyCountInterface.doUpdate(groupPosition, childPosition, showCountView, isChecked);
 
                     doNumberData();
                     dialog.dismiss();
@@ -294,7 +290,7 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
         DeIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count>1){
+                if (count > 1) {
                     count--;
                     num.setText(String.valueOf(count));
                 }

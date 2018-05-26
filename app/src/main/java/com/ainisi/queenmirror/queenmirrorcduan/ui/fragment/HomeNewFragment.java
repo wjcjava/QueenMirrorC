@@ -33,7 +33,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneAc
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
@@ -151,7 +150,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         params.put("shopCate","1");
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 获取新消息提示
      */
@@ -332,11 +330,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         badgeView.setBadgeTextColor(this.getResources().getColor(R.color.white));
                         badgeView.setBadgeGravity(Gravity.END | Gravity.TOP);
                         badgeView.setBadgeBackgroundColor(this.getResources().getColor(R.color.colorPri));
-
                         badgeView.setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
                             @Override
                             public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-
                             }
                         });
                     }
@@ -377,7 +373,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             case ACTION.HEADLINES:
                 homeHeadlinesBean = GsonUtil.toObj(res, HomeHeadlinesBean.class);
                 if (homeHeadlinesBean.isSuccess()) {
-
                     for (int i = 0; i < homeHeadlinesBean.getBody().getTopListData().size(); i++) {
                         contntList.add(homeHeadlinesBean.getBody().getTopListData().get(i).getEcTop().getTopName());
                     }
