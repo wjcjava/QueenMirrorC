@@ -127,4 +127,6 @@ public interface UrlConstants {
     String USERBIND="api/ans/login/snsUserBindingAccount";//客户端绑定第三方账号
 
     String PROBLEMLIST="api/ec/help/questionCategoryList";//常见问题分类
+
+    String PROBLEMDATA="api/ec/help/questionListByCategory";//常见问题分类的数据
 }

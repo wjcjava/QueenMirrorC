@@ -65,6 +65,8 @@ public interface ACTION {
 
     int PROBLEMLIST=0x31;//常见问题分类
 
+    int PROBLEMDATA=0X32;
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

@@ -159,7 +159,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         params.put("messageType", "");
         HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true,this);
     }
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {

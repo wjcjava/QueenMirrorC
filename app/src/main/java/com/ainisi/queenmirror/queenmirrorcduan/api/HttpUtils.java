@@ -428,21 +428,27 @@ public class HttpUtils {
             case ACTION.SHOPCARTADD:
                 actionUrl = UrlConstants.SHOPCARTADD;
                 break;
+            //加入购物车
             case ACTION.ADDTOCAT:
                 actionUrl = UrlConstants.ADDTOCAT;
                 break;
+            //获取开通城市列表
             case ACTION.GETCITYLIST:
                 actionUrl = UrlConstants.GETCITYLIST;
                 break;
+            //获取商品详情
             case ACTION.GETPRODUCTDETAIL:
                 actionUrl = UrlConstants.GETPRODUCTDETAIL;
                 break;
+            //搜索购物车
             case ACTION.GETSHOPPINDCART:
                 actionUrl = UrlConstants.GETSHOPPINDCART;
                 break;
+            //改变购物车数量
             case ACTION.CHANGENUMBERCART:
                 actionUrl = UrlConstants.CHANGENUMBERCART;
                 break;
+            //删除购物车
             case ACTION.DELETESHOPCART:
                 actionUrl = UrlConstants.DELETESHOPCART;
                 break;
@@ -450,21 +456,27 @@ public class HttpUtils {
             case ACTION.MYCOMMENTS:
                 actionUrl = UrlConstants.MYCOMMENTS;
                 break;
+            //修改密码
             case ACTION.CHANGEPASSWORD:
                 actionUrl = UrlConstants.CHANGEPASSWORD;
                 break;
+            //退出登录账号
             case ACTION.LOGINOUT:
                 actionUrl = UrlConstants.LOGINOUT;
                 break;
+            //用户修改用户名
             case ACTION.CHANGENAME:
                 actionUrl = UrlConstants.CHANGENAME;
                 break;
+            //获取新消息提示
             case ACTION.GETNEWNEWS:
                 actionUrl = UrlConstants.GETNEWNEWS;
                 break;
+            //第三方登录检验openID
             case ACTION.CHECKOPENID:
                 actionUrl = UrlConstants.CHECKOPENID;
                 break;
+            //第三方直接登录
             case ACTION.THIRDLOGINONE:
                 actionUrl = UrlConstants.THIRDLOGINONE;
                 break;
@@ -509,6 +521,10 @@ public class HttpUtils {
             //常见问题分类
             case ACTION.PROBLEMLIST:
                 actionUrl = UrlConstants.PROBLEMLIST;
+                break;
+            //常见问题分类的数据
+            case ACTION.PROBLEMDATA:
+                actionUrl = UrlConstants.PROBLEMDATA;
                 break;
         }
         url.append(actionUrl);
