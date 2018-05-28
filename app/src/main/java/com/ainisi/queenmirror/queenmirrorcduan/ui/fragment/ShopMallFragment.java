@@ -122,7 +122,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private CustomPopWindow popWindow;
     private PopupWindow pop;
     private View popview1;
-    private List<ShopBean> shopList = new ArrayList<>();
+    private List<ShopBean> shopList;
     private List<ProblemBean> list = new ArrayList<>();
     private int[] imgTitle = {R.drawable.icon_shop_entertainment, R.drawable.icon_shop_bank_insurance,
             R.drawable.icon_shop_jewellery, R.drawable.icon_shop_medicalcare, R.drawable.icon_shop_motion,
@@ -190,7 +190,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private void initshopList() {
         HashMap<String,String> params=new HashMap<>();
         params.put("categoryId","");
-        params.put("pageNumber","");
+        params.put("pageNumber","1");
+        params.put("pageSize","10");
         HttpUtils.doPost(ACTION.MERCHANTSLIST,params,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
@@ -419,7 +420,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         }
     }
 
-    private List<DetailsBean> drtalist=new ArrayList<>();
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
@@ -427,16 +427,16 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
              * 获取异业分类数据
              */
             case ACTION.INDUSTRY:
-
                 homeIndustryBean = GsonUtil.toObj(res, HomeIndustryBean.class);
 
-                L.e("@@@@@@@@@@@@@@    "+homeIndustryBean.getBody().getCategoryListData().size()+"    "+homeIndustryBean.getBody().getCategoryListData().get(0).getEcCategory().getTabName());
-                for (int i = 0; i < homeIndustryBean.getBody().getCategoryListData().size(); i++) {
+                shopList = new ArrayList<>();
+                for (int i = 0; i < 8; i++) {
                     ShopBean shopBean = new ShopBean();
                     shopBean.setImageTitle(imgTitle[i]);
                     shopBean.setTextName(homeIndustryBean.getBody().getCategoryListData().get(i).getEcCategory().getTabName());
                     shopList.add(shopBean);
                 }
+
                 MyShopAdapter myShopAdapter = new MyShopAdapter(R.layout.re_shopmall_shop, shopList);
                 shopRecycle.setLayoutManager(new GridLayoutManager(getActivity(), 4));
                 shopRecycle.setAdapter(myShopAdapter);
@@ -451,11 +451,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case ACTION.SHOPLIST:
                 shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
                 if (shopListHomeBean.isSuccess()) {
-
-                    L.e("$$$$$$$   "+res);
-
                     if(shopListHomeBean.getBody().getShopList().size()>0){
-
                         HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
                         shop_gridView.setAdapter(gridViewAdapter);
                     }else{

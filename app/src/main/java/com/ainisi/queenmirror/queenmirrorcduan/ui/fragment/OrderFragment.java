@@ -12,6 +12,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActi
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.AssessedFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.RefundFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.WholeFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.LoginActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
@@ -33,12 +36,8 @@ public class OrderFragment extends BaseFragment {
     @Bind(R.id.title_photo)
     ImageView title_photo;
 
-    public String order_state="";
-
     private List<String> tablist = new ArrayList<>();
     private List<Fragment> pagerlist = new ArrayList<>();
-
-    public int pos ;
 
     @Override
     protected int getLayoutResource()  {
@@ -46,8 +45,19 @@ public class OrderFragment extends BaseFragment {
     }
 
     @Override
-    public void initPresenter() {
+    public void onResume() {
+        super.onResume();
 
+         if(SP.get(getActivity(), SpContent.isLogin,"").equals("1")){
+
+         }else{
+             Intent intent = new Intent(getActivity(), LoginActivity.class);
+             startActivity(intent);
+         }
+    }
+
+    @Override
+    public void initPresenter() {
     }
     @OnClick({R.id.title_photo})
     public void onClick(View view){

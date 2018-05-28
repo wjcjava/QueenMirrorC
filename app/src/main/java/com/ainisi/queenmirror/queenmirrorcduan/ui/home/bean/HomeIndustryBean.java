@@ -8,11 +8,12 @@ import java.util.List;
 
 public class HomeIndustryBean {
 
+
     /**
      * success : true
      * errorCode : 0
      * msg : 获取数据成功
-     * body : {"CategoryListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"27a7d133a8f94cb9b9bce03365cf6a48","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"2","tabName":"美容美体","tabKeyword":"MRMT","tabDesc":"美容美体","tabSorts":"3","fatherId":"0","allFathers":"","categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null},"tabTypeLabel":"美业商品","openFlagLabel":"开放"},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"575a4f781e48405f860f0dc7a7be4b79","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"2","tabName":"美学汇","tabKeyword":"MXH","tabDesc":"美学汇","tabSorts":"1","fatherId":"0","allFathers":"","categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null},"tabTypeLabel":"美业商品","openFlagLabel":"开放"},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"9003d18c17bd4bb98969a72a4ca553d5","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"2","tabName":"美甲美手","tabKeyword":"MJMS","tabDesc":"美甲美手","tabSorts":"2","fatherId":"0","allFathers":"","categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null},"tabTypeLabel":"美业商品","openFlagLabel":"开放"},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"b718ade8a94f4b41993c0ecbcc2821d2","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"2","tabName":"美发定制","tabKeyword":"MFDZ","tabDesc":"美发定制","tabSorts":"4","fatherId":"0","allFathers":"","categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null},"tabTypeLabel":"美业商品","openFlagLabel":"开放"},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"d93edbd7180246aca91c368b1d64b937","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"2","tabName":"半永久","tabKeyword":"BYJ","tabDesc":"半永久","tabSorts":"5","fatherId":"0","allFathers":"","categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null},"tabTypeLabel":"美业商品","openFlagLabel":"开放"}]}
+     * body : {"CategoryListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"052b2fcbe3e74cba9221e381d490b9f0","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"银行保险","tabPic":null,"tabKeyword":"YHBX","tabDesc":"银行保险","tabSorts":"12","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"26264efa932944b89d2c739b84b6002b","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"休闲娱乐","tabPic":null,"tabKeyword":"XXYL","tabDesc":"休闲娱乐","tabSorts":"2","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"5db93f5c225a4856b72752c075644461","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"珠宝首饰","tabPic":null,"tabKeyword":"ZBSS","tabDesc":"珠宝首饰","tabSorts":"10","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"779c1c0dbb4c40fead0df9c1c18c7c3a","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"酒店","tabPic":null,"tabKeyword":"JD","tabDesc":"酒店","tabSorts":"8","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"7b3310c8702c49938642658220720c35","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"运动健身","tabPic":null,"tabKeyword":"YDJS","tabDesc":"运动健身","tabSorts":"5","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"aa35843c173a451a80053d269da0e874","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"教育培训","tabPic":null,"tabKeyword":"JYPX","tabDesc":"教育培训","tabSorts":"7","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"c93f724061614fbaa6d65f1403cb42ab","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"爱车服务","tabPic":null,"tabKeyword":"ACFW","tabDesc":"爱车服务","tabSorts":"6","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"d502b6c59b4e4ef08af60a6f76d87762","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"亲子","tabPic":null,"tabKeyword":"QZ","tabDesc":"亲子","tabSorts":"9","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"d5ecccbf6fd649b8aa43a1a135dd6605","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"旅游","tabPic":null,"tabKeyword":"LY","tabDesc":"旅游","tabSorts":"1","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"d6faa03eafc1495d9b915be5d3a14231","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"购物","tabPic":null,"tabKeyword":"GW","tabDesc":"购物","tabSorts":"4","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"de3cb2ab3c1b49b79329350cdf32fcd0","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"医疗健康","tabPic":null,"tabKeyword":"YLJK","tabDesc":"医疗健康","tabSorts":"3","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"e6bca29a6ec54f1d849e93b8faed168e","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"幼儿培训","tabPic":null,"tabKeyword":"YEPX","tabDesc":"幼儿培训","tabSorts":"5","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecCategory":{"id":"f5011adcb2474d329f72775ed7fb2574","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"婚庆摄影","tabPic":null,"tabKeyword":"HQSY","tabDesc":"婚庆摄影","tabSorts":"11","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null},"tabTypeLabel":null,"openFlagLabel":null}]}
      */
 
     private boolean success;
@@ -70,9 +71,9 @@ public class HomeIndustryBean {
              * remarks : null
              * createDate : null
              * updateDate : null
-             * ecCategory : {"id":"27a7d133a8f94cb9b9bce03365cf6a48","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"2","tabName":"美容美体","tabKeyword":"MRMT","tabDesc":"美容美体","tabSorts":"3","fatherId":"0","allFathers":"","categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null}
-             * tabTypeLabel : 美业商品
-             * openFlagLabel : 开放
+             * ecCategory : {"id":"052b2fcbe3e74cba9221e381d490b9f0","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"tabType":"4","tabName":"银行保险","tabPic":null,"tabKeyword":"YHBX","tabDesc":"银行保险","tabSorts":"12","fatherId":"0","allFathers":null,"categoryNo":null,"categoryBrief":null,"categoryRemarks":null,"openFlag":"0","list":null,"fatherName":null}
+             * tabTypeLabel : null
+             * openFlagLabel : null
              */
 
             private Object id;
@@ -81,8 +82,8 @@ public class HomeIndustryBean {
             private Object createDate;
             private Object updateDate;
             private EcCategoryBean ecCategory;
-            private String tabTypeLabel;
-            private String openFlagLabel;
+            private Object tabTypeLabel;
+            private Object openFlagLabel;
 
             public Object getId() {
                 return id;
@@ -132,41 +133,43 @@ public class HomeIndustryBean {
                 this.ecCategory = ecCategory;
             }
 
-            public String getTabTypeLabel() {
+            public Object getTabTypeLabel() {
                 return tabTypeLabel;
             }
 
-            public void setTabTypeLabel(String tabTypeLabel) {
+            public void setTabTypeLabel(Object tabTypeLabel) {
                 this.tabTypeLabel = tabTypeLabel;
             }
 
-            public String getOpenFlagLabel() {
+            public Object getOpenFlagLabel() {
                 return openFlagLabel;
             }
 
-            public void setOpenFlagLabel(String openFlagLabel) {
+            public void setOpenFlagLabel(Object openFlagLabel) {
                 this.openFlagLabel = openFlagLabel;
             }
 
             public static class EcCategoryBean {
                 /**
-                 * id : 27a7d133a8f94cb9b9bce03365cf6a48
+                 * id : 052b2fcbe3e74cba9221e381d490b9f0
                  * isNewRecord : false
                  * remarks : null
                  * createDate : null
                  * updateDate : null
-                 * tabType : 2
-                 * tabName : 美容美体
-                 * tabKeyword : MRMT
-                 * tabDesc : 美容美体
-                 * tabSorts : 3
+                 * tabType : 4
+                 * tabName : 银行保险
+                 * tabPic : null
+                 * tabKeyword : YHBX
+                 * tabDesc : 银行保险
+                 * tabSorts : 12
                  * fatherId : 0
-                 * allFathers :
+                 * allFathers : null
                  * categoryNo : null
                  * categoryBrief : null
                  * categoryRemarks : null
                  * openFlag : 0
                  * list : null
+                 * fatherName : null
                  */
 
                 private String id;
@@ -176,16 +179,18 @@ public class HomeIndustryBean {
                 private Object updateDate;
                 private String tabType;
                 private String tabName;
+                private Object tabPic;
                 private String tabKeyword;
                 private String tabDesc;
                 private String tabSorts;
                 private String fatherId;
-                private String allFathers;
+                private Object allFathers;
                 private Object categoryNo;
                 private Object categoryBrief;
                 private Object categoryRemarks;
                 private String openFlag;
                 private Object list;
+                private Object fatherName;
 
                 public String getId() {
                     return id;
@@ -243,6 +248,14 @@ public class HomeIndustryBean {
                     this.tabName = tabName;
                 }
 
+                public Object getTabPic() {
+                    return tabPic;
+                }
+
+                public void setTabPic(Object tabPic) {
+                    this.tabPic = tabPic;
+                }
+
                 public String getTabKeyword() {
                     return tabKeyword;
                 }
@@ -275,11 +288,11 @@ public class HomeIndustryBean {
                     this.fatherId = fatherId;
                 }
 
-                public String getAllFathers() {
+                public Object getAllFathers() {
                     return allFathers;
                 }
 
-                public void setAllFathers(String allFathers) {
+                public void setAllFathers(Object allFathers) {
                     this.allFathers = allFathers;
                 }
 
@@ -321,6 +334,14 @@ public class HomeIndustryBean {
 
                 public void setList(Object list) {
                     this.list = list;
+                }
+
+                public Object getFatherName() {
+                    return fatherName;
+                }
+
+                public void setFatherName(Object fatherName) {
+                    this.fatherName = fatherName;
                 }
             }
         }

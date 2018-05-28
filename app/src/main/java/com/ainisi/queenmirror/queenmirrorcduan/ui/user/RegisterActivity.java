@@ -163,14 +163,12 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 if(ceshiBean.isSuccess()){
                     myCountDownTimer.start();
                     vConfig = ceshiBean.getBody().getVerifyCode();
-                }
-                else{
+                }else{
                     T.show("系统出错，请稍后再试");
                 }
                 break;
             case ACTION.REGIST://注册
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
-
                 if(successBean.isSuccess()){
                     T.show(successBean.getMsg());
                     if(where.equals("third")){
@@ -219,9 +217,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     }
     @Override
     public void showErrorMessage(String s) {
-
     }
-
     //复写倒计时  
     private class MyCountDownTimer extends CountDownTimer {
 
