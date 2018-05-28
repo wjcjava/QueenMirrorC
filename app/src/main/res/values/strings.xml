@@ -235,6 +235,8 @@
     <string name="add_login_number">请输入登陆账号</string>
     <string name="add_login_password">请输入登陆密码</string>
     <string name="add_pay_password" >请输入支付密码</string>
+    <string name="subscribe">在线预约</string>
+    <string name="facepay">到店付款</string>
 
 
 </resources>

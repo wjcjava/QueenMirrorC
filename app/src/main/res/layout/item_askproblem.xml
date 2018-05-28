@@ -3,8 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_2_dip"
+        android:background="@color/alpha_05_black"
 
+        />
     <RelativeLayout
+        android:layout_below="@id/view"
         android:id="@+id/relayout_problem"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_50_dip"
@@ -34,25 +41,11 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/comment_20_dip"
         android:layout_below="@id/relayout_problem"
-        android:text="
-Android Filter筛选ListView并且筛选内容变色
-
-微信中有筛选功能，且筛选内容会变色，感觉挺酷的，研究了一下。我首先想到的是遍历每一个数据，如果包含就把它添加到List中，然后用SpannableStringBuilder 类使筛选的内容变色。后来发...
-
-gaolei1201 gaolei1201
-
-2015-10-04 20:06:01
-
-阅读数：3649
-" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/comment_2_dip"
-        android:layout_below="@id/text"
-        android:background="@color/alpha_05_black"
-
+        android:text="Android Filter筛选ListView"
+        android:layout_marginBottom="@dimen/comment_10_dip"
         />
+
+
 </RelativeLayout>
