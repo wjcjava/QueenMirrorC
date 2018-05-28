@@ -21,6 +21,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.CouponGetBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -51,6 +52,7 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
     boolean isLogin=false;
     private List<SortBean> beanList=new ArrayList<>();
     private CustomPopWindow popWindow;
+    String shopName,shopId;
 
     @Override
     protected int getLayoutId() {
@@ -60,10 +62,21 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
     @Override
     protected void initView() {
         super.initView();
-        storeTitle.setText("DLOVES婚介定制中心");
+        Intent intent = this.getIntent();
+        shopName = intent.getStringExtra("shopName");
+        shopId = intent.getStringExtra("shopId");
+
+        storeTitle.setText(shopName);
         storeTitle.setTextColor(Color.BLACK);
 
+        getShopDetailData();
+    }
 
+    private void getShopDetailData() {
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",shopId);//商户ID
+        params.put("userId", SP.get(this, SpContent.UserId,"").toString()+"");//用户ID
+        HttpUtils.doPost(ACTION.SHOPDETAILDATA,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
     @Override
@@ -71,17 +84,12 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
         super.onResume();
         if(SP.get(this, SpContent.isLogin,"0").toString().equals("1")){
             isLogin = true;
-
         }else{
             isLogin = false;
-
         }
     }
-
     @Override
     protected void initData() {
-
-
         super.initData();
         for (int i = 0; i <6 ; i++) {
             SortBean sortBean=new SortBean();
@@ -93,10 +101,7 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
         MyAdapter myAdapter1=new MyAdapter(R.layout.re_store_boutique,beanList);
         reBoutique.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL,false));
         reBoutique.setAdapter(myAdapter1);
-
     }
-
-
     @OnClick({R.id.title_back,R.id.re_product_two,R.id.re_invincible})
     public void click(View view) {
         switch (view.getId()) {
@@ -124,11 +129,8 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
                 break;
             default:
                 break;
-
         }
-
     }
-
     private void initgetId(View popview) {
         popview.findViewById(R.id.tv_shop_couponget).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,19 +140,15 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
                 }else {
                     T.show("您未登陆请先登陆");
                 }
-
             }
         });
-
     }
-
     private void inithttp() {
         HashMap<String,String> params=new HashMap<>();
         params.put("cpId","1cf04904fa064c4294453ce39c506be1");//优惠券ID
-        params.put("userId", SP.get(this, SpContent.UserName,"").toString()+"");//用户ID
-        params.put("shopId","19");//商品ID
+        params.put("userId", SP.get(this, SpContent.UserId,"").toString()+"");//用户ID
+        params.put("shopId",shopId);//商品ID
         HttpUtils.doPost(ACTION.COUPONGET,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
-
     }
 
     @Override
@@ -164,16 +162,18 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
                     T.show(couponGetBean.getMsg());
                 }
                 break;
+                //获取店铺详情
+            case ACTION.SHOPDETAILDATA:
+
+                L.e("................."+res);
+
+                break;
         }
     }
-
     @Override
     public void showLoadingDialog() {
-
     }
-
     @Override
     public void showErrorMessage(String s) {
-
     }
 }

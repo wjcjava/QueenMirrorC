@@ -15,7 +15,7 @@
     <LinearLayout
         android:id="@+id/re_"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/comment_61_dip"
+        android:layout_height="@dimen/comment_60_dip"
         android:layout_alignParentBottom="true"
         android:background="@color/white">
 
@@ -257,8 +257,7 @@
             <RelativeLayout
                 android:id="@+id/recycler_two"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/comment_25_dip">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:id="@+id/re_product_two"

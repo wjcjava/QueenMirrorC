@@ -123,7 +123,6 @@ public interface ACTION {
 
     int UPLOADORDER = 0x132;//提交订单
 
-
-
+    int PayBefore = 0x133;//支付之前调用
 
 }

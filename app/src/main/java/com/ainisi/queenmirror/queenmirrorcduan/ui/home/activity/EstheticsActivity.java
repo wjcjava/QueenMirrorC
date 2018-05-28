@@ -135,6 +135,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
         hashMap.put("categoryId", categoryId);
         hashMap.put("pageNumber", pageNumber + "");
         hashMap.put("pageSize", "10");
+        hashMap.put("shopCate","1");
         HttpUtils.doPost(ACTION.MERCHANTSLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 

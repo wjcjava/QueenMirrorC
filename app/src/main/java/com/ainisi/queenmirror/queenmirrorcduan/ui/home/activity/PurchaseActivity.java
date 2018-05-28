@@ -13,6 +13,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.AreFundBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderDetailsListInfoBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderPayDetailBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderPurchaseBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
@@ -25,6 +26,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.google.gson.Gson;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +61,9 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
     List<OrderDetailsListInfoBean> orderDetailsListInfo;
 
     List<OrderPurchaseBean> orderPurchaseBeans ;
-    double end_price;
+
+    List<String> orderIdList = new ArrayList<>();
+    double end_price = 0;
     String cartId = "";
 
     @Override
@@ -104,7 +108,6 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
             cartId = "";
             orderDetailsListInfo = new ArrayList<>();
             for(int j=0;j<shopList.get(i).getApiAnsCustCartList().size();j++){
-                L.e(shopList.get(i).getApiAnsCustCartList().get(j).getEcGoodsBasic().getGoodsPrice());
 
                 end_price = end_price + (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice();
                 OrderDetailsListInfoBean orderDetailsListInfoBean = new OrderDetailsListInfoBean();
@@ -116,7 +119,6 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
                 orderDetailsListInfoBean.setUsePoints("");
 
                 orderDetailsListInfo.add(orderDetailsListInfoBean);
-
                 cartId = cartId + shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getId()+",";
             }
             shopId = shopList.get(i).getId();
@@ -170,9 +172,15 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
         switch (action){
             case ACTION.UPLOADORDER://提交订单
 
-                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                OrderPayDetailBean successBean = GsonUtil.toObj(res,OrderPayDetailBean.class);
                 if(successBean.isSuccess()){
-                    startActivity(new Intent(PurchaseActivity.this,SubmitActivity.class));
+
+                    orderIdList = successBean.getBody().getOrderIdList();
+
+                    Intent intent = new Intent(PurchaseActivity.this,SubmitActivity.class);
+                    intent.putExtra("orderIdList",(Serializable) orderIdList);
+                    intent.putExtra("amount",tv_shopping_cart_number.getText().toString());
+                    startActivity(intent);
                     T.show(successBean.getMsg());
                 }else{
                     T.show(successBean.getMsg());

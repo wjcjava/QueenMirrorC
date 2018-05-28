@@ -526,6 +526,9 @@ public class HttpUtils {
             case ACTION.PROBLEMDATA:
                 actionUrl = UrlConstants.PROBLEMDATA;
                 break;
+            case ACTION.PayBefore:
+                actionUrl = UrlConstants.PayBefore;
+                break;
         }
         url.append(actionUrl);
         return url;

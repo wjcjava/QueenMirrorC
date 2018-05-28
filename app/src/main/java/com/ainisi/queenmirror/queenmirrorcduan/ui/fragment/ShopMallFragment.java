@@ -443,7 +443,10 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 myShopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        startActivity(new Intent(getActivity(), ShopClassificationActivity.class));
+                        Intent intent = new Intent(getActivity(),ShopClassificationActivity.class);
+                        intent.putExtra("catName",shopList.get(position).getTextName());
+                        intent.putExtra("catId",homeIndustryBean.getBody().getCategoryListData().get(position).getEcCategory().getId());
+                        startActivity(intent);
                     }
                 });
                 break;

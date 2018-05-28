@@ -14,22 +14,33 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.EstheticsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FulldistanFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullsalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullscreenFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullshortFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.ShopMainFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -38,7 +49,7 @@ import butterknife.OnClick;
 /**
  * 休闲娱乐
  */
-public class ShopClassificationActivity extends BaseActivity {
+public class ShopClassificationActivity extends BaseActivity implements HttpCallBack{
     @Bind(R.id.full_rb_sort)
     TextView hSort;
     @Bind(R.id.re_recommendable_projects)
@@ -55,14 +66,17 @@ public class ShopClassificationActivity extends BaseActivity {
     ImageView ivsort1;
     @Bind(R.id.pager_home_full)
     NoScrollViewPager fullpager;
+    @Bind(R.id.newtitle_title)
+    TextView newtitle_title;
+
     //综合排序
-    FullshortFragment sortFragment = new FullshortFragment();
+    ShopMainFragment sortFragment = new ShopMainFragment();
     //销量最高
-    FullshortFragment salesFragment = new FullshortFragment();
+    ShopMainFragment salesFragment = new ShopMainFragment();
     //距离最近
-    FullshortFragment distanceFragment = new FullshortFragment();
+    ShopMainFragment distanceFragment = new ShopMainFragment();
     //筛选
-    FullshortFragment screenFragment = new FullshortFragment();
+    ShopMainFragment screenFragment = new ShopMainFragment();
     private CustomPopWindow popWindow;
     private View popview1;
     private PopupWindow pop;
@@ -70,7 +84,16 @@ public class ShopClassificationActivity extends BaseActivity {
     List<SortBean> sortlist=new ArrayList<>();
     private List<ProblemBean> list = new ArrayList<>();
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
+
+    public String catName,catId;
+    int pageNumber = 1;
+    List<EstheticsBean.BodyBean.ApiShopListBean> apiShopList = new ArrayList<>();
+
+    EstheticsAdapter sortAdapter;
+    public static ShopClassificationActivity instance = null;
+
     public int getLayoutId() {
+        instance = this;
         return R.layout.activity_shop_classification;
     }
     @Override
@@ -78,9 +101,29 @@ public class ShopClassificationActivity extends BaseActivity {
     }
     @Override
     public void initView() {
+
+        Intent intent  = this.getIntent();
+        catName = intent.getStringExtra("catName");
+        catId = intent.getStringExtra("catId");
+        newtitle_title.setText(catName);
+
+        doFirstData();
         initDate();
         initfragment();
     }
+
+    /**
+     * 获取推荐好店的数据
+     */
+    private void doFirstData() {
+        HashMap<String, String> hashMap = new HashMap();
+        hashMap.put("categoryId", catId);
+        hashMap.put("pageNumber", pageNumber + "");
+        hashMap.put("pageSize", "10");
+        hashMap.put("shopCate","2");
+        HttpUtils.doPost(ACTION.MERCHANTSLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     private void initfragment() {
         pagerList.add(sortFragment);
         pagerList.add(salesFragment);
@@ -92,7 +135,7 @@ public class ShopClassificationActivity extends BaseActivity {
     }
     private void initDate() {
 
-        for (int i = 0; i <10 ; i++) {
+       /* for (int i = 0; i <10 ; i++) {
             SortBean sortBean=new SortBean();
             sortlist.add(sortBean);
         }
@@ -104,7 +147,7 @@ public class ShopClassificationActivity extends BaseActivity {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 startActivity(new Intent(ShopClassificationActivity.this, FullActivity.class));
             }
-        });
+        });*/
         pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
         popview1 = View.inflate(this, R.layout.pop_myitem, null);
         initpop(popview1);
@@ -201,10 +244,46 @@ public class ShopClassificationActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 popWindow.dissmiss();
-
             }
         });
     }
 
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.MERCHANTSLIST:
+                EstheticsBean estheticsBean = GsonUtil.toObj(res, EstheticsBean.class);
+                apiShopList = estheticsBean.getBody().getApiShopList();
 
+                if (apiShopList.size()>0) {
+
+                    sortAdapter = new EstheticsAdapter(R.layout.re_full_recommend, apiShopList);
+                    reProjects.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+                    reProjects.setAdapter(sortAdapter);
+
+                    sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            Intent intent = new Intent(ShopClassificationActivity.this, ShopStoreActivity.class);
+                            intent.putExtra("shopName", apiShopList.get(position).getAnsShopBasic().getShopName());
+                            intent.putExtra("shopId", apiShopList.get(position).getAnsShopBasic().getId());
+                            startActivity(intent);
+                        }
+                    });
+                } else {
+                    T.show(estheticsBean.getMsg());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }
