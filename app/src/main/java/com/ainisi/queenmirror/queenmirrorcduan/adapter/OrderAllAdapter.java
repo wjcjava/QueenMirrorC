@@ -15,12 +15,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBean.ApiOrderListBean,BaseViewHolder> {
 
     Context context;
-    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean> apiOrderListBeanList;
+    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean> apiOrderListBeanList = new ArrayList<>();
 
     OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean apiOrderDetailsListBean;
 
@@ -41,13 +42,13 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
                     .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
                     .setText(R.id.tv_order_again,"取消")
-                    .setGone(R.id.tv_order_like, false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"待付款");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("UT")){
-//待接单
+            //待接单
             helper.setText(R.id.tv_order_tuikuan,"退款")
-                    .setGone(R.id.tv_order_again,false)
-                    .setGone(R.id.tv_order_like, false)
+                    .setVisible(R.id.tv_order_again,false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"待接单");
 
             helper.setOnClickListener(R.id.tv_order_tuikuan, new View.OnClickListener() {
@@ -60,22 +61,19 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                         apiOrderDetailsListBean = item.getIntfAnsOrder().getApiOrderDetailsList().get(i);
                         apiOrderListBeanList.add(apiOrderDetailsListBean);
                     }
-
-
                     intent.putExtra("lstBean",(Serializable)apiOrderListBeanList);
                     intent.putExtra("orderNo",item.getIntfAnsOrder().getOrderNo());
                     context.startActivity(intent);
                 }
             });
 
-
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("FT")){
-//已接单
+            //已接单
             helper.setText(R.id.tv_order_tuikuan,"查看订单")
                     .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
                     .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
                     .setText(R.id.tv_order_again,"退款")
-                    .setGone(R.id.tv_order_like, false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"已接单");
 
         /*    helper.setOnClickListener(R.id.tv_order_again, new View.OnClickListener() {
@@ -88,51 +86,51 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
             });*/
 
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("US")){
-//待服务
+            //待服务
             helper.setText(R.id.tv_order_tuikuan,"查看订单")
                     .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
                     .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
                     .setText(R.id.tv_order_again,"退款")
-                    .setGone(R.id.tv_order_like, false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"待服务");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("FN")){
-//已完成
-            helper.setGone(R.id.tv_order_tuikuan,false)
-                    .setGone(R.id.tv_order_again,false)
-                    .setGone(R.id.tv_order_like, false)
+            //已完成
+            helper.setVisible(R.id.tv_order_tuikuan,false)
+                    .setVisible(R.id.tv_order_again,false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"已完成");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("UC")){
-//待评价
+            //待评价
             helper.setText(R.id.tv_order_tuikuan,"去评价")
-                    .setGone(R.id.tv_order_again,false)
-                    .setGone(R.id.tv_order_like, false)
+                    .setVisible(R.id.tv_order_again,false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"待评价");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("CA")){
-//已取消
+             //已取消
             helper.setText(R.id.tv_order_tuikuan,"付款")
                     .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
                     .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
                     .setText(R.id.tv_order_again,"取消")
-                    .setGone(R.id.tv_order_like, false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"已取消");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("PR")){
-//部分退款中
+            //部分退款中
             helper.setText(R.id.tv_order_tuikuan,"部分退款中")
                     .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
                     .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
                     .setText(R.id.tv_order_again,"取消")
-                    .setGone(R.id.tv_order_like, false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"部分退款中");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("PF")){
-//部分已退款
+            //部分已退款
             helper.setText(R.id.tv_order_tuikuan,"部分已退款")
                     .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
                     .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
-                    .setGone(R.id.tv_order_again,false)
-                    .setGone(R.id.tv_order_like, false)
+                    .setVisible(R.id.tv_order_again,false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"部分已退款");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("RA")){
-//退款中
+            //退款中
             helper.setText(R.id.tv_order_tuikuan,"退款中")
                     .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
                     .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
@@ -140,10 +138,10 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     .setGone(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"退款中");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("RF")){
-//已退款
-            helper.setGone(R.id.tv_order_tuikuan,false)
-                    .setGone(R.id.tv_order_again,false)
-                    .setGone(R.id.tv_order_like, false)
+            //已退款
+            helper.setVisible(R.id.tv_order_tuikuan,false)
+                    .setVisible(R.id.tv_order_again,false)
+                    .setVisible(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"已退款");
         }
 

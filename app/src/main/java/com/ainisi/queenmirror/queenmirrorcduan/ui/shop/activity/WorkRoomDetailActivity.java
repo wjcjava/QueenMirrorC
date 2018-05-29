@@ -196,7 +196,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             case ACTION.ADDLIULAN://添加浏览量
                 SuccessBean successBeans = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBeans.isSuccess()){
-                    T.show(successBeans.getMsg());//成功
                 }else{
                     T.show(successBeans.getMsg());
                 }
@@ -480,7 +479,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
              * 关注店铺
              */
             case R.id.tv_work_detail_guanzhu:
-
                 if(isLogin.equals("1")){
 
                     userId = (String) SP.get(WorkRoomDetailActivity.this,SpContent.UserId,"");

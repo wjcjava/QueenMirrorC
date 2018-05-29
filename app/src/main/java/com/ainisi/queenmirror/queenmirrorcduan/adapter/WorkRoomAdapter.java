@@ -149,6 +149,7 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
             case ACTION.ADDTOCAT:
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
+                    T.show("加入购物车成功");
                    WorkRoomDetailActivity.instance.getShopCartData();
                 }else{
                     T.show(successBean.getMsg());
@@ -166,7 +167,6 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
     public void showErrorMessage(String s) {
 
     }
-
 
     //就是View的持有
     public final class ViewHolder{

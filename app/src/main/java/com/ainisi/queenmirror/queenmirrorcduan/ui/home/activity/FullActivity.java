@@ -20,6 +20,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProductDetailBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
@@ -37,6 +38,7 @@ import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -82,7 +84,9 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     boolean isColl = false;
     String goodsId,shopId,isLogin,userId;
 
-
+    ShoppingCartBean shoppingCartBean;
+    ShoppingCartBean.BodyBean.ShopListBean shopListBean;
+    List<ShoppingCartBean.BodyBean.ShopListBean> shopListBeans = new ArrayList<>();
     private ShareAction mShareAction;
     private UMShareListener mShareListener;
 
@@ -203,7 +207,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     private void getProductDetailData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("id", goodsId);//商品ID
-        params.put("userId",userId);//UID    可以不传
+        params.put("userId",userId);//UID  可以不传
         HttpUtils.doPost(ACTION.GETPRODUCTDETAIL, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -298,7 +302,13 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 break;
             //提交订单
             case R.id.tv_purchase:
-                startActivity(new Intent(FullActivity.this, PurchaseActivity.class));
+                /*Intent intent = new Intent(FullActivity.this, PurchaseActivity.class);
+                intent.putExtra("cartBean",);
+                startActivity(intent);*/
+                /**
+                 * 新加接口
+                 */
+                T.show("马上就来。。。");
                 break;
             //加入购物车
             case R.id.tv_full_shoppingcart:

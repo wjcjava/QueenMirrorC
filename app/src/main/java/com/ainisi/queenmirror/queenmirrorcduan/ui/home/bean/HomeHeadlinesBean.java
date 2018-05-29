@@ -174,7 +174,7 @@ public class HomeHeadlinesBean {
                 private Object updateDate;
                 private String topType;
                 private String topName;
-                private Object topUrl;
+                private String topUrl;
                 private String startTime;
                 private String endTime;
                 private String topClicks;
@@ -239,11 +239,11 @@ public class HomeHeadlinesBean {
                     this.topName = topName;
                 }
 
-                public Object getTopUrl() {
+                public String getTopUrl() {
                     return topUrl;
                 }
 
-                public void setTopUrl(Object topUrl) {
+                public void setTopUrl(String topUrl) {
                     this.topUrl = topUrl;
                 }
 
