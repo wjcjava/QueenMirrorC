@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 
 import java.util.ArrayList;
@@ -28,11 +29,13 @@ public class HomeListViewAdapter extends BaseAdapter {
     private final LayoutInflater inflater;
     private Context context;
     List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
+    private String where;
 
-    public HomeListViewAdapter(Context context,List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData) {
+    public HomeListViewAdapter(Context context,List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData,String where) {
         this.context = context;
         this.ShopListData = ShopListData;
         inflater = LayoutInflater.from(context);
+        this.where = where;
     }
     @Override
     public int getCount() {
@@ -65,10 +68,17 @@ public class HomeListViewAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, WorkRoomDetailActivity.class);
-                    intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
-                    intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
-                    context.startActivity(intent);
+                    if(where.equals("home")) {
+                        Intent intent = new Intent(context, WorkRoomDetailActivity.class);
+                        intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
+                        intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
+                        context.startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(context, ShopStoreActivity.class);
+                        intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
+                        intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
+                        context.startActivity(intent);
+                    }
                 }
             });
 

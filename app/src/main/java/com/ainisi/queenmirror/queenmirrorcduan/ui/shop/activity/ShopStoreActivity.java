@@ -1,7 +1,9 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopStoreDetailBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.CouponGetBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
@@ -49,10 +52,19 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
     //网友评论
     @Bind(R.id.recycler_boutique)
     RecyclerView reBoutique;
+    @Bind(R.id.tv_shopname)
+    TextView tv_shopname;
+    @Bind(R.id.tv_shop_detail_address)
+    TextView tv_shop_detail_address;
+    @Bind(R.id.li_shop_detail_comment)
+    LinearLayout li_shop_detail_comment;
+    @Bind(R.id.li_shop_detail_order)
+    LinearLayout li_shop_detail_order;
+
     boolean isLogin=false;
     private List<SortBean> beanList=new ArrayList<>();
     private CustomPopWindow popWindow;
-    String shopName,shopId;
+    String shopName,shopId,service_tel="13405024815";
 
     @Override
     protected int getLayoutId() {
@@ -102,9 +114,38 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
         reBoutique.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL,false));
         reBoutique.setAdapter(myAdapter1);
     }
-    @OnClick({R.id.title_back,R.id.re_product_two,R.id.re_invincible})
+    @SuppressLint("MissingPermission")
+    @OnClick({R.id.title_back,R.id.re_product_two,R.id.re_invincible,R.id.li_shop_detail_comment,R.id.li_shop_detail_order,
+            R.id.li_shop_detail_phone,R.id.li_shop_detail_pay})
     public void click(View view) {
         switch (view.getId()) {
+            /**
+             * 到店付款
+             */
+            case R.id.li_shop_detail_pay:
+                T.show("敬请期待");
+                break;
+            /**
+             * 电话
+             */
+            case R.id.li_shop_detail_phone:
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Uri data = Uri.parse("tel:" + service_tel);
+                intent.setData(data);
+                startActivity(intent);
+                break;
+            /**
+             * 在线预约
+             */
+            case R.id.li_shop_detail_order:
+                T.show("敬请期待");
+                break;
+            /**
+             * 点击评价
+             */
+            case R.id.li_shop_detail_comment:
+                T.show("敬请期待");
+                break;
             case R.id.title_back:
                 finish();
                 break;
@@ -122,7 +163,7 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
                         .setAnimationStyle(R.style.CustomPopWindowStyle)
                         .create()
                         .showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM, 0, 0);
-                        initgetId(popview);
+                initgetId(popview);
                 break;
             case R.id.re_product_two:
                 startActivity(new Intent(this, ProductActivity.class));
@@ -162,11 +203,16 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
                     T.show(couponGetBean.getMsg());
                 }
                 break;
-                //获取店铺详情
+            //获取店铺详情
             case ACTION.SHOPDETAILDATA:
 
                 L.e("................."+res);
+                ShopStoreDetailBean shopStoreDetailBean = GsonUtil.toObj(res,ShopStoreDetailBean.class);
 
+                tv_shopname.setText(shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getShopName());
+                service_tel = shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getServiceTel();
+                tv_shop_detail_address.setText(shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrProvince()+
+                        shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrCity()+shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrDistrict());
                 break;
         }
     }

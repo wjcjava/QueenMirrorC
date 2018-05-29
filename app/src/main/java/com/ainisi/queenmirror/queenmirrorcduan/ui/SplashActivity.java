@@ -10,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.MainActivity;
 
 /**
  * 启动画面

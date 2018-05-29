@@ -25,10 +25,12 @@ import java.util.List;
 public class HomepageGridViewAdapter extends BaseAdapter{
     private Context context;
     List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
+    private String where;
 
-    public HomepageGridViewAdapter(Context context,List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData) {
+    public HomepageGridViewAdapter(Context context,List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData,String where) {
         this.context = context;
         this.ShopListData = ShopListData;
+        this.where = where;
     }
     @Override
     public int getCount() {
@@ -60,12 +62,17 @@ public class HomepageGridViewAdapter extends BaseAdapter{
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, WorkRoomDetailActivity.class);
-                    intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
-                    intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
-                    context.startActivity(intent);
-                  /*  Intent intent = new Intent(context, ShopStoreActivity.class);
-                    context.startActivity(intent);*/
+                    if(where.equals("home")){
+                        Intent intent = new Intent(context, WorkRoomDetailActivity.class);
+                        intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
+                        intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
+                        context.startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(context, ShopStoreActivity.class);
+                        intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
+                        intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
+                        context.startActivity(intent);
+                    }
                 }
             });
             convertView.setTag(holder);

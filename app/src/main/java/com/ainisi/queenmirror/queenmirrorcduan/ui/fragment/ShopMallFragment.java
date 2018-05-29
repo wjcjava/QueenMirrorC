@@ -104,21 +104,10 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ImageView uspensionSurface;
     @Bind(R.id.shop_gridView)
     NoScrollGridView shop_gridView;
-    //综合排序
-    SortFragment sortFragment;
-    //销量最高
-    SalesFragment salesFragment;
-    //距离最近
-    DistanceFragment distanceFragment;
-    //筛选
-    ScreenFragment screenFragment;
 
     ClassificationBean classificationBean;
-
     ShopListHomeBean shopListHomeBean;
     private HomeIndustryBean homeIndustryBean;
-
-    private FragmentManager fm;
     private CustomPopWindow popWindow;
     private PopupWindow pop;
     private View popview1;
@@ -128,15 +117,10 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             R.drawable.icon_shop_jewellery, R.drawable.icon_shop_medicalcare, R.drawable.icon_shop_motion,
             R.drawable.icon_shop_photography, R.drawable.icon_shop_service, R.drawable.icon_shop_train
     };
-    String[] textTitle = {"休闲娱乐", "银行保险", "珠宝首饰", "医疗保健", "运动健身", "婚庆摄影", "汽车服务", "教育培训"};
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
 
     int hight, pageNumber = 1;//标记ScrollView移动的距离
     private boolean isClick;
-    //private GridViewAdapter gridViewAdapter;
-
-    List<ShopMallListBean.BodyBean.ShopListBean> shopListNew = new ArrayList<>();
-    private DetailsBean detailsBean;
 
     @Override
     protected int getLayoutResource() {
@@ -292,7 +276,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_surface:
                 if (isClick) {
                     isClick = false;
-                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
+                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(),"shop");
                     listView.setAdapter(homeListViewAdapter);
 
                     /*listadapter = new ListViewAdapter(getContext(), shopListNew);
@@ -305,7 +289,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     shop_gridView.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
 
-                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
+                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(),"shop");
                     shop_gridView.setAdapter(gridViewAdapter);
 
                     /*gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
@@ -316,7 +300,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.line_uspension_surface:
                 if (isClick) {
                     isClick = false;
-                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(),  shopListHomeBean.getBody().getShopList());
+                    HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(),  shopListHomeBean.getBody().getShopList(),"shop");
                     listView.setAdapter(homeListViewAdapter);
                   /*  listadapter = new ListViewAdapter(getContext(), shopListNew);
                     listView.setAdapter(listadapter);*/
@@ -328,7 +312,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     shop_gridView.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
 
-                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
+                    HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(),"shop");
                     shop_gridView.setAdapter(gridViewAdapter);
 
                    /* gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
@@ -455,7 +439,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
                 if (shopListHomeBean.isSuccess()) {
                     if(shopListHomeBean.getBody().getShopList().size()>0){
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(),"shop");
                         shop_gridView.setAdapter(gridViewAdapter);
                     }else{
                         T.show("暂无店铺信息");

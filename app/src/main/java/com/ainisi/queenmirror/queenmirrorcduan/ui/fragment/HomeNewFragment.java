@@ -282,7 +282,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     gv_home_gridView.setVisibility(View.VISIBLE);
 
                     if(shopListHomeBean.getBody().getShopList().size()>0){
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(),"home");
                         gv_home_gridView.setAdapter(gridViewAdapter);
                     }else{
 
@@ -295,7 +295,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     gv_home_gridView.setVisibility(View.GONE);
 
                     if(shopListHomeBean.getBody().getShopList().size()>0){
-                        HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
+                        HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(),"home");
                         nl_home_list_view.setAdapter(homeListViewAdapter);
                     }
                 }
@@ -358,7 +358,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
                 if (shopListHomeBean.isSuccess()) {
                     if(shopListHomeBean.getBody().getShopList().size()>0){
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList());
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(),"home");
                         gv_home_gridView.setAdapter(gridViewAdapter);
                     }else{
                         T.show("暂无店铺信息");
