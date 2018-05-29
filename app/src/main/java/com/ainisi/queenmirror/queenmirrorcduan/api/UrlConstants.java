@@ -131,4 +131,6 @@ String BASE_URL = "http://192.168.30.155:7080/wg/a/";
  String PROBLEMDATA="api/ec/help/questionListByCategory";//常见问题分类的数据
 
  String PayBefore = "api/util/pay/aliPay";//支付之前调用数据
+
+ String DOOUTDATA = "api/util/pay/aliPayRefund";//退款
 }

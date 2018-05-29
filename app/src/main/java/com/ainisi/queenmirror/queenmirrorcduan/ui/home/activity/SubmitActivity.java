@@ -61,6 +61,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
 
     List<String> orderIdList = new ArrayList<>();
     String amount = "0",aliPayResult="";
+    String transId;
 
     /**
      * 支付宝支付业务：入参app_id
@@ -235,6 +236,11 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             case ACTION.PayBefore:
                 PayInBean payInBean = GsonUtil.toObj(res,PayInBean.class);
                 aliPayResult = payInBean.getBody().getAliPayResult();
+
+                transId = payInBean.getBody().getTransId();
+
+                L.e("支付前   "+transId);
+                SP.put(SubmitActivity.this,SpContent.TransId,transId);
 
                 payThread.start();
                 break;

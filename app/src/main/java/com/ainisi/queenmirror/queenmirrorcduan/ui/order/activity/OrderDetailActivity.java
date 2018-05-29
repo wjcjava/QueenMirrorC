@@ -63,7 +63,6 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
 
         tv_common_title.setText("订单详情页");
 
-
         tv_order_detail_ordernum.setText("订单号码："+orderNo);
         tv_order_detail_tel.setText("手机号码："+orderTel);
         tv_order_detail_ordertime.setText("下单时间："+orderTime);
@@ -86,6 +85,7 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
                 //退款
                 Intent intent = new Intent(this,ArefundActivity.class);
                 intent.putExtra("lstBean", (Serializable)getApiOrderDetailsList);
+                intent.putExtra("orderNo",orderNo);
                 startActivity(intent);
                 break;
         }

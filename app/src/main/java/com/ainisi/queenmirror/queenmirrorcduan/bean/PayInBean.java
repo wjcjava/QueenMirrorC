@@ -55,6 +55,15 @@ public class PayInBean implements Serializable{
          */
 
         private String aliPayResult;
+        private String transId;
+
+        public String getTransId() {
+            return transId;
+        }
+
+        public void setTransId(String transId) {
+            this.transId = transId;
+        }
 
         public String getAliPayResult() {
             return aliPayResult;

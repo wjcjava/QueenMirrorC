@@ -125,4 +125,6 @@ public interface ACTION {
 
     int PayBefore = 0x133;//支付之前调用
 
+    int DOOUTDATA = 0x134;//退款
+
 }

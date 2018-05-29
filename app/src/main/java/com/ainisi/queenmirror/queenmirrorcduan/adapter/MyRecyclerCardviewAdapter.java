@@ -15,7 +15,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.Bean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeAdvertisingActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
@@ -190,21 +189,12 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                 break;
             //综合排序
             case R.id.li_hime_sort:
-                HomeFragment.instance.recyclerView.smoothScrollToPosition(6);
-                HomeFragment.instance.layout_stick_header_main.setVisibility(View.VISIBLE);
-                HomeFragment.instance.pop.showAsDropDown(HomeFragment.instance.hSort);
                 break;
             //筛选
             case R.id.li_home_screen_bottom:
-                HomeFragment.instance.recyclerView.smoothScrollToPosition(6);
-                HomeFragment.instance.layout_stick_header_main.setVisibility(View.VISIBLE);
-                HomeFragment.instance.popWindow.showAsDropDown(HomeFragment.instance.hSort);
                 break;
             //瀑布流切换
             case R.id.iv_surface:
-                HomeFragment.instance.recyclerView.smoothScrollToPosition(6);
-                HomeFragment.instance.layout_stick_header_main.setVisibility(View.VISIBLE);
-                HomeFragment.instance.onclick = false;
 
 
         }

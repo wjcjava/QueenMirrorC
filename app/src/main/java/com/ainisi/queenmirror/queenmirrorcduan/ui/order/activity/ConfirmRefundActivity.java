@@ -14,13 +14,21 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ConfirmRefundAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.AreFundBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -29,7 +37,7 @@ import butterknife.OnClick;
 /**
  * 申请退款
  */
-public class ConfirmRefundActivity extends BaseNewActivity{
+public class ConfirmRefundActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.re_arefund)
     RecyclerView recyclerView;
     @Bind(R.id.title_title)
@@ -50,6 +58,7 @@ public class ConfirmRefundActivity extends BaseNewActivity{
     List<AreFundBean> areFundCheckList = new ArrayList<>();
     public static ConfirmRefundActivity instance = null;
     double amount = 0;
+    String outTradeNo="";
 
     @Override
     protected int getLayoutId() {
@@ -60,6 +69,10 @@ public class ConfirmRefundActivity extends BaseNewActivity{
     @Override
     protected void initView() {
         super.initView();
+
+        Intent intent = this.getIntent();
+        outTradeNo = intent.getStringExtra("orderNo");
+
         areTitle.setText(R.string.arefund);
 
         Intent intentGet = getIntent();
@@ -97,9 +110,40 @@ public class ConfirmRefundActivity extends BaseNewActivity{
                 if(tv_arefund_select.getText().toString().equals("")||tv_arefund_select.getText().toString().equals("请选择")){
                     T.show("请选择退款原因");
                 }else{
-
+                    DoOutData();
                 }
                 break;
         }
+    }
+
+    /**
+     * 退款
+     */
+    private void DoOutData() {
+        L.e(SP.get(ConfirmRefundActivity.this,SpContent.TransId,"0")+"    ****");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("refundAmount", amount+"");
+        params.put("outTradeNo", SP.get(ConfirmRefundActivity.this,SpContent.TransId,"0")+"");
+        HttpUtils.doPost(ACTION.DOOUTDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.DOOUTDATA:
+                L.e("&&&&&  "+res);
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
     }
 }

@@ -17,4 +17,6 @@ public class SpContent {
 
     public static String Remember="remember";//记住密码
 
+    public static  String TransId = "transId";
+
 }

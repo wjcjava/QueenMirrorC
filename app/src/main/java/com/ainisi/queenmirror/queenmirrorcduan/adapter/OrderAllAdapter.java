@@ -8,24 +8,29 @@ import android.view.View;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ArefundActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ConfirmRefundActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBean.ApiOrderListBean,BaseViewHolder> {
 
     Context context;
+    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean> apiOrderListBeanList;
+
+    OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean apiOrderDetailsListBean;
 
     public OrderAllAdapter(Context context,int layoutResId, @Nullable List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> data) {
-        super(layoutResId, data);
+        super(layoutResId,data);
         this.context = context;
     }
     @SuppressLint("ResourceAsColor")
     @Override
-    protected void convert(BaseViewHolder helper, OrderMyAllOrderBean.BodyBean.ApiOrderListBean item) {
+    protected void convert(BaseViewHolder helper, final OrderMyAllOrderBean.BodyBean.ApiOrderListBean item) {
 
         helper.setText(R.id.tv_shangpin,item.getIntfAnsShopBasic().getShopName());
 
@@ -44,6 +49,26 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     .setGone(R.id.tv_order_again,false)
                     .setGone(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"待接单");
+
+            helper.setOnClickListener(R.id.tv_order_tuikuan, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ArefundActivity.class);
+
+                    for(int i=0;i<item.getIntfAnsOrder().getApiOrderDetailsList().size();i++){
+                        apiOrderDetailsListBean = new OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean();
+                        apiOrderDetailsListBean = item.getIntfAnsOrder().getApiOrderDetailsList().get(i);
+                        apiOrderListBeanList.add(apiOrderDetailsListBean);
+                    }
+
+
+                    intent.putExtra("lstBean",(Serializable)apiOrderListBeanList);
+                    intent.putExtra("orderNo",item.getIntfAnsOrder().getOrderNo());
+                    context.startActivity(intent);
+                }
+            });
+
+
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("FT")){
 //已接单
             helper.setText(R.id.tv_order_tuikuan,"查看订单")
@@ -53,14 +78,14 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     .setGone(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"已接单");
 
-            helper.setOnClickListener(R.id.tv_order_again, new View.OnClickListener() {
+        /*    helper.setOnClickListener(R.id.tv_order_again, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ConfirmRefundActivity.class);
-
+                    Intent intent = new Intent(context, ArefundActivity.class);
+                    intent.putExtra("orderNo",item.getIntfAnsOrder().getId());
                     context.startActivity(intent);
                 }
-            });
+            });*/
 
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("US")){
 //待服务

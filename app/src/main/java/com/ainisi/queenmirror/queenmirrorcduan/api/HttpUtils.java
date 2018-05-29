@@ -529,6 +529,9 @@ public class HttpUtils {
             case ACTION.PayBefore:
                 actionUrl = UrlConstants.PayBefore;
                 break;
+            case ACTION.DOOUTDATA:
+                actionUrl = UrlConstants.DOOUTDATA;
+                break;
         }
         url.append(actionUrl);
         return url;

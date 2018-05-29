@@ -39,6 +39,7 @@ public class ArefundActivity extends BaseNewActivity {
     List<AreFundBean> areFundBeanList = new ArrayList<>();
 
     List<AreFundBean> areFundCheckList;
+    String orderNo;
 
 
     @Override
@@ -52,7 +53,7 @@ public class ArefundActivity extends BaseNewActivity {
         areTitle.setText(R.string.arefund);
         Intent intentGet = getIntent();
         getApiOrderDetailsList = (List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean>) intentGet.getSerializableExtra("lstBean");
-
+        orderNo = intentGet.getStringExtra("orderNo");
         for(int i=0;i<getApiOrderDetailsList.size();i++){
             areFundBean = new AreFundBean();
             AreFundBean.IntfAnsOrderDetailsBean  intfAnsOrderDetailsBean = new AreFundBean.IntfAnsOrderDetailsBean();
@@ -103,6 +104,7 @@ public class ArefundActivity extends BaseNewActivity {
                 if(areFundCheckList.size() >0){
                     Intent intent = new Intent(this,ConfirmRefundActivity.class);
                     intent.putExtra("lstBean", (Serializable)areFundCheckList);
+                    intent.putExtra("orderNo",orderNo);
                     startActivity(intent);
                 }else{
                     T.show("请选择需要退款的商品");

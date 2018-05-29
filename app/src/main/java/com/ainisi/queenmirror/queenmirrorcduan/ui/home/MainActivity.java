@@ -8,7 +8,6 @@ import android.widget.RadioButton;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseOneActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MasterFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MineFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
