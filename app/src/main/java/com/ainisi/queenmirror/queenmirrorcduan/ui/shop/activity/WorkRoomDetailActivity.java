@@ -196,6 +196,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             case ACTION.ADDLIULAN://添加浏览量
                 SuccessBean successBeans = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBeans.isSuccess()){
+                    //T.show(successBeans.getMsg());//成功
                 }else{
                     T.show(successBeans.getMsg());
                 }
@@ -204,7 +205,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 isColl = true;
                 SuccessBean successBean1 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean1.isSuccess()) {
-                    T.show(successBean1.getMsg());//成功
+                   // T.show(successBean1.getMsg());//成功
                 } else {
                     T.show(successBean1.getMsg());
                 }
@@ -213,7 +214,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 isColl = false;
                 SuccessBean successBean2 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean2.isSuccess()) {
-                    T.show(successBean2.getMsg());//成功
+                  //  T.show(successBean2.getMsg());//成功
                 } else {
                     T.show(successBean2.getMsg());
                 }
@@ -263,7 +264,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
-                    T.show(successBean.getMsg());
+                  //  T.show(successBean.getMsg());
                     tv_work_detail_guanzhu.setText("取消关注");
                 }else{
                     T.show(successBean.getMsg());

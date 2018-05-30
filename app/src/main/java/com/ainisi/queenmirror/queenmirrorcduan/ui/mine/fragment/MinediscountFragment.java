@@ -19,6 +19,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ReceiveDiscounBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.lzy.okgo.cache.CacheMode;
@@ -91,12 +93,11 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
          * 商品所领取优惠券
          */
         getReceiveDiscoun();
-
     }
 
     private void getReceiveDiscoun(){
         HashMap<String,String> params=new HashMap<>();
-        params.put("userId","1");//用户ID
+        params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");//用户ID
         HttpUtils.doPost(ACTION.RECEIVEDISCOUN,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
     @Override
@@ -175,10 +176,8 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
         int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, leftDip, Resources.getSystem().getDisplayMetrics());
         int right = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rightDip, Resources.getSystem().getDisplayMetrics());
-
         for (int i = 0; i < llTab.getChildCount(); i++) {
             View child = llTab.getChildAt(i);
             child.setPadding(0, 0, 0, 0);

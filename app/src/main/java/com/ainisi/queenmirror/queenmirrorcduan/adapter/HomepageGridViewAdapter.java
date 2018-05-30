@@ -71,6 +71,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
                         Intent intent = new Intent(context, ShopStoreActivity.class);
                         intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
                         intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
+
                         context.startActivity(intent);
                     }
                 }

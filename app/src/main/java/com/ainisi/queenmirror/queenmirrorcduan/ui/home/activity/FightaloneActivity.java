@@ -1,5 +1,6 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
@@ -52,7 +52,7 @@ public class FightaloneActivity extends BaseNewActivity {
             sortBean.setDistance("875m");
             fulllist.add(sortBean);
         }
-        MyAdapter sortAdapter = new MyAdapter( R.layout.item_fullrecycler,fulllist);
+        MyAdapter sortAdapter = new MyAdapter(R.layout.item_fullrecycler, fulllist);
         frecycler.setLayoutManager(new GridLayoutManager(this, 2));
         frecycler.setAdapter(sortAdapter);
         for (int i = 0; i < 8; i++) {
@@ -62,7 +62,7 @@ public class FightaloneActivity extends BaseNewActivity {
             sortBean.setDistance("");
             fulllist2.add(sortBean);
         }
-        MyAdapter sortAdapter2 = new MyAdapter(R.layout.item_fullrecyclertwo,fulllist2);
+        MyAdapter sortAdapter2 = new MyAdapter(R.layout.item_fullrecyclertwo, fulllist2);
 
         frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         frecyclertwo.setAdapter(sortAdapter2);
@@ -74,7 +74,7 @@ public class FightaloneActivity extends BaseNewActivity {
         fullPhoto.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.title_back, R.id.relative_look_more})
+    @OnClick({R.id.title_back, R.id.relative_look_more, R.id.tv_home_goShare, R.id.tv_startspell})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -83,8 +83,17 @@ public class FightaloneActivity extends BaseNewActivity {
             //拼单剩余人数（查看更多）
             case R.id.relative_look_more:
                 Toast.makeText(this, "您点击了我", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, SpellOrderListActivity.class));
                 break;
 
+            case R.id.tv_home_goShare:
+
+                break;
+            //开启拼单
+            case R.id.tv_startspell:
+                Intent intent = new Intent(this, SubmitActivity.class);
+                startActivity(intent);
+                break;
         }
 
 

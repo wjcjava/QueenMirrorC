@@ -213,6 +213,7 @@
                         android:textSize="@dimen/comment_10_size" />
 
                     <TextView
+                        android:id="@+id/tv_home_goShare"
                         android:layout_width="@dimen/comment_69_dip"
                         android:layout_height="@dimen/comment_29_dip"
                         android:background="@drawable/icon_home_fightalone"

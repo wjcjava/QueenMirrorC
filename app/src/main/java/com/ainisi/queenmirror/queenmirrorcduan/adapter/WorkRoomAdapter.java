@@ -23,7 +23,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -151,6 +150,7 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
                 if(successBean.isSuccess()){
                     T.show("加入购物车成功");
                    WorkRoomDetailActivity.instance.getShopCartData();
+                   T.show("已成功添加到购物车");
                 }else{
                     T.show(successBean.getMsg());
                 }

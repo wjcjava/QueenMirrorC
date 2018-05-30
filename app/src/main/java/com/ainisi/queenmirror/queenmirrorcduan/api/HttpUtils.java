@@ -128,6 +128,7 @@ public class HttpUtils {
                                 return;
                             }*/
                             //成功
+
                             httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -526,9 +527,11 @@ public class HttpUtils {
             case ACTION.PROBLEMDATA:
                 actionUrl = UrlConstants.PROBLEMDATA;
                 break;
+            //支付之前调用
             case ACTION.PayBefore:
                 actionUrl = UrlConstants.PayBefore;
                 break;
+            //退款
             case ACTION.DOOUTDATA:
                 actionUrl = UrlConstants.DOOUTDATA;
                 break;

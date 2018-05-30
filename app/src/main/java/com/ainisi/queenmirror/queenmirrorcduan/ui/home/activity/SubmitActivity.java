@@ -2,8 +2,6 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -14,16 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.alipay.OrderInfoUtil2_0;
 import com.ainisi.queenmirror.queenmirrorcduan.alipay.PayResult;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.PayInBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -61,23 +56,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
 
     List<String> orderIdList = new ArrayList<>();
     String amount = "0",aliPayResult="";
-    String transId;
-
-    /**
-     * 支付宝支付业务：入参app_id
-     */
-    public static final String APPID = "2017090608586413";
-
-    /** 商户私钥，pkcs8格式 */
-    /** 如下私钥，RSA2_PRIVATE 或者 RSA_PRIVATE 只需要填入一个 */
-    /** 如果商户两个都设置了，优先使用 RSA2_PRIVATE */
-    /** RSA2_PRIVATE 可以保证商户交易在更加安全的环境下进行，建议使用 RSA2_PRIVATE */
-    /** 获取 RSA2_PRIVATE，建议使用支付宝提供的公私钥生成工具生成， */
-    /**
-     * 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
-     */
-    public static final String RSA2_PRIVATE = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCPZIQ2M38cU069uIFsj2I8+Y2jabIL6/1kk0SbFUhFyfD+0QupRVdfBrVsjKVRgut8CwUTjw0/DJUbnN/uTEJhmd27SekUfju1FA4kHGxCj/UjzlpZAzz9q4y/DDEzsyElEC0o8DkUMgxYkdtGcx3psOuErCCZ9VPkFPEgtWgu9jvIX3dLzzBrc8OttcEY0uH1hUZhlJHv5qFfHMJFccBrFPGKHi+46Hgy5k9uTpfZENJXb1FR3VFtD7TUCy74rOopzevbbTBgQQA6+3l8ULVGp/r+GUOb6DH22n64JLqVNqON69aEjJrssIm8qiAV8aoZCZ2oy8mZlX6RqM21YZcBAgMBAAECggEAGMEvmfPV89vl8hbSMR2nxgMHErkChdBd1GkgJO3Npk6wji0kqDpSVRNharX1LFc/tBBq9e9yR/oyG6w/dHIx24umndiqpmEMibxGnLFTd0JG/cF4E3ndo6VkDO9b5yL7i9x5D2I5WGUzgG7dvhHNjjR+1E6q6ilSLEP5RL5MmB6jEi/3LVkfmpWaY+0Wm3MXnjpwMIaMFO92TvEBWl7PBJlB8dCRgPuhWKhLDBykholhUR839ZJMrtOg3Vk87vmbzqwFLfDAqT2xuEmONJ7aru6D722RDj2GOnAeesTW2C3DCLJAWofDK+TTWD2UbUueuOpgpxokjHdw3aou4cuAAQKBgQDkZltgrpQoaIDYicI/Z1MO1SozkpEt9TB2c0508QcgdvMpaYkT4IrJlYlQYAYLdoDtQdu8SvGb541vWJTsWXEa+50a2/UWjKLRmr4/uVOTh5VVgrUz2vKidJSylE8rO3TR6rbNz4XyG5CT+YK1uKAS97+RFtVWTUoUefk0egGJgQKBgQCguG1RR0l9rXuQApxtLmf/Q5tqK/KWcupoUjr+pdL+Xb9u6HTQJVyt1sDJjooPrzlT8cTLLYQptRvS9+g/cw3ExAeMZO3thf/0HQUZlRPdaw4OYZuIFm4mqC/24nVE1w0AyA9QXwqabxr/1GuB1NUkcfOf1l5FK7ZRldRVCP/NgQKBgF6lo/w+nBrao3oYLCzGDn85CpHwjMT0tC6BveNr9j4XzNA+cZWRGTJMC2kJQbgCVY78Gai/jbvDirK3jI8cyWgbGJGG0NuVT+t4KpqRm/ao2tNipOBmPOHhWbVfDCeoLdLHZxWGh8U6cwE/BlFzvrHdhL8FLUbkJGyz1vdOD9EBAoGActHPJ1XqZuLdd5Cl+EpC+dZu3XbwJBOM62JzyyDkj9yhurZPXbSTdY4KxPQUJghkyFfc49pspO9CJYH+ZfXoTD5PtjkU0a/9n4Rr9E7Qlkq5DAUnfB2qK+vT+GjopnmMTJageiasCJB/lW1IMMTAUP0ns3UOfBQyeC62NtnrBgECgYEA3AuOlQ97g28ZWd5NdWCSqGl56KnoShoqrgrw2mH4Rv+kmj/kMO4idKNzzkUkexEerUL51VUUUYLC3bsLmSsZh7q337ZxV49len0zRIWUM1WzGj5ORg3zEcnNEOpMyKW43g8qSpd7Yn0/KlvhKhbQMZVMFm6Fm8ArJJS3OavSEL0=";
-    public static final String RSA_PRIVATE = "";
     private static final int SDK_PAY_FLAG = 1;
 
     @SuppressLint("HandlerLeak")
@@ -126,34 +104,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
         tv_submit_price.setText(amount);
         tv_submit_bottom_price.setText(amount);
 
-        if (TextUtils.isEmpty(APPID) || (TextUtils.isEmpty(RSA2_PRIVATE) && TextUtils.isEmpty(RSA_PRIVATE))) {
-            new AlertDialog.Builder(this).setTitle("警告").setMessage("需要配置APPID | RSA_PRIVATE")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialoginterface, int i) {
-                            //
-                            finish();
-                        }
-                    }).show();
-            return;
-        }
-
-        /**
-         * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
-         * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
-         * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
-         *
-         * orderInfo的获取必须来自服务端；
-         */
-        boolean rsa2 = (RSA2_PRIVATE.length() > 0);
-        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID, rsa2);
-        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-
-        String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
-        String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
-        final String orderInfo = orderParam + "&" + sign;
-
-        L.e("************    "+orderParam+"      "+privateKey+"          "+sign+"            "+orderInfo);
-
         Runnable payRunnable = new Runnable() {
 
             @Override
@@ -181,7 +131,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                 finish();
                 break;
             case R.id.img_wechat_unpayment:
-
                 wcpayment.setVisibility(View.VISIBLE);
                 queenpayment.setVisibility(View.GONE);
                 alipay.setVisibility(View.GONE);
@@ -236,12 +185,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             case ACTION.PayBefore:
                 PayInBean payInBean = GsonUtil.toObj(res,PayInBean.class);
                 aliPayResult = payInBean.getBody().getAliPayResult();
-
-                transId = payInBean.getBody().getTransId();
-
-                L.e("支付前   "+transId);
-                SP.put(SubmitActivity.this,SpContent.TransId,transId);
-
                 payThread.start();
                 break;
         }

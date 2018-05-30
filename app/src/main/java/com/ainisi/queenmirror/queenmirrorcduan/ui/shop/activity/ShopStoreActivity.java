@@ -15,14 +15,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.CommentsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopStoreDetailBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.CouponGetBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.timeutil.CustomDatePicker;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
@@ -31,9 +34,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -41,7 +47,7 @@ import butterknife.OnClick;
 /**
  * 异业
  */
-public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
+public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.iv_shop)
     ImageView ivShop;
     @Bind(R.id.title_title)
@@ -61,11 +67,14 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.li_shop_detail_order)
     LinearLayout li_shop_detail_order;
 
-    boolean isLogin=false;
-    private List<SortBean> beanList=new ArrayList<>();
+    boolean isLogin = false;
+    private List<SortBean> beanList = new ArrayList<>();
     private CustomPopWindow popWindow;
-    String shopName,shopId,service_tel="13405024815";
-
+    String shopName, shopId, service_tel = "13405024815";
+    private CommentsBean commentsBean;
+    private CustomDatePicker timePicker;
+    private String time;
+    private String date;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_shop_store;
@@ -84,39 +93,69 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
         getShopDetailData();
     }
 
+    /**
+     * 商品的评价数据
+     */
+    private void initShop() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("goodsId", shopId);
+        hashMap.put("pageNumber", "1");
+        hashMap.put("pageSize", "10");
+        HttpUtils.doPost(ACTION.EVALUATION, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     private void getShopDetailData() {
-        HashMap<String,String> params=new HashMap<>();
-        params.put("id",shopId);//商户ID
-        params.put("userId", SP.get(this, SpContent.UserId,"").toString()+"");//用户ID
-        HttpUtils.doPost(ACTION.SHOPDETAILDATA,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", shopId);//商户ID
+        params.put("userId", SP.get(this, SpContent.UserId, "").toString() + "");//用户ID
+        HttpUtils.doPost(ACTION.SHOPDETAILDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(SP.get(this, SpContent.isLogin,"0").toString().equals("1")){
+        if (SP.get(this, SpContent.isLogin, "0").toString().equals("1")) {
             isLogin = true;
-        }else{
+        } else {
             isLogin = false;
         }
     }
+
     @Override
     protected void initData() {
         super.initData();
-        for (int i = 0; i <6 ; i++) {
-            SortBean sortBean=new SortBean();
+        for (int i = 0; i < 6; i++) {
+            SortBean sortBean = new SortBean();
             beanList.add(sortBean);
         }
-        MyAdapter myAdapter=new MyAdapter(R.layout.re_shop_store,beanList);
-        reProduct.setLayoutManager(new GridLayoutManager(this,2));
+        MyAdapter myAdapter = new MyAdapter(R.layout.re_shop_store, beanList);
+        reProduct.setLayoutManager(new GridLayoutManager(this, 2));
         reProduct.setAdapter(myAdapter);
-        MyAdapter myAdapter1=new MyAdapter(R.layout.re_store_boutique,beanList);
-        reBoutique.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL,false));
-        reBoutique.setAdapter(myAdapter1);
+        initPicker();
+
+    }
+
+    private void initPicker() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        time = sdf.format(new Date());
+        date = time.split(" ")[0];
+
+
+        /**
+         * 设置年月日
+         */
+
+        timePicker = new CustomDatePicker(this, "请选择时间", new CustomDatePicker.ResultHandler() {
+            @Override
+            public void handle(String time) {
+                T.show(time);
+            }
+        }, "2007-01-01 00:00", "2027-12-31 23:59");//"2027-12-31 23:59"
+        timePicker.setIsLoop(true);
     }
     @SuppressLint("MissingPermission")
-    @OnClick({R.id.title_back,R.id.re_product_two,R.id.re_invincible,R.id.li_shop_detail_comment,R.id.li_shop_detail_order,
-            R.id.li_shop_detail_phone,R.id.li_shop_detail_pay})
+    @OnClick({R.id.title_back, R.id.re_product_two, R.id.re_invincible, R.id.li_shop_detail_comment, R.id.li_shop_detail_order,
+            R.id.li_shop_detail_phone, R.id.li_shop_detail_pay})
     public void click(View view) {
         switch (view.getId()) {
             /**
@@ -139,6 +178,8 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
              */
             case R.id.li_shop_detail_order:
                 T.show("敬请期待");
+                // 日期格式为yyyy-MM-dd
+                timePicker.show(time);
                 break;
             /**
              * 点击评价
@@ -172,53 +213,69 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack{
                 break;
         }
     }
+
     private void initgetId(View popview) {
         popview.findViewById(R.id.tv_shop_couponget).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isLogin){
+                if (isLogin) {
                     inithttp();
-                }else {
+                } else {
                     T.show("您未登陆请先登陆");
                 }
             }
         });
     }
+
     private void inithttp() {
-        HashMap<String,String> params=new HashMap<>();
-        params.put("cpId","1cf04904fa064c4294453ce39c506be1");//优惠券ID
-        params.put("userId", SP.get(this, SpContent.UserId,"").toString()+"");//用户ID
-        params.put("shopId",shopId);//商品ID
-        HttpUtils.doPost(ACTION.COUPONGET,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cpId", "1cf04904fa064c4294453ce39c506be1");//优惠券ID
+        params.put("userId", SP.get(this, SpContent.UserId, "").toString() + "");//用户ID
+        params.put("shopId", shopId);//商品ID
+        HttpUtils.doPost(ACTION.COUPONGET, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
+            case ACTION.EVALUATION:
+                commentsBean = GsonUtil.toObj(res, CommentsBean.class);
+                if (commentsBean.isSuccess()) {
+                    List<CommentsBean.BodyBean.ApiGoodsCommentsListBean> commList = commentsBean.getBody().getApiGoodsCommentsList();
+                    CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo, commList);
+                    reBoutique.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                    reBoutique.setAdapter(sortAdapter2);
+                } else {
+                    T.show(commentsBean.getMsg());
+                }
+
+                break;
             case ACTION.COUPONGET:
-                CouponGetBean couponGetBean=GsonUtil.toObj(res, CouponGetBean.class);
-                if(couponGetBean.isSuccess()){
+                CouponGetBean couponGetBean = GsonUtil.toObj(res, CouponGetBean.class);
+                if (couponGetBean.isSuccess()) {
                     T.show(couponGetBean.getMsg());
-                }else {
+                } else {
                     T.show(couponGetBean.getMsg());
                 }
                 break;
             //获取店铺详情
             case ACTION.SHOPDETAILDATA:
 
-                L.e("................."+res);
-                ShopStoreDetailBean shopStoreDetailBean = GsonUtil.toObj(res,ShopStoreDetailBean.class);
+                L.e("................." + res);
+                ShopStoreDetailBean shopStoreDetailBean = GsonUtil.toObj(res, ShopStoreDetailBean.class);
 
                 tv_shopname.setText(shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getShopName());
                 service_tel = shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getServiceTel();
-                tv_shop_detail_address.setText(shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrProvince()+
-                        shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrCity()+shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrDistrict());
+                tv_shop_detail_address.setText(shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrProvince() +
+                        shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrCity() + shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrDistrict());
                 break;
         }
     }
+
     @Override
     public void showLoadingDialog() {
     }
+
     @Override
     public void showErrorMessage(String s) {
     }

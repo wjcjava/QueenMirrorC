@@ -234,9 +234,13 @@
     <string name="back_payment_password">找回支付密码</string>
     <string name="add_login_number">请输入登陆账号</string>
     <string name="add_login_password">请输入登陆密码</string>
-    <string name="add_pay_password" >请输入支付密码</string>
+    <string name="add_pay_password">请输入支付密码</string>
     <string name="subscribe">在线预约</string>
     <string name="facepay">到店付款</string>
+    <string name="startspellorder">开启拼单</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
 
 
 </resources>

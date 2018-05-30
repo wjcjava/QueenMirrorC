@@ -63,7 +63,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-
             android:theme="@style/Transparent"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
@@ -89,7 +88,6 @@
             android:name=".ui.home.activity.PurchaseActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-
             android:theme="@style/Transparent" />
         <activity
             android:name=".ui.home.activity.SubmitActivity"
@@ -467,7 +465,8 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.mine.activity.BackPayActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.home.activity.SpellOrderListActivity"></activity>
     </application>
 
 </manifest>
