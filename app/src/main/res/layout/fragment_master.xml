@@ -23,6 +23,7 @@
             android:textSize="@dimen/comment_18_size" />
 
         <ImageView
+            android:id="@+id/iv_master_news"
             android:layout_width="@dimen/comment_20_dip"
             android:layout_height="@dimen/comment_21_dip"
             android:layout_alignParentBottom="true"

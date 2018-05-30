@@ -18,9 +18,11 @@ public class GoodsInfo {
     private String color;
     private String size;
     private int goodsImg;
+    private String custId;
+
 
     public GoodsInfo(String id, String name, String desc, double price, double prime_price,
-                     String color, String size, int goodsImg, int count) {
+                     String color, String size, int goodsImg, int count,String custId) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -30,6 +32,15 @@ public class GoodsInfo {
         this.color = color;
         this.size = size;
         this.goodsImg = goodsImg;
+        this.custId = custId;
+    }
+
+    public String getCustId() {
+        return custId;
+    }
+
+    public void setCustId(String custId) {
+        this.custId = custId;
     }
 
     public String getId() {

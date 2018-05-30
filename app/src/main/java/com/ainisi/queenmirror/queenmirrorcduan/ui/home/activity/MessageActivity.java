@@ -32,8 +32,7 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
     TextView tvSystem;
     @Bind(R.id.tv_message_review)
     TextView tvReview;
-    boolean isLogin=false;
-
+    boolean isLogin = false;
     private HomeMessageBean messageBean;
     private String interactine;
     private String systemMessage;
@@ -50,11 +49,10 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
     @Override
     public void initView() {
         initText();
-
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume(){
         super.onResume();
         if(SP.get(this, SpContent.isLogin,"0").toString().equals("1")){
             isLogin=true;
@@ -62,34 +60,28 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
             isLogin=false;
         }
     }
-
     @Override
     protected void initData() {
         super.initData();
         inithttp();
     }
-
     private void inithttp() {
         HashMap<String,String> hashMap=new HashMap<>();
         hashMap.put("tabType","2");
         hashMap.put("tabFather","0");
         HttpUtils.doPost(ACTION.MESSAGE,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
-
     private void initText() {
         title.setText(R.string.message_center);
         title.setTextColor(ContextCompat.getColor(this,R.color.alpha_95_black));
     }
-
-    @OnClick({R.id.title_back,R.id.layout_message_interactive,R.id.layout_message_system,R.id.layout_message_review
-    })
+    @OnClick({R.id.title_back,R.id.layout_message_interactive,R.id.layout_message_system,R.id.layout_message_review})
     public void click(View view) {
-
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
-                //订单消息
+            //订单消息
             case R.id.layout_message_interactive:
                 if(isLogin){
                     Intent intent=new Intent(this,OrderMessageActivity.class);
@@ -98,9 +90,8 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
                 }else {
                     T.show("请登录");
                 }
-
                 break;
-                //互动信息
+            //互动信息
             case R.id.layout_message_system:
                 if(isLogin){
                     Intent intent=new Intent(this,InteractiveMessageActivity.class);
@@ -110,7 +101,7 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
                     T.show("请登录");
                 }
                 break;
-                //系统消息
+            //系统消息
             case R.id.layout_message_review:
                 if(isLogin){
                     Intent intent=new Intent(this,SystemActivity.class);
@@ -119,11 +110,9 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
                 }else {
                     T.show("请登录");
                 }
-
                 break;
             default:
                 break;
-
         }
     }
 
@@ -140,23 +129,16 @@ public class MessageActivity extends BaseNewActivity implements HttpCallBack{
                     tvInteractive.setText(interactine);
                     tvSystem.setText(systemMessage);
                     tvReview.setText(orderMessage);
-                    break;
                 }else {
                     T.show(messageBean.getMsg());
                 }
-
-
+                break;
         }
-
     }
-
     @Override
     public void showLoadingDialog() {
-
     }
-
     @Override
     public void showErrorMessage(String s) {
-
     }
 }

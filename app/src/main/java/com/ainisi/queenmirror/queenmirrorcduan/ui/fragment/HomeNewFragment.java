@@ -164,11 +164,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     protected void initView() {
 
         /**
-         * 获取新消息提示
-         */
-        getNewNewsData();
-
-        /**
          * 获取首页部分数据
          */
         getBannerData();
@@ -221,6 +216,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 }
             });
         }
+
+         /**
+         * 获取新消息提示
+         */
+        getNewNewsData();
     }
     @OnClick({R.id.li_home_esthetics,R.id.li_home_nailart,R.id.li_home_haircustom,R.id.li_home_beauty,R.id.li_home_permanent,R.id.linear_home_freetrial,
             R.id.line_surface,R.id.line_uspension_surface,R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information})

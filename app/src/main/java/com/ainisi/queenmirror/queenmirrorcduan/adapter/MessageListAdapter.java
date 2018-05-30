@@ -26,6 +26,5 @@ public class MessageListAdapter extends BaseQuickAdapter<MessageListBean,BaseVie
     protected void convert(BaseViewHolder helper, MessageListBean item) {
            TextView order=helper.getView(R.id.tv_order);
            order.setText(item.getBody().getMessageListData().get(0).getEcSysMessage().getMessDetails());
-
     }
 }

@@ -75,13 +75,16 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     private ShopcatAdapter adapter;
     private List<StoreInfo> groups; //组元素的列表
     private Map<String, List<GoodsInfo>> childs; //子元素的列表
-    ShoppingCartBean shoppingCartBean;
+    public ShoppingCartBean shoppingCartBean;
 
     String delIds="";
-    List<ShoppingCartBean.BodyBean.ShopListBean> shopList = new ArrayList<>();
+    List<ShoppingCartBean.BodyBean.ShopListBean.ApiAnsCustCartListBean> apiAnsCustCartListBeans = new ArrayList<>();
+
+    public static ShoppingCartActivity instance = null;
 
     @Override
     protected int getLayoutId() {
+        instance = this;
         StatusBarUtil.getStatusBarLightMode(getWindow());
         return R.layout.activity_shopping_cart;
     }
@@ -117,7 +120,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     @Override
     protected void initView() {
         super.initView();
-
+        getShopCartData();
     }
 
     /**
@@ -140,9 +143,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     }
 
     private void initEvents() {
-
-        List<ShoppingCartBean.BodyBean.ShopListBean.ApiAnsCustCartListBean> apiAnsCustCartListBeans = new ArrayList<>();
-
         mcontext = this;
         groups = new ArrayList<StoreInfo>();
         childs = new HashMap<String, List<GoodsInfo>>();
@@ -153,7 +153,8 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
             for (int j = 0; j < shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().size(); j++) {
                 int img = R.drawable.icon_home_beautiful;
                 //i-j 就是商品的id， 对应着第几个店铺的第几个商品，1-1 就是第一个店铺的第一个商品,价格,在加商品时的数量
-                goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), "第一排", "出头天者", img, apiAnsCustCartListBeans.get(j).getAnsCustCart().getPurchaseNumber()));
+                goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), "第一排", "出头天者"
+                        , img, apiAnsCustCartListBeans.get(j).getAnsCustCart().getPurchaseNumber(),apiAnsCustCartListBeans.get(j).getAnsCustCart().getId()));
             }
             childs.put(groups.get(i).getId(), goods);
         }
@@ -190,7 +191,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     @Override
     protected void onResume() {
         super.onResume();
-        getShopCartData();
+
     }
 
     /**
@@ -206,7 +207,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
                 count++;
             }
         }
-
         //购物车已经清空
         if (count == 0) {
             clearCart();
@@ -440,20 +440,16 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      */
     //思路:当子元素=0，那么组元素也要删除
     private void calulates(){
-
-
         for(int i=0; i < groups.size(); i++){
             StoreInfo group = groups.get(i);
             List<GoodsInfo> child = childs.get(group.getId());
-
             for (int j = 0; j < child.size(); j++) {
                 GoodsInfo good = child.get(j);
-
                 if (good.isChoosed()) {
+
                 }else{
                     shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().remove(j);
                     child.remove(j);
-
                     if (child.size() == 0) {
                         shoppingCartBean.getBody().getShopList().remove(i);
                     }

@@ -23,7 +23,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.GoodsInfo;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.StoreInfo;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilTool;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.UtilsLog;
@@ -134,10 +138,9 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
         } else {
             childViewHolder = (ChildViewHolder) convertView.getTag();
         }
-
         final GoodsInfo child = (GoodsInfo) getChild(groupPosition, childPosition);
         if (child != null) {
-            cartId = child.getId();
+            cartId = child.getCustId();
             childViewHolder.goodsNum.setText(String.valueOf(child.getCount()));
             childViewHolder.tv_shop_name.setText(child.getName());
             childViewHolder.tv_shop_cart_price.setText("￥" + child.getPrice());
@@ -157,31 +160,26 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
                 }
             });
 
-        /*    childViewHolder.singleCheckBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    child.setChoosed(((CheckBox) v).isChecked());
-                    childViewHolder.singleCheckBox.setChecked(((CheckBox) v).isChecked());
-                    checkInterface.checkChild(groupPosition, childPosition, ((CheckBox) v).isChecked());
-                }
-            });*/
             childViewHolder.increaseGoodsNum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     /**
                      * 点击加号
                      */
+                    cartId = child.getCustId();
                     modifyCountInterface.doIncrease(groupPosition, childPosition, childViewHolder.goodsNum, childViewHolder.singleCheckBox.isChecked());
-
+                    count = Integer.parseInt(childViewHolder.goodsNum.getText().toString());
+                    ShoppingCartActivity.instance.shoppingCartBean.getBody().getShopList().get(groupPosition).getApiAnsCustCartList().get(childPosition).getAnsCustCart().setPurchaseNumber(count);
                     doNumberData();
-
                 }
             });
             childViewHolder.reduceGoodsNum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    cartId = child.getCustId();
                     modifyCountInterface.doDecrease(groupPosition, childPosition, childViewHolder.goodsNum, childViewHolder.singleCheckBox.isChecked());
-
+                    count = Integer.parseInt(childViewHolder.goodsNum.getText().toString());
+                    ShoppingCartActivity.instance.shoppingCartBean.getBody().getShopList().get(groupPosition).getApiAnsCustCartList().get(childPosition).getAnsCustCart().setPurchaseNumber(count);
                     doNumberData();
                 }
             });
@@ -201,7 +199,7 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
      */
     private void doNumberData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("userId", "111");//用户ID
+        params.put("userId", SP.get(mcontext, SpContent.UserId,"0")+"");//用户ID
         params.put("num", count + "");
         params.put("cartId", cartId);
         HttpUtils.doPost(ACTION.CHANGENUMBERCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
@@ -214,6 +212,7 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
             case ACTION.CHANGENUMBERCART:
                 SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean.isSuccess()) {
+                    L.e("&&&&&&  "+successBean.getMsg());
                 } else {
                     T.show(successBean.getMsg());
                 }
@@ -274,7 +273,7 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
                     num.setText(String.valueOf(number));
                     child.setCount(number);
                     modifyCountInterface.doUpdate(groupPosition, childPosition, showCountView, isChecked);
-
+                    ShoppingCartActivity.instance.shoppingCartBean.getBody().getShopList().get(groupPosition).getApiAnsCustCartList().get(childPosition).getAnsCustCart().setPurchaseNumber(number);
                     doNumberData();
                     dialog.dismiss();
                 }
@@ -285,6 +284,9 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
             public void onClick(View v) {
                 count++;
                 num.setText(String.valueOf(count));
+
+                ShoppingCartActivity.instance.shoppingCartBean.getBody().getShopList().get(groupPosition).getApiAnsCustCartList().get(childPosition).getAnsCustCart().setPurchaseNumber(count);
+
             }
         });
         DeIncrease.setOnClickListener(new View.OnClickListener() {
@@ -293,6 +295,7 @@ public class ShopcatAdapter extends BaseExpandableListAdapter implements HttpCal
                 if (count > 1) {
                     count--;
                     num.setText(String.valueOf(count));
+                    ShoppingCartActivity.instance.shoppingCartBean.getBody().getShopList().get(groupPosition).getApiAnsCustCartList().get(childPosition).getAnsCustCart().setPurchaseNumber(count);
                 }
             }
         });

@@ -1,11 +1,16 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.NewsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MondelActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.InstallActivity;
@@ -27,21 +32,29 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineProblemActiv
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineQueenActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.PortraitActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.LoginActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.lzy.okgo.cache.CacheMode;
+
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 /**
  * Created by EWorld on 2018/3/6.
  * 我的
  */
 
-public class MineFragment extends BaseFragment {
+public class MineFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.tv_mine_uername)
     TextView tv_mine_uername;
+    @Bind(R.id.img_information)
+    ImageView img_information;
     boolean isLogin = false;
 
     @Override
@@ -63,8 +76,20 @@ public class MineFragment extends BaseFragment {
             isLogin = false;
             tv_mine_uername.setText("点击登录");
         }
+         /**
+         * 获取新消息提示
+         */
+        getNewNewsData();
     }
-
+ /**
+     * 获取新消息提示
+     */
+    private void getNewNewsData() {
+        java.util.HashMap<String, String> params = new HashMap<>();
+        params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");
+        params.put("messageType", "");
+        HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true,this);
+    }
 
     @Override
     protected void initView() {
@@ -250,6 +275,46 @@ public class MineFragment extends BaseFragment {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onSuccess(int action, String res) {
+        switch (action){
+            case ACTION.GETNEWNEWS:
+                NewsBean newsBean = GsonUtil.toObj(res, NewsBean.class);
+
+                if(newsBean.isSuccess()){
+                    if(newsBean.getBody().getIsRead().equals("0")){
+
+                    }else{
+                        QBadgeView badgeView = new QBadgeView(getActivity());
+                        badgeView.bindTarget(img_information);
+                        badgeView.setBadgeTextSize(10,false);
+                        badgeView.setBadgeText("");
+                        badgeView.setBadgeTextColor(this.getResources().getColor(R.color.white));
+                        badgeView.setBadgeGravity(Gravity.END | Gravity.TOP);
+                        badgeView.setBadgeBackgroundColor(this.getResources().getColor(R.color.colorPri));
+                        badgeView.setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                            @Override
+                            public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+                            }
+                        });
+                    }
+                }else{
+                    T.show(newsBean.getMsg());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
     }
 }
 
