@@ -1,12 +1,13 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by john on 2018/5/23.
  */
 
-public class ReceiveDiscounBean {
+public class ReceiveDiscounBean implements Serializable {
 
     /**
      * success : true

@@ -68,7 +68,7 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack{
         beanrecycle.setAdapter(sortAdapter2);
     }
 
-    @OnClick({R.id.title_back,R.id.iv_date
+    @OnClick({R.id.title_back
     })
     public void click(View view) {
 
@@ -76,9 +76,9 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack{
             case R.id.title_back:
                 finish();
                 break;
-            case R.id.iv_date:
-                startActivity(new Intent(this,BeanstalkActivity.class));
-                break;
+//            case R.id.iv_date:
+//                startActivity(new Intent(this,BeanstalkActivity.class));
+//                break;
         }
 
 

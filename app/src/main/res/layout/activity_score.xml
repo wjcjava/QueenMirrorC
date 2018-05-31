@@ -9,156 +9,38 @@
     <include
         android:id="@+id/ic_title"
         layout="@layout/layout_title" />
-
     <View
         android:id="@+id/vie"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_2_dip"
         android:layout_below="@id/ic_title"
         android:background="@color/alpha_05_black" />
+    <com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@id/vie"
+        android:scrollbars="vertical"
+        android:layout_height="match_parent">
+
 
     <RelativeLayout
         android:id="@+id/recycler"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/vie"
         android:background="@drawable/et_shap">
 
-        <ImageView
-            android:id="@+id/iv_order_title"
-            android:layout_width="@dimen/comment_41_dip"
-            android:layout_height="@dimen/comment_41_dip"
-            android:layout_marginStart="@dimen/comment_13_dip"
-            android:layout_marginTop="@dimen/comment_10_dip"
-            android:src="@drawable/icon_home_beautiful" />
+       <android.support.v7.widget.RecyclerView
+           android:id="@+id/re_score"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/tv_shop_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/comment_8_dip"
-            android:layout_marginTop="@dimen/comment_8_dip"
-            android:layout_toRightOf="@id/iv_order_title"
-            android:text="美甲套餐"
-            android:textSize="@dimen/comment_16_size" />
-
-        <TextView
-            android:id="@+id/tv_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_shop_name"
-            android:layout_marginStart="@dimen/comment_10_dip"
-            android:layout_marginTop="@dimen/comment_1_dip"
-            android:layout_toRightOf="@id/iv_order_title"
-            android:text="技师服务"
-            android:textColor="@color/alpha_95_black"
-            android:textSize="@dimen/comment_13_size" />
-
-        <com.ainisi.queenmirror.queenmirrorcduan.utils.CustomRatingBar
-            android:id="@+id/score_custom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_shop_name"
-            android:layout_marginStart="@dimen/comment_20_dip"
-            android:layout_toRightOf="@id/tv_service"
-            app:mode="random"
-            app:ratingProgress="5"
-            app:starDistance="@dimen/comment_16_dip"
-            app:starEmpty="@mipmap/empty"
-            app:starFill="@mipmap/fill"
-            app:starNum="5"
-            app:starSize="@dimen/comment_19_dip"
-            app:touchAble="true" />
-
-        <TextView
-            android:id="@+id/tv_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/tv_shop_name"
-            android:layout_marginEnd="@dimen/comment_15_dip"
-            android:layout_marginTop="@dimen/comment_1_dip"
-            android:text="非常好"
-            android:textSize="@dimen/comment_13_size" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_2_dip"
-            android:layout_below="@id/iv_order_title"
-            android:layout_marginTop="@dimen/comment_10_dip"
-            android:background="@color/alpha_05_black" />
-
-        <EditText
-            android:id="@+id/et_order"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_80_dip"
-            android:layout_below="@id/view"
-            android:layout_marginTop="@dimen/comment_10_dip"
-            android:background="@color/alpha_05_black"
-            android:gravity="top"
-            android:hint="@string/hintorder"
-            android:paddingLeft="@dimen/comment_20_dip"
-            android:paddingTop="@dimen/comment_15_dip"
-            android:textSize="@dimen/comment_13_size" />
-
-        <ImageView
-            android:id="@+id/iv_add"
-            android:layout_width="@dimen/comment_80_dip"
-            android:layout_height="@dimen/comment_80_dip"
-            android:layout_below="@id/et_order"
-            android:layout_marginStart="@dimen/comment_20_dip"
-            android:layout_marginTop="@dimen/comment_14_dip"
-            android:src="@mipmap/icon_order_add" />
-
-        <View
-            android:id="@+id/view_one"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_2_dip"
-            android:layout_below="@id/iv_add"
-            android:layout_marginTop="@dimen/comment_14_dip"
-            android:background="@color/alpha_05_black" />
-
-        <ImageView
-            android:id="@+id/iv_order_checked"
-            android:layout_width="@dimen/comment_18_dip"
-            android:layout_height="@dimen/comment_18_dip"
-            android:layout_below="@id/view_one"
-            android:layout_marginBottom="@dimen/comment_22_dip"
-            android:layout_marginStart="@dimen/comment_19_dip"
-            android:layout_marginTop="@dimen/comment_18_dip"
-            android:src="@mipmap/icon_order_checked" />
-
-        <TextView
-            android:id="@+id/tv_anonymous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view_one"
-            android:layout_marginBottom="@dimen/comment_22_dip"
-            android:layout_marginStart="@dimen/comment_15_dip"
-            android:layout_marginTop="@dimen/comment_18_dip"
-            android:layout_toRightOf="@id/iv_order_checked"
-            android:text="@string/anonymous"
-            android:textColor="@color/alpha_95_black"
-            android:textSize="@dimen/comment_13_size" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/view_one"
-            android:layout_marginBottom="@dimen/comment_22_dip"
-            android:layout_marginEnd="@dimen/comment_10_dip"
-            android:layout_marginTop="@dimen/comment_18_dip"
-            android:text="@string/anonymousshow"
-            android:textSize="@dimen/comment_14_size" />
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/recycler"
+        android:layout_below="@id/re_score"
         android:layout_marginTop="@dimen/comment_12_dip"
         android:background="@drawable/et_shap">
 
@@ -252,7 +134,10 @@
             app:starEmpty="@mipmap/empty"
             app:starFill="@mipmap/fill"
             app:starNum="5"
+            android:layout_marginBottom="@dimen/comment_20_dip"
             app:starSize="@dimen/comment_19_dip"
             app:touchAble="true" />
     </RelativeLayout>
+    </RelativeLayout>
+    </com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView>
 </RelativeLayout>

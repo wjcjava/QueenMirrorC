@@ -1,10 +1,12 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
@@ -25,7 +27,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineFriendsActiv
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineGiftActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineHomepageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineMyFootActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineMyServiceActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineMyWalletActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MinePositionActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineProblemActivity;
@@ -56,6 +57,7 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.img_information)
     ImageView img_information;
     boolean isLogin = false;
+    private String service_tel="120";
 
     @Override
     protected int getLayoutResource() {
@@ -261,7 +263,10 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
                 break;
             //客服
             case R.id.lay_service:
-                getActivity().startActivity(new Intent(getActivity(), MineMyServiceActivity.class));
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Uri data = Uri.parse("tel:" + service_tel);
+                intent.setData(data);
+                startActivity(intent);
                 break;
             //魔豆商城
             case R.id.li_mine_model:

@@ -1,27 +1,20 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.DisCountAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ReceiveDiscounBean;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -38,7 +31,6 @@ public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallB
     RecyclerView pur_rey_distance;
 
     String shopId = "",goodsIds = "";
-    private DisCountAdapter sortAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -85,16 +77,16 @@ public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallB
         switch (action){
             case ACTION.GETUSEYOUHUIQUAN:
                 L.e("^^^^^"+res);
-               /* ReceiveDiscounBean receiveBean= GsonUtil.toObj(res, ReceiveDiscounBean.class);
-
-                if(receiveBean.isSuccess()){
-                    List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> receiveList = receiveBean.getBody().getCustCouponListData();
-                    sortAdapter = new DisCountAdapter(PurchaseSelectActivity.this,receiveList);
-                    pur_rey_distance.setLayoutManager(new LinearLayoutManager(PurchaseSelectActivity.this, LinearLayoutManager.VERTICAL, false));
-                    pur_rey_distance.setAdapter(sortAdapter);
-                }else{
-                    T.show(receiveBean.getMsg());
-                }*/
+//               ReceiveDiscounBean receiveBean= GsonUtil.toObj(res, ReceiveDiscounBean.class);
+//
+//                if(receiveBean.isSuccess()){
+//                    List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> receiveList = receiveBean.getBody().getCustCouponListData();
+//                    sortAdapter = new DisCountAdapter(PurchaseSelectActivity.this,receiveList);
+//                    pur_rey_distance.setLayoutManager(new LinearLayoutManager(PurchaseSelectActivity.this, LinearLayoutManager.VERTICAL, false));
+//                    pur_rey_distance.setAdapter(sortAdapter);
+//                }else{
+//                    T.show(receiveBean.getMsg());
+//                }
                 break;
         }
     }

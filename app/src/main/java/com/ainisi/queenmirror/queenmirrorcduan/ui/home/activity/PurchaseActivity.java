@@ -5,21 +5,19 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.PurchaseListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.AreFundBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderDetailsListInfoBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderPayDetailBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderPurchaseBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.SelectLinkPeopleActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -27,6 +25,7 @@ import com.google.gson.Gson;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -132,9 +131,12 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
 
             orderPurchaseBeans.add(orderPurchaseBean);
         }
-        tv_shopping_cart_number.setText("￥"+end_price);
+        DecimalFormat df = new DecimalFormat("0.00");
+        String str = df.format(end_price);
+        tv_shopping_cart_number.setText("￥"+str);
         listadapter = new PurchaseListViewAdapter(this,shopList);
         listOrder.setAdapter(listadapter);
+        listadapter.notifyDataSetChanged();
     }
 
     @OnClick({R.id.tv_submit,R.id.title_back,R.id.rl_purchase_top})

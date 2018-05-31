@@ -2,6 +2,8 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -9,9 +11,8 @@ import android.widget.RadioButton;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.fragment.HistorydiscountFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullsalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.fragment.MinediscountFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.FragmentUtil;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -20,11 +21,9 @@ import butterknife.OnClick;
 public class MineDiscountActivity extends BaseNewActivity {
 
     private MinediscountFragment minediscountFragment;
-    private HistorydiscountFragment historydiscountFragment;
+    private FullsalesFragment historydiscountFragment;
     @Bind(R.id.radio_preferential)
     RadioButton preferential;
-    private FragmentManager manager;
-    private FragmentTransaction transaction;
 
 
     @Override
@@ -41,8 +40,8 @@ public class MineDiscountActivity extends BaseNewActivity {
 
     private void initshowdiscountFragment() {
         preferential.setChecked(true);
-        manager = getSupportFragmentManager();
-        transaction = manager.beginTransaction();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.fr_mine_discount, new MinediscountFragment());
         transaction.commit();
     }
@@ -52,33 +51,56 @@ public class MineDiscountActivity extends BaseNewActivity {
     }
 
     @Override
-    protected void initData() {
-
+    protected void initData(){
 
     }
 
     @OnClick({R.id.title_back, R.id.radio_preferential, R.id.radio_invincible})
     public void click(View view) {
+
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
             case R.id.radio_preferential:
-                if (minediscountFragment == null) {
-            minediscountFragment = new MinediscountFragment();
 
-        }
-        FragmentUtil.showFragment(this, R.id.fr_mine_discount, minediscountFragment);
+                    minediscountFragment = new MinediscountFragment();
+                    replaceFragment(minediscountFragment,"",false);
+
                 break;
             case R.id.radio_invincible:
-                if (historydiscountFragment == null) {
-                    historydiscountFragment = new HistorydiscountFragment();
-                }
-                FragmentUtil.showFragment(this, R.id.fr_mine_discount, historydiscountFragment);
+
+                    historydiscountFragment = new FullsalesFragment();
+                replaceFragment(historydiscountFragment,"",false);
                 break;
             default:
                 break;
         }
 
     }
-}
+
+    /**
+     * fragment切换
+     * @param fragment 需要显示的Fragment
+     * @param tag Tag标签
+     * @param addToBackStack 是否加入栈
+     */
+    public void replaceFragment(Fragment fragment, String tag, boolean addToBackStack) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fr_mine_discount, fragment, tag);
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
+        fragmentTransaction.commit();
+    }
+    /**
+     * 解决重影问题
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        //super.onRestoreInstanceState(savedInstanceState);
+    }
+
+
+       }

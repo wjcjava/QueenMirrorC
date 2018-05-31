@@ -255,11 +255,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
         <activity
-            android:name=".ui.mine.activity.MineMyServiceActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Transparent" />
-        <activity
             android:name=".ui.mine.activity.MineAddcartActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

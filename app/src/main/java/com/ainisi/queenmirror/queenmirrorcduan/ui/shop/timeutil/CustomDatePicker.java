@@ -57,7 +57,7 @@ public class CustomDatePicker {
     private String currentMon, currentDay; //当前选中的月、日、时、分
     private boolean spanYear, spanMon, spanDay;
     private Calendar selectedCalender, startCalendar, endCalendar;
-    private TextView tv_title, tv_select,tv_cancle;
+    private TextView tv_title, tv_select, tv_cancle;
 
 
     public CustomDatePicker(Context context, String title, ResultHandler resultHandler, String startDate, String endDate) {
@@ -99,12 +99,12 @@ public class CustomDatePicker {
     }
 
     private void initView() {
-        year_pv = (DatePickerView) datePickerDialog.findViewById(R.id.year_pv);
-        month_pv = (DatePickerView) datePickerDialog.findViewById(R.id.month_pv);
-        day_pv = (DatePickerView) datePickerDialog.findViewById(R.id.day_pv);
-        tv_title = (TextView) datePickerDialog.findViewById(R.id.tv_title);
+        year_pv = datePickerDialog.findViewById(R.id.year_pv);
+        month_pv = datePickerDialog.findViewById(R.id.month_pv);
+        day_pv = datePickerDialog.findViewById(R.id.day_pv);
+        tv_title = datePickerDialog.findViewById(R.id.tv_title);
         tv_cancle = datePickerDialog.findViewById(R.id.tv_cancle);
-        tv_select = (TextView) datePickerDialog.findViewById(R.id.tv_select);
+        tv_select = datePickerDialog.findViewById(R.id.tv_select);
 
 
         tv_title.setText("在线预约");
@@ -129,15 +129,12 @@ public class CustomDatePicker {
         startYear = startCalendar.get(Calendar.YEAR);
         startMonth = startCalendar.get(Calendar.MONTH) + 1;
         startDay = startCalendar.get(Calendar.DAY_OF_MONTH);
-
         endYear = endCalendar.get(Calendar.YEAR);
         endMonth = endCalendar.get(Calendar.MONTH) + 1;
         endDay = endCalendar.get(Calendar.DAY_OF_MONTH);
-
         spanYear = startYear != endYear;
         spanMon = (!spanYear) && (startMonth != endMonth);
         spanDay = (!spanMon) && (startDay != endDay);
-
         selectedCalender.setTime(startCalendar.getTime());
     }
 
@@ -154,13 +151,13 @@ public class CustomDatePicker {
                 day.add(formatTimeUnit(i));
             }
             if (spanMon) {
-            year.add(String.valueOf(startYear));
-            for (int i = startMonth; i <= endMonth; i++) {
-                month.add(formatTimeUnit(i));
-            }
-            for (int i = startDay; i <= startCalendar.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-                day.add(formatTimeUnit(i));
-            }
+                year.add(String.valueOf(startYear));
+                for (int i = startMonth; i <= endMonth; i++) {
+                    month.add(formatTimeUnit(i));
+                }
+                for (int i = startDay; i <= startCalendar.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
+                    day.add(formatTimeUnit(i));
+                }
 
 
             }
@@ -301,9 +298,7 @@ public class CustomDatePicker {
         lastMonthDays = day.size();
 
 
-
     }
-
 
 
     private void executeScroll() {
@@ -362,7 +357,6 @@ public class CustomDatePicker {
     }
 
 
-
     /**
      * 设置日期控件默认选中的时间
      */
@@ -418,7 +412,7 @@ public class CustomDatePicker {
 
 
             if (str.length == 2)
-            executeScroll();
+                executeScroll();
         }
     }
 

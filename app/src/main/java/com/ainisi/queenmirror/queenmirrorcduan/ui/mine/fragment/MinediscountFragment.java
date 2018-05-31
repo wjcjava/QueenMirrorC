@@ -1,33 +1,20 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.fragment;
 
 import android.content.res.Resources;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.DisCountAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.Overduedapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.UseAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
-import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
-import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ReceiveDiscounBean;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
-import com.lzy.okgo.cache.CacheMode;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -37,16 +24,16 @@ import butterknife.Bind;
  * 我的优惠券
  */
 
-public class MinediscountFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack ,HttpCallBack{
-    @Bind(R.id.rey_distance)
-    RecyclerView disrecycler;
+public class MinediscountFragment extends BaseFragment {
+
     @Bind(R.id.tab_mine_distance)
     TabLayout tabDistance;
+
     private List<String> tabList = new ArrayList<>();
-    private Handler handler = new Handler();
-    @Bind(R.id.rlm)
-    RefreshLoadMoreLayout mRefreshLoadMoreLayout;
-    private DisCountAdapter sortAdapter;
+    private FragmentManager manager;
+    private FragmentTransaction transaction;
+    private int position;
+    private ReceiveDiscounBean receiveBean;
 
     @Override
     protected int getLayoutResource() {
@@ -55,67 +42,41 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
 
     @Override
     public void initPresenter() {
-        mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
-                .canLoadMore(true)
-                .autoLoadMore()
-                .showLastRefreshTime(
-                        RefreshLoadMoreLayout.class,
-                        "yyyy-MM-dd")
-                .multiTask());
     }
 
-    @Override
-    public void onRefresh() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                T.show("下拉成功");
-                mRefreshLoadMoreLayout.stopRefresh();
-            }
-        }, 200);
+    private void initshowdiscountFragment() {
+
+        manager = getActivity().getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        HistorydiscountFragment historydiscountFragment = new HistorydiscountFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        bundle.putSerializable("bean", receiveBean);
+        historydiscountFragment.setArguments(bundle);
+        transaction.add(R.id.frame_discount, historydiscountFragment);
+        transaction.commit();
     }
 
-    @Override
-    public void onLoadMore() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                T.show("上拉成功");
-                mRefreshLoadMoreLayout.stopLoadMore();
-            }
-        }, 1000);
-    }
 
     @Override
     protected void initView() {
+
         initDate();
         /**
          * 商品所领取优惠券
          */
-        getReceiveDiscoun();
+
     }
 
-    private void getReceiveDiscoun(){
-        HashMap<String,String> params=new HashMap<>();
-        params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");//用户ID
-        HttpUtils.doPost(ACTION.RECEIVEDISCOUN,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
-    }
     @Override
-    public void onSuccess(int action, String res) {
-        switch (action){
-            case ACTION.RECEIVEDISCOUN:
-                ReceiveDiscounBean receiveBean=GsonUtil.toObj(res, ReceiveDiscounBean.class);
-                if(receiveBean.isSuccess()){
-                    List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> receiveList = receiveBean.getBody().getCustCouponListData();
-                    sortAdapter = new DisCountAdapter(getActivity(),receiveList);
-                    disrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                    disrecycler.setAdapter(sortAdapter);
-                }else {
-                    T.show(receiveBean.getMsg());
-                }
-                break;
-        }
+    public void onResume() {
+        super.onResume();
+        initshowdiscountFragment();
     }
+
+
+
+
     private void initDate() {
         tabList.add("已领取优惠券");
         tabList.add("已使用优惠券");
@@ -133,22 +94,17 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
                 if (view == null) return;
                 view.setTag(i);
                 view.setOnClickListener(new View.OnClickListener() {
-                    private int position;
+
                     @Override
                     public void onClick(View v) {
                         position = (int) view.getTag();
                         //这里就可以根据业务需求处理点击事件了。
                         if (position == 0) {
-                            disrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                            disrecycler.setAdapter(sortAdapter);
+                            initshowdiscountFragment();
                         } else if (position == 1) {
-                            UseAdapter sortAdapter = new UseAdapter(getActivity());
-                            disrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                            disrecycler.setAdapter(sortAdapter);
-                        } else if(position==2){
-                            Overduedapter sortAdapter = new Overduedapter(getActivity());
-                            disrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                            disrecycler.setAdapter(sortAdapter);
+                            initshowdiscountFragment();
+                        } else if (position == 2) {
+                            initshowdiscountFragment();
                         }
                     }
                 });
@@ -160,6 +116,7 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
         }
         setIndicator(tabDistance, 10, 10);
     }
+
     public void setIndicator(TabLayout tabs, int leftDip, int rightDip) {
         Class<?> tabLayout = tabs.getClass();
         Field tabStrip = null;
@@ -188,13 +145,6 @@ public class MinediscountFragment extends BaseFragment implements RefreshLoadMor
             child.invalidate();
         }
     }
-    @Override
-    public void showLoadingDialog() {
 
-    }
 
-    @Override
-    public void showErrorMessage(String s) {
-
-    }
 }

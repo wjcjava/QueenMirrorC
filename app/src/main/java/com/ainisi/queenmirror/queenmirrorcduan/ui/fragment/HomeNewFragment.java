@@ -36,6 +36,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivi
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ScoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
@@ -223,7 +224,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         getNewNewsData();
     }
     @OnClick({R.id.li_home_esthetics,R.id.li_home_nailart,R.id.li_home_haircustom,R.id.li_home_beauty,R.id.li_home_permanent,R.id.linear_home_freetrial,
-            R.id.line_surface,R.id.line_uspension_surface,R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information})
+            R.id.line_surface,R.id.line_uspension_surface,R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information,R.id.li_home_newuserprg})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_home_bustling:
@@ -307,6 +308,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             //消息
             case R.id.img_information:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
+                break;
+            case R.id.li_home_newuserprg:
+                startActivity(new Intent(getActivity(), ScoreActivity.class));
                 break;
         }
     }
