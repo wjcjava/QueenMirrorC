@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
@@ -13,6 +12,7 @@
         android:background="@color/alpha_05_black"
         />
     <RelativeLayout
+        android:id="@+id/rl_top"
         android:layout_below="@id/view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,4 +54,64 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_top"
+        android:orientation="vertical">
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mine_back_gray">
+            <TextView
+                android:id="@+id/tv_pur_youhui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/back_pur_right_select"
+                android:textSize="@dimen/comment_14_size"
+                android:text="优惠券"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/alpha_85_black"
+                android:gravity="center">
+            </TextView>
+            <TextView
+                android:id="@+id/tv_pur_modou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/back_pur_select"
+                android:textSize="@dimen/comment_14_size"
+                android:text="魔豆"
+                android:textColor="@color/white"
+                android:gravity="center">
+            </TextView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_purchase_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_pur_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/right_arrow">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tv_pur_selectname"
+                android:layout_toLeftOf="@id/iv_pur_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/alpha_85_black"
+                android:text="请选择优惠券"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:textSize="@dimen/comment_14_size">
+            </TextView>
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

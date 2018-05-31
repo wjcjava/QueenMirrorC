@@ -177,12 +177,14 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         HttpUtils.doPost(ACTION.GETSHOPPINDCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
+    /**
+     * 这里需要修改
+     */
     private void geeshopDiscoun() {
         HashMap<String,String> params=new HashMap<>();
         params.put("cpCate","1");
-        params.put("cpScope","1");
-        params.put("shopId","12");//商品ID
-        params.put("userId","1");//用户ID
+        params.put("shopId",shopId);//商品ID
+        params.put("userId",SP.get(WorkRoomDetailActivity.this, SpContent.UserId,"")+"");//用户ID
         HttpUtils.doPost(ACTION.SHOPDISCOUN,params,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
@@ -191,7 +193,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         switch (action){
             case ACTION.GETSHOPPINDCART:
                 shoppingCartBean = GsonUtil.toObj(res,ShoppingCartBean.class);
-
                 break;
             case ACTION.ADDLIULAN://添加浏览量
                 SuccessBean successBeans = GsonUtil.toObj(res,SuccessBean.class);
@@ -205,7 +206,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 isColl = true;
                 SuccessBean successBean1 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean1.isSuccess()) {
-                   // T.show(successBean1.getMsg());//成功
+                    // T.show(successBean1.getMsg());//成功
                 } else {
                     T.show(successBean1.getMsg());
                 }
@@ -214,7 +215,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 isColl = false;
                 SuccessBean successBean2 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean2.isSuccess()) {
-                  //  T.show(successBean2.getMsg());//成功
+                    //  T.show(successBean2.getMsg());//成功
                 } else {
                     T.show(successBean2.getMsg());
                 }
@@ -229,25 +230,20 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 break;
             case ACTION.SHOPSALEPRODUCT://获取商家所卖商品列表
                 ShopSalesProduct shopSalesProduct = GsonUtil.toObj(res,ShopSalesProduct.class);
-
                 apiGoodsList = shopSalesProduct.getBody().getApiGoodsList();
                 pageSum = shopSalesProduct.getBody().getPageSum();
-
                 listadapter = new WorkRoomAdapter(WorkRoomDetailActivity.this,apiGoodsList);
                 listView.setAdapter(listadapter);
                 break;
             case ACTION.SHOPXINYONG://获取门店信用
                 ShopXinyongBean shopXinyongBean = GsonUtil.toObj(res,ShopXinyongBean.class);
                 apiShopScoreList = shopXinyongBean.getBody().getApiShopScoreList();
-
                 top_detail = top_detail+"评分" + apiShopScoreList.get(0).getEcShopScore().getShopScore();
-
                 break;
             case ACTION.SHOPDETAILDATA://获取商家具体信息
                 shopDetailDataBean = GsonUtil.toObj(res,ShopDetailDataBean.class);
                 top_detail = top_detail+"  浏览量"+shopDetailDataBean.getBody().getApiShop().getAnsShopBrowses().getBrowseCounts()+"次";
                 tv_workdetail_topfenshu.setText(top_detail);
-
                 if(shopDetailDataBean.getBody().getIfFollow().equals("1")){
                     /**
                      * 已关注
@@ -264,7 +260,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
-                  //  T.show(successBean.getMsg());
+                    //  T.show(successBean.getMsg());
                     tv_work_detail_guanzhu.setText("取消关注");
                 }else{
                     T.show(successBean.getMsg());
@@ -295,7 +291,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 break;
         }
     }
-
     /**
      * 添加浏览次数
      */
@@ -317,7 +312,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("pageSize","10");
         HttpUtils.doPost(ACTION.SHOPSALEPRODUCT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 获取商家推荐商品列表
      */
@@ -329,7 +323,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("pageSize","10");
         HttpUtils.doPost(ACTION.SHOPTUIJIANLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 获取门店信用数据
      */
@@ -338,7 +331,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("id", shopId);//商家ID
         HttpUtils.doPost(ACTION.SHOPXINYONG, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 获取商家具体信息
      */
@@ -347,7 +339,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("id", shopId);//商家ID
         HttpUtils.doPost(ACTION.SHOPDETAILDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 关注店铺
      */
@@ -357,7 +348,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("userId",userId);
         HttpUtils.doPost(ACTION.GUANZHUSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 取消关注
      */
@@ -367,7 +357,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("userId",userId);
         HttpUtils.doPost(ACTION.CANCELGUANZHUSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 举报商家
      */
@@ -376,7 +365,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("complainInfo", shopId);//商家ID
         HttpUtils.doPost(ACTION.JUBAOSHOP, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     private void initTab() {
         listView.setVisibility(View.VISIBLE);
         tabList.add("门店服务");
@@ -492,7 +480,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                     T.show("请您先登录APP");
                 }
                 break;
-                //举报
+            //举报
             case R.id.tv_workroom_service_jubao:
                 jubaoData();
                 break;

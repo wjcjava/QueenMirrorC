@@ -23,8 +23,6 @@ public class DisCountAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> list;
     private LayoutInflater myLayoutinflater;
 
-
-
     //建立枚举 4个item类型
     public enum ITEM_TYPE {
         ITEM1,

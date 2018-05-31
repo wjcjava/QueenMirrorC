@@ -127,4 +127,6 @@ public interface ACTION {
 
     int DOOUTDATA = 0x134;//退款
 
+    int GETUSEYOUHUIQUAN = 0x135;//获取可用的优惠券
+
 }
