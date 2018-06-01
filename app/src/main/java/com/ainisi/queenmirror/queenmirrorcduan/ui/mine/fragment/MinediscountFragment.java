@@ -34,6 +34,7 @@ public class MinediscountFragment extends BaseFragment {
     private FragmentTransaction transaction;
     private int position;
     private ReceiveDiscounBean receiveBean;
+    private int item;
 
     @Override
     protected int getLayoutResource() {
@@ -74,13 +75,12 @@ public class MinediscountFragment extends BaseFragment {
         initshowdiscountFragment();
     }
 
-
-
-
     private void initDate() {
-        tabList.add("已领取优惠券");
-        tabList.add("已使用优惠券");
-        tabList.add("已过期优惠券");
+            tabList.add("已领取优惠券");
+            tabList.add("已使用优惠券");
+            tabList.add("已过期优惠券");
+
+
         for (int i = 0; i < tabList.size(); i++) {
             tabDistance.addTab(tabDistance.newTab().setText(tabList.get(i)));
             TabLayout.Tab tab = tabDistance.getTabAt(i);

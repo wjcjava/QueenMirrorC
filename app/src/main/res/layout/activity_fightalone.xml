@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -17,108 +18,111 @@
         android:layout_alignParentBottom="true"
         android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="@dimen/comment_200_dip"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
             <RelativeLayout
-                android:layout_width="@dimen/comment_0_dip"
+                android:id="@+id/re_full_customerservice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white">
+                android:layout_marginStart="@dimen/comment_20_dip"
+                android:layout_marginTop="@dimen/comment_10_dip"
+                android:gravity="center">
 
-                <RelativeLayout
-                    android:id="@+id/re_full_customerservice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/comment_20_dip"
-                    android:layout_marginTop="@dimen/comment_10_dip"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/iv_full_customerservice"
-                        android:layout_width="@dimen/comment_21_dip"
-                        android:layout_height="@dimen/comment_18_dip"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/icon_full_service" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/iv_full_customerservice"
-                        android:text="@string/customer_service"
-                        android:textSize="@dimen/comment_10_size" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/re_full_shop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/comment_30_dip"
-                    android:layout_marginTop="@dimen/comment_10_dip"
-                    android:layout_toRightOf="@id/re_full_customerservice"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/iv_full_shop"
-                        android:layout_width="@dimen/comment_19_dip"
-                        android:layout_height="@dimen/comment_17_dip"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/icon_full_shop" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/iv_full_shop"
-                        android:text="@string/shop"
-                        android:textSize="@dimen/comment_10_size" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rl_full_collection"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/comment_10_dip"
-                    android:layout_marginStart="@dimen/comment_30_dip"
-                    android:layout_marginTop="@dimen/comment_10_dip"
-                    android:layout_toRightOf="@id/re_full_shop"
-                    android:gravity="center"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp">
-
-                    <ImageView
-                        android:id="@+id/iv_full_collection"
-                        android:layout_width="@dimen/comment_20_dip"
-                        android:layout_height="@dimen/comment_18_dip"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/icon_full_collection" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/iv_full_collection"
-                        android:text="@string/Collection"
-                        android:textSize="@dimen/comment_10_size" />
-                </RelativeLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="@dimen/comment_0_dip"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/iv_full_customerservice"
+                    android:layout_width="@dimen/comment_21_dip"
+                    android:layout_height="@dimen/comment_18_dip"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/icon_full_service" />
 
                 <TextView
-                    android:id="@+id/tv_startspell"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/comment_44_dip"
-                    android:background="@drawable/ic_setting_breake"
-                    android:gravity="center"
-                    android:text="@string/startspellorder"
-                    android:textColor="@color/white" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_full_customerservice"
+                    android:text="@string/customer_service"
+                    android:textSize="@dimen/comment_10_size" />
             </RelativeLayout>
 
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/re_full_shop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_40_dip"
+                android:layout_marginTop="@dimen/comment_10_dip"
+                android:layout_toRightOf="@id/re_full_customerservice"
+                android:gravity="center"
+                tools:ignore="NotSibling">
+
+                <ImageView
+                    android:id="@+id/iv_full_shop"
+                    android:layout_width="@dimen/comment_19_dip"
+                    android:layout_height="@dimen/comment_17_dip"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/icon_full_shop" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_full_shop"
+                    android:text="@string/shop"
+                    android:textSize="@dimen/comment_10_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_spell_shopcollection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_30_dip"
+                android:layout_marginTop="@dimen/comment_10_dip"
+                android:layout_marginEnd="@dimen/comment_10_dip"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:layout_toRightOf="@id/re_full_shop"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_spell_shopcollection"
+                    android:layout_width="@dimen/comment_20_dip"
+                    android:layout_height="@dimen/comment_18_dip"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/icon_full_collection" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_spell_shopcollection"
+                    android:text="@string/Collection"
+                    android:textSize="@dimen/comment_10_size" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/tv_fightalone_buy"
+                android:layout_width="@dimen/comment_89_dip"
+                android:layout_height="@dimen/comment_44_dip"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="@string/pricetobuy"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_startspell"
+                android:layout_width="@dimen/comment_89_dip"
+                android:layout_height="@dimen/comment_44_dip"
+                android:layout_toRightOf="@id/tv_fightalone_buy"
+                android:background="@drawable/ic_setting_breake"
+                android:gravity="center"
+                android:text="@string/startspellorder"
+                android:textColor="@color/white" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout

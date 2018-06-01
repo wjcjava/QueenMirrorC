@@ -387,12 +387,6 @@
             android:name=".ui.home.activity.HomeAdvertisingActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.home.activity.GoodsActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".ui.home.activity.ShopsActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".ui.home.activity.MondelActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

@@ -11,7 +11,6 @@ import android.widget.RadioButton;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullsalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.fragment.MinediscountFragment;
 
 import butterknife.Bind;
@@ -21,10 +20,8 @@ import butterknife.OnClick;
 public class MineDiscountActivity extends BaseNewActivity {
 
     private MinediscountFragment minediscountFragment;
-    private FullsalesFragment historydiscountFragment;
     @Bind(R.id.radio_preferential)
     RadioButton preferential;
-
 
     @Override
     public int getLayoutId() {
@@ -42,7 +39,8 @@ public class MineDiscountActivity extends BaseNewActivity {
         preferential.setChecked(true);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.fr_mine_discount, new MinediscountFragment());
+        minediscountFragment= new MinediscountFragment();
+        transaction.add(R.id.fr_mine_discount, minediscountFragment);
         transaction.commit();
     }
 
@@ -51,7 +49,7 @@ public class MineDiscountActivity extends BaseNewActivity {
     }
 
     @Override
-    protected void initData(){
+    protected void initData() {
 
     }
 
@@ -63,15 +61,12 @@ public class MineDiscountActivity extends BaseNewActivity {
                 finish();
                 break;
             case R.id.radio_preferential:
-
-                    minediscountFragment = new MinediscountFragment();
-                    replaceFragment(minediscountFragment,"",false);
+                    replaceFragment(minediscountFragment, "", false);
 
                 break;
             case R.id.radio_invincible:
 
-                    historydiscountFragment = new FullsalesFragment();
-                replaceFragment(historydiscountFragment,"",false);
+                    replaceFragment(minediscountFragment, "", false);
                 break;
             default:
                 break;
@@ -81,8 +76,9 @@ public class MineDiscountActivity extends BaseNewActivity {
 
     /**
      * fragment切换
-     * @param fragment 需要显示的Fragment
-     * @param tag Tag标签
+     *
+     * @param fragment       需要显示的Fragment
+     * @param tag            Tag标签
      * @param addToBackStack 是否加入栈
      */
     public void replaceFragment(Fragment fragment, String tag, boolean addToBackStack) {
@@ -93,8 +89,10 @@ public class MineDiscountActivity extends BaseNewActivity {
         }
         fragmentTransaction.commit();
     }
+
     /**
      * 解决重影问题
+     *
      * @param savedInstanceState
      */
     @Override
@@ -103,4 +101,4 @@ public class MineDiscountActivity extends BaseNewActivity {
     }
 
 
-       }
+}

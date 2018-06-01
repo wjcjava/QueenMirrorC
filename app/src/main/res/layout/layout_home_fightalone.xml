@@ -71,7 +71,7 @@
 
 
                     <TextView
-                        android:id="@+id/fullname"
+                        android:id="@+id/tv_spell_shopname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/comment_15_dip"
@@ -81,34 +81,34 @@
                         android:textSize="@dimen/comment_16_size" />
 
                     <TextView
-                        android:id="@+id/tv_brief"
+                        android:id="@+id/tv_spell_shopabstract"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/tv_time"
-                        android:layout_below="@+id/fullname"
+                        android:layout_alignStart="@+id/tv_spell_shoptime"
+                        android:layout_below="@+id/tv_spell_shopname"
                         android:text="2016年4月18日,算是第三次修改了,这个项目也算"
                         android:textSize="@dimen/comment_13_size" />
 
                     <TextView
-                        android:id="@+id/tv_time"
+                        android:id="@+id/tv_spell_shoptime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/fullname"
-                        android:layout_below="@+id/tv_brief"
+                        android:layout_alignStart="@+id/tv_spell_shopname"
+                        android:layout_below="@+id/tv_spell_shopabstract"
                         android:layout_marginBottom="@dimen/comment_15_dip"
                         android:layout_marginTop="@dimen/comment_28_dip"
                         android:text="服务时长：60分钟"
                         android:textSize="@dimen/comment_13_size" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/tv_spell_shopbrowse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/tv_time"
-                        android:layout_alignBottom="@+id/tv_time"
+                        android:layout_alignBaseline="@+id/tv_spell_shoptime"
+                        android:layout_alignBottom="@+id/tv_spell_shoptime"
                         android:layout_marginBottom="@dimen/comment_15_dip"
                         android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@+id/tv_time"
+                        android:layout_toEndOf="@+id/tv_spell_shoptime"
                         android:text="已浏览：48次"
                         android:textSize="@dimen/comment_13_size" />
                 </RelativeLayout>
@@ -303,7 +303,7 @@
 
                 <TextView
 
-                    android:id="@+id/tv_fullname"
+                    android:id="@+id/tv_tv_spell_shopname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/comment_15_dip"
@@ -315,12 +315,12 @@
                     android:id="@+id/view"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_1_dip"
-                    android:layout_below="@id/tv_fullname"
+                    android:layout_below="@id/tv_tv_spell_shopname"
                     android:layout_marginTop="@dimen/comment_21_dip"
                     android:background="@color/alpha_05_black" />
 
                 <TextView
-                    android:id="@+id/tv_introduction"
+                    android:id="@+id/tv_spell_shopdetails"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_72_dip"
                     android:layout_below="@+id/view"

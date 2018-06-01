@@ -353,7 +353,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
              */
             case ACTION.GETPRODUCTDETAIL:
                 ProductDetailBean productDetailBean = GsonUtil.toObj(res,ProductDetailBean.class);
-
                 String isCollection = productDetailBean.getBody().getIfCollect();
                 if(isCollection.equals("1")){
                     isColl = true;

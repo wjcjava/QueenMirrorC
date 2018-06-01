@@ -538,6 +538,14 @@ public class HttpUtils {
             case ACTION.GETUSEYOUHUIQUAN:
                 actionUrl = UrlConstants.GETUSEYOUHUIQUAN;
                 break;
+            //拼单详情
+            case ACTION.SPELLDETAILS:
+                actionUrl = UrlConstants.SPELLDETAILS;
+                break;
+            //收藏拼团
+            case ACTION.SPELLCOLLECTION:
+                actionUrl = UrlConstants.SPELLCOLLECTION;
+                break;
             case ACTION.CANCLEORDER:
                 actionUrl = UrlConstants.CANCLEORDER;
                 break;
