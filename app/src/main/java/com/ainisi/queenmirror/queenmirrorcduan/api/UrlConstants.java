@@ -136,6 +136,10 @@ String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
  String GETUSEYOUHUIQUAN = "api/ans/coupon/couponListForUse";//获取可用的优惠券
 
+ String SPELLDETAILS="api/ans/group/groupActivityDetails";//拼单详情
+
+ String SPELLCOLLECTION="api/ans/group/collectGroup";//收藏拼单
+
  String CANCLEORDER = "api/ans/order/custOrderCancel";//取消订单
 
  String BEMEIYEREN = "api/ec/beauty/beautyApply";//申请成为美业人

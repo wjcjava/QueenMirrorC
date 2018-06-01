@@ -8,7 +8,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
  * 距离最近
  */
 
-public class DistanceFragment extends BaseFragment{
+public class DistanceFragment extends BaseFragment {
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_distance;

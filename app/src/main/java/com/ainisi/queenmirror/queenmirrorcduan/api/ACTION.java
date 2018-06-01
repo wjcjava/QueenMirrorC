@@ -67,6 +67,10 @@ public interface ACTION {
 
     int PROBLEMDATA=0X32;
 
+    int SPELLDETAILS=0x33;//拼单详情
+
+    int SPELLCOLLECTION=0x34;//收藏拼单
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

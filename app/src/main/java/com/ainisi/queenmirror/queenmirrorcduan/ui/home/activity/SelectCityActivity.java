@@ -7,31 +7,28 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.SelectCityAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SelectCityBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.HomeNewFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
 /**
  * @author weikailiang
  * @function Created on 2017/8/4.
  * 位置
  */
-public class SelectCityActivity extends BaseNewActivity implements HttpCallBack{
+public class SelectCityActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.title_title)
     TextView StTitle;
     @Bind(R.id.rc_selsctcity)
@@ -51,18 +48,20 @@ public class SelectCityActivity extends BaseNewActivity implements HttpCallBack{
         initDate();
 
     }
+
     private void initDate() {
         HashMap<String, String> hashMap = new HashMap<>();
         HttpUtils.doPost(ACTION.GETCITYLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//获取已开通城市
     }
-    @OnClick({R.id.title_back,R.id.tv_select_city_gps})
+
+    @OnClick({R.id.title_back, R.id.tv_select_city_gps})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
             case R.id.tv_select_city_gps:
-                HomeNewFragment.instance.mLocation.setText(tv_select_city_gps.getText().toString()+" ");
+                HomeNewFragment.instance.mLocation.setText(tv_select_city_gps.getText().toString() + " ");
                 SelectCityActivity.this.finish();
                 break;
             default:
@@ -73,17 +72,17 @@ public class SelectCityActivity extends BaseNewActivity implements HttpCallBack{
     @Override
     public void onSuccess(int action, String res) {
 
-        switch (action){
+        switch (action) {
             case ACTION.GETCITYLIST:
-                final SelectCityBean selectCityBean = GsonUtil.toObj(res,SelectCityBean.class);
-                SelectCityAdapter sortAdapter = new SelectCityAdapter( R.layout.activity_city_layout,selectCityBean.getBody().getCityListData());
+                final SelectCityBean selectCityBean = GsonUtil.toObj(res, SelectCityBean.class);
+                SelectCityAdapter sortAdapter = new SelectCityAdapter(R.layout.activity_city_layout, selectCityBean.getBody().getCityListData());
                 HmSelecity.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 HmSelecity.setAdapter(sortAdapter);
 
                 sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        HomeNewFragment.instance.mLocation.setText(selectCityBean.getBody().getCityListData().get(position).getArea().getName()+" ");
+                        HomeNewFragment.instance.mLocation.setText(selectCityBean.getBody().getCityListData().get(position).getArea().getName() + " ");
                         SelectCityActivity.this.finish();
                     }
                 });

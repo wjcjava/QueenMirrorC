@@ -242,6 +242,7 @@
     <string name="month">月</string>
     <string name="day">日</string>
     <string name="Nails">美甲</string>
+    <string name="pricetobuy">原价购买</string>
 
 
 </resources>

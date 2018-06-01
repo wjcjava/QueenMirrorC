@@ -16,13 +16,14 @@ import butterknife.OnClick;
  * 我要认证页面
  */
 
-public class MineAuthenticationActivity extends BaseNewActivity implements HttpCallBack{
+public class MineAuthenticationActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.tv_common_title)
     TextView tv_common_title;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineAuthenticationActivity.class));
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_mine_authentication;
@@ -36,8 +37,8 @@ public class MineAuthenticationActivity extends BaseNewActivity implements HttpC
 
 
     @OnClick({R.id.iv_common_back})
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.iv_common_back:
                 finish();
                 break;

@@ -10,11 +10,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+
 import java.lang.reflect.Field;
 import java.util.Calendar;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -62,11 +65,11 @@ public class BeanstalkActivity extends BaseNewActivity implements HttpCallBack {
     }
 
 
-
     private void initText() {
         dateTitle.setText(R.string.Selectiontime);
         rightTitle.setText(R.string.complete);
     }
+
     private void initDate() {
         initTime();
         hidePicker(datePicker);
@@ -91,6 +94,7 @@ public class BeanstalkActivity extends BaseNewActivity implements HttpCallBack {
             }
         });
     }
+
     public void setnewText(final TextView newdate) {
         datePicker.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), new DatePicker.OnDateChangedListener() {
             //            当dp日期改变时回调onDateChanged方法
@@ -98,11 +102,12 @@ public class BeanstalkActivity extends BaseNewActivity implements HttpCallBack {
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 //                获取dp的年月日的值，在textView上显示出来
                 c.set(year, monthOfYear, dayOfMonth);
-                newdate.setText(year + "-" + monthOfYear );
+                newdate.setText(year + "-" + monthOfYear);
 
             }
         });
     }
+
     @OnClick({R.id.title_back, R.id.iv_delete, R.id.tv_date, R.id.re_branstalk, R.id.ed_starttime, R.id.ed_endtime})
     public void click(View view) {
         switch (view.getId()) {

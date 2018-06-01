@@ -57,7 +57,7 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.img_information)
     ImageView img_information;
     boolean isLogin = false;
-    private String service_tel="120";
+    private String service_tel = "120";
 
     @Override
     protected int getLayoutResource() {
@@ -78,19 +78,20 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
             isLogin = false;
             tv_mine_uername.setText("点击登录");
         }
-         /**
+        /**
          * 获取新消息提示
          */
-       // getNewNewsData();
+        // getNewNewsData();
     }
- /**
+
+    /**
      * 获取新消息提示
      */
     private void getNewNewsData() {
         java.util.HashMap<String, String> params = new HashMap<>();
-        params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");
+        params.put("userId", SP.get(getActivity(), SpContent.UserId, "") + "");
         params.put("messageType", "");
-        HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true,this);
+        HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
@@ -284,17 +285,17 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.GETNEWNEWS:
                 NewsBean newsBean = GsonUtil.toObj(res, NewsBean.class);
 
-                if(newsBean.isSuccess()){
-                    if(newsBean.getBody().getIsRead().equals("0")){
+                if (newsBean.isSuccess()) {
+                    if (newsBean.getBody().getIsRead().equals("0")) {
 
-                    }else{
+                    } else {
                         QBadgeView badgeView = new QBadgeView(getActivity());
                         badgeView.bindTarget(img_information);
-                        badgeView.setBadgeTextSize(10,false);
+                        badgeView.setBadgeTextSize(10, false);
                         badgeView.setBadgeText("");
                         badgeView.setBadgeTextColor(this.getResources().getColor(R.color.white));
                         badgeView.setBadgeGravity(Gravity.END | Gravity.TOP);
@@ -305,7 +306,7 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
                             }
                         });
                     }
-                }else{
+                } else {
                     T.show(newsBean.getMsg());
                 }
                 break;

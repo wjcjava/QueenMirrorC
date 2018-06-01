@@ -20,15 +20,15 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 //系统消息
-public class SystemActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack{
+public class SystemActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack {
     @Bind(R.id.title_title)
     TextView title;
     @Bind(R.id.recycler_systemmessage)
     RecyclerView systemRecyclerView;
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
-    private Handler handler=new Handler();
-    private List<SortBean> systemList=new ArrayList<>();
+    private Handler handler = new Handler();
+    private List<SortBean> systemList = new ArrayList<>();
     private String systemMessage;
 
     @Override
@@ -39,7 +39,7 @@ public class SystemActivity extends BaseNewActivity implements RefreshLoadMoreLa
     @Override
     protected void initView() {
         super.initView();
-        systemMessage=getIntent().getStringExtra("system");
+        systemMessage = getIntent().getStringExtra("system");
         title.setText(systemMessage);
         /**
          * canRefresh 是否下拉刷新
@@ -62,15 +62,16 @@ public class SystemActivity extends BaseNewActivity implements RefreshLoadMoreLa
     protected void initData() {
         super.initData();
         for (int i = 0; i < 10; i++) {
-            SortBean sortBean=new SortBean();
+            SortBean sortBean = new SortBean();
             systemList.add(sortBean);
         }
-        MyAdapter adapter=new MyAdapter(R.layout.item_system,systemList);
+        MyAdapter adapter = new MyAdapter(R.layout.item_system, systemList);
         systemRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         systemRecyclerView.setAdapter(adapter);
 
 
     }
+
     @Override
     public void onRefresh() {
         handler.postDelayed(new Runnable() {
@@ -92,6 +93,7 @@ public class SystemActivity extends BaseNewActivity implements RefreshLoadMoreLa
             }
         }, 1000);
     }
+
     @OnClick({R.id.title_back
     })
     public void click(View view) {

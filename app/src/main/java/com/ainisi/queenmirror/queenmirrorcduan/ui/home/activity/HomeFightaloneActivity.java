@@ -1,18 +1,22 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.TextView;
-import com.ainisi.queenmirror.common.base.BaseActivity;
+
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.HomeFightaloneFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.OnClick;
+
 /**
  * 拼单
  */
@@ -23,17 +27,20 @@ public class HomeFightaloneActivity extends BaseNewActivity {
     NoScrollViewPager pagerFightalone;
     @Bind(R.id.title_title)
     TextView titleFightalone;
-    List<String> tabList=new ArrayList<>();
-    List<Fragment> pagerList=new ArrayList<>();
-    String[] tabName={"全部","美容美体","美发订制","美甲美手","美学汇","半永久"};
+    List<String> tabList = new ArrayList<>();
+    List<Fragment> pagerList = new ArrayList<>();
+    String[] tabName = {"全部", "美容美体", "美发订制", "美甲美手", "美学汇", "半永久"};
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_home_fightalone;
     }
+
     @Override
     public void initView() {
         initDate();
     }
+
     private void initDate() {
         titleFightalone.setText("拼团");
         for (int i = 0; i < tabName.length; i++) {
@@ -42,11 +49,12 @@ public class HomeFightaloneActivity extends BaseNewActivity {
             tabFightalone.addTab(tabFightalone.newTab().setText(tabList.get(i)));
         }
 
-        ViewPager viewPager=new ViewPager(getSupportFragmentManager(),pagerList,tabList);
+        ViewPager viewPager = new ViewPager(getSupportFragmentManager(), pagerList, tabList);
         pagerFightalone.setAdapter(viewPager);
         tabFightalone.setupWithViewPager(pagerFightalone);
 
     }
+
     @OnClick({R.id.title_back
     })
     public void click(View view) {

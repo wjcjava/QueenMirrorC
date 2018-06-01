@@ -4,7 +4,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseFragment;
 
 
-public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
+public class HomeFragmentOne extends BaseFragment implements HttpCallBack {
 
   /*  @Bind(R.id.banner)
     Banner banner;
@@ -142,7 +142,9 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
             }
         });
     }
-    *//**
+    */
+
+    /**
      * 点击首页跑马灯效果
      *//*
     private void initQuee() {
@@ -412,7 +414,6 @@ public class HomeFragmentOne extends BaseFragment implements HttpCallBack{
             transaction.hide(fragment);
         }
     }*/
-
     @Override
     public void onSuccess(int action, String res) {
 

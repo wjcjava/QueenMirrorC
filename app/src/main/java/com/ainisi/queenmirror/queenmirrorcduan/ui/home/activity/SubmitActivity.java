@@ -115,6 +115,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             public void run() {
                 PayTask alipay = new PayTask(SubmitActivity.this);
                 Map<String, String> result = alipay.payV2(aliPayResult, true);
+                Log.i("msp", result.toString());
 
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
@@ -162,7 +163,9 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                     return;
                 }
                 break;
+
         }
+
     }
 
     /**
@@ -200,7 +203,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             case ACTION.PayBefore:
                 PayInBean payInBean = GsonUtil.toObj(res,PayInBean.class);
                 aliPayResult = payInBean.getBody().getAliPayResult();
-                transId = payInBean.getBody().getTransId();
                 payThread.start();
                 break;
         }

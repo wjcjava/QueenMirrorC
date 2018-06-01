@@ -22,6 +22,7 @@ public class DynamicActivity extends BaseNewActivity {
     TextView txtRight;
     @Bind(R.id.title_title)
     TextView dynamicTitle;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_dynamic;
@@ -31,7 +32,6 @@ public class DynamicActivity extends BaseNewActivity {
     protected void initView() {
         super.initView();
     }
-
 
 
     @Override

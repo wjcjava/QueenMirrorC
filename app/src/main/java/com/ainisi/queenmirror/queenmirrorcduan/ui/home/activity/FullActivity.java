@@ -48,7 +48,7 @@ import butterknife.OnClick;
 /**
  * 商品详情
  */
-public class FullActivity extends BaseNewActivity implements HttpCallBack{
+public class FullActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.full_recycler)
     RecyclerView frecycler;
     @Bind(R.id.full_recyclertwo)
@@ -82,7 +82,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     private FullGoodsAdapter myAdapter;
 
     boolean isColl = false;
-    String goodsId,shopId,isLogin,userId;
+    String goodsId, shopId, isLogin, userId;
 
     ShoppingCartBean shoppingCartBean;
     ShoppingCartBean.BodyBean.ShopListBean shopListBean;
@@ -102,9 +102,9 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         goodsId = intent.getStringExtra("goodsId");
         shopId = intent.getStringExtra("shopId");
 
-        isLogin = SP.get(FullActivity.this, SpContent.isLogin,"0").toString();
+        isLogin = SP.get(FullActivity.this, SpContent.isLogin, "0").toString();
 
-        userId = SP.get(FullActivity.this,SpContent.UserId,"0").toString();
+        userId = SP.get(FullActivity.this, SpContent.UserId, "0").toString();
 
         inithttp();
 
@@ -114,7 +114,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         mShareAction = new ShareAction(FullActivity.this).setDisplayList(
                 SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
                 SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
-        ) .setShareboardclickCallback(new ShareBoardlistener() {
+        ).setShareboardclickCallback(new ShareBoardlistener() {
             @Override
             public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
                 UMWeb web = new UMWeb("http://baidu.com");
@@ -181,8 +181,8 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 Toast.makeText(mActivity.get(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
             }
 
-            if (t != null){
-                L.e("throw","throw:"+t.getMessage());
+            if (t != null) {
+                L.e("throw", "throw:" + t.getMessage());
 
             }
 
@@ -207,7 +207,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
     private void getProductDetailData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("id", goodsId);//商品ID
-        params.put("userId",userId);//UID  可以不传
+        params.put("userId", userId);//UID  可以不传
         HttpUtils.doPost(ACTION.GETPRODUCTDETAIL, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -228,7 +228,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         hashMap1.put("saleFlag", "2");
         hashMap1.put("pageNumber", "1");
         hashMap1.put("shopId", shopId);//shopId  111
-        hashMap1.put("pageSize","10");
+        hashMap1.put("pageSize", "10");
         HttpUtils.doPost(ACTION.COMMENDGOODS, hashMap1, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -236,11 +236,11 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
      * 商品的评价数据
      */
     private void inithttp() {
-        HashMap<String,String> hashMap=new HashMap<>();
-        hashMap.put("goodsId",goodsId);
-        hashMap.put("pageNumber","1");
-        hashMap.put("pageSize","10");
-        HttpUtils.doPost(ACTION.EVALUATION,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("goodsId", goodsId);
+        hashMap.put("pageNumber", "1");
+        hashMap.put("pageSize", "10");
+        HttpUtils.doPost(ACTION.EVALUATION, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
 
@@ -271,8 +271,8 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         HashMap<String, String> params = new HashMap<>();
         params.put("custId", userId);//用户ID
         params.put("goodsId", goodsId);
-        params.put("unitPrice",full_cash.getText().toString().substring(1,full_cash.getText().toString().length()));//价格
-        params.put("purchaseNumber","1");//数量
+        params.put("unitPrice", full_cash.getText().toString().substring(1, full_cash.getText().toString().length()));//价格
+        params.put("purchaseNumber", "1");//数量
         HttpUtils.doPost(ACTION.ADDTOCAT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -281,13 +281,14 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
         initText();
         initshophttp();
     }
+
     private void initText() {
         fullPhoto.setImageResource(R.drawable.icon_full_fenxiang);
         fullPhoto.setVisibility(View.VISIBLE);
         tv_shopping_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 
-    @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart,R.id.rl_full_collection,R.id.title_photo})
+    @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart, R.id.rl_full_collection, R.id.title_photo})
 
     public void OnClick(View view) {
         switch (view.getId()) {
@@ -312,21 +313,21 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
                 break;
             //加入购物车
             case R.id.tv_full_shoppingcart:
-                if(isLogin.equals("1")) {
+                if (isLogin.equals("1")) {
                     AddCatData();
-                }else{
+                } else {
                     T.show("请您先登录APP");
                 }
                 break;
             //收藏
             case R.id.rl_full_collection:
-                if(isLogin.equals("1")){
-                    if(isColl){
+                if (isLogin.equals("1")) {
+                    if (isColl) {
                         getCancleCollectionData();
-                    }else{
+                    } else {
                         getCollectionData();
                     }
-                }else{
+                } else {
                     T.show("请您先登录APP");
                 }
                 break;
@@ -335,16 +336,16 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             /**
              * 加入购物车
              */
             case ACTION.ADDTOCAT:
-                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean.isSuccess()){
+                SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
+                if (successBean.isSuccess()) {
                     T.show(successBean.getMsg());
                     startActivity(new Intent(this, ShoppingCartActivity.class));
-                }else{
+                } else {
                     T.show(successBean.getMsg());
                 }
                 break;
@@ -352,38 +353,37 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
              * 商品详情
              */
             case ACTION.GETPRODUCTDETAIL:
-                ProductDetailBean productDetailBean = GsonUtil.toObj(res,ProductDetailBean.class);
-
+                ProductDetailBean productDetailBean = GsonUtil.toObj(res, ProductDetailBean.class);
                 String isCollection = productDetailBean.getBody().getIfCollect();
-                if(isCollection.equals("1")){
+                if (isCollection.equals("1")) {
                     isColl = true;
                     iv_full_collection.setImageResource(R.drawable.collection_bein);
-                }else{
+                } else {
                     isColl = false;
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
                 }
-                full_cash.setText("￥"+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsPrice());
-                tv_shopping_oldprice.setText("￥"+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getOfflinePrice());
-                tv_shopping_oldprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
+                full_cash.setText("￥" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsPrice());
+                tv_shopping_oldprice.setText("￥" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getOfflinePrice());
+                tv_shopping_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
 
                 tv_brief.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsBrief());
-                tv_time.setText("服务时长："+productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getServiceTime());
-                textView4.setText("已浏览："+"200"+"次");
+                tv_time.setText("服务时长：" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getServiceTime());
+                textView4.setText("已浏览：" + "200" + "次");
                 //  tv_introduction.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsDetails().toString());
                 fullTitle.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsName());
                 break;
             case ACTION.EVALUATION:
                 commentsBean = GsonUtil.toObj(res, CommentsBean.class);
                 List<CommentsBean.BodyBean.ApiGoodsCommentsListBean> commList = commentsBean.getBody().getApiGoodsCommentsList();
-                CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo,commList);
+                CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo, commList);
                 frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 frecyclertwo.setAdapter(sortAdapter2);
                 break;
             case ACTION.ADDGOODSLIULAN://添加浏览量
-                SuccessBean successBean1 = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean1.isSuccess()){
+                SuccessBean successBean1 = GsonUtil.toObj(res, SuccessBean.class);
+                if (successBean1.isSuccess()) {
                     T.show(successBean1.getMsg());
-                }else{
+                } else {
                     T.show(successBean1.getMsg());
                 }
 
@@ -391,35 +391,35 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack{
             //商家商品推荐
             case ACTION.COMMENDGOODS:
                 goodBean = GsonUtil.toObj(res, CommendGoodBean.class);
-                if(goodBean.isSuccess()){
+                if (goodBean.isSuccess()) {
                     List<CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean> list = goodBean.getBody().getApiEcGoodsBasicList();
                     myAdapter = new FullGoodsAdapter(R.layout.item_fullrecycler, list);
                     frecycler.setLayoutManager(new GridLayoutManager(this, 2));
                     frecycler.setAdapter(myAdapter);
-                }else {
+                } else {
                     T.show(goodBean.getMsg());
                 }
 
                 break;
             case ACTION.COLLECTIONPRODUCT://收藏商品
                 isColl = true;
-                SuccessBean successBean2 = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean2.isSuccess()){
+                SuccessBean successBean2 = GsonUtil.toObj(res, SuccessBean.class);
+                if (successBean2.isSuccess()) {
                     iv_full_collection.setImageResource(R.drawable.collection_bein);
                     //collection_bein
                     T.show(successBean2.getMsg());//成功
-                }else{
+                } else {
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
                     T.show(successBean2.getMsg());
                 }
                 break;
             case ACTION.CANCELCOLLECTION://取消收藏
                 isColl = false;
-                SuccessBean successBean3 = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean3.isSuccess()){
+                SuccessBean successBean3 = GsonUtil.toObj(res, SuccessBean.class);
+                if (successBean3.isSuccess()) {
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
                     T.show(successBean3.getMsg());//成功
-                }else{
+                } else {
                     iv_full_collection.setImageResource(R.drawable.collection_bein);
                     T.show(successBean3.getMsg());
                 }

@@ -22,6 +22,7 @@ public class MasterActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView masterTitle;
     private List<SortBean> list = new ArrayList<>();
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_master;
@@ -40,11 +41,12 @@ public class MasterActivity extends BaseNewActivity {
             sortBean.setDistance("");
             list.add(sortBean);
         }
-        MyAdapter sortAdapter2 = new MyAdapter(R.layout.item_master_evaluation,list);
+        MyAdapter sortAdapter2 = new MyAdapter(R.layout.item_master_evaluation, list);
 
         evaluation.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         evaluation.setAdapter(sortAdapter2);
     }
+
     @OnClick({R.id.title_back})
     public void click(View view) {
         switch (view.getId()) {

@@ -6,7 +6,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,10 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.GridViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomepageGridViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
@@ -33,18 +30,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopMallListBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.DistanceFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SalesFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.ScreenFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.SortFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopClassificationActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.DetailsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
@@ -104,7 +94,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ImageView uspensionSurface;
     @Bind(R.id.shop_gridView)
     NoScrollGridView shop_gridView;
-
     ClassificationBean classificationBean;
     ShopListHomeBean shopListHomeBean;
     private HomeIndustryBean homeIndustryBean;
@@ -194,7 +183,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private void initImgTitle() {
 
     }
-
     private void initpopwindow() {
         pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
         popview1 = View.inflate(getActivity(), R.layout.pop_myitem, null);
@@ -213,7 +201,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
-
     /**
      * 设置添加屏幕的背景透明度
      *
@@ -260,7 +247,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
-
     @OnClick({R.id.rb_sort, R.id.rb_sales, R.id.rb_distance, R.id.rb_screen
             , R.id.iv_sort
             , R.id.bt_screen, R.id.li_sort_bottom, R.id.li_home_screen, R.id.li_home_screen_bottom

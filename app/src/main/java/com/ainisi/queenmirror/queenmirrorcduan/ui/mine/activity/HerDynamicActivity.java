@@ -12,8 +12,7 @@ import butterknife.OnClick;
 /**
  * 动态（是否让看）
  */
-public class HerDynamicActivity extends BaseNewActivity
-{
+public class HerDynamicActivity extends BaseNewActivity {
     @Bind(R.id.newtitle_title)
     TextView hertitle;
     private String title;
@@ -24,10 +23,9 @@ public class HerDynamicActivity extends BaseNewActivity
     }
 
 
-
     @Override
     public void initView() {
-        title =getIntent().getStringExtra("dynamic");
+        title = getIntent().getStringExtra("dynamic");
         hertitle.setText(title);
     }
 

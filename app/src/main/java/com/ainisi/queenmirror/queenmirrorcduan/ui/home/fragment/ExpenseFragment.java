@@ -1,11 +1,7 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -27,7 +23,6 @@ public class ExpenseFragment extends BaseFragment {
     public void initPresenter() {
 
     }
-
 
 
     @Override

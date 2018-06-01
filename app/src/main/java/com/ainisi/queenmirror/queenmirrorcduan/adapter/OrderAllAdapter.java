@@ -15,13 +15,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SubmitActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ArefundActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ConfirmRefundActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.WholeFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -87,7 +83,6 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     CancelOrderData();
                 }
             });
-
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("UT")){
             //待接单
             helper.setText(R.id.tv_order_tuikuan,"退款")

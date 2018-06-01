@@ -13,7 +13,7 @@ import butterknife.OnClick;
 /**
  * 添加银行卡
  */
-public class MineAddcartActivity extends BaseNewActivity{
+public class MineAddcartActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView addcartTitle;
 
@@ -22,7 +22,6 @@ public class MineAddcartActivity extends BaseNewActivity{
     public int getLayoutId() {
         return R.layout.activity_mine_addcart;
     }
-
 
 
     @Override
@@ -34,7 +33,7 @@ public class MineAddcartActivity extends BaseNewActivity{
 
     private void initText() {
         addcartTitle.setText(getIntent().getStringExtra("name"));
-        addcartTitle.setTextColor(ContextCompat.getColor(this,R.color.alpha_95_black));
+        addcartTitle.setTextColor(ContextCompat.getColor(this, R.color.alpha_95_black));
     }
 
     @OnClick({R.id.title_back

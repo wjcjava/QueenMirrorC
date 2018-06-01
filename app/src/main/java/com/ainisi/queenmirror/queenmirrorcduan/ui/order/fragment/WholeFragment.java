@@ -10,17 +10,14 @@ import android.widget.LinearLayout;
 
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.OrderAllAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -46,7 +43,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     private List<SortBean> list = new ArrayList<>();
     private Handler handler = new Handler();
     double amountNum;
-    int pageSum,pageNumber = 1;
+    int pageSum, pageNumber = 1;
     List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> apiOrderList = new ArrayList();
     String state;
     public static WholeFragment instance = null;
@@ -57,7 +54,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
         return R.layout.fragment_sort_whole;
     }
 
-    public WholeFragment newInstance(String flag){
+    public WholeFragment newInstance(String flag) {
         Bundle bundle = new Bundle();
         bundle.putString("state", flag);
         WholeFragment testFm = new WholeFragment();
@@ -87,10 +84,9 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
 
     @Override
     public void onLoadMore() {
-
-        if(pageSum <= pageNumber * 10){
+        if (pageSum <= pageNumber * 10) {
             T.show("您已获取全部数据");
-        }else{
+        } else {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -105,18 +101,19 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     protected void initView() {
 
     }
+
     /**
      * 获取全部订单的数据
      */
-    public void doFirstData(){
+    public void doFirstData() {
         Bundle bundle = this.getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             state = bundle.getString("state");
         }
         HashMap<String, String> params = new HashMap<>();
         params.put("orderStatus", state);
-        params.put("pageNumber", pageNumber+"");
-        params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");
+        params.put("pageNumber", pageNumber + "");
+        params.put("userId", SP.get(getActivity(), SpContent.UserId, "") + "");
         params.put("pageSize", "10");
         HttpUtils.doPost(ACTION.ALLOFMYORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -125,30 +122,30 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.ALLOFMYORDER:
-                OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res,OrderMyAllOrderBean.class);
-                if(orderMyAllOrderBean.isSuccess()){
+                OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res, OrderMyAllOrderBean.class);
+                if (orderMyAllOrderBean.isSuccess()) {
                     pageSum = orderMyAllOrderBean.getBody().getPageSum();
                     apiOrderList = orderMyAllOrderBean.getBody().getApiOrderList();
-                    OrderAllAdapter sbmitWholeAdapter = new OrderAllAdapter(getActivity(),R.layout.item_sbmitrecycler, apiOrderList);
+                    OrderAllAdapter sbmitWholeAdapter = new OrderAllAdapter(getActivity(), R.layout.item_sbmitrecycler, apiOrderList);
                     whole.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
                     whole.setAdapter(sbmitWholeAdapter);
                     sbmitWholeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                             amountNum = 0;
-                            for(int i=0;i<apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().size();i++){
-                                amountNum  = amountNum + Double.parseDouble(apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().get(i).getIntfAnsOrderDetails().getSumAmount());
+                            for (int i = 0; i < apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().size(); i++) {
+                                amountNum = amountNum + Double.parseDouble(apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().get(i).getIntfAnsOrderDetails().getSumAmount());
                             }
-                            Intent intent = new Intent(getActivity(),OrderDetailActivity.class);
+                            Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
                             intent.putExtra("orderNo", apiOrderList.get(position).getIntfAnsOrder().getOrderNo());
-                            intent.putExtra("orderTel",apiOrderList.get(position).getIntfAnsShopBasic().getServiceTel());
-                            intent.putExtra("orderTime",apiOrderList.get(position).getIntfAnsOrder().getOrderTime());
-                            intent.putExtra("OrderHeji",amountNum+"");
-                            intent.putExtra("lstBean", (Serializable)apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList());
+                            intent.putExtra("orderTel", apiOrderList.get(position).getIntfAnsShopBasic().getServiceTel());
+                            intent.putExtra("orderTime", apiOrderList.get(position).getIntfAnsOrder().getOrderTime());
+                            intent.putExtra("OrderHeji", amountNum + "");
+                            intent.putExtra("lstBean", (Serializable) apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList());
                             startActivity(intent);
                         }
                     });
-                }else{
+                } else {
                     T.show(orderMyAllOrderBean.getMsg());
                 }
                 break;
