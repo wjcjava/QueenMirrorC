@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/li_new_top"
     android:orientation="vertical">
 
     <com.youth.banner.Banner
@@ -380,7 +382,6 @@
         android:layout_height="wrap_content">
     </com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView>
 
-    <include layout="@layout/home_appbarlayout" />
 
 
 </LinearLayout>

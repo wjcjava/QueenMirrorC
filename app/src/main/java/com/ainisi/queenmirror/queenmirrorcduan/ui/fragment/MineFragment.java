@@ -81,7 +81,7 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
          /**
          * 获取新消息提示
          */
-        getNewNewsData();
+       // getNewNewsData();
     }
  /**
      * 获取新消息提示

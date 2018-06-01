@@ -47,14 +47,13 @@ public class CustomPopWindow implements PopupWindow.OnDismissListener{
     /**
      * 弹出PopWindow 背景是否变暗，默认不会变暗。
      */
-    private boolean mIsBackgroundDark = true;
+    private boolean mIsBackgroundDark = false;
 
     private float mBackgroundDrakValue = 0;// 背景变暗的值，0 - 1
     /**
      * 设置是否允许点击 PopupWindow之外的地方，关闭PopupWindow
      */
-    private boolean enableOutsideTouchDisMiss = true
-            ;// 默认点击pop之外的地方可以关闭
+    private boolean enableOutsideTouchDisMiss = true;// 默认点击pop之外的地方可以关闭
 
     private CustomPopWindow(Context context){
         mContext = context;
@@ -274,12 +273,10 @@ public class CustomPopWindow implements PopupWindow.OnDismissListener{
             return this;
         }
 
-
         public PopupWindowBuilder setFocusable(boolean focusable){
             mCustomPopWindow.mIsFocusable = focusable;
             return this;
         }
-
 
 
         public PopupWindowBuilder setView(int resLayoutId){

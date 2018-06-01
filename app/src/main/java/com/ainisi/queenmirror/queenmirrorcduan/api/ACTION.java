@@ -129,4 +129,6 @@ public interface ACTION {
 
     int GETUSEYOUHUIQUAN = 0x135;//获取可用的优惠券
 
+    int CANCLEORDER = 0x136;//取消订单
+
 }

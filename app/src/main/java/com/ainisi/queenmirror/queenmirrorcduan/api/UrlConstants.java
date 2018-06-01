@@ -135,4 +135,6 @@ String BASE_URL = "http://192.168.30.155:7080/wg/a/";
  String DOOUTDATA = "api/util/pay/aliPayRefund";//退款
 
  String GETUSEYOUHUIQUAN = "api/ans/coupon/couponListForUse";//获取可用的优惠券
+
+ String CANCLEORDER = "api/ans/order/custOrderCancel";//取消订单
 }

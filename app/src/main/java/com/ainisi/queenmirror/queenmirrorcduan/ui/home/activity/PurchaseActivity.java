@@ -176,11 +176,15 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
 
                 OrderPayDetailBean successBean = GsonUtil.toObj(res,OrderPayDetailBean.class);
                 if(successBean.isSuccess()){
-
+                    String businessIds="";
                     orderIdList = successBean.getBody().getOrderIdList();
 
+                    for(int i=0;i<orderIdList.size();i++){
+                        businessIds = businessIds+orderIdList.get(i)+",";
+                    }
+
                     Intent intent = new Intent(PurchaseActivity.this,SubmitActivity.class);
-                    intent.putExtra("orderIdList",(Serializable) orderIdList);
+                    intent.putExtra("businessIds",businessIds);
                     intent.putExtra("amount",tv_shopping_cart_number.getText().toString());
                     startActivity(intent);
                     T.show(successBean.getMsg());

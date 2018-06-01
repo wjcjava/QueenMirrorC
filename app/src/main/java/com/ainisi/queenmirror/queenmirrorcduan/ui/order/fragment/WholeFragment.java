@@ -49,9 +49,11 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     int pageSum,pageNumber = 1;
     List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> apiOrderList = new ArrayList();
     String state;
+    public static WholeFragment instance = null;
 
     @Override
     protected int getLayoutResource() {
+        instance = this;
         return R.layout.fragment_sort_whole;
     }
 
@@ -80,6 +82,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     @Override
     public void onResume() {
         super.onResume();
+        doFirstData();
     }
 
     @Override
@@ -100,7 +103,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
 
     @Override
     protected void initView() {
-        doFirstData();
+
     }
     /**
      * 获取全部订单的数据
@@ -116,7 +119,7 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
         params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");
         params.put("pageSize", "10");
         HttpUtils.doPost(ACTION.ALLOFMYORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-     }
+    }
 
     @Override
     public void onSuccess(int action, String res) {
@@ -136,7 +139,6 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                             for(int i=0;i<apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().size();i++){
                                 amountNum  = amountNum + Double.parseDouble(apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().get(i).getIntfAnsOrderDetails().getSumAmount());
                             }
-
                             Intent intent = new Intent(getActivity(),OrderDetailActivity.class);
                             intent.putExtra("orderNo", apiOrderList.get(position).getIntfAnsOrder().getOrderNo());
                             intent.putExtra("orderTel",apiOrderList.get(position).getIntfAnsShopBasic().getServiceTel());

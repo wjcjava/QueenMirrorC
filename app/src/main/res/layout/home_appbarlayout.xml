@@ -53,7 +53,7 @@
                 android:id="@+id/rb_sort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sort"
+                android:text="附近商家"
                 android:textSize="@dimen/comment_14_size" />
 
             <ImageView
@@ -61,15 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:src="@drawable/arrow_dwon_blue" />
+                android:background="@drawable/arrow_dwon_blue" />
 
-            <ImageView
-                android:id="@+id/iv_sort1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:src="@drawable/arrow_up_black"
-                android:visibility="gone" />
         </LinearLayout>
 
         <TextView

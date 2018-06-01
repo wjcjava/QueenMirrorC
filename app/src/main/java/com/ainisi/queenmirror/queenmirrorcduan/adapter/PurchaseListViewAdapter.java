@@ -156,9 +156,9 @@ public class  PurchaseListViewAdapter extends BaseAdapter {
             TextView tv_purchase_name = _view.findViewById(R.id.tv_purchase_name);
             tv_purchase_name.setText(shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getGoodsName());
             TextView tv_purchase_presentprice = _view.findViewById(R.id.tv_purchase_presentprice);
-            tv_purchase_presentprice.setText("￥"+shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getGoodsPrice());
+            tv_purchase_presentprice.setText("￥"+shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getSalesPrice());
             TextView tv_purchase_originalprice = _view.findViewById(R.id.tv_purchase_originalprice);
-            tv_purchase_originalprice.setText("￥"+shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getOfflinePrice());
+            tv_purchase_originalprice.setText("￥"+shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getMarketPrice());
             tv_purchase_originalprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
             TextView tv_purchase_adapter_number = _view.findViewById(R.id.tv_purchase_adapter_number);
             tv_purchase_adapter_number.setText("X"+shopList.get(position).getApiAnsCustCartList().get(i).getAnsCustCart().getPurchaseNumber());

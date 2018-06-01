@@ -262,7 +262,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     }
 
     @OnClick({R.id.rb_sort, R.id.rb_sales, R.id.rb_distance, R.id.rb_screen
-            , R.id.iv_sort, R.id.iv_sort1
+            , R.id.iv_sort
             , R.id.bt_screen, R.id.li_sort_bottom, R.id.li_home_screen, R.id.li_home_screen_bottom
             , R.id.line_surface, R.id.line_uspension_surface, R.id.ed_keyword
     })
@@ -338,12 +338,12 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     pop.showAsDropDown(hSort);
                 }
                 break;
-            case R.id.iv_sort1:
+          /*  case R.id.iv_sort1:
 
                 sc_home_scroll.smoothScrollTo(0, 1180);
                 ivsort1.setVisibility(View.GONE);
                 ivsort.setVisibility(View.VISIBLE);
-                break;
+                break;*/
             case R.id.rb_sort:
                 sc_home_scroll.smoothScrollTo(0, 1180);
               /*  if (sortFragment == null) {

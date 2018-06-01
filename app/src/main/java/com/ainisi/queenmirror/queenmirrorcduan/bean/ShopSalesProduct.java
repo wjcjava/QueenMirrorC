@@ -231,6 +231,7 @@ public class ShopSalesProduct {
 
             public static class EcGoodsBasicBean {
                 /**
+                 * marketPrice
                  * id : e883991a7f94488b90da78ec7d7a6562
                  * isNewRecord : false
                  * remarks : null
@@ -269,6 +270,7 @@ public class ShopSalesProduct {
                 private String goodsCate;
                 private String goodsType;
                 private String goodsName;
+                private String marketPrice;
                 private Object goodsNo;
                 private String goodsBrief;
                 private String serviceTime;
@@ -280,7 +282,7 @@ public class ShopSalesProduct {
                 private Object goodsStorage;
                 private String goodsPrice;
                 private String offlinePrice;
-                private Object salesPrice;
+                private String salesPrice;
                 private Object promotionPrice;
                 private Object goodsActivity;
                 private String shopId;
@@ -289,6 +291,14 @@ public class ShopSalesProduct {
                 private long endTime;
                 private Object goodsRemarks;
                 private String updatePgm;
+
+                public String getMarketPrice() {
+                    return marketPrice;
+                }
+
+                public void setMarketPrice(String marketPrice) {
+                    this.marketPrice = marketPrice;
+                }
 
                 public String getId() {
                     return id;
@@ -442,11 +452,11 @@ public class ShopSalesProduct {
                     this.offlinePrice = offlinePrice;
                 }
 
-                public Object getSalesPrice() {
+                public String getSalesPrice() {
                     return salesPrice;
                 }
 
-                public void setSalesPrice(Object salesPrice) {
+                public void setSalesPrice(String salesPrice) {
                     this.salesPrice = salesPrice;
                 }
 

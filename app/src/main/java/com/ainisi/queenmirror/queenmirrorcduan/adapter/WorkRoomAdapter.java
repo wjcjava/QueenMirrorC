@@ -100,8 +100,8 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
             }
         }
 
-        holder.tv_price.setText("￥"+apiGoodsList.get(position).getEcGoodsBasic().getGoodsPrice());
-        holder.tv_workroom_service_price.setText("￥"+apiGoodsList.get(position).getEcGoodsBasic().getOfflinePrice());
+        holder.tv_price.setText("￥"+apiGoodsList.get(position).getEcGoodsBasic().getSalesPrice());
+        holder.tv_workroom_service_price.setText("￥"+apiGoodsList.get(position).getEcGoodsBasic().getMarketPrice());
         holder.tv_workroom_service_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
 
         holder.iv_workroom_add_cat.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +137,7 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
         HashMap<String, String> params = new HashMap<>();
         params.put("custId", SP.get(context,SpContent.UserId,"").toString());//
         params.put("goodsId", apiGoodsList.get(pos_cart).getEcGoodsBasic().getId());
-        params.put("unitPrice",apiGoodsList.get(pos_cart).getEcGoodsBasic().getGoodsPrice());
+        params.put("unitPrice",apiGoodsList.get(pos_cart).getEcGoodsBasic().getSalesPrice());
         params.put("purchaseNumber","1");
         HttpUtils.doPost(ACTION.ADDTOCAT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }

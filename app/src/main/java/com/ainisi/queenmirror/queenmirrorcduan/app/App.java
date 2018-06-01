@@ -154,18 +154,8 @@ public class App extends MultiDexApplication {
     private void initUmeng() {
         //设置LOG开关，默认为false
         UMConfigure.setLogEnabled(true);
-        try {
-            Class<?> aClass = Class.forName("com.umeng.commonsdk.UMConfigure");
-            Field[] fs = aClass.getDeclaredFields();
-            for (Field f:fs){
-                f.setAccessible(true);
-            }
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
-       /*UMConfigure.init(this, "	5a13e4fbf29d982a16000037", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
+       /*UMConfigure.init(App.this, "5a13e4fbf29d982a16000037", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
                 "38c62f307e5bf45492df19e86ddc4dbb");*/
         //PushSDK初始化(如使用推送SDK，必须调用此方法)
         initUpush();

@@ -538,6 +538,9 @@ public class HttpUtils {
             case ACTION.GETUSEYOUHUIQUAN:
                 actionUrl = UrlConstants.GETUSEYOUHUIQUAN;
                 break;
+            case ACTION.CANCLEORDER:
+                actionUrl = UrlConstants.CANCLEORDER;
+                break;
         }
         url.append(actionUrl);
         return url;

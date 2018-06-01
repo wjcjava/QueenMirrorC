@@ -54,7 +54,7 @@ public class MasterFragment extends BaseFragment implements HttpCallBack{
     @Override
     public void onResume() {
         super.onResume();
-        getNewNewsData();
+      //  getNewNewsData();
     }
 
     /**

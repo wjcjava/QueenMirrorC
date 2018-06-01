@@ -16,6 +16,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ArefundActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.bean.RefundBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -40,6 +42,7 @@ public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayou
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     private RefundBean refundBean;
+    List<RefundBean.BodyBean.ApiRefundListBean> apiRefundList = new ArrayList<>();
 
     @Override
     protected int getLayoutResource() {
@@ -87,7 +90,7 @@ public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayou
 
     private void inithttp() {
         HashMap<String,String> hashMap=new HashMap<>();
-        hashMap.put("userId","111");
+        hashMap.put("userId", SP.get(getActivity(), SpContent.UserId,"0")+"");
         HttpUtils.doPost(ACTION.REFUND,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
 
     }
@@ -96,11 +99,10 @@ public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayou
     public void onSuccess(int action, String res) {
         switch (action){
             case ACTION.REFUND:
-                for (int i = 0; i <10 ; i++) {
-                    refundBean = GsonUtil.toObj(res, RefundBean.class);
-                    list.add(refundBean);
-                }
-                RefundAdapter sbmitWholeAdapter=new RefundAdapter(R.layout.item_refundrecycler,list);
+                refundBean = GsonUtil.toObj(res, RefundBean.class);
+
+                apiRefundList = refundBean.getBody().getApiRefundList();
+                RefundAdapter sbmitWholeAdapter=new RefundAdapter(R.layout.item_refundrecycler,apiRefundList);
                 refund.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL,false));
                 refund.setAdapter(sbmitWholeAdapter);
                 sbmitWholeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

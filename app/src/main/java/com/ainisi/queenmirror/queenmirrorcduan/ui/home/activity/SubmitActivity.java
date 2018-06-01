@@ -54,6 +54,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.tv_submit_bottom_price)
             TextView tv_submit_bottom_price;
 
+    String businessIds = "";
     List<String> orderIdList = new ArrayList<>();
     String amount = "0",aliPayResult="";
     private static final int SDK_PAY_FLAG = 1;
@@ -98,7 +99,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
     public void initView() {
 
         Intent intent = this.getIntent();
-        orderIdList =  (List<String>) intent.getSerializableExtra("orderIdList");
+        businessIds =  intent.getStringExtra("businessIds");
         amount = intent.getStringExtra("amount");
 
         tv_submit_price.setText(amount);
@@ -167,14 +168,12 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
      * 支付前调用
      */
     private void getData() {
-        String businessIds = "";
-        for(int i=0;i<orderIdList.size();i++){
-            businessIds = businessIds+orderIdList.get(i)+",";
-        }
+
         HashMap<String, String> params = new HashMap<>();
         params.put("custId", SP.get(SubmitActivity.this,SpContent.UserId,"0")+"");
         params.put("platformType", "3");
-        params.put("payAmount",amount.substring(1,amount.length()));
+        //params.put("payAmount",amount.substring(1,amount.length()));
+        params.put("payAmount","0.01");
         params.put("businessIds", businessIds);
         HttpUtils.doPost(ACTION.PayBefore, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }

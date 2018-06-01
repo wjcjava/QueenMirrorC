@@ -13,14 +13,14 @@ import java.util.List;
  * Created by john on 2018/5/12.
  */
 
-public class RefundAdapter extends BaseQuickAdapter<RefundBean,BaseViewHolder> {
+public class RefundAdapter extends BaseQuickAdapter<RefundBean.BodyBean.ApiRefundListBean,BaseViewHolder> {
 
-    public RefundAdapter(int layoutResId, @Nullable List<RefundBean> data) {
+    public RefundAdapter(int layoutResId, @Nullable List<RefundBean.BodyBean.ApiRefundListBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, RefundBean item) {
-        helper.setText(R.id.tv_refund_name,item.getBody().getApiRefundList().get(0).getEcGoodsBasic().getGoodsName());
+    protected void convert(BaseViewHolder helper, RefundBean.BodyBean.ApiRefundListBean item) {
+        helper.setText(R.id.tv_refund_name,item.getEcGoodsBasic().getGoodsName());
     }
 }
