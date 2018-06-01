@@ -54,12 +54,12 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
     TextView shopDetails;
     @Bind(R.id.iv_spell_shopcollection)
     ImageView shopCollection;
-//    @Bind(R.id.re_spell_shop)
+    //    @Bind(R.id.re_spell_shop)
 //    RecyclerView reShopspell;
     private List<SortBean> fulllist = new ArrayList<>();
     private List<SortBean> fulllist2 = new ArrayList<>();
     private String isLogin;
-    private boolean iscomment=false;
+    private boolean iscomment = false;
 
     // private List<SortBean> list=new ArrayList<>();
     @Override
@@ -70,7 +70,7 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
     @Override
     public void initView() {
         initText();
-        isLogin = SP.get(this, SpContent.isLogin,"0").toString();
+        isLogin = SP.get(this, SpContent.isLogin, "0").toString();
         for (int i = 0; i < 6; i++) {
             SortBean sortBean = new SortBean();
             sortBean.setName("MOCO美容美发沙龙");
@@ -110,14 +110,13 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
     }
 
 
-
     private void initText() {
         fullTitle.setText("纯色美甲");
         fullPhoto.setImageResource(R.drawable.icon_full_fenxiang);
         fullPhoto.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.title_back, R.id.relative_look_more, R.id.tv_home_goShare, R.id.tv_startspell,R.id.rl_spell_shopcollection})
+    @OnClick({R.id.title_back, R.id.relative_look_more, R.id.tv_home_goShare, R.id.tv_startspell, R.id.rl_spell_shopcollection})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -125,9 +124,9 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
                 break;
             //拼单剩余人数（查看更多）
             case R.id.relative_look_more:
-                if(isLogin.equals("1")){
+                if (isLogin.equals("1")) {
                     startActivity(new Intent(this, SpellOrderListActivity.class));
-                }else {
+                } else {
                     T.show("请登录");
                 }
 
@@ -138,10 +137,10 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
                 break;
             //开启拼单
             case R.id.tv_startspell:
-                if(isLogin.equals("1")){
+                if (isLogin.equals("1")) {
                     Intent intent = new Intent(this, SubmitActivity.class);
                     startActivity(intent);
-                }else {
+                } else {
                     T.show("请登录");
                 }
 
@@ -149,13 +148,13 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
 
             case R.id.rl_spell_shopcollection:
                 T.show("你点击了我");
-                if(isLogin.equals("1")){
-                    if(iscomment){
+                if (isLogin.equals("1")) {
+                    if (iscomment) {
 
-                    }else {
+                    } else {
                         initCollectiongp();
                     }
-                }else {
+                } else {
                     T.show("请先登录");
                 }
                 break;
@@ -168,57 +167,58 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
      * 拼单详情
      */
     private void inithttp() {
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("groupId","123");//拼团商品的ID
-        HttpUtils.doPost(ACTION.SPELLDETAILS,parames, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("groupId", "123");//拼团商品的ID
+        HttpUtils.doPost(ACTION.SPELLDETAILS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     /**
      * 收藏拼单
      */
-    private void initCollectiongp(){
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("userId","111");
-        parames.put("gpId","12");
-        HttpUtils.doPost(ACTION.SPELLCOLLECTION,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+    private void initCollectiongp() {
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("userId", "111");
+        parames.put("gpId", "12");
+        HttpUtils.doPost(ACTION.SPELLCOLLECTION, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     @Override
     public void onSuccess(int action, String res) {
-           switch (action){
-               case ACTION.SPELLDETAILS:
-                  SpellDetailsBean detailsBean= GsonUtil.toObj(res, SpellDetailsBean.class);
-                  if(detailsBean.isSuccess()){
-                      SpellDetailsBean.BodyBean.GroupActivityDataBean groupActivityData= detailsBean.getBody().getGroupActivityData();
-                        shopName.setText(groupActivityData.getGpActivity().getGroupName());
-                        shopAbstract.setText(groupActivityData.getGpActivity().getGroupBrief());
-                        shopTime.setText(groupActivityData.getGpActivity().getGroupStart());
-                        shopBrowse.setText(groupActivityData.getGpActivity().getCurrentNumber());
-                        shopDetails.setText(groupActivityData.getGpActivity().getGroupDetails());
-                      String isCollection = detailsBean.getBody().getGroupActivityData().getGpActivity().getShopId();
-                      if(isCollection.equals("1")){
-                          iscomment = true;
-                          shopCollection.setImageResource(R.drawable.collection_bein);
-                      }else{
-                          iscomment = false;
-                          shopCollection.setImageResource(R.drawable.icon_full_collection);
-                      }
+        switch (action) {
+            case ACTION.SPELLDETAILS:
+                SpellDetailsBean detailsBean = GsonUtil.toObj(res, SpellDetailsBean.class);
+                if (detailsBean.isSuccess()) {
+                    SpellDetailsBean.BodyBean.GroupActivityDataBean groupActivityData = detailsBean.getBody().getGroupActivityData();
+                    shopName.setText(groupActivityData.getGpActivity().getGroupName());
+                    shopAbstract.setText(groupActivityData.getGpActivity().getGroupBrief());
+                    shopTime.setText(groupActivityData.getGpActivity().getGroupStart());
+                    shopBrowse.setText(groupActivityData.getGpActivity().getCurrentNumber());
+                    shopDetails.setText(groupActivityData.getGpActivity().getGroupDetails());
+                    String isCollection = detailsBean.getBody().getGroupActivityData().getGpActivity().getShopId();
+                    if (isCollection.equals("1")) {
+                        iscomment = true;
+                        shopCollection.setImageResource(R.drawable.collection_bein);
+                    } else {
+                        iscomment = false;
+                        shopCollection.setImageResource(R.drawable.icon_full_collection);
+                    }
 
-                  }else {
-                      T.show(detailsBean.getMsg());
-                  }
-                   break;
-               case ACTION.SPELLCOLLECTION:
-                   iscomment=true;
-                   CollectionSpellBean collectionSpellBean=GsonUtil.toObj(res, CollectionSpellBean.class);
-                   if(collectionSpellBean.isSuccess()){
-                       shopCollection.setImageResource(R.drawable.collection_bein);
-                       T.show(collectionSpellBean.getMsg());
-                   }else {
-                       shopCollection.setImageResource(R.drawable.icon_full_collection);
-                       T.show(collectionSpellBean.getMsg());
-                   }
-                   break;
-           }
+                } else {
+                    T.show(detailsBean.getMsg());
+                }
+                break;
+            case ACTION.SPELLCOLLECTION:
+                iscomment = true;
+                CollectionSpellBean collectionSpellBean = GsonUtil.toObj(res, CollectionSpellBean.class);
+                if (collectionSpellBean.isSuccess()) {
+                    shopCollection.setImageResource(R.drawable.collection_bein);
+                    T.show(collectionSpellBean.getMsg());
+                } else {
+                    shopCollection.setImageResource(R.drawable.icon_full_collection);
+                    T.show(collectionSpellBean.getMsg());
+                }
+                break;
+        }
     }
 
     @Override

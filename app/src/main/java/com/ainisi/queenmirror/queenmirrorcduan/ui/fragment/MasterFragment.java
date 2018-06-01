@@ -34,7 +34,7 @@ import q.rorbin.badgeview.QBadgeView;
  * 大咖
  */
 
-public class MasterFragment extends BaseFragment implements HttpCallBack{
+public class MasterFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.re_big_shot)
     RecyclerView reBigshot;
     @Bind(R.id.iv_master_news)
@@ -54,7 +54,7 @@ public class MasterFragment extends BaseFragment implements HttpCallBack{
     @Override
     public void onResume() {
         super.onResume();
-      //  getNewNewsData();
+        //  getNewNewsData();
     }
 
     /**
@@ -62,10 +62,11 @@ public class MasterFragment extends BaseFragment implements HttpCallBack{
      */
     private void getNewNewsData() {
         java.util.HashMap<String, String> params = new HashMap<>();
-        params.put("userId", SP.get(getActivity(), SpContent.UserId,"")+"");
+        params.put("userId", SP.get(getActivity(), SpContent.UserId, "") + "");
         params.put("messageType", "");
-        HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true,this);
+        HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     @Override
     protected void initView() {
         initDate();
@@ -81,7 +82,7 @@ public class MasterFragment extends BaseFragment implements HttpCallBack{
             mData.add(more);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             reBigshot.setLayoutManager(linearLayoutManager);
-            RecyclerVarietyAdapter adapter = new RecyclerVarietyAdapter(getActivity(),mData);
+            RecyclerVarietyAdapter adapter = new RecyclerVarietyAdapter(getActivity(), mData);
             reBigshot.setAdapter(adapter);
 
         }
@@ -89,17 +90,17 @@ public class MasterFragment extends BaseFragment implements HttpCallBack{
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.GETNEWNEWS:
                 NewsBean newsBean = GsonUtil.toObj(res, NewsBean.class);
 
-                if(newsBean.isSuccess()){
-                    if(newsBean.getBody().getIsRead().equals("0")){
+                if (newsBean.isSuccess()) {
+                    if (newsBean.getBody().getIsRead().equals("0")) {
 
-                    }else{
+                    } else {
                         QBadgeView badgeView = new QBadgeView(getActivity());
                         badgeView.bindTarget(iv_master_news);
-                        badgeView.setBadgeTextSize(10,false);
+                        badgeView.setBadgeTextSize(10, false);
                         badgeView.setBadgeText("");
                         badgeView.setBadgeTextColor(this.getResources().getColor(R.color.white));
                         badgeView.setBadgeGravity(Gravity.END | Gravity.TOP);
@@ -110,7 +111,7 @@ public class MasterFragment extends BaseFragment implements HttpCallBack{
                             }
                         });
                     }
-                }else{
+                } else {
                     T.show(newsBean.getMsg());
                 }
                 break;

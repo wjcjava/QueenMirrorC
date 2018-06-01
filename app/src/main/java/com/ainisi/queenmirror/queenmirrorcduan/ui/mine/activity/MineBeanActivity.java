@@ -23,16 +23,18 @@ import butterknife.OnClick;
 /**
  * 我的魔豆
  */
-public class MineBeanActivity extends BaseActivity implements HttpCallBack{
+public class MineBeanActivity extends BaseActivity implements HttpCallBack {
     @Bind(R.id.title_title)
     TextView beantitle;
     @Bind(R.id.rc_bean)
     RecyclerView beanrecycle;
 
-    private List<SortBean> list=new ArrayList<>();
+    private List<SortBean> list = new ArrayList<>();
+
     public static void startActivity(Context context) {
-        context.startActivity(new Intent(context,MineBeanActivity.class));
+        context.startActivity(new Intent(context, MineBeanActivity.class));
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_dean;
@@ -49,6 +51,7 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack{
         initText();
         initDate();
     }
+
     private void initText() {
         beantitle.setText(R.string.magic_bean);
         beantitle.setTextColor(Color.WHITE);
@@ -56,15 +59,15 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack{
     }
 
     private void initDate() {
-        for (int i = 0; i <8 ; i++) {
-            SortBean sortBean=new SortBean();
+        for (int i = 0; i < 8; i++) {
+            SortBean sortBean = new SortBean();
             sortBean.setName("");
             sortBean.setTime("");
             sortBean.setDistance("");
             list.add(sortBean);
         }
-        MyAdapter sortAdapter2=new MyAdapter(R.layout.item_rcbean,list);
-        beanrecycle.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        MyAdapter sortAdapter2 = new MyAdapter(R.layout.item_rcbean, list);
+        beanrecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         beanrecycle.setAdapter(sortAdapter2);
     }
 

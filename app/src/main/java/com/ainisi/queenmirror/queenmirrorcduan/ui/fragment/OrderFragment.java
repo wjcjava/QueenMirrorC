@@ -9,13 +9,11 @@ import android.widget.ImageView;
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.AssessedFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.RefundFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.WholeFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.LoginActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
 
@@ -24,9 +22,9 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
 /**
  * Created by EWorld on 2018/3/6.
- *
  */
 public class OrderFragment extends BaseFragment {
     @Bind(R.id.or_tab)
@@ -40,7 +38,7 @@ public class OrderFragment extends BaseFragment {
     private List<Fragment> pagerlist = new ArrayList<>();
 
     @Override
-    protected int getLayoutResource()  {
+    protected int getLayoutResource() {
         return R.layout.fragment_order;
     }
 
@@ -48,21 +46,22 @@ public class OrderFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-         if(SP.get(getActivity(), SpContent.isLogin,"").equals("1")){
+        if (SP.get(getActivity(), SpContent.isLogin, "").equals("1")) {
 
-         }else{
-             Intent intent = new Intent(getActivity(), LoginActivity.class);
-             startActivity(intent);
-         }
+        } else {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
     public void initPresenter() {
     }
-    @OnClick({R.id.title_photo})
-    public void onClick(View view){
 
-        switch (view.getId()){
+    @OnClick({R.id.title_photo})
+    public void onClick(View view) {
+
+        switch (view.getId()) {
             case R.id.title_photo:
                 Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
                 startActivity(intent);
@@ -74,9 +73,10 @@ public class OrderFragment extends BaseFragment {
     protected void initView() {
         initDate();
     }
+
     private void initDate() {
 
-        if(tablist.size() == 0){
+        if (tablist.size() == 0) {
             tablist.add("全部订单");
             tablist.add("待付款");
             tablist.add("待接单");
@@ -90,7 +90,7 @@ public class OrderFragment extends BaseFragment {
          //待评价
          //退款
          */
-        if(pagerlist.size() == 0){
+        if (pagerlist.size() == 0) {
             pagerlist.add(new WholeFragment().newInstance(""));
             pagerlist.add(new WholeFragment().newInstance("UP"));
             pagerlist.add(new WholeFragment().newInstance("UT"));

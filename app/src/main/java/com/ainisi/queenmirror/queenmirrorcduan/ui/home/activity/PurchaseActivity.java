@@ -24,7 +24,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.google.gson.Gson;
 import com.lzy.okgo.cache.CacheMode;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +35,7 @@ import butterknife.OnClick;
 /**
  * 提交订单
  */
-public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
+public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.list_order)
     ListView listOrder;
     @Bind(R.id.title_title)
@@ -55,11 +54,11 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
 
     ShoppingCartBean shoppingCartBean;
     List<ShoppingCartBean.BodyBean.ShopListBean> shopList = new ArrayList<>();
-    String lick_name,lick_phone,link_sex,shopId;
+    String lick_name, lick_phone, link_sex, shopId;
 
     List<OrderDetailsListInfoBean> orderDetailsListInfo;
 
-    List<OrderPurchaseBean> orderPurchaseBeans ;
+    List<OrderPurchaseBean> orderPurchaseBeans;
 
     List<String> orderIdList = new ArrayList<>();
     double end_price = 0;
@@ -82,13 +81,13 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
         Intent intent = this.getIntent();
         shoppingCartBean = (ShoppingCartBean) intent.getSerializableExtra("cartBean");
 
-        lick_name = SP.get(this,SpContent.Lickname,"")+"";
-        lick_phone = SP.get(this,SpContent.LickPhone,"")+"";
-        link_sex = SP.get(this,SpContent.LickSex,"")+"";
+        lick_name = SP.get(this, SpContent.Lickname, "") + "";
+        lick_phone = SP.get(this, SpContent.LickPhone, "") + "";
+        link_sex = SP.get(this, SpContent.LickSex, "") + "";
 
-        if(lick_name.equals("")){
+        if (lick_name.equals("")) {
             tv_name.setText("请添加联系人");
-        }else{
+        } else {
             tv_name.setText(lick_name);
         }
         tv_sex.setText(link_sex);
@@ -103,22 +102,22 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
         shopList = shoppingCartBean.getBody().getShopList();
 
         orderPurchaseBeans = new ArrayList<>();
-        for(int i=0;i<shopList.size();i++){
+        for (int i = 0; i < shopList.size(); i++) {
             cartId = "";
             orderDetailsListInfo = new ArrayList<>();
-            for(int j=0;j<shopList.get(i).getApiAnsCustCartList().size();j++){
+            for (int j = 0; j < shopList.get(i).getApiAnsCustCartList().size(); j++) {
 
                 end_price = end_price + (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice();
                 OrderDetailsListInfoBean orderDetailsListInfoBean = new OrderDetailsListInfoBean();
                 orderDetailsListInfoBean.setGoodsId(shopList.get(i).getApiAnsCustCartList().get(j).getEcGoodsBasic().getId());
-                orderDetailsListInfoBean.setPurchaseNumber(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber()+"");
-                orderDetailsListInfoBean.setUnitPrice(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice()+"");
-                orderDetailsListInfoBean.setSumAmount((double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice()+"");
+                orderDetailsListInfoBean.setPurchaseNumber(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() + "");
+                orderDetailsListInfoBean.setUnitPrice(shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice() + "");
+                orderDetailsListInfoBean.setSumAmount((double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice() + "");
                 orderDetailsListInfoBean.setDiscountAmount("");
                 orderDetailsListInfoBean.setUsePoints("");
 
                 orderDetailsListInfo.add(orderDetailsListInfoBean);
-                cartId = cartId + shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getId()+",";
+                cartId = cartId + shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getId() + ",";
             }
             shopId = shopList.get(i).getId();
 
@@ -133,20 +132,20 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
         }
         DecimalFormat df = new DecimalFormat("0.00");
         String str = df.format(end_price);
-        tv_shopping_cart_number.setText("￥"+str);
-        listadapter = new PurchaseListViewAdapter(this,shopList);
+        tv_shopping_cart_number.setText("￥" + str);
+        listadapter = new PurchaseListViewAdapter(this, shopList);
         listOrder.setAdapter(listadapter);
         listadapter.notifyDataSetChanged();
     }
 
-    @OnClick({R.id.tv_submit,R.id.title_back,R.id.rl_purchase_top})
+    @OnClick({R.id.tv_submit, R.id.title_back, R.id.rl_purchase_top})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
             case R.id.rl_purchase_top:
-                startActivity(new Intent(PurchaseActivity.this,SelectLinkPeopleActivity.class));
+                startActivity(new Intent(PurchaseActivity.this, SelectLinkPeopleActivity.class));
                 break;
             //提交订单
             case R.id.tv_submit:
@@ -164,31 +163,31 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack{
 
         HashMap<String, String> params = new HashMap<>();
         params.put("orderInfo", str);
-        params.put("userId",SP.get(PurchaseActivity.this,SpContent.UserId,"")+"");
-        params.put("platform","3");
+        params.put("userId", SP.get(PurchaseActivity.this, SpContent.UserId, "") + "");
+        params.put("platform", "3");
         HttpUtils.doPost(ACTION.UPLOADORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.UPLOADORDER://提交订单
 
-                OrderPayDetailBean successBean = GsonUtil.toObj(res,OrderPayDetailBean.class);
-                if(successBean.isSuccess()){
-                    String businessIds="";
+                OrderPayDetailBean successBean = GsonUtil.toObj(res, OrderPayDetailBean.class);
+                if (successBean.isSuccess()) {
+                    String businessIds = "";
                     orderIdList = successBean.getBody().getOrderIdList();
 
-                    for(int i=0;i<orderIdList.size();i++){
-                        businessIds = businessIds+orderIdList.get(i)+",";
+                    for (int i = 0; i < orderIdList.size(); i++) {
+                        businessIds = businessIds + orderIdList.get(i) + ",";
                     }
 
-                    Intent intent = new Intent(PurchaseActivity.this,SubmitActivity.class);
-                    intent.putExtra("businessIds",businessIds);
-                    intent.putExtra("amount",tv_shopping_cart_number.getText().toString());
+                    Intent intent = new Intent(PurchaseActivity.this, SubmitActivity.class);
+                    intent.putExtra("businessIds", businessIds);
+                    intent.putExtra("amount", tv_shopping_cart_number.getText().toString());
                     startActivity(intent);
                     T.show(successBean.getMsg());
-                }else{
+                } else {
                     T.show(successBean.getMsg());
                 }
                 break;

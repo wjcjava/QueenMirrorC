@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
-import android.support.annotation.BoolRes;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
@@ -17,7 +16,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -49,7 +47,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GDLocationUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
@@ -302,7 +299,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              * 筛选
              */
             case R.id.li_home_screen:
-
                 break;
             /**
              * 按距离排序
@@ -488,7 +484,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
                 if(newsBean.isSuccess()){
                     if(newsBean.getBody().getIsRead().equals("0")){
-
                     }else{
                         QBadgeView badgeView = new QBadgeView(getActivity());
                         badgeView.bindTarget(img_information);

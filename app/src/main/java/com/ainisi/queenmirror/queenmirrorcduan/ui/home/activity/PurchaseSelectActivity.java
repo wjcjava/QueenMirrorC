@@ -28,7 +28,7 @@ import butterknife.OnClick;
 /**
  * 选择优惠券
  */
-public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallBack{
+public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.title_back)
     ImageView title_back;
     @Bind(R.id.title_title)
@@ -36,7 +36,7 @@ public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallB
     @Bind(R.id.pur_rey_distance)
     RecyclerView pur_rey_distance;
 
-    String shopId = "",goodsIds = "";
+    String shopId = "", goodsIds = "";
 
     @Override
     protected int getLayoutId() {
@@ -59,19 +59,19 @@ public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallB
      * 获取可用的优惠券
      */
     private void getPurData() {
-        HashMap<String,String> params=new HashMap<>();
-      //  params.put("userId", SP.get(PurchaseSelectActivity.this, SpContent.UserId,"")+"");//用户ID
-        params.put("userId","111");
+        HashMap<String, String> params = new HashMap<>();
+        //  params.put("userId", SP.get(PurchaseSelectActivity.this, SpContent.UserId,"")+"");//用户ID
+        params.put("userId", "111");
         //params.put("shopId",shopId);
-        params.put("shopId","12");
-       // params.put("goodsIds",goodsIds);
-        params.put("goodsIds","123");
-        HttpUtils.doPost(ACTION.GETUSEYOUHUIQUAN,params, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        params.put("shopId", "12");
+        // params.put("goodsIds",goodsIds);
+        params.put("goodsIds", "123");
+        HttpUtils.doPost(ACTION.GETUSEYOUHUIQUAN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @OnClick({R.id.title_back})
-    public void OnClick(View view){
-        switch (view.getId()){
+    public void OnClick(View view) {
+        switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
@@ -80,17 +80,17 @@ public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallB
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.GETUSEYOUHUIQUAN:
-                L.e("^^^^^"+res);
-               ReceiveDiscounBean receiveBean= GsonUtil.toObj(res, ReceiveDiscounBean.class);
+                L.e("^^^^^" + res);
+                ReceiveDiscounBean receiveBean = GsonUtil.toObj(res, ReceiveDiscounBean.class);
 
-                if(receiveBean.isSuccess()){
+                if (receiveBean.isSuccess()) {
                     List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> receiveList = receiveBean.getBody().getCustCouponListData();
-                    PurchaseAdapter purchaseAdapter = new PurchaseAdapter(R.layout.item_discount,receiveList);
+                    PurchaseAdapter purchaseAdapter = new PurchaseAdapter(R.layout.item_discount, receiveList);
                     pur_rey_distance.setLayoutManager(new LinearLayoutManager(PurchaseSelectActivity.this, LinearLayoutManager.VERTICAL, false));
                     pur_rey_distance.setAdapter(purchaseAdapter);
-                }else{
+                } else {
                     T.show(receiveBean.getMsg());
                 }
                 break;

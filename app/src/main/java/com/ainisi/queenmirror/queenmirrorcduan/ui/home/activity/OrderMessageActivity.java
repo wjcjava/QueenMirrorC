@@ -55,7 +55,7 @@ public class OrderMessageActivity extends BaseNewActivity implements RefreshLoad
     @Override
     protected void initView() {
         super.initView();
-        orderMessage=getIntent().getStringExtra("ordermessage");
+        orderMessage = getIntent().getStringExtra("ordermessage");
         title.setText(orderMessage);
 
     }

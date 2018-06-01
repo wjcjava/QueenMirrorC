@@ -73,10 +73,10 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
     }
 
     private void initShopSearch() {
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("activityId","111");//活动的ID
-        parames.put("shopCate","1");//商铺状态ID 1.首页 2.异业
-        HttpUtils.doPost(ACTION.ACTIVITYSHOPS,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("activityId", "111");//活动的ID
+        parames.put("shopCate", "1");//商铺状态ID 1.首页 2.异业
+        HttpUtils.doPost(ACTION.ACTIVITYSHOPS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
 
@@ -88,12 +88,11 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
                 finish();
                 break;
             case R.id.title_search:
-                if(searchShop.isChecked()){
+                if (searchShop.isChecked()) {
                     initShopSearch();
-                }else if(searchNails.isChecked()){
+                } else if (searchNails.isChecked()) {
                     initNailsSearch();
-                }
-                else {
+                } else {
                     T.show("请选择条件进行搜索");
                 }
 
@@ -103,12 +102,14 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
 
         }
     }
+
     private void initNailsSearch() {
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("activityId","111");//活动的ID
-        parames.put("shopCate","1");//商铺状态ID 1.首页 2.异业
-        HttpUtils.doPost(ACTION.ACTIVITYGOODS,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("activityId", "111");//活动的ID
+        parames.put("shopCate", "1");//商铺状态ID 1.首页 2.异业
+        HttpUtils.doPost(ACTION.ACTIVITYGOODS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     /**
      * 热门搜索
      */
@@ -153,7 +154,7 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
                     footprineRelayout.setVisibility(View.GONE);
                     List<ShopSearchBean.BodyBean.ShopListDataBean> shopList = shopSearchBean.getBody().getShopListData();
                     ShopSearchAdapter searchAdapter = new ShopSearchAdapter(R.layout.item_shopsearch, shopList);
-                    initstartAdapter(shopsearchRecycler,searchAdapter);
+                    initstartAdapter(shopsearchRecycler, searchAdapter);
 
                 } else {
                     T.show(shopSearchBean.getMsg());
@@ -166,9 +167,9 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
                     footprineRelayout.setVisibility(View.GONE);
                     List<GoodsBean.BodyBean.ActivityListDataBean> goodsList = goodsBean.getBody().getActivityListData();
                     GoodsSearchAdapter searchAdapter = new GoodsSearchAdapter(R.layout.item_shopsearch, goodsList);
-                    initstartAdapter(shopsearchRecycler,searchAdapter);
+                    initstartAdapter(shopsearchRecycler, searchAdapter);
 
-                }else {
+                } else {
                     T.show(goodsBean.getMsg());
                 }
                 break;

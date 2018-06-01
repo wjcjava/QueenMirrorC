@@ -30,12 +30,12 @@ public class SpellOrderListActivity extends BaseNewActivity{
     protected void initData() {
         super.initData();
         spellTitle.setText("更多拼单");
-        for (int i = 0; i <3 ; i++) {
-            SortBean sortBean=new SortBean();
+        for (int i = 0; i < 3; i++) {
+            SortBean sortBean = new SortBean();
             list.add(sortBean);
         }
-        MyAdapter myAdapter=new MyAdapter(R.layout.item_spellorder_list,list);
-        reSpellOrder.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        MyAdapter myAdapter = new MyAdapter(R.layout.item_spellorder_list, list);
+        reSpellOrder.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         reSpellOrder.setAdapter(myAdapter);
     }
 }

@@ -24,7 +24,7 @@ public class MeDynamicActivity extends BaseNewActivity {
 
     @Override
     public void initView() {
-        title=getIntent().getStringExtra("dynamic");
+        title = getIntent().getStringExtra("dynamic");
         meTitle.setText(title);
     }
 

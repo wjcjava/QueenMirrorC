@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
 
-import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
@@ -14,14 +13,16 @@ import butterknife.Bind;
 /**
  * 我的——成为美业人
  */
-public class MineBeautyActivity extends BaseNewActivity implements HttpCallBack{
+public class MineBeautyActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.title_title)
     TextView beautyTitle;
     @Bind(R.id.title_right)
     TextView titleRight;
+
     public static void startActivity(Context context) {
-        context.startActivity(new Intent(context,MineBeautyActivity.class));
+        context.startActivity(new Intent(context, MineBeautyActivity.class));
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_beauty;

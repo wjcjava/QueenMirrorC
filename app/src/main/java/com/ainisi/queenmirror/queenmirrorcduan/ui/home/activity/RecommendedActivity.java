@@ -27,7 +27,7 @@ import butterknife.OnClick;
 /**
  * 更多
  */
-public class RecommendedActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack ,HttpCallBack{
+public class RecommendedActivity extends BaseActivity implements RefreshLoadMoreLayout.CallBack, HttpCallBack {
     @Bind(R.id.re_recommended)
     RecyclerView reRecommended;
     @Bind(R.id.rlm)
@@ -71,6 +71,7 @@ public class RecommendedActivity extends BaseActivity implements RefreshLoadMore
                         "yyyy-MM-dd")
                 .multiTask());
     }
+
     @Override
     public void onRefresh() {
 
@@ -88,7 +89,7 @@ public class RecommendedActivity extends BaseActivity implements RefreshLoadMore
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-               T.show("上拉成功");
+                T.show("上拉成功");
                 mRefreshLoadMoreLayout.stopLoadMore();
             }
         }, 1000);
@@ -100,6 +101,7 @@ public class RecommendedActivity extends BaseActivity implements RefreshLoadMore
         inithttp();
 
     }
+
     @OnClick({R.id.title_back
     })
     public void click(View view) {
@@ -114,28 +116,29 @@ public class RecommendedActivity extends BaseActivity implements RefreshLoadMore
 
 
     }
-    private void inithttp() {
-        HashMap<String,String> hashMap=new HashMap();
-        hashMap.put("saleFlag","2");
-        hashMap.put("pageNumber","1");
-        hashMap.put("shopId","111");
-        HttpUtils.doPost(ACTION.COMMENDGOODS,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
 
+    private void inithttp() {
+        HashMap<String, String> hashMap = new HashMap();
+        hashMap.put("saleFlag", "2");
+        hashMap.put("pageNumber", "1");
+        hashMap.put("shopId", "111");
+        HttpUtils.doPost(ACTION.COMMENDGOODS, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
 
     }
+
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.COMMENDGOODS:
                 goodBean = GsonUtil.toObj(res, CommendGoodBean.class);
-                if(goodBean.isSuccess()){
-                List<CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean> list = goodBean.getBody().getApiEcGoodsBasicList();
+                if (goodBean.isSuccess()) {
+                    List<CommendGoodBean.BodyBean.ApiEcGoodsBasicListBean> list = goodBean.getBody().getApiEcGoodsBasicList();
                     myAdapter = new CommendGoodsAdapter(R.layout.item_shortrecycler, list);
 
                     reRecommended.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     reRecommended.setAdapter(myAdapter);
-                }else {
+                } else {
                     T.show(goodBean.getMsg());
                 }
 

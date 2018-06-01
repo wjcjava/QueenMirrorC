@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+
 /**
  * Created by Administrator on 2018/3/19.
  */
@@ -29,6 +30,7 @@ public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.
     private Handler handler = new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_sort;
@@ -57,6 +59,7 @@ public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.
         }, 200);
 
     }
+
     @Override
     public void onLoadMore() {
         handler.postDelayed(new Runnable() {
@@ -67,6 +70,7 @@ public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.
             }
         }, 1000);
     }
+
     @Override
     protected void initView() {
         for (int i = 0; i < 10; i++) {
@@ -78,7 +82,7 @@ public class SortFragment extends BaseFragment implements RefreshLoadMoreLayout.
             sortBean.setDistance("875m");
             sortlist.add(sortBean);
         }
-        MyAdapter sortAdapter = new MyAdapter(R.layout.item_shortrecycler,sortlist);
+        MyAdapter sortAdapter = new MyAdapter(R.layout.item_shortrecycler, sortlist);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recycler.setAdapter(sortAdapter);
         sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

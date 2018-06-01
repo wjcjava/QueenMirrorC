@@ -19,7 +19,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class InteractiveMessageActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack{
+public class InteractiveMessageActivity extends BaseNewActivity implements RefreshLoadMoreLayout.CallBack {
     @Bind(R.id.recycler_interactivemessage)
     RecyclerView interactRecyclerView;
     @Bind(R.id.title_title)
@@ -27,8 +27,8 @@ public class InteractiveMessageActivity extends BaseNewActivity implements Refre
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     private String interact;
-    private Handler handler=new Handler();
-    private List<SortBean> systemList=new ArrayList<>();
+    private Handler handler = new Handler();
+    private List<SortBean> systemList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -38,7 +38,7 @@ public class InteractiveMessageActivity extends BaseNewActivity implements Refre
     @Override
     protected void initView() {
         super.initView();
-        interact=getIntent().getStringExtra("interact");
+        interact = getIntent().getStringExtra("interact");
         interactTitle.setText(interact);
         /**
          * canRefresh 是否下拉刷新
@@ -61,10 +61,10 @@ public class InteractiveMessageActivity extends BaseNewActivity implements Refre
     protected void initData() {
         super.initData();
         for (int i = 0; i < 10; i++) {
-            SortBean sortBean=new SortBean();
+            SortBean sortBean = new SortBean();
             systemList.add(sortBean);
         }
-        MyAdapter adapter=new MyAdapter(R.layout.item_interactive,systemList);
+        MyAdapter adapter = new MyAdapter(R.layout.item_interactive, systemList);
         interactRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         interactRecyclerView.setAdapter(adapter);
 
@@ -92,6 +92,7 @@ public class InteractiveMessageActivity extends BaseNewActivity implements Refre
             }
         }, 1000);
     }
+
     @OnClick({R.id.title_back
     })
     public void click(View view) {

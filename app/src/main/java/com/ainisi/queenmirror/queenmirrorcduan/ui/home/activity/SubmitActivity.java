@@ -36,7 +36,7 @@ import butterknife.OnClick;
 /**
  * 我的订单
  */
-public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
+public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.img_wechat_unpayment)
     ImageView wcunpayment;
     @Bind(R.id.img_queen_unpayment)
@@ -52,11 +52,11 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.tv_submit_price)
     TextView tv_submit_price;
     @Bind(R.id.tv_submit_bottom_price)
-            TextView tv_submit_bottom_price;
+    TextView tv_submit_bottom_price;
 
     String businessIds = "";
     List<String> orderIdList = new ArrayList<>();
-    String amount = "0",aliPayResult="";
+    String amount = "0", aliPayResult = "";
     private static final int SDK_PAY_FLAG = 1;
 
     @SuppressLint("HandlerLeak")
@@ -99,7 +99,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
     public void initView() {
 
         Intent intent = this.getIntent();
-        businessIds =  intent.getStringExtra("businessIds");
+        businessIds = intent.getStringExtra("businessIds");
         amount = intent.getStringExtra("amount");
 
         tv_submit_price.setText(amount);
@@ -154,7 +154,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                     T.show("抱歉微信还在开发中");
                 } else if (queenpayment.getVisibility() == View.VISIBLE) {
                     T.show("抱歉女王卡还在开发中");
-                }else {
+                } else {
                     T.show("请选择支付方式");
                     return;
                 }
@@ -170,19 +170,19 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
     private void getData() {
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("custId", SP.get(SubmitActivity.this,SpContent.UserId,"0")+"");
+        params.put("custId", SP.get(SubmitActivity.this, SpContent.UserId, "0") + "");
         params.put("platformType", "3");
         //params.put("payAmount",amount.substring(1,amount.length()));
-        params.put("payAmount","0.01");
+        params.put("payAmount", "0.01");
         params.put("businessIds", businessIds);
         HttpUtils.doPost(ACTION.PayBefore, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.PayBefore:
-                PayInBean payInBean = GsonUtil.toObj(res,PayInBean.class);
+                PayInBean payInBean = GsonUtil.toObj(res, PayInBean.class);
                 aliPayResult = payInBean.getBody().getAliPayResult();
                 payThread.start();
                 break;

@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 
@@ -23,6 +22,7 @@ import java.util.List;
 
 /**
  * Created by Mloong on 2017/11/25.
+ *
  */
 
 public class HomeListViewAdapter extends BaseAdapter {

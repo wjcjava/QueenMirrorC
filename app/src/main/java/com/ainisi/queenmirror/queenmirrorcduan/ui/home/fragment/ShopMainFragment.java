@@ -15,7 +15,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopClassificationActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
@@ -34,13 +33,14 @@ import butterknife.Bind;
  * 综合排序
  */
 
-public class ShopMainFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack,HttpCallBack{
+public class ShopMainFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack, HttpCallBack {
     @Bind(R.id.full_sore_recycler)
     RecyclerView recycler;
     List<ClassificationBean.BodyBean.ShopListDataBean> sortlist = new ArrayList<>();
-    private Handler handler=new Handler();
+    private Handler handler = new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_fullshort;
@@ -57,6 +57,7 @@ public class ShopMainFragment extends BaseFragment implements RefreshLoadMoreLay
                         "yyyy-MM-dd")
                 .multiTask());
     }
+
     @Override
     public void onRefresh() {
         XLog.v("onRefresh");
@@ -82,6 +83,7 @@ public class ShopMainFragment extends BaseFragment implements RefreshLoadMoreLay
             }
         }, 1000);
     }
+
     @Override
     protected void initView() {
         inithttp();
@@ -93,39 +95,40 @@ public class ShopMainFragment extends BaseFragment implements RefreshLoadMoreLay
         params.put("pageNumber", "1");
         params.put("contentByTitle", "");
         params.put("categoryId", ShopClassificationActivity.instance.catId);
-        params.put("pageSize","10");
-        params.put("shopCate","2");
-        HttpUtils.doPost(ACTION.CLASSIFICATION,params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        params.put("pageSize", "10");
+        params.put("shopCate", "2");
+        HttpUtils.doPost(ACTION.CLASSIFICATION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.CLASSIFICATION:
-                ClassificationBean classificationBean= GsonUtil.toObj(res, ClassificationBean.class);
+                ClassificationBean classificationBean = GsonUtil.toObj(res, ClassificationBean.class);
 
-                if(classificationBean.isSuccess()){
+                if (classificationBean.isSuccess()) {
                     sortlist = classificationBean.getBody().getShopListData();
 
-                    FullShortAdapter sortAdapter = new FullShortAdapter(getActivity(),R.layout.item_shortrecycler, sortlist);
+                    FullShortAdapter sortAdapter = new FullShortAdapter(getActivity(), R.layout.item_shortrecycler, sortlist);
                     recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                     recycler.setAdapter(sortAdapter);
                     sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                            Intent intent = new Intent(getActivity(),ShopStoreActivity.class);
-                            intent.putExtra("shopId",sortlist.get(position).getAnsShopBasic().getId());
-                            intent.putExtra("shopName",sortlist.get(position).getAnsShopBasic().getShopName());
+                            Intent intent = new Intent(getActivity(), ShopStoreActivity.class);
+                            intent.putExtra("shopId", sortlist.get(position).getAnsShopBasic().getId());
+                            intent.putExtra("shopName", sortlist.get(position).getAnsShopBasic().getShopName());
                             startActivity(intent);
                         }
                     });
 
-                }else {
+                } else {
                     T.show(classificationBean.getMsg());
                 }
                 break;
         }
     }
+
     @Override
     public void showLoadingDialog() {
 

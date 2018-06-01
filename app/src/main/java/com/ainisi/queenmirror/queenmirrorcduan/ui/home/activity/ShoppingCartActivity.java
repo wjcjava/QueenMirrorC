@@ -23,7 +23,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.StoreInfo;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -44,7 +43,7 @@ import butterknife.OnClick;
 /**
  * 购物车
  */
-public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBack,View.OnClickListener, ShopcatAdapter.CheckInterface, ShopcatAdapter.ModifyCountInterface, ShopcatAdapter.GroupEditorListener {
+public class ShoppingCartActivity extends BaseNewActivity implements HttpCallBack, View.OnClickListener, ShopcatAdapter.CheckInterface, ShopcatAdapter.ModifyCountInterface, ShopcatAdapter.GroupEditorListener {
 
     @Bind(R.id.listView)
     ExpandableListView listView;
@@ -77,7 +76,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     private Map<String, List<GoodsInfo>> childs; //子元素的列表
     public ShoppingCartBean shoppingCartBean;
 
-    String delIds="";
+    String delIds = "";
     List<ShoppingCartBean.BodyBean.ShopListBean.ApiAnsCustCartListBean> apiAnsCustCartListBeans = new ArrayList<>();
 
     public static ShoppingCartActivity instance = null;
@@ -91,16 +90,16 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action){
+        switch (action) {
             case ACTION.GETSHOPPINDCART:
-                shoppingCartBean = GsonUtil.toObj(res,ShoppingCartBean.class);
+                shoppingCartBean = GsonUtil.toObj(res, ShoppingCartBean.class);
                 initEvents();
                 break;
             case ACTION.DELETESHOPCART:
-                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean.isSuccess()){
+                SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
+                if (successBean.isSuccess()) {
                     T.show(successBean.getMsg());
-                }else{
+                } else {
                     T.show(successBean.getMsg());
                 }
                 break;
@@ -128,7 +127,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      */
     private void getShopCartData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("custId", SP.get(ShoppingCartActivity.this, SpContent.UserId,"")+"");//用户ID
+        params.put("custId", SP.get(ShoppingCartActivity.this, SpContent.UserId, "") + "");//用户ID
         HttpUtils.doPost(ACTION.GETSHOPPINDCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -137,8 +136,8 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      */
     private void DeleteShopCartData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("userId", SP.get(ShoppingCartActivity.this, SpContent.UserId,"")+"");//用户ID
-        params.put("delIds",delIds);
+        params.put("userId", SP.get(ShoppingCartActivity.this, SpContent.UserId, "") + "");//用户ID
+        params.put("delIds", delIds);
         HttpUtils.doPost(ACTION.DELETESHOPCART, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -154,7 +153,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
                 int img = R.drawable.icon_home_beautiful;
                 //i-j 就是商品的id， 对应着第几个店铺的第几个商品，1-1 就是第一个店铺的第一个商品,价格,在加商品时的数量
                 goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), "第一排", "出头天者"
-                        , img, apiAnsCustCartListBeans.get(j).getAnsCustCart().getPurchaseNumber(),apiAnsCustCartListBeans.get(j).getAnsCustCart().getId()));
+                        , img, apiAnsCustCartListBeans.get(j).getAnsCustCart().getPurchaseNumber(), apiAnsCustCartListBeans.get(j).getAnsCustCart().getId()));
             }
             childs.put(groups.get(i).getId(), goods);
         }
@@ -177,17 +176,18 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int firstVisiablePostion=view.getFirstVisiblePosition();
-                int top=-1;
-                View firstView=view.getChildAt(firstVisibleItem);
-                UtilsLog.i("childCount="+view.getChildCount());//返回的是显示层面上的所包含的子view的个数
-                if(firstView!=null){
-                    top=firstView.getTop();
+                int firstVisiablePostion = view.getFirstVisiblePosition();
+                int top = -1;
+                View firstView = view.getChildAt(firstVisibleItem);
+                UtilsLog.i("childCount=" + view.getChildCount());//返回的是显示层面上的所包含的子view的个数
+                if (firstView != null) {
+                    top = firstView.getTop();
                 }
-                UtilsLog.i("firstVisiableItem="+firstVisibleItem+",fistVisiablePosition="+firstVisiablePostion+",firstView="+firstView+",top="+top);
+                UtilsLog.i("firstVisiableItem=" + firstVisibleItem + ",fistVisiablePosition=" + firstVisiablePostion + ",firstView=" + firstView + ",top=" + top);
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -230,6 +230,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      */
     List<GoodsInfo> toBeDeleteChilds;
     List<GoodsInfo> childde;
+
     private void doDelete() {
         List<StoreInfo> toBeDeleteGroups = new ArrayList<StoreInfo>(); //待删除的组元素
         for (int i = 0; i < groups.size(); i++) {
@@ -242,7 +243,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
             for (int j = 0; j < childde.size(); j++) {
                 if (childde.get(j).isChoosed()) {
                     toBeDeleteChilds.add(childde.get(j));
-                    delIds = delIds+childde.get(j).getId()+",";
+                    delIds = delIds + childde.get(j).getId() + ",";
                 }
             }
         }
@@ -388,7 +389,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
 
     }
 
-    @OnClick({R.id.all_checkBox, R.id.go_pay,  R.id.del_goods,R.id.title_shopcart_back})
+    @OnClick({R.id.all_checkBox, R.id.go_pay, R.id.del_goods, R.id.title_shopcart_back})
     public void onClick(View view) {
         AlertDialog dialog;
         switch (view.getId()) {
@@ -439,15 +440,15 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      * 这里删除的是购物车未选中相关信息
      */
     //思路:当子元素=0，那么组元素也要删除
-    private void calulates(){
-        for(int i=0; i < groups.size(); i++){
+    private void calulates() {
+        for (int i = 0; i < groups.size(); i++) {
             StoreInfo group = groups.get(i);
             List<GoodsInfo> child = childs.get(group.getId());
             for (int j = 0; j < child.size(); j++) {
                 GoodsInfo good = child.get(j);
                 if (good.isChoosed()) {
 
-                }else{
+                } else {
                     shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().remove(j);
                     child.remove(j);
                     if (child.size() == 0) {
@@ -458,12 +459,10 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
             }
         }
 
-        Intent intent = new Intent(ShoppingCartActivity.this,PurchaseActivity.class);
-        intent.putExtra("cartBean", (Serializable)shoppingCartBean);
+        Intent intent = new Intent(ShoppingCartActivity.this, PurchaseActivity.class);
+        intent.putExtra("cartBean", (Serializable) shoppingCartBean);
         startActivity(intent);
     }
-
-
 
 
     /**

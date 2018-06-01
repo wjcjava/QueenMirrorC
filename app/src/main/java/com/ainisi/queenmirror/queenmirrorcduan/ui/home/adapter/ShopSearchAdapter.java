@@ -13,13 +13,14 @@ import java.util.List;
  * Created by john on 2018/6/1.
  */
 
-public class ShopSearchAdapter  extends BaseQuickAdapter<ShopSearchBean.BodyBean.ShopListDataBean,BaseViewHolder> {
+public class ShopSearchAdapter extends BaseQuickAdapter<ShopSearchBean.BodyBean.ShopListDataBean, BaseViewHolder> {
     public ShopSearchAdapter(int layoutResId, @Nullable List<ShopSearchBean.BodyBean.ShopListDataBean> data) {
         super(layoutResId, data);
     }
+
     @Override
     protected void convert(BaseViewHolder helper, ShopSearchBean.BodyBean.ShopListDataBean item) {
-        helper.setText(R.id.tv_search_shopname,item.getAnsShopBasic().getShopName());
-        helper.setText(R.id.tv_search_shoptime,item.getAnsShopBasic().getJoinTime());
+        helper.setText(R.id.tv_search_shopname, item.getAnsShopBasic().getShopName());
+        helper.setText(R.id.tv_search_shoptime, item.getAnsShopBasic().getJoinTime());
     }
 }

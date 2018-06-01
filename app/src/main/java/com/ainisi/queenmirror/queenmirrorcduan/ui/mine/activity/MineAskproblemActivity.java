@@ -26,7 +26,7 @@ import butterknife.OnClick;
 /**
  * 常见问题
  */
-public class MineAskproblemActivity extends BaseNewActivity implements HttpCallBack{
+public class MineAskproblemActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.title_title)
     TextView askTitle;
     @Bind(R.id.re_problem)
@@ -36,12 +36,13 @@ public class MineAskproblemActivity extends BaseNewActivity implements HttpCallB
     public int getLayoutId() {
         return R.layout.activity_mine_askproblem;
     }
+
     @Override
     protected void initData() {
         super.initData();
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("","");
-        HttpUtils.doPost(ACTION.PROBLEMLIST,parames, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("", "");
+        HttpUtils.doPost(ACTION.PROBLEMLIST, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
 
@@ -49,6 +50,7 @@ public class MineAskproblemActivity extends BaseNewActivity implements HttpCallB
     public void initView() {
         askTitle.setText(R.string.common_problem);
     }
+
     @OnClick({R.id.title_back
     })
     public void click(View view) {
@@ -74,7 +76,7 @@ public class MineAskproblemActivity extends BaseNewActivity implements HttpCallB
                         @Override
                         public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                             TextView name = view.findViewById(R.id.problem_name);
-                            switch (view.getId()){
+                            switch (view.getId()) {
                                 case R.id.problem_name:
                                     T.show("你点击了我");
                                     name.setText("你点击了我");

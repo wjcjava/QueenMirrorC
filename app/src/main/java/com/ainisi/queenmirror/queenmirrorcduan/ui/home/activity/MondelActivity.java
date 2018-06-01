@@ -26,7 +26,8 @@ public class MondelActivity extends BaseNewActivity {
     RecyclerView reMondel;
     @Bind(R.id.re_mondel_exchange)
     RecyclerView reExchange;
-    private List<SortBean> mondelList=new ArrayList<>();
+    private List<SortBean> mondelList = new ArrayList<>();
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_mondel;
@@ -48,18 +49,19 @@ public class MondelActivity extends BaseNewActivity {
         modelBanner.setIndicatorGravity(BannerConfig.LEFT);
         modelBanner.start();
 
-        for (int i = 0; i <4 ; i++) {
-            SortBean sortBean=new SortBean();
+        for (int i = 0; i < 4; i++) {
+            SortBean sortBean = new SortBean();
             mondelList.add(sortBean);
         }
 
-        MyAdapter myAdapter=new MyAdapter(R.layout.re_mondel_service,mondelList);
-        reMondel.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        MyAdapter myAdapter = new MyAdapter(R.layout.re_mondel_service, mondelList);
+        reMondel.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         reMondel.setAdapter(myAdapter);
-        MyAdapter myAdaptertwo=new MyAdapter(R.layout.re_mondel_exchange,mondelList);
-        reExchange.setLayoutManager(new GridLayoutManager(this,2));
+        MyAdapter myAdaptertwo = new MyAdapter(R.layout.re_mondel_exchange, mondelList);
+        reExchange.setLayoutManager(new GridLayoutManager(this, 2));
         reExchange.setAdapter(myAdaptertwo);
     }
+
     @OnClick({R.id.title_back
     })
     public void click(View view) {

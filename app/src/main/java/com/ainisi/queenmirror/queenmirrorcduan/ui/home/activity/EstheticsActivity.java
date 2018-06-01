@@ -81,6 +81,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     String shop_name, categoryId;
     int pageNumber = 1;
     EstheticsAdapter sortAdapter;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_esthetics;
@@ -127,6 +128,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
         initDate();
         initfragment();
     }
+
     /**
      * 获取推荐好店的数据
      */
@@ -135,7 +137,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
         hashMap.put("categoryId", categoryId);
         hashMap.put("pageNumber", pageNumber + "");
         hashMap.put("pageSize", "10");
-        hashMap.put("shopCate","1");
+        hashMap.put("shopCate", "1");
         HttpUtils.doPost(ACTION.MERCHANTSLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
