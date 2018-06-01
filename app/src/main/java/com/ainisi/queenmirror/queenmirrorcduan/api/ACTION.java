@@ -131,4 +131,8 @@ public interface ACTION {
 
     int CANCLEORDER = 0x136;//取消订单
 
+    int BEMEIYEREN = 0x137;//申请成为美业人
+
+    int AliPayAfterRefresh = 0x138;//支付宝支付后调用
+
 }

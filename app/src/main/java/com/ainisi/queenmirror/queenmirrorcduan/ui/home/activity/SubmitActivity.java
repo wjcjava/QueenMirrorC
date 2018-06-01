@@ -19,6 +19,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.PayInBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -52,9 +53,10 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.tv_submit_price)
     TextView tv_submit_price;
     @Bind(R.id.tv_submit_bottom_price)
-            TextView tv_submit_bottom_price;
+    TextView tv_submit_bottom_price;
 
     String businessIds = "";
+    String transId = "";
     List<String> orderIdList = new ArrayList<>();
     String amount = "0",aliPayResult="";
     private static final int SDK_PAY_FLAG = 1;
@@ -76,6 +78,8 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         T.show("支付成功");
+
+                        AfterPayData();
                         finish();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
@@ -111,7 +115,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             public void run() {
                 PayTask alipay = new PayTask(SubmitActivity.this);
                 Map<String, String> result = alipay.payV2(aliPayResult, true);
-                Log.i("msp", result.toString());
 
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
@@ -159,9 +162,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                     return;
                 }
                 break;
-
         }
-
     }
 
     /**
@@ -178,12 +179,28 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
         HttpUtils.doPost(ACTION.PayBefore, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
+    /**
+     * 支付宝付款成功后调用
+     */
+    private void AfterPayData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("outTradeNo", transId);
+        HttpUtils.doPost(ACTION.AliPayAfterRefresh, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
+            /**
+             * 调用支付宝之后调用
+             */
+            case ACTION.AliPayAfterRefresh:
+                L.e("&&&&&   "+res);
+                break;
             case ACTION.PayBefore:
                 PayInBean payInBean = GsonUtil.toObj(res,PayInBean.class);
                 aliPayResult = payInBean.getBody().getAliPayResult();
+                transId = payInBean.getBody().getTransId();
                 payThread.start();
                 break;
         }

@@ -147,14 +147,26 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         groups = new ArrayList<StoreInfo>();
         childs = new HashMap<String, List<GoodsInfo>>();
         for (int i = 0; i < shoppingCartBean.getBody().getShopList().size(); i++) {
+
             groups.add(new StoreInfo(i + "", shoppingCartBean.getBody().getShopList().get(i).getShopName()));
+
             List<GoodsInfo> goods = new ArrayList<>();
             apiAnsCustCartListBeans = shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList();
             for (int j = 0; j < shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().size(); j++) {
                 int img = R.drawable.icon_home_beautiful;
+
+
                 //i-j 就是商品的id， 对应着第几个店铺的第几个商品，1-1 就是第一个店铺的第一个商品,价格,在加商品时的数量
-                goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(), apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsPrice()), "第一排", "出头天者"
-                        , img, apiAnsCustCartListBeans.get(j).getAnsCustCart().getPurchaseNumber(),apiAnsCustCartListBeans.get(j).getAnsCustCart().getId()));
+                goods.add(new GoodsInfo(apiAnsCustCartListBeans.get(j).getAnsCustCart().getId(),
+                        apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsName(),
+                        apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getGoodsBrief(),
+                        Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getSalesPrice()),
+                        Double.parseDouble(apiAnsCustCartListBeans.get(j).getEcGoodsBasic().getSalesPrice()),
+                        "第一排",
+                        "出头天者"
+                        , img,
+                        apiAnsCustCartListBeans.get(j).getAnsCustCart().getPurchaseNumber(),
+                        apiAnsCustCartListBeans.get(j).getAnsCustCart().getId()));
             }
             childs.put(groups.get(i).getId(), goods);
         }
@@ -488,16 +500,22 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
      * 错误标记：在这里出现过错误
      */
     private void doCheckAll() {
-        for (int i = 0; i < groups.size(); i++) {
-            StoreInfo group = groups.get(i);
-            group.setChoosed(allCheckBox.isChecked());
-            List<GoodsInfo> child = childs.get(group.getId());
-            for (int j = 0; j < child.size(); j++) {
-                child.get(j).setChoosed(allCheckBox.isChecked());//这里出现过错误
+
+        if(groups.size()>0){
+            for (int i = 0; i < groups.size(); i++) {
+                StoreInfo group = groups.get(i);
+                group.setChoosed(allCheckBox.isChecked());
+                List<GoodsInfo> child = childs.get(group.getId());
+                for (int j = 0; j < child.size(); j++) {
+                    child.get(j).setChoosed(allCheckBox.isChecked());//这里出现过错误
+                }
             }
+            adapter.notifyDataSetChanged();
+            calulate();
+        }else{
+            T.show("请先添加商品");
         }
-        adapter.notifyDataSetChanged();
-        calulate();
+
     }
 
     /**

@@ -130,11 +130,15 @@ String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
  String PROBLEMDATA="api/ec/help/questionListByCategory";//常见问题分类的数据
 
- String PayBefore = "api/util/pay/aliPay";//支付之前调用数据
+ String PayBefore = "api/util/alipay/orderAliPay";//支付之前调用数据
 
  String DOOUTDATA = "api/util/pay/aliPayRefund";//退款
 
  String GETUSEYOUHUIQUAN = "api/ans/coupon/couponListForUse";//获取可用的优惠券
 
  String CANCLEORDER = "api/ans/order/custOrderCancel";//取消订单
+
+ String BEMEIYEREN = "api/ec/beauty/beautyApply";//申请成为美业人
+
+ String AliPayAfterRefresh = "api/util/alipay/orderAliPayAfterRefresh";//订单支付宝支付后结果查询
 }

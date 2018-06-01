@@ -541,6 +541,12 @@ public class HttpUtils {
             case ACTION.CANCLEORDER:
                 actionUrl = UrlConstants.CANCLEORDER;
                 break;
+            case ACTION.BEMEIYEREN:
+                actionUrl = UrlConstants.BEMEIYEREN;
+                break;
+            case ACTION.AliPayAfterRefresh:
+                actionUrl = UrlConstants.AliPayAfterRefresh;
+                break;
         }
         url.append(actionUrl);
         return url;

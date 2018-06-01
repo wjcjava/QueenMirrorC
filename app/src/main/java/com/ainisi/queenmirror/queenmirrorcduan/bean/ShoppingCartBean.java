@@ -892,8 +892,8 @@ public class ShoppingCartBean implements Serializable{
                     private Object goodsStorage;
                     private String goodsPrice;
                     private String offlinePrice;
-                    private Object marketPrice;
-                    private Object salesPrice;
+                    private String marketPrice;
+                    private String salesPrice;
                     private Object promotionPrice;
                     private Object goodsActivity;
                     private Object goodsBanner;
@@ -1058,19 +1058,19 @@ public class ShoppingCartBean implements Serializable{
                         this.offlinePrice = offlinePrice;
                     }
 
-                    public Object getMarketPrice() {
+                    public String getMarketPrice() {
                         return marketPrice;
                     }
 
-                    public void setMarketPrice(Object marketPrice) {
+                    public void setMarketPrice(String marketPrice) {
                         this.marketPrice = marketPrice;
                     }
 
-                    public Object getSalesPrice() {
+                    public String getSalesPrice() {
                         return salesPrice;
                     }
 
-                    public void setSalesPrice(Object salesPrice) {
+                    public void setSalesPrice(String salesPrice) {
                         this.salesPrice = salesPrice;
                     }
 
