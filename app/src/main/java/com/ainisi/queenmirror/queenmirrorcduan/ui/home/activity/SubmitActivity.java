@@ -18,6 +18,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.PayInBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
@@ -80,7 +81,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                         T.show("支付成功");
 
                         AfterPayData();
-                        finish();
+
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         T.show("支付失败");
@@ -199,6 +200,12 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
              */
             case ACTION.AliPayAfterRefresh:
                 L.e("&&&&&   "+res);
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    finish();
+                }else{
+                    T.show(successBean.getMsg());
+                }
                 break;
             case ACTION.PayBefore:
                 PayInBean payInBean = GsonUtil.toObj(res,PayInBean.class);
