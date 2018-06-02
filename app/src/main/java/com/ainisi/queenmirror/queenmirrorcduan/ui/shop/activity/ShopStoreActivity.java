@@ -185,7 +185,7 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
              * 点击评价
              */
             case R.id.li_shop_detail_comment:
-                T.show("敬请期待");
+                startActivity(new Intent(this,CommentActivity.class));
                 break;
             case R.id.title_back:
                 finish();
@@ -226,7 +226,6 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
             }
         });
     }
-
     private void inithttp() {
         HashMap<String, String> params = new HashMap<>();
         params.put("cpId", "1cf04904fa064c4294453ce39c506be1");//优惠券ID

@@ -79,7 +79,6 @@ public class HomeFightaloneFragment extends BaseFragment implements RefreshLoadM
     }
 
     private void initDate() {
-
         for (int i = 0; i < 15; i++) {
             SortBean sortBean = new SortBean();
             sortBean.setName("MOCO美容美发沙龙");

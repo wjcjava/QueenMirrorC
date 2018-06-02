@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusableInTouchMode="true"
     android:focusable="true"
+    android:id="@+id/relativeLayout"
     android:background="@color/mine_back_gray">
 
     <android.support.design.widget.AppBarLayout
@@ -183,13 +184,13 @@
                 android:text="@string/sales" />
 
             <TextView
-                android:id="@+id/rb_distance"
+                android:id="@+id/tv_distance"
                 style="@style/Recommend_layout"
                 android:layout_height="@dimen/comment_40_dip"
                 android:textSize="@dimen/comment_12_size"
                 android:textColor="@color/alpha_55_black"
                 android:drawableEnd="@drawable/arrow_dwon_blue"
-                android:text="综合排序" />
+                android:text="限量最高" />
 
             <LinearLayout
                 android:id="@+id/li_home_screen"
@@ -197,7 +198,7 @@
                 android:layout_height="@dimen/comment_40_dip">
 
                 <TextView
-                    android:id="@+id/rb_screen"
+                    android:id="@+id/tv_screen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/comment_12_size"
