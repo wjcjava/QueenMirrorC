@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,9 +23,9 @@ public class PreferentialAdapter extends RecyclerView.Adapter<PreferentialAdapte
     //这个是checkbox的Hashmap集合
     private final HashMap<Integer, Boolean> map;
     //这个是数据集合
-    private final List<MerchantsBean> list;
+    private final List<PreferentialBean.BodyBean.FeatureKeysListDataBean> list;
 
-    public PreferentialAdapter(List<MerchantsBean> merchantsList) {
+    public PreferentialAdapter(List<PreferentialBean.BodyBean.FeatureKeysListDataBean> merchantsList) {
         map = new HashMap<>();
         this.list=merchantsList;
         for (int i = 0; i < list.size(); i++) {
@@ -51,8 +51,6 @@ public class PreferentialAdapter extends RecyclerView.Adapter<PreferentialAdapte
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.LayoutManager layoutManager = ((RecyclerView) parent).getLayoutManager();
-        //初始化布局文件
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_adapter_preferential, parent, false);
         return new MyViewHolder(inflate);
     }
@@ -60,6 +58,7 @@ public class PreferentialAdapter extends RecyclerView.Adapter<PreferentialAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         //放入集合中的值
+        holder.checkBox.setText(list.get(position).getEcTab().getTabName());
         holder.checkBox.setChecked(map.get(position));
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,9 +83,7 @@ public class PreferentialAdapter extends RecyclerView.Adapter<PreferentialAdapte
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-
-            checkBox = (CheckBox) itemView.findViewById(R.id.tv_preferential_name);
+            checkBox =itemView.findViewById(R.id.tv_preferential_name);
         }
     }
 }

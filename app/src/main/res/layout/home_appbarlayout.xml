@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="附近商家"
-                android:textSize="@dimen/comment_14_size" />
+                android:textSize="@dimen/comment_12_size" />
 
             <ImageView
                 android:id="@+id/iv_shop_sort"
@@ -70,7 +70,7 @@
             style="@style/Recommend_layout"
             android:layout_height="@dimen/comment_40_dip"
             android:text="@string/sales"
-            android:textSize="@dimen/comment_14_size" />
+            android:textSize="@dimen/comment_12_size" />
 
         <TextView
 
@@ -78,7 +78,8 @@
             style="@style/Recommend_layout"
             android:layout_height="@dimen/comment_40_dip"
             android:text="@string/distance"
-            android:textSize="@dimen/comment_14_size" />
+            android:drawableEnd="@drawable/arrow_dwon_blue"
+            android:textSize="@dimen/comment_12_size" />
 
         <LinearLayout
             android:id="@+id/li_home_screen_bottom"
@@ -90,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/screen"
-                android:textSize="@dimen/comment_14_size" />
+                android:textSize="@dimen/comment_12_size" />
 
             <RadioButton
 

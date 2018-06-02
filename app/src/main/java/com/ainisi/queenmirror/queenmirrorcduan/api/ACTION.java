@@ -71,6 +71,10 @@ public interface ACTION {
 
     int SPELLCOLLECTION=0x34;//收藏拼单
 
+    int MERCHANTACTIVITY=0x35;//商家活动（首页筛选）
+
+    int MERCHANTFEATURES=0x36;//商家特色（首页筛选）
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

@@ -145,4 +145,8 @@ String BASE_URL = "http://192.168.30.155:7080/wg/a/";
  String BEMEIYEREN = "api/ec/beauty/beautyApply";//申请成为美业人
 
  String AliPayAfterRefresh = "api/util/alipay/orderAliPayAfterRefresh";//订单支付宝支付后结果查询
+
+ String MERCHANTACTIVITY="api/ec/common/activityList";//商家活动（首页筛选）
+
+ String MERCHANTFEATURES="api/ec/common/featureList";//商家特色（首页筛选）
 }

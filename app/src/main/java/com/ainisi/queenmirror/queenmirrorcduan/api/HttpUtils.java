@@ -555,6 +555,14 @@ public class HttpUtils {
             case ACTION.AliPayAfterRefresh:
                 actionUrl = UrlConstants.AliPayAfterRefresh;
                 break;
+            //商家活动（首页筛选）
+            case ACTION.MERCHANTACTIVITY:
+                actionUrl=UrlConstants.MERCHANTACTIVITY;
+                break;
+            //商家特色（首页筛选）
+            case ACTION.MERCHANTFEATURES:
+                actionUrl=UrlConstants.MERCHANTFEATURES;
+                break;
         }
         url.append(actionUrl);
         return url;

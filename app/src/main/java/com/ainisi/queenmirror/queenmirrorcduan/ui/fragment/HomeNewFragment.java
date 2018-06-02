@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -47,6 +46,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
@@ -137,6 +137,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     ImageView iv_shop_sort;
     @Bind(R.id.rb_sales)
     TextView rb_sales;
+    @Bind(R.id.tv_sales)
+    TextView tv_sales;
     @Bind(R.id.rb_distance)
     TextView rb_distance;
     @Bind(R.id.li_home_screen)
@@ -147,10 +149,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     TextView textScreen;
     @Bind(R.id.tv_distance)
     TextView tvdistance;
+    @Bind(R.id.iv_distance_sort)
+    ImageView ivdistance;
     private HomeIndustryBean homeIndustryBean;
     private HomeHeadlinesBean homeHeadlinesBean;
     private HomeAdvertisingBean homeAdvertisingBean;
-
     List<String> contntList = new ArrayList<>();
     List<SortBean> sortlist = new ArrayList<>();
     String[] merchantsGather = {"新商家", "品牌商家", "消费者保障", "七天内退货", "支持开发票", "魔豆抵钱", "魔豆抵钱"};
@@ -164,6 +167,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
     private PopupWindow popWindow;
     private MerchantsAdapter merchantsAdapter;
+    private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
+    private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
 
     @Override
     protected int getLayoutResource() {
@@ -213,7 +218,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
-        merchantsList.clear();
+
         /**
          * 获取首页部分数据
          */
@@ -251,11 +256,17 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
             }
         });
-        for (int i = 0; i < merchantsGather.length; i++) {
-            MerchantsBean merchantsBean = new MerchantsBean();
-            merchantsBean.setMerchantsName(merchantsGather[i]);
-            merchantsList.add(merchantsBean);
-        }
+        inithttp();
+
+    }
+
+    private void inithttp() {
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("", "");
+        //商家活动（筛选）
+        HttpUtils.doPost(ACTION.MERCHANTACTIVITY, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        //商家特色（筛选）
+        HttpUtils.doPost(ACTION.MERCHANTFEATURES, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
@@ -315,7 +326,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
     @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
             R.id.line_surface, R.id.line_uspension_surface, R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information, R.id.li_hime_sort,
-            R.id.li_sort_bottom, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom,R.id.li_home_screen})
+            R.id.li_sort_bottom, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom, R.id.li_home_screen})
     public void onClick(View view) {
         switch (view.getId()) {
             /**
@@ -325,14 +336,17 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 sc_home_scroll.smoothScrollTo(0, 3315);
                 tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 initShowsreen();
-
                 break;
             case R.id.li_home_screen:
                 textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 initShowsreen();
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 break;
             /**
              * 按距离排序
@@ -344,31 +358,34 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-
+                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 initShowPop();
 
-
-                Drawable drawable=getResources().getDrawable(R.drawable.arrow_up_black);
-                rb_distance.setCompoundDrawables(null, null, drawable, null);
-                tvdistance.setCompoundDrawables(null, null, drawable, null);
+                ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
+//                ivdistanceapp.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
                 popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
 
-                        Drawable drawable=getResources().getDrawable(R.drawable.arrow_dwon_blue);
-                        rb_distance.setCompoundDrawables(null, null, drawable, null);
-                        tvdistance.setCompoundDrawables(null, null, drawable, null);
+
+                        ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+//                        ivdistanceapp.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
 
 
                     }
                 });
+
                 break;
             /**
              * 底部销量最高
              */
             case R.id.rb_sales:
+
+                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 sc_home_scroll.smoothScrollTo(0, 3315);
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -404,11 +421,13 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              * 点击底部的综合排序
              */
             case R.id.li_hime_sort:
-
+                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
 
                 initview(popview);
@@ -537,8 +556,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
-    private List<MerchantsBean> merchantsList = new ArrayList<>();
-
     private void initoperation(View popview) {
         RecyclerView merchants = popview.findViewById(R.id.re_home_merchants);
         TextView cancel = popview.findViewById(R.id.tv_cancel);
@@ -553,7 +570,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         merchants.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         merchants.setAdapter(merchantsAdapter);
 
-        PreferentialAdapter preferentialAdapter = new PreferentialAdapter(merchantsList);
+        PreferentialAdapter preferentialAdapter = new PreferentialAdapter(preferentialList);
         preferential.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         preferential.setAdapter(preferentialAdapter);
 
@@ -674,6 +691,25 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 } else {
                     T.show(homeAdvertisingBean.getMsg());
                 }
+                break;
+            //商家活动（筛选）
+            case ACTION.MERCHANTACTIVITY:
+                MerchantsBean merchantsBean = GsonUtil.toObj(res, MerchantsBean.class);
+                if (merchantsBean.isSuccess()) {
+                    merchantsList = merchantsBean.getBody().getActivityKeysListData();
+                } else {
+                    T.show(merchantsBean.getMsg());
+                }
+
+                break;
+            //商家特色（筛选）
+            case ACTION.MERCHANTFEATURES:
+               PreferentialBean preferentialBean= GsonUtil.toObj(res, PreferentialBean.class);
+               if(preferentialBean.isSuccess()){
+                   preferentialList=preferentialBean.getBody().getFeatureKeysListData();
+               }else {
+                   T.show(preferentialBean.getMsg());
+               }
                 break;
         }
     }
