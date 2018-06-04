@@ -13,7 +13,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -253,11 +252,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         layout_stick_header_main.setVisibility(View.GONE);
                     }
                 }
-
             }
         });
         inithttp();
-
     }
 
     private void inithttp() {
@@ -272,7 +269,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Override
     public void onResume() {
         super.onResume();
-
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // 没有权限，申请权限。
@@ -338,6 +334,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 initShowsreen();
                 break;
             case R.id.li_home_screen:
@@ -347,6 +347,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 break;
             /**
              * 按距离排序
@@ -360,20 +364,17 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                layout_stick_header_main.setVisibility(View.VISIBLE);
+                view_new_fragment_half.setVisibility(View.VISIBLE);
                 initShowPop();
-
                 ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
-//                ivdistanceapp.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
                 popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
-
-
                         ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-//                        ivdistanceapp.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-
-
-                    }
+                   }
                 });
 
                 break;
@@ -381,14 +382,16 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              * 底部销量最高
              */
             case R.id.rb_sales:
-
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 sc_home_scroll.smoothScrollTo(0, 3315);
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
 
 
                 break;
@@ -397,7 +400,13 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-
+                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                layout_stick_header_main.setVisibility(View.VISIBLE);
+                view_new_fragment_half.setVisibility(View.VISIBLE);
                 initShowPop();
 
                 layout_stick_header_main.setVisibility(View.VISIBLE);
@@ -428,16 +437,14 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
-
                 initview(popview);
                 popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
                 popWindow.setContentView(popview);
                 popWindow.setOutsideTouchable(true);
                 popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
                 popWindow.showAsDropDown(li_top_select, 0, 0);
-
-
                 layout_stick_header_main.setVisibility(View.VISIBLE);
                 view_new_fragment_half.setVisibility(View.VISIBLE);
                 iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
@@ -552,8 +559,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         popWindow.setContentView(popview);
         popWindow.setOutsideTouchable(true);
         popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
-        popWindow.showAtLocation(LayoutInflater.from(getActivity()).inflate(R.layout.activity_home_new_fragment, null),
-                Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+        popWindow.showAsDropDown(li_top_select, 0, 0);
     }
 
     private void initoperation(View popview) {
@@ -704,12 +710,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 break;
             //商家特色（筛选）
             case ACTION.MERCHANTFEATURES:
-               PreferentialBean preferentialBean= GsonUtil.toObj(res, PreferentialBean.class);
-               if(preferentialBean.isSuccess()){
-                   preferentialList=preferentialBean.getBody().getFeatureKeysListData();
-               }else {
-                   T.show(preferentialBean.getMsg());
-               }
+                PreferentialBean preferentialBean = GsonUtil.toObj(res, PreferentialBean.class);
+                if (preferentialBean.isSuccess()) {
+                    preferentialList = preferentialBean.getBody().getFeatureKeysListData();
+                } else {
+                    T.show(preferentialBean.getMsg());
+                }
                 break;
         }
     }
