@@ -15,14 +15,12 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Mloong on 2017/11/25.
- *
  */
 
 public class HomeListViewAdapter extends BaseAdapter {
@@ -31,12 +29,13 @@ public class HomeListViewAdapter extends BaseAdapter {
     List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
     private String where;
 
-    public HomeListViewAdapter(Context context,List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData,String where) {
+    public HomeListViewAdapter(Context context, List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData, String where) {
         this.context = context;
         this.ShopListData = ShopListData;
         inflater = LayoutInflater.from(context);
         this.where = where;
     }
+
     @Override
     public int getCount() {
         return ShopListData.size();
@@ -68,12 +67,16 @@ public class HomeListViewAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(where.equals("home")) {
-                        Intent intent = new Intent(context, WorkRoomDetailActivity.class);
+                    if (where.equals("home")) {
+//                        Intent intent = new Intent(context, WorkRoomDetailActivity.class);
+//                        intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
+//                        intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
+//                        context.startActivity(intent);
+                        Intent intent = new Intent(context, ShopStoreActivity.class);
                         intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
                         intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
                         context.startActivity(intent);
-                    }else{
+                    } else {
                         Intent intent = new Intent(context, ShopStoreActivity.class);
                         intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
                         intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
@@ -81,19 +84,18 @@ public class HomeListViewAdapter extends BaseAdapter {
                     }
                 }
             });
-
             convertView.setTag(holder);
-        }else{
-            holder = (ViewHolder)convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
-        holder.sort_time.setText("营业时间："+ShopListData.get(position).getAnsShopBasic().getOpenTime()+"-"+ShopListData.get(position).getAnsShopBasic().getCloseTime());
+        holder.sort_time.setText("营业时间：" + ShopListData.get(position).getAnsShopBasic().getOpenTime() + "-" + ShopListData.get(position).getAnsShopBasic().getCloseTime());
         holder.sort_name.setText(ShopListData.get(position).getAnsShopBasic().getShopName());
 
         return convertView;
     }
 
     //就是View的持有
-    public final class ViewHolder{
+    public final class ViewHolder {
         private LinearLayout li_home_short;
         private TextView sort_name;
         private TextView sort_time;

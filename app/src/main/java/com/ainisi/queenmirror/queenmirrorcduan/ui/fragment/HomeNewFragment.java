@@ -9,7 +9,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -40,12 +39,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.MerchantsAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.PreferentialAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
@@ -329,28 +328,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              * 筛选
              */
             case R.id.li_home_screen_bottom:
-                sc_home_scroll.smoothScrollTo(0, 3315);
-                tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                initShowsreen();
+                initScreentext();
+                new ScreenPoputil(getActivity()).showscreenPop(li_top_select,merchantsList,preferentialList,"home");
                 break;
             case R.id.li_home_screen:
-                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                initShowsreen();
-                rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                initScreentext();
+                new ScreenPoputil(getActivity()).showscreenPop(li_top_select,merchantsList,preferentialList,"home");
                 break;
             /**
              * 按距离排序
@@ -551,37 +534,18 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         }
     }
 
-    private void initShowsreen() {
-        popview = View.inflate(getActivity(), R.layout.pop_screening, null);
-
-        initoperation(popview);
-        popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
-        popWindow.setContentView(popview);
-        popWindow.setOutsideTouchable(true);
-        popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
-        popWindow.showAsDropDown(li_top_select, 0, 0);
+    private void initScreentext() {
+        sc_home_scroll.smoothScrollTo(0, 3315);
+        tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+        textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+        rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
     }
 
-    private void initoperation(View popview) {
-        RecyclerView merchants = popview.findViewById(R.id.re_home_merchants);
-        TextView cancel = popview.findViewById(R.id.tv_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popWindow.dismiss();
-            }
-        });
-        RecyclerView preferential = popview.findViewById(R.id.re_home_preferential);
-        merchantsAdapter = new MerchantsAdapter(R.layout.item_adapter_merchants, merchantsList);
-        merchants.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        merchants.setAdapter(merchantsAdapter);
-
-        PreferentialAdapter preferentialAdapter = new PreferentialAdapter(preferentialList);
-        preferential.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        preferential.setAdapter(preferentialAdapter);
-
-
-    }
 
     private void initShowPop() {
         popview = View.inflate(getActivity(), R.layout.pop_myitem, null);

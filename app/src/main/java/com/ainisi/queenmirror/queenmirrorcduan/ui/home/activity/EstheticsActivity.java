@@ -6,7 +6,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -21,14 +20,17 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.MerchantsAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FulldistanFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullsalesFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullscreenFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullshortFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -71,7 +73,6 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     FulldistanFragment distanceFragment = new FulldistanFragment();
     //筛选
     FullscreenFragment screenFragment = new FullscreenFragment();
-    private CustomPopWindow popWindow;
     private View popview1;
     private PopupWindow pop;
     private List<Fragment> pagerList = new ArrayList<>();
@@ -81,6 +82,11 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     String shop_name, categoryId;
     int pageNumber = 1;
     EstheticsAdapter sortAdapter;
+    private View popview;
+    private PopupWindow popWindow;
+    private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
+    private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
+    private MerchantsAdapter merchantsAdapter;
 
     @Override
     public int getLayoutId() {
@@ -115,6 +121,25 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
                     T.show(estheticsBean.getMsg());
                 }
                 break;
+            //商家活动（筛选）
+            case ACTION.MERCHANTACTIVITY:
+                MerchantsBean merchantsBean = GsonUtil.toObj(res, MerchantsBean.class);
+                if (merchantsBean.isSuccess()) {
+                    merchantsList = merchantsBean.getBody().getActivityKeysListData();
+                } else {
+                    T.show(merchantsBean.getMsg());
+                }
+
+                break;
+            //商家特色（筛选）
+            case ACTION.MERCHANTFEATURES:
+                PreferentialBean preferentialBean = GsonUtil.toObj(res, PreferentialBean.class);
+                if (preferentialBean.isSuccess()) {
+                    preferentialList = preferentialBean.getBody().getFeatureKeysListData();
+                } else {
+                    T.show(preferentialBean.getMsg());
+                }
+                break;
         }
     }
 
@@ -127,6 +152,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
         getTuijianData();
         initDate();
         initfragment();
+        inithttp();
     }
 
     /**
@@ -140,7 +166,14 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
         hashMap.put("shopCate", "1");
         HttpUtils.doPost(ACTION.MERCHANTSLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
+    private void inithttp() {
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("", "");
+        //商家活动（筛选）
+        HttpUtils.doPost(ACTION.MERCHANTACTIVITY, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        //商家特色（筛选）
+        HttpUtils.doPost(ACTION.MERCHANTFEATURES, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
     private void initfragment() {
         pagerList.add(sortFragment);
         pagerList.add(salesFragment);
@@ -229,34 +262,13 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
                 break;
             //筛选
             case R.id.full_rb_screen:
-                View popview = View.inflate(this, R.layout.pop_right, null);
 
-                initview(popview);
-                popWindow = new CustomPopWindow.PopupWindowBuilder(this)
-                        .setView(popview)
-                        .setFocusable(true)
-                        .size(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT)
-                        .setOutsideTouchable(true)
-                        .setAnimationStyle(R.style.CustomPopWindowStyle)
-                        .create()
-                        .showAtLocation(hscreen, Gravity.RIGHT, 0, 0);
+                new ScreenPoputil(this).showscreenPop(hscreen,merchantsList,preferentialList,"esthetics");
                 break;
             default:
                 break;
 
         }
-    }
-
-    private void initview(final View popview) {
-        TextView eliminateTv = popview.findViewById(R.id.tv_eliminate);
-        TextView okTv = popview.findViewById(R.id.tv_ok);
-        eliminateTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popWindow.dissmiss();
-
-            }
-        });
     }
 
     @Override

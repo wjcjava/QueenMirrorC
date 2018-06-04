@@ -118,6 +118,7 @@
     <dimen name="comment_298_dip">298dp</dimen>
     <dimen name="comment_9_size">9sp</dimen>
     <dimen name="comment_255_dip">255dp</dimen>
+    <dimen name="comment_420_dip">420dp</dimen>
 
 
 </resources>

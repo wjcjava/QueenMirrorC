@@ -6,7 +6,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -15,25 +14,20 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.EstheticsAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FulldistanFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullsalesFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullscreenFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullshortFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.MerchantsAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.ShopMainFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -77,11 +71,9 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
     ShopMainFragment distanceFragment = new ShopMainFragment();
     //筛选
     ShopMainFragment screenFragment = new ShopMainFragment();
-    private CustomPopWindow popWindow;
     private View popview1;
     private PopupWindow pop;
     private List<Fragment> pagerList = new ArrayList<>();
-    List<SortBean> sortlist=new ArrayList<>();
     private List<ProblemBean> list = new ArrayList<>();
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
 
@@ -91,6 +83,11 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
 
     EstheticsAdapter sortAdapter;
     public static ShopClassificationActivity instance = null;
+    private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
+    private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
+    private View popview;
+    private PopupWindow popWindow;
+    private MerchantsAdapter merchantsAdapter;
 
     public int getLayoutId() {
         instance = this;
@@ -110,6 +107,7 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
         doFirstData();
         initDate();
         initfragment();
+        inithttp();
     }
 
     /**
@@ -124,6 +122,17 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
         HttpUtils.doPost(ACTION.MERCHANTSLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
+    /**
+     * 筛选
+     */
+    private void inithttp() {
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("", "");
+        //商家活动（筛选）
+        HttpUtils.doPost(ACTION.MERCHANTACTIVITY, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        //商家特色（筛选）
+        HttpUtils.doPost(ACTION.MERCHANTFEATURES, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
     private void initfragment() {
         pagerList.add(sortFragment);
         pagerList.add(salesFragment);
@@ -134,20 +143,6 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
         fullpager.setAdapter(pager);
     }
     private void initDate() {
-
-       /* for (int i = 0; i <10 ; i++) {
-            SortBean sortBean=new SortBean();
-            sortlist.add(sortBean);
-        }
-        MyAdapter sortAdapter=new MyAdapter(R.layout.re_shop_all,sortlist);
-        reProjects.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        reProjects.setAdapter(sortAdapter);
-        sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(ShopClassificationActivity.this, FullActivity.class));
-            }
-        });*/
         pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
         popview1 = View.inflate(this, R.layout.pop_myitem, null);
         initpop(popview1);
@@ -222,32 +217,12 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
                 break;
             //筛选
             case R.id.full_rb_screen:
-                View popview = View.inflate(this, R.layout.pop_right, null);
-                initview(popview);
-                popWindow = new CustomPopWindow.PopupWindowBuilder(this)
-                        .setView(popview)
-                        .setFocusable(true)
-                        .size(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT)
-                        .setOutsideTouchable(true)
-                        .setAnimationStyle(R.style.CustomPopWindowStyle)
-                        .create()
-                        .showAtLocation(hscreen, Gravity.RIGHT, 0, 0);
+                new ScreenPoputil(this).showscreenPop(hscreen,merchantsList,preferentialList,"shopification");
                 break;
             default:
                 break;
         }
     }
-    private void initview(final View popview) {
-        TextView eliminateTv = popview.findViewById(R.id.tv_eliminate);
-        TextView okTv = popview.findViewById(R.id.tv_ok);
-        eliminateTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popWindow.dissmiss();
-            }
-        });
-    }
-
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
@@ -272,6 +247,25 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
                     });
                 } else {
                     T.show(estheticsBean.getMsg());
+                }
+                break;
+            //商家活动（筛选）
+            case ACTION.MERCHANTACTIVITY:
+                MerchantsBean merchantsBean = GsonUtil.toObj(res, MerchantsBean.class);
+                if (merchantsBean.isSuccess()) {
+                    merchantsList = merchantsBean.getBody().getActivityKeysListData();
+                } else {
+                    T.show(merchantsBean.getMsg());
+                }
+
+                break;
+            //商家特色（筛选）
+            case ACTION.MERCHANTFEATURES:
+                PreferentialBean preferentialBean = GsonUtil.toObj(res, PreferentialBean.class);
+                if (preferentialBean.isSuccess()) {
+                    preferentialList = preferentialBean.getBody().getFeatureKeysListData();
+                } else {
+                    T.show(preferentialBean.getMsg());
                 }
                 break;
         }
