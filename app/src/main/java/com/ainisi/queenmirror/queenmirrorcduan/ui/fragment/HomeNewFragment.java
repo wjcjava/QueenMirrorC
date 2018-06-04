@@ -432,10 +432,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 view_new_fragment_half.setVisibility(View.VISIBLE);
                 iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
                 iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
-
                 sc_home_scroll.smoothScrollTo(0, 3315);
-
-
                 popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {

@@ -13,10 +13,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 
 import java.util.List;
 
-/**
- * Created by cuibin on 17/11/7.
- */
-
 //号码设置内部类
 public class PositionListAdapter extends BaseAdapter {
 

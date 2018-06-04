@@ -243,6 +243,7 @@
     <string name="day">日</string>
     <string name="Nails">美甲</string>
     <string name="pricetobuy">原价购买</string>
+    <string name="balance_payment">余额支付</string>
 
 
 </resources>

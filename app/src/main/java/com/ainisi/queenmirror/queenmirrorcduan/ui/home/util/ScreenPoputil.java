@@ -20,7 +20,7 @@ import java.util.List;
  * Created by john on 2018/6/4.
  */
 
-public class ScreenPoputil {
+public class ScreenPoputil{
 
     private View popview;
     private PopupWindow popWindow;
@@ -39,6 +39,7 @@ public class ScreenPoputil {
         this.merchantsList = merchantsList;
         this.preferentialList = preferentialList;
         this.text = text;
+
         popview = View.inflate(context, R.layout.pop_screening, null);
         initoperation(popview, merchantsList, preferentialList);
         popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
@@ -46,6 +47,8 @@ public class ScreenPoputil {
         popWindow.setOutsideTouchable(true);
         popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
         popWindow.showAsDropDown(view, 0, 0);
+
+
     }
 
     private void initoperation(View popview, List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList, List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList) {
@@ -79,6 +82,7 @@ public class ScreenPoputil {
         PreferentialAdapter preferentialAdapter = new PreferentialAdapter(preferentialList);
         preferential.setLayoutManager(new GridLayoutManager(context, 2));
         preferential.setAdapter(preferentialAdapter);
+
     }
 
 
