@@ -51,13 +51,12 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     private boolean click;
     private LoginCeshiBean ceshiBean;
     String vConfig = "";
-    String nickName,headPic,openId,loginToken,where,loginFlag;
+    String nickName, headPic, openId, loginToken, where, loginFlag;
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_register;
     }
-
 
     @Override
     protected void initView() {
@@ -68,13 +67,13 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         Intent intent = this.getIntent();
         where = intent.getStringExtra("where");
 
-        if(where.equals("third")){
+        if (where.equals("third")) {
             nickName = intent.getStringExtra("nickName");
             headPic = intent.getStringExtra("headPic");
             openId = intent.getStringExtra("openId");
             loginToken = intent.getStringExtra("loginToken");
             loginFlag = intent.getStringExtra("loginFlag");
-        }else{
+        } else {
         }
     }
 
@@ -111,15 +110,14 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 break;
             case R.id.bt_user_confirmregistration:
                 initcheck();
-
                 break;
         }
     }
 
     private void initcheck() {
-        HashMap<String,String> params=new HashMap<>();
-        params.put("cellPhone",phoneNumber.getText().toString().trim());
-        HttpUtils.doPost(ACTION.PHONECHECK,params,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cellPhone", phoneNumber.getText().toString().trim());
+        HttpUtils.doPost(ACTION.PHONECHECK, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
 
@@ -155,75 +153,80 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         params.put("telNo", phoneNumber.getText().toString().trim());
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.VERIFY://获取验证码
-                ceshiBean = GsonUtil.toObj(res,LoginCeshiBean.class);
-                if(ceshiBean.isSuccess()){
+                ceshiBean = GsonUtil.toObj(res, LoginCeshiBean.class);
+                if (ceshiBean.isSuccess()) {
                     myCountDownTimer.start();
                     vConfig = ceshiBean.getBody().getVerifyCode();
-                }else{
+                } else {
                     T.show("系统出错，请稍后再试");
                 }
                 break;
             case ACTION.REGIST://注册
-                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
-                if(successBean.isSuccess()){
+                SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
+                if (successBean.isSuccess()) {
                     T.show(successBean.getMsg());
-                    if(where.equals("third")){
-                        Intent intent = new Intent(RegisterActivity.this,GuanLianActivity.class);
-                        intent.putExtra("nickName",nickName);
-                        intent.putExtra("headPic",headPic);
-                        intent.putExtra("openId",openId);
-                        intent.putExtra("loginToken",loginToken);
-                        intent.putExtra("loginFlag",loginFlag);
+                    if (where.equals("third")) {
+                        Intent intent = new Intent(RegisterActivity.this, GuanLianActivity.class);
+                        intent.putExtra("nickName", nickName);
+                        intent.putExtra("headPic", headPic);
+                        intent.putExtra("openId", openId);
+                        intent.putExtra("loginToken", loginToken);
+                        intent.putExtra("loginFlag", loginFlag);
                         startActivity(intent);
-                    }else{
+                    } else {
                         RegisterActivity.this.finish();
                     }
-                }else{
+                } else {
                     T.show(successBean.getMsg());
                 }
                 break;
             case ACTION.PHONECHECK:
-               PhoneCheckBean checkBean= GsonUtil.toObj(res, PhoneCheckBean.class);
-               if(checkBean.isSuccess()){
-                   boolean exists = checkBean.getBody().isExists();
-                   if(exists==true){
-                     T.show("此手机号已注册过请勿再次注册");
-                   }else {
-                       if(phoneNumber.getText().toString().trim().equals("")||passWord.getText().toString().trim().equals("")||etValidation.getText().toString().trim().equals("")){
-                           T.show("请完善相关信息");
-                       }else{
-                           HashMap<String, String> paramsRegister = new HashMap<>();
-                           paramsRegister.put("cellPhone",phoneNumber.getText().toString().trim());
-                           paramsRegister.put("userPass", MD5.md5(passWord.getText().toString()+"MYN888"));
-                           paramsRegister.put("contractConfirm","1");
-                           paramsRegister.put("ifFirst","0");
-                           paramsRegister.put("verifyCode",vConfig);
-                           paramsRegister.put("verifyCodeCust",etValidation.getText().toString().trim());
-                           HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-                       }
-                   }
-               }else {
-                   T.show(checkBean.getMsg());
-               }
+                PhoneCheckBean checkBean = GsonUtil.toObj(res, PhoneCheckBean.class);
+                if (checkBean.isSuccess()) {
+                    boolean exists = checkBean.getBody().isExists();
+                    if (exists == true) {
+                        T.show("此手机号已注册过请勿再次注册");
+                    } else {
+                        if (phoneNumber.getText().toString().trim().equals("") || passWord.getText().toString().trim().equals("") || etValidation.getText().toString().trim().equals("")) {
+                            T.show("请完善相关信息");
+                        } else {
+                            HashMap<String, String> paramsRegister = new HashMap<>();
+                            paramsRegister.put("cellPhone", phoneNumber.getText().toString().trim());
+                            paramsRegister.put("userPass", MD5.md5(passWord.getText().toString() + "MYN888"));
+                            paramsRegister.put("contractConfirm", "1");
+                            paramsRegister.put("ifFirst", "0");
+                            paramsRegister.put("verifyCode", vConfig);
+                            paramsRegister.put("verifyCodeCust", etValidation.getText().toString().trim());
+                            HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+                        }
+                    }
+                } else {
+                    T.show(checkBean.getMsg());
+                }
                 break;
         }
     }
+
     @Override
     public void showLoadingDialog() {
     }
+
     @Override
     public void showErrorMessage(String s) {
     }
-    //复写倒计时  
+
+    //复写倒计时
     private class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
+
         //计时过程
         @Override
         public void onTick(long l) {
@@ -231,6 +234,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             validation.setClickable(false);
             validation.setText((l / 1000) + "s后重新获取");
         }
+
         //计时完毕的方法
         @Override
         public void onFinish() {

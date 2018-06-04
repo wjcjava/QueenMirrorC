@@ -13,7 +13,7 @@
         android:layout_marginTop="@dimen/comment_18_dip"
         android:text="@string/business_features"
         android:textColor="@color/alpha_50_black"
-        android:textSize="@dimen/comment_18_size" />
+        android:textSize="@dimen/comment_14_size" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/re_home_merchants"
@@ -28,7 +28,7 @@
         android:layout_marginTop="@dimen/comment_18_dip"
         android:text="@string/preferential_activities"
         android:textColor="@color/alpha_50_black"
-        android:textSize="@dimen/comment_18_size" />
+        android:textSize="@dimen/comment_14_size" />
 
 
     <android.support.v7.widget.RecyclerView
