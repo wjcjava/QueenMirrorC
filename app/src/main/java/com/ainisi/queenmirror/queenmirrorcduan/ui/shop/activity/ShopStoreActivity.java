@@ -162,7 +162,9 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
              * 到店付款
              */
             case R.id.li_shop_detail_pay:
-                T.show("敬请期待");
+                Intent intentp = new Intent(this,PayInShopActivity.class);
+                startActivity(intentp);
+
                 break;
             /**
              * 电话

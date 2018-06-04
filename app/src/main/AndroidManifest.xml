@@ -467,7 +467,8 @@
         <activity android:name=".ui.home.activity.PurchaseSelectActivity" />
         android:launchMode="singleTask" />
         <activity android:name=".ui.home.activity.SpellOrderListActivity" />
-        <activity android:name=".ui.shop.activity.CommentActivity"></activity>
+        <activity android:name=".ui.shop.activity.CommentActivity" />
+        <activity android:name=".ui.shop.activity.PayInShopActivity"></activity>
     </application>
 
 </manifest>
