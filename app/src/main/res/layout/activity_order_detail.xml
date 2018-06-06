@@ -191,6 +191,15 @@
                     android:background="@color/search_text_biankuang"
                     android:layout_margin="10dp">
                 </View>
+
+                <ImageView
+                    android:id="@+id/iv_order_detail_zxing"
+                    android:layout_width="@dimen/comment_100_dip"
+                    android:layout_height="@dimen/comment_100_dip"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+                </ImageView>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -212,10 +221,10 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
                 android:layout_height="@dimen/comment_45_dip"
+                android:visibility="gone"
                 android:background="@drawable/background_mine_auth">
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"

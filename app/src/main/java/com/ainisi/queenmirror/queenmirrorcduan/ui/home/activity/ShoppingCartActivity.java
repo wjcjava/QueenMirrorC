@@ -456,8 +456,8 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
                 if (good.isChoosed()) {
 
                 }else{
-                    shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().remove(j);
                     child.remove(j);
+                    shoppingCartBean.getBody().getShopList().get(i).getApiAnsCustCartList().remove(j);
                     if (child.size() == 0) {
                         shoppingCartBean.getBody().getShopList().remove(i);
                     }
@@ -470,9 +470,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         intent.putExtra("cartBean", (Serializable)shoppingCartBean);
         startActivity(intent);
     }
-
-
-
 
     /**
      * ActionBar标题上点编辑的时候，只显示每一个店铺的商品修改界面

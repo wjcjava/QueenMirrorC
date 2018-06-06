@@ -23,6 +23,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.io.Serializable;
@@ -37,9 +39,11 @@ import butterknife.Bind;
  * 全部订单
  */
 
-public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack, HttpCallBack {
+public class WholeFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.rc_whole)
     RecyclerView whole;
+    @Bind(R.id.order_main_refresh)
+    MaterialRefreshLayout order_main_refresh;
     private List<SortBean> list = new ArrayList<>();
     private Handler handler = new Handler();
     double amountNum;
@@ -67,39 +71,32 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     }
 
     @Override
-    public void onRefresh() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doFirstData();
-            }
-        }, 200);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         doFirstData();
     }
 
     @Override
-    public void onLoadMore() {
-        if (pageSum <= pageNumber * 10) {
-            T.show("您已获取全部数据");
-        } else {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    pageNumber++;
-                    doFirstData();
-                }
-            }, 1000);
-        }
-    }
-
-    @Override
     protected void initView() {
 
+        order_main_refresh.setLoadMore(true);
+
+        order_main_refresh.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
+                //下拉刷新...
+                pageNumber = 1;
+
+                doFirstData();
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                //上拉刷新...
+                pageNumber++;
+                doFirstData();
+            }
+        });
     }
 
     /**
@@ -122,6 +119,10 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.ALLOFMYORDER:
+
+                order_main_refresh.finishRefresh();
+                order_main_refresh.finishRefreshLoadMore();
+
                 OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res, OrderMyAllOrderBean.class);
                 if (orderMyAllOrderBean.isSuccess()) {
                     pageSum = orderMyAllOrderBean.getBody().getPageSum();
@@ -137,9 +138,11 @@ public class WholeFragment extends BaseFragment implements RefreshLoadMoreLayout
                                 amountNum = amountNum + Double.parseDouble(apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList().get(i).getIntfAnsOrderDetails().getSumAmount());
                             }
                             Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                            intent.putExtra("orderId",apiOrderList.get(position).getIntfAnsOrder().getId());
                             intent.putExtra("orderNo", apiOrderList.get(position).getIntfAnsOrder().getOrderNo());
                             intent.putExtra("orderTel", apiOrderList.get(position).getIntfAnsShopBasic().getServiceTel());
                             intent.putExtra("orderTime", apiOrderList.get(position).getIntfAnsOrder().getOrderTime());
+                            intent.putExtra("orderState",apiOrderList.get(position).getIntfAnsOrder().getOrderStatus());
                             intent.putExtra("OrderHeji", amountNum + "");
                             intent.putExtra("lstBean", (Serializable) apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList());
                             startActivity(intent);

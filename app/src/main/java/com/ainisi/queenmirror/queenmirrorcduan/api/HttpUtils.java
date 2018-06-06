@@ -563,6 +563,25 @@ public class HttpUtils {
             case ACTION.MERCHANTFEATURES:
                 actionUrl=UrlConstants.MERCHANTFEATURES;
                 break;
+            case ACTION.GETZXING:
+                actionUrl = UrlConstants.GETZXING;
+                break;
+            case ACTION.CONFIMSERVICE:
+                actionUrl = UrlConstants.CONFIMSERVICE;
+                break;
+                //获取我的魔豆余额
+            case ACTION.GETMINEMODOU:
+                actionUrl = UrlConstants.GETMINEMODOU;
+                break;
+            case ACTION.GETMINEMODOUBEAN:
+                actionUrl = UrlConstants.GETMINEMODOUBEAN;
+                break;
+            case ACTION.GETMONTHMODOU:
+                actionUrl = UrlConstants.GETMONTHMODOU;
+                break;
+            case ACTION.COMMENTPRO:
+                actionUrl = UrlConstants.COMMENTPRO;
+                break;
         }
         url.append(actionUrl);
         return url;

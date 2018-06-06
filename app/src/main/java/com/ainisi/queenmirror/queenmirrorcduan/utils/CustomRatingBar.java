@@ -145,7 +145,7 @@ public class CustomRatingBar extends View {
         mStarSize = array.getDimensionPixelSize(R.styleable.CustomRatingBar_starSize, DensityUtils.dp2px(context, 20));
         mEmptyStar = array.getDrawable(R.styleable.CustomRatingBar_starEmpty);
         mFillStar = drawableToBitmap(array.getDrawable(R.styleable.CustomRatingBar_starFill));
-        mMode = array.getInt(R.styleable.CustomRatingBar_mode, 2);
+        mMode = array.getInt(R.styleable.CustomRatingBar_mode, 3);
         mTouchAble = array.getBoolean(R.styleable.CustomRatingBar_touchAble, true);
         mTouchStarMark = array.getInt(R.styleable.CustomRatingBar_ratingProgress, 0);
         array.recycle();

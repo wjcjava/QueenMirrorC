@@ -1,7 +1,10 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -87,8 +90,9 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     ShoppingCartBean shoppingCartBean;
     ShoppingCartBean.BodyBean.ShopListBean shopListBean;
     List<ShoppingCartBean.BodyBean.ShopListBean> shopListBeans = new ArrayList<>();
-    private ShareAction mShareAction;
-    private UMShareListener mShareListener;
+
+    CustomShareListener mShareListener;
+    ShareAction mShareAction;
 
     @Override
     public int getLayoutId() {
@@ -110,7 +114,15 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
 
         getProductDetailData();
 
-        mShareListener = new CustomShareListener(this);
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,
+                    Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS};
+            ActivityCompat.requestPermissions(this,mPermissionList,123);
+        }
+
+       mShareListener = new CustomShareListener(this);
         mShareAction = new ShareAction(FullActivity.this).setDisplayList(
                 SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
                 SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE

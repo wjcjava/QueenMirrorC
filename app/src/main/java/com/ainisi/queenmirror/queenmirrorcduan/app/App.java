@@ -35,7 +35,6 @@ import com.umeng.socialize.PlatformConfig;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
-
 import okhttp3.Authenticator;
 import okhttp3.Credentials;
 import okhttp3.Request;
@@ -50,89 +49,34 @@ import okhttp3.Route;
  */
 
 public class App extends MultiDexApplication {
+    private static final String TAG = App.class.getName();
 
-    private static final String TAG ="App" ;
-    private Handler handler;
     public static final String UPDATE_STATUS_ACTION = "com.umeng.message.example.action.UPDATE_STATUS";
-
+    private Handler handler;
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void onCreate() {
         super.onCreate();
-
         ViewTarget.setTagId(R.id.glide_tag);
-
-
-
-        //L.e("...................adadassaasdasdasdasdasd..............................."+JPushInterface.getRegistrationID(this));
-
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-
         T.context = getApplicationContext();
-
-        //---------这里给出的是示例代码,告诉你可以这么传,实际使用的时候,根据需要传,不需要就不传-------------//
         HttpHeaders headers = new HttpHeaders();
-//        headers.put("commonHeaderKey1", "commonHeaderValue1");    //header不支持中文
-        //   headers.put("access_token", "Bearer "+ SP.get(this, Key.ACCESS_TOKEN,""));
         HttpParams params = new HttpParams();
-//        params.put("commonParamsKey1", "commonParamsValue1");     //param支持中文,直接传,不要自己编码
-//        params.put("commonParamsKey2", "这里支持中文参数");
-        //-----------------------------------------------------------------------------------//
-
-        //必须调用初始化
         OkGo.init(this);
-
-        //以下设置的所有参数是全局参数,同样的参数可以在请求的时候再设置一遍,那么对于该请求来讲,请求中的参数会覆盖全局参数
-        //好处是全局参数统一,特定请求可以特别定制参数
         try {
             //以下都不是必须的，根据需要自行选择,一般来说只需要 debug,缓存相关,cookie相关的 就可以了
             OkGo.getInstance()
-
-                    // 打开该调试开关,打印级别INFO,并不是异常,是为了显眼,不需要就不要加入该行
-                    // 最后的true表示是否打印okgo的内部异常，一般打开方便调试错误
                     .debug(L.TAG, Level.INFO, true)
-
-                    //如果使用默认的 60秒,以下三行也不需要传
                     .setConnectTimeout(15*1000)  //全局的连接超时时间
                     .setReadTimeOut(15*1000)     //全局的读取超时时间
                     .setWriteTimeOut(15*1000)    //全局的写入超时时间
-
-                    //可以全局统一设置缓存模式,默认是不使用缓存,可以不传,具体其他模式看 github 介绍 https://github.com/jeasonlzy/
                     .setCacheMode(CacheMode.NO_CACHE)
-
-                    //可以全局统一设置缓存时间,默认永不过期,具体使用方法看 github 介绍
                     .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
-
-                    //可以全局统一设置超时重连次数,默认为三次,那么最差的情况会请求4次(一次原始请求,三次重连请求),不需要可以设置为0
                     .setRetryCount(3)
-
-                    //如果不想让框架管理cookie（或者叫session的保持）,以下不需要
-//              .setCookieStore(new MemoryCookieStore())            //cookie使用内存缓存（app退出后，cookie消失）
                     .setCookieStore(new PersistentCookieStore())        //cookie持久化存储，如果cookie不过期，则一直有效
-
-                    //可以设置https的证书,以下几种方案根据需要自己设置
                     .setCertificates()                                  //方法一：信任所有证书,不安全有风险
-
-//              .setCertificates(new SafeTrustManager())            //方法二：自定义信任规则，校验服务端证书
-//              .setCertificates(getAssets().open("srca.cer"))      //方法三：使用预埋证书，校验服务端证书（自签名证书）
-//              //方法四：使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）
-//               .setCertificates(getAssets().open("xxx.bks"), "123456", getAssets().open("yyy.cer"))//
-
-                    //配置https的域名匹配规则，详细看demo的初始化介绍，不需要就不要加入，使用不当会导致https握手失败
-//               .setHostnameVerifier(new SafeHostnameVerifier())
-
-                    //可以添加全局拦截器，不需要就不要加入，错误写法直接导致任何回调不执行
-//                .addInterceptor(new Interceptor() {
-//                    @Override
-//                    public Response intercept(Chain chain) throws IOException {
-//                        return chain.proceed(chain.request());
-//                    }
-//                })
-
-                    //这两行同上，不需要就不要加入
                     .addCommonHeaders(headers)  //设置全局公共头
-                    //这里是加Auth认证
                     .getOkHttpClientBuilder().authenticator(new Authenticator() {
                 @Override
                 public Request authenticate(Route route, Response response) throws IOException {
@@ -141,27 +85,27 @@ public class App extends MultiDexApplication {
                             .header("Authorization", credential)
                             .build();
                 }
-            })
-//                    .addCommonParams(params);   //设置全局公共参数
-            ;
-
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
-        initUmeng();
-    }
-
-    private void initUmeng() {
         //设置LOG开关，默认为false
         UMConfigure.setLogEnabled(true);
+        try {
+            Class<?> aClass = Class.forName("com.umeng.commonsdk.UMConfigure");
+            Field[] fs = aClass.getDeclaredFields();
+            for (Field f:fs){
+                Log.e("xxxxxx","ff="+f.getName()+"   "+f.getType().getName());
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
-       /*UMConfigure.init(App.this, "5a13e4fbf29d982a16000037", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
-                "38c62f307e5bf45492df19e86ddc4dbb");*/
+        UMConfigure.init(this, "5afa51818f4a9d296100014b", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
+                "38c62f307e5bf45492df19e86ddc4dbb");
         //PushSDK初始化(如使用推送SDK，必须调用此方法)
         initUpush();
     }
-
-
     private void initUpush() {
         PushAgent mPushAgent = PushAgent.getInstance(this);
         handler = new Handler(getMainLooper());
@@ -297,12 +241,13 @@ public class App extends MultiDexApplication {
         //MeizuRegister.register(this, MEIZU_APPID, MEIZU_APPKEY);
     }
 
-
     {
         PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
         //豆瓣RENREN平台目前只能在服务器端配置
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+
     }
+
 
 }

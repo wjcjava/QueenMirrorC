@@ -14,7 +14,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-
 /**
  * 到店付款
  */

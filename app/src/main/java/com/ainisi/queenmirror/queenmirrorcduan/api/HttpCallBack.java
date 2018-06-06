@@ -1,5 +1,7 @@
 package com.ainisi.queenmirror.queenmirrorcduan.api;
 
+import com.google.zxing.WriterException;
+
 /**
  * 作者： jl
  *
@@ -12,7 +14,7 @@ public interface HttpCallBack {
      * @param action
      * @param res
      */
-    void onSuccess(int action, String res);
+    void onSuccess(int action, String res) throws WriterException;
 
     /**
      * 是否显示对话框

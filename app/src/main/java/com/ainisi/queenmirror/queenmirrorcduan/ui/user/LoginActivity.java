@@ -26,10 +26,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
-import com.umeng.socialize.UMAuthListener;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -126,12 +122,12 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                 }
                 break;
             case R.id.user_reg_qq_login_view:
-                UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.QQ, authListener);
+              //  UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.QQ, authListener);
                 loginFlag = "2";
                 break;
 
             case R.id.user_reg_wechat_login_view:
-                UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.WEIXIN, authListener);
+                //UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.WEIXIN, authListener);
                 loginFlag = "1";
                 break;
         }
@@ -231,7 +227,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
 
     }
 
-    UMAuthListener authListener = new UMAuthListener() {
+    /*UMAuthListener authListener = new UMAuthListener() {
         @Override
         public void onStart(SHARE_MEDIA platform) {
         }
@@ -290,7 +286,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
         public void onCancel(SHARE_MEDIA platform, int action) {
             T.show("取消了");
         }
-    };
+    };*/
 
     /**
      * 第三方登录OpenId检验
@@ -306,8 +302,6 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode,resultCode,data);
-
-
+      //  UMShareAPI.get(this).onActivityResult(requestCode,resultCode,data);
     }
 }

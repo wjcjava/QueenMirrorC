@@ -143,4 +143,16 @@ public interface ACTION {
 
     int AliPayAfterRefresh = 0x138;//支付宝支付后调用
 
+    int GETZXING = 0x139;//获取二维码内容
+
+    int CONFIMSERVICE = 0x140;//完成服务
+
+    int GETMINEMODOU = 0x141;//获取我的魔豆余额
+
+    int GETMINEMODOUBEAN = 0x142;//获取我的魔豆列表
+
+    int GETMONTHMODOU = 0x143;//魔豆按月支出收入
+
+    int COMMENTPRO = 0x144;//商品评价
+
 }

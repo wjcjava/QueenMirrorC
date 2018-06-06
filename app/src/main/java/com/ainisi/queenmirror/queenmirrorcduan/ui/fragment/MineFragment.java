@@ -12,6 +12,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.MoDouBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.NewsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MondelActivity;
@@ -34,6 +35,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.MineQueenActivit
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.PortraitActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.LoginActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -56,8 +58,11 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
     TextView tv_mine_uername;
     @Bind(R.id.img_information)
     ImageView img_information;
+    @Bind(R.id.tv_mine_modou)
+    TextView tv_mine_modou;
     boolean isLogin = false;
     private String service_tel = "120";
+    int moDou = 0;
 
     @Override
     protected int getLayoutResource() {
@@ -82,13 +87,24 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
          * 获取新消息提示
          */
         // getNewNewsData();
+
+        getMineModouData();
+    }
+
+    /**
+     * 获取我的魔豆数据
+     */
+    private void getMineModouData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("custId", SP.get(getActivity(), SpContent.UserId, "") + "");
+        HttpUtils.doPost(ACTION.GETMINEMODOU, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     /**
      * 获取新消息提示
      */
     private void getNewNewsData() {
-        java.util.HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params = new HashMap<>();
         params.put("userId", SP.get(getActivity(), SpContent.UserId, "") + "");
         params.put("messageType", "");
         HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
@@ -286,6 +302,15 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
+            case ACTION.GETMINEMODOU:
+                MoDouBean moDouBean = GsonUtil.toObj(res,MoDouBean.class);
+                if(moDouBean.isSuccess()){
+                    moDou = moDouBean.getBody().getAnsMemberBasic().getCardBalance();
+                    tv_mine_modou.setText(moDou + "个");
+                }else{
+                    T.show(moDouBean.getMsg());
+                }
+                break;
             case ACTION.GETNEWNEWS:
                 NewsBean newsBean = GsonUtil.toObj(res, NewsBean.class);
 

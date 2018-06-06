@@ -1,15 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:background="@color/mine_back_gray"
     tools:context=".ui.mine.activity.MineGiftActivity">
     <include
         android:id="@+id/ic_title"
         layout="@layout/layout_title"/>
 
-</RelativeLayout>
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/mine_gift_yaoqing">
+            </ImageView>
+
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="邀请新用户领取魔豆下点"
+                android:textSize="@dimen/comment_12_size"
+                android:textColor="@color/alpha_85_black"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/comment_15_dip">
+            </TextView>
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="您将获得最高50魔豆"
+                android:textSize="@dimen/comment_16_size"
+                android:textColor="@color/alpha_95_black"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/comment_5_dip">
+            </TextView>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/comment_10_dip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_gift_firend"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="6dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="邀请好友"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/comment_14_size"
+                    android:background="@drawable/button_shap_queen"
+                    >
+                </TextView>
+                <TextView android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="6dp"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="邀请开店"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/comment_14_size"
+                    android:background="@drawable/button_shap_queen"
+                    >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="累计获得"
+                        android:textSize="@dimen/comment_12_size"
+                        android:textColor="@color/alpha_95_black"
+                        android:gravity="center_horizontal">
+                    </TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tv_mine_modou_number"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/comment_16_size"
+                            android:textColor="@color/alpha_95_black"
+                            android:gravity="end">
+                        </TextView>
+                        <TextView android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="魔豆"
+                            android:paddingStart="20dp"
+                            android:textSize="@dimen/comment_16_size"
+                            android:textColor="@color/alpha_95_black"
+                            android:gravity="start">
+                        </TextView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal">
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="累计邀请"
+                        android:textSize="@dimen/comment_12_size"
+                        android:textColor="@color/alpha_95_black"
+                        android:gravity="center_horizontal">
+                    </TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/comment_16_size"
+                            android:textColor="@color/alpha_95_black"
+                            android:gravity="end">
+                        </TextView>
+                        <TextView android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="人"
+                            android:paddingStart="20dp"
+                            android:textSize="@dimen/comment_16_size"
+                            android:textColor="@color/alpha_95_black"
+                            android:gravity="start">
+                        </TextView>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:paddingTop="15dp"
+                android:orientation="horizontal">
+
+                <View android:layout_width="@dimen/comment_50_dip"
+                    android:layout_height="0.5dp"
+                    android:background="@color/alpha_55_black">
+                </View>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动规则"
+                    android:gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:textSize="@dimen/comment_16_size"
+                    android:textColor="@color/alpha_95_black">
+                </TextView>
+                <View android:layout_width="@dimen/comment_50_dip"
+                    android:layout_height="0.5dp"
+                    android:background="@color/alpha_55_black">
+                </View>
+            </LinearLayout>
+
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.邀请好友成为女王魔镜新用户，好友将领取您送出的魔豆，并在1个月内完成支付10元以上的在线支付订单且无退款，无论是否使用领取的魔豆，您均可以获得最高50魔豆的奖励。
+\n2.奖励的魔豆会在邀请成功后的24小时内发放入您的账号，您可在女王魔镜APP-我的-女王卡中查看。
+\n3.您邀请的好友必须是女王魔镜新用户，同一手机号、同一设备、同一支付账号视为同一用户。
+\n4.如有其它疑问请咨询女王魔镜客服。"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:paddingTop="@dimen/comment_10_dip"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="@dimen/comment_13_size"
+                android:textColor="@color/alpha_95_black"
+                android:gravity="start">
+            </TextView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

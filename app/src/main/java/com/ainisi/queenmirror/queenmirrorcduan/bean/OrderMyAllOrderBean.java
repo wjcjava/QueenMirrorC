@@ -456,7 +456,7 @@ public class OrderMyAllOrderBean implements Serializable{
                      * detailsStatusLabel : null
                      */
 
-                    private Object id;
+                    private String id;
                     private boolean isNewRecord;
                     private Object remarks;
                     private Object createDate;
@@ -467,11 +467,11 @@ public class OrderMyAllOrderBean implements Serializable{
                     private Object ansShopBasic;
                     private Object detailsStatusLabel;
 
-                    public Object getId() {
+                    public String getId() {
                         return id;
                     }
 
-                    public void setId(Object id) {
+                    public void setId(String id) {
                         this.id = id;
                     }
 
@@ -557,7 +557,7 @@ public class OrderMyAllOrderBean implements Serializable{
                          * cpAmount : null
                          * afterAmount : null
                          */
-
+                        private String id;
                         private String goodsId;
                         private String goodsName;
                         private String unitPrice;
@@ -565,6 +565,14 @@ public class OrderMyAllOrderBean implements Serializable{
                         private String sumAmount;
                         private Object cpAmount;
                         private Object afterAmount;
+
+                        public String getId() {
+                            return id;
+                        }
+
+                        public void setId(String id) {
+                            this.id = id;
+                        }
 
                         public String getGoodsId() {
                             return goodsId;

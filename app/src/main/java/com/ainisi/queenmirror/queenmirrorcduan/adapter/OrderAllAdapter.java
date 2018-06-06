@@ -16,8 +16,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SubmitActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ArefundActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ScoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -34,6 +37,8 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
     List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean> apiOrderListBeanList = new ArrayList<>();
 
     OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean apiOrderDetailsListBean;
+
+
     double amountNum = 0;
     String shopId,orderId;
 
@@ -62,8 +67,6 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
 
                     TextView textView = helper.getView(R.id.tv_jiage);
                     String number = textView.getText().toString().substring(1,textView.getText().toString().length());
-
-                    L.e("???????    "+number);
                     Intent intent = new Intent(context, SubmitActivity.class);
                     intent.putExtra("businessIds",item.getIntfAnsOrder().getId());
                     intent.putExtra("amount",number+"");
@@ -127,7 +130,10 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     intent.putExtra("orderTime",item.getIntfAnsOrder().getOrderTime());
                     intent.putExtra("OrderHeji",amountNum+"");
                     intent.putExtra("lstBean", (Serializable)item.getIntfAnsOrder().getApiOrderDetailsList());
+                    intent.putExtra("orderId",item.getIntfAnsOrder().getId());
+                    intent.putExtra("orderState",item.getIntfAnsOrder().getOrderStatus());
                     context.startActivity(intent);
+
                 }
             });
 
@@ -167,6 +173,8 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     intent.putExtra("orderTime",item.getIntfAnsOrder().getOrderTime());
                     intent.putExtra("OrderHeji",amountNum+"");
                     intent.putExtra("lstBean", (Serializable)item.getIntfAnsOrder().getApiOrderDetailsList());
+                    intent.putExtra("orderId",item.getIntfAnsOrder().getId());
+                    intent.putExtra("orderState",item.getIntfAnsOrder().getOrderStatus());
                     context.startActivity(intent);
                 }
             });
@@ -190,6 +198,28 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                 }
             });
 
+        }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("UF")){
+            //待确认
+            helper.setText(R.id.tv_order_tuikuan,"完成服务")
+                    .setBackgroundRes(R.id.tv_order_tuikuan,R.drawable.button_shap_queen)
+                    .setTextColor(R.id.tv_order_tuikuan,context.getResources().getColor(R.color.white))
+                    .setVisible(R.id.tv_order_again,false)
+                    .setVisible(R.id.tv_order_like, false)
+                    .setText(R.id.tv_submit,"正在服务");
+            /**
+             * 这里需要添加待确认
+             */
+
+            helper.setOnClickListener(R.id.tv_order_tuikuan, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    /**
+                     * 确认服务
+                     */
+                    orderId = item.getIntfAnsOrder().getId();
+                    ConfimServiceData();
+                }
+            });
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("FN")){
             //已完成
             helper.setVisible(R.id.tv_order_tuikuan,false)
@@ -208,6 +238,12 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     /**
                      * 评价页面
                      */
+                    Intent intent = new Intent(context,ScoreActivity.class);
+                    intent.putExtra("apiOrderListBeanList",(Serializable)item.getIntfAnsOrder().getApiOrderDetailsList());
+                    intent.putExtra("shopName",item.getIntfAnsShopBasic().getShopName());
+                    intent.putExtra("shopId",item.getIntfAnsShopBasic().getId());
+                    intent.putExtra("orderId",item.getIntfAnsOrder().getId());
+                    context.startActivity(intent);
                 }
             });
 
@@ -298,6 +334,16 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
     }
 
     /**
+     * 确认服务完成
+     */
+    private void ConfimServiceData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("orderId", orderId);
+        params.put("userId", SP.get(context, SpContent.UserId,"0").toString());
+        HttpUtils.doPost(ACTION.CONFIMSERVICE, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
      * 取消订单
      */
     private void CancelOrderData() {
@@ -316,6 +362,14 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     T.show("取消成功");
                 }else{
                     T.show(successBean.getMsg());
+                }
+                break;
+            case ACTION.CONFIMSERVICE:
+                SuccessBean successBeans = GsonUtil.toObj(res,SuccessBean.class);
+                if (successBeans.isSuccess()){
+                    T.show("确认成功");
+                }else{
+                    T.show(successBeans.getMsg());
                 }
                 break;
         }

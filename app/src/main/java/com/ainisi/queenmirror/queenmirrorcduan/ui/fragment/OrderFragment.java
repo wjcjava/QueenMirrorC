@@ -94,7 +94,7 @@ public class OrderFragment extends BaseFragment {
             pagerlist.add(new WholeFragment().newInstance(""));
             pagerlist.add(new WholeFragment().newInstance("UP"));
             pagerlist.add(new WholeFragment().newInstance("UT"));
-            pagerlist.add(new WholeFragment().newInstance("US"));
+            pagerlist.add(new WholeFragment().newInstance("FT,US,UF"));
             pagerlist.add(new WholeFragment().newInstance("UC"));
             pagerlist.add(new WholeFragment().newInstance("FN"));
             pagerlist.add(new RefundFragment());
