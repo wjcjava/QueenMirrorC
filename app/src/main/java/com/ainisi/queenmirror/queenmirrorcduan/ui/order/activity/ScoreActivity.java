@@ -20,10 +20,13 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentShopBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopProductListBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.orderadapter.ScoreAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomRatingBar;
 import com.google.gson.Gson;
 import com.lzy.okgo.cache.CacheMode;
@@ -138,9 +141,7 @@ public class ScoreActivity extends BaseNewActivity implements HttpCallBack {
                     }else{
                         isCheck = "0";
                     }
-
                     shopProductListBean.setGoodsId(apiOrderListBeanList.get(i).getIntfAnsOrderDetails().getGoodsId());
-                    L.e("%%%%%%%%%  "+apiOrderListBeanList.get(i).getIntfAnsOrderDetails().getId());
                     shopProductListBean.setDetailId(apiOrderListBeanList.get(i).getIntfAnsOrderDetails().getId());
                     shopProductListBean.setIfMatch("");
                     shopProductListBean.setEmployeeAbility("");
@@ -149,16 +150,12 @@ public class ScoreActivity extends BaseNewActivity implements HttpCallBack {
                     shopProductListBean.setIfAnon(isCheck);
                     shopProductListBean.setApprLevel(new_list_score+"");
 
-
                     shopProductListBeans.add(shopProductListBean);
                 }
-
                 com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L.e("%%%%%%%%     "+et_score_order_list+"    "+new_list_score);
-
                 Gson gson = new Gson();
                 String str = gson.toJson(shopProductListBeans);
                 String str1 = gson.toJson(commentShopBean);
-
                 HashMap<String, String> params = new HashMap<>();
                 params.put("shopId", shopId);
                 params.put("goodsInfo", str);
@@ -174,8 +171,12 @@ public class ScoreActivity extends BaseNewActivity implements HttpCallBack {
     public void onSuccess(int action, String res) {
         switch (action){
             case ACTION.COMMENTPRO:
-
-                L.e("~~~~~~~~~~~~~~~~   "+res);
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    T.show("已完成评价");
+                }else{
+                    T.show(successBean.getMsg());
+                }
                 break;
         }
     }
