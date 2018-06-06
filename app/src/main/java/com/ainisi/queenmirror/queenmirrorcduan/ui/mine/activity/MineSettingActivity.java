@@ -51,7 +51,8 @@ public class MineSettingActivity extends BaseNewActivity {
                 break;
             //修改支付密码
             case R.id.layout_pay_modify:
-                Intent intent=new Intent(this,ModifyPayActivity.class);
+                Intent intent=new Intent(this,ResetPayPassActivity.class);
+                intent.putExtra("paymodify",payModify.getText().toString());
                 startActivity(intent);
                 break;
             //找回支付密码

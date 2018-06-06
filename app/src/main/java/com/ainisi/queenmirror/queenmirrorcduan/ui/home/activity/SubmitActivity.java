@@ -8,7 +8,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -27,9 +27,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.alipay.sdk.app.PayTask;
 import com.lzy.okgo.cache.CacheMode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -39,26 +37,22 @@ import butterknife.OnClick;
  * 我的订单
  */
 public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
-    @Bind(R.id.img_wechat_unpayment)
-    ImageView wcunpayment;
-    @Bind(R.id.img_queen_unpayment)
-    ImageView queenunpayment;
-    @Bind(R.id.img_wechat_payment)
-    ImageView wcpayment;
-    @Bind(R.id.img_queen_payment)
-    ImageView queenpayment;
-    @Bind(R.id.img_alipay_unalipay)
-    ImageView unalipay;
-    @Bind(R.id.img_wechat_alipay)
-    ImageView alipay;
     @Bind(R.id.tv_submit_price)
     TextView tv_submit_price;
     @Bind(R.id.tv_submit_bottom_price)
     TextView tv_submit_bottom_price;
+    @Bind(R.id.check_wechat)
+    CheckBox check_wechat;
+    @Bind(R.id.check_alipay)
+    CheckBox check_alipay;
+    @Bind(R.id.check_queen)
+    CheckBox check_queen;
+    @Bind(R.id.check_balance)
+    CheckBox check_balance;
 
     String businessIds = "";
     String transId = "";
-    List<String> orderIdList = new ArrayList<>();
+
     String amount = "0",aliPayResult="";
     private static final int SDK_PAY_FLAG = 1;
 
@@ -79,7 +73,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         T.show("支付成功");
-
                         AfterPayData();
 
                     } else {
@@ -110,6 +103,71 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
         tv_submit_price.setText(amount);
         tv_submit_bottom_price.setText(amount);
 
+
+
+
+    }
+
+
+    @OnClick({R.id.title_back,R.id.check_wechat, R.id.check_alipay, R.id.check_queen, R.id.check_balance, R.id.payV2
+    })
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.title_back:
+                finish();
+                break;
+            case R.id.check_wechat:
+                if(check_wechat.isChecked()){
+                    check_alipay.setChecked(false);
+                    check_queen.setChecked(false);
+                    check_balance.setChecked(false);
+                }
+                break;
+
+            case R.id.check_alipay:
+                if(check_alipay.isChecked()){
+                    check_wechat.setChecked(false);
+                    check_queen.setChecked(false);
+                    check_balance.setChecked(false);
+                }
+
+                break;
+            case R.id.check_queen:
+                if(check_queen.isChecked()){
+                    check_alipay.setChecked(false);
+                    check_wechat.setChecked(false);
+                    check_balance.setChecked(false);
+                }
+
+                break;
+            case R.id.check_balance:
+                if(check_balance.isChecked()){
+                    check_alipay.setChecked(false);
+                    check_queen.setChecked(false);
+                    check_wechat.setChecked(false);
+                }
+
+                break;
+
+            case R.id.payV2:
+                if(check_wechat.isChecked()){
+                    T.show("微信支付（待开发）敬请期待");
+                }else if(check_alipay.isChecked()){
+                    T.show("正在跳转支付页面");
+                    getData();
+                    startPay();
+                }else if(check_queen.isChecked()){
+                    T.show("女王卡支付（待开发）敬请期待");
+                }else if(check_balance.isChecked()){
+                    T.show("余额支付（待开发）敬请期待");
+                }
+                break;
+
+        }
+
+    }
+
+    private void startPay() {
         Runnable payRunnable = new Runnable() {
 
             @Override
@@ -125,48 +183,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             }
         };
         payThread = new Thread(payRunnable);
-
-    }
-
-
-    @OnClick({R.id.img_wechat_unpayment, R.id.img_queen_unpayment, R.id.title_back, R.id.img_alipay, R.id.img_alipay_unalipay, R.id.payV2
-    })
-    public void click(View view) {
-        switch (view.getId()) {
-            case R.id.title_back:
-                finish();
-                break;
-            case R.id.img_wechat_unpayment:
-                wcpayment.setVisibility(View.VISIBLE);
-                queenpayment.setVisibility(View.GONE);
-                alipay.setVisibility(View.GONE);
-                break;
-
-            case R.id.img_queen_unpayment:
-                queenpayment.setVisibility(View.VISIBLE);
-                alipay.setVisibility(View.GONE);
-                wcpayment.setVisibility(View.GONE);
-                break;
-            case R.id.img_alipay_unalipay:
-                alipay.setVisibility(View.VISIBLE);
-                queenpayment.setVisibility(View.GONE);
-                wcpayment.setVisibility(View.GONE);
-                break;
-            case R.id.payV2:
-                if (alipay.getVisibility() == View.VISIBLE) {
-                    getData();
-                } else if (wcpayment.getVisibility() == View.VISIBLE) {
-                    T.show("抱歉微信还在开发中");
-                } else if (queenpayment.getVisibility() == View.VISIBLE) {
-                    T.show("抱歉女王卡还在开发中");
-                }else {
-                    T.show("请选择支付方式");
-                    return;
-                }
-                break;
-
-        }
-
+        payThread.start();
     }
 
     /**

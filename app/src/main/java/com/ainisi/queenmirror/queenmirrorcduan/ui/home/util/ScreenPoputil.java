@@ -20,7 +20,7 @@ import java.util.List;
  * Created by john on 2018/6/4.
  */
 
-public class ScreenPoputil{
+public class ScreenPoputil extends PopupWindow{
 
     private View popview;
     private PopupWindow popWindow;
@@ -29,6 +29,7 @@ public class ScreenPoputil{
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
     private MerchantsAdapter merchantsAdapter;
     private String text;
+
 
 
     public ScreenPoputil(Context context) {
@@ -41,7 +42,7 @@ public class ScreenPoputil{
         this.text = text;
 
         popview = View.inflate(context, R.layout.pop_screening, null);
-        initoperation(popview, merchantsList, preferentialList);
+        initoperation(popview);
         popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
         popWindow.setContentView(popview);
         popWindow.setOutsideTouchable(true);
@@ -51,7 +52,9 @@ public class ScreenPoputil{
 
     }
 
-    private void initoperation(View popview, List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList, List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList) {
+
+
+    private void initoperation(View popview) {
         RecyclerView merchants = popview.findViewById(R.id.re_home_merchants);
         TextView cancel = popview.findViewById(R.id.tv_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -69,10 +72,7 @@ public class ScreenPoputil{
         } else if (text.equals("shopification")) {
             initAdapter(merchants);
         }
-
-
     }
-
     private void initAdapter(RecyclerView merchants) {
         RecyclerView preferential = popview.findViewById(R.id.re_home_preferential);
         merchantsAdapter = new MerchantsAdapter(R.layout.item_adapter_merchants, merchantsList);
@@ -82,6 +82,7 @@ public class ScreenPoputil{
         PreferentialAdapter preferentialAdapter = new PreferentialAdapter(preferentialList);
         preferential.setLayoutManager(new GridLayoutManager(context, 2));
         preferential.setAdapter(preferentialAdapter);
+
 
     }
 

@@ -23,6 +23,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -52,6 +54,9 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     private LoginCeshiBean ceshiBean;
     String vConfig = "";
     String nickName, headPic, openId, loginToken, where, loginFlag;
+    private String uuid;
+    private String dataTime;
+    private StringBuilder sb;
 
     @Override
     protected int getLayoutId() {
@@ -64,6 +69,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         myCountDownTimer = new MyCountDownTimer(60000, 1000);
         inidTitle();
 
+
         Intent intent = this.getIntent();
         where = intent.getStringExtra("where");
 
@@ -75,6 +81,23 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             loginFlag = intent.getStringExtra("loginFlag");
         } else {
         }
+    }
+
+    private void initKey() {
+        //随机生成的UUID
+        uuid = java.util.UUID.randomUUID().toString();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
+        //获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        dataTime=simpleDateFormat.format(date);
+
+        initPinjie();
+    }
+
+    private void initPinjie() {
+        sb = new StringBuilder();
+        sb.append("2").append(uuid).append(phoneNumber.getText().toString()).append(dataTime);
+
     }
 
     @Override
@@ -99,6 +122,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 if (TextUtils.isEmpty(phoneNumber.getText())) {
                     T.show("手机号不能为空");
                 } else {
+                    initKey();
                     initValidation();
                 }
                 break;
@@ -148,22 +172,29 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
     }
 
+    //获取验证码
     private void initValidation() {
         HashMap<String, String> params = new HashMap<>();
         params.put("telNo", phoneNumber.getText().toString().trim());
+        params.put("salt", uuid);
+        params.put("signature", MD5.md5(sb.toString()));
+        params.put("sysflag", "2");
+        params.put("frontType", "C");
+
+
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
-            case ACTION.VERIFY://获取验证码
+            case ACTION.VERIFY:
                 ceshiBean = GsonUtil.toObj(res, LoginCeshiBean.class);
                 if (ceshiBean.isSuccess()) {
                     myCountDownTimer.start();
                     vConfig = ceshiBean.getBody().getVerifyCode();
-                } else {
-                    T.show("系统出错，请稍后再试");
+                }else {
+                    T.show(ceshiBean.getMsg());
                 }
                 break;
             case ACTION.REGIST://注册

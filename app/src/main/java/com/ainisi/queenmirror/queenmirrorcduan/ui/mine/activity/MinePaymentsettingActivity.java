@@ -37,19 +37,24 @@ public class MinePaymentsettingActivity extends BaseNewActivity {
 
     private void initText() {
         settingTitle.setText(R.string.payment_setting);
-        settingTitle.setTextColor(ContextCompat.getColor(this,R.color.alpha_95_black));
+        settingTitle.setTextColor(ContextCompat.getColor(this, R.color.alpha_95_black));
     }
 
-    @OnClick({R.id.title_back,R.id.layout_setting})
+    @OnClick({R.id.title_back, R.id.layout_setting})
     public void click(View view) {
 
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
-                //设置支付密码
+            //设置支付密码
             case R.id.layout_setting:
-                startActivity(new Intent(this,ModifyPayActivity.class));
+
+                    Intent intent=new Intent(this, ModifyPayActivity.class);
+
+                    startActivity(intent);
+
+
 
                 break;
             default:

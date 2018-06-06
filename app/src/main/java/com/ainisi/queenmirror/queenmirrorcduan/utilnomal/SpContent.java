@@ -19,4 +19,6 @@ public class SpContent {
 
     public static  String TransId = "transId";
 
+    public static  String PayPassword="password";//支付密码判定
+
 }

@@ -232,7 +232,7 @@
     <string name="user_nickname">昵称</string>
     <string name="modify_payment_password">修改支付密码</string>
     <string name="back_payment_password">找回支付密码</string>
-    <string name="add_login_number">请输入登陆账号</string>
+    <string name="add_login_number">请输入登陆账号/手机号</string>
     <string name="add_login_password">请输入登陆密码</string>
     <string name="add_pay_password">请输入支付密码</string>
     <string name="subscribe">在线预约</string>
@@ -244,6 +244,10 @@
     <string name="Nails">美甲</string>
     <string name="pricetobuy">原价购买</string>
     <string name="balance_payment">余额支付</string>
+    <string name="paypass">支付密码</string>
+    <string name="currentpaypass">当前密码</string>
+    <string name="add_currentpay_password">请输入当前密码</string>
+    <string name="newpaypass">新密码</string>
 
 
 </resources>

@@ -24,6 +24,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -49,6 +51,9 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
     private MyCountDownTimer myCountDownTimer;
     private LoginCeshiBean ceshiBean;
     private String vConfig;
+    private String uuid;
+    private String dataTime;
+    private StringBuilder sb;
 
     @Override
     protected int getLayoutId() {
@@ -81,8 +86,9 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
                 if (TextUtils.isEmpty(phoneNumber.getText().toString().trim())) {
                     T.show("手机号不能为空");
                 } else {
+                    initKey();
                     initValidation();
-                    myCountDownTimer.start();
+
                 }
 
                 break;
@@ -109,7 +115,6 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
                     T.show(SP.get(this, SpContent.UserName,""));
                     HashMap<String, String> parames = new HashMap<>();
                     parames.put("cellPhone",phoneNumber.getText().toString().trim());
-                    parames.put("verifyCode",vConfig);
                     parames.put("verifyCodeCust",etvalidation.getText().toString().trim());
                     parames.put("userPass", MD5.md5(passWord.getText().toString()+"MYN888"));
                     HttpUtils.doPost(ACTION.FORGOTPASSWORD,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
@@ -119,10 +124,29 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
 
 
     }
+    private void initKey() {
+        //随机生成的UUID
+        uuid = java.util.UUID.randomUUID().toString();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
+        //获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        dataTime =simpleDateFormat.format(date);
 
+        initPinjie();
+    }
+
+    private void initPinjie() {
+        sb = new StringBuilder();
+        sb.append("2").append(uuid).append(phoneNumber.getText().toString()).append(dataTime);
+
+    }
     private void initValidation() {
         HashMap<String, String> params = new HashMap<>();
         params.put("telNo", phoneNumber.getText().toString().trim());
+        params.put("salt", uuid);
+        params.put("signature", MD5.md5(sb.toString()));
+        params.put("sysflag", "2");
+        params.put("frontType", "C");
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -131,10 +155,9 @@ public class ForgetcipherActivity extends BaseNewActivity implements HttpCallBac
         switch (action) {
             case ACTION.VERIFY:
                 ceshiBean = GsonUtil.toObj(res, LoginCeshiBean.class);
-
                 if (ceshiBean.isSuccess()) {
                     myCountDownTimer.start();
-                    vConfig = ceshiBean.getBody().getVerifyCode();
+
                 } else {
                     T.show("系统出错，请稍后再试");
                 }

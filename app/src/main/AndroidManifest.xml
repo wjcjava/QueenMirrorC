@@ -250,16 +250,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
         <activity
-            android:name=".ui.mine.activity.MineFeedbackActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Transparent" />
-        <activity
-            android:name=".ui.mine.activity.MineAskproblemActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Transparent" />
-        <activity
             android:name=".ui.mine.activity.MineAddcartActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -457,6 +447,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 
 
+        <activity android:name=".ui.shop.activity.PayInShopActivity" />
+        <activity android:name=".ui.mine.activity.AmentPayActivity" />
+        <activity android:name=".ui.mine.activity.ResetPayPassActivity"></activity>
     </application>
 
 </manifest>

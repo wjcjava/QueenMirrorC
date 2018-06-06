@@ -45,35 +45,47 @@ public interface ACTION {
 
     int SHOPCARTADD=0x021;//加入购物车
 
-    int MYCOMMENTS=0x22;//我的评论
+    int MYCOMMENTS=0x022;//我的评论
 
-    int SHOPDISCOUN=0x23;//商家优惠券
+    int SHOPDISCOUN=0x023;//商家优惠券
 
-    int RECEIVEDISCOUN=0X24;//商家所领取优惠券
+    int RECEIVEDISCOUN=0X024;//商家所领取优惠券
 
-    int LISTFOEUSE=0x25;//可以优惠券列表（订单）
+    int LISTFOEUSE=0x025;//可以优惠券列表（订单）
 
-    int QUEENDETAILS=0x26;//女王卡详情
+    int QUEENDETAILS=0x026;//女王卡详情
 
-    int FORGOTPASSWORD=0x27;//忘记密码
+    int FORGOTPASSWORD=0x027;//忘记密码
 
-    int PHONECHECK=0x28;//确认手机号是否已注册
+    int PHONECHECK=0x028;//确认手机号是否已注册
 
-    int COUPONGET=0x29;//优惠券领取
+    int COUPONGET=0x029;//优惠券领取
 
-    int USERBIND=0x30;//客户端绑定第三方账号
+    int USERBIND=0x030;//客户端绑定第三方账号
 
-    int PROBLEMLIST=0x31;//常见问题分类
+    int PROBLEMLIST=0x031;//常见问题分类
 
-    int PROBLEMDATA=0X32;
+    int PROBLEMDATA=0X032;
 
-    int SPELLDETAILS=0x33;//拼单详情
+    int SPELLDETAILS=0x033;//拼单详情
 
-    int SPELLCOLLECTION=0x34;//收藏拼单
+    int SPELLCOLLECTION=0x034;//收藏拼单
 
-    int MERCHANTACTIVITY=0x35;//商家活动（首页筛选）
+    int MERCHANTACTIVITY=0x035;//商家活动（首页筛选）
 
-    int MERCHANTFEATURES=0x36;//商家特色（首页筛选）
+    int MERCHANTFEATURES=0x036;//商家特色（首页筛选）
+
+    int SETPAYPASS=0x37;//设置支付密码（我的余额）
+
+    int AMENTPAY=0x38;//修改支付密码（我的余额）
+
+    int FORGOTPAYPASS = 0x39;//忘记支付密码（我的余额）
+
+    int TOUCHBALANCE=0X40;//余额明细
+
+    int MYWALLIET=0x041;//我的余额
+
+    int WHETHERPASS=0x042;//判断是否有支付密码
 
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 

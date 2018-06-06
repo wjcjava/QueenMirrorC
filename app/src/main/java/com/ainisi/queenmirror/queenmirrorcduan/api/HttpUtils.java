@@ -557,11 +557,41 @@ public class HttpUtils {
                 break;
             //商家活动（首页筛选）
             case ACTION.MERCHANTACTIVITY:
-                actionUrl=UrlConstants.MERCHANTACTIVITY;
+                actionUrl = UrlConstants.MERCHANTACTIVITY;
                 break;
             //商家特色（首页筛选）
             case ACTION.MERCHANTFEATURES:
-                actionUrl=UrlConstants.MERCHANTFEATURES;
+                actionUrl = UrlConstants.MERCHANTFEATURES;
+                break;
+            //设置支付密码（我的余额）
+            case ACTION.SETPAYPASS:
+                actionUrl = UrlConstants.SETPAYPASS;
+                break;
+            //修改支付密码（我的余额）
+            case ACTION.AMENTPAY:
+                /**
+                 * 接口在调试中。。。(UI界面暂时无法对应接口所传数据)
+                 */
+                actionUrl = UrlConstants.AMENTPAY;
+                break;
+            //忘记支付密码（我的余额）
+            case ACTION.FORGOTPAYPASS:
+                /**
+                 * 接口在调试中。。。(UI界面暂时无法对应接口所传数据)
+                 */
+                actionUrl = UrlConstants.FORGOTPAYPASS;
+                break;
+            //余额明细
+            case ACTION.TOUCHBALANCE:
+                actionUrl = UrlConstants.TOUCHBALANCE;
+                break;
+            //我的余额
+            case ACTION.MYWALLIET:
+                actionUrl = UrlConstants.MYWALLIET;
+                break;
+            //判断是否有支付密码
+            case ACTION.WHETHERPASS:
+                actionUrl = UrlConstants.WHETHERPASS;
                 break;
             case ACTION.GETZXING:
                 actionUrl = UrlConstants.GETZXING;
@@ -569,7 +599,7 @@ public class HttpUtils {
             case ACTION.CONFIMSERVICE:
                 actionUrl = UrlConstants.CONFIMSERVICE;
                 break;
-                //获取我的魔豆余额
+            //获取我的魔豆余额
             case ACTION.GETMINEMODOU:
                 actionUrl = UrlConstants.GETMINEMODOU;
                 break;

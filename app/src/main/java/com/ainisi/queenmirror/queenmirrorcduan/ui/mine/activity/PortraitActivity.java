@@ -73,9 +73,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                 Glide.with(PortraitActivity.this).load(outputUri).into(iv_portrait_head);
             }
         }, false);//true裁剪，false不裁剪
-
         //Glide.with(this).load(SP.get(this,SpContent.UserName,"")).into(iv_portrait_head);
-
     }
 
     @Override

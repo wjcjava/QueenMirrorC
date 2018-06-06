@@ -24,11 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_50_dip"
         android:layout_below="@id/ic_title"
-        android:layout_marginEnd="@dimen/comment_20_dip"
         android:layout_toRightOf="@id/tv_system_phone"
         android:background="@color/white"
-        android:gravity="center|right"
         android:hint="@string/add_login_number"
+        android:layout_marginStart="@dimen/comment_10_dip"
         android:inputType="phone"
         android:maxLength="11"
         android:textSize="@dimen/comment_14_size" />
@@ -43,7 +42,7 @@
         android:background="@color/alpha_20_black" />
 
     <TextView
-        android:id="@+id/tv_system_verification"
+        android:id="@+id/tv_system_loginpass"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/comment_50_dip"
         android:layout_below="@id/v1_pass"
@@ -53,23 +52,74 @@
         android:textSize="@dimen/comment_14_size" />
 
     <EditText
-        android:id="@+id/et_system_verification"
+        android:id="@+id/et_system_loginpass"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_50_dip"
         android:layout_below="@+id/v1_pass"
-        android:layout_marginEnd="@dimen/comment_20_dip"
-        android:layout_toRightOf="@id/tv_system_verification"
+        android:layout_toRightOf="@id/tv_system_loginpass"
         android:background="@color/white"
-        android:gravity="center|right"
+        android:layout_marginStart="@dimen/comment_10_dip"
+        android:inputType="numberPassword|number"
         android:hint="@string/add_login_password"
-        android:inputType="number"
         android:textSize="@dimen/comment_14_size" />
 
     <View
         android:id="@+id/v2_pass"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/et_system_verification"
+        android:layout_below="@id/tv_system_loginpass"
+        android:layout_marginLeft="@dimen/comment_20_dip"
+        android:layout_marginRight="@dimen/comment_20_dip"
+        android:background="@color/alpha_20_black" />
+
+    <TextView
+        android:id="@+id/tv_system_verification"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_50_dip"
+        android:layout_below="@id/v2_pass"
+        android:layout_marginStart="@dimen/comment_20_dip"
+        android:gravity="center"
+        android:text="@string/verification_code"
+        android:textSize="@dimen/comment_14_size" />
+
+    <EditText
+        android:id="@+id/et_system_verification"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_50_dip"
+        android:layout_below="@+id/v2_pass"
+        android:layout_toRightOf="@id/tv_system_loginpass"
+        android:background="@color/white"
+        android:layout_marginStart="@dimen/comment_10_dip"
+        android:inputType="number"
+        android:hint="@string/verification_code"
+        android:textSize="@dimen/comment_14_size" />
+    <TextView
+        android:id="@+id/tv_validation"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_50_dip"
+        android:gravity="center"
+        android:layout_below="@id/v2_pass"
+        android:layout_alignParentRight="true"
+        android:text="获取验证码"
+        android:layout_marginEnd="@dimen/comment_21_dip"
+        android:padding="5dp"
+        android:textColor="@color/gray_E7370C"
+        android:textSize="@dimen/comment_15_size" />
+    <View
+        android:layout_width="@dimen/comment_2_dip"
+        android:layout_marginTop="@dimen/comment_8_dip"
+        android:layout_below="@id/v2_pass"
+        android:layout_marginEnd="@dimen/comment_20_dip"
+        android:layout_toLeftOf="@id/tv_validation"
+        android:layout_height="@dimen/comment_38_dip"
+        android:background="@color/gray_E7370C"
+        />
+
+    <View
+        android:id="@+id/v3_pass"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_system_verification"
         android:layout_marginLeft="@dimen/comment_20_dip"
         android:layout_marginRight="@dimen/comment_20_dip"
         android:background="@color/alpha_20_black" />
@@ -77,18 +127,18 @@
         android:id="@+id/tv_system_password"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/comment_50_dip"
-        android:layout_below="@id/v2_pass"
+        android:layout_below="@id/v3_pass"
         android:layout_marginStart="@dimen/comment_20_dip"
         android:gravity="center"
-        android:text="支付密码"
+        android:text="@string/paypass"
         android:textSize="@dimen/comment_14_size" />
     <EditText
-        android:id="@+id/et_system_password"
+        android:id="@+id/et_pay_password"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_50_dip"
-        android:layout_below="@+id/v2_pass"
-        android:gravity="center|right"
-        android:layout_marginEnd="@dimen/comment_20_dip"
+        android:layout_below="@+id/v3_pass"
+        android:layout_marginStart="@dimen/comment_10_dip"
+
         android:layout_toRightOf="@id/tv_system_password"
         android:background="@color/white"
         android:hint="@string/add_pay_password"
@@ -96,10 +146,11 @@
         android:textSize="@dimen/comment_14_size" />
     <TextView
         android:id="@+id/text"
+
         android:layout_marginTop="@dimen/comment_10_dip"
         android:layout_marginStart="@dimen/comment_20_dip"
         android:text="该密码用于银行卡，女王卡。钱包支付"
-        android:layout_below="@id/et_system_password"
+        android:layout_below="@id/et_pay_password"
         android:layout_width="match_parent"
         android:textColor="@color/alpha_30_black"
         android:layout_height="wrap_content"
