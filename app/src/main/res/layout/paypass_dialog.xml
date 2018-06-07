@@ -35,7 +35,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="@dimen/comment_15_size"
                 android:layout_width="@dimen/comment_202_dip"
-                android:layout_height="@dimen/comment_34_dip"
+                android:layout_height="@dimen/comment_38_dip"
                 android:text="设置支付密码"
                 android:textColor="@color/white"
                 android:gravity="center"

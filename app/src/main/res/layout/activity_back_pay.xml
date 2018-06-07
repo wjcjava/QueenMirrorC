@@ -62,7 +62,7 @@
         android:layout_toRightOf="@id/tv_back_loginpass"
         android:background="@color/white"
         android:hint="@string/add_login_password"
-        android:inputType="numberPassword|number"
+        android:inputType="textPassword"
         android:textSize="@dimen/comment_14_size" />
 
     <View

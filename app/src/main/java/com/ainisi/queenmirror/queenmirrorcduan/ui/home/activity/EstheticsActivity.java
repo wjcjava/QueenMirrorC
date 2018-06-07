@@ -2,6 +2,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,27 +15,24 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.EstheticsAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.FullShortAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.MerchantsAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FulldistanFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullsalesFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullscreenFragment;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment.FullshortFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollViewPager;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.ViewPager;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
+import com.qbw.log.XLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +44,7 @@ import butterknife.OnClick;
 /**
  * 美学汇（美甲美手）
  */
-public class EstheticsActivity extends BaseActivity implements HttpCallBack {
+public class EstheticsActivity extends BaseActivity implements HttpCallBack,RefreshLoadMoreLayout.CallBack {
     @Bind(R.id.full_rb_sort)
     TextView hSort;
     @Bind(R.id.re_recommendable_projects)
@@ -61,18 +59,14 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     ImageView ivsort;
     @Bind(R.id.iv_sort1)
     ImageView ivsort1;
-    @Bind(R.id.pager_home_full)
-    NoScrollViewPager fullpager;
+//    @Bind(R.id.pager_home_full)
+//    NoScrollViewPager fullpager;
     @Bind(R.id.newtitle_title)
     TextView newtitle_title;
-    //综合排序
-    FullshortFragment sortFragment = new FullshortFragment();
-    //销量最高
-    FullsalesFragment salesFragment = new FullsalesFragment();
-    //距离最近
-    FulldistanFragment distanceFragment = new FulldistanFragment();
-    //筛选
-    FullscreenFragment screenFragment = new FullscreenFragment();
+    @Bind(R.id.iv_distance)
+    ImageView iv_distance;
+    @Bind(R.id.iv_distance1)
+    ImageView iv_distance1;
     private View popview1;
     private PopupWindow pop;
     private List<Fragment> pagerList = new ArrayList<>();
@@ -82,12 +76,16 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     String shop_name, categoryId;
     int pageNumber = 1;
     EstheticsAdapter sortAdapter;
-    private View popview;
-    private PopupWindow popWindow;
+
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
-    private MerchantsAdapter merchantsAdapter;
 
+    @Bind(R.id.full_sore_recycler)
+    RecyclerView recycler;
+    List<ClassificationBean.BodyBean.ShopListDataBean> sortlist = new ArrayList<>();
+    private Handler handler = new Handler();
+    @Bind(R.id.rlm)
+    RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     @Override
     public int getLayoutId() {
         return R.layout.activity_esthetics;
@@ -95,6 +93,14 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
 
     @Override
     public void initPresenter() {
+        mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
+                .canLoadMore(true)
+                .autoLoadMore()
+
+                .showLastRefreshTime(
+                        RefreshLoadMoreLayout.class,
+                        "yyyy-MM-dd")
+                .multiTask());
     }
 
     @Override
@@ -140,6 +146,25 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
                     T.show(preferentialBean.getMsg());
                 }
                 break;
+            case ACTION.CLASSIFICATION:
+                ClassificationBean classificationBean = GsonUtil.toObj(res, ClassificationBean.class);
+
+                if (classificationBean.isSuccess()) {
+                    sortlist = classificationBean.getBody().getShopListData();
+
+                    FullShortAdapter sortAdapter = new FullShortAdapter(this, R.layout.item_shortrecycler, sortlist);
+                    recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                    recycler.setAdapter(sortAdapter);
+                    sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            startActivity(new Intent(EstheticsActivity.this, WorkRoomDetailActivity.class));
+                        }
+                    });
+
+                } else {
+                    T.show(classificationBean.getMsg());
+                }
         }
     }
 
@@ -151,10 +176,21 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
         categoryId = intent.getStringExtra("categoryId");
         getTuijianData();
         initDate();
-        initfragment();
+
         inithttp();
+        inithttpshop();
     }
 
+    private void inithttpshop() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("pageNumber", "1");
+        params.put("contentByTitle", "");
+        params.put("categoryId", "0");
+        params.put("pageSize", "10");
+        params.put("shopCate", "1");
+        HttpUtils.doPost(ACTION.CLASSIFICATION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+
+    }
     /**
      * 获取推荐好店的数据
      */
@@ -166,6 +202,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
         hashMap.put("shopCate", "1");
         HttpUtils.doPost(ACTION.MERCHANTSLIST, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
         parames.put("", "");
@@ -173,15 +210,6 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
         HttpUtils.doPost(ACTION.MERCHANTACTIVITY, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
         //商家特色（筛选）
         HttpUtils.doPost(ACTION.MERCHANTFEATURES, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-    }
-    private void initfragment() {
-        pagerList.add(sortFragment);
-        pagerList.add(salesFragment);
-        pagerList.add(distanceFragment);
-        pagerList.add(screenFragment);
-        ViewPager pager = new ViewPager(getSupportFragmentManager(), pagerList, null);
-        fullpager.setScanScroll(true);
-        fullpager.setAdapter(pager);
     }
 
     private void initDate() {
@@ -197,6 +225,8 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
             public void onDismiss() {
                 ivsort.setVisibility(View.VISIBLE);
                 ivsort1.setVisibility(View.GONE);
+                iv_distance.setVisibility(View.VISIBLE);
+                iv_distance1.setVisibility(View.GONE);
             }
         });
         pop.dismiss();
@@ -222,8 +252,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     }
 
     @OnClick({R.id.ed_keyword, R.id.iv_back, R.id.full_rb_sort, R.id.full_rb_sales,
-            R.id.full_rb_distance, R.id.full_rb_screen, R.id.iv_sort, R.id.iv_sort1
-            , R.id.tv_more})
+            R.id.full_rb_distance, R.id.full_rb_screen, R.id.tv_more})
     public void click(View view) {
         switch (view.getId()) {
             //搜索
@@ -237,40 +266,43 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
             case R.id.tv_more:
                 startActivity(new Intent(this, RecommendedActivity.class));
                 break;
-            //综合选择
-            case R.id.iv_sort:
-                ivsort.setVisibility(View.GONE);
-                ivsort1.setVisibility(View.VISIBLE);
-                pop.showAsDropDown(hSort);
-                break;
-            case R.id.iv_sort1:
-                pop.dismiss();
-                ivsort.setVisibility(View.VISIBLE);
-                ivsort1.setVisibility(View.GONE);
-                break;
             //综合排序
             case R.id.full_rb_sort:
-                fullpager.setCurrentItem(0);
+                ivsort.setVisibility(View.GONE);
+                ivsort1.setVisibility(View.VISIBLE);
+                colorText(hscreen,hSales,hDistance,hSort);
+                pop.showAsDropDown(hSort);
+
                 break;
             //销量最高
             case R.id.full_rb_sales:
-                fullpager.setCurrentItem(1);
+                colorText(hscreen,hSort,hDistance,hSales);
+
                 break;
             //距离最近
             case R.id.full_rb_distance:
-                fullpager.setCurrentItem(2);
+                iv_distance.setVisibility(View.GONE);
+                iv_distance1.setVisibility(View.VISIBLE);
+                pop.showAsDropDown(hSort);
+                colorText(hSort,hscreen,hSales,hDistance);
+
                 break;
             //筛选
             case R.id.full_rb_screen:
-
-                new ScreenPoputil(this).showscreenPop(hscreen,merchantsList,preferentialList,"esthetics");
+                colorText(hSort,hDistance,hSales,hscreen);
+                new ScreenPoputil(this).showscreenPop(hscreen, merchantsList, preferentialList, "esthetics");
                 break;
+
             default:
                 break;
-
         }
     }
-
+    private void colorText(TextView viewOne,TextView viewTwo,TextView viewStree,TextView viewfour) {
+        viewOne.setTextColor(this.getResources().getColor(R.color.alpha_55_black));
+        viewTwo.setTextColor(this.getResources().getColor(R.color.alpha_55_black));
+        viewStree.setTextColor(this.getResources().getColor(R.color.alpha_55_black));
+        viewfour.setTextColor(this.getResources().getColor(R.color.alpha_violet01));
+    }
     @Override
     public void showLoadingDialog() {
 
@@ -279,5 +311,31 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack {
     @Override
     public void showErrorMessage(String s) {
 
+    }
+
+    @Override
+    public void onRefresh() {
+        XLog.v("onRefresh");
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                T.show("下拉成功");
+
+                mRefreshLoadMoreLayout.stopRefresh();
+            }
+        }, 200);
+    }
+
+    @Override
+    public void onLoadMore() {
+        XLog.v("onLoadMore");
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                T.show("上拉成功");
+
+                mRefreshLoadMoreLayout.stopLoadMore();
+            }
+        }, 1000);
     }
 }

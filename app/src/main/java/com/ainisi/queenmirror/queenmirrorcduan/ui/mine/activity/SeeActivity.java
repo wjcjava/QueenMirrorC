@@ -92,12 +92,7 @@ public class SeeActivity extends BaseNewActivity {
             case R.id.title_back:
                 finish();
                 break;
-
-
-
         }
-
-
     }
     public void setIndicator(TabLayout tabs, int leftDip, int rightDip) {
         Class<?> tabLayout = tabs.getClass();
