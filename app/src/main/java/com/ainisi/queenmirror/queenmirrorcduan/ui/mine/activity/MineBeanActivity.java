@@ -84,7 +84,6 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack {
         }else{
             months = ""+ month;
         }
-        L.e("###########     " + year+months);
 
         HashMap<String, String> params = new HashMap<>();
         params.put("searchMonth", year + months);
@@ -142,13 +141,14 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack {
         switch (action){
             //按月获取魔豆收入支出
             case ACTION.GETMONTHMODOU:
+                L.e("res  "+res);
 
                 MoDouBeanOne moDouBeanOne = GsonUtil.toObj(res,MoDouBeanOne.class);
 
                 if(moDouBeanOne.isSuccess()){
-                    tv_mine_bean_zhichu.setText(moDouBeanOne.getBody().getPointsChargeSumByMonth().get(1).getChargePoints());
+                    tv_mine_bean_zhichu.setText(moDouBeanOne.getBody().getPointsChargeSumByMonth().get(1).getChargePoints()+"");
 
-                    tv_mine_bean_shouru.setText(moDouBeanOne.getBody().getPointsChargeSumByMonth().get(0).getChargePoints());
+                    tv_mine_bean_shouru.setText(moDouBeanOne.getBody().getPointsChargeSumByMonth().get(0).getChargePoints()+"");
                 }else{
                     T.show(moDouBeanOne.getMsg());
                 }

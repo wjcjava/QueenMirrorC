@@ -161,7 +161,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
                 hight = i1;
-                if (i1 >= 1180) {
+                if (i1 >= 1150) {
                     layout_stick_header.setVisibility(View.GONE);
                     layout_stick_header_main.setVisibility(View.VISIBLE);
                 } else {
@@ -197,7 +197,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private void doFirstData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("pageNumber", pageNumber + "");
-        params.put("contentByTitle", "");//画面检索输入框输入的内容
+        params.put("contentByTitle", "");
         params.put("pageSize", "10");
         params.put("shopCate", "2");
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
@@ -524,13 +524,12 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case ACTION.SHOPLIST:
                 shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
                 if (shopListHomeBean.isSuccess()) {
-                    if (shopListHomeBean.getBody().getShopList().size() > 2) {
+                    if (shopListHomeBean.getBody().getShopList().size() > 0) {
                         HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "shop");
                         shop_gridView.setAdapter(gridViewAdapter);
                     } else {
                         shopData.setVisibility(View.VISIBLE);
                     }
-
                 } else {
                     T.show(classificationBean.getMsg());
                 }
@@ -543,7 +542,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 } else {
                     T.show(merchantsBean.getMsg());
                 }
-
                 break;
                 //特色筛选
             case ACTION.MERCHANTFEATURES:

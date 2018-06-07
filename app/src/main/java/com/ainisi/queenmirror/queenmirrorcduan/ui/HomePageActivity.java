@@ -1,5 +1,6 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,6 +15,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MasterFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.MineFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.OrderFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.fragment.ShopMallFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.LoginActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -80,7 +82,13 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
                 tabSelected(ll_category);
                 break;
             case 2:
-                tabSelected(ll_service);
+                if (SP.get(HomePageActivity.this, SpContent.isLogin, "").equals("1")) {
+                    tabSelected(ll_service);
+                } else {
+                    Intent intent = new Intent(HomePageActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+
                 break;
             case 3:
                 tabSelected(ll_daka);
@@ -115,17 +123,23 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
                 tabSelected(ll_category);
                 break;
             case R.id.ll_service:
-                viewPager.setCurrentItem(2);
-                tabSelected(ll_service);
-                break;
-            case R.id.ll_mine:
-                viewPager.setCurrentItem(4);
-                tabSelected(ll_mine);
+                if (SP.get(HomePageActivity.this, SpContent.isLogin, "").equals("1")) {
+                    viewPager.setCurrentItem(2);
+                    tabSelected(ll_service);
+                } else {
+                    Intent intent = new Intent(HomePageActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_daka:
                 viewPager.setCurrentItem(3);
                 tabSelected(ll_daka);
                 break;
+            case R.id.ll_mine:
+                viewPager.setCurrentItem(4);
+                tabSelected(ll_mine);
+                break;
+
         }
     }
 

@@ -79,7 +79,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
 
     String delIds="";
     List<ShoppingCartBean.BodyBean.ShopListBean.ApiAnsCustCartListBean> apiAnsCustCartListBeans = new ArrayList<>();
-
     public static ShoppingCartActivity instance = null;
 
     @Override
@@ -88,7 +87,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         StatusBarUtil.getStatusBarLightMode(getWindow());
         return R.layout.activity_shopping_cart;
     }
-
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
@@ -100,6 +98,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
                     T.show(successBean.getMsg());
+                    getShopCartData();
                 }else{
                     T.show(successBean.getMsg());
                 }
@@ -120,7 +119,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     @Override
     protected void initView() {
         super.initView();
-        getShopCartData();
     }
 
     /**
@@ -182,7 +180,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 int firstVisiablePostion=view.getFirstVisiblePosition();
@@ -199,7 +196,7 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
     @Override
     protected void onResume() {
         super.onResume();
-
+        getShopCartData();
     }
 
     /**
@@ -221,7 +218,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         } else {
             shoppingcatNum.setText("购物车");
         }
-
     }
 
     private void clearCart() {
@@ -229,42 +225,6 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
         actionBarEdit.setVisibility(View.GONE);
         llCart.setVisibility(View.GONE);
         empty_shopcart.setVisibility(View.VISIBLE);//这里发生过错误
-    }
-
-    /**
-     * 删除操作
-     * 1.不要边遍历边删除,容易出现数组越界的情况
-     * 2.把将要删除的对象放进相应的容器中，待遍历完，用removeAll的方式进行删除
-     */
-    List<GoodsInfo> toBeDeleteChilds;
-    List<GoodsInfo> childde;
-    private void doDelete() {
-        List<StoreInfo> toBeDeleteGroups = new ArrayList<StoreInfo>(); //待删除的组元素
-        for (int i = 0; i < groups.size(); i++) {
-            StoreInfo group = groups.get(i);
-            if (group.isChoosed()) {
-                toBeDeleteGroups.add(group);
-            }
-            toBeDeleteChilds = new ArrayList<GoodsInfo>();//待删除的子元素
-            childde = childs.get(group.getId());
-            for (int j = 0; j < childde.size(); j++) {
-                if (childde.get(j).isChoosed()) {
-                    toBeDeleteChilds.add(childde.get(j));
-                    delIds = delIds+childde.get(j).getId()+",";
-                }
-            }
-        }
-        childde.removeAll(toBeDeleteChilds);
-        groups.removeAll(toBeDeleteGroups);
-
-        /**
-         * 删除购物车数据
-         */
-        DeleteShopCartData();
-        //重新设置购物车
-        setCartNum();
-        adapter.notifyDataSetChanged();
-
     }
 
     /**
@@ -465,10 +425,47 @@ public class  ShoppingCartActivity extends BaseNewActivity implements HttpCallBa
                 }
             }
         }
-
         Intent intent = new Intent(ShoppingCartActivity.this,PurchaseActivity.class);
         intent.putExtra("cartBean", (Serializable)shoppingCartBean);
         startActivity(intent);
+    }
+
+
+    /**
+     * 删除操作
+     * 1.不要边遍历边删除,容易出现数组越界的情况
+     * 2.把将要删除的对象放进相应的容器中，待遍历完，用removeAll的方式进行删除
+     */
+    List<GoodsInfo> toBeDeleteChilds;
+    List<GoodsInfo> childde;
+    private void doDelete() {
+        delIds = "";
+        List<StoreInfo> toBeDeleteGroups = new ArrayList<StoreInfo>(); //待删除的组元素
+        for (int i = 0; i < groups.size(); i++) {
+            StoreInfo group = groups.get(i);
+            if (group.isChoosed()) {
+                toBeDeleteGroups.add(group);
+            }
+            toBeDeleteChilds = new ArrayList<GoodsInfo>();//待删除的子元素
+            childde = childs.get(group.getId());
+            for (int j = 0; j < childde.size(); j++) {
+                if (childde.get(j).isChoosed()) {
+                    toBeDeleteChilds.add(childde.get(j));
+                    L.e("*******     "+childde.get(j).getId()+"    "+j);
+                    delIds = delIds+childde.get(j).getId()+",";
+                }
+            }
+        }
+        childde.removeAll(toBeDeleteChilds);
+        groups.removeAll(toBeDeleteGroups);
+
+        /**
+         * 删除购物车数据
+         */
+        DeleteShopCartData();
+        //重新设置购物车
+        setCartNum();
+        adapter.notifyDataSetChanged();
     }
 
     /**

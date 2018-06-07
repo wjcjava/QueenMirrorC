@@ -152,7 +152,6 @@ public class ScoreActivity extends BaseNewActivity implements HttpCallBack {
 
                     shopProductListBeans.add(shopProductListBean);
                 }
-                com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L.e("%%%%%%%%     "+et_score_order_list+"    "+new_list_score);
                 Gson gson = new Gson();
                 String str = gson.toJson(shopProductListBeans);
                 String str1 = gson.toJson(commentShopBean);
@@ -174,6 +173,7 @@ public class ScoreActivity extends BaseNewActivity implements HttpCallBack {
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
                     T.show("已完成评价");
+                    finish();
                 }else{
                     T.show(successBean.getMsg());
                 }

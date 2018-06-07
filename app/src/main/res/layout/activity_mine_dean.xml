@@ -55,7 +55,7 @@
                     android:id="@+id/tv_mine_bean_zhichu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100"
+                    android:text="0"
                     android:textSize="@dimen/comment_24_size"
                     android:gravity="center"
                     android:textColor="@color/un_press_color" />
@@ -84,7 +84,7 @@
                     android:id="@+id/tv_mine_bean_shouru"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100"
+                    android:text="0"
                     android:textSize="@dimen/comment_24_size"
                     android:gravity="center"
                     android:textColor="@color/un_press_color" />

@@ -46,12 +46,6 @@ public class OrderFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        if (SP.get(getActivity(), SpContent.isLogin, "").equals("1")) {
-
-        } else {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
-        }
     }
 
     @Override

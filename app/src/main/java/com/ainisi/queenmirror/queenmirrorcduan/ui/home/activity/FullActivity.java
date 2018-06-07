@@ -374,8 +374,8 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                     isColl = false;
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
                 }
-                full_cash.setText("￥" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsPrice());
-                tv_shopping_oldprice.setText("￥" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getOfflinePrice());
+                full_cash.setText("￥" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getSalesPrice());
+                tv_shopping_oldprice.setText("￥" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getMarketPrice());
                 tv_shopping_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
 
                 tv_brief.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsBrief());

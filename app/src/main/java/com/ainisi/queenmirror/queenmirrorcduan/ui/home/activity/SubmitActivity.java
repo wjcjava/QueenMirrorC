@@ -102,10 +102,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
 
         tv_submit_price.setText(amount);
         tv_submit_bottom_price.setText(amount);
-
-
-
-
     }
 
 
@@ -162,9 +158,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                     T.show("余额支付（待开发）敬请期待");
                 }
                 break;
-
         }
-
     }
 
     private void startPay() {
@@ -174,7 +168,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             public void run() {
                 PayTask alipay = new PayTask(SubmitActivity.this);
                 Map<String, String> result = alipay.payV2(aliPayResult, true);
-                Log.i("msp", result.toString());
 
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
@@ -194,8 +187,8 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
         HashMap<String, String> params = new HashMap<>();
         params.put("custId", SP.get(SubmitActivity.this,SpContent.UserId,"0")+"");
         params.put("platformType", "3");
-        //params.put("payAmount",amount.substring(1,amount.length()));
-        params.put("payAmount","0.01");
+        params.put("payAmount",amount.substring(1,amount.length()));
+       // params.put("payAmount","0.01");
         params.put("businessIds", businessIds);
         HttpUtils.doPost(ACTION.PayBefore, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -216,10 +209,10 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
              * 调用支付宝之后调用
              */
             case ACTION.AliPayAfterRefresh:
-                L.e("&&&&&   "+res);
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
-                    finish();
+                    Intent intent = new Intent(this,ShoppingCartActivity.class);
+                    startActivity(intent);
                 }else{
                     T.show(successBean.getMsg());
                 }
