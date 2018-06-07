@@ -232,7 +232,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             public void onDismiss() {
                 ivsort.setVisibility(View.VISIBLE);
                 ivsort1.setVisibility(View.GONE);
-
             }
         });
     }
@@ -279,6 +278,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 upSort.setText(problem[position]);
                 pop.dismiss();
+
             }
         });
     }

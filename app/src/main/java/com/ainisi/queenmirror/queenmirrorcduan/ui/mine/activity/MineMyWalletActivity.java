@@ -73,7 +73,6 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
                 break;
             //余额
             case R.id.img_balance:
-
                 Intent intent1 = new Intent(this, MineBalanceActivity.class);
                 intent1.putExtra("name", tvbalance.getText().toString().trim());
                 startActivity(intent1);

@@ -321,7 +321,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
     @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
             R.id.line_surface, R.id.line_uspension_surface, R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information, R.id.li_hime_sort,
-            R.id.li_sort_bottom, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom, R.id.li_home_screen})
+            R.id.li_sort_bottom, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom, R.id.li_home_screen,R.id.li_sales_bottom})
     public void onClick(View view) {
         switch (view.getId()) {
             /**
@@ -340,26 +340,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              */
             case R.id.rb_distance:
                 sc_home_scroll.smoothScrollTo(0, 3315);
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                layout_stick_header_main.setVisibility(View.VISIBLE);
-                view_new_fragment_half.setVisibility(View.VISIBLE);
-                initShowPop();
-                ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
-                popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                   }
-                });
-
+                initshowdistance();
+                break;
+            case R.id.li_sales_bottom:
+                initshowdistance();
                 break;
             /**
              * 底部销量最高
@@ -531,6 +515,30 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         }
     }
 
+    private void initshowdistance() {
+        rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+        tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+        rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        layout_stick_header_main.setVisibility(View.VISIBLE);
+        view_new_fragment_half.setVisibility(View.VISIBLE);
+        initShowPop();
+        ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
+        popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+                view_new_fragment_half.setVisibility(View.INVISIBLE);
+                li_home_paixu.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
     private void initScreentext() {
         sc_home_scroll.smoothScrollTo(0, 3315);
         tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
@@ -541,6 +549,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+
     }
 
 
@@ -552,6 +561,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         popWindow.setOutsideTouchable(true);
         popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
         popWindow.showAsDropDown(li_top_select, 0, 0);
+
     }
 
     @Override

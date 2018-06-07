@@ -163,4 +163,16 @@ public interface UrlConstants {
     String GETMONTHMODOU = "api/ans/points/pointsChargeSumByMonth";//魔豆按月支出收入
 
     String COMMENTPRO ="api/ec/goods/goodsCommentsSubmit";//商品评价
+
+    String WHETHERPASS="api/util/pay/payPassCheck"; //判断是否有支付密码
+
+    String MYWALLIET="api/ans/cust/myWallet";//我的余额
+
+    String TOUCHBALANCE="api/ans/cust/myWalletChargeList";//余额明细
+
+    String FORGOTPAYPASS="api/ans/cust/forgotPayPass";//忘记支付密码
+
+    String AMENTPAY="api/ans/cust/modifyPayPass";//修改支付密码
+
+    String SETPAYPASS="api/ans/cust/setPayPass";//设置支付密码
 }

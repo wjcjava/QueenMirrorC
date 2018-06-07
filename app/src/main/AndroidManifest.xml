@@ -447,7 +447,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 
 
-        <activity android:name=".ui.shop.activity.PayInShopActivity" />
+        <activity android:name=".ui.shop.activity.PayInShopActivity"
+            tools:ignore="DuplicateActivity" />
         <activity android:name=".ui.mine.activity.AmentPayActivity" />
         <activity android:name=".ui.mine.activity.ResetPayPassActivity"></activity>
     </application>
