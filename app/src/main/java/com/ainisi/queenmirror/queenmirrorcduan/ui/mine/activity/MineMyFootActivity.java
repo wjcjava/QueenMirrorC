@@ -58,7 +58,7 @@ public class MineMyFootActivity extends BaseNewActivity implements RefreshLoadMo
         folltitle.setTextSize(16);
         titleRight.setText("编辑");
         titleRight.setTextSize(14);
-
+        titleRight.setVisibility(View.GONE);
 
     }
 

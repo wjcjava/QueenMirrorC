@@ -15,6 +15,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.MoDouBeanOne;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.MoDouListBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
@@ -46,6 +47,9 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack {
     int pageNumber = 1;
 
     private List<SortBean> list = new ArrayList<>();
+
+    List<MoDouListBean> moDouListBeans = new ArrayList<>();
+
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineBeanActivity.class));
     }
@@ -157,6 +161,10 @@ public class MineBeanActivity extends BaseActivity implements HttpCallBack {
             //获取魔豆列表
             case ACTION.GETMINEMODOUBEAN:
                 L.e("$$$$$$$$$     " + res);
+
+
+
+
                 break;
         }
     }

@@ -1,6 +1,7 @@
 package com.ainisi.queenmirror.queenmirrorcduan.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class AreFundBean implements Serializable{
 
@@ -44,7 +45,6 @@ public class AreFundBean implements Serializable{
          * cpAmount : null
          * afterAmount : null
          */
-
         private String goodsId;
         private String goodsName;
         private String unitPrice;

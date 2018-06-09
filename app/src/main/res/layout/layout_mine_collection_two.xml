@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/comment_10_dip"
-                android:text="1000个"
+                android:text="0个"
                 android:textSize="@dimen/comment_10_size" />
         </LinearLayout>
     </LinearLayout>

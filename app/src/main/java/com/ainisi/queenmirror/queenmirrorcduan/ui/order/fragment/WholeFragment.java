@@ -26,6 +26,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.lzy.okgo.cache.CacheMode;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
+import in.srain.cube.views.ptr.header.MaterialHeader;
 
 /**
  * Created by EWorld on 2018/3/6.
@@ -42,8 +47,10 @@ import butterknife.Bind;
 public class WholeFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.rc_whole)
     RecyclerView whole;
-    @Bind(R.id.order_main_refresh)
-    MaterialRefreshLayout order_main_refresh;
+   /* @Bind(R.id.order_main_refresh)
+    MaterialRefreshLayout order_main_refresh;*/
+   @Bind(R.id.refreshLayout)
+   SmartRefreshLayout refreshLayout;
     private List<SortBean> list = new ArrayList<>();
     private Handler handler = new Handler();
     double amountNum;
@@ -79,7 +86,7 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
     @Override
     protected void initView() {
 
-        order_main_refresh.setLoadMore(true);
+       /* order_main_refresh.setLoadMore(true);
 
         order_main_refresh.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -95,6 +102,23 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
                 //上拉刷新...
                 pageNumber++;
                 doFirstData();
+            }
+        });*/
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                pageNumber = 1;
+
+                doFirstData();
+                refreshlayout.finishRefresh(2000);
+            }
+        });
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                pageNumber++;
+                doFirstData();
+                refreshlayout.finishLoadmore(2000);
             }
         });
     }
@@ -119,9 +143,6 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.ALLOFMYORDER:
-
-                order_main_refresh.finishRefresh();
-                order_main_refresh.finishRefreshLoadMore();
 
                 OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res, OrderMyAllOrderBean.class);
                 if (orderMyAllOrderBean.isSuccess()) {

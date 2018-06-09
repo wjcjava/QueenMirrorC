@@ -167,4 +167,10 @@ public interface ACTION {
 
     int COMMENTPRO = 0x144;//商品评价
 
+    int PAYUSENVWANGCARD = 0x145;//女王卡支付
+
+    int QUEENCHARGE = 0x146;//女王卡支付宝充值
+
+    int PAYAFTERREFRESH = 0x147;//女王卡充值后查看结果
+
 }

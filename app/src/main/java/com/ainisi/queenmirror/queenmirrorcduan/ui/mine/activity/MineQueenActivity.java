@@ -12,7 +12,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.QueenDeiailsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.HashMap;
@@ -47,15 +51,11 @@ public class MineQueenActivity extends BaseActivity implements HttpCallBack{
     public void initPresenter() {
 
     }
-
-
     @Override
     public void initView() {
         queentitle.setText("我的女王卡");
         inithttp();
     }
-
-
 
     @OnClick({R.id.title_back, R.id.bt_recharge,R.id.bt_see
     })
@@ -68,7 +68,7 @@ public class MineQueenActivity extends BaseActivity implements HttpCallBack{
             //我要充值
             case  R.id.bt_recharge:
                 RechargeActivity.startActivity(this);
-            break;
+                break;
             //查看订单记录
             case R.id.bt_see:
                 SeeActivity.startActivity(this);
@@ -80,9 +80,8 @@ public class MineQueenActivity extends BaseActivity implements HttpCallBack{
     }
     private void inithttp() {
         HashMap<String,String> parames=new HashMap<>();
-        parames.put("userId","123");
+        parames.put("userId", SP.get(MineQueenActivity.this, SpContent.UserId,"0")+"");
         HttpUtils.doPost(ACTION.QUEENDETAILS,parames, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
-
     }
     @Override
     public void onSuccess(int action, String res) {
@@ -91,17 +90,14 @@ public class MineQueenActivity extends BaseActivity implements HttpCallBack{
                 deiailsBean = GsonUtil.toObj(res, QueenDeiailsBean.class);
                 if(deiailsBean.isSuccess()){
                     QueenDeiailsBean.BodyBean.QueenCardDataBean.AnsQueenCardBean dataBean = deiailsBean.getBody().getQueenCardData().getAnsQueenCard();
-                    queenName.setText(dataBean.getCustId());
-                    queenWallet.setText(dataBean.getCardNo());
-                    queenPhone.setText(dataBean.getCardNo());
-                    queenMoney.setText(dataBean.getCustId());
-
+                    queenName.setText(SP.get(MineQueenActivity.this,SpContent.UserName,"")+"");
+                    queenPhone.setText(SP.get(MineQueenActivity.this,SpContent.UserCall,"")+"");
+                    queenWallet.setText(MD5.doubleToString(dataBean.getCardBalance())+"  女王币");
                 }else {
                     T.show(deiailsBean.getMsg());
                 }
                 break;
         }
-
     }
 
     @Override

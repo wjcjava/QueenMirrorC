@@ -8,11 +8,14 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 public interface UrlConstants {
 
     // String BASE_URL = "http://116.62.204.235:8080/";
+
     //String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
 
     //String BASE_URL = "http://192.168.50.137:8080/wg/a/";//测试路径    刘璇
 
-    String BASE_URL = "http://192.168.30.155:7080/wg/a/";
+    //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
+
+     String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
     String ADVERTISING = "api/ec/common/advertisementList";//首页banner广告
 
@@ -164,6 +167,8 @@ public interface UrlConstants {
 
     String COMMENTPRO ="api/ec/goods/goodsCommentsSubmit";//商品评价
 
+    String PAYUSENVWANGCARD = "api/util/pay/orderQueenCardPay";//女王卡支付
+
     String WHETHERPASS="api/util/pay/payPassCheck"; //判断是否有支付密码
 
     String MYWALLIET="api/ans/cust/myWallet";//我的余额
@@ -175,4 +180,8 @@ public interface UrlConstants {
     String AMENTPAY="api/ans/cust/modifyPayPass";//修改支付密码
 
     String SETPAYPASS="api/ans/cust/setPayPass";//设置支付密码
+
+    String QUEENCHARGE ="api/util/alipay/queenChargeAliPay";//女王卡支付宝充值
+
+    String PAYAFTERREFRESH = "api/util/alipay/queenChargeAliPayAfterRefresh";//女王卡充值后查看结果
 }

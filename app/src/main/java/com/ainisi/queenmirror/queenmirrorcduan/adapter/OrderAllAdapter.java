@@ -319,7 +319,7 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getIntfAnsOrderDetails().getGoodsName())
                     .setText(R.id.textView30,"X "+apiOrderDetailsList.get(2).getIntfAnsOrderDetails().getPurchaseNumber());
         }
-
+        amountNum = 0;
         for(int i=0;i<apiOrderDetailsList.size();i++){
             amountNum = amountNum + Double.parseDouble(apiOrderDetailsList.get(i).getIntfAnsOrderDetails().getSumAmount());
         }

@@ -612,6 +612,15 @@ public class HttpUtils {
             case ACTION.COMMENTPRO:
                 actionUrl = UrlConstants.COMMENTPRO;
                 break;
+            case ACTION.PAYUSENVWANGCARD:
+                actionUrl = UrlConstants.PAYUSENVWANGCARD;
+                break;
+            case ACTION.QUEENCHARGE:
+                actionUrl = UrlConstants.QUEENCHARGE;
+                break;
+            case ACTION.PAYAFTERREFRESH:
+                actionUrl = UrlConstants.PAYAFTERREFRESH;
+                break;
         }
         url.append(actionUrl);
         return url;

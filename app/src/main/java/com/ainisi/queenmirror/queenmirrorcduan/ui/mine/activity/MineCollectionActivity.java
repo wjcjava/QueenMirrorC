@@ -18,6 +18,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.MineCollectionListBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.lzy.okgo.cache.CacheMode;
@@ -67,7 +69,7 @@ public class MineCollectionActivity extends BaseNewActivity implements RefreshLo
         super.doFirstRequest();
         HashMap<String, String> params = new HashMap<>();
         params.put("pageNumber", pageNumber+"");
-        params.put("userId", "111");
+        params.put("userId", SP.get(MineCollectionActivity.this,SpContent.UserId,"")+"");
         params.put("pageSize", "10");
         HttpUtils.doPost(ACTION.MINECOLLECTION, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 

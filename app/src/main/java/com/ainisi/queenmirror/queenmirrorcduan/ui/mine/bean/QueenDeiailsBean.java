@@ -161,7 +161,7 @@ public class QueenDeiailsBean {
                 private String updateDate;
                 private String custId;
                 private String cardNo;
-                private int cardBalance;
+                private String cardBalance;
                 private String enableFlag;
                 private String updatePgm;
 
@@ -221,11 +221,11 @@ public class QueenDeiailsBean {
                     this.cardNo = cardNo;
                 }
 
-                public int getCardBalance() {
+                public String getCardBalance() {
                     return cardBalance;
                 }
 
-                public void setCardBalance(int cardBalance) {
+                public void setCardBalance(String cardBalance) {
                     this.cardBalance = cardBalance;
                 }
 

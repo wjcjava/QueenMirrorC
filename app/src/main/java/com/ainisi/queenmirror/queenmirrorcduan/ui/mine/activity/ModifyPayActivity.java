@@ -56,15 +56,12 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
         super.initView();
         paymodify.setText("设置支付密码");
 
-
     }
 
     @Override
     protected void initData() {
         super.initData();
-
         myCountDownTimer = new MyCountDownTimer(60000, 1000);
-
     }
 
     private void initPayPass() {
@@ -77,7 +74,6 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
         HttpUtils.doPost(ACTION.SETPAYPASS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
-
     @OnClick({R.id.title_back, R.id.tv_ok_submit,R.id.tv_validation
     })
     public void click(View view) {
@@ -87,10 +83,7 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
                 finish();
                 break;
             case R.id.tv_ok_submit:
-
                     initPayPass();
-
-
                 break;
             case R.id.tv_validation:
                 if (TextUtils.isEmpty(phoneText.getText())) {
@@ -133,10 +126,8 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
             case ACTION.SETPAYPASS:
                 SetPayPessBean payPessBean = GsonUtil.toObj(res, SetPayPessBean.class);
                 if (payPessBean.isSuccess()) {
-
                     T.show("支付密码设置成功");
-
-                    MineSettingActivity.startActivity(this);
+                    finish();
                 } else {
                     T.show(payPessBean.getMsg());
                 }

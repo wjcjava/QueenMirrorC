@@ -129,7 +129,7 @@
     <string name="invincible_coupon">无敌劵</string>
     <string name="queen">女王卡</string>
     <string name="member_management">会员管理</string>
-    <string name="notused">3张未使用</string>
+    <string name="notused">0张未使用</string>
     <string name="mywallet">我的钱包</string>
     <string name="my_magic_beans">我的魔豆</string>
     <string name="gift">邀请有奖</string>

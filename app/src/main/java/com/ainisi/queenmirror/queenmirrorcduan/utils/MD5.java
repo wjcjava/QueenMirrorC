@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 
 public class MD5{
     public static String md5(String string) {
@@ -27,6 +28,15 @@ public class MD5{
             e.printStackTrace();
         }
         return "";
+    }
+
+    /**
+     * 保留两位小数
+     * @param num
+     * @return
+     */
+    public static String doubleToString(String num){
+        return new DecimalFormat("0.00").format(Double.parseDouble(num));
     }
 
 }

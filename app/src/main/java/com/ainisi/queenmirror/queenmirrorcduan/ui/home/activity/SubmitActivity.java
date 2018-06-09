@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,13 +22,16 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.PayInBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.QueenPayBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.ModifyPayActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.BaseDialog;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.alipay.sdk.app.PayTask;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -40,7 +44,7 @@ import butterknife.OnClick;
 /**
  * 我的订单
  */
-public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
+public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
     @Bind(R.id.tv_submit_price)
     TextView tv_submit_price;
     @Bind(R.id.tv_submit_bottom_price)
@@ -55,9 +59,9 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
     CheckBox check_balance;
 
     String businessIds = "";
-    String transId = "";
+    String transId = "",input_pass="",outTradeNo="";
 
-    String amount = "0", aliPayResult = "";
+    String amount = "0",aliPayResult="";
     private static final int SDK_PAY_FLAG = 1;
 
     @SuppressLint("HandlerLeak")
@@ -78,6 +82,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         T.show("支付成功");
                         AfterPayData();
+
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         T.show("支付失败");
@@ -99,24 +104,21 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
 
     @Override
     public void initView() {
-
         Intent intent = this.getIntent();
-        businessIds = intent.getStringExtra("businessIds");
+        businessIds =  intent.getStringExtra("businessIds");
         amount = intent.getStringExtra("amount");
         tv_submit_price.setText(amount);
         tv_submit_bottom_price.setText(amount);
     }
 
-
-    @OnClick({R.id.title_back, R.id.check_wechat, R.id.check_alipay, R.id.check_queen, R.id.check_balance, R.id.payV2
-    })
+    @OnClick({R.id.title_back,R.id.check_wechat, R.id.check_alipay, R.id.check_queen, R.id.check_balance, R.id.payV2})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
             case R.id.check_wechat:
-                if (check_wechat.isChecked()) {
+                if(check_wechat.isChecked()){
                     check_alipay.setChecked(false);
                     check_queen.setChecked(false);
                     check_balance.setChecked(false);
@@ -124,7 +126,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
                 break;
 
             case R.id.check_alipay:
-                if (check_alipay.isChecked()) {
+                if(check_alipay.isChecked()){
                     check_wechat.setChecked(false);
                     check_queen.setChecked(false);
                     check_balance.setChecked(false);
@@ -132,7 +134,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
 
                 break;
             case R.id.check_queen:
-                if (check_queen.isChecked()) {
+                if(check_queen.isChecked()){
                     check_alipay.setChecked(false);
                     check_wechat.setChecked(false);
                     check_balance.setChecked(false);
@@ -151,24 +153,86 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
             case R.id.payV2:
                 if (check_wechat.isChecked()) {
                     T.show("微信支付（待开发）敬请期待");
-                } else if (check_alipay.isChecked()) {
+                }else if(check_alipay.isChecked()){
                     if(aliPayResult.equals("")){
                         getData();
-                    }else {
+                    }else{
                         startPay();
                     }
-                } else if (check_queen.isChecked()) {
-                    showDialog(Gravity.CENTER, R.style.Scale_aniamtion);
-                } else if (check_balance.isChecked()) {
-                    showDialog(Gravity.CENTER, R.style.Scale_aniamtion);
+                }else if(check_queen.isChecked()){
+                    //T.show("女王卡支付（待开发）敬请期待");
+                    showDialogs(Gravity.CENTER, R.style.Scale_aniamtion);
 
+                    //showDialog(Gravity.CENTER, R.style.Scale_aniamtion);
+                } else if (check_balance.isChecked()) {
+                    T.show("余额支付（待开发）敬请期待");
                 }
                 break;
         }
     }
+
+    private void showDialogs(int grary, int animationStyle) {
+        final BaseDialog.Builder builder = new BaseDialog.Builder(SubmitActivity.this);
+        final BaseDialog dialog = builder.setViewId(R.layout.pay_password_dialog)
+                .setPaddingdp(10, 0, 10, 0)
+                .setGravity(grary)
+                .setAnimation(animationStyle)
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(true)
+                .builder();
+        dialog.show();
+        TextView tv_setting_pay_sub = dialog.getView(R.id.tv_setting_pay_sub);
+        final EditText pass_edit = (EditText) dialog.getView(R.id.et_pay_password_sub);
+        tv_setting_pay_sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(pass_edit.getText().toString().equals("")) {
+                    T.show("请输入支付密码");
+                }else{
+                    input_pass = pass_edit.getText().toString();
+                    PayInNvwangData();
+                }
+            }
+        });
+        ImageView dialogfinsh = dialog.getView(R.id.iv_dialog_finsh);
+        final BaseDialog finalDialog = dialog;
+        dialogfinsh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalDialog.close();
+            }
+        });
+    }
+
+    /**
+     * 女王卡支付
+     */
+    private void PayInNvwangData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("custId", SP.get(SubmitActivity.this,SpContent.UserId,"0")+"");
+        params.put("platformType","3");
+        if(amount.substring(0,1).equals("￥")){
+            params.put("payAmount",amount.substring(1,amount.length()));
+        }else{
+            params.put("payAmount",amount);
+        }
+        params.put("businessIds",businessIds);
+        params.put("payPass", MD5.md5(input_pass+ "MYN888"));
+        HttpUtils.doPost(ACTION.PAYUSENVWANGCARD, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    /**
+     * 女王卡支付成功后调用
+     */
+    private void PayInNvwangAfterData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("outTradeNo",outTradeNo);
+        HttpUtils.doPost(ACTION.PAYAFTERREFRESH, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
-        dialog = builder.setViewId(R.layout.paypass_dialog)
+        final BaseDialog dialog = builder.setViewId(R.layout.paypass_dialog)
                 .setPaddingdp(10, 0, 10, 0)
                 .setGravity(grary)
                 .setAnimation(animationStyle)
@@ -177,9 +241,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
                 .addViewOnClickListener(R.id.tv_setting_pay, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(SubmitActivity.this, ModifyPayActivity.class);
-                        startActivity(intent);
-                        dialog.close();
+                        T.show("设置密码");
                     }
                 })
                 .builder();
@@ -195,6 +257,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
 
     private void startPay() {
         Runnable payRunnable = new Runnable() {
+
             @Override
             public void run() {
                 PayTask alipay = new PayTask(SubmitActivity.this);
@@ -210,16 +273,20 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
         payThread = new Thread(payRunnable);
         payThread.start();
     }
+
     /**
      * 支付前调用
      */
     private void getData() {
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("custId", SP.get(SubmitActivity.this, SpContent.UserId, "0") + "");
+        params.put("custId", SP.get(SubmitActivity.this,SpContent.UserId,"0")+"");
         params.put("platformType", "3");
-        params.put("payAmount", amount.substring(1, amount.length()));
-        // params.put("payAmount","0.01");
+        if(amount.substring(0,1).equals("￥")){
+            params.put("payAmount",amount.substring(1,amount.length()));
+        }else{
+            params.put("payAmount",amount);
+        }
         params.put("businessIds", businessIds);
         HttpUtils.doPost(ACTION.PayBefore, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -235,16 +302,33 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack {
 
     @Override
     public void onSuccess(int action, String res) {
-        switch (action) {
+        switch (action){
+            case ACTION.PAYAFTERREFRESH:
+                L.e("%%%%%%%%    "+res);
+                break;
+            /**
+             * 女王卡支付
+             */
+            case ACTION.PAYUSENVWANGCARD:
+
+                QueenPayBean queenPayBean = GsonUtil.toObj(res,QueenPayBean.class);
+                if(queenPayBean.isSuccess()) {
+                    outTradeNo = queenPayBean.getBody().getOutTradeNo();
+
+                    PayInNvwangAfterData();
+                }else{
+                    T.show(queenPayBean.getMsg());
+                }
+                break;
             /**
              * 调用支付宝之后调用
              */
             case ACTION.AliPayAfterRefresh:
-                SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
-                if (successBean.isSuccess()) {
-                    Intent intent = new Intent(this, ShoppingCartActivity.class);
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    Intent intent = new Intent(this,ShoppingCartActivity.class);
                     startActivity(intent);
-                } else {
+                }else{
                     T.show(successBean.getMsg());
                 }
                 break;
