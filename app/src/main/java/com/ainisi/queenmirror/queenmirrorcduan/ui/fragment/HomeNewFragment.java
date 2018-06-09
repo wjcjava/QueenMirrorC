@@ -154,7 +154,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private HomeAdvertisingBean homeAdvertisingBean;
     List<String> contntList = new ArrayList<>();
     List<SortBean> sortlist = new ArrayList<>();
-    String[] merchantsGather = {"新商家", "品牌商家", "消费者保障", "七天内退货", "支持开发票", "魔豆抵钱", "魔豆抵钱"};
+
     int hight;
     boolean type = false;
 
@@ -167,6 +167,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private MerchantsAdapter merchantsAdapter;
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
+    private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist;
+    private PopupWindow popWindowdistance;
 
     @Override
     protected int getLayoutResource() {
@@ -316,7 +318,16 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 popWindow.dismiss();
             }
         });
-
+        popview.findViewById(R.id.pop_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view_new_fragment_half.setVisibility(View.INVISIBLE);
+                li_home_paixu.setVisibility(View.VISIBLE);
+                iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+                iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+                popWindow.dismiss();
+            }
+        });
     }
 
     @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
@@ -407,7 +418,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
                 initview(popview);
-                popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
+                popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT);
                 popWindow.setContentView(popview);
                 popWindow.setOutsideTouchable(true);
                 popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
@@ -427,7 +438,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
                     }
                 });
-
+                popview.findViewById(R.id.pop_layout).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popWindow.dismiss();
+                    }
+                });
                 break;
 
             case R.id.tv_home_bustling:
@@ -486,7 +502,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     gv_home_gridView.setVisibility(View.VISIBLE);
 
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "home");
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(),shoplist, "home");
                         gv_home_gridView.setAdapter(gridViewAdapter);
                     } else {
 
@@ -499,7 +515,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     gv_home_gridView.setVisibility(View.GONE);
 
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
-                        HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "home");
+                        HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shoplist, "home");
                         nl_home_list_view.setAdapter(homeListViewAdapter);
                     }
                 }
@@ -556,14 +572,23 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private void initShowPop() {
         popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
         initview(popview);
-        popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
+        popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT);
         popWindow.setContentView(popview);
         popWindow.setOutsideTouchable(true);
         popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
         popWindow.showAsDropDown(li_top_select, 0, 0);
 
     }
+    private void initdistancePop() {
+        popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
+        initview(popview);
+        popWindowdistance = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT);
+        popWindowdistance.setContentView(popview);
+        popWindowdistance.setOutsideTouchable(true);
+        popWindowdistance.setAnimationStyle(R.style.CustomPopWindowStyle);
+        popWindowdistance.showAsDropDown(li_top_select, 0, 0);
 
+    }
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
@@ -610,7 +635,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
                 if (shopListHomeBean.isSuccess()) {
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "home");
+                        shoplist=shopListHomeBean.getBody().getShopList();
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(),shoplist, "home");
                         gv_home_gridView.setAdapter(gridViewAdapter);
                     } else {
                         T.show("暂无店铺信息");

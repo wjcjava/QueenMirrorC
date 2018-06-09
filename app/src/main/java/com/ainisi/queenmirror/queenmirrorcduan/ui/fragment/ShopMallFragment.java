@@ -22,7 +22,6 @@ import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomepageGridViewAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.ListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyShopAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
@@ -76,7 +75,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     LinearLayout li_home_screen_bottom;
     @Bind(R.id.sc_home_scroll)
     ScrollView sc_home_scroll;
-    ListViewAdapter listadapter;
     @Bind(R.id.list_view)
     NoScrollListview listView;
     @Bind(R.id.layout_stick_header_main)
@@ -283,12 +281,11 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         });
     }
 
-    @OnClick({R.id.rb_sort, R.id.rb_sales, R.id.tv_shop_sales, R.id.rb_distance
+    @OnClick({R.id.li_hime_sort, R.id.rb_sales, R.id.tv_shop_sales, R.id.rb_distance
             , R.id.li_sort_bottom, R.id.li_home_screen, R.id.li_home_screen_bottom
             , R.id.line_surface, R.id.line_uspension_surface, R.id.ed_keyword, R.id.li_distance_bottom
     })
     public void click(View view) {
-        //  FragmentTransaction transaction = fm.beginTransaction();
         switch (view.getId()) {
             case R.id.ed_keyword:
                 SearchActivity.startActivity(getContext());
@@ -299,8 +296,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     isClick = false;
                     HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "shop");
                     listView.setAdapter(homeListViewAdapter);
-                    /*listadapter = new ListViewAdapter(getContext(), shopListNew);
-                    listView.setAdapter(listadapter);*/
                     shop_gridView.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
                     imgSurface.setImageResource(R.drawable.icon_home_list);
@@ -311,9 +306,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
 
                     HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "shop");
                     shop_gridView.setAdapter(gridViewAdapter);
-
-                    /*gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
-                    shop_gridView.setAdapter(gridViewAdapter);*/
                     isClick = true;
 
                 }
@@ -335,9 +327,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
 
                     HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "shop");
                     shop_gridView.setAdapter(gridViewAdapter);
-
-                   /* gridViewAdapter = new GridViewAdapter(getContext(),drtalist);
-                    shop_gridView.setAdapter(gridViewAdapter);*/
                     isClick = true;
                 }
                 break;
@@ -357,33 +346,15 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 }
                 initSorttext();
                 break;
-            case R.id.rb_sort:
+            case R.id.li_hime_sort:
                 sc_home_scroll.smoothScrollTo(0, 1180);
                 pop.showAsDropDown(upSort);
                 initSorttext();
-              /*  if (sortFragment == null) {
-                    sortFragment = new SortFragment();
-                    transaction.add(R.id.fl_home_recommend_layout, sortFragment);
-                } else {
-                    transaction.show(sortFragment);
-                }
-                hideFragment(salesFragment, transaction);
-                hideFragment(distanceFragment, transaction);*/
-//              hideFragment(screenFragment, transaction);
                 break;
             //销量最高
             case R.id.rb_sales:
                 sc_home_scroll.smoothScrollTo(0, 1180);
                 initSalestext();
-            /*    if (salesFragment == null) {
-                    salesFragment = new SalesFragment();
-                    transaction.add(R.id.fl_home_recommend_layout, salesFragment);
-                } else {
-                    transaction.show(salesFragment);
-                }
-                hideFragment(sortFragment, transaction);
-//                hideFragment(screenFragment, transaction);
-                hideFragment(distanceFragment, transaction);*/
                 break;
             case R.id.tv_shop_sales:
                 initSalestext();
@@ -397,16 +368,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 sc_home_scroll.smoothScrollTo(0, 1180);
                 initDistancetext();
                 initDistancepop();
-
-               /* if (distanceFragment == null) {
-                    distanceFragment = new DistanceFragment();
-                    transaction.add(R.id.fl_home_recommend_layout, distanceFragment);
-                } else {
-                    transaction.show(distanceFragment);
-                }
-                hideFragment(sortFragment, transaction);
-                hideFragment(salesFragment, transaction);
-//                hideFragment(screenFragment, transaction);*/
                 break;
 
             //筛选
@@ -440,6 +401,12 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             @Override
             public void onDismiss() {
                 ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+            }
+        });
+        popview.findViewById(R.id.pop_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popWindow.dismiss();
             }
         });
     }
@@ -527,7 +494,13 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
                         HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "shop");
                         shop_gridView.setAdapter(gridViewAdapter);
-                    } else {
+                        shopData.setVisibility(View.VISIBLE);
+                        shopData.setText("");
+                    }else if(shopListHomeBean.getBody().getShopList().size() > 2){
+                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "shop");
+                        shop_gridView.setAdapter(gridViewAdapter);
+                    }
+                    else{
                         shopData.setVisibility(View.VISIBLE);
                     }
                 } else {

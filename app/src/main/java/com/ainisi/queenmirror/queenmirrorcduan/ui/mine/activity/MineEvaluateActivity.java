@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -17,6 +18,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.MyCommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.lzy.okgo.cache.CacheMode;
@@ -40,6 +43,12 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     private Handler handler = new Handler();
     private View evaluateView;
+    @Bind(R.id.tv_name)
+    TextView evalueteName;
+    @Bind(R.id.tv_evaluate_number)
+    TextView numeber;
+    int pagenumer=1;
+    private List<MyCommentsBean.BodyBean.CommentsListDataBean> commentList;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineEvaluateActivity.class));
@@ -62,6 +71,7 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
     }
 
     private void initReply() {
+        evalueteName.setText(SP.get(this, SpContent.UserName,"")+"");
 
     }
 
@@ -116,7 +126,8 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
         parames.put("userId", "111");
-        parames.put("pageNumber", "1");
+        parames.put("pageNumber", pagenumer+"");
+        parames.put("pageSize","10");
         HttpUtils.doPost(ACTION.MYCOMMENTS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
@@ -127,9 +138,14 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
             case ACTION.MYCOMMENTS:
                 MyCommentsBean commentsBean = GsonUtil.toObj(res, MyCommentsBean.class);
                 evaluateView = LayoutInflater.from(this).inflate(R.layout.item_evaluate, null);
-                List<MyCommentsBean.BodyBean.CommentsListDataBean> commentList = commentsBean.getBody().getCommentsListData();
+                commentList = commentsBean.getBody().getCommentsListData();
+                if(commentList.size()>0){
+                    numeber.setText("共有"+commentList.size()+"条数据");
+                }else {
+                    numeber.setText("共有0条数据");
+                }
                 if (commentsBean.isSuccess()) {
-                    MyCommentsAdapter sortAdapter2 = new MyCommentsAdapter(R.layout.item_evaluate, commentList);
+                    MyCommentsAdapter sortAdapter2 = new MyCommentsAdapter(R.layout.item_evaluate, commentList,this);
                     rcevaluate.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     rcevaluate.setAdapter(sortAdapter2);
                 } else {

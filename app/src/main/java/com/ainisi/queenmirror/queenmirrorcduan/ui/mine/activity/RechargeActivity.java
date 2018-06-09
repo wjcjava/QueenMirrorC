@@ -3,7 +3,6 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
@@ -26,9 +25,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.PayInBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.RechargeFreashBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SubmitActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -181,7 +178,7 @@ public class RechargeActivity extends BaseActivity implements HttpCallBack{
                 RechargeFreashBean rechargeFreashBean = GsonUtil.toObj(res,RechargeFreashBean.class);
                 if(rechargeFreashBean.isSuccess()){
                     if(rechargeFreashBean.getBody().getAnsChargeTrans().getTransStatus().equals("1")){
-                        Intent intent = new Intent(RechargeActivity.this,RechargeSuccessActivity.class);
+                        Intent intent = new Intent(RechargeActivity.this,RechargeSuccessAgainActivity.class);
                         startActivity(intent);
                     }else{
                         T.show("充值失败，请联系管理员");

@@ -122,6 +122,7 @@ public class RecommendedActivity extends BaseActivity implements RefreshLoadMore
         hashMap.put("saleFlag", "2");
         hashMap.put("pageNumber", "1");
         hashMap.put("shopId", "111");
+        hashMap.put("pageSize","10");
         HttpUtils.doPost(ACTION.COMMENDGOODS, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
 

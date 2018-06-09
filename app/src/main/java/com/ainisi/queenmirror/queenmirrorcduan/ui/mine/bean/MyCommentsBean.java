@@ -8,11 +8,12 @@ import java.util.List;
 
 public class MyCommentsBean {
 
+
     /**
      * success : true
      * errorCode : 0
      * msg : 获取数据成功
-     * body : {"CommentsListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecAppraiseGoods":{"id":"111","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","goodsId":"q'w'r","detailId":"05d10158c051415a9d6bea9d6ef1a3fd","ifMatch":"2","employeeAbility":"1","apprDetails":"aff","apprPic":"","ifAnon":"0","apprLevel":"1","apprTime":"2018-04-11 00:00:00"},"ecAppraiseShop":{"id":"0eae9689e7e84af5a120a5d28c604cb1","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","orderId":"6352b0d7cbc347d5b3bd7d3d61969524","serviceAttitude":"2","shopEnvironment":"1","apprTime":"2018-04-27 16:36:15"},"ansOrderDetails":{"id":"05d10158c051415a9d6bea9d6ef1a3fd","isNewRecord":false,"remarks":null,"createDate":"2018-05-04 11:29:01","updateDate":"2018-05-04 11:29:01","orderId":"6352b0d7cbc347d5b3bd7d3d61969524","goodsId":"666","unitPrice":"111.00","purchaseNumber":"6","sumAmount":"666.00","cpAmount":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":null,"updatePgm":"ApiOrderService"},"ecShopScore":{"id":"112","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"shopId":"0eae9689e7e84af5a120a5d28c604cb1","goodsAppraiseate":null,"shopAppraise":"2","goodsScore":"1.0","shopScore":"1.0","sumScore":"2.0","serviceAttitude":null,"shopEnvironment":null,"levelOne":null,"levelTwo":null,"levelThree":null,"levelFour":null,"levelFive":null,"sumStart":"2018-04-09 09:54:46","sumEnd":"2018-04-25 09:54:51","sumTime":"2018-04-18 09:54:55","newFlag":"1"},"goodsIdName":null,"custIdName":null,"shopIdName":"美美理发店","ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"goodsAppraiseLabel":null,"shopAppraiseLabel":null}]}
+     * body : {"CommentsListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecAppraiseGoods":{"id":"111","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","goodsId":"111","detailId":"04eaad7a66f64edd95f29815558f8cb9","ifMatch":"2","employeeAbility":"1","apprDetails":"aff","apprPic":"","ifAnon":"0","apprLevel":"1","apprTime":"2018-04-11 00:00:00"},"ecAppraiseShop":{"id":"0eae9689e7e84af5a120a5d28c604cb1","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","orderId":"1a36396703d648f1abf0544c474d7288","serviceAttitude":"2","shopEnvironment":"1","apprTime":"2018-04-27 16:36:15"},"ansOrderDetails":{"id":"04eaad7a66f64edd95f29815558f8cb9","isNewRecord":false,"remarks":null,"createDate":"2018-05-29 13:39:32","updateDate":"2018-05-29 13:39:32","orderId":"1a36396703d648f1abf0544c474d7288","goodsId":"ef4f51753e1d43b2a39e3d15ba10dcca","goodsName":"修改测试1","unitPrice":"0.01","purchaseNumber":"4","sumAmount":"0.04","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":null,"updatePgm":"ApiOrderService"},"ecShopScore":{"id":"112","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"shopId":"0eae9689e7e84af5a120a5d28c604cb1","goodsAppraiseate":null,"shopAppraise":"2","goodsScore":"1.0","shopScore":"1.0","sumScore":"2.0","serviceAttitude":null,"shopEnvironment":null,"levelOne":null,"levelTwo":null,"levelThree":null,"levelFour":null,"levelFive":null,"sumStart":"2018-04-09 09:54:46","sumEnd":"2018-04-25 09:54:51","sumTime":"2018-04-18 09:54:55","newFlag":"1"},"goodsIdName":"测试3","custIdName":null,"shopIdName":"琳美甲","ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"goodsAppraiseLabel":null,"shopAppraiseLabel":null,"apiEcAppraiseReplyList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecAppraiseReply":{"id":"a34838a82fe74ec0b4fd5edab31ba38f","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"appraiseId":"111","objectId":"111","replyContent":"谢谢您","replyFrom":"1","replyUser":"3523","objectUser":"2352","replyTime":"2018-04-25 00:00:00"},"replyUserName":null,"objectUserName":"琳美甲"},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecAppraiseReply":{"id":"a34838a82fe74ec0b8fd5edab31aa38f","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"appraiseId":"111","objectId":"a34838a82fe74ec0b4fd5edab31ba38f","replyContent":"你们家商品要是不好我也不会说好的","replyFrom":"1","replyUser":"3523","objectUser":"2352","replyTime":"2018-04-25 00:00:00"},"replyUserName":null,"objectUserName":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecAppraiseReply":{"id":"a34838a82fe74ec0b8fd5edab31ba38e","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"appraiseId":"111","objectId":"a34838a82fe74ec0b8fd5edab31aa38f","replyContent":"这个商品是verygood啊","replyFrom":"1","replyUser":"3523","objectUser":"2352","replyTime":"2018-04-25 00:00:00"},"replyUserName":null,"objectUserName":null}]}]}
      */
 
     private boolean success;
@@ -70,13 +71,13 @@ public class MyCommentsBean {
              * remarks : null
              * createDate : null
              * updateDate : null
-             * ecAppraiseGoods : {"id":"111","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","goodsId":"q'w'r","detailId":"05d10158c051415a9d6bea9d6ef1a3fd","ifMatch":"2","employeeAbility":"1","apprDetails":"aff","apprPic":"","ifAnon":"0","apprLevel":"1","apprTime":"2018-04-11 00:00:00"}
-             * ecAppraiseShop : {"id":"0eae9689e7e84af5a120a5d28c604cb1","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","orderId":"6352b0d7cbc347d5b3bd7d3d61969524","serviceAttitude":"2","shopEnvironment":"1","apprTime":"2018-04-27 16:36:15"}
-             * ansOrderDetails : {"id":"05d10158c051415a9d6bea9d6ef1a3fd","isNewRecord":false,"remarks":null,"createDate":"2018-05-04 11:29:01","updateDate":"2018-05-04 11:29:01","orderId":"6352b0d7cbc347d5b3bd7d3d61969524","goodsId":"666","unitPrice":"111.00","purchaseNumber":"6","sumAmount":"666.00","cpAmount":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":null,"updatePgm":"ApiOrderService"}
+             * ecAppraiseGoods : {"id":"111","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","goodsId":"111","detailId":"04eaad7a66f64edd95f29815558f8cb9","ifMatch":"2","employeeAbility":"1","apprDetails":"aff","apprPic":"","ifAnon":"0","apprLevel":"1","apprTime":"2018-04-11 00:00:00"}
+             * ecAppraiseShop : {"id":"0eae9689e7e84af5a120a5d28c604cb1","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","orderId":"1a36396703d648f1abf0544c474d7288","serviceAttitude":"2","shopEnvironment":"1","apprTime":"2018-04-27 16:36:15"}
+             * ansOrderDetails : {"id":"04eaad7a66f64edd95f29815558f8cb9","isNewRecord":false,"remarks":null,"createDate":"2018-05-29 13:39:32","updateDate":"2018-05-29 13:39:32","orderId":"1a36396703d648f1abf0544c474d7288","goodsId":"ef4f51753e1d43b2a39e3d15ba10dcca","goodsName":"修改测试1","unitPrice":"0.01","purchaseNumber":"4","sumAmount":"0.04","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":null,"updatePgm":"ApiOrderService"}
              * ecShopScore : {"id":"112","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"shopId":"0eae9689e7e84af5a120a5d28c604cb1","goodsAppraiseate":null,"shopAppraise":"2","goodsScore":"1.0","shopScore":"1.0","sumScore":"2.0","serviceAttitude":null,"shopEnvironment":null,"levelOne":null,"levelTwo":null,"levelThree":null,"levelFour":null,"levelFive":null,"sumStart":"2018-04-09 09:54:46","sumEnd":"2018-04-25 09:54:51","sumTime":"2018-04-18 09:54:55","newFlag":"1"}
-             * goodsIdName : null
+             * goodsIdName : 测试3
              * custIdName : null
-             * shopIdName : 美美理发店
+             * shopIdName : 琳美甲
              * ifMatchLabel : null
              * employeeAbilityLabel : null
              * ifAnonLabel : null
@@ -84,6 +85,7 @@ public class MyCommentsBean {
              * shopEnvironmentLabel : null
              * goodsAppraiseLabel : null
              * shopAppraiseLabel : null
+             * apiEcAppraiseReplyList : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecAppraiseReply":{"id":"a34838a82fe74ec0b4fd5edab31ba38f","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"appraiseId":"111","objectId":"111","replyContent":"谢谢您","replyFrom":"1","replyUser":"3523","objectUser":"2352","replyTime":"2018-04-25 00:00:00"},"replyUserName":null,"objectUserName":"琳美甲"},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecAppraiseReply":{"id":"a34838a82fe74ec0b8fd5edab31aa38f","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"appraiseId":"111","objectId":"a34838a82fe74ec0b4fd5edab31ba38f","replyContent":"你们家商品要是不好我也不会说好的","replyFrom":"1","replyUser":"3523","objectUser":"2352","replyTime":"2018-04-25 00:00:00"},"replyUserName":null,"objectUserName":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecAppraiseReply":{"id":"a34838a82fe74ec0b8fd5edab31ba38e","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"appraiseId":"111","objectId":"a34838a82fe74ec0b8fd5edab31aa38f","replyContent":"这个商品是verygood啊","replyFrom":"1","replyUser":"3523","objectUser":"2352","replyTime":"2018-04-25 00:00:00"},"replyUserName":null,"objectUserName":null}]
              */
 
             private Object id;
@@ -95,7 +97,7 @@ public class MyCommentsBean {
             private EcAppraiseShopBean ecAppraiseShop;
             private AnsOrderDetailsBean ansOrderDetails;
             private EcShopScoreBean ecShopScore;
-            private Object goodsIdName;
+            private String goodsIdName;
             private Object custIdName;
             private String shopIdName;
             private Object ifMatchLabel;
@@ -105,6 +107,7 @@ public class MyCommentsBean {
             private Object shopEnvironmentLabel;
             private Object goodsAppraiseLabel;
             private Object shopAppraiseLabel;
+            private List<ApiEcAppraiseReplyListBean> apiEcAppraiseReplyList;
 
             public Object getId() {
                 return id;
@@ -178,11 +181,11 @@ public class MyCommentsBean {
                 this.ecShopScore = ecShopScore;
             }
 
-            public Object getGoodsIdName() {
+            public String getGoodsIdName() {
                 return goodsIdName;
             }
 
-            public void setGoodsIdName(Object goodsIdName) {
+            public void setGoodsIdName(String goodsIdName) {
                 this.goodsIdName = goodsIdName;
             }
 
@@ -258,6 +261,14 @@ public class MyCommentsBean {
                 this.shopAppraiseLabel = shopAppraiseLabel;
             }
 
+            public List<ApiEcAppraiseReplyListBean> getApiEcAppraiseReplyList() {
+                return apiEcAppraiseReplyList;
+            }
+
+            public void setApiEcAppraiseReplyList(List<ApiEcAppraiseReplyListBean> apiEcAppraiseReplyList) {
+                this.apiEcAppraiseReplyList = apiEcAppraiseReplyList;
+            }
+
             public static class EcAppraiseGoodsBean {
                 /**
                  * id : 111
@@ -267,8 +278,8 @@ public class MyCommentsBean {
                  * updateDate : null
                  * custId : 111
                  * shopId : 111
-                 * goodsId : q'w'r
-                 * detailId : 05d10158c051415a9d6bea9d6ef1a3fd
+                 * goodsId : 111
+                 * detailId : 04eaad7a66f64edd95f29815558f8cb9
                  * ifMatch : 2
                  * employeeAbility : 1
                  * apprDetails : aff
@@ -433,7 +444,7 @@ public class MyCommentsBean {
                  * updateDate : null
                  * custId : 111
                  * shopId : 111
-                 * orderId : 6352b0d7cbc347d5b3bd7d3d61969524
+                 * orderId : 1a36396703d648f1abf0544c474d7288
                  * serviceAttitude : 2
                  * shopEnvironment : 1
                  * apprTime : 2018-04-27 16:36:15
@@ -542,17 +553,20 @@ public class MyCommentsBean {
 
             public static class AnsOrderDetailsBean {
                 /**
-                 * id : 05d10158c051415a9d6bea9d6ef1a3fd
+                 * id : 04eaad7a66f64edd95f29815558f8cb9
                  * isNewRecord : false
                  * remarks : null
-                 * createDate : 2018-05-04 11:29:01
-                 * updateDate : 2018-05-04 11:29:01
-                 * orderId : 6352b0d7cbc347d5b3bd7d3d61969524
-                 * goodsId : 666
-                 * unitPrice : 111.00
-                 * purchaseNumber : 6
-                 * sumAmount : 666.00
+                 * createDate : 2018-05-29 13:39:32
+                 * updateDate : 2018-05-29 13:39:32
+                 * orderId : 1a36396703d648f1abf0544c474d7288
+                 * goodsId : ef4f51753e1d43b2a39e3d15ba10dcca
+                 * goodsName : 修改测试1
+                 * unitPrice : 0.01
+                 * purchaseNumber : 4
+                 * sumAmount : 0.04
                  * cpAmount : null
+                 * discountAmount : null
+                 * usePoints : null
                  * afterAmount : null
                  * consumeQrcode : null
                  * detailsRemarks : null
@@ -567,10 +581,13 @@ public class MyCommentsBean {
                 private String updateDate;
                 private String orderId;
                 private String goodsId;
+                private String goodsName;
                 private String unitPrice;
                 private String purchaseNumber;
                 private String sumAmount;
                 private Object cpAmount;
+                private Object discountAmount;
+                private Object usePoints;
                 private Object afterAmount;
                 private Object consumeQrcode;
                 private Object detailsRemarks;
@@ -633,6 +650,14 @@ public class MyCommentsBean {
                     this.goodsId = goodsId;
                 }
 
+                public String getGoodsName() {
+                    return goodsName;
+                }
+
+                public void setGoodsName(String goodsName) {
+                    this.goodsName = goodsName;
+                }
+
                 public String getUnitPrice() {
                     return unitPrice;
                 }
@@ -663,6 +688,22 @@ public class MyCommentsBean {
 
                 public void setCpAmount(Object cpAmount) {
                     this.cpAmount = cpAmount;
+                }
+
+                public Object getDiscountAmount() {
+                    return discountAmount;
+                }
+
+                public void setDiscountAmount(Object discountAmount) {
+                    this.discountAmount = discountAmount;
+                }
+
+                public Object getUsePoints() {
+                    return usePoints;
+                }
+
+                public void setUsePoints(Object usePoints) {
+                    this.usePoints = usePoints;
                 }
 
                 public Object getAfterAmount() {
@@ -929,6 +970,218 @@ public class MyCommentsBean {
 
                 public void setNewFlag(String newFlag) {
                     this.newFlag = newFlag;
+                }
+            }
+
+            public static class ApiEcAppraiseReplyListBean {
+                /**
+                 * id : null
+                 * isNewRecord : true
+                 * remarks : null
+                 * createDate : null
+                 * updateDate : null
+                 * ecAppraiseReply : {"id":"a34838a82fe74ec0b4fd5edab31ba38f","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"appraiseId":"111","objectId":"111","replyContent":"谢谢您","replyFrom":"1","replyUser":"3523","objectUser":"2352","replyTime":"2018-04-25 00:00:00"}
+                 * replyUserName : null
+                 * objectUserName : 琳美甲
+                 */
+
+                private Object id;
+                private boolean isNewRecord;
+                private Object remarks;
+                private Object createDate;
+                private Object updateDate;
+                private EcAppraiseReplyBean ecAppraiseReply;
+                private Object replyUserName;
+                private String objectUserName;
+
+                public Object getId() {
+                    return id;
+                }
+
+                public void setId(Object id) {
+                    this.id = id;
+                }
+
+                public boolean isIsNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setIsNewRecord(boolean isNewRecord) {
+                    this.isNewRecord = isNewRecord;
+                }
+
+                public Object getRemarks() {
+                    return remarks;
+                }
+
+                public void setRemarks(Object remarks) {
+                    this.remarks = remarks;
+                }
+
+                public Object getCreateDate() {
+                    return createDate;
+                }
+
+                public void setCreateDate(Object createDate) {
+                    this.createDate = createDate;
+                }
+
+                public Object getUpdateDate() {
+                    return updateDate;
+                }
+
+                public void setUpdateDate(Object updateDate) {
+                    this.updateDate = updateDate;
+                }
+
+                public EcAppraiseReplyBean getEcAppraiseReply() {
+                    return ecAppraiseReply;
+                }
+
+                public void setEcAppraiseReply(EcAppraiseReplyBean ecAppraiseReply) {
+                    this.ecAppraiseReply = ecAppraiseReply;
+                }
+
+                public Object getReplyUserName() {
+                    return replyUserName;
+                }
+
+                public void setReplyUserName(Object replyUserName) {
+                    this.replyUserName = replyUserName;
+                }
+
+                public String getObjectUserName() {
+                    return objectUserName;
+                }
+
+                public void setObjectUserName(String objectUserName) {
+                    this.objectUserName = objectUserName;
+                }
+
+                public static class EcAppraiseReplyBean {
+                    /**
+                     * id : a34838a82fe74ec0b4fd5edab31ba38f
+                     * isNewRecord : false
+                     * remarks : null
+                     * createDate : null
+                     * updateDate : null
+                     * appraiseId : 111
+                     * objectId : 111
+                     * replyContent : 谢谢您
+                     * replyFrom : 1
+                     * replyUser : 3523
+                     * objectUser : 2352
+                     * replyTime : 2018-04-25 00:00:00
+                     */
+
+                    private String id;
+                    private boolean isNewRecord;
+                    private Object remarks;
+                    private Object createDate;
+                    private Object updateDate;
+                    private String appraiseId;
+                    private String objectId;
+                    private String replyContent;
+                    private String replyFrom;
+                    private String replyUser;
+                    private String objectUser;
+                    private String replyTime;
+
+                    public String getId() {
+                        return id;
+                    }
+
+                    public void setId(String id) {
+                        this.id = id;
+                    }
+
+                    public boolean isIsNewRecord() {
+                        return isNewRecord;
+                    }
+
+                    public void setIsNewRecord(boolean isNewRecord) {
+                        this.isNewRecord = isNewRecord;
+                    }
+
+                    public Object getRemarks() {
+                        return remarks;
+                    }
+
+                    public void setRemarks(Object remarks) {
+                        this.remarks = remarks;
+                    }
+
+                    public Object getCreateDate() {
+                        return createDate;
+                    }
+
+                    public void setCreateDate(Object createDate) {
+                        this.createDate = createDate;
+                    }
+
+                    public Object getUpdateDate() {
+                        return updateDate;
+                    }
+
+                    public void setUpdateDate(Object updateDate) {
+                        this.updateDate = updateDate;
+                    }
+
+                    public String getAppraiseId() {
+                        return appraiseId;
+                    }
+
+                    public void setAppraiseId(String appraiseId) {
+                        this.appraiseId = appraiseId;
+                    }
+
+                    public String getObjectId() {
+                        return objectId;
+                    }
+
+                    public void setObjectId(String objectId) {
+                        this.objectId = objectId;
+                    }
+
+                    public String getReplyContent() {
+                        return replyContent;
+                    }
+
+                    public void setReplyContent(String replyContent) {
+                        this.replyContent = replyContent;
+                    }
+
+                    public String getReplyFrom() {
+                        return replyFrom;
+                    }
+
+                    public void setReplyFrom(String replyFrom) {
+                        this.replyFrom = replyFrom;
+                    }
+
+                    public String getReplyUser() {
+                        return replyUser;
+                    }
+
+                    public void setReplyUser(String replyUser) {
+                        this.replyUser = replyUser;
+                    }
+
+                    public String getObjectUser() {
+                        return objectUser;
+                    }
+
+                    public void setObjectUser(String objectUser) {
+                        this.objectUser = objectUser;
+                    }
+
+                    public String getReplyTime() {
+                        return replyTime;
+                    }
+
+                    public void setReplyTime(String replyTime) {
+                        this.replyTime = replyTime;
+                    }
                 }
             }
         }

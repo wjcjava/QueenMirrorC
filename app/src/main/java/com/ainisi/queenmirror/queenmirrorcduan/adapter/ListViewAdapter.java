@@ -65,7 +65,6 @@ public class ListViewAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
-
         holder.sote_name.setText(shopListNew.get(position).getAnsShopBasic().getShopName());
         holder.sort_time.setText(shopListNew.get(position).getAnsShopBasic().getOpenTime()+"-"+shopListNew.get(position).getAnsShopBasic().getCloseTime());
 

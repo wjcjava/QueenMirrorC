@@ -1,16 +1,16 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean;
 
 /**
- * Created by john on 2018/6/5.
+ * Created by john on 2018/6/9.
  */
 
-public class MyWalletBean {
+public class WhetherPassBean {
 
     /**
      * success : true
-     * errorCode : -1
-     * msg : 操作成功
-     * body : {"accountBalance":0}
+     * errorCode : 0
+     * msg : 不存在
+     * body : {"isExists":0}
      */
 
     private boolean success;
@@ -52,17 +52,17 @@ public class MyWalletBean {
 
     public static class BodyBean {
         /**
-         * accountBalance : 0
+         * isExists : 0
          */
 
-        private int accountBalance;
+        private int isExists;
 
-        public int getAccountBalance() {
-            return accountBalance;
+        public int getIsExists() {
+            return isExists;
         }
 
-        public void setAccountBalance(int accountBalance) {
-            this.accountBalance = accountBalance;
+        public void setIsExists(int isExists) {
+            this.isExists = isExists;
         }
     }
 }

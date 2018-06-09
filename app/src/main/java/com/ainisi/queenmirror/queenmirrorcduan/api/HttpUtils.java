@@ -621,6 +621,10 @@ public class HttpUtils {
             case ACTION.PAYAFTERREFRESH:
                 actionUrl = UrlConstants.PAYAFTERREFRESH;
                 break;
+            //商品数据的列表
+            case ACTION.GOODLIST:
+                actionUrl=UrlConstants.GOODLIST;
+                break;
         }
         url.append(actionUrl);
         return url;

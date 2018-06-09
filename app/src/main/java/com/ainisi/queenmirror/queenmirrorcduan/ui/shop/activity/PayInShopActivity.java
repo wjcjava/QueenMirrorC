@@ -11,9 +11,11 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
 /**
  * 到店付款
  */
@@ -66,32 +68,33 @@ public class PayInShopActivity extends BaseNewActivity implements HttpCallBack, 
         balancePay.setOnClickListener(this);
         popview.findViewById(R.id.li_confirm_pay).setOnClickListener(this);
     }
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.check_wechat:
-                if(wechatPay.isChecked()){
+                if (wechatPay.isChecked()) {
                     aliPay.setChecked(false);
                     queenPay.setChecked(false);
                     balancePay.setChecked(false);
                 }
                 break;
             case R.id.check_alipay:
-                if(aliPay.isChecked()){
+                if (aliPay.isChecked()) {
                     wechatPay.setChecked(false);
                     queenPay.setChecked(false);
                     balancePay.setChecked(false);
                 }
                 break;
             case R.id.check_queen:
-                if(queenPay.isChecked()){
+                if (queenPay.isChecked()) {
                     aliPay.setChecked(false);
                     wechatPay.setChecked(false);
                     balancePay.setChecked(false);
                 }
                 break;
             case R.id.check_balance:
-                if(balancePay.isChecked()){
+                if (balancePay.isChecked()) {
                     aliPay.setChecked(false);
                     queenPay.setChecked(false);
                     wechatPay.setChecked(false);
@@ -100,20 +103,21 @@ public class PayInShopActivity extends BaseNewActivity implements HttpCallBack, 
             case R.id.li_confirm_pay:
                 popWindow.dismiss();
                 lighton();
-                if(wechatPay.isChecked()){
+                if (wechatPay.isChecked()) {
                     payArrow.setText(tvWechat.getText());
-                }else if(aliPay.isChecked()){
+                } else if (aliPay.isChecked()) {
                     payArrow.setText(tvAliPay.getText());
-                }else if(queenPay.isChecked()){
+                } else if (queenPay.isChecked()) {
                     payArrow.setText(tvQueen.getText());
-                }else if(balancePay.isChecked()){
+                } else if (balancePay.isChecked()) {
                     payArrow.setText(tvBalance.getText());
                 }
                 break;
 
         }
     }
-    @OnClick({R.id.title_back, R.id.re_pay_way})
+
+    @OnClick({R.id.title_back, R.id.re_pay_way, R.id.tv_amountpay})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -123,7 +127,25 @@ public class PayInShopActivity extends BaseNewActivity implements HttpCallBack, 
             case R.id.re_pay_way:
                 lightoff();
                 initshowpop();
+                break;
+            case R.id.tv_amountpay:
+                if (payArrow.getText()!=null) {
+                    T.show(payArrow.getText());
+                } else {
+                    if (payArrow.getText() == tvWechat.getText()) {
+                        T.show("你选择了" + tvWechat.getText());
 
+                    } else if (payArrow.getText() == tvAliPay.getText()) {
+                        T.show("你选择了" + tvAliPay.getText());
+
+                    } else if (payArrow.getText() == tvQueen.getText()) {
+                        T.show("你选择了" + tvQueen.getText());
+
+                    } else if (payArrow.getText() == tvBalance.getText()) {
+                        T.show("你选择了" + tvBalance.getText());
+
+                    }
+                }
                 break;
         }
     }
@@ -163,7 +185,7 @@ public class PayInShopActivity extends BaseNewActivity implements HttpCallBack, 
                 }
             });
             popWindow.showAtLocation(PayInShopActivity.this.findViewById(R.id.layout_pay_inshop), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-        }else {
+        } else {
             //如果popupWindow正在显示，接下来隐藏
             if (popWindow.isShowing()) {
                 popWindow.dismiss();

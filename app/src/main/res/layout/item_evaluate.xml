@@ -169,6 +169,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/appbar_blue" />
             <RelativeLayout
+                android:id="@+id/re_relayComment"
                 android:layout_alignParentRight="true"
                 android:background="@color/white"
                 android:layout_below="@id/re_evaluate_business"

@@ -8,11 +8,12 @@ import java.util.List;
 
 public class CommentsBean {
 
+
     /**
      * success : true
      * errorCode : 0
      * msg : 获取数据成功
-     * body : {"apiGoodsCommentsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"9c1ab6728e534231b233964be44fd585","isNewRecord":false,"remarks":null,"createDate":"2018-05-04 11:29:00","updateDate":"2018-05-04 11:29:00","orderId":"1111","goodsId":"111","unitPrice":"111.00","purchaseNumber":"1","sumAmount":"111.00","detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":{"id":"25d2f4cc4a154cd0aaffecb225b4eb07","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"1111","orderId":"1111","serviceAttitude":"1","shopEnvironment":"1","apprTime":"2018-04-27 15:10:06"},"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":"差","shopEnvironmentLabel":"差"}]}
+     * body : {"pageSum":7,"CommentsListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"9c1ab6728e534231b233964be44fd585","isNewRecord":false,"remarks":null,"createDate":"2018-05-04 11:29:00","updateDate":"2018-05-04 11:29:00","orderId":"1111","goodsId":"111","goodsName":"自然堂","unitPrice":"111.00","purchaseNumber":"1","sumAmount":"111.00","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"RF","updatePgm":"ApiOrderService"},"ecAppraiseShop":{"id":"25d2f4cc4a154cd0aaffecb225b4eb07","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"1111","orderId":"1111","serviceAttitude":"1","shopEnvironment":"1","apprTime":"2018-04-27 15:10:06"},"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"cdcf9fb926e7482f9a3f24f9d1ed46e5","isNewRecord":false,"remarks":null,"createDate":"2018-05-29 09:26:07","updateDate":"2018-05-29 09:26:07","orderId":"b619986b5e194b9db01085d41cacafe0","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UT","updatePgm":"ApiOrderService"},"ecAppraiseShop":{"id":"63191e139d0e424f9ca23745d437cd42","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","orderId":"b619986b5e194b9db01085d41cacafe0","serviceAttitude":"1","shopEnvironment":"2","apprTime":"2018-04-27 16:19:39"},"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"233a959dde884abc9b8ea35d7f82474a","isNewRecord":false,"remarks":null,"createDate":"2018-05-28 19:00:22","updateDate":"2018-05-28 19:00:22","orderId":"236dfbb862fc47fa8a56c83543347433","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"4a166a4d0c474dc5a90b663bf874b0d6","isNewRecord":false,"remarks":null,"createDate":"2018-05-28 19:00:22","updateDate":"2018-05-28 19:00:22","orderId":"282bb7007a8047efb415a4e6626da90e","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"4ca85e3438f44f5ab137b789d588b5e5","isNewRecord":false,"remarks":null,"createDate":"2018-05-28 18:51:37","updateDate":"2018-05-28 18:51:37","orderId":"2d0f91c5713d4e14a4fd7250c8adbdaf","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"5e0f9dd4a4b742059645c89b9e8e7ca6","isNewRecord":false,"remarks":null,"createDate":"2018-05-28 19:00:22","updateDate":"2018-05-28 19:00:22","orderId":"6270ce6befc24012906223c332d21499","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"7626a08fbf11442f93aea544798c0049","isNewRecord":false,"remarks":null,"createDate":"2018-05-29 09:28:41","updateDate":"2018-05-29 09:28:41","orderId":"f0bbbb920d6242bb8e31858de214ff02","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"2","sumAmount":"0.02","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UT","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null}]}
      */
 
     private boolean success;
@@ -53,24 +54,38 @@ public class CommentsBean {
     }
 
     public static class BodyBean {
-        private List<ApiGoodsCommentsListBean> apiGoodsCommentsList;
+        /**
+         * pageSum : 7
+         * CommentsListData : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"9c1ab6728e534231b233964be44fd585","isNewRecord":false,"remarks":null,"createDate":"2018-05-04 11:29:00","updateDate":"2018-05-04 11:29:00","orderId":"1111","goodsId":"111","goodsName":"自然堂","unitPrice":"111.00","purchaseNumber":"1","sumAmount":"111.00","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"RF","updatePgm":"ApiOrderService"},"ecAppraiseShop":{"id":"25d2f4cc4a154cd0aaffecb225b4eb07","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"1111","orderId":"1111","serviceAttitude":"1","shopEnvironment":"1","apprTime":"2018-04-27 15:10:06"},"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"cdcf9fb926e7482f9a3f24f9d1ed46e5","isNewRecord":false,"remarks":null,"createDate":"2018-05-29 09:26:07","updateDate":"2018-05-29 09:26:07","orderId":"b619986b5e194b9db01085d41cacafe0","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UT","updatePgm":"ApiOrderService"},"ecAppraiseShop":{"id":"63191e139d0e424f9ca23745d437cd42","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"111","orderId":"b619986b5e194b9db01085d41cacafe0","serviceAttitude":"1","shopEnvironment":"2","apprTime":"2018-04-27 16:19:39"},"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"233a959dde884abc9b8ea35d7f82474a","isNewRecord":false,"remarks":null,"createDate":"2018-05-28 19:00:22","updateDate":"2018-05-28 19:00:22","orderId":"236dfbb862fc47fa8a56c83543347433","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"4a166a4d0c474dc5a90b663bf874b0d6","isNewRecord":false,"remarks":null,"createDate":"2018-05-28 19:00:22","updateDate":"2018-05-28 19:00:22","orderId":"282bb7007a8047efb415a4e6626da90e","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"4ca85e3438f44f5ab137b789d588b5e5","isNewRecord":false,"remarks":null,"createDate":"2018-05-28 18:51:37","updateDate":"2018-05-28 18:51:37","orderId":"2d0f91c5713d4e14a4fd7250c8adbdaf","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"5e0f9dd4a4b742059645c89b9e8e7ca6","isNewRecord":false,"remarks":null,"createDate":"2018-05-28 19:00:22","updateDate":"2018-05-28 19:00:22","orderId":"6270ce6befc24012906223c332d21499","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"1","sumAmount":"0.01","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansOrderDetails":{"id":"7626a08fbf11442f93aea544798c0049","isNewRecord":false,"remarks":null,"createDate":"2018-05-29 09:28:41","updateDate":"2018-05-29 09:28:41","orderId":"f0bbbb920d6242bb8e31858de214ff02","goodsId":"111","goodsName":"测试3","unitPrice":"0.01","purchaseNumber":"2","sumAmount":"0.02","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"UT","updatePgm":"ApiOrderService"},"ecAppraiseShop":null,"ecAppraiseGoods":null,"goodsIdName":"测试3","custIdName":null,"shopIdName":null,"detailsStatusLabel":null,"ifMatchLabel":null,"employeeAbilityLabel":null,"ifAnonLabel":null,"serviceAttitudeLabel":null,"shopEnvironmentLabel":null,"map":null}]
+         */
 
-        public List<ApiGoodsCommentsListBean> getApiGoodsCommentsList() {
-            return apiGoodsCommentsList;
+        private int pageSum;
+        private List<CommentsListDataBean> CommentsListData;
+
+        public int getPageSum() {
+            return pageSum;
         }
 
-        public void setApiGoodsCommentsList(List<ApiGoodsCommentsListBean> apiGoodsCommentsList) {
-            this.apiGoodsCommentsList = apiGoodsCommentsList;
+        public void setPageSum(int pageSum) {
+            this.pageSum = pageSum;
         }
 
-        public static class ApiGoodsCommentsListBean {
+        public List<CommentsListDataBean> getCommentsListData() {
+            return CommentsListData;
+        }
+
+        public void setCommentsListData(List<CommentsListDataBean> CommentsListData) {
+            this.CommentsListData = CommentsListData;
+        }
+
+        public static class CommentsListDataBean {
             /**
              * id : null
              * isNewRecord : true
              * remarks : null
              * createDate : null
              * updateDate : null
-             * ansOrderDetails : {"id":"9c1ab6728e534231b233964be44fd585","isNewRecord":false,"remarks":null,"createDate":"2018-05-04 11:29:00","updateDate":"2018-05-04 11:29:00","orderId":"1111","goodsId":"111","unitPrice":"111.00","purchaseNumber":"1","sumAmount":"111.00","detailsRemarks":null,"detailsStatus":"UP","updatePgm":"ApiOrderService"}
+             * ansOrderDetails : {"id":"9c1ab6728e534231b233964be44fd585","isNewRecord":false,"remarks":null,"createDate":"2018-05-04 11:29:00","updateDate":"2018-05-04 11:29:00","orderId":"1111","goodsId":"111","goodsName":"自然堂","unitPrice":"111.00","purchaseNumber":"1","sumAmount":"111.00","cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"RF","updatePgm":"ApiOrderService"}
              * ecAppraiseShop : {"id":"25d2f4cc4a154cd0aaffecb225b4eb07","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"custId":"111","shopId":"1111","orderId":"1111","serviceAttitude":"1","shopEnvironment":"1","apprTime":"2018-04-27 15:10:06"}
              * ecAppraiseGoods : null
              * goodsIdName : 测试3
@@ -80,8 +95,9 @@ public class CommentsBean {
              * ifMatchLabel : null
              * employeeAbilityLabel : null
              * ifAnonLabel : null
-             * serviceAttitudeLabel : 差
-             * shopEnvironmentLabel : 差
+             * serviceAttitudeLabel : null
+             * shopEnvironmentLabel : null
+             * map : null
              */
 
             private Object id;
@@ -99,8 +115,9 @@ public class CommentsBean {
             private Object ifMatchLabel;
             private Object employeeAbilityLabel;
             private Object ifAnonLabel;
-            private String serviceAttitudeLabel;
-            private String shopEnvironmentLabel;
+            private Object serviceAttitudeLabel;
+            private Object shopEnvironmentLabel;
+            private Object map;
 
             public Object getId() {
                 return id;
@@ -222,20 +239,28 @@ public class CommentsBean {
                 this.ifAnonLabel = ifAnonLabel;
             }
 
-            public String getServiceAttitudeLabel() {
+            public Object getServiceAttitudeLabel() {
                 return serviceAttitudeLabel;
             }
 
-            public void setServiceAttitudeLabel(String serviceAttitudeLabel) {
+            public void setServiceAttitudeLabel(Object serviceAttitudeLabel) {
                 this.serviceAttitudeLabel = serviceAttitudeLabel;
             }
 
-            public String getShopEnvironmentLabel() {
+            public Object getShopEnvironmentLabel() {
                 return shopEnvironmentLabel;
             }
 
-            public void setShopEnvironmentLabel(String shopEnvironmentLabel) {
+            public void setShopEnvironmentLabel(Object shopEnvironmentLabel) {
                 this.shopEnvironmentLabel = shopEnvironmentLabel;
+            }
+
+            public Object getMap() {
+                return map;
+            }
+
+            public void setMap(Object map) {
+                this.map = map;
             }
 
             public static class AnsOrderDetailsBean {
@@ -247,11 +272,17 @@ public class CommentsBean {
                  * updateDate : 2018-05-04 11:29:00
                  * orderId : 1111
                  * goodsId : 111
+                 * goodsName : 自然堂
                  * unitPrice : 111.00
                  * purchaseNumber : 1
                  * sumAmount : 111.00
+                 * cpAmount : null
+                 * discountAmount : null
+                 * usePoints : null
+                 * afterAmount : null
+                 * consumeQrcode : null
                  * detailsRemarks : null
-                 * detailsStatus : UP
+                 * detailsStatus : RF
                  * updatePgm : ApiOrderService
                  */
 
@@ -262,9 +293,15 @@ public class CommentsBean {
                 private String updateDate;
                 private String orderId;
                 private String goodsId;
+                private String goodsName;
                 private String unitPrice;
                 private String purchaseNumber;
                 private String sumAmount;
+                private Object cpAmount;
+                private Object discountAmount;
+                private Object usePoints;
+                private Object afterAmount;
+                private Object consumeQrcode;
                 private Object detailsRemarks;
                 private String detailsStatus;
                 private String updatePgm;
@@ -325,6 +362,14 @@ public class CommentsBean {
                     this.goodsId = goodsId;
                 }
 
+                public String getGoodsName() {
+                    return goodsName;
+                }
+
+                public void setGoodsName(String goodsName) {
+                    this.goodsName = goodsName;
+                }
+
                 public String getUnitPrice() {
                     return unitPrice;
                 }
@@ -347,6 +392,46 @@ public class CommentsBean {
 
                 public void setSumAmount(String sumAmount) {
                     this.sumAmount = sumAmount;
+                }
+
+                public Object getCpAmount() {
+                    return cpAmount;
+                }
+
+                public void setCpAmount(Object cpAmount) {
+                    this.cpAmount = cpAmount;
+                }
+
+                public Object getDiscountAmount() {
+                    return discountAmount;
+                }
+
+                public void setDiscountAmount(Object discountAmount) {
+                    this.discountAmount = discountAmount;
+                }
+
+                public Object getUsePoints() {
+                    return usePoints;
+                }
+
+                public void setUsePoints(Object usePoints) {
+                    this.usePoints = usePoints;
+                }
+
+                public Object getAfterAmount() {
+                    return afterAmount;
+                }
+
+                public void setAfterAmount(Object afterAmount) {
+                    this.afterAmount = afterAmount;
+                }
+
+                public Object getConsumeQrcode() {
+                    return consumeQrcode;
+                }
+
+                public void setConsumeQrcode(Object consumeQrcode) {
+                    this.consumeQrcode = consumeQrcode;
                 }
 
                 public Object getDetailsRemarks() {

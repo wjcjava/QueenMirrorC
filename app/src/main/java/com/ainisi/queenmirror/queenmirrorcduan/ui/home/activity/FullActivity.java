@@ -249,7 +249,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
      */
     private void inithttp() {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("goodsId", goodsId);
+        hashMap.put("goodsId", "111");
         hashMap.put("pageNumber", "1");
         hashMap.put("pageSize", "10");
         HttpUtils.doPost(ACTION.EVALUATION, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
@@ -386,7 +386,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 break;
             case ACTION.EVALUATION:
                 commentsBean = GsonUtil.toObj(res, CommentsBean.class);
-                List<CommentsBean.BodyBean.ApiGoodsCommentsListBean> commList = commentsBean.getBody().getApiGoodsCommentsList();
+                List<CommentsBean.BodyBean.CommentsListDataBean> commList = commentsBean.getBody().getCommentsListData();
                 CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo, commList);
                 frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 frecyclertwo.setAdapter(sortAdapter2);

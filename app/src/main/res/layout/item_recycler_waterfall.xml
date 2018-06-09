@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/comment_2_dip"
-    android:paddingLeft="@dimen/comment_2_dip"
-    android:paddingRight="@dimen/comment_2_dip"
+    android:layout_margin="@dimen/comment_10_dip"
     android:fitsSystemWindows="true"
     android:id="@+id/li_home_short"
     android:background="@drawable/et_shap">
@@ -59,4 +57,22 @@
         android:layout_marginBottom="@dimen/comment_5_dip"
         android:text="营业时间：9:00~20:00"
         />
+    <View
+        android:id="@+id/view"
+        android:layout_marginTop="@dimen/comment_5_dip"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/comment_20_dip"
+        android:background="@color/alpha_05_black"
+        android:layout_below="@id/tv_shop_time"
+        android:layout_height="@dimen/comment_2_dip"/>
+    <TextView
+        android:layout_below="@id/view"
+        android:text="100km"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/comment_20_dip"
+        android:layout_marginTop="@dimen/comment_5_dip"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="@dimen/comment_5_dip"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

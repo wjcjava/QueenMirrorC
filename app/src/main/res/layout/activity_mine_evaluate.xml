@@ -10,7 +10,6 @@
     tools:context=".ui.mine.activity.MineEvaluateActivity">
 
     <RelativeLayout
-
         android:id="@+id/root_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_188_dip"
@@ -49,6 +48,7 @@
             android:textSize="@dimen/comment_15_size" />
 
         <TextView
+            android:id="@+id/tv_evaluate_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_name"

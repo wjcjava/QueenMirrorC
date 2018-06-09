@@ -10,8 +10,10 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.MyWalletBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.WhetherPassBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -28,6 +30,7 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
     TextView tvbalance;
     @Bind(R.id.tv_addcart)
     TextView tvaddcart;
+    private int exists;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MineMyWalletActivity.class));
@@ -84,9 +87,12 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
 
             //支付设置
             case R.id.rc_setup:
-
+                if (exists == 0) {
                     startActivity(new Intent(this, MinePaymentsettingActivity.class));
                     inithttpPass();
+                } else {
+                    MineSettingActivity.startActivity(this);
+                }
                 break;
             default:
                 break;
@@ -97,20 +103,20 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
     }
 
     private void inithttpPass() {
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("","");
-        HttpUtils.doPost(ACTION.WHETHERPASS,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("custId", SP.get(this, SpContent.UserId,"")+"");
+        HttpUtils.doPost(ACTION.WHETHERPASS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.MYWALLIET:
-                MyWalletBean myWalletBean = GsonUtil.toObj(res, MyWalletBean.class);
-                if(myWalletBean.isSuccess()){
-
-                }else {
-                    T.show(myWalletBean.getMsg());
+                WhetherPassBean whetherPassBean = GsonUtil.toObj(res, WhetherPassBean.class);
+                if (whetherPassBean.isSuccess()) {
+                    exists = whetherPassBean.getBody().getIsExists();
+                } else {
+                    T.show(whetherPassBean.getMsg());
                 }
                 break;
         }

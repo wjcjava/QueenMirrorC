@@ -43,7 +43,7 @@ public class ScreenPoputil extends PopupWindow{
 
         popview = View.inflate(context, R.layout.pop_screening, null);
         initoperation(popview);
-        popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
+        popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT);
         popWindow.setContentView(popview);
         popWindow.setOutsideTouchable(true);
         popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
@@ -54,7 +54,7 @@ public class ScreenPoputil extends PopupWindow{
 
 
 
-    private void initoperation(View popview) {
+    private void initoperation(final View popview) {
         RecyclerView merchants = popview.findViewById(R.id.re_home_merchants);
         TextView cancel = popview.findViewById(R.id.tv_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +72,12 @@ public class ScreenPoputil extends PopupWindow{
         } else if (text.equals("shopification")) {
             initAdapter(merchants);
         }
+        popview.findViewById(R.id.pop_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popWindow.dismiss();
+            }
+        });
     }
     private void initAdapter(RecyclerView merchants) {
         RecyclerView preferential = popview.findViewById(R.id.re_home_preferential);

@@ -63,6 +63,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
                 @Override
                 public void onClick(View view) {
                     if(where.equals("home")){
+
                         Intent intent = new Intent(context, WorkRoomDetailActivity.class);
                         intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
                         intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());

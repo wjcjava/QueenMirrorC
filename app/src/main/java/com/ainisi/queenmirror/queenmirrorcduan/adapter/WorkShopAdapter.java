@@ -64,6 +64,7 @@ public class WorkShopAdapter extends BaseAdapter {
         holder.couneMoney.setText(list.get(position).getCpCreateInfo().getReduceAmount()+"元");
         holder.couneConditions.setText(list.get(position).getCpCreateInfo().getCpUsing());
         holder.couneTime.setText(list.get(position).getCpCreateInfo().getCreateTime());
+
         return convertView;
     }
 

@@ -1,7 +1,5 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;

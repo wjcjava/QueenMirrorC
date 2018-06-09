@@ -121,7 +121,9 @@
         </TextView>
     </RelativeLayout>
 
-    <TextView android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_amountpay"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:padding="10dp"
