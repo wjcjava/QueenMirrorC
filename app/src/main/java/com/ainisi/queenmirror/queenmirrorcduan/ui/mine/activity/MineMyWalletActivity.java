@@ -43,23 +43,17 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
 
     @Override
     public void initPresenter() {
-
     }
-
-
     @Override
     public void initView() {
         wallTitle.setText(R.string.my_wallet);
         inithttp();
     }
-
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
         parames.put("custId", "1a474a8202e84cc49beb65be3addcf9d");
         HttpUtils.doPost(ACTION.MYWALLIET, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
-
     @OnClick({R.id.title_back, R.id.rc_name, R.id.rc_setup, R.id.img_addcart, R.id.img_balance
     })
     public void click(View view) {
@@ -87,9 +81,10 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
 
             //支付设置
             case R.id.rc_setup:
+                inithttpPass();
                 if (exists == 0) {
                     startActivity(new Intent(this, MinePaymentsettingActivity.class));
-                    inithttpPass();
+
                 } else {
                     MineSettingActivity.startActivity(this);
                 }
@@ -115,6 +110,7 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
                 WhetherPassBean whetherPassBean = GsonUtil.toObj(res, WhetherPassBean.class);
                 if (whetherPassBean.isSuccess()) {
                     exists = whetherPassBean.getBody().getIsExists();
+
                 } else {
                     T.show(whetherPassBean.getMsg());
                 }

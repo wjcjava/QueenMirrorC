@@ -80,6 +80,8 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     TextView tv_introduction;
     @Bind(R.id.tv_full_shoppingcart)
     TextView tv_full_shoppingcart;
+    @Bind(R.id.ttv_ping)
+    TextView tvPing;
     private CommentsBean commentsBean;
     private CommendGoodBean goodBean;
     private FullGoodsAdapter myAdapter;
@@ -93,6 +95,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
 
     CustomShareListener mShareListener;
     ShareAction mShareAction;
+    private int pageSum;
 
     @Override
     public int getLayoutId() {
@@ -388,6 +391,8 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 commentsBean = GsonUtil.toObj(res, CommentsBean.class);
                 List<CommentsBean.BodyBean.CommentsListDataBean> commList = commentsBean.getBody().getCommentsListData();
                 CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo, commList);
+                pageSum=commentsBean.getBody().getPageSum();
+                tvPing.setText("评价("+pageSum+")");
                 frecyclertwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 frecyclertwo.setAdapter(sortAdapter2);
                 break;

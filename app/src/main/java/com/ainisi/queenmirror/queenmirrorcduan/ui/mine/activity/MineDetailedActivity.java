@@ -19,6 +19,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.adapter.TouchAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.TouchbalanceBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.lzy.okgo.cache.CacheMode;
@@ -55,14 +57,15 @@ public class MineDetailedActivity extends BaseNewActivity implements RefreshLoad
 
     @Override
     public void initView() {
+        inithttp();
         initText();
         initDete();
-        inithttp();
+
     }
 
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
-        parames.put("custId", "1a474a8202e84cc49beb65be3addcf9d");
+        parames.put("custId", SP.get(this, SpContent.UserId,"")+"");
         HttpUtils.doPost(ACTION.TOUCHBALANCE, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -201,7 +204,7 @@ public class MineDetailedActivity extends BaseNewActivity implements RefreshLoad
             case ACTION.TOUCHBALANCE:
                 TouchbalanceBean touchbalanceBean = GsonUtil.toObj(res, TouchbalanceBean.class);
                 if (touchbalanceBean.isSuccess()) {
-                    T.show(touchbalanceBean.getMsg());
+
                     list = touchbalanceBean.getBody().getAccountChargeRecords();
                     TouchAdapter sortAdapter2 = new TouchAdapter(R.layout.item_rcbean, list);
                     detailrecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/comment_27_dip"
-                        android:text="￥58"
+
                         android:textColor="@color/white"
                         android:textSize="@dimen/comment_18_size"
                         android:layout_centerVertical="true"
@@ -59,7 +59,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/comment_21_dip"
                         android:layout_toEndOf="@+id/full_cash"
-                        android:text="¥258"
+
                         android:textColor="@color/white"
                         android:textSize="@dimen/comment_12_size" />
                 </RelativeLayout>
@@ -78,7 +78,7 @@
                         android:layout_below="@+id/fullname"
                         android:layout_marginTop="3dp"
                         android:layout_marginStart="10dp"
-                        android:text="2016年4月18日,算是第三次修改了,这个项目也算"
+
                         android:textSize="@dimen/comment_13_size"
                         tools:ignore="NotSibling" />
 

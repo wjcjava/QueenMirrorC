@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/comment_13_dip"
                 android:layout_marginTop="@dimen/comment_10_dip"
-                android:text="思妍丽美发苏州中心"
+
                 android:textColor="@color/alpha_95_black"
                 android:textSize="@dimen/comment_16_size"/>
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tv_shangpin"
                 android:layout_marginEnd="@dimen/comment_14_dip"
-                android:text="订单已付款"
+
                 android:textSize="@dimen/comment_14_size" />
         </LinearLayout>
 
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/comment_13_dip"
                 android:layout_marginTop="@dimen/comment_13_dip"
-                android:text="单人美甲套餐"
+
                 android:textSize="@dimen/comment_14_size" />
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_marginEnd="@dimen/comment_13_dip"
                 android:layout_gravity="bottom"
                 android:gravity="end"
-                android:text="X1"
+
                 android:textSize="@dimen/comment_14_size"/>
         </LinearLayout>
 
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/comment_13_dip"
                 android:layout_marginTop="@dimen/comment_16_dip"
-                android:text="单人洗剪吹"
+
                 android:textSize="@dimen/comment_14_size" />
 
             <TextView
@@ -108,7 +108,7 @@
                 android:layout_marginEnd="@dimen/comment_13_dip"
                 android:layout_gravity="bottom"
                 android:gravity="end"
-                android:text="X1"
+
                 android:textSize="@dimen/comment_14_size" />
         </LinearLayout>
 
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/comment_13_dip"
                 android:layout_marginStart="@dimen/comment_13_dip"
-                android:text="单人烫染"
+
                 android:textSize="@dimen/comment_14_size" />
 
             <TextView
@@ -132,7 +132,7 @@
                 android:layout_marginEnd="@dimen/comment_13_dip"
                 android:layout_gravity="bottom"
                 android:gravity="end"
-                android:text="X1"
+
                 android:textSize="@dimen/comment_14_size" />
         </LinearLayout>
 
@@ -147,7 +147,7 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:layout_height="wrap_content"
-                android:text="共三个，商品实付"
+
                 android:textSize="@dimen/comment_12_size" />
 
             <TextView
@@ -159,7 +159,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_gravity="bottom"
                 android:gravity="end"
-                android:text="¥568.00"
+
                 android:textColor="@color/alpha_95_black"
                 android:textSize="@dimen/comment_14_size"
                 android:textStyle="bold" />

@@ -67,7 +67,11 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
     LinearLayout li_shop_detail_comment;
     @Bind(R.id.li_shop_detail_order)
     LinearLayout li_shop_detail_order;
-    int pagenumber=1;
+    @Bind(R.id.tv_boutique)
+    TextView tvBoutique;
+    @Bind(R.id.tv_sume_product)
+            TextView sumeProduct;
+    int pagenumber = 1;
     boolean isLogin = false;
     private List<SortBean> beanList = new ArrayList<>();
     private CustomPopWindow popWindow;
@@ -76,6 +80,7 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
     private CustomDatePicker timePicker;
     private String time;
     private String date;
+    private int pageSum;
 
     @Override
     protected int getLayoutId() {
@@ -100,9 +105,9 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
      */
     private void initShop() {
         HashMap<String, String> parames = new HashMap<>();
-        parames.put("goodsId", "1cf04904fa064c4294453ce39c506be1");
+        parames.put("goodsId", "111");
         parames.put("pageNumber", "1");
-        parames.put("pageSize", "5");
+        parames.put("pageSize", "10");
         HttpUtils.doPost(ACTION.EVALUATION, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -133,13 +138,13 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
     }
 
     private void inithttpshop() {
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("saleFlag","2");//2：上架
-        parames.put("pageNumber",pagenumber+"");
-        parames.put("contentByTitle","111");
-        parames.put("shopCate","2");//1:美业，2：异业
-        parames.put("pageSize","10");
-        HttpUtils.doPost(ACTION.GOODLIST,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("saleFlag", "2");//2：上架
+        parames.put("pageNumber", pagenumber + "");
+        parames.put("contentByTitle", "111");
+        parames.put("shopCate", "2");//1:美业，2：异业
+        parames.put("pageSize", "10");
+        HttpUtils.doPost(ACTION.GOODLIST, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     private void initPicker() {
@@ -252,6 +257,8 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
                 if (commentsBean.isSuccess()) {
                     List<CommentsBean.BodyBean.CommentsListDataBean> commList = commentsBean.getBody().getCommentsListData();
                     CommentsAdapter sortAdapter2 = new CommentsAdapter(R.layout.item_fullrecyclertwo, commList);
+                    pageSum = commentsBean.getBody().getPageSum();
+                    tvBoutique.setText("网友评价"+"("+pageSum+")");
                     reBoutique.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     reBoutique.setAdapter(sortAdapter2);
                 } else {
@@ -279,13 +286,14 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
                         shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrCity() + shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrDistrict());
                 break;
             case ACTION.GOODLIST:
-                ShopListBean shopListBean=GsonUtil.toObj(res, ShopListBean.class);
-                if(shopListBean.isSuccess()){
+                ShopListBean shopListBean = GsonUtil.toObj(res, ShopListBean.class);
+                if (shopListBean.isSuccess()) {
                     List<ShopListBean.BodyBean.GoodsListDataBean> shoplist = shopListBean.getBody().getGoodsListData();
-                    ShopListAdapter shopListAdapter=new ShopListAdapter(R.layout.re_shop_store,shoplist);
+                    sumeProduct.setText("全部成品"+shopListBean.getBody().getPageSum());
+                    ShopListAdapter shopListAdapter = new ShopListAdapter(R.layout.re_shop_store, shoplist);
                     reProduct.setLayoutManager(new GridLayoutManager(this, 2));
                     reProduct.setAdapter(shopListAdapter);
-                }else {
+                } else {
                     T.show(shopListBean.getMsg());
                 }
                 break;

@@ -625,6 +625,10 @@ public class HttpUtils {
             case ACTION.GOODLIST:
                 actionUrl=UrlConstants.GOODLIST;
                 break;
+            //(我的H5)邀请有奖
+            case ACTION.INVITEPRIZE:
+                actionUrl=UrlConstants.INVITEPRIZE;
+                break;
         }
         url.append(actionUrl);
         return url;

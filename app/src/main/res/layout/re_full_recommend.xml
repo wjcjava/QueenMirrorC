@@ -20,14 +20,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/comment_10_dip"
         android:layout_marginStart="@dimen/comment_12_dip"
-        android:text="七彩猫眼甲"
+
         android:textColor="@color/alpha_95_black"
         android:textSize="@dimen/comment_12_size" />
     <TextView
         android:id="@+id/tv_praise"
         android:layout_width="wrap_content"
         android:layout_marginStart="@dimen/comment_10_dip"
-        android:text="25人好评"
+
         android:textSize="@dimen/comment_10_size"
         android:layout_below="@id/tv_commodity_name"
         android:layout_height="wrap_content" />
@@ -35,7 +35,7 @@
         android:id="@+id/tv_present_price"
         android:layout_below="@id/tv_praise"
         android:textSize="@dimen/comment_14_size"
-        android:text="¥138"
+
         android:textColor="@color/gray_E7370C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

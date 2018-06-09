@@ -324,47 +324,61 @@
             android:theme="@style/Transparent" />
         <activity
             android:name=".ui.user.LoginActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.RegisterActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.ForgetcipherActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.order.activity.ScoreActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.shop.activity.ShopStoreActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.shop.activity.ProductActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.activity.RecommendedActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.master.activity.DynamicActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.master.activity.WriteCommentActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.HomePageActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.order.activity.ArefundActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.order.activity.ConfirmRefundActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.order.activity.RefundReasonActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.amap.api.location.APSService"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -373,13 +387,16 @@
 
         <activity
             android:name=".ui.mine.activity.MineHomepageActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.master.activity.MasterActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.activity.HomeAdvertisingActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.activity.MondelActivity"
             android:launchMode="singleTask"
@@ -387,38 +404,57 @@
             android:theme="@style/Transparent" />
         <activity
             android:name=".ui.user.LoginThirdActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.GuanLianActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.shop.activity.SelectLinkPeopleActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.activity.SystemActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.activity.InteractiveMessageActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.mine.activity.ModifyPayActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.mine.activity.BackPayActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.home.activity.PurchaseSelectActivity" />
-        android:launchMode="singleTask" />
-        <activity android:name=".ui.home.activity.SpellOrderListActivity" />
-        <activity android:name=".ui.shop.activity.CommentActivity" />
-        <activity android:name=".ui.shop.activity.PayInShopActivity"></activity>
+        <activity
+            android:name=".ui.home.activity.PurchaseSelectActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.home.activity.SpellOrderListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.activity.CommentActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.activity.PayInShopActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
         <!--友盟相关-->
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5a13e4fbf29d982a16000037"/>
-
+            android:value="5a13e4fbf29d982a16000037"></meta-data>
+        android:value="5a13e4fbf29d982a16000037" />
 
         <!--微信-->
         <activity
@@ -430,11 +466,13 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
@@ -444,11 +482,26 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".ui.shop.activity.PayInShopActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             tools:ignore="DuplicateActivity" />
-        <activity android:name=".ui.mine.activity.AmentPayActivity" />
-        <activity android:name=".ui.mine.activity.RechargeSuccessAgainActivity"></activity>
-        <activity android:name=".ui.mine.activity.ResetPayPassActivity" />
-        <activity android:name=".ui.mine.activity.ReplyCommentActivity"></activity>
+        <activity
+            android:name=".ui.mine.activity.AmentPayActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mine.activity.ResetPayPassActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mine.activity.RechargeSuccessAgainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.mine.activity.ReplyCommentActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

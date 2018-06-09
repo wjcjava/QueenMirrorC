@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/comment_12_dip"
         android:layout_toEndOf="@+id/imageView6"
-        android:text="Dear Skin形象工作室>"
+
         android:layout_centerVertical="true"
         android:textColor="@color/alpha_95_black"
         android:textSize="@dimen/comment_16_size" />
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_toEndOf="@+id/imageView11"
-        android:text="单人纯色美甲"
+
         android:layout_marginTop="@dimen/comment_15_dip"
         android:textColor="@color/alpha_95_black"
         android:textSize="@dimen/comment_14_size"
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/comment_12_dip"
-        android:text="商品描述商品描述商品描述"
+
         android:textSize="@dimen/comment_12_size"
         android:layout_below="@+id/tv_refund_name"
         android:layout_alignStart="@+id/tv_refund_name" />
@@ -100,7 +100,7 @@
         android:layout_below="@+id/relativeLayout2"
         android:layout_toEndOf="@+id/imageView12"
         android:textColor="@color/alpha_95_black"
-        android:text="仅退款 退款成功" />
+         />
     <View
         android:layout_marginTop="@dimen/comment_15_dip"
         android:layout_below="@id/textView28"

@@ -973,7 +973,7 @@ public class MyCommentsBean {
                 }
             }
 
-            public static class ApiEcAppraiseReplyListBean {
+            public static class ApiEcAppraiseReplyListBean{
                 /**
                  * id : null
                  * isNewRecord : true

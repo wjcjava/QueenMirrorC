@@ -242,6 +242,7 @@ public class App extends MultiDexApplication {
     }
 
     {
+
         PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
         //豆瓣RENREN平台目前只能在服务器端配置
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");

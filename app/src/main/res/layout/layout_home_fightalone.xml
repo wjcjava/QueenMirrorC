@@ -47,7 +47,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/comment_27_dip"
                         android:drawableLeft="@drawable/icon_full_minbi"
-                        android:text="58"
+
                         android:textColor="@color/white"
                         android:textSize="@dimen/comment_20_size"
                         android:textStyle="bold" />
@@ -59,7 +59,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/comment_21_dip"
                         android:layout_toEndOf="@+id/full_cash"
-                        android:text="¥258"
+
                         android:textColor="@color/white"
                         android:textSize="@dimen/comment_16_size" />
                 </RelativeLayout>
@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/comment_15_dip"
                         android:layout_marginTop="@dimen/comment_5_dip"
-                        android:text="纯色美甲"
+
                         android:textColor="@color/alpha_95_black"
                         android:textSize="@dimen/comment_16_size" />
 
@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@+id/tv_spell_shoptime"
                         android:layout_below="@+id/tv_spell_shopname"
-                        android:text="2016年4月18日,算是第三次修改了,这个项目也算"
+
                         android:textSize="@dimen/comment_13_size" />
 
                     <TextView

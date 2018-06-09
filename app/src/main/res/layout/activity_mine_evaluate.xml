@@ -43,7 +43,7 @@
             android:layout_below="@+id/iv_title"
             android:layout_marginTop="@dimen/comment_10_dip"
             android:gravity="center"
-            android:text="dugujun001"
+
             android:textColor="@color/alpha_95_black"
             android:textSize="@dimen/comment_15_size" />
 
@@ -55,7 +55,7 @@
             android:layout_marginBottom="@dimen/comment_10_dip"
             android:gravity="center"
             android:layout_marginTop="2dp"
-            android:text="已贡献两条评价"
+
             android:textSize="@dimen/comment_12_size" />
 
     </RelativeLayout>

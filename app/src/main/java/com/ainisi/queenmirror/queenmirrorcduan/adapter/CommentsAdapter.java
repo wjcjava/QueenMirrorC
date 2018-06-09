@@ -23,5 +23,7 @@ public class CommentsAdapter extends BaseQuickAdapter<CommentsBean.BodyBean.Comm
     @Override
     protected void convert(BaseViewHolder helper, CommentsBean.BodyBean.CommentsListDataBean item) {
         helper.setText(R.id.tv_name,item.getGoodsIdName());
+        helper.setText(R.id.tv_evaluate,item.getAnsOrderDetails().getGoodsName());
+
     }
 }

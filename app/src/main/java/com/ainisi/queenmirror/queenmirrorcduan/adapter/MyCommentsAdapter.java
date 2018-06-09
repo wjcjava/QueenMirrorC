@@ -11,6 +11,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.MyCommentsBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class MyCommentsAdapter extends BaseQuickAdapter<MyCommentsBean.BodyBean.
             public void onClick(View view) {
                 replyList= (ArrayList<MyCommentsBean.BodyBean.CommentsListDataBean.ApiEcAppraiseReplyListBean>) item.getApiEcAppraiseReplyList();
                 Intent intent=new Intent(context, ReplyCommentActivity.class);
-                intent.putExtra("replyList",replyList);
+                intent.putExtra("replyList",(Serializable) replyList);
                 context.startActivity(intent);
             }
         });

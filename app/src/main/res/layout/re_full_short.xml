@@ -28,7 +28,7 @@
         android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_marginTop="@dimen/comment_7_dip"
         android:layout_toRightOf="@id/iv_full_shopimage"
-        android:text="MOCO美容美发沙龙"
+
         android:textColor="@color/alpha_95_black"
         android:textSize="@dimen/comment_14_size" />
     <TextView
@@ -70,8 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/comment_10_dip"
             android:layout_toRightOf="@id/iv_full_commodity_picture"
-            android:text="七彩猫眼甲"
-            android:textColor="@color/alpha_95_black"
+                      android:textColor="@color/alpha_95_black"
             android:textSize="@dimen/comment_16_size" />
         <TextView
             android:layout_marginTop="@dimen/comment_2_dip"

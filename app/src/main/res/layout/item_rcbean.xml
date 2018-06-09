@@ -11,6 +11,7 @@
         android:src="@drawable/icon_portrait"
         app:civ_border_color="@color/white"
         app:civ_border_width="@dimen/comment_2_dip"
+        android:layout_marginTop="@dimen/comment_15_dip"
         android:layout_marginLeft="@dimen/comment_20_dip"
         android:layout_marginRight="@dimen/comment_20_dip"
         android:layout_alignBottom="@+id/tv_phone"
@@ -27,12 +28,12 @@
         android:textColor="#000"
         android:layout_marginTop="@dimen/comment_20_dip"
         android:layout_toEndOf="@+id/iv_title"
-        android:text="推荐好友奖励" />
+         />
     <TextView
         android:id="@+id/tv_whole"
         android:layout_below="@+id/tv_touch_name"
         android:layout_width="match_parent"
-        android:text="【酬劳】"
+
         android:textSize="@dimen/comment_12_size"
         android:layout_marginTop="@dimen/comment_5_dip"
         android:layout_marginStart="@dimen/comment_5_dip"
@@ -46,7 +47,7 @@
         android:layout_marginStart="@dimen/comment_5_dip"
         android:textSize="@dimen/comment_10_size"
         android:layout_height="wrap_content"
-        android:text="今天  09:32"
+
         />
 
     <TextView
@@ -57,7 +58,7 @@
         android:layout_alignParentEnd="true"
         android:textColor="#FF6633"
         android:layout_marginEnd="@dimen/comment_12_dip"
-        android:text="+50" />
+         />
     <View
         android:layout_below="@id/text"
         android:layout_marginTop="@dimen/comment_5_dip"

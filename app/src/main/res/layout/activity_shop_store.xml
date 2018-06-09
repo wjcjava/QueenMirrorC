@@ -279,7 +279,7 @@
                         android:textColor="@color/alpha_95_black" />
 
                     <TextView
-                        android:id="@+id/img_product"
+                        android:id="@+id/tv_sume_product"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

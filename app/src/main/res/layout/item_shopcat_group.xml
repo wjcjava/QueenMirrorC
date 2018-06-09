@@ -38,7 +38,7 @@
             android:textColor="@color/black"
             android:drawablePadding="@dimen/comment_5_dip"
             android:textSize="@dimen/comment_14_size"
-            android:text="MOCO形象工作室>"
+
             android:layout_marginTop="@dimen/comment_15_dip"
             android:layout_toRightOf="@id/iv_shop"
             android:id="@+id/store_name"

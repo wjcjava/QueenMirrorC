@@ -35,7 +35,7 @@
         android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_marginTop="@dimen/comment_26_dip"
         android:layout_toRightOf="@id/goods_image"
-        android:text="单色甲油胶套餐"
+
         android:textSize="@dimen/comment_14_size" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_marginTop="@dimen/comment_10_dip"
         android:layout_toRightOf="@id/goods_image"
-        android:text="¥138"
+
         android:textColor="@color/gray_E7370C"
         android:textSize="@dimen/comment_16_size" />
 

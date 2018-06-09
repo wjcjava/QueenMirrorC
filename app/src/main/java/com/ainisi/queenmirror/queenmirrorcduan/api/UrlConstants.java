@@ -189,4 +189,6 @@ public interface UrlConstants {
     String PAYAFTERREFRESH = "api/util/alipay/queenChargeAliPayAfterRefresh";//女王卡充值后查看结果
 
     String GOODLIST="api/ec/goods/list";//商品数据的列表
+
+    String INVITEPRIZE="api/ans/login/inviteUrlGenForC";//(我的H5)邀请有奖
 }

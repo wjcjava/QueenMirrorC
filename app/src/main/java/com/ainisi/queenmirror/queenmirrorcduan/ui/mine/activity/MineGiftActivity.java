@@ -15,8 +15,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.MoDouBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MondelActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.InvitePaizeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
@@ -60,7 +59,7 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
         title_title.setText("邀请有奖");
 
         getMineMoDouData();
-
+        inithttp();
         if(Build.VERSION.SDK_INT>=23){
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE,
@@ -69,22 +68,14 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
             ActivityCompat.requestPermissions(this,mPermissionList,123);
         }
         mShareListener = new CustomShareListener(MineGiftActivity.this);
-        mShareAction = new ShareAction(MineGiftActivity.this).setDisplayList(
-                SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
-                SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
-        ).setShareboardclickCallback(new ShareBoardlistener() {
-            @Override
-            public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                UMWeb web = new UMWeb("http://baidu.com");
-                web.setTitle("来自女王魔镜");
-                web.setDescription("来自女王魔镜内容");
-                web.setThumb(new UMImage(MineGiftActivity.this, R.mipmap.fill));
-                new ShareAction(MineGiftActivity.this).withMedia(web)
-                        .setPlatform(share_media)
-                        .setCallback(mShareListener)
-                        .share();
-            }
-        });
+
+    }
+
+    private void inithttp() {
+        HashMap<String,String> parames=new HashMap<>();
+        parames.put("objectType","1");
+        parames.put("objectId",SP.get(this,SpContent.UserId,"")+"");
+        HttpUtils.doPost(ACTION.INVITEPRIZE,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
     /**
@@ -96,7 +87,7 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
         HttpUtils.doPost(ACTION.GETMINEMODOU, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
-    @OnClick({R.id.title_back,R.id.tv_gift_firend})
+    @OnClick({R.id.title_back,R.id.tv_gift_firend,R.id.tv_gift_shop})
     public void onClick(View view) {
 
         switch (view.getId()) {
@@ -104,6 +95,9 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
                 finish();
                 break;
             case R.id.tv_gift_firend:
+                mShareAction.open();
+                break;
+            case R.id.tv_gift_shop:
                 mShareAction.open();
                 break;
             default:
@@ -122,6 +116,29 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
                 }else{
                     T.show(moDouBean.getMsg());
                 }
+                break;
+            case ACTION.INVITEPRIZE:
+              InvitePaizeBean invitePaizeBean= GsonUtil.toObj(res, InvitePaizeBean.class);
+              if(invitePaizeBean.isSuccess()){
+                  final String url = invitePaizeBean.getBody().getInviteUrlGenForC();
+                  mShareAction = new ShareAction(MineGiftActivity.this).setDisplayList(
+                          SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
+                          SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
+                  ).setShareboardclickCallback(new ShareBoardlistener() {
+                      @Override
+                      public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+                          UMWeb web = new UMWeb(url);
+                          web.setTitle("来自女王魔镜");
+                          web.setDescription("来自女王魔镜内容");
+                          web.setThumb(new UMImage(MineGiftActivity.this, R.mipmap.fill));
+                          new ShareAction(MineGiftActivity.this).withMedia(web)
+                                  .setPlatform(share_media)
+                                  .setCallback(mShareListener)
+                                  .share();
+                      }
+                  });
+                  T.show(invitePaizeBean.getMsg());
+              }
                 break;
         }
     }
