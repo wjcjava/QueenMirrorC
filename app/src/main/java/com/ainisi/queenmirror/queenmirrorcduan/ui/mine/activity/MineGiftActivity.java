@@ -45,6 +45,7 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
     TextView tv_mine_modou_number;
     CustomShareListener mShareListener;
     ShareAction mShareAction;
+    private ShareAction mShareAction1;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context,MineGiftActivity.class));
@@ -60,6 +61,7 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
 
         getMineMoDouData();
         inithttp();
+        inithttpshop();
         if(Build.VERSION.SDK_INT>=23){
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE,
@@ -70,14 +72,18 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
         mShareListener = new CustomShareListener(MineGiftActivity.this);
 
     }
-
     private void inithttp() {
         HashMap<String,String> parames=new HashMap<>();
         parames.put("objectType","1");
         parames.put("objectId",SP.get(this,SpContent.UserId,"")+"");
         HttpUtils.doPost(ACTION.INVITEPRIZE,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
-
+    private void inithttpshop() {
+        HashMap<String,String> parames=new HashMap<>();
+        parames.put("objectType","1");
+        parames.put("objectId",SP.get(this,SpContent.UserId,"")+"");
+        HttpUtils.doPost(ACTION.INVITEBDUAN,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+    }
     /**
      * 获取我的魔豆
      */
@@ -98,7 +104,7 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
                 mShareAction.open();
                 break;
             case R.id.tv_gift_shop:
-                mShareAction.open();
+                mShareAction1.open();
                 break;
             default:
                 break;
@@ -140,6 +146,29 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
                   T.show(invitePaizeBean.getMsg());
               }
                 break;
+           case ACTION.INVITEBDUAN:
+               InviteShopBean invitePaizeBean1= GsonUtil.toObj(res, InviteShopBean.class);
+               if(invitePaizeBean1.isSuccess()){
+                   final String url = invitePaizeBean1.getBody().getInviteUrlGenForB();
+                   mShareAction1 = new ShareAction(MineGiftActivity.this).setDisplayList(
+                           SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
+                           SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
+                   ).setShareboardclickCallback(new ShareBoardlistener() {
+                       @Override
+                       public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+                           UMWeb web = new UMWeb(url);
+                           web.setTitle("来自女王魔镜");
+                           web.setDescription("来自女王魔镜内容");
+                           web.setThumb(new UMImage(MineGiftActivity.this, R.mipmap.fill));
+                           new ShareAction(MineGiftActivity.this).withMedia(web)
+                                   .setPlatform(share_media)
+                                   .setCallback(mShareListener)
+                                   .share();
+                       }
+                   });
+                   T.show(invitePaizeBean1.getMsg());
+               }
+               break;
         }
     }
     @Override

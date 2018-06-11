@@ -13,14 +13,14 @@ import java.util.List;
  * Created by john on 2018/6/8.
  */
 
-public class ShopListAdapter extends BaseQuickAdapter<ShopListBean.BodyBean.GoodsListDataBean,BaseViewHolder> {
-    public ShopListAdapter(int layoutResId, @Nullable List<ShopListBean.BodyBean.GoodsListDataBean> data) {
+public class ShopListAdapter extends BaseQuickAdapter<ShopListBean.BodyBean.ApiGoodsListBean,BaseViewHolder> {
+    public ShopListAdapter(int layoutResId, @Nullable List<ShopListBean.BodyBean.ApiGoodsListBean> data) {
         super(layoutResId, data);
 
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, ShopListBean.BodyBean.GoodsListDataBean item) {
+    protected void convert(BaseViewHolder helper, ShopListBean.BodyBean.ApiGoodsListBean item) {
         helper.setText(R.id.tv_shopName,item.getEcGoodsBasic().getGoodsName());
         helper.setText(R.id.tv_shop_introduce,item.getEcGoodsBasic().getGoodsBrief());
     }

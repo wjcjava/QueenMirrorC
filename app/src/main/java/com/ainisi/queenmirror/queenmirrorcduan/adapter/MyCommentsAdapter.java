@@ -2,6 +2,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
@@ -11,8 +12,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.MyCommentsBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ import java.util.List;
 public class MyCommentsAdapter extends BaseQuickAdapter<MyCommentsBean.BodyBean.CommentsListDataBean,BaseViewHolder>{
 
     private final Context context;
-    private ArrayList<MyCommentsBean.BodyBean.CommentsListDataBean.ApiEcAppraiseReplyListBean> replyList;
+    private List<MyCommentsBean.BodyBean.CommentsListDataBean.ApiEcAppraiseReplyListBean> replyList;
 
     public MyCommentsAdapter(int layoutResId, @Nullable List<MyCommentsBean.BodyBean.CommentsListDataBean> data, Context context) {
         super(layoutResId, data);
@@ -36,9 +35,11 @@ public class MyCommentsAdapter extends BaseQuickAdapter<MyCommentsBean.BodyBean.
         helper.setOnClickListener(R.id.re_relayComment, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replyList= (ArrayList<MyCommentsBean.BodyBean.CommentsListDataBean.ApiEcAppraiseReplyListBean>) item.getApiEcAppraiseReplyList();
+                replyList=item.getApiEcAppraiseReplyList();
                 Intent intent=new Intent(context, ReplyCommentActivity.class);
-                intent.putExtra("replyList",(Serializable) replyList);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("replyList",item);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });

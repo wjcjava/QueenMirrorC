@@ -623,11 +623,19 @@ public class HttpUtils {
                 break;
             //商品数据的列表
             case ACTION.GOODLIST:
-                actionUrl=UrlConstants.GOODLIST;
+                actionUrl = UrlConstants.GOODLIST;
                 break;
-            //(我的H5)邀请有奖
+            //(我的H5)邀请好友
             case ACTION.INVITEPRIZE:
-                actionUrl=UrlConstants.INVITEPRIZE;
+                actionUrl = UrlConstants.INVITEPRIZE;
+                break;
+            //邀请开店
+            case ACTION.INVITEBDUAN:
+                actionUrl = UrlConstants.INVITEBDUAN;
+                break;
+            //实名认证
+            case ACTION.REALNAME:
+                actionUrl = UrlConstants.REALNAME;
                 break;
         }
         url.append(actionUrl);

@@ -345,7 +345,6 @@ public class MyRecyclerCardviewAdapter extends RecyclerView.Adapter<RecyclerView
                     }
                     banner.setImageLoader(new GlideImageLoader());
                     banner.setImages(images);
-
                     banner.start();
                     banner.setOnBannerListener(new OnBannerListener() {
                         @Override

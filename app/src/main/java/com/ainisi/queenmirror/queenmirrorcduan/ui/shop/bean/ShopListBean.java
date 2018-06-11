@@ -1,18 +1,19 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by john on 2018/6/8.
  */
 
-public class ShopListBean {
+public class ShopListBean implements Serializable {
 
     /**
      * success : true
      * errorCode : 0
      * msg : 获取数据成功
-     * body : {"pageSum":2,"GoodsListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecGoodsBasic":{"id":"f30dc270a0df4f21a6336c4874cc1cd5","isNewRecord":false,"remarks":null,"createDate":"2018-05-21 09:56:28","updateDate":"2018-05-21 09:56:28","goodsCate":"美甲美手","goodsType":"0","goodsName":"美手1111111","goodsNo":null,"goodsBrief":"美手了啊我","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"美甲美手","goodsStorage":null,"marketPrice":"20.00","salesPrice":"0.01","goodsActivity":null,"goodsBanner":null,"shopId":"111","saleFlag":"2","ifPoint":"1","pointRule":null,"approveBy":null,"approveDate":null,"approveRemarks":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController","shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null},"ecGoodsSocre":null,"ansShopBasic":null,"ecGoodsBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsId":null,"browseCounts":"0","enableFlag":null},"ansCustCollection":null,"ecPointsRule":null,"goodsCateName":null,"goodsTypeLabel":null,"shopIdName":null,"saleFlagLabel":null,"contentByTitle":null,"goodsAppraiseLabel":null,"newFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecGoodsBasic":{"id":"0","isNewRecord":false,"remarks":null,"createDate":"2018-05-21 09:56:28","updateDate":"2018-05-21 09:56:28","goodsCate":"001b2f5ba54041eaa2c18de791b99045","goodsType":"0","goodsName":"美手1111111","goodsNo":null,"goodsBrief":"美手了啊我","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"美甲美手","goodsStorage":null,"marketPrice":"20.00","salesPrice":"0.01","goodsActivity":null,"goodsBanner":null,"shopId":"8997e0d39bdc44c0bbd7da58371d9385","saleFlag":"1","ifPoint":"1","pointRule":null,"approveBy":null,"approveDate":null,"approveRemarks":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController","shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null},"ecGoodsSocre":null,"ansShopBasic":null,"ecGoodsBrowses":null,"ansCustCollection":null,"ecPointsRule":null,"goodsCateName":null,"goodsTypeLabel":null,"shopIdName":null,"saleFlagLabel":null,"contentByTitle":null,"goodsAppraiseLabel":null,"newFlagLabel":null}]}
+     * body : {"pageSum":1,"apiGoodsList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecGoodsBasic":{"id":"e10324cd98ba470691cb37ea45970196","isNewRecord":false,"remarks":null,"createDate":"2018-06-04 17:33:24","updateDate":"2018-06-04 17:33:30","goodsCate":"de3cb2ab3c1b49b79329350cdf32fcd0","goodsType":"2","goodsName":"足疗","goodsNo":"9572d4cf1f","goodsBrief":"健康养生","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"AESDGFVBN,","goodsStorage":null,"marketPrice":null,"salesPrice":"0.01","goodsActivity":null,"goodsBanner":null,"shopId":"aeadfe091cb244e58be5aafd12f4e622","saleFlag":"2","ifPoint":"1","pointRule":"23c13abf5f534f8c8d83f4e21a4c8b95","approveBy":null,"approveDate":1528104928000,"approveRemarks":"通过","startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController","shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null},"ecGoodsSocre":null,"ansShopBasic":null,"ecGoodsBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsId":null,"browseCounts":"0","enableFlag":null},"ansCustCollection":null,"ecPointsRule":null,"goodsCateName":null,"goodsTypeLabel":null,"shopIdName":"异业1号测试店铺0604","saleFlagLabel":null,"contentByTitle":null,"goodsAppraiseLabel":null,"newFlagLabel":null}]}
      */
 
     private boolean success;
@@ -52,14 +53,14 @@ public class ShopListBean {
         this.body = body;
     }
 
-    public static class BodyBean {
+    public static class BodyBean implements Serializable{
         /**
-         * pageSum : 2
-         * GoodsListData : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecGoodsBasic":{"id":"f30dc270a0df4f21a6336c4874cc1cd5","isNewRecord":false,"remarks":null,"createDate":"2018-05-21 09:56:28","updateDate":"2018-05-21 09:56:28","goodsCate":"美甲美手","goodsType":"0","goodsName":"美手1111111","goodsNo":null,"goodsBrief":"美手了啊我","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"美甲美手","goodsStorage":null,"marketPrice":"20.00","salesPrice":"0.01","goodsActivity":null,"goodsBanner":null,"shopId":"111","saleFlag":"2","ifPoint":"1","pointRule":null,"approveBy":null,"approveDate":null,"approveRemarks":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController","shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null},"ecGoodsSocre":null,"ansShopBasic":null,"ecGoodsBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsId":null,"browseCounts":"0","enableFlag":null},"ansCustCollection":null,"ecPointsRule":null,"goodsCateName":null,"goodsTypeLabel":null,"shopIdName":null,"saleFlagLabel":null,"contentByTitle":null,"goodsAppraiseLabel":null,"newFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecGoodsBasic":{"id":"0","isNewRecord":false,"remarks":null,"createDate":"2018-05-21 09:56:28","updateDate":"2018-05-21 09:56:28","goodsCate":"001b2f5ba54041eaa2c18de791b99045","goodsType":"0","goodsName":"美手1111111","goodsNo":null,"goodsBrief":"美手了啊我","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"美甲美手","goodsStorage":null,"marketPrice":"20.00","salesPrice":"0.01","goodsActivity":null,"goodsBanner":null,"shopId":"8997e0d39bdc44c0bbd7da58371d9385","saleFlag":"1","ifPoint":"1","pointRule":null,"approveBy":null,"approveDate":null,"approveRemarks":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController","shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null},"ecGoodsSocre":null,"ansShopBasic":null,"ecGoodsBrowses":null,"ansCustCollection":null,"ecPointsRule":null,"goodsCateName":null,"goodsTypeLabel":null,"shopIdName":null,"saleFlagLabel":null,"contentByTitle":null,"goodsAppraiseLabel":null,"newFlagLabel":null}]
+         * pageSum : 1
+         * apiGoodsList : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecGoodsBasic":{"id":"e10324cd98ba470691cb37ea45970196","isNewRecord":false,"remarks":null,"createDate":"2018-06-04 17:33:24","updateDate":"2018-06-04 17:33:30","goodsCate":"de3cb2ab3c1b49b79329350cdf32fcd0","goodsType":"2","goodsName":"足疗","goodsNo":"9572d4cf1f","goodsBrief":"健康养生","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"AESDGFVBN,","goodsStorage":null,"marketPrice":null,"salesPrice":"0.01","goodsActivity":null,"goodsBanner":null,"shopId":"aeadfe091cb244e58be5aafd12f4e622","saleFlag":"2","ifPoint":"1","pointRule":"23c13abf5f534f8c8d83f4e21a4c8b95","approveBy":null,"approveDate":1528104928000,"approveRemarks":"通过","startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController","shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null},"ecGoodsSocre":null,"ansShopBasic":null,"ecGoodsBrowses":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsId":null,"browseCounts":"0","enableFlag":null},"ansCustCollection":null,"ecPointsRule":null,"goodsCateName":null,"goodsTypeLabel":null,"shopIdName":"异业1号测试店铺0604","saleFlagLabel":null,"contentByTitle":null,"goodsAppraiseLabel":null,"newFlagLabel":null}]
          */
 
         private int pageSum;
-        private List<GoodsListDataBean> GoodsListData;
+        private List<ApiGoodsListBean> apiGoodsList;
 
         public int getPageSum() {
             return pageSum;
@@ -69,22 +70,22 @@ public class ShopListBean {
             this.pageSum = pageSum;
         }
 
-        public List<GoodsListDataBean> getGoodsListData() {
-            return GoodsListData;
+        public List<ApiGoodsListBean> getApiGoodsList() {
+            return apiGoodsList;
         }
 
-        public void setGoodsListData(List<GoodsListDataBean> GoodsListData) {
-            this.GoodsListData = GoodsListData;
+        public void setApiGoodsList(List<ApiGoodsListBean> apiGoodsList) {
+            this.apiGoodsList = apiGoodsList;
         }
 
-        public static class GoodsListDataBean {
+        public static class ApiGoodsListBean implements Serializable{
             /**
              * id : null
              * isNewRecord : true
              * remarks : null
              * createDate : null
              * updateDate : null
-             * ecGoodsBasic : {"id":"f30dc270a0df4f21a6336c4874cc1cd5","isNewRecord":false,"remarks":null,"createDate":"2018-05-21 09:56:28","updateDate":"2018-05-21 09:56:28","goodsCate":"美甲美手","goodsType":"0","goodsName":"美手1111111","goodsNo":null,"goodsBrief":"美手了啊我","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"美甲美手","goodsStorage":null,"marketPrice":"20.00","salesPrice":"0.01","goodsActivity":null,"goodsBanner":null,"shopId":"111","saleFlag":"2","ifPoint":"1","pointRule":null,"approveBy":null,"approveDate":null,"approveRemarks":null,"startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController","shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null}
+             * ecGoodsBasic : {"id":"e10324cd98ba470691cb37ea45970196","isNewRecord":false,"remarks":null,"createDate":"2018-06-04 17:33:24","updateDate":"2018-06-04 17:33:30","goodsCate":"de3cb2ab3c1b49b79329350cdf32fcd0","goodsType":"2","goodsName":"足疗","goodsNo":"9572d4cf1f","goodsBrief":"健康养生","serviceTime":"90分钟","goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":"AESDGFVBN,","goodsStorage":null,"marketPrice":null,"salesPrice":"0.01","goodsActivity":null,"goodsBanner":null,"shopId":"aeadfe091cb244e58be5aafd12f4e622","saleFlag":"2","ifPoint":"1","pointRule":"23c13abf5f534f8c8d83f4e21a4c8b95","approveBy":null,"approveDate":1528104928000,"approveRemarks":"通过","startTime":1525400918000,"endTime":1525400923000,"goodsRemarks":null,"updatePgm":"ApiGoodsController","shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null}
              * ecGoodsSocre : null
              * ansShopBasic : null
              * ecGoodsBrowses : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsId":null,"browseCounts":"0","enableFlag":null}
@@ -92,7 +93,7 @@ public class ShopListBean {
              * ecPointsRule : null
              * goodsCateName : null
              * goodsTypeLabel : null
-             * shopIdName : null
+             * shopIdName : 异业1号测试店铺0604
              * saleFlagLabel : null
              * contentByTitle : null
              * goodsAppraiseLabel : null
@@ -112,7 +113,7 @@ public class ShopListBean {
             private Object ecPointsRule;
             private Object goodsCateName;
             private Object goodsTypeLabel;
-            private Object shopIdName;
+            private String shopIdName;
             private Object saleFlagLabel;
             private Object contentByTitle;
             private Object goodsAppraiseLabel;
@@ -222,11 +223,11 @@ public class ShopListBean {
                 this.goodsTypeLabel = goodsTypeLabel;
             }
 
-            public Object getShopIdName() {
+            public String getShopIdName() {
                 return shopIdName;
             }
 
-            public void setShopIdName(Object shopIdName) {
+            public void setShopIdName(String shopIdName) {
                 this.shopIdName = shopIdName;
             }
 
@@ -262,36 +263,36 @@ public class ShopListBean {
                 this.newFlagLabel = newFlagLabel;
             }
 
-            public static class EcGoodsBasicBean {
+            public static class EcGoodsBasicBean implements Serializable{
                 /**
-                 * id : f30dc270a0df4f21a6336c4874cc1cd5
+                 * id : e10324cd98ba470691cb37ea45970196
                  * isNewRecord : false
                  * remarks : null
-                 * createDate : 2018-05-21 09:56:28
-                 * updateDate : 2018-05-21 09:56:28
-                 * goodsCate : 美甲美手
-                 * goodsType : 0
-                 * goodsName : 美手1111111
-                 * goodsNo : null
-                 * goodsBrief : 美手了啊我
+                 * createDate : 2018-06-04 17:33:24
+                 * updateDate : 2018-06-04 17:33:30
+                 * goodsCate : de3cb2ab3c1b49b79329350cdf32fcd0
+                 * goodsType : 2
+                 * goodsName : 足疗
+                 * goodsNo : 9572d4cf1f
+                 * goodsBrief : 健康养生
                  * serviceTime : 90分钟
                  * goodsDetails : null
                  * goodsThumb : null
                  * goodsPic : null
                  * goodsShow : null
-                 * goodsTab : 美甲美手
+                 * goodsTab : AESDGFVBN,
                  * goodsStorage : null
-                 * marketPrice : 20.00
+                 * marketPrice : null
                  * salesPrice : 0.01
                  * goodsActivity : null
                  * goodsBanner : null
-                 * shopId : 111
+                 * shopId : aeadfe091cb244e58be5aafd12f4e622
                  * saleFlag : 2
                  * ifPoint : 1
-                 * pointRule : null
+                 * pointRule : 23c13abf5f534f8c8d83f4e21a4c8b95
                  * approveBy : null
-                 * approveDate : null
-                 * approveRemarks : null
+                 * approveDate : 1528104928000
+                 * approveRemarks : 通过
                  * startTime : 1525400918000
                  * endTime : 1525400923000
                  * goodsRemarks : null
@@ -311,7 +312,7 @@ public class ShopListBean {
                 private String goodsCate;
                 private String goodsType;
                 private String goodsName;
-                private Object goodsNo;
+                private String goodsNo;
                 private String goodsBrief;
                 private String serviceTime;
                 private Object goodsDetails;
@@ -320,17 +321,17 @@ public class ShopListBean {
                 private Object goodsShow;
                 private String goodsTab;
                 private Object goodsStorage;
-                private String marketPrice;
+                private Object marketPrice;
                 private String salesPrice;
                 private Object goodsActivity;
                 private Object goodsBanner;
                 private String shopId;
                 private String saleFlag;
                 private String ifPoint;
-                private Object pointRule;
+                private String pointRule;
                 private Object approveBy;
-                private Object approveDate;
-                private Object approveRemarks;
+                private long approveDate;
+                private String approveRemarks;
                 private long startTime;
                 private long endTime;
                 private Object goodsRemarks;
@@ -405,11 +406,11 @@ public class ShopListBean {
                     this.goodsName = goodsName;
                 }
 
-                public Object getGoodsNo() {
+                public String getGoodsNo() {
                     return goodsNo;
                 }
 
-                public void setGoodsNo(Object goodsNo) {
+                public void setGoodsNo(String goodsNo) {
                     this.goodsNo = goodsNo;
                 }
 
@@ -477,11 +478,11 @@ public class ShopListBean {
                     this.goodsStorage = goodsStorage;
                 }
 
-                public String getMarketPrice() {
+                public Object getMarketPrice() {
                     return marketPrice;
                 }
 
-                public void setMarketPrice(String marketPrice) {
+                public void setMarketPrice(Object marketPrice) {
                     this.marketPrice = marketPrice;
                 }
 
@@ -533,11 +534,11 @@ public class ShopListBean {
                     this.ifPoint = ifPoint;
                 }
 
-                public Object getPointRule() {
+                public String getPointRule() {
                     return pointRule;
                 }
 
-                public void setPointRule(Object pointRule) {
+                public void setPointRule(String pointRule) {
                     this.pointRule = pointRule;
                 }
 
@@ -549,19 +550,19 @@ public class ShopListBean {
                     this.approveBy = approveBy;
                 }
 
-                public Object getApproveDate() {
+                public long getApproveDate() {
                     return approveDate;
                 }
 
-                public void setApproveDate(Object approveDate) {
+                public void setApproveDate(long approveDate) {
                     this.approveDate = approveDate;
                 }
 
-                public Object getApproveRemarks() {
+                public String getApproveRemarks() {
                     return approveRemarks;
                 }
 
-                public void setApproveRemarks(Object approveRemarks) {
+                public void setApproveRemarks(String approveRemarks) {
                     this.approveRemarks = approveRemarks;
                 }
 
@@ -638,7 +639,7 @@ public class ShopListBean {
                 }
             }
 
-            public static class EcGoodsBrowsesBean {
+            public static class EcGoodsBrowsesBean implements Serializable{
                 /**
                  * id : null
                  * isNewRecord : true

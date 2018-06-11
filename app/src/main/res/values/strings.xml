@@ -248,6 +248,9 @@
     <string name="currentpaypass">当前密码</string>
     <string name="add_currentpay_password">请输入当前密码</string>
     <string name="newpaypass">新密码</string>
+    <string name="add_real_name">请输入您的名字</string>
+    <string name="add_real_surnames">请输入您的姓氏</string>
+    <string name="add_real_card">请输入您的身份证号码</string>
 
 
 </resources>

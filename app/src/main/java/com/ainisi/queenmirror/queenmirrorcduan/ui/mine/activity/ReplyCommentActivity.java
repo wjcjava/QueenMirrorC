@@ -6,12 +6,10 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean.MyCommentsBean;
 
-import java.util.ArrayList;
-
 import butterknife.Bind;
 
 public class ReplyCommentActivity extends BaseNewActivity{
-    private ArrayList<MyCommentsBean.BodyBean.CommentsListDataBean.ApiEcAppraiseReplyListBean> replyList;
+    private MyCommentsBean.BodyBean.CommentsListDataBean bean;
     @Bind(R.id.tv_name)
     TextView tvName;
     @Override
@@ -22,8 +20,7 @@ public class ReplyCommentActivity extends BaseNewActivity{
     @Override
     protected void initData() {
         super.initData();
-        replyList= (ArrayList<MyCommentsBean.BodyBean.CommentsListDataBean.ApiEcAppraiseReplyListBean>)getIntent().getSerializableExtra("replyList");
-
-        tvName.setText(replyList.get(1).getEcAppraiseReply().getReplyContent());
+        bean= (MyCommentsBean.BodyBean.CommentsListDataBean) getIntent().getSerializableExtra("replyList");
+        tvName.setText(bean.getApiEcAppraiseReplyList().get(0).getEcAppraiseReply().getReplyContent());
     }
 }

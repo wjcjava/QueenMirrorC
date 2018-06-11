@@ -49,24 +49,12 @@ public class MineBalanceActivity extends BaseNewActivity {
                 finish();
                 break;
             /**
-             * 余额充值
-             */
-            case R.id.bt_recharge:
-                startActivity(new Intent(this, MineRechargeActivity.class));
-                break;
-            /**
              * 余额明细
              */
             case R.id.title_right:
                 Intent intent = new Intent(this, MineDetailedActivity.class);
                 intent.putExtra("name", titleRight.getText().toString().trim());
                 startActivity(intent);
-                break;
-            /**
-             * 余额提现
-             */
-            case R.id.bt_withdrawals:
-                startActivity(new Intent(this, MineWithdrawalsActivity.class));
                 break;
             /**
              * 常见问题

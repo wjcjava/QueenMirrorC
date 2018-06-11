@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -71,6 +73,8 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
     TextView tvBoutique;
     @Bind(R.id.tv_sume_product)
             TextView sumeProduct;
+    @Bind(R.id.re_product_two)
+    RelativeLayout  product_two;
     int pagenumber = 1;
     boolean isLogin = false;
     private List<SortBean> beanList = new ArrayList<>();
@@ -81,6 +85,12 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
     private String time;
     private String date;
     private int pageSum;
+    private int pageNumber=1;
+    private ShopListBean shopListBean;
+    private Intent intentProduct;
+    private RelativeLayout invincible_stamps;
+    private TextView couponget;
+    private CouponGetBean couponGetBean;
 
     @Override
     protected int getLayoutId() {
@@ -98,6 +108,8 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
         storeTitle.setTextColor(Color.BLACK);
         initShop();
         getShopDetailData();
+        inithttpshop();
+
     }
 
     /**
@@ -110,7 +122,6 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
         parames.put("pageSize", "10");
         HttpUtils.doPost(ACTION.EVALUATION, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     private void getShopDetailData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("id", shopId);//商户ID
@@ -133,19 +144,29 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
         super.initData();
 
         initPicker();
-        inithttpshop();
+
 
     }
 
     private void inithttpshop() {
-        HashMap<String, String> parames = new HashMap<>();
-        parames.put("saleFlag", "2");//2：上架
-        parames.put("pageNumber", pagenumber + "");
-        parames.put("contentByTitle", "111");
-        parames.put("shopCate", "2");//1:美业，2：异业
-        parames.put("pageSize", "10");
-        HttpUtils.doPost(ACTION.GOODLIST, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("saleFlag", "2");//上架标记（2：上架）
+        params.put("pageNumber", pageNumber + "");
+        params.put("shopId",shopId);//商家ID
+        params.put("contentByTitle", "");//画面检索输入框输入的内容
+        params.put("pageSize", "10");
+        HttpUtils.doPost(ACTION.SHOPSALEPRODUCT,params,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
+
+//    private void inithttpshop() {
+//        HashMap<String, String> parames = new HashMap<>();
+//        parames.put("saleFlag", "2");//2：上架
+//        parames.put("pageNumber", pagenumber + "");
+//        parames.put("contentByTitle", "111");
+//        parames.put("shopCate", "2");//1:美业，2：异业
+//        parames.put("pageSize", "10");
+//        HttpUtils.doPost(ACTION.GOODLIST, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+//    }
 
     private void initPicker() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
@@ -167,7 +188,7 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
     }
 
     @SuppressLint("MissingPermission")
-    @OnClick({R.id.title_back, R.id.re_product_two, R.id.re_invincible, R.id.li_shop_detail_comment, R.id.li_shop_detail_order,
+    @OnClick({R.id.title_back, R.id.re_invincible, R.id.li_shop_detail_comment, R.id.li_shop_detail_order,
             R.id.li_shop_detail_phone, R.id.li_shop_detail_pay})
     public void click(View view) {
         switch (view.getId()) {
@@ -220,16 +241,18 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
                         .showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM, 0, 0);
                 initgetId(popview);
                 break;
-            case R.id.re_product_two:
-                startActivity(new Intent(this, ProductActivity.class));
-                break;
+
+
+
             default:
                 break;
         }
     }
 
     private void initgetId(View popview) {
-        popview.findViewById(R.id.tv_shop_couponget).setOnClickListener(new View.OnClickListener() {
+        invincible_stamps = popview.findViewById(R.id.re_invincible_stamps);
+        couponget = popview.findViewById(R.id.tv_shop_couponget);
+        couponget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isLogin) {
@@ -249,6 +272,7 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
         HttpUtils.doPost(ACTION.COUPONGET, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
@@ -267,9 +291,15 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
 
                 break;
             case ACTION.COUPONGET:
-                CouponGetBean couponGetBean = GsonUtil.toObj(res, CouponGetBean.class);
+                couponGetBean = GsonUtil.toObj(res, CouponGetBean.class);
                 if (couponGetBean.isSuccess()) {
-                    T.show(couponGetBean.getMsg());
+
+                    if(couponGetBean.getErrorCode().equals("1")){
+                        invincible_stamps.setBackgroundColor(R.color.alpha_05_black);
+                        couponget.setText("已领取");
+                    }else if(couponGetBean.getErrorCode().equals("-1")){
+
+                    }
                 } else {
                     T.show(couponGetBean.getMsg());
                 }
@@ -285,18 +315,32 @@ public class ShopStoreActivity extends BaseNewActivity implements HttpCallBack {
                 tv_shop_detail_address.setText(shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrProvince() +
                         shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrCity() + shopStoreDetailBean.getBody().getApiShop().getAnsShopBasic().getAddrDistrict());
                 break;
-            case ACTION.GOODLIST:
-                ShopListBean shopListBean = GsonUtil.toObj(res, ShopListBean.class);
-                if (shopListBean.isSuccess()) {
-                    List<ShopListBean.BodyBean.GoodsListDataBean> shoplist = shopListBean.getBody().getGoodsListData();
-                    sumeProduct.setText("全部成品"+shopListBean.getBody().getPageSum());
+            case ACTION.SHOPSALEPRODUCT:
+                shopListBean = GsonUtil.toObj(res, ShopListBean.class);
+                if(shopListBean.isSuccess()){
+                    List<ShopListBean.BodyBean.ApiGoodsListBean> shoplist = shopListBean.getBody().getApiGoodsList();
+                    sumeProduct.setText("全部成品"+ shopListBean.getBody().getPageSum());
                     ShopListAdapter shopListAdapter = new ShopListAdapter(R.layout.re_shop_store, shoplist);
                     reProduct.setLayoutManager(new GridLayoutManager(this, 2));
                     reProduct.setAdapter(shopListAdapter);
-                } else {
+
+                    product_two.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            intentProduct = new Intent(ShopStoreActivity.this, ProductActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("shopListBean",shopListBean);
+                            intentProduct.putExtras(bundle);
+                            ShopStoreActivity.this.startActivity(intentProduct);
+                        }
+                    });
+
+                }else {
                     T.show(shopListBean.getMsg());
                 }
                 break;
+
         }
     }
 

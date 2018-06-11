@@ -10,6 +10,7 @@
     android:paddingEnd="@dimen/comment_10_dip"
     >
     <RelativeLayout
+        android:id="@+id/re_workroom"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_140_dip"
         android:background="@drawable/button_shap_queen"

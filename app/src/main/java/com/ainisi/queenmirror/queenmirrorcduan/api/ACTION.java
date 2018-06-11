@@ -89,7 +89,11 @@ public interface ACTION {
 
     int GOODLIST=0x43;//商品数据的列表
 
-    int INVITEPRIZE=0x44;//(我的H5)邀请有奖
+    int INVITEPRIZE=0x44;//(我的H5)邀请好友
+
+    int INVITEBDUAN=0x45;//邀请开店
+
+    int REALNAME=0x046;//实名认证
 
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 

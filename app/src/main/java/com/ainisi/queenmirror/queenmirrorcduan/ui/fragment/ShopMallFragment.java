@@ -130,6 +130,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
     private MerchantsAdapter merchantsAdapter;
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
+    private ProblemAdapter problemAdapter;
 
     @Override
     protected int getLayoutResource() {
@@ -212,6 +213,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         //商家特色（筛选）
         HttpUtils.doPost(ACTION.MERCHANTFEATURES, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     private void initImgTitle() {
 
     }
@@ -230,6 +232,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             public void onDismiss() {
                 ivsort.setVisibility(View.VISIBLE);
                 ivsort1.setVisibility(View.GONE);
+                list.clear();
+
             }
         });
     }
@@ -268,7 +272,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             list.add(problemBean);
         }
 
-        ProblemAdapter problemAdapter = new ProblemAdapter(R.layout.item_pop_sort, list);
+        problemAdapter = new ProblemAdapter(R.layout.item_pop_sort, list);
         ce.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         ce.setAdapter(problemAdapter);
         problemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -315,8 +319,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     isClick = false;
                     HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "shop");
                     listView.setAdapter(homeListViewAdapter);
-                  /*  listadapter = new ListViewAdapter(getContext(), shopListNew);
-                    listView.setAdapter(listadapter);*/
                     shop_gridView.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
                     uspensionSurface.setImageResource(R.drawable.icon_home_list);
@@ -374,12 +376,12 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.li_home_screen_bottom:
                 sc_home_scroll.smoothScrollTo(0, 1180);
                 initSreentext();
-                new ScreenPoputil(getActivity()).showscreenPop(upSort,merchantsList,preferentialList,"shop");
+                new ScreenPoputil(getActivity()).showscreenPop(upSort, merchantsList, preferentialList, "shop");
                 break;
 
             case R.id.li_home_screen:
                 initSreentext();
-                new ScreenPoputil(getActivity()).showscreenPop(upSort,merchantsList,preferentialList,"shop");
+                new ScreenPoputil(getActivity()).showscreenPop(upSort, merchantsList, preferentialList, "shop");
                 break;
 
             default:
@@ -457,6 +459,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         upDistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         bottomDistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
     }
+
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
@@ -496,11 +499,10 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                         shop_gridView.setAdapter(gridViewAdapter);
                         shopData.setVisibility(View.VISIBLE);
                         shopData.setText("");
-                    }else if(shopListHomeBean.getBody().getShopList().size() > 2){
+                    } else if (shopListHomeBean.getBody().getShopList().size() > 2) {
                         HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shopListHomeBean.getBody().getShopList(), "shop");
                         shop_gridView.setAdapter(gridViewAdapter);
-                    }
-                    else{
+                    } else {
                         shopData.setVisibility(View.VISIBLE);
                     }
                 } else {
@@ -516,7 +518,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                     T.show(merchantsBean.getMsg());
                 }
                 break;
-                //特色筛选
+            //特色筛选
             case ACTION.MERCHANTFEATURES:
                 PreferentialBean preferentialBean = GsonUtil.toObj(res, PreferentialBean.class);
                 if (preferentialBean.isSuccess()) {

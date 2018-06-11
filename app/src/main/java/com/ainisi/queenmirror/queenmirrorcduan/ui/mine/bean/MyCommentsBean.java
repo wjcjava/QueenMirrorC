@@ -1,12 +1,13 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by john on 2018/5/17.
  */
 
-public class MyCommentsBean {
+public class MyCommentsBean implements Serializable {
 
 
     /**
@@ -53,7 +54,7 @@ public class MyCommentsBean {
         this.body = body;
     }
 
-    public static class BodyBean {
+    public static class BodyBean implements Serializable{
         private List<CommentsListDataBean> CommentsListData;
 
         public List<CommentsListDataBean> getCommentsListData() {
@@ -64,7 +65,7 @@ public class MyCommentsBean {
             this.CommentsListData = CommentsListData;
         }
 
-        public static class CommentsListDataBean {
+        public static class CommentsListDataBean implements Serializable{
             /**
              * id : null
              * isNewRecord : true
@@ -269,7 +270,7 @@ public class MyCommentsBean {
                 this.apiEcAppraiseReplyList = apiEcAppraiseReplyList;
             }
 
-            public static class EcAppraiseGoodsBean {
+            public static class EcAppraiseGoodsBean implements Serializable{
                 /**
                  * id : 111
                  * isNewRecord : false
@@ -435,7 +436,7 @@ public class MyCommentsBean {
                 }
             }
 
-            public static class EcAppraiseShopBean {
+            public static class EcAppraiseShopBean implements Serializable{
                 /**
                  * id : 0eae9689e7e84af5a120a5d28c604cb1
                  * isNewRecord : false
@@ -551,7 +552,7 @@ public class MyCommentsBean {
                 }
             }
 
-            public static class AnsOrderDetailsBean {
+            public static class AnsOrderDetailsBean implements Serializable{
                 /**
                  * id : 04eaad7a66f64edd95f29815558f8cb9
                  * isNewRecord : false
@@ -747,7 +748,7 @@ public class MyCommentsBean {
                 }
             }
 
-            public static class EcShopScoreBean {
+            public static class EcShopScoreBean implements Serializable{
                 /**
                  * id : 112
                  * isNewRecord : false
@@ -973,7 +974,7 @@ public class MyCommentsBean {
                 }
             }
 
-            public static class ApiEcAppraiseReplyListBean{
+            public static class ApiEcAppraiseReplyListBean implements Serializable{
                 /**
                  * id : null
                  * isNewRecord : true
@@ -1058,7 +1059,7 @@ public class MyCommentsBean {
                     this.objectUserName = objectUserName;
                 }
 
-                public static class EcAppraiseReplyBean {
+                public static class EcAppraiseReplyBean implements Serializable{
                     /**
                      * id : a34838a82fe74ec0b4fd5edab31ba38f
                      * isNewRecord : false

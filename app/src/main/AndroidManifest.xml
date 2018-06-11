@@ -39,7 +39,6 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -258,16 +257,6 @@
             android:launchMode="singleTask"
             android:theme="@style/Transparent" />
         <activity
-            android:name=".ui.mine.activity.MineRechargeActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Transparent" />
-        <activity
-            android:name=".ui.mine.activity.MineWithdrawalsActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Transparent" />
-        <activity
             android:name=".ui.mine.activity.MineCommonProblemActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -430,12 +419,10 @@
             android:name=".ui.mine.activity.BackPayActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.home.activity.PurchaseSelectActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.home.activity.SpellOrderListActivity"
             android:launchMode="singleTask"
@@ -449,20 +436,20 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <!--友盟相关-->
+        <!-- 友盟相关 -->
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5a13e4fbf29d982a16000037"></meta-data>
+            android:value="5a13e4fbf29d982a16000037" />
         android:value="5a13e4fbf29d982a16000037" />
 
-        <!--微信-->
+        <!-- 微信 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--qq-->
+        <!-- qq -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -497,11 +484,11 @@
             android:name=".ui.mine.activity.RechargeSuccessAgainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.mine.activity.ReplyCommentActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.mine.activity.RealNameActivity"></activity>
     </application>
 
 </manifest>

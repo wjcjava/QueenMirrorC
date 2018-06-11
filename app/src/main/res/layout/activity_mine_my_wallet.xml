@@ -91,7 +91,6 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/tv_balance"
             android:layout_marginRight="@dimen/comment_107_dip"
-            android:text="@string/money"
             android:textColor="@color/white"
             android:textSize="@dimen/comment_12_size" />
     </RelativeLayout>

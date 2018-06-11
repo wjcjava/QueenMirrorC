@@ -35,7 +35,7 @@
     </LinearLayout>
     <View
         android:id="@+id/view"
-        android:layout_below="@id/et_money"
+        android:layout_below="@id/tv_money"
         android:layout_width="match_parent"
         android:background="@color/alpha_10_black"
         android:layout_marginTop="@dimen/comment_14_dip"

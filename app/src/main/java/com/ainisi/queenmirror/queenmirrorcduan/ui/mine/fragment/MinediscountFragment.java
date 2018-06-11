@@ -35,6 +35,7 @@ public class MinediscountFragment extends BaseFragment {
     private int position;
     private ReceiveDiscounBean receiveBean;
     private int item;
+    private int sumber;
 
     @Override
     protected int getLayoutResource() {
@@ -45,18 +46,6 @@ public class MinediscountFragment extends BaseFragment {
     public void initPresenter() {
     }
 
-    private void initshowdiscountFragment() {
-
-        manager = getActivity().getSupportFragmentManager();
-        transaction = manager.beginTransaction();
-        HistorydiscountFragment historydiscountFragment = new HistorydiscountFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("position", position);
-        bundle.putSerializable("bean", receiveBean);
-        historydiscountFragment.setArguments(bundle);
-        transaction.add(R.id.frame_discount, historydiscountFragment);
-        transaction.commit();
-    }
 
 
     @Override
@@ -72,7 +61,7 @@ public class MinediscountFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        initshowdiscountFragment();
+       initshowdiscountFragment(4);
     }
 
     private void initDate() {
@@ -100,11 +89,14 @@ public class MinediscountFragment extends BaseFragment {
                         position = (int) view.getTag();
                         //这里就可以根据业务需求处理点击事件了。
                         if (position == 0) {
-                            initshowdiscountFragment();
+                            sumber=4;
+                            initshowdiscountFragment(sumber);
                         } else if (position == 1) {
-                            initshowdiscountFragment();
+                            sumber=5;
+                            initshowdiscountFragment(sumber);
                         } else if (position == 2) {
-                            initshowdiscountFragment();
+                            sumber=6;
+                            initshowdiscountFragment(sumber);
                         }
                     }
                 });
@@ -115,6 +107,18 @@ public class MinediscountFragment extends BaseFragment {
 
         }
         setIndicator(tabDistance, 10, 10);
+    }
+    private void initshowdiscountFragment(int sumber) {
+
+        manager = getActivity().getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        HistorydiscountFragment historydiscountFragment = new HistorydiscountFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", sumber);
+        bundle.putSerializable("bean", receiveBean);
+        historydiscountFragment.setArguments(bundle);
+        transaction.add(R.id.frame_discount, historydiscountFragment);
+        transaction.commit();
     }
 
     public void setIndicator(TabLayout tabs, int leftDip, int rightDip) {

@@ -329,7 +329,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
-
     @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
             R.id.line_surface, R.id.line_uspension_surface, R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information, R.id.li_hime_sort,
             R.id.li_sort_bottom, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom, R.id.li_home_screen,R.id.li_sales_bottom})

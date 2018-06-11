@@ -12,7 +12,7 @@ public class ShopDiscounBean {
      * success : true
      * errorCode : 0
      * msg : 获取数据成功
-     * body : {"CouponListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"cpCreateInfo":{"id":"1cf04904fa064c4294453ce39c506be1","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 09:07:40","updateDate":"2018-05-22 09:07:40","cpCate":"1","cpScope":"1","cpDiscount":"2","cpAgeing":"2","cpLimit":"2","cpName":"ainisi","cpUsing":"qwertyui","cpRemark":"...","shopId":"12","exGoodsIds":"12","createTime":"2018-05-22 09:07:53","getFrom":"12","getTo":"16","createNums":"12","useDays":"12","useFrom":"20180520","useTo":"20180531","goodsId":"123","fullCondition":"qw","reduceAmount":11,"discountRate":12,"getNums":null,"cpStatus":"2","approveBy":null,"approveDate":null,"updatePgm":""},"cpGetRecord":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"cpId":null,"shopId":null,"goodsId":null,"custId":null,"getTime":null,"useQrcode":null,"getStatus":"1"},"cpNumsRecord":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"cpCreateInfo":{"id":"bc816138db6847b1a14c5ac2ffbda312","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 09:06:21","updateDate":"2018-05-22 09:06:21","cpCate":"1","cpScope":"1","cpDiscount":"2","cpAgeing":"2","cpLimit":"2","cpName":"ainisi","cpUsing":"qwertyui","cpRemark":"...","shopId":"12","exGoodsIds":"12","createTime":"2018-05-22 09:06:33","getFrom":"12","getTo":"16","createNums":"12","useDays":"12","useFrom":"10","useTo":"14","goodsId":"123","fullCondition":"qw","reduceAmount":11,"discountRate":12,"getNums":null,"cpStatus":"3","approveBy":null,"approveDate":null,"updatePgm":"qweer"},"cpGetRecord":null,"cpNumsRecord":null}]}
+     * body : {"CouponListData":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"cpCreateInfo":{"id":"1cf04904fa064c4294453ce39c506be1","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 09:07:40","updateDate":"2018-05-22 09:07:40","cpCate":"1","cpScope":"1","cpDiscount":"2","cpAgeing":"2","cpLimit":"2","cpName":"ainisi","cpUsing":"qwertyui","cpRemark":"...","shopId":"12","exGoodsIds":"12","createTime":"2018-05-22 09:07:53","getFrom":"12","getTo":"16","createNums":"12","useDays":"12","useFrom":"20180520","useTo":"20180531","goodsId":"123","fullCondition":"qw","reduceAmount":11,"discountRate":12,"getNums":null,"cpStatus":"2","approveBy":null,"approveDate":null,"updatePgm":"","shopName":null,"goodsName":null,"hasGet":0,"hasUse":0},"cpGetRecord":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"cpId":null,"shopId":null,"goodsId":null,"custId":null,"getTime":null,"useQrcode":null,"getStatus":"1"},"cpNumsRecord":null,"shopAddr":null,"shopName":null}],"CouponListDataItem":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"cpCreateInfo":{"id":"bc816138db6847b1a14c5ac2ffbda312","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 09:06:21","updateDate":"2018-05-22 09:06:21","cpCate":"1","cpScope":"2","cpDiscount":"2","cpAgeing":"2","cpLimit":"2","cpName":"ainisi","cpUsing":"qwertyui","cpRemark":"...","shopId":"12","exGoodsIds":"12","createTime":"2018-05-22 09:06:33","getFrom":"12","getTo":"16","createNums":"12","useDays":"12","useFrom":"10","useTo":"14","goodsId":"123","fullCondition":"qw","reduceAmount":11,"discountRate":12,"getNums":null,"cpStatus":"3","approveBy":null,"approveDate":null,"updatePgm":"qweer","shopName":null,"goodsName":null,"hasGet":0,"hasUse":0},"cpGetRecord":null,"cpNumsRecord":null,"shopAddr":null,"shopName":null}]}
      */
 
     private boolean success;
@@ -54,6 +54,7 @@ public class ShopDiscounBean {
 
     public static class BodyBean {
         private List<CouponListDataBean> CouponListData;
+        private List<CouponListDataItemBean> CouponListDataItem;
 
         public List<CouponListDataBean> getCouponListData() {
             return CouponListData;
@@ -63,6 +64,14 @@ public class ShopDiscounBean {
             this.CouponListData = CouponListData;
         }
 
+        public List<CouponListDataItemBean> getCouponListDataItem() {
+            return CouponListDataItem;
+        }
+
+        public void setCouponListDataItem(List<CouponListDataItemBean> CouponListDataItem) {
+            this.CouponListDataItem = CouponListDataItem;
+        }
+
         public static class CouponListDataBean {
             /**
              * id : null
@@ -70,9 +79,11 @@ public class ShopDiscounBean {
              * remarks : null
              * createDate : null
              * updateDate : null
-             * cpCreateInfo : {"id":"1cf04904fa064c4294453ce39c506be1","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 09:07:40","updateDate":"2018-05-22 09:07:40","cpCate":"1","cpScope":"1","cpDiscount":"2","cpAgeing":"2","cpLimit":"2","cpName":"ainisi","cpUsing":"qwertyui","cpRemark":"...","shopId":"12","exGoodsIds":"12","createTime":"2018-05-22 09:07:53","getFrom":"12","getTo":"16","createNums":"12","useDays":"12","useFrom":"20180520","useTo":"20180531","goodsId":"123","fullCondition":"qw","reduceAmount":11,"discountRate":12,"getNums":null,"cpStatus":"2","approveBy":null,"approveDate":null,"updatePgm":""}
+             * cpCreateInfo : {"id":"1cf04904fa064c4294453ce39c506be1","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 09:07:40","updateDate":"2018-05-22 09:07:40","cpCate":"1","cpScope":"1","cpDiscount":"2","cpAgeing":"2","cpLimit":"2","cpName":"ainisi","cpUsing":"qwertyui","cpRemark":"...","shopId":"12","exGoodsIds":"12","createTime":"2018-05-22 09:07:53","getFrom":"12","getTo":"16","createNums":"12","useDays":"12","useFrom":"20180520","useTo":"20180531","goodsId":"123","fullCondition":"qw","reduceAmount":11,"discountRate":12,"getNums":null,"cpStatus":"2","approveBy":null,"approveDate":null,"updatePgm":"","shopName":null,"goodsName":null,"hasGet":0,"hasUse":0}
              * cpGetRecord : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"cpId":null,"shopId":null,"goodsId":null,"custId":null,"getTime":null,"useQrcode":null,"getStatus":"1"}
              * cpNumsRecord : null
+             * shopAddr : null
+             * shopName : null
              */
 
             private Object id;
@@ -83,6 +94,8 @@ public class ShopDiscounBean {
             private CpCreateInfoBean cpCreateInfo;
             private CpGetRecordBean cpGetRecord;
             private Object cpNumsRecord;
+            private Object shopAddr;
+            private Object shopName;
 
             public Object getId() {
                 return id;
@@ -148,6 +161,22 @@ public class ShopDiscounBean {
                 this.cpNumsRecord = cpNumsRecord;
             }
 
+            public Object getShopAddr() {
+                return shopAddr;
+            }
+
+            public void setShopAddr(Object shopAddr) {
+                this.shopAddr = shopAddr;
+            }
+
+            public Object getShopName() {
+                return shopName;
+            }
+
+            public void setShopName(Object shopName) {
+                this.shopName = shopName;
+            }
+
             public static class CpCreateInfoBean {
                 /**
                  * id : 1cf04904fa064c4294453ce39c506be1
@@ -181,6 +210,10 @@ public class ShopDiscounBean {
                  * approveBy : null
                  * approveDate : null
                  * updatePgm :
+                 * shopName : null
+                 * goodsName : null
+                 * hasGet : 0
+                 * hasUse : 0
                  */
 
                 private String id;
@@ -214,6 +247,10 @@ public class ShopDiscounBean {
                 private Object approveBy;
                 private Object approveDate;
                 private String updatePgm;
+                private Object shopName;
+                private Object goodsName;
+                private int hasGet;
+                private int hasUse;
 
                 public String getId() {
                     return id;
@@ -462,6 +499,38 @@ public class ShopDiscounBean {
                 public void setUpdatePgm(String updatePgm) {
                     this.updatePgm = updatePgm;
                 }
+
+                public Object getShopName() {
+                    return shopName;
+                }
+
+                public void setShopName(Object shopName) {
+                    this.shopName = shopName;
+                }
+
+                public Object getGoodsName() {
+                    return goodsName;
+                }
+
+                public void setGoodsName(Object goodsName) {
+                    this.goodsName = goodsName;
+                }
+
+                public int getHasGet() {
+                    return hasGet;
+                }
+
+                public void setHasGet(int hasGet) {
+                    this.hasGet = hasGet;
+                }
+
+                public int getHasUse() {
+                    return hasUse;
+                }
+
+                public void setHasUse(int hasUse) {
+                    this.hasUse = hasUse;
+                }
             }
 
             public static class CpGetRecordBean {
@@ -587,6 +656,468 @@ public class ShopDiscounBean {
 
                 public void setGetStatus(String getStatus) {
                     this.getStatus = getStatus;
+                }
+            }
+        }
+
+        public static class CouponListDataItemBean {
+            /**
+             * id : null
+             * isNewRecord : true
+             * remarks : null
+             * createDate : null
+             * updateDate : null
+             * cpCreateInfo : {"id":"bc816138db6847b1a14c5ac2ffbda312","isNewRecord":false,"remarks":null,"createDate":"2018-05-22 09:06:21","updateDate":"2018-05-22 09:06:21","cpCate":"1","cpScope":"2","cpDiscount":"2","cpAgeing":"2","cpLimit":"2","cpName":"ainisi","cpUsing":"qwertyui","cpRemark":"...","shopId":"12","exGoodsIds":"12","createTime":"2018-05-22 09:06:33","getFrom":"12","getTo":"16","createNums":"12","useDays":"12","useFrom":"10","useTo":"14","goodsId":"123","fullCondition":"qw","reduceAmount":11,"discountRate":12,"getNums":null,"cpStatus":"3","approveBy":null,"approveDate":null,"updatePgm":"qweer","shopName":null,"goodsName":null,"hasGet":0,"hasUse":0}
+             * cpGetRecord : null
+             * cpNumsRecord : null
+             * shopAddr : null
+             * shopName : null
+             */
+
+            private Object id;
+            private boolean isNewRecord;
+            private Object remarks;
+            private Object createDate;
+            private Object updateDate;
+            private CpCreateInfoBeanX cpCreateInfo;
+            private Object cpGetRecord;
+            private Object cpNumsRecord;
+            private Object shopAddr;
+            private Object shopName;
+
+            public Object getId() {
+                return id;
+            }
+
+            public void setId(Object id) {
+                this.id = id;
+            }
+
+            public boolean isIsNewRecord() {
+                return isNewRecord;
+            }
+
+            public void setIsNewRecord(boolean isNewRecord) {
+                this.isNewRecord = isNewRecord;
+            }
+
+            public Object getRemarks() {
+                return remarks;
+            }
+
+            public void setRemarks(Object remarks) {
+                this.remarks = remarks;
+            }
+
+            public Object getCreateDate() {
+                return createDate;
+            }
+
+            public void setCreateDate(Object createDate) {
+                this.createDate = createDate;
+            }
+
+            public Object getUpdateDate() {
+                return updateDate;
+            }
+
+            public void setUpdateDate(Object updateDate) {
+                this.updateDate = updateDate;
+            }
+
+            public CpCreateInfoBeanX getCpCreateInfo() {
+                return cpCreateInfo;
+            }
+
+            public void setCpCreateInfo(CpCreateInfoBeanX cpCreateInfo) {
+                this.cpCreateInfo = cpCreateInfo;
+            }
+
+            public Object getCpGetRecord() {
+                return cpGetRecord;
+            }
+
+            public void setCpGetRecord(Object cpGetRecord) {
+                this.cpGetRecord = cpGetRecord;
+            }
+
+            public Object getCpNumsRecord() {
+                return cpNumsRecord;
+            }
+
+            public void setCpNumsRecord(Object cpNumsRecord) {
+                this.cpNumsRecord = cpNumsRecord;
+            }
+
+            public Object getShopAddr() {
+                return shopAddr;
+            }
+
+            public void setShopAddr(Object shopAddr) {
+                this.shopAddr = shopAddr;
+            }
+
+            public Object getShopName() {
+                return shopName;
+            }
+
+            public void setShopName(Object shopName) {
+                this.shopName = shopName;
+            }
+
+            public static class CpCreateInfoBeanX {
+                /**
+                 * id : bc816138db6847b1a14c5ac2ffbda312
+                 * isNewRecord : false
+                 * remarks : null
+                 * createDate : 2018-05-22 09:06:21
+                 * updateDate : 2018-05-22 09:06:21
+                 * cpCate : 1
+                 * cpScope : 2
+                 * cpDiscount : 2
+                 * cpAgeing : 2
+                 * cpLimit : 2
+                 * cpName : ainisi
+                 * cpUsing : qwertyui
+                 * cpRemark : ...
+                 * shopId : 12
+                 * exGoodsIds : 12
+                 * createTime : 2018-05-22 09:06:33
+                 * getFrom : 12
+                 * getTo : 16
+                 * createNums : 12
+                 * useDays : 12
+                 * useFrom : 10
+                 * useTo : 14
+                 * goodsId : 123
+                 * fullCondition : qw
+                 * reduceAmount : 11
+                 * discountRate : 12
+                 * getNums : null
+                 * cpStatus : 3
+                 * approveBy : null
+                 * approveDate : null
+                 * updatePgm : qweer
+                 * shopName : null
+                 * goodsName : null
+                 * hasGet : 0
+                 * hasUse : 0
+                 */
+
+                private String id;
+                private boolean isNewRecord;
+                private Object remarks;
+                private String createDate;
+                private String updateDate;
+                private String cpCate;
+                private String cpScope;
+                private String cpDiscount;
+                private String cpAgeing;
+                private String cpLimit;
+                private String cpName;
+                private String cpUsing;
+                private String cpRemark;
+                private String shopId;
+                private String exGoodsIds;
+                private String createTime;
+                private String getFrom;
+                private String getTo;
+                private String createNums;
+                private String useDays;
+                private String useFrom;
+                private String useTo;
+                private String goodsId;
+                private String fullCondition;
+                private int reduceAmount;
+                private int discountRate;
+                private Object getNums;
+                private String cpStatus;
+                private Object approveBy;
+                private Object approveDate;
+                private String updatePgm;
+                private Object shopName;
+                private Object goodsName;
+                private int hasGet;
+                private int hasUse;
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setId(String id) {
+                    this.id = id;
+                }
+
+                public boolean isIsNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setIsNewRecord(boolean isNewRecord) {
+                    this.isNewRecord = isNewRecord;
+                }
+
+                public Object getRemarks() {
+                    return remarks;
+                }
+
+                public void setRemarks(Object remarks) {
+                    this.remarks = remarks;
+                }
+
+                public String getCreateDate() {
+                    return createDate;
+                }
+
+                public void setCreateDate(String createDate) {
+                    this.createDate = createDate;
+                }
+
+                public String getUpdateDate() {
+                    return updateDate;
+                }
+
+                public void setUpdateDate(String updateDate) {
+                    this.updateDate = updateDate;
+                }
+
+                public String getCpCate() {
+                    return cpCate;
+                }
+
+                public void setCpCate(String cpCate) {
+                    this.cpCate = cpCate;
+                }
+
+                public String getCpScope() {
+                    return cpScope;
+                }
+
+                public void setCpScope(String cpScope) {
+                    this.cpScope = cpScope;
+                }
+
+                public String getCpDiscount() {
+                    return cpDiscount;
+                }
+
+                public void setCpDiscount(String cpDiscount) {
+                    this.cpDiscount = cpDiscount;
+                }
+
+                public String getCpAgeing() {
+                    return cpAgeing;
+                }
+
+                public void setCpAgeing(String cpAgeing) {
+                    this.cpAgeing = cpAgeing;
+                }
+
+                public String getCpLimit() {
+                    return cpLimit;
+                }
+
+                public void setCpLimit(String cpLimit) {
+                    this.cpLimit = cpLimit;
+                }
+
+                public String getCpName() {
+                    return cpName;
+                }
+
+                public void setCpName(String cpName) {
+                    this.cpName = cpName;
+                }
+
+                public String getCpUsing() {
+                    return cpUsing;
+                }
+
+                public void setCpUsing(String cpUsing) {
+                    this.cpUsing = cpUsing;
+                }
+
+                public String getCpRemark() {
+                    return cpRemark;
+                }
+
+                public void setCpRemark(String cpRemark) {
+                    this.cpRemark = cpRemark;
+                }
+
+                public String getShopId() {
+                    return shopId;
+                }
+
+                public void setShopId(String shopId) {
+                    this.shopId = shopId;
+                }
+
+                public String getExGoodsIds() {
+                    return exGoodsIds;
+                }
+
+                public void setExGoodsIds(String exGoodsIds) {
+                    this.exGoodsIds = exGoodsIds;
+                }
+
+                public String getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(String createTime) {
+                    this.createTime = createTime;
+                }
+
+                public String getGetFrom() {
+                    return getFrom;
+                }
+
+                public void setGetFrom(String getFrom) {
+                    this.getFrom = getFrom;
+                }
+
+                public String getGetTo() {
+                    return getTo;
+                }
+
+                public void setGetTo(String getTo) {
+                    this.getTo = getTo;
+                }
+
+                public String getCreateNums() {
+                    return createNums;
+                }
+
+                public void setCreateNums(String createNums) {
+                    this.createNums = createNums;
+                }
+
+                public String getUseDays() {
+                    return useDays;
+                }
+
+                public void setUseDays(String useDays) {
+                    this.useDays = useDays;
+                }
+
+                public String getUseFrom() {
+                    return useFrom;
+                }
+
+                public void setUseFrom(String useFrom) {
+                    this.useFrom = useFrom;
+                }
+
+                public String getUseTo() {
+                    return useTo;
+                }
+
+                public void setUseTo(String useTo) {
+                    this.useTo = useTo;
+                }
+
+                public String getGoodsId() {
+                    return goodsId;
+                }
+
+                public void setGoodsId(String goodsId) {
+                    this.goodsId = goodsId;
+                }
+
+                public String getFullCondition() {
+                    return fullCondition;
+                }
+
+                public void setFullCondition(String fullCondition) {
+                    this.fullCondition = fullCondition;
+                }
+
+                public int getReduceAmount() {
+                    return reduceAmount;
+                }
+
+                public void setReduceAmount(int reduceAmount) {
+                    this.reduceAmount = reduceAmount;
+                }
+
+                public int getDiscountRate() {
+                    return discountRate;
+                }
+
+                public void setDiscountRate(int discountRate) {
+                    this.discountRate = discountRate;
+                }
+
+                public Object getGetNums() {
+                    return getNums;
+                }
+
+                public void setGetNums(Object getNums) {
+                    this.getNums = getNums;
+                }
+
+                public String getCpStatus() {
+                    return cpStatus;
+                }
+
+                public void setCpStatus(String cpStatus) {
+                    this.cpStatus = cpStatus;
+                }
+
+                public Object getApproveBy() {
+                    return approveBy;
+                }
+
+                public void setApproveBy(Object approveBy) {
+                    this.approveBy = approveBy;
+                }
+
+                public Object getApproveDate() {
+                    return approveDate;
+                }
+
+                public void setApproveDate(Object approveDate) {
+                    this.approveDate = approveDate;
+                }
+
+                public String getUpdatePgm() {
+                    return updatePgm;
+                }
+
+                public void setUpdatePgm(String updatePgm) {
+                    this.updatePgm = updatePgm;
+                }
+
+                public Object getShopName() {
+                    return shopName;
+                }
+
+                public void setShopName(Object shopName) {
+                    this.shopName = shopName;
+                }
+
+                public Object getGoodsName() {
+                    return goodsName;
+                }
+
+                public void setGoodsName(Object goodsName) {
+                    this.goodsName = goodsName;
+                }
+
+                public int getHasGet() {
+                    return hasGet;
+                }
+
+                public void setHasGet(int hasGet) {
+                    this.hasGet = hasGet;
+                }
+
+                public int getHasUse() {
+                    return hasUse;
+                }
+
+                public void setHasUse(int hasUse) {
+                    this.hasUse = hasUse;
                 }
             }
         }

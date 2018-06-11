@@ -27,6 +27,7 @@
         android:text="无敌券领取"
         />
     <RelativeLayout
+        android:id="@+id/re_invincible_stamps"
         android:layout_below="@id/iv_invincible_stamps"
         android:layout_marginTop="@dimen/comment_27_dip"
         android:layout_marginBottom="@dimen/comment_71_dip"

@@ -23,7 +23,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProductDetailBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
@@ -41,7 +40,6 @@ import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -88,10 +86,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
 
     boolean isColl = false;
     String goodsId, shopId, isLogin, userId;
-
-    ShoppingCartBean shoppingCartBean;
-    ShoppingCartBean.BodyBean.ShopListBean shopListBean;
-    List<ShoppingCartBean.BodyBean.ShopListBean> shopListBeans = new ArrayList<>();
 
     CustomShareListener mShareListener;
     ShareAction mShareAction;
@@ -384,7 +378,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 tv_brief.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsBrief());
                 tv_time.setText("服务时长：" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getServiceTime());
                 textView4.setText("已浏览：" + "200" + "次");
-                //  tv_introduction.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsDetails().toString());
                 fullTitle.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsName());
                 break;
             case ACTION.EVALUATION:
@@ -399,7 +392,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
             case ACTION.ADDGOODSLIULAN://添加浏览量
                 SuccessBean successBean1 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean1.isSuccess()) {
-                    T.show(successBean1.getMsg());
+
                 } else {
                     T.show(successBean1.getMsg());
                 }
@@ -423,9 +416,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 SuccessBean successBean2 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean2.isSuccess()) {
                     iv_full_collection.setImageResource(R.drawable.collection_bein);
-                    //collection_bein
-                    T.show(successBean2.getMsg());//成功
-                } else {
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
                     T.show(successBean2.getMsg());
                 }
@@ -435,7 +425,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 SuccessBean successBean3 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean3.isSuccess()) {
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
-                    T.show(successBean3.getMsg());//成功
+
                 } else {
                     iv_full_collection.setImageResource(R.drawable.collection_bein);
                     T.show(successBean3.getMsg());

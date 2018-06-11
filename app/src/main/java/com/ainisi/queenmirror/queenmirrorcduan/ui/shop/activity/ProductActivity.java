@@ -1,19 +1,17 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.adapter.ShopListAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ShopListBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -25,7 +23,8 @@ public class ProductActivity extends BaseNewActivity {
     //本店成品
     @Bind(R.id.re_product)
     RecyclerView reProduct;
-    private List<SortBean> beanList = new ArrayList<>();
+    private ShopListBean shopListBean;
+    private List<ShopListBean.BodyBean.ApiGoodsListBean> list;
 
     @Override
     protected int getLayoutId() {
@@ -34,6 +33,7 @@ public class ProductActivity extends BaseNewActivity {
     @Override
     protected void initView() {
         super.initView();
+
     }
 
 
@@ -42,14 +42,12 @@ public class ProductActivity extends BaseNewActivity {
         super.initData();
         productTitle.setText("全部成品");
         productTitle.setTextColor(Color.BLACK);
-        for (int i = 0; i < 6; i++) {
-            SortBean sortBean = new SortBean();
-            beanList.add(sortBean);
-        }
-
-        MyAdapter myAdapter = new MyAdapter(R.layout.re_shop_store, beanList);
+        Intent intent = this.getIntent();
+        shopListBean= (ShopListBean) intent.getSerializableExtra("shopListBean");
+        list=shopListBean.getBody().getApiGoodsList();
+        ShopListAdapter shopListAdapter = new ShopListAdapter(R.layout.re_shop_store, list);
         reProduct.setLayoutManager(new GridLayoutManager(this, 2));
-        reProduct.setAdapter(myAdapter);
+        reProduct.setAdapter(shopListAdapter);
 
     }
 

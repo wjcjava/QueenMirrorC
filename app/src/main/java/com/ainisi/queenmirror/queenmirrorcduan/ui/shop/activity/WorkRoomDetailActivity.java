@@ -31,7 +31,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActi
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ShopDiscounBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -125,6 +124,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     ShoppingCartBean shoppingCartBean;
     public static WorkRoomDetailActivity instance = null;
+    private WorkSingleAdapter singleAdapter;
+    private List<ShopDiscounBean.BodyBean.CouponListDataItemBean> list1;
+    private List<ShopDiscounBean.BodyBean.CouponListDataBean> list;
 
     @Override
     protected int getLayoutId() {
@@ -160,10 +162,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
          * 获取商家具体信息
          */
         getShopDetailData();
-        /**
-         * 商家优惠券
-         */
-        geeshopDiscoun();
+
 
         /**
          * 获取购物车信息
@@ -189,8 +188,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("cpCate", "1");
         params.put("cpScope", "1");
         params.put("shopId", shopId);//商品ID
-        params.put("userId", SP.get(WorkRoomDetailActivity.this, SpContent.UserId, "") + "");//用户ID
-        L.e("----------------"+SP.get(WorkRoomDetailActivity.this, SpContent.UserId, "") + "");
+        params.put("userId", SP.get(this,SpContent.UserId,"")+"");//用户ID
         HttpUtils.doPost(ACTION.SHOPDISCOUN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -288,8 +286,14 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             case ACTION.SHOPDISCOUN:
                 ShopDiscounBean discounBean = GsonUtil.toObj(res, ShopDiscounBean.class);
                 if (discounBean.isSuccess()) {
-                    List<ShopDiscounBean.BodyBean.CouponListDataBean> list = discounBean.getBody().getCouponListData();
+                    list = discounBean.getBody().getCouponListData();
+                    list1 = discounBean.getBody().getCouponListDataItem();
                     shopAdapter = new WorkShopAdapter(WorkRoomDetailActivity.this, list);
+                    singleAdapter = new WorkSingleAdapter(WorkRoomDetailActivity.this, list1);
+                    listShop.setAdapter(shopAdapter);
+                    listShop.setDividerHeight(0);
+                    listSingle.setAdapter(shopAdapter);
+                    listSingle.setDividerHeight(0);
                     if (list.size() > 0) {
                         textShop.setVisibility(View.GONE);
                         textSingle.setVisibility(View.GONE);
@@ -429,7 +433,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         listView.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.VISIBLE);
-
                         tv_work_detail_hangye.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab());
                         tv_work_detail_address.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopAddr());
                         tv_work_detail_time.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getOpenTime() + "-" + shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getCloseTime());
@@ -442,11 +445,10 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         reMassage.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.VISIBLE);
 
-                        listShop.setAdapter(shopAdapter);
-                        listShop.setDividerHeight(0);
-                        WorkSingleAdapter singleAdapter = new WorkSingleAdapter(WorkRoomDetailActivity.this);
-                        listSingle.setAdapter(shopAdapter);
-                        listSingle.setDividerHeight(0);
+                        /**
+                         * 商家优惠券
+                         */
+                        geeshopDiscoun();
                         break;
                 }
             }
