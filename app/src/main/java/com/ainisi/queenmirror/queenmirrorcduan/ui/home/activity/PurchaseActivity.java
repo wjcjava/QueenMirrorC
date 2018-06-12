@@ -72,14 +72,16 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
     @Override
     public void initView() {
         purtitle.setText("提交订单");
+
+        Intent intent = this.getIntent();
+        shoppingCartBean = (ShoppingCartBean) intent.getSerializableExtra("cartBean");
+        getShopCartData();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Intent intent = this.getIntent();
-        shoppingCartBean = (ShoppingCartBean) intent.getSerializableExtra("cartBean");
 
         lick_name = SP.get(this, SpContent.Lickname, "") + "";
         lick_phone = SP.get(this, SpContent.LickPhone, "") + "";
@@ -92,7 +94,6 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
         }
         tv_sex.setText(link_sex);
         tv_phone.setText(lick_phone);
-        getShopCartData();
     }
 
     /**
@@ -186,6 +187,7 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
                     intent.putExtra("businessIds", businessIds);
                     intent.putExtra("amount", tv_shopping_cart_number.getText().toString());
                     startActivity(intent);
+                    finish();
                     T.show(successBean.getMsg());
                 } else {
                     T.show(successBean.getMsg());

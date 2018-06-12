@@ -7,7 +7,7 @@ import java.util.List;
  * Created by john on 2018/5/17.
  */
 
-public class MyCommentsBean implements Serializable {
+public class MyCommentsBean implements Serializable{
 
 
     /**

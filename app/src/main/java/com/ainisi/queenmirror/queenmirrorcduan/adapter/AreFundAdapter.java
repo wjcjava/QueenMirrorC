@@ -28,7 +28,6 @@ public class AreFundAdapter  extends BaseQuickAdapter<AreFundBean,BaseViewHolder
         box_goods.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
                 if(b){
                     item.setCheck(true);
                 }else{

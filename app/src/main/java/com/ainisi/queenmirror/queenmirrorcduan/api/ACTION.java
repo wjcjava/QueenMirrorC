@@ -51,8 +51,6 @@ public interface ACTION {
 
     int RECEIVEDISCOUN=0X024;//商家所领取优惠券
 
-    int LISTFOEUSE=0x025;//可以优惠券列表（订单）
-
     int QUEENDETAILS=0x026;//女王卡详情
 
     int FORGOTPASSWORD=0x027;//忘记密码
@@ -180,5 +178,15 @@ public interface ACTION {
     int QUEENCHARGE = 0x146;//女王卡支付宝充值
 
     int PAYAFTERREFRESH = 0x147;//女王卡充值后查看结果
+
+    int PAYNOWINPAY = 0x148;//立即购买获取订单编号
+
+    int PAYPASSWORDCHECK = 0x149;//支付密码判断是否存在
+
+    int LISTFOEUSE=0x150;//可以优惠券列表（订单）
+
+    int PAYINYUEDATA = 0x151;//余额支付
+
+    int CommentReplyList = 0x152;//评价回复数据
 
 }

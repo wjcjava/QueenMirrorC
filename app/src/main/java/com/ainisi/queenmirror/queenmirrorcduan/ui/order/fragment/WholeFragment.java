@@ -85,25 +85,6 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
 
     @Override
     protected void initView() {
-
-       /* order_main_refresh.setLoadMore(true);
-
-        order_main_refresh.setMaterialRefreshListener(new MaterialRefreshListener() {
-            @Override
-            public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
-                //下拉刷新...
-                pageNumber = 1;
-
-                doFirstData();
-            }
-
-            @Override
-            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-                //上拉刷新...
-                pageNumber++;
-                doFirstData();
-            }
-        });*/
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
@@ -164,6 +145,7 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
                             intent.putExtra("orderTel", apiOrderList.get(position).getIntfAnsShopBasic().getServiceTel());
                             intent.putExtra("orderTime", apiOrderList.get(position).getIntfAnsOrder().getOrderTime());
                             intent.putExtra("orderState",apiOrderList.get(position).getIntfAnsOrder().getOrderStatus());
+                            intent.putExtra("shopId",apiOrderList.get(position).getIntfAnsShopBasic().getId());
                             intent.putExtra("OrderHeji", amountNum + "");
                             intent.putExtra("lstBean", (Serializable) apiOrderList.get(position).getIntfAnsOrder().getApiOrderDetailsList());
                             startActivity(intent);

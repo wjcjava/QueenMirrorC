@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -16,6 +17,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.adapter.PurchaseAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ReceiveDiscounBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -35,6 +38,8 @@ public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallB
     TextView title_title;
     @Bind(R.id.pur_rey_distance)
     RecyclerView pur_rey_distance;
+    @Bind(R.id.li_purchase_null)
+    LinearLayout li_purchase_null;
 
     String shopId = "", goodsIds = "";
 
@@ -60,12 +65,9 @@ public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallB
      */
     private void getPurData() {
         HashMap<String, String> params = new HashMap<>();
-        //  params.put("userId", SP.get(PurchaseSelectActivity.this, SpContent.UserId,"")+"");//用户ID
-        params.put("userId", "111");
-        //params.put("shopId",shopId);
-        params.put("shopId", "12");
-        // params.put("goodsIds",goodsIds);
-        params.put("goodsIds", "123");
+        params.put("userId", SP.get(PurchaseSelectActivity.this, SpContent.UserId,"")+"");//用户ID
+        params.put("shopId",shopId);
+        params.put("goodsIds",goodsIds);
         HttpUtils.doPost(ACTION.GETUSEYOUHUIQUAN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -82,14 +84,17 @@ public class PurchaseSelectActivity extends BaseNewActivity implements HttpCallB
     public void onSuccess(int action, String res) {
         switch (action) {
             case ACTION.GETUSEYOUHUIQUAN:
-                L.e("^^^^^" + res);
                 ReceiveDiscounBean receiveBean = GsonUtil.toObj(res, ReceiveDiscounBean.class);
 
                 if (receiveBean.isSuccess()) {
                     List<ReceiveDiscounBean.BodyBean.CustCouponListDataBean> receiveList = receiveBean.getBody().getCustCouponListData();
-                    PurchaseAdapter purchaseAdapter = new PurchaseAdapter(R.layout.item_discount, receiveList);
-                    pur_rey_distance.setLayoutManager(new LinearLayoutManager(PurchaseSelectActivity.this, LinearLayoutManager.VERTICAL, false));
-                    pur_rey_distance.setAdapter(purchaseAdapter);
+                    if(receiveList.size() == 0){
+                        li_purchase_null.setVisibility(View.VISIBLE);
+                    }else{
+                        PurchaseAdapter purchaseAdapter = new PurchaseAdapter(R.layout.item_discount, receiveList);
+                        pur_rey_distance.setLayoutManager(new LinearLayoutManager(PurchaseSelectActivity.this, LinearLayoutManager.VERTICAL, false));
+                        pur_rey_distance.setAdapter(purchaseAdapter);
+                    }
                 } else {
                     T.show(receiveBean.getMsg());
                 }

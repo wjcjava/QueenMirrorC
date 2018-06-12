@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/mine_back_gray"
     android:fitsSystemWindows="true"
     tools:context=".ui.mine.activity.MineEvaluateActivity">
 
@@ -55,23 +55,50 @@
             android:layout_marginBottom="@dimen/comment_10_dip"
             android:gravity="center"
             android:layout_marginTop="2dp"
-
+            android:text="已贡献0条评价"
             android:textSize="@dimen/comment_12_size" />
 
     </RelativeLayout>
 
-    <com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout
-        android:id="@+id/rlm"
-        android:layout_width="match_parent"
+    <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/root_title"
-        app:rll_header_hint_normal="下拉给我试试看"
-        app:rll_header_hint_ready="主淫我已经准备好了">
+        android:layout_below="@+id/root_title">
 
-        <android.support.v7.widget.RecyclerView
-
-            android:id="@+id/rc_evaluate"
+        <LinearLayout
+            android:id="@+id/li_mine_comment_null"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:layout_centerVertical="true">
+            <ImageView android:layout_width="253dp"
+                android:layout_height="137dp"
+                android:src="@drawable/shop_null">
+            </ImageView>
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="您还没有发表评论"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/comment_12_size"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/shop_text">
+            </TextView>
+
+        </LinearLayout>
+
+        <com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout
+            android:id="@+id/rlm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:rll_header_hint_normal="下拉给我试试看"
+            app:rll_header_hint_ready="主淫我已经准备好了">
+
+            <android.support.v7.widget.RecyclerView
+
+                android:id="@+id/rc_evaluate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout>
+    </RelativeLayout>
 </RelativeLayout>

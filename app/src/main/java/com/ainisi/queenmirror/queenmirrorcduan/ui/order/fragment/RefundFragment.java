@@ -16,6 +16,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ArefundActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.bean.RefundBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -92,7 +93,6 @@ public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayou
         HashMap<String,String> hashMap=new HashMap<>();
         hashMap.put("userId", SP.get(getActivity(), SpContent.UserId,"0")+"");
         HttpUtils.doPost(ACTION.REFUND,hashMap, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
-
     }
 
     @Override
@@ -100,7 +100,6 @@ public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayou
         switch (action){
             case ACTION.REFUND:
                 refundBean = GsonUtil.toObj(res, RefundBean.class);
-
                 apiRefundList = refundBean.getBody().getApiRefundList();
                 RefundAdapter sbmitWholeAdapter=new RefundAdapter(R.layout.item_refundrecycler,apiRefundList);
                 refund.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL,false));
@@ -112,8 +111,6 @@ public class RefundFragment extends BaseFragment implements RefreshLoadMoreLayou
                         startActivity(new Intent(getActivity(), ArefundActivity.class));
                     }
                 });
-
-
                 break;
         }
     }

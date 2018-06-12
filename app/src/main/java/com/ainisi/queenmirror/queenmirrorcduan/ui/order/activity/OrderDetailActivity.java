@@ -63,7 +63,7 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
     @Bind(R.id.re_order_refund)
     RelativeLayout re_order_refund;
 
-    String orderNo,orderTel,orderTime,OrderHeji,orderId,orderState;
+    String orderNo,orderTel,orderTime,OrderHeji,orderId,orderState,shopId;
 
     List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean> getApiOrderDetailsList = new ArrayList();
 
@@ -84,6 +84,7 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
         OrderHeji = intentGet.getStringExtra("OrderHeji");
         orderId = intentGet.getStringExtra("orderId");
         orderState = intentGet.getStringExtra("orderState");
+        shopId = intentGet.getStringExtra("shopId");
 
         tv_common_title.setText("订单详情页");
 
@@ -132,6 +133,8 @@ public class OrderDetailActivity extends BaseNewActivity implements HttpCallBack
                 Intent intent = new Intent(this,ArefundActivity.class);
                 intent.putExtra("lstBean", (Serializable)getApiOrderDetailsList);
                 intent.putExtra("orderNo",orderNo);
+                intent.putExtra("orderId",orderId);
+                intent.putExtra("shopId",shopId);
                 startActivity(intent);
                 break;
         }

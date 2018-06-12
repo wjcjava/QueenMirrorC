@@ -47,7 +47,9 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
 
     @Override
     public void initPresenter() {
+
     }
+
 
     @Override
     public void initView() {
@@ -60,6 +62,7 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
         parames.put("custId",SP.get(this,SpContent.UserId,"")+"");
         HttpUtils.doPost(ACTION.MYWALLIET, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
 
     @OnClick({R.id.title_back, R.id.rc_name, R.id.rc_setup, R.id.img_addcart, R.id.img_balance
     })
@@ -80,9 +83,6 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
                 Intent intent1 = new Intent(this, MineDetailedActivity.class);
                 intent1.putExtra("name", "余额明细");
                 startActivity(intent1);
-//                Intent intent1 = new Intent(this, MineBalanceActivity.class);
-//                intent1.putExtra("name", tvbalance.getText().toString().trim());
-//                startActivity(intent1);
                 break;
             //实名认证
             case R.id.rc_name:
@@ -94,6 +94,7 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
                 inithttpPass();
                 if (exists == 0) {
                     startActivity(new Intent(this, MinePaymentsettingActivity.class));
+                    inithttpPass();
                 } else {
                     MineSettingActivity.startActivity(this);
                 }
@@ -108,7 +109,7 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
 
     private void inithttpPass() {
         HashMap<String, String> parames = new HashMap<>();
-        parames.put("custId", SP.get(this, SpContent.UserId, "") + "");
+        parames.put("custId", SP.get(this, SpContent.UserId,"")+"");
         HttpUtils.doPost(ACTION.WHETHERPASS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -119,7 +120,6 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
                 WhetherPassBean whetherPassBean = GsonUtil.toObj(res, WhetherPassBean.class);
                 if (whetherPassBean.isSuccess()) {
                     exists = whetherPassBean.getBody().getIsExists();
-
                 } else {
                     T.show(whetherPassBean.getMsg());
                 }

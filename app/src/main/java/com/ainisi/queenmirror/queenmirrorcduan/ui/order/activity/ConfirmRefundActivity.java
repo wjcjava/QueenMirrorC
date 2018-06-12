@@ -19,12 +19,16 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.AreFundBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ConfirmRefundBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.google.gson.Gson;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
@@ -58,7 +62,8 @@ public class ConfirmRefundActivity extends BaseNewActivity implements HttpCallBa
     List<AreFundBean> areFundCheckList = new ArrayList<>();
     public static ConfirmRefundActivity instance = null;
     double amount = 0;
-    String outTradeNo="";
+    String outTradeNo="",shopId,orderId,type_reson;
+    List<ConfirmRefundBean> list;
 
     @Override
     protected int getLayoutId() {
@@ -72,17 +77,18 @@ public class ConfirmRefundActivity extends BaseNewActivity implements HttpCallBa
 
         Intent intent = this.getIntent();
         outTradeNo = intent.getStringExtra("orderNo");
+        areFundCheckList = (List<AreFundBean>) intent.getSerializableExtra("lstBean");
+        shopId = intent.getStringExtra("shopId");
+        orderId = intent.getStringExtra("orderId");
 
         areTitle.setText(R.string.arefund);
 
-        Intent intentGet = getIntent();
-        areFundCheckList = (List<AreFundBean>) intentGet.getSerializableExtra("lstBean");
-
         for(int i=0;i<areFundCheckList.size();i++){
-            amount = amount + Double.parseDouble(areFundCheckList.get(i).getIntfAnsOrderDetails().getSumAmount());
-        }
+            amount = amount + Double.parseDouble(areFundCheckList.get(i).getIntfAnsOrderDetails().getAfterAmount());
 
-        tv_confirm_amount.setText("￥"+amount);
+            L.e("******    "+areFundCheckList.get(i).getIntfAnsOrderDetails().getId());
+        }
+        tv_confirm_amount.setText("￥" + amount);
 
         ConfirmRefundAdapter confirmRefundAdapter = new ConfirmRefundAdapter(R.layout.confirmrefund_re_listitem,areFundCheckList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
@@ -115,16 +121,46 @@ public class ConfirmRefundActivity extends BaseNewActivity implements HttpCallBa
                 break;
         }
     }
-
     /**
      * 退款
      */
     private void DoOutData() {
-        L.e(SP.get(ConfirmRefundActivity.this,SpContent.TransId,"0")+"    ****");
+        if(tv_arefund_select.getText().toString().equals("不喜欢/效果不好")){
+            type_reson = "1";
+        }else if(tv_arefund_select.getText().toString().equals("拍错了")){
+            type_reson = "2";
+        }else if(tv_arefund_select.getText().toString().equals("不想去了")){
+            type_reson = "3";
+        }else if(tv_arefund_select.getText().toString().equals("重拍")){
+            type_reson = "4";
+        }else if(tv_arefund_select.getText().toString().equals("太远了")){
+            type_reson = "5";
+        }else if(tv_arefund_select.getText().toString().equals("其他")){
+            type_reson = "9";
+        }
+
+        list = new ArrayList<>();
+        for(int i=0;i<areFundCheckList.size();i++){
+            ConfirmRefundBean confirmRefundBean = new ConfirmRefundBean();
+            confirmRefundBean.setOrderId(orderId);//订单ID
+            confirmRefundBean.setDetailsId(areFundCheckList.get(i).getIntfAnsOrderDetails().getId());//
+            confirmRefundBean.setShopId(shopId);
+            confirmRefundBean.setCustId(SP.get(ConfirmRefundActivity.this,SpContent.UserId,"")+"");
+            confirmRefundBean.setGoodsId(areFundCheckList.get(i).getIntfAnsOrderDetails().getGoodsId());
+            confirmRefundBean.setRefundReason(type_reson);
+            confirmRefundBean.setRefundAmount(areFundCheckList.get(i).getIntfAnsOrderDetails().getSumAmount());
+            confirmRefundBean.setActualAmount(areFundCheckList.get(i).getIntfAnsOrderDetails().getAfterAmount());
+            confirmRefundBean.setRefundDetails(et_confirm_backresuion.getText().toString());
+            confirmRefundBean.setRefundEvidence("");
+            list.add(confirmRefundBean);
+        }
+
+        Gson gson = new Gson();
+        String toGson = gson.toJson(list);
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("refundAmount", amount+"");
-        params.put("outTradeNo", SP.get(ConfirmRefundActivity.this,SpContent.TransId,"0")+"");
+        params.put("refundInfo", toGson);
+        params.put("userId", SP.get(ConfirmRefundActivity.this,SpContent.UserId,"0")+"");
         HttpUtils.doPost(ACTION.DOOUTDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -132,7 +168,13 @@ public class ConfirmRefundActivity extends BaseNewActivity implements HttpCallBa
     public void onSuccess(int action, String res) {
         switch (action){
             case ACTION.DOOUTDATA:
-                L.e("&&&&&  "+res);
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()){
+                    T.show("申请成功");
+                    finish();
+                }else{
+                    T.show(successBean.getMsg());
+                }
                 break;
         }
     }

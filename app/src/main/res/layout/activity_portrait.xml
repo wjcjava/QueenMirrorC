@@ -238,7 +238,7 @@
     </RelativeLayout>
     <TextView
         android:id="@+id/tv_portrait_loginout"
-        android:background="@drawable/ic_setting_breake"
+        android:background="@drawable/button_shap_queen"
         android:text="退出登录"
         android:gravity="center"
         android:textColor="@color/white"

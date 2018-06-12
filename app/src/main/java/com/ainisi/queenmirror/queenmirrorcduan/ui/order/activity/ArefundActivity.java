@@ -16,6 +16,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.AreFundBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 
 import java.io.Serializable;
@@ -39,7 +40,7 @@ public class ArefundActivity extends BaseNewActivity {
     List<AreFundBean> areFundBeanList = new ArrayList<>();
 
     List<AreFundBean> areFundCheckList;
-    String orderNo;
+    String orderNo,shopId,orderId;
 
 
     @Override
@@ -54,6 +55,9 @@ public class ArefundActivity extends BaseNewActivity {
         Intent intentGet = getIntent();
         getApiOrderDetailsList = (List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean>) intentGet.getSerializableExtra("lstBean");
         orderNo = intentGet.getStringExtra("orderNo");
+        shopId = intentGet.getStringExtra("shopId");
+        orderId = intentGet.getStringExtra("orderId");
+
         for(int i=0;i<getApiOrderDetailsList.size();i++){
             areFundBean = new AreFundBean();
             AreFundBean.IntfAnsOrderDetailsBean  intfAnsOrderDetailsBean = new AreFundBean.IntfAnsOrderDetailsBean();
@@ -62,6 +66,10 @@ public class ArefundActivity extends BaseNewActivity {
             intfAnsOrderDetailsBean.setPurchaseNumber(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getPurchaseNumber());
             intfAnsOrderDetailsBean.setUnitPrice(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getUnitPrice());
             intfAnsOrderDetailsBean.setSumAmount(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getSumAmount());
+            intfAnsOrderDetailsBean.setCpAmount(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getCpAmount());
+            intfAnsOrderDetailsBean.setAfterAmount(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getAfterAmount());
+            intfAnsOrderDetailsBean.setId(getApiOrderDetailsList.get(i).getIntfAnsOrderDetails().getId());
+
             areFundBean.setIntfAnsOrderDetails(intfAnsOrderDetailsBean);
             areFundBean.setCheck(false);
             areFundBeanList.add(areFundBean);
@@ -96,6 +104,9 @@ public class ArefundActivity extends BaseNewActivity {
                         intfAnsOrderDetailsBean.setPurchaseNumber(areFundBeanList.get(i).getIntfAnsOrderDetails().getPurchaseNumber());
                         intfAnsOrderDetailsBean.setUnitPrice(areFundBeanList.get(i).getIntfAnsOrderDetails().getUnitPrice());
                         intfAnsOrderDetailsBean.setSumAmount(areFundBeanList.get(i).getIntfAnsOrderDetails().getSumAmount());
+                        intfAnsOrderDetailsBean.setCpAmount(areFundBeanList.get(i).getIntfAnsOrderDetails().getCpAmount());
+                        intfAnsOrderDetailsBean.setAfterAmount(areFundBeanList.get(i).getIntfAnsOrderDetails().getAfterAmount());
+                        intfAnsOrderDetailsBean.setId(areFundBeanList.get(i).getIntfAnsOrderDetails().getId());
                         areFundBean.setIntfAnsOrderDetails(intfAnsOrderDetailsBean);
                         areFundCheckList.add(areFundBean);
                     }
@@ -105,7 +116,10 @@ public class ArefundActivity extends BaseNewActivity {
                     Intent intent = new Intent(this,ConfirmRefundActivity.class);
                     intent.putExtra("lstBean", (Serializable)areFundCheckList);
                     intent.putExtra("orderNo",orderNo);
+                    intent.putExtra("shopId",shopId);
+                    intent.putExtra("orderId",orderId);
                     startActivity(intent);
+                    finish();
                 }else{
                     T.show("请选择需要退款的商品");
                 }

@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/comment_10_dip"
-
-    android:background="@drawable/et_shap"
+    android:background="@color/white"
     android:orientation="vertical">
 
 
@@ -34,6 +33,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/comment_11_dip"
         android:layout_marginTop="@dimen/comment_21_dip"
+        android:visibility="invisible"
         app:srcCompat="@drawable/icon_full_right" />
 
     <View
@@ -47,215 +47,112 @@
         android:layout_marginTop="@dimen/comment_10_dip"
         android:background="@color/alpha_05_black" />
 
-    <RelativeLayout
-        android:background="@color/alpha_05_black"
-        android:id="@+id/rl_bottom"
-        android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-
-            android:id="@+id/iv_title"
-            android:layout_width="@dimen/comment_40_dip"
-            android:layout_height="@dimen/comment_40_dip"
-            android:layout_marginLeft="@dimen/comment_10_dip"
-            android:layout_marginTop="@dimen/comment_10_dip"
-            android:src="@drawable/icon_portrait"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="@dimen/comment_2_dip" />
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+        android:layout_below="@id/view"
+        android:orientation="vertical">
+        <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/comment_5_dip"
-            android:layout_marginTop="7dp"
-            android:layout_toRightOf="@+id/iv_title"
-            android:text="dugujun001"
-            android:textColor="@color/alpha_90_black"
-            android:textSize="@dimen/comment_15_size" />
-
-        <TextView
-            android:id="@+id/tv_shop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
-            android:layout_marginLeft="@dimen/comment_5_dip"
-            android:layout_marginTop="@dimen/comment_5_dip"
-            android:layout_toRightOf="@+id/iv_title"
-            android:text="商家："
-            android:textSize="@dimen/comment_12_size" />
-
-        <ImageView
-            android:id="@+id/iv_star"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/comment_18_dip"
-            android:layout_alignBottom="@+id/tv_shop"
-            android:layout_toEndOf="@+id/tv_shop"
-            app:srcCompat="@drawable/ic_sortrecyke_stars" />
-
-        <TextView
-            android:id="@+id/tv_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_shop"
-            android:layout_below="@+id/iv_title"
-            android:layout_marginTop="@dimen/comment_10_dip"
-            android:text="服务：满意"
-            android:textSize="@dimen/comment_12_size" />
-
-        <TextView
-            android:id="@+id/tv_attitude"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="@dimen/comment_10_dip"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/tv_service"
-            android:layout_toEndOf="@+id/tv_service"
-            android:text="态度：满意"
-            android:textSize="@dimen/comment_12_size" />
-
-        <TextView
-            android:id="@+id/tv_evaluate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_service"
-            android:layout_below="@+id/tv_service"
-            android:layout_marginTop="@dimen/comment_13_dip"
-            android:text="技师服务态度很好，质量也很棒"
-            android:textColor="@color/alpha_95_black"
-            android:textSize="@dimen/comment_14_size" />
-
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/iv_title"
-            android:layout_marginEnd="@dimen/comment_13_dip"
-            android:text="2017.03.23"
-            android:textSize="@dimen/comment_10_size" />
-
-        <TextView
-            android:id="@+id/tv_wallet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_evaluate"
-            android:layout_below="@+id/tv_evaluate"
-            android:layout_marginTop="@dimen/comment_5_dip"
-            android:text="单人纯色美甲"
-            android:textSize="@dimen/comment_12_size" />
-
-        <View
-            android:id="@+id/viewsex"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/comment_2_dip"
-            android:layout_alignStart="@+id/tv_evaluate"
-            android:layout_below="@id/tv_wallet"
-            android:layout_margin="@dimen/comment_5_dip"
-            android:background="@color/alpha_05_black" />
-
-        <RelativeLayout
-            android:id="@+id/re_evaluate_shop"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_evaluate"
-            android:layout_below="@id/viewsex">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/re_evaluate_business"
+            android:paddingStart="10dp"
+            android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商品名称："
+                android:textColor="@color/alpha_45_black"
+                android:textSize="@dimen/comment_14_size">
+            </TextView>
+            <TextView
+                android:id="@+id/tv_mine_evaluate_goodname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/appbar_blue" />
-            <RelativeLayout
-                android:id="@+id/re_relayComment"
-                android:layout_alignParentRight="true"
-                android:background="@color/white"
-                android:layout_below="@id/re_evaluate_business"
-                android:layout_width="@dimen/comment_298_dip"
-                android:layout_height="@dimen/comment_34_dip">
-                <TextView
-                    android:id="@+id/tv_customername"
-                    android:layout_width="wrap_content"
-                    android:text="小明"
-                    android:textSize="@dimen/comment_14_size"
-                    android:layout_marginStart="@dimen/comment_15_dip"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/appbar_blue"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/tv_number_customername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/tv_customername"
-                    android:text="等人"
-                    android:textSize="@dimen/comment_14_size"
-                    android:textColor="@color/alpha_60_black"
-                    />
-                    <TextView
-                        android:textSize="@dimen/comment_14_size"
-                        android:text="共60条回复>"
-                        android:layout_marginStart="@dimen/comment_5_dip"
-                        android:layout_toRightOf="@id/tv_number_customername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:textColor="@color/appbar_blue"
-                        />
-            </RelativeLayout>
+                android:text="美甲套餐"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/alpha_85_black"
+                android:textSize="@dimen/comment_14_size">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="技师服务："
+                android:textColor="@color/alpha_45_black"
+                android:textSize="@dimen/comment_14_size">
+            </TextView>
+            <com.ainisi.queenmirror.queenmirrorcduan.utils.CustomRatingBar
+                android:id="@+id/score_mine_evaluate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_service"
+                android:layout_marginStart="5dp"
+                app:mode="random"
+                app:ratingProgress="4"
+                app:starDistance="@dimen/comment_6_dip"
+                app:starEmpty="@mipmap/empty"
+                app:starFill="@mipmap/fill"
+                app:starNum="5"
+                app:starSize="@dimen/comment_14_dip"
+                app:touchAble="false" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的评论："
+                android:textColor="@color/alpha_45_black"
+                android:textSize="@dimen/comment_14_size">
+            </TextView>
+            <TextView
+                android:id="@+id/tv_mine_evaluate_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服务态度好，技师能力强"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/alpha_85_black"
+                android:textSize="@dimen/comment_13_size">
+            </TextView>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/mine_back_gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+        </View>
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看全部评论"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/alpha_85_black"
+                android:textSize="@dimen/comment_12_size">
+            </TextView>
+            <ImageView android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/right_arrow"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true">
+            </ImageView>
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_ratings"
-            android:layout_width="@dimen/comment_15_dip"
-            android:layout_height="@dimen/comment_15_dip"
-            android:layout_alignEnd="@+id/tv_evaluate"
-            android:layout_below="@+id/re_evaluate_shop"
-            android:layout_marginBottom="@dimen/comment_16_dip"
-            android:layout_marginTop="@dimen/comment_14_dip"
-            app:srcCompat="@drawable/icon_mine_ratings" />
+        <View android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/mine_back_gray">
+        </View>
 
-        <TextView
-            android:id="@+id/tv_ratings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/re_evaluate_shop"
-            android:layout_marginBottom="@dimen/comment_16_dip"
-            android:layout_marginLeft="@dimen/comment_5_dip"
-            android:layout_marginTop="@dimen/comment_14_dip"
-            android:layout_toRightOf="@id/iv_ratings"
-            android:text="追评"
-            android:textSize="@dimen/comment_12_size" />
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_delete"
-            android:layout_width="@dimen/comment_11_dip"
-            android:layout_height="@dimen/comment_15_dip"
-            android:layout_below="@+id/re_evaluate_shop"
-            android:layout_marginBottom="@dimen/comment_16_dip"
-            android:layout_marginLeft="@dimen/comment_20_dip"
-            android:layout_marginTop="@dimen/comment_14_dip"
-            android:layout_toRightOf="@id/tv_ratings"
-            app:srcCompat="@drawable/icon_mine_delete" />
 
-        <TextView
-            android:id="@+id/tv_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/re_evaluate_shop"
-            android:layout_marginBottom="@dimen/comment_16_dip"
-            android:layout_marginLeft="@dimen/comment_5_dip"
-            android:layout_marginTop="@dimen/comment_14_dip"
-            android:layout_toRightOf="@id/iv_delete"
-            android:text="删除"
-            android:textSize="@dimen/comment_12_size" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_below="@id/rl_bottom"
-        android:background="@color/mine_back_gray"></View>
 </RelativeLayout>

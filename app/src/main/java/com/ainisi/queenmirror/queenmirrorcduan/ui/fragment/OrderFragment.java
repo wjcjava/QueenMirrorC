@@ -57,8 +57,6 @@ public class OrderFragment extends BaseFragment {
 
         switch (view.getId()) {
             case R.id.title_photo:
-                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
-                startActivity(intent);
                 break;
         }
     }

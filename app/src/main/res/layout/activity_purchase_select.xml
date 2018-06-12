@@ -10,9 +10,36 @@
 
     <include layout="@layout/layout_title"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/pur_rey_distance"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/li_purchase_null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/purchase_select">
+            </ImageView>
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/comment_13_dip"
+                android:textColor="@color/alpha_75_black"
+                android:text="暂无可用的优惠券"
+                android:layout_marginTop="15dp">
+            </TextView>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/pur_rey_distance"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
 
 </LinearLayout>

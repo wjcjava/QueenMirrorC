@@ -22,6 +22,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.PayInBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.PayPassCheckBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.PayRefreshBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.QueenPayBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity.ModifyPayActivity;
@@ -60,8 +62,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
 
     String businessIds = "";
     String transId = "",input_pass="",outTradeNo="";
-
-    String amount = "0",aliPayResult="";
+    String amount = "0",aliPayResult="",type="0";
     private static final int SDK_PAY_FLAG = 1;
 
     @SuppressLint("HandlerLeak")
@@ -147,29 +148,29 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                     check_queen.setChecked(false);
                     check_wechat.setChecked(false);
                 }
-
                 break;
-
             case R.id.payV2:
                 if (check_wechat.isChecked()) {
+                    type = "0";
                     T.show("微信支付（待开发）敬请期待");
                 }else if(check_alipay.isChecked()){
+                    type = "1";
                     if(aliPayResult.equals("")){
                         getData();
                     }else{
                         startPay();
                     }
                 }else if(check_queen.isChecked()){
-                    //T.show("女王卡支付（待开发）敬请期待");
-                    showDialogs(Gravity.CENTER, R.style.Scale_aniamtion);
-
-                    //showDialog(Gravity.CENTER, R.style.Scale_aniamtion);
+                    type = "2";
+                    CheckPayPass();
                 } else if (check_balance.isChecked()) {
-                    T.show("余额支付（待开发）敬请期待");
+                    type = "3";
+                    CheckPayPass();
                 }
                 break;
         }
     }
+
 
     private void showDialogs(int grary, int animationStyle) {
         final BaseDialog.Builder builder = new BaseDialog.Builder(SubmitActivity.this);
@@ -190,7 +191,12 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                     T.show("请输入支付密码");
                 }else{
                     input_pass = pass_edit.getText().toString();
-                    PayInNvwangData();
+
+                    if(type.equals("2")){
+                        PayInNvwangData();
+                    }else if(type.equals("3")){
+                        PayInYueData();
+                    }
                 }
             }
         });
@@ -202,6 +208,23 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                 finalDialog.close();
             }
         });
+    }
+
+    /**
+     * 余额支付
+     */
+    private void PayInYueData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("custId", SP.get(SubmitActivity.this,SpContent.UserId,"0")+"");
+        params.put("platformType","3");
+        if(amount.substring(0,1).equals("￥")){
+            params.put("payAmount",amount.substring(1,amount.length()));
+        }else{
+            params.put("payAmount",amount);
+        }
+        params.put("businessIds",businessIds);
+        params.put("payPass", MD5.md5(input_pass+ "MYN888"));
+        HttpUtils.doPost(ACTION.PAYINYUEDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     /**
@@ -230,6 +253,14 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
         HttpUtils.doPost(ACTION.PAYAFTERREFRESH, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
+    /**
+     * 判断支付密码是否存在
+     */
+    private void CheckPayPass() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("custId",SP.get(this,SpContent.UserId,"0")+"");
+        HttpUtils.doPost(ACTION.PAYPASSWORDCHECK, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         final BaseDialog dialog = builder.setViewId(R.layout.paypass_dialog)
@@ -241,7 +272,8 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
                 .addViewOnClickListener(R.id.tv_setting_pay, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        T.show("设置密码");
+                        Intent intent = new Intent(SubmitActivity.this,ModifyPayActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .builder();
@@ -262,8 +294,6 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             public void run() {
                 PayTask alipay = new PayTask(SubmitActivity.this);
                 Map<String, String> result = alipay.payV2(aliPayResult, true);
-                Log.i("msp", result.toString());
-
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
                 msg.obj = result;
@@ -303,8 +333,45 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
+            /**
+             * 余额支付
+             */
+            case ACTION.PAYINYUEDATA:
+                QueenPayBean queenPayBeans = GsonUtil.toObj(res,QueenPayBean.class);
+                if(queenPayBeans.isSuccess()) {
+                    outTradeNo = queenPayBeans.getBody().getOutTradeNo();
+
+                    PayInNvwangAfterData();
+                }else{
+                    T.show(queenPayBeans.getMsg());
+                }
+                break;
+            /**
+             * 判断支付密码是否存在
+             */
+            case ACTION.PAYPASSWORDCHECK:
+                PayPassCheckBean payPassCheckBean = GsonUtil.toObj(res,PayPassCheckBean.class);
+                if(payPassCheckBean.isSuccess()&&payPassCheckBean.getErrorCode().equals("0")){
+                    if(payPassCheckBean.getBody().getIsExists() == 0){
+                        showDialog(Gravity.CENTER, R.style.Scale_aniamtion);
+                    }else{
+                        showDialogs(Gravity.CENTER, R.style.Scale_aniamtion);
+                    }
+                }else{
+                    T.show(payPassCheckBean.getMsg());
+                }
+                break;
             case ACTION.PAYAFTERREFRESH:
-                L.e("%%%%%%%%    "+res);
+                PayRefreshBean payRefreshBean = GsonUtil.toObj(res,PayRefreshBean.class);
+                if(payRefreshBean.isSuccess()){
+                    if(payRefreshBean.getBody().getAnsChargeTrans().getTransStatus().equals("1")){
+                        finish();
+                    }else{
+                        T.show("支付出错，请联系客服人员");
+                    }
+                }else{
+                    T.show(payRefreshBean.getMsg());
+                }
                 break;
             /**
              * 女王卡支付
@@ -326,8 +393,7 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             case ACTION.AliPayAfterRefresh:
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
-                    Intent intent = new Intent(this,ShoppingCartActivity.class);
-                    startActivity(intent);
+                    finish();
                 }else{
                     T.show(successBean.getMsg());
                 }
@@ -335,7 +401,8 @@ public class SubmitActivity extends BaseNewActivity implements HttpCallBack{
             case ACTION.PayBefore:
                 PayInBean payInBean = GsonUtil.toObj(res, PayInBean.class);
                 aliPayResult = payInBean.getBody().getAliPayResult();
-                payThread.start();
+                transId = payInBean.getBody().getTransId();
+                startPay();
                 break;
         }
     }

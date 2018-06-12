@@ -17,6 +17,7 @@ import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import retrofit2.http.Url;
 
 /**
  * 作者： jl
@@ -636,6 +637,18 @@ public class HttpUtils {
             //实名认证
             case ACTION.REALNAME:
                 actionUrl = UrlConstants.REALNAME;
+                break;
+            case ACTION.PAYNOWINPAY:
+                actionUrl = UrlConstants.PAYNOWINPAY;
+                break;
+            case ACTION.PAYPASSWORDCHECK:
+                actionUrl = UrlConstants.PAYPASSWORDCHECK;
+                break;
+            case ACTION.PAYINYUEDATA:
+                actionUrl = UrlConstants.PAYINYUEDATA;
+                break;
+            case ACTION.CommentReplyList:
+                actionUrl = UrlConstants.CommentReplyList;
                 break;
         }
         url.append(actionUrl);

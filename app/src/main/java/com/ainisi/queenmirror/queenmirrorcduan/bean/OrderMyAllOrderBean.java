@@ -381,8 +381,8 @@ public class OrderMyAllOrderBean implements Serializable{
                 private String id;
                 private String orderNo;
                 private String orderStatus;
-                private Object cpAmount;
-                private Object afterAmount;
+                private String cpAmount;
+                private String afterAmount;
                 private String orderTime;
                 private List<ApiOrderDetailsListBean> apiOrderDetailsList;
 
@@ -410,19 +410,19 @@ public class OrderMyAllOrderBean implements Serializable{
                     this.orderStatus = orderStatus;
                 }
 
-                public Object getCpAmount() {
+                public String getCpAmount() {
                     return cpAmount;
                 }
 
-                public void setCpAmount(Object cpAmount) {
+                public void setCpAmount(String cpAmount) {
                     this.cpAmount = cpAmount;
                 }
 
-                public Object getAfterAmount() {
+                public String getAfterAmount() {
                     return afterAmount;
                 }
 
-                public void setAfterAmount(Object afterAmount) {
+                public void setAfterAmount(String afterAmount) {
                     this.afterAmount = afterAmount;
                 }
 
@@ -563,8 +563,8 @@ public class OrderMyAllOrderBean implements Serializable{
                         private String unitPrice;
                         private String purchaseNumber;
                         private String sumAmount;
-                        private Object cpAmount;
-                        private Object afterAmount;
+                        private String cpAmount;
+                        private String afterAmount;
 
                         public String getId() {
                             return id;
@@ -614,19 +614,19 @@ public class OrderMyAllOrderBean implements Serializable{
                             this.sumAmount = sumAmount;
                         }
 
-                        public Object getCpAmount() {
+                        public String getCpAmount() {
                             return cpAmount;
                         }
 
-                        public void setCpAmount(Object cpAmount) {
+                        public void setCpAmount(String cpAmount) {
                             this.cpAmount = cpAmount;
                         }
 
-                        public Object getAfterAmount() {
+                        public String getAfterAmount() {
                             return afterAmount;
                         }
 
-                        public void setAfterAmount(Object afterAmount) {
+                        public void setAfterAmount(String afterAmount) {
                             this.afterAmount = afterAmount;
                         }
                     }

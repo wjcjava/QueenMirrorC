@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/comment_13_dip"
             android:layout_marginStart="@dimen/comment_22_dip"
-            android:text="ButterBee美容院"
+            android:text=""
             android:textColor="@color/alpha_95_black"
             android:textSize="@dimen/comment_16_size" />
 
@@ -90,7 +90,8 @@
         <RelativeLayout
             android:id="@+id/rl_purchase_select"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
             <ImageView
                 android:id="@+id/iv_pur_right"
                 android:layout_width="wrap_content"

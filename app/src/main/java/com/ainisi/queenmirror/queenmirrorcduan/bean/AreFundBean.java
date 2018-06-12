@@ -45,11 +45,38 @@ public class AreFundBean implements Serializable{
          * cpAmount : null
          * afterAmount : null
          */
+        private String id;
         private String goodsId;
         private String goodsName;
         private String unitPrice;
         private String purchaseNumber;
         private String sumAmount;
+        private String cpAmount;
+        private String afterAmount;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getCpAmount() {
+            return cpAmount;
+        }
+
+        public void setCpAmount(String cpAmount) {
+            this.cpAmount = cpAmount;
+        }
+
+        public String getAfterAmount() {
+            return afterAmount;
+        }
+
+        public void setAfterAmount(String afterAmount) {
+            this.afterAmount = afterAmount;
+        }
 
         public String getGoodsId() {
             return goodsId;

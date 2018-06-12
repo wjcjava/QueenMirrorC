@@ -12,7 +12,7 @@ public class RefundBean {
      * success : true
      * errorCode : 0
      * msg : 获取数据成功
-     * body : {"apiRefundList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustRefund":{"id":"9ca4eba9a002422cbd4f1adf12696598","isNewRecord":false,"remarks":null,"createDate":"2018-04-15 23:35:06","updateDate":"2018-04-15 23:35:06","orderId":"111","detailsId":"2","custId":"111","shopId":"111","goodsId":"111","refundReason":"1","otherReason":"111","refundAmount":111,"actualAmount":111,"refundDetails":"111","refundEvidence":"111","refundStatus":"1","updatePgm":"11"},"ansOrderDetails":null,"ansOrder":null,"ansShopBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"contractConfirm":null,"ifContract":null,"shopName":"美美理发店","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"shopActivity":null,"shopFeature":null,"queenCard":null,"shopTab":null,"shopCate":null,"industryCate":null,"belongCity":null,"addrProvince":null,"addrCity":null,"addrDistrict":null,"shopAddr":null,"openTime":null,"closeTime":null,"serviceTel":null,"shopContacts":null,"contactsTel":null,"ifLicence":null,"shopLegal":null,"legalIdc":null,"legalAddress":null,"taxNumber":null,"businessLicence":null,"shopCharge":null,"chargeIdc":null,"chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":null,"businessFlag":null,"enableFlag":null,"signFlag":null,"geoX":null,"geoY":null,"updatePgm":null},"ansCustBasic":null,"ecGoodsBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsCate":null,"goodsType":null,"goodsName":"测试3","goodsNo":null,"goodsBrief":null,"serviceTime":null,"goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":null,"goodsStorage":null,"goodsPrice":null,"offlinePrice":null,"marketPrice":null,"salesPrice":null,"promotionPrice":null,"goodsActivity":null,"shopId":null,"saleFlag":null,"approveBy":null,"approveDate":null,"startTime":null,"endTime":null,"goodsRemarks":null,"updatePgm":null},"refundReasonLabel":"不喜欢/效果不好","refundStatusLabel":"退款中"}]}
+     * body : {"apiRefundList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustRefund":{"id":"562b2b3f8c5344a6a0bb64b9f21f4f3b","isNewRecord":false,"remarks":null,"createDate":"2018-06-11 19:09:40","updateDate":"2018-06-11 19:09:40","orderId":"df0d11e2adf14116a50a5992641089da","detailsId":"70656a3e2b204079a22f6231f00d364f","custId":"6f2f98dc426646f7adf978637e3e077a","shopId":"784c86c5a355436b9e169ac3b40651d4","goodsId":"92c246c0a64e49ea82a90f50a2968fbe","refundReason":"2","otherReason":null,"refundAmount":0.01,"actualAmount":0.01,"refundDetails":"空","refundEvidence":"","refundStatus":"1","updatePgm":null},"ansOrderDetails":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"orderId":null,"goodsId":null,"goodsName":null,"unitPrice":null,"purchaseNumber":null,"sumAmount":null,"cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"RA","updatePgm":null},"ansOrder":null,"ansShopBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"merchantId":null,"contractConfirm":null,"ifContract":null,"shopName":"流川枫美发沙龙","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"ifNew":null,"shopBanner":null,"shopActivity":null,"shopFeature":null,"queenCard":null,"shopTab":null,"shopCate":null,"industryCate":null,"belongCity":null,"addrProvince":null,"addrCity":null,"addrDistrict":null,"shopAddr":null,"openTime":null,"closeTime":null,"serviceTel":null,"shopContacts":null,"contactsTel":null,"contactsMail":null,"ifLicence":null,"shopProperty":null,"shopLegal":null,"legalIdc":null,"legalIdp":null,"legalProvince":null,"legalCity":null,"legalDistrict":null,"legalAddress":null,"taxNumber":null,"businessLicence":null,"shopCharge":null,"chargeIdc":null,"chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":null,"businessFlag":null,"enableFlag":null,"signFlag":null,"geoX":null,"geoY":null,"updatePgm":null,"belongCityName":null,"apiAnsCustCartList":null,"goodsCounts":0,"approveBy":null,"openFee":0,"serviceFee":0,"servicePeriod":0,"signStart":null,"signEnd":null,"ansSnsType":null,"snsId":null,"snsName":null,"serviceAgreement":null,"adAgreement":null,"otherAgreement":null},"ansCustBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"contractConfirm":null,"cellPhone":null,"deviceToken":null,"userName":"13405024815","userPass":null,"wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"completeFlag":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":null,"nickName":null,"loginIp":null,"logininTime":null,"loginoutTime":null,"loginFlag":null,"recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":null},"ecGoodsBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsCate":null,"goodsType":null,"goodsName":"买不起啊","goodsNo":null,"goodsBrief":null,"serviceTime":null,"goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":null,"goodsStorage":null,"marketPrice":null,"salesPrice":null,"goodsActivity":null,"goodsBanner":null,"shopId":null,"saleFlag":null,"ifPoint":null,"pointRule":null,"approveBy":null,"approveDate":null,"approveRemarks":null,"startTime":null,"endTime":null,"goodsRemarks":null,"updatePgm":null,"shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null},"refundReasonLabel":null,"refundStatusLabel":null}]}
      */
 
     private boolean success;
@@ -70,14 +70,14 @@ public class RefundBean {
              * remarks : null
              * createDate : null
              * updateDate : null
-             * ansCustRefund : {"id":"9ca4eba9a002422cbd4f1adf12696598","isNewRecord":false,"remarks":null,"createDate":"2018-04-15 23:35:06","updateDate":"2018-04-15 23:35:06","orderId":"111","detailsId":"2","custId":"111","shopId":"111","goodsId":"111","refundReason":"1","otherReason":"111","refundAmount":111,"actualAmount":111,"refundDetails":"111","refundEvidence":"111","refundStatus":"1","updatePgm":"11"}
-             * ansOrderDetails : null
+             * ansCustRefund : {"id":"562b2b3f8c5344a6a0bb64b9f21f4f3b","isNewRecord":false,"remarks":null,"createDate":"2018-06-11 19:09:40","updateDate":"2018-06-11 19:09:40","orderId":"df0d11e2adf14116a50a5992641089da","detailsId":"70656a3e2b204079a22f6231f00d364f","custId":"6f2f98dc426646f7adf978637e3e077a","shopId":"784c86c5a355436b9e169ac3b40651d4","goodsId":"92c246c0a64e49ea82a90f50a2968fbe","refundReason":"2","otherReason":null,"refundAmount":0.01,"actualAmount":0.01,"refundDetails":"空","refundEvidence":"","refundStatus":"1","updatePgm":null}
+             * ansOrderDetails : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"orderId":null,"goodsId":null,"goodsName":null,"unitPrice":null,"purchaseNumber":null,"sumAmount":null,"cpAmount":null,"discountAmount":null,"usePoints":null,"afterAmount":null,"consumeQrcode":null,"detailsRemarks":null,"detailsStatus":"RA","updatePgm":null}
              * ansOrder : null
-             * ansShopBasic : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"contractConfirm":null,"ifContract":null,"shopName":"美美理发店","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"shopActivity":null,"shopFeature":null,"queenCard":null,"shopTab":null,"shopCate":null,"industryCate":null,"belongCity":null,"addrProvince":null,"addrCity":null,"addrDistrict":null,"shopAddr":null,"openTime":null,"closeTime":null,"serviceTel":null,"shopContacts":null,"contactsTel":null,"ifLicence":null,"shopLegal":null,"legalIdc":null,"legalAddress":null,"taxNumber":null,"businessLicence":null,"shopCharge":null,"chargeIdc":null,"chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":null,"businessFlag":null,"enableFlag":null,"signFlag":null,"geoX":null,"geoY":null,"updatePgm":null}
-             * ansCustBasic : null
-             * ecGoodsBasic : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsCate":null,"goodsType":null,"goodsName":"测试3","goodsNo":null,"goodsBrief":null,"serviceTime":null,"goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":null,"goodsStorage":null,"goodsPrice":null,"offlinePrice":null,"marketPrice":null,"salesPrice":null,"promotionPrice":null,"goodsActivity":null,"shopId":null,"saleFlag":null,"approveBy":null,"approveDate":null,"startTime":null,"endTime":null,"goodsRemarks":null,"updatePgm":null}
-             * refundReasonLabel : 不喜欢/效果不好
-             * refundStatusLabel : 退款中
+             * ansShopBasic : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"merchantId":null,"contractConfirm":null,"ifContract":null,"shopName":"流川枫美发沙龙","shortName":null,"shopNo":null,"marketAssistant":null,"shopBrief":null,"shopAccounce":null,"ifNew":null,"shopBanner":null,"shopActivity":null,"shopFeature":null,"queenCard":null,"shopTab":null,"shopCate":null,"industryCate":null,"belongCity":null,"addrProvince":null,"addrCity":null,"addrDistrict":null,"shopAddr":null,"openTime":null,"closeTime":null,"serviceTel":null,"shopContacts":null,"contactsTel":null,"contactsMail":null,"ifLicence":null,"shopProperty":null,"shopLegal":null,"legalIdc":null,"legalIdp":null,"legalProvince":null,"legalCity":null,"legalDistrict":null,"legalAddress":null,"taxNumber":null,"businessLicence":null,"shopCharge":null,"chargeIdc":null,"chargeIdp":null,"shopLogo":null,"shopPhoto":null,"shopEnvPhoto":null,"joinTime":null,"businessFlag":null,"enableFlag":null,"signFlag":null,"geoX":null,"geoY":null,"updatePgm":null,"belongCityName":null,"apiAnsCustCartList":null,"goodsCounts":0,"approveBy":null,"openFee":0,"serviceFee":0,"servicePeriod":0,"signStart":null,"signEnd":null,"ansSnsType":null,"snsId":null,"snsName":null,"serviceAgreement":null,"adAgreement":null,"otherAgreement":null}
+             * ansCustBasic : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"contractConfirm":null,"cellPhone":null,"deviceToken":null,"userName":"13405024815","userPass":null,"wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"completeFlag":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":null,"nickName":null,"loginIp":null,"logininTime":null,"loginoutTime":null,"loginFlag":null,"recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":null}
+             * ecGoodsBasic : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"goodsCate":null,"goodsType":null,"goodsName":"买不起啊","goodsNo":null,"goodsBrief":null,"serviceTime":null,"goodsDetails":null,"goodsThumb":null,"goodsPic":null,"goodsShow":null,"goodsTab":null,"goodsStorage":null,"marketPrice":null,"salesPrice":null,"goodsActivity":null,"goodsBanner":null,"shopId":null,"saleFlag":null,"ifPoint":null,"pointRule":null,"approveBy":null,"approveDate":null,"approveRemarks":null,"startTime":null,"endTime":null,"goodsRemarks":null,"updatePgm":null,"shopName":null,"saleFlagName":null,"goodsTypeName":null,"goodsCateName":null,"ecPointsRule":null}
+             * refundReasonLabel : null
+             * refundStatusLabel : null
              */
 
             private Object id;
@@ -86,13 +86,13 @@ public class RefundBean {
             private Object createDate;
             private Object updateDate;
             private AnsCustRefundBean ansCustRefund;
-            private Object ansOrderDetails;
+            private AnsOrderDetailsBean ansOrderDetails;
             private Object ansOrder;
             private AnsShopBasicBean ansShopBasic;
-            private Object ansCustBasic;
+            private AnsCustBasicBean ansCustBasic;
             private EcGoodsBasicBean ecGoodsBasic;
-            private String refundReasonLabel;
-            private String refundStatusLabel;
+            private Object refundReasonLabel;
+            private Object refundStatusLabel;
 
             public Object getId() {
                 return id;
@@ -142,11 +142,11 @@ public class RefundBean {
                 this.ansCustRefund = ansCustRefund;
             }
 
-            public Object getAnsOrderDetails() {
+            public AnsOrderDetailsBean getAnsOrderDetails() {
                 return ansOrderDetails;
             }
 
-            public void setAnsOrderDetails(Object ansOrderDetails) {
+            public void setAnsOrderDetails(AnsOrderDetailsBean ansOrderDetails) {
                 this.ansOrderDetails = ansOrderDetails;
             }
 
@@ -166,11 +166,11 @@ public class RefundBean {
                 this.ansShopBasic = ansShopBasic;
             }
 
-            public Object getAnsCustBasic() {
+            public AnsCustBasicBean getAnsCustBasic() {
                 return ansCustBasic;
             }
 
-            public void setAnsCustBasic(Object ansCustBasic) {
+            public void setAnsCustBasic(AnsCustBasicBean ansCustBasic) {
                 this.ansCustBasic = ansCustBasic;
             }
 
@@ -182,42 +182,42 @@ public class RefundBean {
                 this.ecGoodsBasic = ecGoodsBasic;
             }
 
-            public String getRefundReasonLabel() {
+            public Object getRefundReasonLabel() {
                 return refundReasonLabel;
             }
 
-            public void setRefundReasonLabel(String refundReasonLabel) {
+            public void setRefundReasonLabel(Object refundReasonLabel) {
                 this.refundReasonLabel = refundReasonLabel;
             }
 
-            public String getRefundStatusLabel() {
+            public Object getRefundStatusLabel() {
                 return refundStatusLabel;
             }
 
-            public void setRefundStatusLabel(String refundStatusLabel) {
+            public void setRefundStatusLabel(Object refundStatusLabel) {
                 this.refundStatusLabel = refundStatusLabel;
             }
 
             public static class AnsCustRefundBean {
                 /**
-                 * id : 9ca4eba9a002422cbd4f1adf12696598
+                 * id : 562b2b3f8c5344a6a0bb64b9f21f4f3b
                  * isNewRecord : false
                  * remarks : null
-                 * createDate : 2018-04-15 23:35:06
-                 * updateDate : 2018-04-15 23:35:06
-                 * orderId : 111
-                 * detailsId : 2
-                 * custId : 111
-                 * shopId : 111
-                 * goodsId : 111
-                 * refundReason : 1
-                 * otherReason : 111
-                 * refundAmount : 111
-                 * actualAmount : 111
-                 * refundDetails : 111
-                 * refundEvidence : 111
+                 * createDate : 2018-06-11 19:09:40
+                 * updateDate : 2018-06-11 19:09:40
+                 * orderId : df0d11e2adf14116a50a5992641089da
+                 * detailsId : 70656a3e2b204079a22f6231f00d364f
+                 * custId : 6f2f98dc426646f7adf978637e3e077a
+                 * shopId : 784c86c5a355436b9e169ac3b40651d4
+                 * goodsId : 92c246c0a64e49ea82a90f50a2968fbe
+                 * refundReason : 2
+                 * otherReason : null
+                 * refundAmount : 0.01
+                 * actualAmount : 0.01
+                 * refundDetails : 空
+                 * refundEvidence :
                  * refundStatus : 1
-                 * updatePgm : 11
+                 * updatePgm : null
                  */
 
                 private String id;
@@ -231,13 +231,13 @@ public class RefundBean {
                 private String shopId;
                 private String goodsId;
                 private String refundReason;
-                private String otherReason;
-                private int refundAmount;
-                private int actualAmount;
+                private Object otherReason;
+                private double refundAmount;
+                private double actualAmount;
                 private String refundDetails;
                 private String refundEvidence;
                 private String refundStatus;
-                private String updatePgm;
+                private Object updatePgm;
 
                 public String getId() {
                     return id;
@@ -327,27 +327,27 @@ public class RefundBean {
                     this.refundReason = refundReason;
                 }
 
-                public String getOtherReason() {
+                public Object getOtherReason() {
                     return otherReason;
                 }
 
-                public void setOtherReason(String otherReason) {
+                public void setOtherReason(Object otherReason) {
                     this.otherReason = otherReason;
                 }
 
-                public int getRefundAmount() {
+                public double getRefundAmount() {
                     return refundAmount;
                 }
 
-                public void setRefundAmount(int refundAmount) {
+                public void setRefundAmount(double refundAmount) {
                     this.refundAmount = refundAmount;
                 }
 
-                public int getActualAmount() {
+                public double getActualAmount() {
                     return actualAmount;
                 }
 
-                public void setActualAmount(int actualAmount) {
+                public void setActualAmount(double actualAmount) {
                     this.actualAmount = actualAmount;
                 }
 
@@ -375,64 +375,35 @@ public class RefundBean {
                     this.refundStatus = refundStatus;
                 }
 
-                public String getUpdatePgm() {
+                public Object getUpdatePgm() {
                     return updatePgm;
                 }
 
-                public void setUpdatePgm(String updatePgm) {
+                public void setUpdatePgm(Object updatePgm) {
                     this.updatePgm = updatePgm;
                 }
             }
 
-            public static class AnsShopBasicBean {
+            public static class AnsOrderDetailsBean {
                 /**
                  * id : null
                  * isNewRecord : true
                  * remarks : null
                  * createDate : null
                  * updateDate : null
-                 * contractConfirm : null
-                 * ifContract : null
-                 * shopName : 美美理发店
-                 * shortName : null
-                 * shopNo : null
-                 * marketAssistant : null
-                 * shopBrief : null
-                 * shopAccounce : null
-                 * shopActivity : null
-                 * shopFeature : null
-                 * queenCard : null
-                 * shopTab : null
-                 * shopCate : null
-                 * industryCate : null
-                 * belongCity : null
-                 * addrProvince : null
-                 * addrCity : null
-                 * addrDistrict : null
-                 * shopAddr : null
-                 * openTime : null
-                 * closeTime : null
-                 * serviceTel : null
-                 * shopContacts : null
-                 * contactsTel : null
-                 * ifLicence : null
-                 * shopLegal : null
-                 * legalIdc : null
-                 * legalAddress : null
-                 * taxNumber : null
-                 * businessLicence : null
-                 * shopCharge : null
-                 * chargeIdc : null
-                 * chargeIdp : null
-                 * shopLogo : null
-                 * shopPhoto : null
-                 * shopEnvPhoto : null
-                 * joinTime : null
-                 * businessFlag : null
-                 * enableFlag : null
-                 * signFlag : null
-                 * geoX : null
-                 * geoY : null
+                 * orderId : null
+                 * goodsId : null
+                 * goodsName : null
+                 * unitPrice : null
+                 * purchaseNumber : null
+                 * sumAmount : null
+                 * cpAmount : null
+                 * discountAmount : null
+                 * usePoints : null
+                 * afterAmount : null
+                 * consumeQrcode : null
+                 * detailsRemarks : null
+                 * detailsStatus : RA
                  * updatePgm : null
                  */
 
@@ -441,48 +412,19 @@ public class RefundBean {
                 private Object remarks;
                 private Object createDate;
                 private Object updateDate;
-                private Object contractConfirm;
-                private Object ifContract;
-                private String shopName;
-                private Object shortName;
-                private Object shopNo;
-                private Object marketAssistant;
-                private Object shopBrief;
-                private Object shopAccounce;
-                private Object shopActivity;
-                private Object shopFeature;
-                private Object queenCard;
-                private Object shopTab;
-                private Object shopCate;
-                private Object industryCate;
-                private Object belongCity;
-                private Object addrProvince;
-                private Object addrCity;
-                private Object addrDistrict;
-                private Object shopAddr;
-                private Object openTime;
-                private Object closeTime;
-                private Object serviceTel;
-                private Object shopContacts;
-                private Object contactsTel;
-                private Object ifLicence;
-                private Object shopLegal;
-                private Object legalIdc;
-                private Object legalAddress;
-                private Object taxNumber;
-                private Object businessLicence;
-                private Object shopCharge;
-                private Object chargeIdc;
-                private Object chargeIdp;
-                private Object shopLogo;
-                private Object shopPhoto;
-                private Object shopEnvPhoto;
-                private Object joinTime;
-                private Object businessFlag;
-                private Object enableFlag;
-                private Object signFlag;
-                private Object geoX;
-                private Object geoY;
+                private Object orderId;
+                private Object goodsId;
+                private Object goodsName;
+                private Object unitPrice;
+                private Object purchaseNumber;
+                private Object sumAmount;
+                private Object cpAmount;
+                private Object discountAmount;
+                private Object usePoints;
+                private Object afterAmount;
+                private Object consumeQrcode;
+                private Object detailsRemarks;
+                private String detailsStatus;
                 private Object updatePgm;
 
                 public Object getId() {
@@ -523,6 +465,316 @@ public class RefundBean {
 
                 public void setUpdateDate(Object updateDate) {
                     this.updateDate = updateDate;
+                }
+
+                public Object getOrderId() {
+                    return orderId;
+                }
+
+                public void setOrderId(Object orderId) {
+                    this.orderId = orderId;
+                }
+
+                public Object getGoodsId() {
+                    return goodsId;
+                }
+
+                public void setGoodsId(Object goodsId) {
+                    this.goodsId = goodsId;
+                }
+
+                public Object getGoodsName() {
+                    return goodsName;
+                }
+
+                public void setGoodsName(Object goodsName) {
+                    this.goodsName = goodsName;
+                }
+
+                public Object getUnitPrice() {
+                    return unitPrice;
+                }
+
+                public void setUnitPrice(Object unitPrice) {
+                    this.unitPrice = unitPrice;
+                }
+
+                public Object getPurchaseNumber() {
+                    return purchaseNumber;
+                }
+
+                public void setPurchaseNumber(Object purchaseNumber) {
+                    this.purchaseNumber = purchaseNumber;
+                }
+
+                public Object getSumAmount() {
+                    return sumAmount;
+                }
+
+                public void setSumAmount(Object sumAmount) {
+                    this.sumAmount = sumAmount;
+                }
+
+                public Object getCpAmount() {
+                    return cpAmount;
+                }
+
+                public void setCpAmount(Object cpAmount) {
+                    this.cpAmount = cpAmount;
+                }
+
+                public Object getDiscountAmount() {
+                    return discountAmount;
+                }
+
+                public void setDiscountAmount(Object discountAmount) {
+                    this.discountAmount = discountAmount;
+                }
+
+                public Object getUsePoints() {
+                    return usePoints;
+                }
+
+                public void setUsePoints(Object usePoints) {
+                    this.usePoints = usePoints;
+                }
+
+                public Object getAfterAmount() {
+                    return afterAmount;
+                }
+
+                public void setAfterAmount(Object afterAmount) {
+                    this.afterAmount = afterAmount;
+                }
+
+                public Object getConsumeQrcode() {
+                    return consumeQrcode;
+                }
+
+                public void setConsumeQrcode(Object consumeQrcode) {
+                    this.consumeQrcode = consumeQrcode;
+                }
+
+                public Object getDetailsRemarks() {
+                    return detailsRemarks;
+                }
+
+                public void setDetailsRemarks(Object detailsRemarks) {
+                    this.detailsRemarks = detailsRemarks;
+                }
+
+                public String getDetailsStatus() {
+                    return detailsStatus;
+                }
+
+                public void setDetailsStatus(String detailsStatus) {
+                    this.detailsStatus = detailsStatus;
+                }
+
+                public Object getUpdatePgm() {
+                    return updatePgm;
+                }
+
+                public void setUpdatePgm(Object updatePgm) {
+                    this.updatePgm = updatePgm;
+                }
+            }
+
+            public static class AnsShopBasicBean {
+                /**
+                 * id : null
+                 * isNewRecord : true
+                 * remarks : null
+                 * createDate : null
+                 * updateDate : null
+                 * merchantId : null
+                 * contractConfirm : null
+                 * ifContract : null
+                 * shopName : 流川枫美发沙龙
+                 * shortName : null
+                 * shopNo : null
+                 * marketAssistant : null
+                 * shopBrief : null
+                 * shopAccounce : null
+                 * ifNew : null
+                 * shopBanner : null
+                 * shopActivity : null
+                 * shopFeature : null
+                 * queenCard : null
+                 * shopTab : null
+                 * shopCate : null
+                 * industryCate : null
+                 * belongCity : null
+                 * addrProvince : null
+                 * addrCity : null
+                 * addrDistrict : null
+                 * shopAddr : null
+                 * openTime : null
+                 * closeTime : null
+                 * serviceTel : null
+                 * shopContacts : null
+                 * contactsTel : null
+                 * contactsMail : null
+                 * ifLicence : null
+                 * shopProperty : null
+                 * shopLegal : null
+                 * legalIdc : null
+                 * legalIdp : null
+                 * legalProvince : null
+                 * legalCity : null
+                 * legalDistrict : null
+                 * legalAddress : null
+                 * taxNumber : null
+                 * businessLicence : null
+                 * shopCharge : null
+                 * chargeIdc : null
+                 * chargeIdp : null
+                 * shopLogo : null
+                 * shopPhoto : null
+                 * shopEnvPhoto : null
+                 * joinTime : null
+                 * businessFlag : null
+                 * enableFlag : null
+                 * signFlag : null
+                 * geoX : null
+                 * geoY : null
+                 * updatePgm : null
+                 * belongCityName : null
+                 * apiAnsCustCartList : null
+                 * goodsCounts : 0
+                 * approveBy : null
+                 * openFee : 0.0
+                 * serviceFee : 0.0
+                 * servicePeriod : 0.0
+                 * signStart : null
+                 * signEnd : null
+                 * ansSnsType : null
+                 * snsId : null
+                 * snsName : null
+                 * serviceAgreement : null
+                 * adAgreement : null
+                 * otherAgreement : null
+                 */
+
+                private Object id;
+                private boolean isNewRecord;
+                private Object remarks;
+                private Object createDate;
+                private Object updateDate;
+                private Object merchantId;
+                private Object contractConfirm;
+                private Object ifContract;
+                private String shopName;
+                private Object shortName;
+                private Object shopNo;
+                private Object marketAssistant;
+                private Object shopBrief;
+                private Object shopAccounce;
+                private Object ifNew;
+                private Object shopBanner;
+                private Object shopActivity;
+                private Object shopFeature;
+                private Object queenCard;
+                private Object shopTab;
+                private Object shopCate;
+                private Object industryCate;
+                private Object belongCity;
+                private Object addrProvince;
+                private Object addrCity;
+                private Object addrDistrict;
+                private Object shopAddr;
+                private Object openTime;
+                private Object closeTime;
+                private Object serviceTel;
+                private Object shopContacts;
+                private Object contactsTel;
+                private Object contactsMail;
+                private Object ifLicence;
+                private Object shopProperty;
+                private Object shopLegal;
+                private Object legalIdc;
+                private Object legalIdp;
+                private Object legalProvince;
+                private Object legalCity;
+                private Object legalDistrict;
+                private Object legalAddress;
+                private Object taxNumber;
+                private Object businessLicence;
+                private Object shopCharge;
+                private Object chargeIdc;
+                private Object chargeIdp;
+                private Object shopLogo;
+                private Object shopPhoto;
+                private Object shopEnvPhoto;
+                private Object joinTime;
+                private Object businessFlag;
+                private Object enableFlag;
+                private Object signFlag;
+                private Object geoX;
+                private Object geoY;
+                private Object updatePgm;
+                private Object belongCityName;
+                private Object apiAnsCustCartList;
+                private int goodsCounts;
+                private Object approveBy;
+                private double openFee;
+                private double serviceFee;
+                private double servicePeriod;
+                private Object signStart;
+                private Object signEnd;
+                private Object ansSnsType;
+                private Object snsId;
+                private Object snsName;
+                private Object serviceAgreement;
+                private Object adAgreement;
+                private Object otherAgreement;
+
+                public Object getId() {
+                    return id;
+                }
+
+                public void setId(Object id) {
+                    this.id = id;
+                }
+
+                public boolean isIsNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setIsNewRecord(boolean isNewRecord) {
+                    this.isNewRecord = isNewRecord;
+                }
+
+                public Object getRemarks() {
+                    return remarks;
+                }
+
+                public void setRemarks(Object remarks) {
+                    this.remarks = remarks;
+                }
+
+                public Object getCreateDate() {
+                    return createDate;
+                }
+
+                public void setCreateDate(Object createDate) {
+                    this.createDate = createDate;
+                }
+
+                public Object getUpdateDate() {
+                    return updateDate;
+                }
+
+                public void setUpdateDate(Object updateDate) {
+                    this.updateDate = updateDate;
+                }
+
+                public Object getMerchantId() {
+                    return merchantId;
+                }
+
+                public void setMerchantId(Object merchantId) {
+                    this.merchantId = merchantId;
                 }
 
                 public Object getContractConfirm() {
@@ -587,6 +839,22 @@ public class RefundBean {
 
                 public void setShopAccounce(Object shopAccounce) {
                     this.shopAccounce = shopAccounce;
+                }
+
+                public Object getIfNew() {
+                    return ifNew;
+                }
+
+                public void setIfNew(Object ifNew) {
+                    this.ifNew = ifNew;
+                }
+
+                public Object getShopBanner() {
+                    return shopBanner;
+                }
+
+                public void setShopBanner(Object shopBanner) {
+                    this.shopBanner = shopBanner;
                 }
 
                 public Object getShopActivity() {
@@ -717,12 +985,28 @@ public class RefundBean {
                     this.contactsTel = contactsTel;
                 }
 
+                public Object getContactsMail() {
+                    return contactsMail;
+                }
+
+                public void setContactsMail(Object contactsMail) {
+                    this.contactsMail = contactsMail;
+                }
+
                 public Object getIfLicence() {
                     return ifLicence;
                 }
 
                 public void setIfLicence(Object ifLicence) {
                     this.ifLicence = ifLicence;
+                }
+
+                public Object getShopProperty() {
+                    return shopProperty;
+                }
+
+                public void setShopProperty(Object shopProperty) {
+                    this.shopProperty = shopProperty;
                 }
 
                 public Object getShopLegal() {
@@ -739,6 +1023,38 @@ public class RefundBean {
 
                 public void setLegalIdc(Object legalIdc) {
                     this.legalIdc = legalIdc;
+                }
+
+                public Object getLegalIdp() {
+                    return legalIdp;
+                }
+
+                public void setLegalIdp(Object legalIdp) {
+                    this.legalIdp = legalIdp;
+                }
+
+                public Object getLegalProvince() {
+                    return legalProvince;
+                }
+
+                public void setLegalProvince(Object legalProvince) {
+                    this.legalProvince = legalProvince;
+                }
+
+                public Object getLegalCity() {
+                    return legalCity;
+                }
+
+                public void setLegalCity(Object legalCity) {
+                    this.legalCity = legalCity;
+                }
+
+                public Object getLegalDistrict() {
+                    return legalDistrict;
+                }
+
+                public void setLegalDistrict(Object legalDistrict) {
+                    this.legalDistrict = legalDistrict;
                 }
 
                 public Object getLegalAddress() {
@@ -868,6 +1184,452 @@ public class RefundBean {
                 public void setUpdatePgm(Object updatePgm) {
                     this.updatePgm = updatePgm;
                 }
+
+                public Object getBelongCityName() {
+                    return belongCityName;
+                }
+
+                public void setBelongCityName(Object belongCityName) {
+                    this.belongCityName = belongCityName;
+                }
+
+                public Object getApiAnsCustCartList() {
+                    return apiAnsCustCartList;
+                }
+
+                public void setApiAnsCustCartList(Object apiAnsCustCartList) {
+                    this.apiAnsCustCartList = apiAnsCustCartList;
+                }
+
+                public int getGoodsCounts() {
+                    return goodsCounts;
+                }
+
+                public void setGoodsCounts(int goodsCounts) {
+                    this.goodsCounts = goodsCounts;
+                }
+
+                public Object getApproveBy() {
+                    return approveBy;
+                }
+
+                public void setApproveBy(Object approveBy) {
+                    this.approveBy = approveBy;
+                }
+
+                public double getOpenFee() {
+                    return openFee;
+                }
+
+                public void setOpenFee(double openFee) {
+                    this.openFee = openFee;
+                }
+
+                public double getServiceFee() {
+                    return serviceFee;
+                }
+
+                public void setServiceFee(double serviceFee) {
+                    this.serviceFee = serviceFee;
+                }
+
+                public double getServicePeriod() {
+                    return servicePeriod;
+                }
+
+                public void setServicePeriod(double servicePeriod) {
+                    this.servicePeriod = servicePeriod;
+                }
+
+                public Object getSignStart() {
+                    return signStart;
+                }
+
+                public void setSignStart(Object signStart) {
+                    this.signStart = signStart;
+                }
+
+                public Object getSignEnd() {
+                    return signEnd;
+                }
+
+                public void setSignEnd(Object signEnd) {
+                    this.signEnd = signEnd;
+                }
+
+                public Object getAnsSnsType() {
+                    return ansSnsType;
+                }
+
+                public void setAnsSnsType(Object ansSnsType) {
+                    this.ansSnsType = ansSnsType;
+                }
+
+                public Object getSnsId() {
+                    return snsId;
+                }
+
+                public void setSnsId(Object snsId) {
+                    this.snsId = snsId;
+                }
+
+                public Object getSnsName() {
+                    return snsName;
+                }
+
+                public void setSnsName(Object snsName) {
+                    this.snsName = snsName;
+                }
+
+                public Object getServiceAgreement() {
+                    return serviceAgreement;
+                }
+
+                public void setServiceAgreement(Object serviceAgreement) {
+                    this.serviceAgreement = serviceAgreement;
+                }
+
+                public Object getAdAgreement() {
+                    return adAgreement;
+                }
+
+                public void setAdAgreement(Object adAgreement) {
+                    this.adAgreement = adAgreement;
+                }
+
+                public Object getOtherAgreement() {
+                    return otherAgreement;
+                }
+
+                public void setOtherAgreement(Object otherAgreement) {
+                    this.otherAgreement = otherAgreement;
+                }
+            }
+
+            public static class AnsCustBasicBean {
+                /**
+                 * id : null
+                 * isNewRecord : true
+                 * remarks : null
+                 * createDate : null
+                 * updateDate : null
+                 * contractConfirm : null
+                 * cellPhone : null
+                 * deviceToken : null
+                 * userName : 13405024815
+                 * userPass : null
+                 * wechatId : null
+                 * wechatToken : null
+                 * qqId : null
+                 * qqToken : null
+                 * completeFlag : null
+                 * headPic : null
+                 * lastName : null
+                 * firstName : null
+                 * idCard : null
+                 * nameIdentify : null
+                 * sex : null
+                 * birthday : null
+                 * registerDate : null
+                 * nickName : null
+                 * loginIp : null
+                 * logininTime : null
+                 * loginoutTime : null
+                 * loginFlag : null
+                 * recommendUser : null
+                 * recommendCode : null
+                 * updatBy : null
+                 * updatePgm : null
+                 */
+
+                private Object id;
+                private boolean isNewRecord;
+                private Object remarks;
+                private Object createDate;
+                private Object updateDate;
+                private Object contractConfirm;
+                private Object cellPhone;
+                private Object deviceToken;
+                private String userName;
+                private Object userPass;
+                private Object wechatId;
+                private Object wechatToken;
+                private Object qqId;
+                private Object qqToken;
+                private Object completeFlag;
+                private Object headPic;
+                private Object lastName;
+                private Object firstName;
+                private Object idCard;
+                private Object nameIdentify;
+                private Object sex;
+                private Object birthday;
+                private Object registerDate;
+                private Object nickName;
+                private Object loginIp;
+                private Object logininTime;
+                private Object loginoutTime;
+                private Object loginFlag;
+                private Object recommendUser;
+                private Object recommendCode;
+                private Object updatBy;
+                private Object updatePgm;
+
+                public Object getId() {
+                    return id;
+                }
+
+                public void setId(Object id) {
+                    this.id = id;
+                }
+
+                public boolean isIsNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setIsNewRecord(boolean isNewRecord) {
+                    this.isNewRecord = isNewRecord;
+                }
+
+                public Object getRemarks() {
+                    return remarks;
+                }
+
+                public void setRemarks(Object remarks) {
+                    this.remarks = remarks;
+                }
+
+                public Object getCreateDate() {
+                    return createDate;
+                }
+
+                public void setCreateDate(Object createDate) {
+                    this.createDate = createDate;
+                }
+
+                public Object getUpdateDate() {
+                    return updateDate;
+                }
+
+                public void setUpdateDate(Object updateDate) {
+                    this.updateDate = updateDate;
+                }
+
+                public Object getContractConfirm() {
+                    return contractConfirm;
+                }
+
+                public void setContractConfirm(Object contractConfirm) {
+                    this.contractConfirm = contractConfirm;
+                }
+
+                public Object getCellPhone() {
+                    return cellPhone;
+                }
+
+                public void setCellPhone(Object cellPhone) {
+                    this.cellPhone = cellPhone;
+                }
+
+                public Object getDeviceToken() {
+                    return deviceToken;
+                }
+
+                public void setDeviceToken(Object deviceToken) {
+                    this.deviceToken = deviceToken;
+                }
+
+                public String getUserName() {
+                    return userName;
+                }
+
+                public void setUserName(String userName) {
+                    this.userName = userName;
+                }
+
+                public Object getUserPass() {
+                    return userPass;
+                }
+
+                public void setUserPass(Object userPass) {
+                    this.userPass = userPass;
+                }
+
+                public Object getWechatId() {
+                    return wechatId;
+                }
+
+                public void setWechatId(Object wechatId) {
+                    this.wechatId = wechatId;
+                }
+
+                public Object getWechatToken() {
+                    return wechatToken;
+                }
+
+                public void setWechatToken(Object wechatToken) {
+                    this.wechatToken = wechatToken;
+                }
+
+                public Object getQqId() {
+                    return qqId;
+                }
+
+                public void setQqId(Object qqId) {
+                    this.qqId = qqId;
+                }
+
+                public Object getQqToken() {
+                    return qqToken;
+                }
+
+                public void setQqToken(Object qqToken) {
+                    this.qqToken = qqToken;
+                }
+
+                public Object getCompleteFlag() {
+                    return completeFlag;
+                }
+
+                public void setCompleteFlag(Object completeFlag) {
+                    this.completeFlag = completeFlag;
+                }
+
+                public Object getHeadPic() {
+                    return headPic;
+                }
+
+                public void setHeadPic(Object headPic) {
+                    this.headPic = headPic;
+                }
+
+                public Object getLastName() {
+                    return lastName;
+                }
+
+                public void setLastName(Object lastName) {
+                    this.lastName = lastName;
+                }
+
+                public Object getFirstName() {
+                    return firstName;
+                }
+
+                public void setFirstName(Object firstName) {
+                    this.firstName = firstName;
+                }
+
+                public Object getIdCard() {
+                    return idCard;
+                }
+
+                public void setIdCard(Object idCard) {
+                    this.idCard = idCard;
+                }
+
+                public Object getNameIdentify() {
+                    return nameIdentify;
+                }
+
+                public void setNameIdentify(Object nameIdentify) {
+                    this.nameIdentify = nameIdentify;
+                }
+
+                public Object getSex() {
+                    return sex;
+                }
+
+                public void setSex(Object sex) {
+                    this.sex = sex;
+                }
+
+                public Object getBirthday() {
+                    return birthday;
+                }
+
+                public void setBirthday(Object birthday) {
+                    this.birthday = birthday;
+                }
+
+                public Object getRegisterDate() {
+                    return registerDate;
+                }
+
+                public void setRegisterDate(Object registerDate) {
+                    this.registerDate = registerDate;
+                }
+
+                public Object getNickName() {
+                    return nickName;
+                }
+
+                public void setNickName(Object nickName) {
+                    this.nickName = nickName;
+                }
+
+                public Object getLoginIp() {
+                    return loginIp;
+                }
+
+                public void setLoginIp(Object loginIp) {
+                    this.loginIp = loginIp;
+                }
+
+                public Object getLogininTime() {
+                    return logininTime;
+                }
+
+                public void setLogininTime(Object logininTime) {
+                    this.logininTime = logininTime;
+                }
+
+                public Object getLoginoutTime() {
+                    return loginoutTime;
+                }
+
+                public void setLoginoutTime(Object loginoutTime) {
+                    this.loginoutTime = loginoutTime;
+                }
+
+                public Object getLoginFlag() {
+                    return loginFlag;
+                }
+
+                public void setLoginFlag(Object loginFlag) {
+                    this.loginFlag = loginFlag;
+                }
+
+                public Object getRecommendUser() {
+                    return recommendUser;
+                }
+
+                public void setRecommendUser(Object recommendUser) {
+                    this.recommendUser = recommendUser;
+                }
+
+                public Object getRecommendCode() {
+                    return recommendCode;
+                }
+
+                public void setRecommendCode(Object recommendCode) {
+                    this.recommendCode = recommendCode;
+                }
+
+                public Object getUpdatBy() {
+                    return updatBy;
+                }
+
+                public void setUpdatBy(Object updatBy) {
+                    this.updatBy = updatBy;
+                }
+
+                public Object getUpdatePgm() {
+                    return updatePgm;
+                }
+
+                public void setUpdatePgm(Object updatePgm) {
+                    this.updatePgm = updatePgm;
+                }
             }
 
             public static class EcGoodsBasicBean {
@@ -879,7 +1641,7 @@ public class RefundBean {
                  * updateDate : null
                  * goodsCate : null
                  * goodsType : null
-                 * goodsName : 测试3
+                 * goodsName : 买不起啊
                  * goodsNo : null
                  * goodsBrief : null
                  * serviceTime : null
@@ -889,20 +1651,26 @@ public class RefundBean {
                  * goodsShow : null
                  * goodsTab : null
                  * goodsStorage : null
-                 * goodsPrice : null
-                 * offlinePrice : null
                  * marketPrice : null
                  * salesPrice : null
-                 * promotionPrice : null
                  * goodsActivity : null
+                 * goodsBanner : null
                  * shopId : null
                  * saleFlag : null
+                 * ifPoint : null
+                 * pointRule : null
                  * approveBy : null
                  * approveDate : null
+                 * approveRemarks : null
                  * startTime : null
                  * endTime : null
                  * goodsRemarks : null
                  * updatePgm : null
+                 * shopName : null
+                 * saleFlagName : null
+                 * goodsTypeName : null
+                 * goodsCateName : null
+                 * ecPointsRule : null
                  */
 
                 private Object id;
@@ -914,7 +1682,7 @@ public class RefundBean {
                 private Object goodsType;
                 private String goodsName;
                 private Object goodsNo;
-                private Object goodsBrief;
+                private String goodsBrief;
                 private Object serviceTime;
                 private Object goodsDetails;
                 private Object goodsThumb;
@@ -922,20 +1690,26 @@ public class RefundBean {
                 private Object goodsShow;
                 private Object goodsTab;
                 private Object goodsStorage;
-                private Object goodsPrice;
-                private Object offlinePrice;
                 private Object marketPrice;
                 private Object salesPrice;
-                private Object promotionPrice;
                 private Object goodsActivity;
+                private Object goodsBanner;
                 private Object shopId;
                 private Object saleFlag;
+                private Object ifPoint;
+                private Object pointRule;
                 private Object approveBy;
                 private Object approveDate;
+                private Object approveRemarks;
                 private Object startTime;
                 private Object endTime;
                 private Object goodsRemarks;
                 private Object updatePgm;
+                private Object shopName;
+                private Object saleFlagName;
+                private Object goodsTypeName;
+                private Object goodsCateName;
+                private Object ecPointsRule;
 
                 public Object getId() {
                     return id;
@@ -1009,11 +1783,11 @@ public class RefundBean {
                     this.goodsNo = goodsNo;
                 }
 
-                public Object getGoodsBrief() {
+                public String getGoodsBrief() {
                     return goodsBrief;
                 }
 
-                public void setGoodsBrief(Object goodsBrief) {
+                public void setGoodsBrief(String goodsBrief) {
                     this.goodsBrief = goodsBrief;
                 }
 
@@ -1073,22 +1847,6 @@ public class RefundBean {
                     this.goodsStorage = goodsStorage;
                 }
 
-                public Object getGoodsPrice() {
-                    return goodsPrice;
-                }
-
-                public void setGoodsPrice(Object goodsPrice) {
-                    this.goodsPrice = goodsPrice;
-                }
-
-                public Object getOfflinePrice() {
-                    return offlinePrice;
-                }
-
-                public void setOfflinePrice(Object offlinePrice) {
-                    this.offlinePrice = offlinePrice;
-                }
-
                 public Object getMarketPrice() {
                     return marketPrice;
                 }
@@ -1105,20 +1863,20 @@ public class RefundBean {
                     this.salesPrice = salesPrice;
                 }
 
-                public Object getPromotionPrice() {
-                    return promotionPrice;
-                }
-
-                public void setPromotionPrice(Object promotionPrice) {
-                    this.promotionPrice = promotionPrice;
-                }
-
                 public Object getGoodsActivity() {
                     return goodsActivity;
                 }
 
                 public void setGoodsActivity(Object goodsActivity) {
                     this.goodsActivity = goodsActivity;
+                }
+
+                public Object getGoodsBanner() {
+                    return goodsBanner;
+                }
+
+                public void setGoodsBanner(Object goodsBanner) {
+                    this.goodsBanner = goodsBanner;
                 }
 
                 public Object getShopId() {
@@ -1137,6 +1895,22 @@ public class RefundBean {
                     this.saleFlag = saleFlag;
                 }
 
+                public Object getIfPoint() {
+                    return ifPoint;
+                }
+
+                public void setIfPoint(Object ifPoint) {
+                    this.ifPoint = ifPoint;
+                }
+
+                public Object getPointRule() {
+                    return pointRule;
+                }
+
+                public void setPointRule(Object pointRule) {
+                    this.pointRule = pointRule;
+                }
+
                 public Object getApproveBy() {
                     return approveBy;
                 }
@@ -1151,6 +1925,14 @@ public class RefundBean {
 
                 public void setApproveDate(Object approveDate) {
                     this.approveDate = approveDate;
+                }
+
+                public Object getApproveRemarks() {
+                    return approveRemarks;
+                }
+
+                public void setApproveRemarks(Object approveRemarks) {
+                    this.approveRemarks = approveRemarks;
                 }
 
                 public Object getStartTime() {
@@ -1183,6 +1965,46 @@ public class RefundBean {
 
                 public void setUpdatePgm(Object updatePgm) {
                     this.updatePgm = updatePgm;
+                }
+
+                public Object getShopName() {
+                    return shopName;
+                }
+
+                public void setShopName(Object shopName) {
+                    this.shopName = shopName;
+                }
+
+                public Object getSaleFlagName() {
+                    return saleFlagName;
+                }
+
+                public void setSaleFlagName(Object saleFlagName) {
+                    this.saleFlagName = saleFlagName;
+                }
+
+                public Object getGoodsTypeName() {
+                    return goodsTypeName;
+                }
+
+                public void setGoodsTypeName(Object goodsTypeName) {
+                    this.goodsTypeName = goodsTypeName;
+                }
+
+                public Object getGoodsCateName() {
+                    return goodsCateName;
+                }
+
+                public void setGoodsCateName(Object goodsCateName) {
+                    this.goodsCateName = goodsCateName;
+                }
+
+                public Object getEcPointsRule() {
+                    return ecPointsRule;
+                }
+
+                public void setEcPointsRule(Object ecPointsRule) {
+                    this.ecPointsRule = ecPointsRule;
                 }
             }
         }

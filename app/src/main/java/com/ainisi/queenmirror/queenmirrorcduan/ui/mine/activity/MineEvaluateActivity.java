@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.common.base.BaseActivity;
@@ -22,6 +23,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
@@ -47,6 +49,8 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
     TextView evalueteName;
     @Bind(R.id.tv_evaluate_number)
     TextView numeber;
+    @Bind(R.id.li_mine_comment_null)
+    LinearLayout li_mine_comment_null;
     int pagenumer=1;
     private List<MyCommentsBean.BodyBean.CommentsListDataBean> commentList;
 
@@ -64,7 +68,6 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
         inithttp();
     }
 
-
     @Override
     public void initView() {
         initReply();
@@ -72,19 +75,16 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
 
     private void initReply() {
         evalueteName.setText(SP.get(this, SpContent.UserName,"")+"");
-
     }
 
     public void initData() {
         mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
                 .canLoadMore(true)
                 .autoLoadMore()
-
                 .showLastRefreshTime(
                         RefreshLoadMoreLayout.class,
                         "yyyy-MM-dd")
                 .multiTask());
-
     }
 
     @OnClick({R.id.title_back})
@@ -95,10 +95,7 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
                 break;
             default:
                 break;
-
-
         }
-
     }
 
     @Override
@@ -125,11 +122,10 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
 
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
-        parames.put("userId", "111");
+        parames.put("userId", SP.get(MineEvaluateActivity.this,SpContent.UserId,"0")+"");
         parames.put("pageNumber", pagenumer+"");
         parames.put("pageSize","10");
         HttpUtils.doPost(ACTION.MYCOMMENTS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-
     }
 
     @Override
@@ -141,13 +137,31 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
                 commentList = commentsBean.getBody().getCommentsListData();
                 if(commentList.size()>0){
                     numeber.setText("共有"+commentList.size()+"条数据");
+                    li_mine_comment_null.setVisibility(View.INVISIBLE);
                 }else {
                     numeber.setText("共有0条数据");
+                    li_mine_comment_null.setVisibility(View.VISIBLE);
                 }
                 if (commentsBean.isSuccess()) {
                     MyCommentsAdapter sortAdapter2 = new MyCommentsAdapter(R.layout.item_evaluate, commentList,this);
                     rcevaluate.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     rcevaluate.setAdapter(sortAdapter2);
+
+                    sortAdapter2.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            Intent intent=new Intent(MineEvaluateActivity.this, ReplyCommentActivity.class);
+                            intent.putExtra("shopName",commentList.get(position).getShopIdName());
+                            intent.putExtra("shopDevice",commentList.get(position).getEcAppraiseGoods().getEmployeeAbility());
+                            intent.putExtra("serviceAttitude",commentList.get(position).getEcAppraiseShop().getServiceAttitude());
+                            intent.putExtra("shopEnvironment",commentList.get(position).getEcAppraiseShop().getShopEnvironment());
+                            intent.putExtra("apprTime",commentList.get(position).getEcAppraiseGoods().getApprTime());
+                            intent.putExtra("goodsName",commentList.get(position).getGoodsIdName());
+                            intent.putExtra("commentgContent",commentList.get(position).getEcAppraiseGoods().getApprDetails());
+                            intent.putExtra("commentId",commentList.get(position).getEcAppraiseGoods().getId());
+                            startActivity(intent);
+                        }
+                    });
                 } else {
                     T.show(commentsBean.getMsg());
                 }

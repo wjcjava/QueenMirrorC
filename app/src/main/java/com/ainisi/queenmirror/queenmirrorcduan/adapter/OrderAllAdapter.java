@@ -104,10 +104,13 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     for(int i=0;i<item.getIntfAnsOrder().getApiOrderDetailsList().size();i++){
                         apiOrderDetailsListBean = new OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean();
                         apiOrderDetailsListBean = item.getIntfAnsOrder().getApiOrderDetailsList().get(i);
+
                         apiOrderListBeanList.add(apiOrderDetailsListBean);
                     }
                     intent.putExtra("lstBean",(Serializable)apiOrderListBeanList);
                     intent.putExtra("orderNo",item.getIntfAnsOrder().getOrderNo());
+                    intent.putExtra("orderId",item.getIntfAnsOrder().getId());
+                    intent.putExtra("shopId",item.getIntfAnsShopBasic().getId());
                     context.startActivity(intent);
                 }
             });
@@ -132,6 +135,7 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     intent.putExtra("lstBean", (Serializable)item.getIntfAnsOrder().getApiOrderDetailsList());
                     intent.putExtra("orderId",item.getIntfAnsOrder().getId());
                     intent.putExtra("orderState",item.getIntfAnsOrder().getOrderStatus());
+                    intent.putExtra("shopId",item.getIntfAnsShopBasic().getId());
                     context.startActivity(intent);
 
                 }
@@ -152,6 +156,8 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     }
                     intent.putExtra("lstBean",(Serializable)apiOrderListBeanList);
                     intent.putExtra("orderNo",item.getIntfAnsOrder().getOrderNo());
+                    intent.putExtra("orderId",item.getIntfAnsOrder().getId());
+                    intent.putExtra("shopId",item.getIntfAnsShopBasic().getId());
                     context.startActivity(intent);
                 }
             });
@@ -175,6 +181,7 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     intent.putExtra("lstBean", (Serializable)item.getIntfAnsOrder().getApiOrderDetailsList());
                     intent.putExtra("orderId",item.getIntfAnsOrder().getId());
                     intent.putExtra("orderState",item.getIntfAnsOrder().getOrderStatus());
+                    intent.putExtra("shopId",item.getIntfAnsShopBasic().getId());
                     context.startActivity(intent);
                 }
             });
@@ -194,6 +201,8 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     }
                     intent.putExtra("lstBean",(Serializable)apiOrderListBeanList);
                     intent.putExtra("orderNo",item.getIntfAnsOrder().getOrderNo());
+                    intent.putExtra("orderId",item.getIntfAnsOrder().getId());
+                    intent.putExtra("shopId",item.getIntfAnsShopBasic().getId());
                     context.startActivity(intent);
                 }
             });
@@ -319,16 +328,16 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     .setText(R.id.tv_tangran,apiOrderDetailsList.get(2).getIntfAnsOrderDetails().getGoodsName())
                     .setText(R.id.textView30,"X "+apiOrderDetailsList.get(2).getIntfAnsOrderDetails().getPurchaseNumber());
         }
-        amountNum = 0;
+        /*amountNum = 0;
         for(int i=0;i<apiOrderDetailsList.size();i++){
             amountNum = amountNum + Double.parseDouble(apiOrderDetailsList.get(i).getIntfAnsOrderDetails().getSumAmount());
-        }
+        }*/
         if(apiOrderDetailsList.size() > 3){
             helper.setText(R.id.tv_head,"...                        共"+apiOrderDetailsList.size()+"个，商品实付")
-                    .setText(R.id.tv_jiage,"￥"+ amountNum);
+                    .setText(R.id.tv_jiage,"￥"+ item.getIntfAnsOrder().getAfterAmount());
         }else{
             helper.setText(R.id.tv_head,"共"+apiOrderDetailsList.size()+"个，商品实付")
-                    .setText(R.id.tv_jiage,"￥"+ amountNum);
+                    .setText(R.id.tv_jiage,"￥"+ item.getIntfAnsOrder().getAfterAmount());
         }
 
     }

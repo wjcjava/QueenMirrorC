@@ -21,6 +21,8 @@ public class RefundAdapter extends BaseQuickAdapter<RefundBean.BodyBean.ApiRefun
 
     @Override
     protected void convert(BaseViewHolder helper, RefundBean.BodyBean.ApiRefundListBean item) {
-        helper.setText(R.id.tv_refund_name,item.getEcGoodsBasic().getGoodsName());
+        helper.setText(R.id.tv_refund_name,item.getEcGoodsBasic().getGoodsName())
+                .setText(R.id.text_refund_shop_name,item.getAnsShopBasic().getShopName()+">")
+                .setText(R.id.tv_refund_discontent,item.getEcGoodsBasic().getGoodsBrief());
     }
 }

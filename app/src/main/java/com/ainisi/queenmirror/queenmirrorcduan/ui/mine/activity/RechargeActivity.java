@@ -3,6 +3,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
@@ -25,7 +26,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.PayInBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.RechargeFreashBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SubmitActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -154,7 +157,7 @@ public class RechargeActivity extends BaseActivity implements HttpCallBack{
         HashMap<String,String> parames=new HashMap<>();
         parames.put("custId", SP.get(RechargeActivity.this, SpContent.UserId,"0")+"");
         parames.put("platformType","3");
-        parames.put("chargeAmount",tv_recharge_really.getText().toString().substring(0,tv_recharge_really.getText().toString().length()-1));
+        parames.put("chargeAmount",et_recharge_money.getText().toString());
         HttpUtils.doPost(ACTION.QUEENCHARGE,parames, CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
     /**
@@ -179,6 +182,8 @@ public class RechargeActivity extends BaseActivity implements HttpCallBack{
                 if(rechargeFreashBean.isSuccess()){
                     if(rechargeFreashBean.getBody().getAnsChargeTrans().getTransStatus().equals("1")){
                         Intent intent = new Intent(RechargeActivity.this,RechargeSuccessAgainActivity.class);
+                        intent.putExtra("payStyle",pay_type);
+                        intent.putExtra("payMoney",et_recharge_money.getText().toString());
                         startActivity(intent);
                     }else{
                         T.show("充值失败，请联系管理员");

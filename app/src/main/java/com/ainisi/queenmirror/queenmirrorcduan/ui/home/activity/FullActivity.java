@@ -23,6 +23,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProductDetailBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
@@ -40,6 +41,7 @@ import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -85,7 +87,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     private FullGoodsAdapter myAdapter;
 
     boolean isColl = false;
-    String goodsId, shopId, isLogin, userId;
+    String goodsId, shopId, isLogin, userId,shopName;
 
     CustomShareListener mShareListener;
     ShareAction mShareAction;
@@ -102,6 +104,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
         Intent intent = this.getIntent();
         goodsId = intent.getStringExtra("goodsId");
         shopId = intent.getStringExtra("shopId");
+        shopName = intent.getStringExtra("shopName");
 
         isLogin = SP.get(FullActivity.this, SpContent.isLogin, "0").toString();
 
@@ -312,13 +315,15 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 break;
             //提交订单
             case R.id.tv_purchase:
-                /*Intent intent = new Intent(FullActivity.this, PurchaseActivity.class);
-                intent.putExtra("cartBean",);
-                startActivity(intent);*/
-                /**
-                 * 新加接口
-                 */
-                T.show("马上就来。。。");
+                Intent intent = new Intent(FullActivity.this, PurchaseNowActivity.class);
+                intent.putExtra("shopName",shopName);
+                intent.putExtra("shopId",shopId);
+                intent.putExtra("goodId",goodsId);
+                intent.putExtra("goodName",fullTitle.getText().toString());
+                intent.putExtra("goodPrice",full_cash.getText().toString());
+                intent.putExtra("goodPriceSale",tv_shopping_oldprice.getText().toString());
+                startActivity(intent);
+
                 break;
             //加入购物车
             case R.id.tv_full_shoppingcart:
@@ -378,6 +383,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 tv_brief.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsBrief());
                 tv_time.setText("服务时长：" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getServiceTime());
                 textView4.setText("已浏览：" + "200" + "次");
+                //  tv_introduction.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsDetails().toString());
                 fullTitle.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsName());
                 break;
             case ACTION.EVALUATION:
@@ -416,6 +422,9 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 SuccessBean successBean2 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean2.isSuccess()) {
                     iv_full_collection.setImageResource(R.drawable.collection_bein);
+                    //collection_bein
+                    T.show(successBean2.getMsg());//成功
+                } else {
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
                     T.show(successBean2.getMsg());
                 }
@@ -425,7 +434,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 SuccessBean successBean3 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean3.isSuccess()) {
                     iv_full_collection.setImageResource(R.drawable.icon_full_collection);
-
+                    T.show(successBean3.getMsg());//成功
                 } else {
                     iv_full_collection.setImageResource(R.drawable.collection_bein);
                     T.show(successBean3.getMsg());

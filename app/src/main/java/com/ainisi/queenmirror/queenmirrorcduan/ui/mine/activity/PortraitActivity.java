@@ -47,6 +47,10 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
     TextView tv_portrait_loginout;
     @Bind(R.id.tv_portrait_username)
     TextView tv_portrait_username;
+    @Bind(R.id.tv_portrait_nickname)
+    TextView tv_portrait_nickname;
+    @Bind(R.id.tv_userphone)
+    TextView tv_userphone;
     private CustomPopWindow popWindow;
     private LQRPhotoSelectUtils mLqrPhotoSelectUtils;
 
@@ -64,6 +68,8 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
     protected void onResume() {
         super.onResume();
         tv_portrait_username.setText(SP.get(this, SpContent.UserName, "") + "");
+        tv_portrait_nickname.setText(SP.get(this,SpContent.UserName,"")+"");
+        tv_userphone.setText(SP.get(this,SpContent.UserCall,"")+"");
     }
     private void init() {
         // 1、创建LQRPhotoSelectUtils（一个Activity对应一个LQRPhotoSelectUtils）

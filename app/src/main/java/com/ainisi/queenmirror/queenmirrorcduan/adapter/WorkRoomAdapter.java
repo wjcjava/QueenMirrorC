@@ -123,6 +123,7 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
                 Intent intent = new Intent(context, FullActivity.class);
                 intent.putExtra("goodsId",apiGoodsList.get(position).getEcGoodsBasic().getId()+"");
                 intent.putExtra("shopId",apiGoodsList.get(position).getEcGoodsBasic().getShopId()+"");
+                intent.putExtra("shopName",apiGoodsList.get(position).getShopIdName());
                 context.startActivity(intent);
             }
         });
