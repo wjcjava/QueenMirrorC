@@ -189,4 +189,6 @@ public interface ACTION {
 
     int CommentReplyList = 0x152;//评价回复数据
 
+    int COMMENTINPUT = 0x153;//评论回复
+
 }

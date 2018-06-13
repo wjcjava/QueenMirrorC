@@ -10,24 +10,25 @@
 
     <ImageView
         android:layout_marginTop="@dimen/comment_5_dip"
-        android:id="@+id/iv_shop"
+        android:id="@+id/iv_homepage_shop"
         android:layout_centerHorizontal="true"
         android:layout_width="@dimen/comment_130_dip"
+        android:layout_marginBottom="5dp"
         android:layout_height="@dimen/comment_130_dip"
-        app:srcCompat="@drawable/ic_sortrecyle_logo" />
+        app:srcCompat="@drawable/dismiss" />
 
     <TextView
         android:id="@+id/tv_shopName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_shop"
+        android:layout_below="@id/iv_homepage_shop"
         android:layout_marginStart="@dimen/comment_20_dip"
         android:text="MOCO美容美发沙龙"
         android:maxLines="1"
         android:ellipsize="end"
         android:textColor="@color/alpha_95_black" />
     <TextView
-        android:layout_below="@id/iv_shop"
+        android:layout_below="@id/iv_homepage_shop"
         android:text="100km"
         android:layout_marginStart="@dimen/comment_30_dip"
         android:layout_toRightOf="@id/tv_shopName"

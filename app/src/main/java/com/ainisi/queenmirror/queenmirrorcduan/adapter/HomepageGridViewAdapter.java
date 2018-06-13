@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,8 @@ public class HomepageGridViewAdapter extends BaseAdapter{
             holder.tv_shopName = convertView.findViewById(R.id.tv_shopName);
             holder.tv_shop_time = convertView.findViewById(R.id.tv_shop_time);
 
+            holder.iv_homepage_shop = convertView.findViewById(R.id.iv_homepage_shop);
+
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -85,6 +89,13 @@ public class HomepageGridViewAdapter extends BaseAdapter{
         holder.tv_shopName.setText(ShopListData.get(position).getAnsShopBasic().getShopName());
         holder.tv_shop_time.setText("营业时间："+ShopListData.get(position).getAnsShopBasic().getOpenTime()+"-"+ShopListData.get(position).getAnsShopBasic().getCloseTime());
 
+        if(ShopListData.get(position).getAnsShopBasic().getShopLogo() == null || ShopListData.get(position).getAnsShopBasic().getShopLogo().equals("")){
+
+        }else{
+            Glide.with(context).load(ShopListData.get(position).getAnsShopBasic().getShopLogo()).into(holder.iv_homepage_shop);
+        }
+
+
         return convertView;
 
     }
@@ -92,6 +103,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
     public final class ViewHolder{
         TextView tv_shopName;
         TextView tv_shop_time;
+        ImageView iv_homepage_shop;
     }
 
 

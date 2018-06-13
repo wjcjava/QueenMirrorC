@@ -50,7 +50,12 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
     @Override
     protected void convert(final BaseViewHolder helper, final OrderMyAllOrderBean.BodyBean.ApiOrderListBean item) {
 
-        helper.setText(R.id.tv_shangpin,item.getIntfAnsShopBasic().getShopName());
+        if(item.getIntfAnsShopBasic().getShopName() == null||item.getIntfAnsShopBasic().getShopName().toString().equals("")){
+
+        }else{
+
+        }
+       helper.setText(R.id.tv_shangpin,item.getIntfAnsShopBasic().getShopName());
 
         if(item.getIntfAnsOrder().getOrderStatus().toString().equals("UP")){
             //待付款
@@ -231,9 +236,9 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
             });
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("FN")){
             //已完成
-            helper.setVisible(R.id.tv_order_tuikuan,false)
-                    .setVisible(R.id.tv_order_again,false)
-                    .setVisible(R.id.tv_order_like, false)
+            helper.setGone(R.id.tv_order_tuikuan,false)
+                    .setGone(R.id.tv_order_again,false)
+                    .setGone(R.id.tv_order_like, false)
                     .setText(R.id.tv_submit,"已完成");
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("UC")){
             //待评价
@@ -255,7 +260,6 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     context.startActivity(intent);
                 }
             });
-
         }else if(item.getIntfAnsOrder().getOrderStatus().toString().equals("CA")){
             //已取消
             helper.setGone(R.id.tv_order_tuikuan,false)

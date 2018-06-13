@@ -223,9 +223,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
          * 获取首页部分数据
          */
         getBannerData();
-
         getShopData();
-
         for (int i = 0; i < 10; i++) {
             SortBean sortBean = new SortBean();
             sortlist.add(sortBean);
@@ -369,8 +367,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-
-
                 break;
             case R.id.li_sort_bottom:
                 tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));

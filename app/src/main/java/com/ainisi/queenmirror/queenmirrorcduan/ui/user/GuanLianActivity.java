@@ -61,21 +61,6 @@ public class GuanLianActivity extends BaseNewActivity implements HttpCallBack{
         openId = intent.getStringExtra("openId");
         loginToken = intent.getStringExtra("loginToken");
         loginFlag = intent.getStringExtra("loginFlag");
-
-
-        //获取手机token值  唯一设备码
-        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        deviceToken = TelephonyMgr.getDeviceId();
     }
 
     @OnClick({R.id.title_back,R.id.gl_bt_login_submit})
@@ -113,7 +98,7 @@ public class GuanLianActivity extends BaseNewActivity implements HttpCallBack{
     private void LoginthereData() {
         //传参数
         HashMap<String, String> params = new HashMap<>();
-        params.put("deviceToken", deviceToken);
+        params.put("deviceToken", SP.get(this,SpContent.UserToken,"")+"");
         params.put("cellPhone", gl_et_login_pghone.getText().toString());
         params.put("userPass", MD5.md5(gl_et_login_pass.getText().toString()+ "MYN888"));
         //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity

@@ -151,6 +151,7 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                             Intent intent=new Intent(MineEvaluateActivity.this, ReplyCommentActivity.class);
+                            intent.putExtra("shopId",commentList.get(position).getEcAppraiseShop().getShopId());
                             intent.putExtra("shopName",commentList.get(position).getShopIdName());
                             intent.putExtra("shopDevice",commentList.get(position).getEcAppraiseGoods().getEmployeeAbility());
                             intent.putExtra("serviceAttitude",commentList.get(position).getEcAppraiseShop().getServiceAttitude());
@@ -159,6 +160,7 @@ public class MineEvaluateActivity extends BaseActivity implements RefreshLoadMor
                             intent.putExtra("goodsName",commentList.get(position).getGoodsIdName());
                             intent.putExtra("commentgContent",commentList.get(position).getEcAppraiseGoods().getApprDetails());
                             intent.putExtra("commentId",commentList.get(position).getEcAppraiseGoods().getId());
+                            intent.putExtra("commshopId",commentList.get(position).getEcAppraiseShop().getId());
                             startActivity(intent);
                         }
                     });

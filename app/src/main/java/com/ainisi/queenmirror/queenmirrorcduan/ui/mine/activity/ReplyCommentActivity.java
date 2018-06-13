@@ -3,6 +3,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,12 +14,15 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ReplyCommentBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ReplyCommentTwoBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomRatingBar;
+import com.google.gson.Gson;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.HashMap;
@@ -48,9 +52,20 @@ public class ReplyCommentActivity extends BaseNewActivity implements HttpCallBac
     TextView tv_reply_comment_goodsname;
     @Bind(R.id.li_reply_comment_linear)
     LinearLayout li_reply_comment_linear;
+    @Bind(R.id.li_reply_comment_zhuiping)
+    LinearLayout li_reply_comment_zhuiping;
+    @Bind(R.id.li_reply_comment_input)
+    LinearLayout li_reply_comment_input;
+    @Bind(R.id.tv_reply_comment_submit)
+    TextView tv_reply_comment_submit;
+    @Bind(R.id.et_reply_comment_content)
+    EditText et_reply_comment_content;
 
-    String shopName,shopDevice,serviceAttitude,shopEnvironment,apprTime,service="",goodsName,commentgContent,commentId;
+    String shopName,shopDevice,serviceAttitude,shopEnvironment,apprTime,service="",goodsName,commentgContent,commentId,shopId,commshopId;
     @Override
+
+
+
     protected int getLayoutId() {
         return R.layout.activity_reply_comment;
     }
@@ -69,6 +84,8 @@ public class ReplyCommentActivity extends BaseNewActivity implements HttpCallBac
         goodsName = intent.getStringExtra("goodsName");
         commentgContent = intent.getStringExtra("commentgContent");
         commentId = intent.getStringExtra("commentId");
+        shopId = intent.getStringExtra("shopId");
+        commshopId = intent.getStringExtra("commshopId");
 
         tv_reply_comment_shopname.setText(shopName);
         tv_reply_comment_nickname.setText(SP.get(this, SpContent.UserName,"")+"");
@@ -104,7 +121,7 @@ public class ReplyCommentActivity extends BaseNewActivity implements HttpCallBac
         HashMap<String, String> parames = new HashMap<>();
         parames.put("commentId", commentId);
         parames.put("objectId", commentId);
-       // parames.put("objectId", SP.get(ReplyCommentActivity.this,SpContent.UserId,"0")+"");
+        // parames.put("objectId", SP.get(ReplyCommentActivity.this,SpContent.UserId,"0")+"");
         HttpUtils.doPost(ACTION.CommentReplyList, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -113,17 +130,80 @@ public class ReplyCommentActivity extends BaseNewActivity implements HttpCallBac
         super.initData();
     }
 
-    @OnClick({R.id.title_back})
+    @OnClick({R.id.title_back,R.id.li_reply_comment_zhuiping,R.id.tv_reply_comment_submit})
     public void OnClick(View view){
         switch (view.getId()){
             case R.id.title_back:
                 finish();
                 break;
+            case R.id.li_reply_comment_zhuiping:
+                /**
+                 * 追评
+                 */
+                li_reply_comment_zhuiping.setVisibility(View.GONE);
+                li_reply_comment_input.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tv_reply_comment_submit:
+                /**
+                 * 点击评论
+                 */
+                if(et_reply_comment_content.getText().toString().equals("")){
+                    T.show("请输入追评内容");
+                }else{
+                    DoReplyData();
+                }
+                break;
         }
     }
+
+    /**
+     * 追评
+     */
+    private void DoReplyData() {
+        ReplyCommentTwoBean replyCommentTwoBean = new ReplyCommentTwoBean();
+
+        replyCommentTwoBean.setAppraiseId(commentId);
+       // replyCommentTwoBean.setObjectId(commshopId);
+        replyCommentTwoBean.setObjectId(commentId);
+        replyCommentTwoBean.setObjectUser(shopId);
+        replyCommentTwoBean.setReplyContent(et_reply_comment_content.getText().toString());
+        replyCommentTwoBean.setReplyFrom("1");
+        replyCommentTwoBean.setReplyUser(SP.get(this,SpContent.UserId,"0")+"");
+
+        Gson gson = new Gson();
+        String replyinfo = gson.toJson(replyCommentTwoBean);
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("replyInfo", replyinfo);//评论ID
+        HttpUtils.doPost(ACTION.COMMENTINPUT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
+            /**
+             * 商品回复
+             */
+            case ACTION.COMMENTINPUT:
+                SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
+                if(successBean.isSuccess()&&successBean.getErrorCode().equals("0")){
+                    // 2、获取组件，设置组件属性
+                    View _view = LayoutInflater.from(ReplyCommentActivity.this).inflate(R.layout.reply_comment_item, null);
+                    // 3、在布局中添加组件，设置组件属性
+                    li_reply_comment_linear.addView(_view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    TextView tv_reply_comment_where = _view.findViewById(R.id.tv_reply_comment_where);
+                    tv_reply_comment_where.setText(SP.get(this,SpContent.UserName,"")+":");
+
+                    TextView tv_reply_comment_content = _view.findViewById(R.id.tv_reply_comment_content);
+                    tv_reply_comment_content.setText(et_reply_comment_content.getText().toString());
+
+                    et_reply_comment_content.setText("");
+                    li_reply_comment_zhuiping.setVisibility(View.VISIBLE);
+                    li_reply_comment_input.setVisibility(View.GONE);
+                }else{
+                    T.show(successBean.getMsg());
+                }
+                break;
             case ACTION.CommentReplyList:
 
                 ReplyCommentBean replyCommentBean = GsonUtil.toObj(res,ReplyCommentBean.class);
@@ -141,7 +221,7 @@ public class ReplyCommentActivity extends BaseNewActivity implements HttpCallBac
                             if(replyCommentBean.getBody().getApiEcAppraiseReplyList().get(i).getReplyUserName() == null || replyCommentBean.getBody().getApiEcAppraiseReplyList().get(i).getReplyUserName().equals("")){
                                 tv_reply_comment_where.setText("商家回应：");
                             }else {
-                                tv_reply_comment_where.setText(replyCommentBean.getBody().getApiEcAppraiseReplyList().get(i).getReplyUserName());
+                                tv_reply_comment_where.setText(replyCommentBean.getBody().getApiEcAppraiseReplyList().get(i).getReplyUserName()+":");
                             }
                             TextView tv_reply_comment_content = _view.findViewById(R.id.tv_reply_comment_content);
                             tv_reply_comment_content.setText(replyCommentBean.getBody().getApiEcAppraiseReplyList().get(i).getEcAppraiseReply().getReplyContent());
@@ -149,7 +229,7 @@ public class ReplyCommentActivity extends BaseNewActivity implements HttpCallBac
                     }
 
                 }else{
-                    T.show(replyCommentBean.getMsg());
+                    T.show("暂无回复");
                 }
                 break;
         }

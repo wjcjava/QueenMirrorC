@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.lzy.okgo.OkGo;
@@ -50,6 +52,7 @@ import okhttp3.Route;
 
 public class App extends MultiDexApplication {
     private static final String TAG = App.class.getName();
+    Context context;
 
     public static final String UPDATE_STATUS_ACTION = "com.umeng.message.example.action.UPDATE_STATUS";
     private Handler handler;
@@ -57,6 +60,9 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        context = this;
+
         ViewTarget.setTagId(R.id.glide_tag);
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -221,6 +227,9 @@ public class App extends MultiDexApplication {
             public void onSuccess(String deviceToken) {
                 Log.i(TAG, "device token: " + deviceToken);
                 sendBroadcast(new Intent(UPDATE_STATUS_ACTION));
+
+                SP.put(context, SpContent.UserToken,deviceToken);
+
             }
 
             @Override

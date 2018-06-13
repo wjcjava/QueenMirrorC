@@ -1,10 +1,6 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.user;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +22,10 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -63,28 +63,12 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
         super.initView();
         initTitle();
         choice.setChecked(true);
-
     }
 
     private void initTitle() {
         loginTitle.setText(R.string.login);
         loginRighrTitle.setText(R.string.register);
 
-        //获取手机token值  唯一设备码
-        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions2
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
-            return;
-        }
-        deviceToken = TelephonyMgr.getDeviceId();
     }
 
     @OnClick({R.id.title_back, R.id.title_right, R.id.tv_forgetcipher,R.id.bt_login_submit,R.id.user_reg_qq_login_view,R.id.user_reg_wechat_login_view})
@@ -122,12 +106,12 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                 }
                 break;
             case R.id.user_reg_qq_login_view:
-              //  UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.QQ, authListener);
+              UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.QQ, authListener);
                 loginFlag = "2";
                 break;
 
             case R.id.user_reg_wechat_login_view:
-                //UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.WEIXIN, authListener);
+                UMShareAPI.get(this).doOauthVerify(this, SHARE_MEDIA.WEIXIN, authListener);
                 loginFlag = "1";
                 break;
         }
@@ -138,7 +122,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     private void LoginData() {
         //传参数
         HashMap<String, String> params = new HashMap<>();
-        params.put("deviceToken", deviceToken);
+        params.put("deviceToken", SP.get(this,SpContent.UserToken,"")+"");
         params.put("cellPhone", et_login_pghone.getText().toString());
         params.put("userPass", MD5.md5(et_login_pass.getText().toString()+ "MYN888"));
         //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
@@ -212,7 +196,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
         params.put("loginFlag", loginFlag);
         params.put("openId", openId);
         params.put("loginToken",loginToken);
-        params.put("deviceToken",deviceToken);
+        params.put("deviceToken",SP.get(this,SpContent.UserToken,"")+"");
         //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
         HttpUtils.doPost(ACTION.THIRDLOGINONE, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -227,7 +211,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
 
     }
 
-    /*UMAuthListener authListener = new UMAuthListener() {
+    UMAuthListener authListener = new UMAuthListener() {
         @Override
         public void onStart(SHARE_MEDIA platform) {
         }
@@ -286,7 +270,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
         public void onCancel(SHARE_MEDIA platform, int action) {
             T.show("取消了");
         }
-    };*/
+    };
 
     /**
      * 第三方登录OpenId检验

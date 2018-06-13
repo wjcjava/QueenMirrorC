@@ -22,7 +22,9 @@
         android:padding="10dp"
         android:background="@color/white">
 
-        <LinearLayout android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/li_reply_comment_zhuiping"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_height="wrap_content"
@@ -37,6 +39,40 @@
                 android:layout_marginStart="@dimen/comment_10_dip"
                 android:textSize="@dimen/comment_14_size"
                 android:textColor="@color/alpha_75_black">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/li_reply_comment_input"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_reply_comment_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="请输入追评内容"
+                android:background="@null"
+                android:textSize="@dimen/comment_14_size"
+                android:textColor="@color/alpha_75_black">
+            </EditText>
+            <TextView
+                android:id="@+id/tv_reply_comment_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="追评"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:background="@drawable/button_shap_queen"
+                android:layout_marginStart="@dimen/comment_10_dip"
+                android:textSize="@dimen/comment_14_size"
+                android:textColor="@color/white">
             </TextView>
         </LinearLayout>
 

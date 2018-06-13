@@ -426,7 +426,7 @@ public class ShopListHomeBean {
                 private String shopCharge;
                 private String chargeIdc;
                 private Object chargeIdp;
-                private Object shopLogo;
+                private String shopLogo;
                 private Object shopPhoto;
                 private Object shopEnvPhoto;
                 private String joinTime;
@@ -437,6 +437,22 @@ public class ShopListHomeBean {
                 private Object geoY;
                 private String updatePgm;
                 private Object apiAnsCustCartList;
+
+                public boolean isNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setNewRecord(boolean newRecord) {
+                    isNewRecord = newRecord;
+                }
+
+                public String getShopLogo() {
+                    return shopLogo;
+                }
+
+                public void setShopLogo(String shopLogo) {
+                    this.shopLogo = shopLogo;
+                }
 
                 public String getId() {
                     return id;
@@ -780,14 +796,6 @@ public class ShopListHomeBean {
 
                 public void setChargeIdp(Object chargeIdp) {
                     this.chargeIdp = chargeIdp;
-                }
-
-                public Object getShopLogo() {
-                    return shopLogo;
-                }
-
-                public void setShopLogo(Object shopLogo) {
-                    this.shopLogo = shopLogo;
                 }
 
                 public Object getShopPhoto() {

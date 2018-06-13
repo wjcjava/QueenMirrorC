@@ -650,6 +650,9 @@ public class HttpUtils {
             case ACTION.CommentReplyList:
                 actionUrl = UrlConstants.CommentReplyList;
                 break;
+            case ACTION.COMMENTINPUT:
+                actionUrl = UrlConstants.COMMENTINPUT;
+                break;
         }
         url.append(actionUrl);
         return url;

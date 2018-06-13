@@ -20,7 +20,7 @@ public class MineFollowAdapter extends BaseQuickAdapter<MineFollowBean.BodyBean.
     @Override
     protected void convert(BaseViewHolder helper, MineFollowBean.BodyBean.CommentsListDataBean item) {
 
-        L.e("测试的方法"+item.getAnsShopBasic().getCloseTime());
+        L.e("测试的方法"+item.getAnsShopBasic().getShopName());
 
         helper.setText(R.id.sote_name,item.getAnsShopBasic().getShopName())
         .setText(R.id.tv_mine_follow_score,"5")
