@@ -15,6 +15,10 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.DistanceGet;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -28,6 +32,8 @@ public class HomepageGridViewAdapter extends BaseAdapter{
     private Context context;
     List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
     private String where;
+    double distance;
+    String mine_lon,mine_lat,shop_lon,shop_lat;
 
     public HomepageGridViewAdapter(Context context,List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData,String where) {
         this.context = context;
@@ -62,6 +68,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
             holder.tv_shop_time = convertView.findViewById(R.id.tv_shop_time);
 
             holder.iv_homepage_shop = convertView.findViewById(R.id.iv_homepage_shop);
+            holder.tv_homepage_distance = convertView.findViewById(R.id.tv_homepage_distance);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,13 +101,20 @@ public class HomepageGridViewAdapter extends BaseAdapter{
             Glide.with(context).load(ShopListData.get(position).getAnsShopBasic().getShopLogo()).into(holder.iv_homepage_shop);
         }
 
-        if(ShopListData.get(position).getAnsShopBasic().getGeoX() == null|| ShopListData.get(position).getAnsShopBasic().getGeoX().equals("")){
-
+        if(ShopListData.get(position).getAnsShopBasic().getGeoX() == null|| ShopListData.get(position).getAnsShopBasic().getGeoY() == null){
+            shop_lon = "0";
+            shop_lat = "0";
         }else{
-            
+            mine_lon = SP.get(context, SpContent.UserLon,"")+"";
+            mine_lat = SP.get(context,SpContent.UserLat,"")+"";
+            shop_lon = ShopListData.get(position).getAnsShopBasic().getGeoX();
+            shop_lat = ShopListData.get(position).getAnsShopBasic().getGeoY();
+
         }
+        L.e("*****   "+mine_lon+ "   "+mine_lat+"   "+shop_lon+"    "+shop_lat);
+        distance = (DistanceGet.getDistance(Double.parseDouble(mine_lon),Double.parseDouble(mine_lat),Double.parseDouble(shop_lon),Double.parseDouble(shop_lat)))/10;
 
-
+        holder.tv_homepage_distance.setText("相距 "+ distance +"km");
         return convertView;
 
     }
@@ -109,11 +123,6 @@ public class HomepageGridViewAdapter extends BaseAdapter{
         TextView tv_shopName;
         TextView tv_shop_time;
         ImageView iv_homepage_shop;
+        TextView tv_homepage_distance;
     }
-
-
-
-
-
-
 }

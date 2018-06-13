@@ -164,10 +164,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private HomeHeadlinesBean homeHeadlinesBean;
     private HomeAdvertisingBean homeAdvertisingBean;
     List<String> contntList = new ArrayList<>();
-    List<SortBean>    sortlist = new ArrayList<>();
+    List<SortBean>   sortlist = new ArrayList<>();
 
     int hight;
     boolean type = false;
+
+    List<String> cValues;
 
     ShopListHomeBean shopListHomeBean;
     Intent intent;
@@ -604,8 +606,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
     private void initshowdistance() {
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        /*tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));*/
         rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -632,8 +634,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+      /*  tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));*/
         rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
 
