@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -31,6 +32,10 @@ public class InstallActivity extends BaseNewActivity implements HttpCallBack {
     TextView settitle;
     @Bind(R.id.iv_unselected)
     ImageView unselscetd;
+    @Bind(R.id.layout_we)
+    RelativeLayout layout_we;
+
+
     private boolean isClick;
 
     public static void startActivity(Context context) {
@@ -52,10 +57,14 @@ public class InstallActivity extends BaseNewActivity implements HttpCallBack {
         super.initData();
     }
 
-    @OnClick({R.id.title_back, R.id.iv_unselected, R.id.layout_privacy, R.id.tv_install_loginout
+    @OnClick({R.id.title_back, R.id.iv_unselected, R.id.layout_privacy, R.id.tv_install_loginout,R.id.layout_we
     })
     public void click(View view) {
         switch (view.getId()) {
+            case R.id.layout_we:
+                Intent intent = new Intent(this,AboutUsActivity.class);
+                startActivity(intent);
+                break;
             case R.id.title_back:
                 finish();
                 break;
@@ -74,7 +83,6 @@ public class InstallActivity extends BaseNewActivity implements HttpCallBack {
                 break;
             case R.id.tv_install_loginout:
                 initParams();
-
                 break;
             default:
                 break;

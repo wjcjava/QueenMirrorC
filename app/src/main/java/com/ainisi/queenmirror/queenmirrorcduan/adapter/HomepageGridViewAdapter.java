@@ -95,7 +95,6 @@ public class HomepageGridViewAdapter extends BaseAdapter{
             Glide.with(context).load(ShopListData.get(position).getAnsShopBasic().getShopLogo()).into(holder.iv_homepage_shop);
         }
 
-
         return convertView;
 
     }

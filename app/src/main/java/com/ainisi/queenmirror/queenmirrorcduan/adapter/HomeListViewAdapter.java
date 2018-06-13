@@ -9,12 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,7 @@ public class HomeListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_shortrecycler, parent, false);
             holder.sort_time = convertView.findViewById(R.id.tv_sort_time);
             holder.sort_name = convertView.findViewById(R.id.tv_sort_name);
+            holder.iv_homepage_shop_listview = convertView.findViewById(R.id.iv_homepage_shop_listview);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,6 +94,14 @@ public class HomeListViewAdapter extends BaseAdapter {
         holder.sort_time.setText("营业时间：" + ShopListData.get(position).getAnsShopBasic().getOpenTime() + "-" + ShopListData.get(position).getAnsShopBasic().getCloseTime());
         holder.sort_name.setText(ShopListData.get(position).getAnsShopBasic().getShopName());
 
+        if(ShopListData.get(position).getAnsShopBasic().getShopLogo() == null || ShopListData.get(position).getAnsShopBasic().getShopLogo().equals("")){
+
+        }else{
+            Glide.with(context).load(ShopListData.get(position).getAnsShopBasic().getShopLogo()).into(holder.iv_homepage_shop_listview
+
+            );
+        }
+
         return convertView;
     }
 
@@ -99,5 +110,6 @@ public class HomeListViewAdapter extends BaseAdapter {
         private LinearLayout li_home_short;
         private TextView sort_name;
         private TextView sort_time;
+        private ImageView iv_homepage_shop_listview;
     }
 }
