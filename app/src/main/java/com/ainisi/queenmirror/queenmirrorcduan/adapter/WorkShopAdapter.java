@@ -82,12 +82,14 @@ public class WorkShopAdapter extends BaseAdapter {
         holder.couneMoney.setText(list.get(position).getCpCreateInfo().getReduceAmount() + "元");
         holder.couneConditions.setText(list.get(position).getCpCreateInfo().getCpUsing());
         holder.couneTime.setText(list.get(position).getCpCreateInfo().getCreateTime());
+
         holder.img_overdue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                holder.inithttp(position);
             }
         });
+
 
         return convertView;
     }
@@ -113,19 +115,9 @@ public class WorkShopAdapter extends BaseAdapter {
             switch (action) {
                 case ACTION.COUPONGET:
                     couponGetBean = GsonUtil.toObj(res, CouponGetBean.class);
-                    if (couponGetBean.isSuccess()) {
-                        couponGetBean.getErrorCode();
-                        if(couponGetBean.getErrorCode().equals("1")){
-
-                            img_overdue.setImageResource(R.drawable.icon_shop_receive);
-                            re_workroom.setBackgroundResource(R.color.alpha_55_black);
-                        }else {
-                            T.show("您已成功领取优惠券");
-                            img_overdue.setImageResource(R.drawable.icon_shop_receive);
-                            re_workroom.setBackgroundResource(R.drawable.button_shap_queen);
-                        }
-
-                    } else {
+                    if(couponGetBean.isSuccess()){
+                        T.show(couponGetBean.getMsg());
+                    }else {
                         T.show(couponGetBean.getMsg());
                     }
                     break;

@@ -469,7 +469,7 @@
         <activity
             android:name=".ui.shop.activity.PayInShopActivity"
             tools:ignore="DuplicateActivity" />
-        <activity android:name=".ui.home.activity.PurchaseNowActivity"></activity>
+        <activity android:name=".ui.home.activity.PurchaseNowActivity"/>
         <activity
             android:name=".ui.mine.activity.AmentPayActivity"
             android:launchMode="singleTask"

@@ -7,8 +7,11 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -16,12 +19,14 @@ import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.EstheticsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.FullShortAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.PopupAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
+import com.ainisi.queenmirror.queenmirrorcduan.popbutton.PopupButton;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
@@ -45,8 +50,8 @@ import butterknife.OnClick;
  * 休闲娱乐
  */
 public class ShopClassificationActivity extends BaseActivity implements HttpCallBack, RefreshLoadMoreLayout.CallBack {
-    @Bind(R.id.full_rb_sort)
-    TextView hSort;
+//    @Bind(R.id.full_rb_sort)
+//    TextView hSort;
     @Bind(R.id.re_recommendable_projects)
     RecyclerView reProjects;
     @Bind(R.id.full_rb_sales)
@@ -55,10 +60,10 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
     TextView hDistance;
     @Bind(R.id.full_rb_screen)
     TextView hscreen;
-    @Bind(R.id.iv_sort)
-    ImageView ivsort;
-    @Bind(R.id.iv_sort1)
-    ImageView ivsort1;
+//    @Bind(R.id.iv_sort)
+//    ImageView ivsort;
+//    @Bind(R.id.iv_sort1)
+//    ImageView ivsort1;
     @Bind(R.id.newtitle_title)
     TextView newtitle_title;
     @Bind(R.id.iv_distance)
@@ -67,6 +72,8 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
     ImageView iv_distance1;
     @Bind(R.id.full_sore_recycler)
     RecyclerView recycler;
+    @Bind(R.id.bt_up_recommendable)
+    PopupButton recommbt;
     List<ClassificationBean.BodyBean.ShopListDataBean> sortlist = new ArrayList<>();
     private Handler handler = new Handler();
     @Bind(R.id.rlm)
@@ -85,6 +92,8 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
     public static ShopClassificationActivity instance = null;
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
+    private ArrayList<String> cValues;
+
     public int getLayoutId() {
         instance = this;
         return R.layout.activity_shop_classification;
@@ -157,8 +166,8 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
         pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                ivsort.setVisibility(View.VISIBLE);
-                ivsort1.setVisibility(View.GONE);
+                //ivsort.setVisibility(View.VISIBLE);
+                //ivsort1.setVisibility(View.GONE);
                 iv_distance.setVisibility(View.VISIBLE);
                 iv_distance1.setVisibility(View.GONE);
             }
@@ -178,13 +187,13 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
         problemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                hSort.setText(problem[position]);
+                hDistance.setText(problem[position]);
                 pop.dismiss();
             }
         });
     }
 
-    @OnClick({R.id.ed_keyword,R.id.iv_back,R.id.full_rb_sort, R.id.full_rb_sales, R.id.full_rb_distance, R.id.full_rb_screen})
+    @OnClick({R.id.ed_keyword,R.id.iv_back,R.id.bt_up_recommendable, R.id.full_rb_sales, R.id.full_rb_distance, R.id.full_rb_screen})
     public void click(View view) {
         switch (view.getId()) {
             //搜素
@@ -199,34 +208,85 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
 //                startActivity(new Intent(this, FullActivity.class));
 //                break;
             //综合排序
-            case R.id.full_rb_sort:
-                ivsort.setVisibility(View.GONE);
-                ivsort1.setVisibility(View.VISIBLE);
-                pop.showAsDropDown(hSort);
-                colorText(hDistance,hSales,hscreen,hSort);
+            case R.id.bt_up_recommendable:
+                //ivsort.setVisibility(View.GONE);
+                //ivsort1.setVisibility(View.VISIBLE);
+                //pop.showAsDropDown(hSort);
+                initpop();
+                colorText(hDistance,hSales,hscreen,recommbt);
 
                 break;
             //销量最高
             case R.id.full_rb_sales:
-                colorText(hDistance,hSort,hscreen,hSales);
+                colorText(hDistance,recommbt,hscreen,hSales);
 
                 break;
             //距离最近
             case R.id.full_rb_distance:
 
-                pop.showAsDropDown(hSort);
-                colorText(hSort,hSales,hscreen,hDistance);
+               // pop.showAsDropDown(hSort);
+                colorText(recommbt,hSales,hscreen,hDistance);
                 iv_distance.setVisibility(View.GONE);
                 iv_distance1.setVisibility(View.VISIBLE);
                 break;
             //筛选
             case R.id.full_rb_screen:
-                colorText(hDistance,hSales,hSort,hscreen);
+                colorText(hDistance,hSales,recommbt,hscreen);
                 new ScreenPoputil(this).showscreenPop(hscreen,merchantsList,preferentialList,"shopification");
                 break;
             default:
                 break;
         }
+    }
+    private void initpop() {
+        View view2 = LayoutInflater.from(this).inflate(R.layout.popup2,null);
+        ListView pLv = view2.findViewById(R.id.parent_lv);
+        final ListView cLv =view2.findViewById(R.id.child_lv);
+        List<String> pList = new ArrayList<>();
+        final List<List<String>> cList = new ArrayList<>();
+        for(int i = 0; i < 10; i ++) {
+            pList.add("p" + i);
+            List<String> t = new ArrayList<>();
+            for(int j = 0; j < 15; j++) {
+                t.add(pList.get(i) + "-c" + j);
+            }
+            cList.add(t);
+        }
+
+        cValues = new ArrayList<>();
+        cValues.addAll(cList.get(0));
+        final PopupAdapter pAdapter = new PopupAdapter(this,R.layout.popup_item,pList,R.drawable.normal,R.drawable.press2);
+        final PopupAdapter cAdapter = new PopupAdapter(this,R.layout.popup_item, cValues,R.drawable.normal,R.drawable.press);
+        pAdapter.setPressPostion(0);
+
+        pLv.setAdapter(pAdapter);
+        cLv.setAdapter(cAdapter);
+
+        pLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pAdapter.setPressPostion(position);
+                pAdapter.notifyDataSetChanged();
+                cValues.clear();
+                cValues.addAll(cList.get(position));
+                cAdapter.notifyDataSetChanged();
+                cAdapter.setPressPostion(-1);
+                cLv.setSelection(0);
+            }
+        });
+
+        cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cAdapter.setPressPostion(position);
+                cAdapter.notifyDataSetChanged();
+                recommbt.setText(cValues.get(position));
+                recommbt.hidePopup();
+            }
+        });
+
+
+        recommbt.setPopupView(view2);
     }
     private void colorText(TextView viewOne,TextView viewTwo,TextView viewStree,TextView viewfour) {
         viewOne.setTextColor(this.getResources().getColor(R.color.alpha_55_black));

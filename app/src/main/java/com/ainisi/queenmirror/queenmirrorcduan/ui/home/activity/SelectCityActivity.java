@@ -44,7 +44,6 @@ public class SelectCityActivity extends BaseNewActivity implements HttpCallBack 
     @Override
     public void initView() {
         StTitle.setText("选择城市");
-
         initDate();
 
     }
@@ -68,7 +67,6 @@ public class SelectCityActivity extends BaseNewActivity implements HttpCallBack 
                 break;
         }
     }
-
     @Override
     public void onSuccess(int action, String res) {
 

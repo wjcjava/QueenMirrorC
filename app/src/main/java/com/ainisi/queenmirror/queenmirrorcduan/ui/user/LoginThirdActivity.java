@@ -46,10 +46,8 @@ public class LoginThirdActivity extends BaseNewActivity implements HttpCallBack{
         openId = intent.getStringExtra("openId");
         loginToken = intent.getStringExtra("loginToken");
         loginFlag = intent.getStringExtra("loginFlag");
-
         Glide.with(LoginThirdActivity.this).load(headPic).into(iv_title);
     }
-
     @OnClick({R.id.title_back,R.id.tv_third_login_regist,R.id.tv_third_login_login})
     public void OnClick(View view){
         switch (view.getId()){

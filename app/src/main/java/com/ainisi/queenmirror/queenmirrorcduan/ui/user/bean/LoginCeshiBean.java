@@ -56,6 +56,15 @@ public class LoginCeshiBean {
          */
 
         private String verifyCode;
+        private String imageStr;
+
+        public String getImageStr() {
+            return imageStr;
+        }
+
+        public void setImageStr(String imageStr) {
+            this.imageStr = imageStr;
+        }
 
         public String getVerifyCode() {
             return verifyCode;

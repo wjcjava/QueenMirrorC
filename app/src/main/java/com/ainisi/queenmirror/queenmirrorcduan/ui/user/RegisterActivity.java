@@ -1,6 +1,8 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.user;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -8,6 +10,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -29,6 +32,7 @@ import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import cz.msebera.android.httpclient.extras.Base64;
 
 /**
  * 注册
@@ -49,6 +53,12 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     ImageView loginSee;
     @Bind(R.id.iv_remove_text)
     ImageView removeText;
+    @Bind(R.id.et_graphics_validation)
+    EditText evValidateCode;
+    @Bind(R.id.re_graphics_validation)
+    RelativeLayout reValidation;
+    @Bind(R.id.iv_graphics_validation)
+    ImageView ivValidation;
     private MyCountDownTimer myCountDownTimer;
     private boolean click;
     private LoginCeshiBean ceshiBean;
@@ -57,6 +67,9 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     private String uuid;
     private String dataTime;
     private StringBuilder sb;
+    private boolean addvalidatecode = false;
+    private HashMap<String, String> params;
+    private String tvValidation;
 
     @Override
     protected int getLayoutId() {
@@ -89,7 +102,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
         //获取当前时间
         Date date = new Date(System.currentTimeMillis());
-        dataTime=simpleDateFormat.format(date);
+        dataTime = simpleDateFormat.format(date);
 
         initPinjie();
     }
@@ -104,6 +117,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     protected void initData() {
         super.initData();
         initRemoveText();
+
         loginSee.setImageResource(R.drawable.icon_login_nosee);
         passWord.setTransformationMethod(PasswordTransformationMethod.getInstance());
     }
@@ -121,9 +135,10 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             case R.id.tv_validation:
                 if (TextUtils.isEmpty(phoneNumber.getText())) {
                     T.show("手机号不能为空");
-                } else {
-                    initKey();
-                    initValidation();
+                }
+                else {
+                    initcheck();
+
                 }
                 break;
             case R.id.iv_remove_text:
@@ -133,7 +148,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 initSee();
                 break;
             case R.id.bt_user_confirmregistration:
-                initcheck();
+                initregister();
                 break;
         }
     }
@@ -144,7 +159,22 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         HttpUtils.doPost(ACTION.PHONECHECK, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
+    private void initregister(){
 
+            if (phoneNumber.getText().toString().trim().equals("") || passWord.getText().toString().trim().equals("") || etValidation.getText().toString().trim().equals("")) {
+                T.show("请完善相关信息");
+            } else {
+                HashMap<String, String> paramsRegister = new HashMap<>();
+                paramsRegister.put("cellPhone", phoneNumber.getText().toString().trim());
+                paramsRegister.put("userPass", MD5.md5(passWord.getText().toString() + "MYN888"));
+                paramsRegister.put("contractConfirm", "1");
+                paramsRegister.put("ifFirst", "0");
+                paramsRegister.put("verifyCode", vConfig);
+                paramsRegister.put("verifyCodeCust", etValidation.getText().toString().trim());
+                HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+            }
+
+    }
     private void initSee() {
         //判断第一次选中和第二次选中状态
         if (click) {
@@ -172,35 +202,66 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
     }
 
+
+
     //获取验证码
     private void initValidation() {
-        HashMap<String, String> params = new HashMap<>();
+        params = new HashMap<>();
         params.put("telNo", phoneNumber.getText().toString().trim());
         params.put("salt", uuid);
         params.put("signature", MD5.md5(sb.toString()));
         params.put("sysflag", "2");
         params.put("frontType", "C");
-
-
+        if (addvalidatecode) {
+            tvValidation = evValidateCode.getText().toString();
+            if(!TextUtils.isEmpty(tvValidation)){
+                params.put("imgValidateCode", tvValidation);
+            }
+        }
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+
+
+    }
+
+    public static Bitmap stringtoBitmap(String string) {
+        Bitmap bitmap = null;
+        try {
+            byte[] bitmapArray;
+            bitmapArray = Base64.decode(string, Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
     }
 
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
+            //验证码获取
             case ACTION.VERIFY:
                 ceshiBean = GsonUtil.toObj(res, LoginCeshiBean.class);
                 if (ceshiBean.isSuccess()) {
+                    reValidation.setVisibility(View.GONE);
                     myCountDownTimer.start();
                     vConfig = ceshiBean.getBody().getVerifyCode();
-                }else {
+                } else {
+                    reValidation.setVisibility(View.VISIBLE);
+                    String imageStr = ceshiBean.getBody().getImageStr();
+                    if (TextUtils.isEmpty(imageStr)) {
+                        return;
+                    } else {
+                        Bitmap image = stringtoBitmap(imageStr);
+                        ivValidation.setImageBitmap(image);
+                        addvalidatecode=true;
+                    }
                     T.show(ceshiBean.getMsg());
                 }
                 break;
             case ACTION.REGIST://注册
                 SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean.isSuccess()) {
-                    T.show(successBean.getMsg());
                     if (where.equals("third")) {
                         Intent intent = new Intent(RegisterActivity.this, GuanLianActivity.class);
                         intent.putExtra("nickName", nickName);
@@ -210,9 +271,11 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                         intent.putExtra("loginFlag", loginFlag);
                         startActivity(intent);
                     } else {
+                        T.show("注册成功，请登录");
                         RegisterActivity.this.finish();
                     }
                 } else {
+                    reValidation.setVisibility(View.GONE);
                     T.show(successBean.getMsg());
                 }
                 break;
@@ -222,19 +285,9 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                     boolean exists = checkBean.getBody().isExists();
                     if (exists == true) {
                         T.show("此手机号已注册过请勿再次注册");
-                    } else {
-                        if (phoneNumber.getText().toString().trim().equals("") || passWord.getText().toString().trim().equals("") || etValidation.getText().toString().trim().equals("")) {
-                            T.show("请完善相关信息");
-                        } else {
-                            HashMap<String, String> paramsRegister = new HashMap<>();
-                            paramsRegister.put("cellPhone", phoneNumber.getText().toString().trim());
-                            paramsRegister.put("userPass", MD5.md5(passWord.getText().toString() + "MYN888"));
-                            paramsRegister.put("contractConfirm", "1");
-                            paramsRegister.put("ifFirst", "0");
-                            paramsRegister.put("verifyCode", vConfig);
-                            paramsRegister.put("verifyCodeCust", etValidation.getText().toString().trim());
-                            HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-                        }
+                    }else {
+                        initKey();
+                        initValidation();
                     }
                 } else {
                     T.show(checkBean.getMsg());

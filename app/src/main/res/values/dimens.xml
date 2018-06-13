@@ -120,6 +120,7 @@
     <dimen name="comment_255_dip">255dp</dimen>
     <dimen name="comment_420_dip">420dp</dimen>
     <dimen name="comment_258_dip">258dp</dimen>
+    <dimen name="comment_171_dip">171dp</dimen>
 
 
 </resources>

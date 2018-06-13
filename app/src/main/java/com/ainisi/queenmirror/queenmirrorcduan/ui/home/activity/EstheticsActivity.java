@@ -7,8 +7,11 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -16,12 +19,14 @@ import com.ainisi.queenmirror.common.base.BaseActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.EstheticsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.FullShortAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.PopupAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
+import com.ainisi.queenmirror.queenmirrorcduan.popbutton.PopupButton;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
@@ -45,8 +50,8 @@ import butterknife.OnClick;
  * 美学汇（美甲美手）
  */
 public class EstheticsActivity extends BaseActivity implements HttpCallBack,RefreshLoadMoreLayout.CallBack {
-    @Bind(R.id.full_rb_sort)
-    TextView hSort;
+//    @Bind(R.id.full_rb_sort)
+//    TextView hSort;
     @Bind(R.id.re_recommendable_projects)
     RecyclerView reProjects;
     @Bind(R.id.full_rb_sales)
@@ -55,10 +60,10 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
     TextView hDistance;
     @Bind(R.id.full_rb_screen)
     TextView hscreen;
-    @Bind(R.id.iv_sort)
-    ImageView ivsort;
-    @Bind(R.id.iv_sort1)
-    ImageView ivsort1;
+//    @Bind(R.id.iv_sort)
+//    ImageView ivsort;
+//    @Bind(R.id.iv_sort1)
+//    ImageView ivsort1;
 //    @Bind(R.id.pager_home_full)
 //    NoScrollViewPager fullpager;
     @Bind(R.id.newtitle_title)
@@ -67,7 +72,8 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
     ImageView iv_distance;
     @Bind(R.id.iv_distance1)
     ImageView iv_distance1;
-    private View popview1;
+    @Bind(R.id.bt_up_full)
+    PopupButton btSort;
     private PopupWindow pop;
     private List<Fragment> pagerList = new ArrayList<>();
     List<EstheticsBean.BodyBean.ApiShopListBean> apiShopList = new ArrayList<>();
@@ -86,6 +92,8 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
     private Handler handler = new Handler();
     @Bind(R.id.rlm)
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
+    private ArrayList<String> cValues;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_esthetics;
@@ -214,7 +222,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
 
     private void initDate() {
         pop = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.WRAP_CONTENT);
-        popview1 = View.inflate(this, R.layout.pop_myitem, null);
+        View popview1 = View.inflate(this, R.layout.pop_myitem, null);
         initpop(popview1);
         pop.setContentView(popview1);
         pop.setBackgroundDrawable(new ColorDrawable(0));
@@ -223,8 +231,8 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
         pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                ivsort.setVisibility(View.VISIBLE);
-                ivsort1.setVisibility(View.GONE);
+                ///ivsort.setVisibility(View.VISIBLE);
+                //ivsort1.setVisibility(View.GONE);
                 iv_distance.setVisibility(View.VISIBLE);
                 iv_distance1.setVisibility(View.GONE);
             }
@@ -245,13 +253,13 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
         problemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                hSort.setText(problem[position]);
+                hDistance.setText(problem[position]);
                 pop.dismiss();
             }
         });
     }
 
-    @OnClick({R.id.ed_keyword, R.id.iv_back, R.id.full_rb_sort, R.id.full_rb_sales,
+    @OnClick({R.id.ed_keyword, R.id.iv_back, R.id.bt_up_full, R.id.full_rb_sales,
             R.id.full_rb_distance, R.id.full_rb_screen, R.id.tv_more})
     public void click(View view) {
         switch (view.getId()) {
@@ -267,35 +275,86 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
                 startActivity(new Intent(this, RecommendedActivity.class));
                 break;
             //综合排序
-            case R.id.full_rb_sort:
-                ivsort.setVisibility(View.GONE);
-                ivsort1.setVisibility(View.VISIBLE);
-                colorText(hscreen,hSales,hDistance,hSort);
-                pop.showAsDropDown(hSort);
+            case R.id.bt_up_full:
+                //ivsort.setVisibility(View.GONE);
+                //ivsort1.setVisibility(View.VISIBLE);
+                initpop();
+                colorText(hscreen,hSales,hDistance,btSort);
+               // pop.showAsDropDown(hSort);
 
                 break;
             //销量最高
             case R.id.full_rb_sales:
-                colorText(hscreen,hSort,hDistance,hSales);
+                colorText(hscreen,btSort,hDistance,hSales);
 
                 break;
             //距离最近
             case R.id.full_rb_distance:
                 iv_distance.setVisibility(View.GONE);
                 iv_distance1.setVisibility(View.VISIBLE);
-                pop.showAsDropDown(hSort);
-                colorText(hSort,hscreen,hSales,hDistance);
+                pop.showAsDropDown(hDistance);
+                colorText(btSort,hscreen,hSales,hDistance);
 
                 break;
             //筛选
             case R.id.full_rb_screen:
-                colorText(hSort,hDistance,hSales,hscreen);
+                colorText(btSort,hDistance,hSales,hscreen);
                 new ScreenPoputil(this).showscreenPop(hscreen, merchantsList, preferentialList, "esthetics");
                 break;
 
             default:
                 break;
         }
+    }
+    private void initpop() {
+        View view2 = LayoutInflater.from(this).inflate(R.layout.popup2,null);
+        ListView pLv = view2.findViewById(R.id.parent_lv);
+        final ListView cLv =view2.findViewById(R.id.child_lv);
+        List<String> pList = new ArrayList<>();
+        final List<List<String>> cList = new ArrayList<>();
+        for(int i = 0; i < 10; i ++) {
+            pList.add("p" + i);
+            List<String> t = new ArrayList<>();
+            for(int j = 0; j < 15; j++) {
+                t.add(pList.get(i) + "-c" + j);
+            }
+            cList.add(t);
+        }
+
+        cValues = new ArrayList<>();
+        cValues.addAll(cList.get(0));
+        final PopupAdapter pAdapter = new PopupAdapter(this,R.layout.popup_item,pList,R.drawable.normal,R.drawable.press2);
+        final PopupAdapter cAdapter = new PopupAdapter(this,R.layout.popup_item, cValues,R.drawable.normal,R.drawable.press);
+        pAdapter.setPressPostion(0);
+
+        pLv.setAdapter(pAdapter);
+        cLv.setAdapter(cAdapter);
+
+        pLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pAdapter.setPressPostion(position);
+                pAdapter.notifyDataSetChanged();
+                cValues.clear();
+                cValues.addAll(cList.get(position));
+                cAdapter.notifyDataSetChanged();
+                cAdapter.setPressPostion(-1);
+                cLv.setSelection(0);
+            }
+        });
+
+        cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cAdapter.setPressPostion(position);
+                cAdapter.notifyDataSetChanged();
+                btSort.setText(cValues.get(position));
+                btSort.hidePopup();
+            }
+        });
+
+
+        btSort.setPopupView(view2);
     }
     private void colorText(TextView viewOne,TextView viewTwo,TextView viewStree,TextView viewfour) {
         viewOne.setTextColor(this.getResources().getColor(R.color.alpha_55_black));

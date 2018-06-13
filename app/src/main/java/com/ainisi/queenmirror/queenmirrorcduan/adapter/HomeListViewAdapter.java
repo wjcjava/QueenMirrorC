@@ -17,6 +17,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
 import com.bumptech.glide.Glide;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,11 +72,7 @@ public class HomeListViewAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     if (where.equals("home")) {
-//                        Intent intent = new Intent(context, WorkRoomDetailActivity.class);
-//                        intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
-//                        intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
-//                        context.startActivity(intent);
-                        Intent intent = new Intent(context, ShopStoreActivity.class);
+                        Intent intent = new Intent(context, WorkRoomDetailActivity.class);
                         intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
                         intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
                         context.startActivity(intent);
@@ -83,6 +80,7 @@ public class HomeListViewAdapter extends BaseAdapter {
                         Intent intent = new Intent(context, ShopStoreActivity.class);
                         intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
                         intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
+
                         context.startActivity(intent);
                     }
                 }

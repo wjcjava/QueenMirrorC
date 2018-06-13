@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:popupbtn="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mine_back_gray"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -27,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/comment_10_dip"
                 android:drawableRight="@drawable/xiaosanjiao"
-                android:text="繁华中心"
                 android:textColor="@color/white"
                 android:textSize="@dimen/comment_16_size"
                 android:textStyle="bold" />
@@ -83,18 +82,17 @@
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView
                 android:id="@+id/gv_home_gridView"
-                android:background="@color/alpha_05_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/alpha_05_black"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:numColumns="2"
-                android:paddingStart="5dp"
-                android:visibility="visible"/>
+                android:visibility="visible" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,7 +105,7 @@
                 <ImageView
                     android:layout_width="@dimen/comment_100_dip"
                     android:layout_height="@dimen/comment_88_dip"
-                    android:background="@drawable/list_null"></ImageView>
+                    android:background="@drawable/list_null" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -116,7 +114,7 @@
                     android:gravity="center_horizontal"
                     android:text="—   我也是有底线的    —"
                     android:textColor="@color/alpha_55_black"
-                    android:textSize="@dimen/comment_14_size"></TextView>
+                    android:textSize="@dimen/comment_14_size" />
 
 
                 <TextView
@@ -129,7 +127,7 @@
                     android:text="我对女王魔镜有话要说"
                     android:textColor="@color/alpha_55_black"
                     android:textSize="@dimen/comment_14_size"
-                    android:visibility="invisible"></TextView>
+                    android:visibility="invisible" />
 
 
             </LinearLayout>
@@ -161,59 +159,79 @@
                 android:id="@+id/li_sort_bottom"
                 style="@style/Recommend_layout"
                 android:layout_height="@dimen/comment_40_dip">
+                <com.ainisi.queenmirror.queenmirrorcduan.popbutton.PopupButton
+                    android:id="@+id/bt_up_home"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_height="@dimen/comment_40_dip"
+                    android:text="综合排序"
+                    android:textSize="12sp"
+                    android:textColor="@color/alpha_55_black"
+                    popupbtn:normalBg="@drawable/tab_bkg_line"
+                    popupbtn:normalIcon="@drawable/arrow_dwon_blue"
+                    popupbtn:pressBg="@drawable/tab_bkg_selected"
+                    popupbtn:pressIcon="@drawable/arrow_up_black"
+                    />
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_shop_sort"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="附近商家"-->
+                    <!--android:textColor="@color/alpha_55_black"-->
+                    <!--android:textSize="@dimen/comment_12_size" />-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_home_sort"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/arrow_dwon_blue"-->
+                    <!--android:gravity="center" />-->
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_sales"
+                style="@style/Recommend_layout"
+                android:layout_height="@dimen/comment_40_dip"
+                android:text="@string/sales"
+                android:textColor="@color/alpha_55_black"
+                android:textSize="@dimen/comment_12_size" />
+
+            <LinearLayout
+                android:id="@+id/li_sales_bottom"
+                style="@style/Recommend_layout"
+                android:layout_height="@dimen/comment_40_dip">
 
                 <TextView
-                    android:id="@+id/tv_shop_sort"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="附近商家"
+                    android:id="@+id/tv_distance"
+                    style="@style/Recommend_layout"
+                    android:layout_height="@dimen/comment_40_dip"
+                    android:text="距离最近"
                     android:textColor="@color/alpha_55_black"
                     android:textSize="@dimen/comment_12_size" />
 
                 <ImageView
-                    android:id="@+id/iv_home_sort"
+                    android:id="@+id/iv_distance_sort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/arrow_dwon_blue"
                     android:gravity="center" />
+
             </LinearLayout>
-                <TextView
-                    android:id="@+id/tv_sales"
-                    style="@style/Recommend_layout"
-                    android:layout_height="@dimen/comment_40_dip"
-                    android:text="@string/sales"
-                    android:textColor="@color/alpha_55_black"
-                    android:textSize="@dimen/comment_12_size" />
-        <LinearLayout
-            android:id="@+id/li_sales_bottom"
-            style="@style/Recommend_layout"
-            android:layout_height="@dimen/comment_40_dip">
 
-            <TextView
-                android:id="@+id/tv_distance"
-                style="@style/Recommend_layout"
-                android:layout_height="@dimen/comment_40_dip"
-                android:text="距离最近"
-                android:textColor="@color/alpha_55_black"
-                android:textSize="@dimen/comment_12_size" />
-            <ImageView
-                android:id="@+id/iv_distance_sort"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/arrow_dwon_blue"
-                android:gravity="center" />
-
-        </LinearLayout>
             <LinearLayout
                 android:id="@+id/li_home_screen"
                 style="@style/Recommend_layout"
-                android:layout_height="@dimen/comment_40_dip">
+                android:layout_height="@dimen/comment_40_dip"
+                android:layout_marginEnd="@dimen/comment_5_dip">
 
                 <TextView
                     android:id="@+id/tv_screen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/screen"
+                    android:layout_marginEnd="@dimen/comment_5_dip"
+                    android:textColor="@color/alpha_55_black"
                     android:textSize="@dimen/comment_12_size" />
 
                 <RadioButton
@@ -231,7 +249,8 @@
                 android:layout_width="@dimen/comment_0_dip"
                 android:layout_height="@dimen/comment_40_dip"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingEnd="@dimen/comment_10_dip">
 
                 <ImageView
                     android:id="@+id/iv_uspension_surface"
@@ -248,5 +267,5 @@
         android:layout_height="match_parent"
         android:layout_below="@id/layout_stick_header_main"
         android:background="@drawable/bg_translate"
-        android:visibility="gone"></View>
+        android:visibility="gone" />
 </RelativeLayout>

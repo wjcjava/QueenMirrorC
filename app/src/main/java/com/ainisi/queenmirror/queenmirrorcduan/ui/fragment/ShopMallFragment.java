@@ -10,10 +10,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomepageGridViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyShopAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.PopupAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
@@ -30,13 +34,13 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
+import com.ainisi.queenmirror.queenmirrorcduan.popbutton.PopupButton;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.MerchantsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopClassificationActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -63,12 +67,12 @@ import butterknife.OnClick;
 public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.banner)
     Banner banner;
-    @Bind(R.id.iv_sort)
-    ImageView ivsort;
-    @Bind(R.id.iv_shop_sort1)
-    ImageView ivsort1;
-    @Bind(R.id.li_sort_bottom)
-    LinearLayout li_sort_bottom;
+//    @Bind(R.id.iv_sort)
+//    ImageView ivsort;
+//    @Bind(R.id.iv_shop_sort1)
+//    ImageView ivsort1;
+//    @Bind(R.id.li_sort_bottom)
+//    LinearLayout li_sort_bottom;
     @Bind(R.id.li_home_screen)
     LinearLayout li_home_screen;
     @Bind(R.id.li_home_screen_bottom)
@@ -89,16 +93,16 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ImageView uspensionSurface;
     @Bind(R.id.shop_gridView)
     NoScrollGridView shop_gridView;
-    @Bind(R.id.tv_shop_sort)
-    TextView upSort;
+//    @Bind(R.id.tv_shop_sort)
+//    TextView upSort;
     @Bind(R.id.tv_shop_sales)
     TextView upSales;
     @Bind(R.id.tv_shop_distance)
     TextView upDistance;
     @Bind(R.id.tv_shop_screen)
     TextView upScreen;
-    @Bind(R.id.rb_sort)
-    TextView bottomSort;
+//    @Bind(R.id.rb_sort)
+//    TextView bottomSort;
     @Bind(R.id.rb_sales)
     TextView bottomSales;
     @Bind(R.id.rb_screen)
@@ -109,6 +113,10 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ImageView ivdistance;
     @Bind(R.id.tv_shop_data)
     TextView shopData;
+    @Bind(R.id.bt_up_shop)
+    PopupButton bt;
+    @Bind(R.id.bt_app_home)
+    PopupButton bt2;
     ClassificationBean classificationBean;
     ShopListHomeBean shopListHomeBean;
     private HomeIndustryBean homeIndustryBean;
@@ -131,6 +139,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private MerchantsAdapter merchantsAdapter;
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
     private ProblemAdapter problemAdapter;
+    private ArrayList<String> cValues;
 
     @Override
     protected int getLayoutResource() {
@@ -230,8 +239,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             @Override
 
             public void onDismiss() {
-                ivsort.setVisibility(View.VISIBLE);
-                ivsort1.setVisibility(View.GONE);
+              //ivsort.setVisibility(View.VISIBLE);
+               // ivsort1.setVisibility(View.GONE);
                 list.clear();
 
             }
@@ -264,8 +273,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
 
     private void initpop(View popview1) {
         final RecyclerView ce = popview1.findViewById(R.id.rc_popview);
-        ivsort.setFocusable(false);
-        ivsort1.setFocusable(false);
+        //ivsort.setFocusable(false);
+        //ivsort1.setFocusable(false);
         for (int i = 0; i < problem.length; i++) {
             ProblemBean problemBean = new ProblemBean();
             problemBean.setName(problem[i]);
@@ -278,15 +287,15 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         problemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                upSort.setText(problem[position]);
+                //upSort.setText(problem[position]);
                 pop.dismiss();
 
             }
         });
     }
 
-    @OnClick({R.id.li_hime_sort, R.id.rb_sales, R.id.tv_shop_sales, R.id.rb_distance
-            , R.id.li_sort_bottom, R.id.li_home_screen, R.id.li_home_screen_bottom
+    @OnClick({R.id.bt_app_home, R.id.rb_sales, R.id.tv_shop_sales, R.id.rb_distance
+            , R.id.bt_up_shop, R.id.li_home_screen, R.id.li_home_screen_bottom
             , R.id.line_surface, R.id.line_uspension_surface, R.id.ed_keyword, R.id.li_distance_bottom
     })
     public void click(View view) {
@@ -335,22 +344,23 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
 
             //综合选择
 
-            case R.id.li_sort_bottom:
-
-                ivsort.setVisibility(View.GONE);
-                ivsort1.setVisibility(View.VISIBLE);
+            case R.id.bt_up_shop:
+                initpop();
+                //ivsort.setVisibility(View.GONE);
+                //ivsort1.setVisibility(View.VISIBLE);
 
                 if (hight >= 1180) {
-                    pop.showAsDropDown(layout_stick_header_main);
+                    //pop.showAsDropDown(layout_stick_header_main);
                 } else {
                     sc_home_scroll.smoothScrollTo(0, 1180);
-                    pop.showAsDropDown(upSort);
+                   // pop.showAsDropDown(upSort);
                 }
                 initSorttext();
                 break;
-            case R.id.li_hime_sort:
+            case R.id.bt_app_home:
+                initpop1();
                 sc_home_scroll.smoothScrollTo(0, 1180);
-                pop.showAsDropDown(upSort);
+                //pop.showAsDropDown(upSort);
                 initSorttext();
                 break;
             //销量最高
@@ -376,12 +386,12 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
             case R.id.li_home_screen_bottom:
                 sc_home_scroll.smoothScrollTo(0, 1180);
                 initSreentext();
-                new ScreenPoputil(getActivity()).showscreenPop(upSort, merchantsList, preferentialList, "shop");
+               // new ScreenPoputil(getActivity()).showscreenPop(upSort, merchantsList, preferentialList, "shop");
                 break;
 
             case R.id.li_home_screen:
                 initSreentext();
-                new ScreenPoputil(getActivity()).showscreenPop(upSort, merchantsList, preferentialList, "shop");
+                //new ScreenPoputil(getActivity()).showscreenPop(upSort, merchantsList, preferentialList, "shop");
                 break;
 
             default:
@@ -389,7 +399,110 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         }
     }
 
+    private void initpop() {
+        View view2 = LayoutInflater.from(getActivity()).inflate(R.layout.popup2,null);
+        ListView pLv = view2.findViewById(R.id.parent_lv);
+        final ListView cLv = view2.findViewById(R.id.child_lv);
+        List<String> pList = new ArrayList<>();
+        final List<List<String>> cList = new ArrayList<>();
+        for(int i = 0; i < 10; i ++) {
+            pList.add("p" + i);
+            List<String> t = new ArrayList<>();
+            for(int j = 0; j < 15; j++) {
+                t.add(pList.get(i) + "-c" + j);
+            }
+            cList.add(t);
+        }
 
+        cValues = new ArrayList<>();
+        cValues.addAll(cList.get(0));
+        final PopupAdapter pAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,pList,R.drawable.normal,R.drawable.press2);
+        final PopupAdapter cAdapter = new PopupAdapter(getActivity(),R.layout.popup_item, cValues,R.drawable.normal,R.drawable.press);
+        pAdapter.setPressPostion(0);
+
+        pLv.setAdapter(pAdapter);
+        cLv.setAdapter(cAdapter);
+
+        pLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pAdapter.setPressPostion(position);
+                pAdapter.notifyDataSetChanged();
+                cValues.clear();
+                cValues.addAll(cList.get(position));
+                cAdapter.notifyDataSetChanged();
+                cAdapter.setPressPostion(-1);
+                cLv.setSelection(0);
+            }
+        });
+
+        cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cAdapter.setPressPostion(position);
+                cAdapter.notifyDataSetChanged();
+                bt2.setText(cValues.get(position));
+                bt.setText(cValues.get(position));
+                bt2.hidePopup();
+                bt.hidePopup();
+            }
+        });
+
+        bt2.setPopupView(view2);
+        bt.setPopupView(view2);
+    }
+    private void initpop1() {
+        View view2 = LayoutInflater.from(getActivity()).inflate(R.layout.popup2,null);
+        ListView pLv = view2.findViewById(R.id.parent_lv);
+        final ListView cLv =view2.findViewById(R.id.child_lv);
+        List<String> pList = new ArrayList<>();
+        final List<List<String>> cList = new ArrayList<>();
+        for(int i = 0; i < 10; i ++) {
+            pList.add("p" + i);
+            List<String> t = new ArrayList<>();
+            for(int j = 0; j < 15; j++) {
+                t.add(pList.get(i) + "-c" + j);
+            }
+            cList.add(t);
+        }
+
+        cValues = new ArrayList<>();
+        cValues.addAll(cList.get(0));
+        final PopupAdapter pAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,pList,R.drawable.normal,R.drawable.press2);
+        final PopupAdapter cAdapter = new PopupAdapter(getActivity(),R.layout.popup_item, cValues,R.drawable.normal,R.drawable.press);
+        pAdapter.setPressPostion(0);
+
+        pLv.setAdapter(pAdapter);
+        cLv.setAdapter(cAdapter);
+
+        pLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pAdapter.setPressPostion(position);
+                pAdapter.notifyDataSetChanged();
+                cValues.clear();
+                cValues.addAll(cList.get(position));
+                cAdapter.notifyDataSetChanged();
+                cAdapter.setPressPostion(-1);
+                cLv.setSelection(0);
+            }
+        });
+
+        cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cAdapter.setPressPostion(position);
+                cAdapter.notifyDataSetChanged();
+                bt2.setText(cValues.get(position));
+                bt.setText(cValues.get(position));
+                bt2.hidePopup();
+
+            }
+        });
+
+        bt2.setPopupView(view2);
+
+    }
     private void initDistancepop() {
         popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
         //initview(popview);
@@ -397,7 +510,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         popWindow.setContentView(popview);
         popWindow.setOutsideTouchable(true);
         popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
-        popWindow.showAsDropDown(upSort, 0, 0);
+       // popWindow.showAsDropDown(upSort, 0, 0);
         ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
         popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -417,8 +530,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
      * 全部，销量最高，距离最近，筛选的字体色值变化
      */
     private void initSorttext() {
-        upSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-        bottomSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+       // upSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+        //bottomSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         upSales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         bottomSales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         upDistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -430,8 +543,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     private void initSalestext() {
         upSales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         bottomSales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-        upSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        bottomSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+       // upSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        //bottomSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         upDistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         bottomDistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         upScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -443,8 +556,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         bottomDistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         upSales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         bottomSales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        upSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        bottomSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+       // upSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        //bottomSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         upScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         bottomScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
     }
@@ -454,8 +567,8 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         bottomScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         upSales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         bottomSales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        upSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        bottomSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+       // upSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        //bottomSort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         upDistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         bottomDistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
     }

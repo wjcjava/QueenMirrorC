@@ -22,7 +22,7 @@
     <!--悬停-->
     <style name="Recommend_layout">
 
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">3</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:gravity">center</item>
     </style>
@@ -126,4 +126,17 @@
         <item name="android:windowExitAnimation">@anim/scale_out</item>
     </style>
 
+
+    <declare-styleable name="popupbtn">
+        <!-- 正常状态下的背景 -->
+        <attr name="normalBg" format="reference" />
+        <!-- 按下状态下的背景 -->
+        <attr name="pressBg" format="reference" />
+        <!-- 正常状态下的图标 -->
+        <attr name="normalIcon" format="reference" />
+        <!-- 按下状态下的图标 -->
+        <attr name="pressIcon" format="reference" />
+        <!-- 按钮的padding -->
+
+    </declare-styleable>
 </resources>

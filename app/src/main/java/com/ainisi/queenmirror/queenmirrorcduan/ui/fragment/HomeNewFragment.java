@@ -11,10 +11,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -23,6 +27,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomepageGridViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.PopupAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
@@ -31,6 +36,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.NewsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
+import com.ainisi.queenmirror.queenmirrorcduan.popbutton.PopupButton;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeAdvertisingActivity;
@@ -71,7 +77,7 @@ import butterknife.OnClick;
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
-public class HomeNewFragment extends BaseFragment implements HttpCallBack {
+public class HomeNewFragment extends BaseFragment implements HttpCallBack{
 
     @Bind(R.id.banner)
     Banner banner;
@@ -123,16 +129,16 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     View view_new_fragment_half;
     @Bind(R.id.li_sort_bottom)
     LinearLayout li_sort_bottom;
-    @Bind(R.id.tv_shop_sort)
-    TextView tv_shop_sort;
+//    @Bind(R.id.tv_shop_sort)
+//    TextView tv_shop_sort;
     @Bind(R.id.li_top_select)
     LinearLayout li_top_select;
-    @Bind(R.id.rb_sort)
-    TextView rb_sort;
-    @Bind(R.id.iv_home_sort)
-    ImageView iv_home_sort;
-    @Bind(R.id.iv_shop_sort)
-    ImageView iv_shop_sort;
+//    @Bind(R.id.rb_sort)
+//    TextView rb_sort;
+//    @Bind(R.id.iv_home_sort)
+//    ImageView iv_home_sort;
+//    @Bind(R.id.iv_shop_sort)
+//    ImageView iv_shop_sort;
     @Bind(R.id.rb_sales)
     TextView rb_sales;
     @Bind(R.id.tv_sales)
@@ -149,11 +155,15 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     TextView tvdistance;
     @Bind(R.id.iv_distance_sort)
     ImageView ivdistance;
+    @Bind(R.id.bt_app_home)
+    PopupButton bt;
+    @Bind(R.id.bt_up_home)
+    PopupButton bt2;
     private HomeIndustryBean homeIndustryBean;
     private HomeHeadlinesBean homeHeadlinesBean;
     private HomeAdvertisingBean homeAdvertisingBean;
     List<String> contntList = new ArrayList<>();
-    List<SortBean> sortlist = new ArrayList<>();
+    List<SortBean>    sortlist = new ArrayList<>();
 
     int hight;
     boolean type = false;
@@ -169,6 +179,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
     private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist;
     private PopupWindow popWindowdistance;
+    private ArrayList<String> cValues;
 
     @Override
     protected int getLayoutResource() {
@@ -279,7 +290,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             GDLocationUtil.getCurrentLocation(new GDLocationUtil.MyLocationListener() {
                 @Override
                 public void result(AMapLocation location) {
-                    mLocation.setText(location.getCity());
+                   if(TextUtils.isEmpty(location.getCity())){
+                       mLocation.setText("全国");
+                   }else {
+                       mLocation.setText(location.getCity());
+                   }
                 }
             });
         }
@@ -307,12 +322,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         problemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                tv_shop_sort.setText(problem[position]);
-                rb_sort.setText(problem[position]);
+                //tv_shop_sort.setText(problem[position]);
+                //rb_sort.setText(problem[position]);
                 view_new_fragment_half.setVisibility(View.INVISIBLE);
                 li_home_paixu.setVisibility(View.VISIBLE);
-                iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+                //iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+                //iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
                 popWindow.dismiss();
             }
         });
@@ -321,15 +336,15 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             public void onClick(View view) {
                 view_new_fragment_half.setVisibility(View.INVISIBLE);
                 li_home_paixu.setVisibility(View.VISIBLE);
-                iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+                //iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
+                //iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
                 popWindow.dismiss();
             }
         });
     }
     @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
-            R.id.line_surface, R.id.line_uspension_surface, R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information, R.id.li_hime_sort,
-            R.id.li_sort_bottom, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom, R.id.li_home_screen,R.id.li_sales_bottom})
+            R.id.line_surface, R.id.line_uspension_surface, R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information, R.id.bt_app_home,
+            R.id.bt_up_home, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom, R.id.li_home_screen,R.id.li_sales_bottom})
     public void onClick(View view) {
         switch (view.getId()) {
             /**
@@ -363,82 +378,23 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+                bt2.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 break;
-            case R.id.li_sort_bottom:
-                tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                layout_stick_header_main.setVisibility(View.VISIBLE);
-                view_new_fragment_half.setVisibility(View.VISIBLE);
-                initShowPop();
-
-                layout_stick_header_main.setVisibility(View.VISIBLE);
-                view_new_fragment_half.setVisibility(View.VISIBLE);
-                iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
-                iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
-
-                popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        view_new_fragment_half.setVisibility(View.INVISIBLE);
-                        li_home_paixu.setVisibility(View.VISIBLE);
-
-                        iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                        iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                    }
-                });
-
+            //case R.id.li_sort_bottom:
+            case R.id.bt_up_home:
+                inithomepop();
+                initpop();
                 break;
             /**
              * 点击底部的综合排序
              */
-            case R.id.li_hime_sort:
-                tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
-                initview(popview);
-                popWindow = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT);
-                popWindow.setContentView(popview);
-                popWindow.setOutsideTouchable(true);
-                popWindow.setAnimationStyle(R.style.CustomPopWindowStyle);
-                popWindow.showAsDropDown(li_top_select, 0, 0);
-                layout_stick_header_main.setVisibility(View.VISIBLE);
-                view_new_fragment_half.setVisibility(View.VISIBLE);
-                iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
-                iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_up_black));
-                sc_home_scroll.smoothScrollTo(0, 3315);
-                popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        view_new_fragment_half.setVisibility(View.INVISIBLE);
-                        li_home_paixu.setVisibility(View.VISIBLE);
-
-                        iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                        iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                    }
-                });
-                popview.findViewById(R.id.pop_layout).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        popWindow.dismiss();
-                    }
-                });
+            //case R.id.li_hime_sort:
+            case R.id.bt_app_home:
+                inithomepop();
+                initpop1();
                 break;
 
             case R.id.tv_home_bustling:
@@ -526,10 +482,125 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         }
     }
 
+    private void inithomepop() {
+        tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+        bt2.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
+        rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+    }
+
+    private void initpop() {
+        View view2 = LayoutInflater.from(getActivity()).inflate(R.layout.popup2,null);
+        ListView pLv = view2.findViewById(R.id.parent_lv);
+        final ListView cLv = view2.findViewById(R.id.child_lv);
+        List<String> pList = new ArrayList<>();
+        final List<List<String>> cList = new ArrayList<>();
+        for(int i = 0; i < 10; i ++) {
+            pList.add("p" + i);
+            List<String> t = new ArrayList<>();
+            for(int j = 0; j < 15; j++) {
+                t.add(pList.get(i) + "-c" + j);
+            }
+            cList.add(t);
+        }
+
+        cValues = new ArrayList<>();
+        cValues.addAll(cList.get(0));
+        final PopupAdapter pAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,pList,R.drawable.normal,R.drawable.press2);
+        final PopupAdapter cAdapter = new PopupAdapter(getActivity(),R.layout.popup_item, cValues,R.drawable.normal,R.drawable.press);
+        pAdapter.setPressPostion(0);
+
+        pLv.setAdapter(pAdapter);
+        cLv.setAdapter(cAdapter);
+
+        pLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pAdapter.setPressPostion(position);
+                pAdapter.notifyDataSetChanged();
+                cValues.clear();
+                cValues.addAll(cList.get(position));
+                cAdapter.notifyDataSetChanged();
+                cAdapter.setPressPostion(-1);
+                cLv.setSelection(0);
+            }
+        });
+
+        cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cAdapter.setPressPostion(position);
+                cAdapter.notifyDataSetChanged();
+                bt2.setText(cValues.get(position));
+                bt.setText(cValues.get(position));
+                bt2.hidePopup();
+                bt.hidePopup();
+            }
+        });
+
+        bt2.setPopupView(view2);
+        bt.setPopupView(view2);
+    }
+    private void initpop1() {
+        View view2 = LayoutInflater.from(getActivity()).inflate(R.layout.popup2,null);
+        ListView pLv = view2.findViewById(R.id.parent_lv);
+        final ListView cLv =view2.findViewById(R.id.child_lv);
+        List<String> pList = new ArrayList<>();
+        final List<List<String>> cList = new ArrayList<>();
+        for(int i = 0; i < 10; i ++) {
+            pList.add("p" + i);
+            List<String> t = new ArrayList<>();
+            for(int j = 0; j < 15; j++) {
+                t.add(pList.get(i) + "-c" + j);
+            }
+            cList.add(t);
+        }
+
+        cValues = new ArrayList<>();
+        cValues.addAll(cList.get(0));
+        final PopupAdapter pAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,pList,R.drawable.normal,R.drawable.press2);
+        final PopupAdapter cAdapter = new PopupAdapter(getActivity(),R.layout.popup_item, cValues,R.drawable.normal,R.drawable.press);
+        pAdapter.setPressPostion(0);
+
+        pLv.setAdapter(pAdapter);
+        cLv.setAdapter(cAdapter);
+
+        pLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pAdapter.setPressPostion(position);
+                pAdapter.notifyDataSetChanged();
+                cValues.clear();
+                cValues.addAll(cList.get(position));
+                cAdapter.notifyDataSetChanged();
+                cAdapter.setPressPostion(-1);
+                cLv.setSelection(0);
+            }
+        });
+
+        cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cAdapter.setPressPostion(position);
+                cAdapter.notifyDataSetChanged();
+                bt2.setText(cValues.get(position));
+                bt.setText(cValues.get(position));
+                bt.hidePopup();
+            }
+        });
+
+
+        bt.setPopupView(view2);
+    }
+
     private void initshowdistance() {
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        bt2.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -545,7 +616,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             public void onDismiss() {
                 ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
                 view_new_fragment_half.setVisibility(View.INVISIBLE);
-                li_home_paixu.setVisibility(View.VISIBLE);
+               li_home_paixu.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -556,8 +627,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+      bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+      bt2.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
 
