@@ -21,5 +21,6 @@ public class SpContent {
 
     public static  String PayPassword="password";//支付密码判定
 
-
+    public static String UserLon = "userLon";//用户经度
+    public static String UserLat = "userLat";//用户经度
 }

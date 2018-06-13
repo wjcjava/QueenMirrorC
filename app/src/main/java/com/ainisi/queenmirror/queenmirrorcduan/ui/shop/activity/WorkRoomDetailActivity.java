@@ -188,7 +188,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("cpCate", "1");
         params.put("cpScope", "1");
         params.put("shopId", shopId);//商品ID
-        params.put("userId", SP.get(this, SpContent.UserId, "") + "");//用户ID
+        params.put("userId", SP.get(this,SpContent.UserId,"")+"");//用户ID
         HttpUtils.doPost(ACTION.SHOPDISCOUN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -263,7 +263,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 } else {
                     T.show(shopDetailDataBean.getMsg());
                 }
-
                 break;
             case ACTION.GUANZHUSHOP://关注店铺
 
@@ -436,15 +435,24 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         listView.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.VISIBLE);
-                        if (shopDetailDataBean.isSuccess()) {
+
+                        if(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab() == null ||shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab().equals("")){
+
+                        }else{
                             tv_work_detail_hangye.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab());
+                        }
+                        if(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopAddr() == null ||shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopAddr().equals("")){
+                            tv_work_detail_address.setText("暂无地址");
+                        }else{
                             tv_work_detail_address.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopAddr());
-                            tv_work_detail_time.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getOpenTime() + "-" + shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getCloseTime());
-                            tv_work_detail_introduce.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief().toString());
-                        } else {
-                            T.show(shopDetailDataBean.getMsg());
                         }
 
+                        if(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief() == null ||shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief().toString().equals("")){
+                            tv_work_detail_introduce.setText("等待商家补成");
+                        }else{
+                            tv_work_detail_introduce.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief());
+                        }
+                        tv_work_detail_time.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getOpenTime() + "-" + shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getCloseTime());
 
                         break;
                     //优惠券

@@ -22,8 +22,14 @@ public class MineFollowAdapter extends BaseQuickAdapter<MineFollowBean.BodyBean.
 
         L.e("测试的方法"+item.getAnsShopBasic().getShopName());
 
-        helper.setText(R.id.sote_name,item.getAnsShopBasic().getShopName())
-        .setText(R.id.tv_mine_follow_score,"5")
-        .setText(R.id.sort_time,"营业时间："+item.getAnsShopBasic().getOpenTime()+"-"+item.getAnsShopBasic().getCloseTime());
+        if(item.getAnsShopBasic().getShopName() == null||item.getAnsShopBasic().getOpenTime() == null || item.getAnsShopBasic().getCloseTime() == null){
+            helper.setText(R.id.foot_name,"")
+                    .setText(R.id.tv_mine_follow_score,"5");
+
+        }else{
+            helper.setText(R.id.foot_name,item.getAnsShopBasic().getShopName().toString())
+                    .setText(R.id.tv_mine_follow_score,"5")
+                    .setText(R.id.sort_time,"营业时间："+item.getAnsShopBasic().getOpenTime()+"-"+item.getAnsShopBasic().getCloseTime());
+        }
     }
 }

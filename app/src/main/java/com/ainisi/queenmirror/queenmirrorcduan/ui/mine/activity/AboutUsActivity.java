@@ -19,8 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.api.UrlConstants;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OSSSTSModel;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.OSS;
@@ -36,9 +44,17 @@ import com.alibaba.sdk.android.oss.model.GetObjectRequest;
 import com.alibaba.sdk.android.oss.model.GetObjectResult;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.google.zxing.WriterException;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.callback.StringCallback;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -50,7 +66,7 @@ import butterknife.OnClick;
  * @author jiangchao
  *         created at 2018/5/11 下午1:38
  */
-public class AboutUsActivity extends BaseNewActivity {
+public class AboutUsActivity extends BaseNewActivity implements HttpCallBack{
 
 
     private static final String TAG = "AboutUsActivity";
@@ -70,36 +86,28 @@ public class AboutUsActivity extends BaseNewActivity {
     private String securityExpiration;
 
     OSSAsyncTask task;
-    public static final String ENDPOINT = "oss-cn-hangzhou.aliyuncs.com";
-    public static final String BUCKET = "nvtest";
-
-    /**
-     * 48.OSS临时上传凭证申请
-     */
-    public static final String SECURITY_TOKEN_APPLY = UrlConstants.BASE_URL + "ans/oss/securityTokenApply";
+    public static final String ENDPOINT = "http://oss-cn-hangzhou.aliyuncs.com";
+    //public static final String BUCKET = "nvtest";
+    public static final String BUCKET = "jayceework";
 
     File file, file2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        file = new File(Environment.getExternalStorageDirectory(), "1.jpg");
+        file = new File(Environment.getExternalStorageDirectory(), "2.jpg");
         file2 = new File(Environment.getExternalStorageDirectory(), "2.jpg");
         if (!file.exists() || !file2.exists()) {
             Toast.makeText(AboutUsActivity.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
-//        getOSSToken();
+        getOSSToken();
     }
     @Override
     protected int getLayoutId() {
         return R.layout.activity_about_us;
     }
-
-
-
 
     @OnClick({R.id.btn_upload, R.id.btn_download})
     public void onClick(View view) {
@@ -112,7 +120,6 @@ public class AboutUsActivity extends BaseNewActivity {
                     ActivityCompat.requestPermissions(this, mPermissionList,100);
                 } else {
                     uploadPicByAliyunOSS(securityAppKey, securityAccessKeySecret, securityToken);
-
                 }
                 break;
             case R.id.btn_download:
@@ -124,48 +131,51 @@ public class AboutUsActivity extends BaseNewActivity {
         }
     }
 
-//    private void getOSSToken() {
-//        Map<String, Object> map = new HashMap<>();
-//        OkHttpUtils
-//                .postString()
-//                .url(Constants.SECURITY_TOKEN_APPLY)
-//                .content(GsonUtils.mapToJson(map))
-//                .mediaType(MediaType.parse(Constants.MEDIA_TYPE_JSON))
-//                .build()
-//                .execute(new GetOSSTokenCallback());
-//    }
-//
-//
-//    public class GetOSSTokenCallback extends StringCallback {
-//
-//        @Override
-//        public void onError(Call call, Exception e, int id) {
-//            Toast.makeText(AboutUsActivity.this, R.string.server_link_failure, Toast.LENGTH_SHORT).show();
-//        }
-//
-//        @Override
-//        public void onResponse(String response, int id) {
-//            OSSSTSModel ossstsModel = GsonUtils.jsonToBean(response, OSSSTSModel.class);
-//            if (ossstsModel.isSuccess()) {
-//                securityToken = ossstsModel.getBody().getSecurityToken();
-//                securityAppKey = ossstsModel.getBody().getAccessKeyId();
-//                securityAccessKeySecret = ossstsModel.getBody().getAccessKeySecret();
-//                securityExpiration = ossstsModel.getBody().getExpiration();
-//
-//
-//            }
-//
-//            Log.i(TAG, response);
-//        }
-//    }
 
+    private void getOSSToken() {
+        HashMap<String, String> params = new HashMap<>();
+        HttpUtils.doPost(ACTION.OSSGETTOKEN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
 
-    private String picturePath = Environment.getExternalStorageDirectory() + File.separator + "1.jpg";
+    @Override
+    public void onSuccess(int action, String res) throws WriterException {
+        switch (action){
+            case ACTION.OSSGETTOKEN:
+
+                OSSSTSModel ossstsModel = GsonUtil.toObj(res,OSSSTSModel.class);
+
+                if(ossstsModel.isSuccess()){
+                    securityToken = ossstsModel.getBody().getSecurityToken();
+                    securityAppKey = ossstsModel.getBody().getAccessKeyId();
+                    securityAccessKeySecret = ossstsModel.getBody().getAccessKeySecret();
+                    securityExpiration = ossstsModel.getBody().getExpiration();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
+
+    private String picturePath = Environment.getExternalStorageDirectory() + File.separator + "2.jpg";
+    public static final String JAYCEE_ACCESSKEYID = "LTAIpiY45EMpLtDe";
+    public static final String JAYCEE_ACCESSKEYSECRET = "8HeLX9vyker1oM0JP1LoeyyMTYhCgq";
 
     private void uploadPicByAliyunOSS(String securityAppKey, String securityAppSecret, String securityToken) {
         // 在移动端建议使用STS方式初始化OSSClient。
-// 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
-        OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(securityAppKey, securityAppSecret, securityToken);
+        // 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
+
+        //    public static final String JAYCEE_ACCESSKEYID = "LTAIpiY45EMpLtDe";
+//    public static final String JAYCEE_ACCESSKEYSECRET = "8HeLX9vyker1oM0JP1LoeyyMTYhCgq";
+
+        OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(JAYCEE_ACCESSKEYID, JAYCEE_ACCESSKEYSECRET, "");
         //该配置类如果不设置，会有默认配置，具体可看该类
         ClientConfiguration conf = new ClientConfiguration();
         // 连接超时，默认15秒
@@ -217,6 +227,7 @@ public class AboutUsActivity extends BaseNewActivity {
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
                 // Request exception
+                L.e("?????????????   "+serviceException.getErrorCode()+"  "+serviceException.getRawMessage());
                 if (clientExcepion != null) {
                     // Local exception, such as a network exception
                     clientExcepion.printStackTrace();
@@ -230,15 +241,13 @@ public class AboutUsActivity extends BaseNewActivity {
                 }
             }
         });
-
-
     }
 
 
     private void downloadPicFromAliyunOSS(String securityAppKey, String securityAppSecret, String securityToken) {
         // 在移动端建议使用STS方式初始化OSSClient。
 // 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
-        OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(securityAppKey, securityAppSecret, securityToken);
+        OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(JAYCEE_ACCESSKEYID, JAYCEE_ACCESSKEYSECRET, "");
         //该配置类如果不设置，会有默认配置，具体可看该类
         ClientConfiguration conf = new ClientConfiguration();
         // 连接超时，默认15秒
@@ -281,10 +290,15 @@ public class AboutUsActivity extends BaseNewActivity {
                 // 请求成功
                 InputStream inputStream = result.getObjectContent();
                 //需要根据对应的View大小来自适应缩放
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
-                ivTest.setImageBitmap(bitmap);
-
+                //ivTest.setImageBitmap(bitmap);
+                ivTest.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ivTest.setImageBitmap(bitmap);
+                    }
+                });
             }
 
             @Override

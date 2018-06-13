@@ -433,10 +433,26 @@ public class ShopListHomeBean {
                 private String businessFlag;
                 private String enableFlag;
                 private String signFlag;
-                private Object geoX;
-                private Object geoY;
+                private String geoX;
+                private String geoY;
                 private String updatePgm;
                 private Object apiAnsCustCartList;
+
+                public String getGeoX() {
+                    return geoX;
+                }
+
+                public void setGeoX(String geoX) {
+                    this.geoX = geoX;
+                }
+
+                public String getGeoY() {
+                    return geoY;
+                }
+
+                public void setGeoY(String geoY) {
+                    this.geoY = geoY;
+                }
 
                 public boolean isNewRecord() {
                     return isNewRecord;
@@ -844,22 +860,6 @@ public class ShopListHomeBean {
 
                 public void setSignFlag(String signFlag) {
                     this.signFlag = signFlag;
-                }
-
-                public Object getGeoX() {
-                    return geoX;
-                }
-
-                public void setGeoX(Object geoX) {
-                    this.geoX = geoX;
-                }
-
-                public Object getGeoY() {
-                    return geoY;
-                }
-
-                public void setGeoY(Object geoY) {
-                    this.geoY = geoY;
                 }
 
                 public String getUpdatePgm() {

@@ -52,6 +52,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
@@ -77,7 +78,7 @@ import butterknife.OnClick;
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
-public class HomeNewFragment extends BaseFragment implements HttpCallBack{
+public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
     @Bind(R.id.banner)
     Banner banner;
@@ -179,7 +180,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack{
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
     private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist;
     private PopupWindow popWindowdistance;
-    private ArrayList<String> cValues;
 
     @Override
     protected int getLayoutResource() {
@@ -295,6 +295,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack{
                    }else {
                        mLocation.setText(location.getCity());
                    }
+                    mLocation.setText(location.getCity());
+
+                    L.e("经纬度$$$$$     "+location.getLongitude()+"     "+location.getLatitude());
+                    SP.put(getActivity(),SpContent.UserLon,location.getLongitude()+"");
+                    SP.put(getActivity(),SpContent.UserLat,location.getLatitude()+"");
                 }
             });
         }
@@ -599,8 +604,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack{
 
     private void initshowdistance() {
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-        bt2.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -616,7 +621,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack{
             public void onDismiss() {
                 ivdistance.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
                 view_new_fragment_half.setVisibility(View.INVISIBLE);
-               li_home_paixu.setVisibility(View.VISIBLE);
+                li_home_paixu.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -627,8 +632,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack{
         textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-      bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-      bt2.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        tv_shop_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
+        rb_sort.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
 

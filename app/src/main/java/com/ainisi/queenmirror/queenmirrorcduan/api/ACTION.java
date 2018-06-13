@@ -191,4 +191,6 @@ public interface ACTION {
 
     int COMMENTINPUT = 0x153;//评论回复
 
+    int OSSGETTOKEN = 0x154;//获取OSStoken
+
 }

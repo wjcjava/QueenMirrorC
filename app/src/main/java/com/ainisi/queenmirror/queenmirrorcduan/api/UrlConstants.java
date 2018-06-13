@@ -15,7 +15,7 @@ public interface UrlConstants {
 
     //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
 
-    String BASE_URL = "http://192.168.50.65:8080/wg/a/";
+    String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
     //String BASE_URL = "http://58.210.102.70:7080/wg/a/";
 
@@ -204,4 +204,6 @@ public interface UrlConstants {
     String REALNAME="api/ans/cust/userNameAuth";//实名认证
 
     String COMMENTINPUT = "api/ec/goods/goodsCommentsReply";//评论回复
+
+    String OSSGETTOKEN = "api/ans/oss/securityTokenApply";
 }

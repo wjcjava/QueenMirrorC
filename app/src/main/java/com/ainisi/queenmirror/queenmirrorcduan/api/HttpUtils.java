@@ -653,6 +653,9 @@ public class HttpUtils {
             case ACTION.COMMENTINPUT:
                 actionUrl = UrlConstants.COMMENTINPUT;
                 break;
+            case ACTION.OSSGETTOKEN:
+                actionUrl = UrlConstants.OSSGETTOKEN;
+                break;
         }
         url.append(actionUrl);
         return url;

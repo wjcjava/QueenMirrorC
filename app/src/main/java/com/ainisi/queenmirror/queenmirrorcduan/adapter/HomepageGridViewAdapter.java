@@ -90,10 +90,16 @@ public class HomepageGridViewAdapter extends BaseAdapter{
         holder.tv_shop_time.setText("营业时间："+ShopListData.get(position).getAnsShopBasic().getOpenTime()+"-"+ShopListData.get(position).getAnsShopBasic().getCloseTime());
 
         if(ShopListData.get(position).getAnsShopBasic().getShopLogo() == null || ShopListData.get(position).getAnsShopBasic().getShopLogo().equals("")){
-
         }else{
             Glide.with(context).load(ShopListData.get(position).getAnsShopBasic().getShopLogo()).into(holder.iv_homepage_shop);
         }
+
+        if(ShopListData.get(position).getAnsShopBasic().getGeoX() == null|| ShopListData.get(position).getAnsShopBasic().getGeoX().equals("")){
+
+        }else{
+            
+        }
+
 
         return convertView;
 
