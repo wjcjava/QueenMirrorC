@@ -23,7 +23,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProductDetailBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
@@ -41,7 +40,6 @@ import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -85,7 +83,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     private CommentsBean commentsBean;
     private CommendGoodBean goodBean;
     private FullGoodsAdapter myAdapter;
-
+    private String url="https://mmbiz.qlogo.cn/mmbiz_png/XDC8ot2yPvMMpEwKmIrIgD6zqnVE3ex8vmXLnMMdq31GN9kalYqIvWZnL8zTfmEliaSTibRSibc27iacE9mPyj1kZA/0?wx_fmt=png";
     boolean isColl = false;
     String goodsId, shopId, isLogin, userId,shopName;
 
@@ -132,10 +130,11 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 UMWeb web = new UMWeb("http://baidu.com");
                 web.setTitle("来自女王魔镜");
                 web.setDescription("来自女王魔镜内容");
-                web.setThumb(new UMImage(FullActivity.this, R.mipmap.fill));
+                web.setThumb(new UMImage(FullActivity.this,url));
                 new ShareAction(FullActivity.this).withMedia(web)
                         .setPlatform(share_media)
                         .setCallback(mShareListener)
+
                         .share();
             }
         });

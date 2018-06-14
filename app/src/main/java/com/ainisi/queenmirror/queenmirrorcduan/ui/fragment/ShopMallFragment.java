@@ -405,15 +405,19 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         final ListView cLv = view2.findViewById(R.id.child_lv);
         List<String> pList = new ArrayList<>();
         final List<List<String>> cList = new ArrayList<>();
-        for(int i = 0; i < 10; i ++) {
-            pList.add("p" + i);
-            List<String> t = new ArrayList<>();
-            for(int j = 0; j < 15; j++) {
-                t.add(pList.get(i) + "-c" + j);
-            }
-            cList.add(t);
+        pList.add("姑苏区");
+        pList.add("虎丘区");
+        pList.add("吴中区");
+        pList.add("相城区");
+        for (int i = 0; i < pList.size(); i++) {
+            List<String> citylist = new ArrayList<>();
+            citylist.add("1千米");
+            citylist.add("3千米");
+            citylist.add("5千米");
+            citylist.add("1千米");
+            citylist.add("全城");
+            cList.add(citylist);
         }
-
         cValues = new ArrayList<>();
         cValues.addAll(cList.get(0));
         final PopupAdapter pAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,pList,R.drawable.normal,R.drawable.press2);
@@ -457,13 +461,18 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         final ListView cLv =view2.findViewById(R.id.child_lv);
         List<String> pList = new ArrayList<>();
         final List<List<String>> cList = new ArrayList<>();
-        for(int i = 0; i < 10; i ++) {
-            pList.add("p" + i);
-            List<String> t = new ArrayList<>();
-            for(int j = 0; j < 15; j++) {
-                t.add(pList.get(i) + "-c" + j);
-            }
-            cList.add(t);
+        pList.add("姑苏区");
+        pList.add("虎丘区");
+        pList.add("吴中区");
+        pList.add("相城区");
+        for (int i = 0; i < pList.size(); i++) {
+            List<String> citylist = new ArrayList<>();
+            citylist.add("1千米");
+            citylist.add("3千米");
+            citylist.add("5千米");
+            citylist.add("1千米");
+            citylist.add("全城");
+            cList.add(citylist);
         }
 
         cValues = new ArrayList<>();

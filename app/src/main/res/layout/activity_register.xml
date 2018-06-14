@@ -156,10 +156,14 @@
                         android:layout_marginStart="@dimen/comment_16_dip"
                         android:layout_marginTop="@dimen/comment_5_dip"
                         android:background="@color/alpha_05_black" />
-
                     <RelativeLayout
                         android:id="@+id/re_graphics_validation"
+                        android:layout_width="match_parent"
                         android:visibility="gone"
+                        android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:id="@+id/re_validation"
+
                         android:layout_marginTop="@dimen/comment_5_dip"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/comment_40_dip">
@@ -196,14 +200,16 @@
                             android:layout_marginEnd="@dimen/comment_20_dip"
                             android:layout_toRightOf="@id/et_graphics_validation"
                            />
+                    </RelativeLayout>
                         <View
                             android:id="@+id/view_two"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/comment_2_dip"
-                            android:layout_below="@id/iv_graphics_validation"
+                            android:layout_below="@id/re_validation"
                             android:layout_marginEnd="@dimen/comment_16_dip"
                             android:layout_marginStart="@dimen/comment_16_dip"
                             android:layout_marginTop="@dimen/comment_5_dip"
+
                             android:background="@color/alpha_05_black" />
 
                     </RelativeLayout>

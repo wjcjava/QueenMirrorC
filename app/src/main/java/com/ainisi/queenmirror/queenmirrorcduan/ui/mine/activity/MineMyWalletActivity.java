@@ -88,16 +88,9 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
             case R.id.rc_name:
                 startActivity(new Intent(this,RealNameActivity.class));
                 break;
-
             //支付设置
             case R.id.rc_setup:
                 inithttpPass();
-                if (exists == 0) {
-                    startActivity(new Intent(this, MinePaymentsettingActivity.class));
-                    inithttpPass();
-                } else {
-                    MineSettingActivity.startActivity(this);
-                }
                 break;
             default:
                 break;
@@ -120,6 +113,12 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
                 WhetherPassBean whetherPassBean = GsonUtil.toObj(res, WhetherPassBean.class);
                 if (whetherPassBean.isSuccess()) {
                     exists = whetherPassBean.getBody().getIsExists();
+                    if (exists == 0) {
+                        startActivity(new Intent(this, MinePaymentsettingActivity.class));
+                        inithttpPass();
+                    } else {
+                        MineSettingActivity.startActivity(this);
+                    }
                 } else {
                     T.show(whetherPassBean.getMsg());
                 }

@@ -93,6 +93,8 @@ public interface ACTION {
 
     int REALNAME=0x046;//实名认证
 
+    int GETSHAPE=0X047;//获取图形验证码
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

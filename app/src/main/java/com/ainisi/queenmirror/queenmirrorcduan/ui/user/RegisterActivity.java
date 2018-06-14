@@ -19,6 +19,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.GetShareBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.PhoneCheckBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
@@ -72,6 +73,8 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     private boolean addvalidatecode = false;
     private HashMap<String, String> params;
     private String tvValidation;
+    private String errorCode;
+    private String validationtext;
 
     @Override
     protected int getLayoutId() {
@@ -165,22 +168,27 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         HttpUtils.doPost(ACTION.PHONECHECK, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
     }
+
     private void initregister(){
 
-            if (phoneNumber.getText().toString().trim().equals("") || passWord.getText().toString().trim().equals("") || etValidation.getText().toString().trim().equals("")) {
-                T.show("请完善相关信息");
-            } else {
+            if ( etValidation.getText().toString().trim().equals("")) {
+                T.show("请输入手机验证码");
+            } else if(passWord.getText().toString().trim().equals("") ){
+                T.show("请输入密码");
+            }else {
                 HashMap<String, String> paramsRegister = new HashMap<>();
                 paramsRegister.put("cellPhone", phoneNumber.getText().toString().trim());
                 paramsRegister.put("userPass", MD5.md5(passWord.getText().toString() + "MYN888"));
                 paramsRegister.put("contractConfirm", "1");
                 paramsRegister.put("ifFirst", "0");
                 paramsRegister.put("verifyCode", vConfig);
-                paramsRegister.put("verifyCodeCust", etValidation.getText().toString().trim());
+                validationtext=etValidation.getText().toString().trim();
+                paramsRegister.put("verifyCodeCust",validationtext );
                 HttpUtils.doPost(ACTION.REGIST, paramsRegister, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
             }
 
     }
+
     private void initSee() {
         //判断第一次选中和第二次选中状态
         if (click) {
@@ -222,11 +230,20 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
             tvValidation = evValidateCode.getText().toString();
             if(!TextUtils.isEmpty(tvValidation)){
                 params.put("imgValidateCode", tvValidation);
+            }else {
+                T.show("请您输入图形验证码");
             }
         }
+
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
 
 
+    }
+    //获取图形验证码
+    private void initgetShape(){
+        HashMap<String,String> parames=new HashMap<>();
+        parames.put("telNo",phoneNumber.getText().toString().trim());
+        HttpUtils.doPost(ACTION.GETSHAPE,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
     }
 
     public static Bitmap stringtoBitmap(String string) {
@@ -253,16 +270,21 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                     myCountDownTimer.start();
                     vConfig = ceshiBean.getBody().getVerifyCode();
                 } else {
-                    reValidation.setVisibility(View.VISIBLE);
-                    String imageStr = ceshiBean.getBody().getImageStr();
-                    if (TextUtils.isEmpty(imageStr)) {
-                        return;
-                    } else {
-                        Bitmap image = stringtoBitmap(imageStr);
-                        ivValidation.setImageBitmap(image);
-                        addvalidatecode=true;
+                    if(ceshiBean.getErrorCode().equals("3")){
+                        reValidation.setVisibility(View.VISIBLE);
+                        initgetShape();
                     }
-                    T.show(ceshiBean.getMsg());
+
+//                    String imageStr = ceshiBean.getBody().getImageStr();
+//                    errorCode =ceshiBean.getErrorCode();
+//                    if (TextUtils.isEmpty(imageStr)) {
+//                        return;
+//                    } else {
+//                        Bitmap image = stringtoBitmap(imageStr);
+//                        ivValidation.setImageBitmap(image);
+//                        addvalidatecode=true;
+//                    }
+//                    T.show(ceshiBean.getMsg());
                 }
                 break;
             case ACTION.REGIST://注册
@@ -298,6 +320,20 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 } else {
                     T.show(checkBean.getMsg());
                 }
+                break;
+            case ACTION.GETSHAPE:
+                GetShareBean getShareBean=GsonUtil.toObj(res,GetShareBean.class);
+                if(getShareBean.isSuccess()){
+                    String imagestr = getShareBean.getBody().getImageStr();
+                    if(!TextUtils.isEmpty(imagestr)){
+                        Bitmap image = stringtoBitmap(imagestr);
+                        ivValidation.setImageBitmap(image);
+                        addvalidatecode=true;
+                    }
+                }else {
+                    T.show(getShareBean.getMsg());
+                }
+
                 break;
         }
     }

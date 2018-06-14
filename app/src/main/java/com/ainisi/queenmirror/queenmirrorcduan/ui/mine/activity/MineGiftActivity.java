@@ -46,7 +46,7 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
     CustomShareListener mShareListener;
     ShareAction mShareAction;
     private ShareAction mShareAction1;
-
+    private String urlIcon="https://mmbiz.qlogo.cn/mmbiz_png/XDC8ot2yPvMMpEwKmIrIgD6zqnVE3ex8vmXLnMMdq31GN9kalYqIvWZnL8zTfmEliaSTibRSibc27iacE9mPyj1kZA/0?wx_fmt=png";
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context,MineGiftActivity.class));
     }
@@ -136,7 +136,7 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
                           UMWeb web = new UMWeb(url);
                           web.setTitle("来自女王魔镜");
                           web.setDescription("来自女王魔镜内容");
-                          web.setThumb(new UMImage(MineGiftActivity.this, R.mipmap.fill));
+                          web.setThumb(new UMImage(MineGiftActivity.this, urlIcon));
                           new ShareAction(MineGiftActivity.this).withMedia(web)
                                   .setPlatform(share_media)
                                   .setCallback(mShareListener)
@@ -159,7 +159,7 @@ public class MineGiftActivity extends BaseNewActivity implements HttpCallBack{
                            UMWeb web = new UMWeb(url);
                            web.setTitle("来自女王魔镜");
                            web.setDescription("来自女王魔镜内容");
-                           web.setThumb(new UMImage(MineGiftActivity.this, R.mipmap.fill));
+                           web.setThumb(new UMImage(MineGiftActivity.this, urlIcon));
                            new ShareAction(MineGiftActivity.this).withMedia(web)
                                    .setPlatform(share_media)
                                    .setCallback(mShareListener)

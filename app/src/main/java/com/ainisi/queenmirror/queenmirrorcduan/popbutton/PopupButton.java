@@ -22,18 +22,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.popbutton.inter.PopupButtonListen
  */
 @SuppressLint("AppCompatCustomView")
 public class PopupButton extends Button implements PopupWindow.OnDismissListener {
-    private int normalBg;//正常状态下的背景
-    private int pressBg;//按下状态下的背景
     private int normalIcon;//正常状态下的图标
     private int pressIcon;//按下状态下的图标
     private PopupWindow popupWindow;
     private Context context;
     private int screenWidth;
     private int screenHeight;
-    private int paddingTop;
-    private int paddingLeft;
-    private int paddingRight;
-    private int paddingBottom;
     private PopupButtonListener listener;
 
     public PopupButton(Context context) {
@@ -57,8 +51,7 @@ public class PopupButton extends Button implements PopupWindow.OnDismissListener
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.popupbtn);
 
-        normalBg = typedArray.getResourceId(R.styleable.popupbtn_normalBg, -1);
-        pressBg = typedArray.getResourceId(R.styleable.popupbtn_pressBg, -1);
+
         normalIcon = typedArray.getResourceId(R.styleable.popupbtn_normalIcon, -1);
         pressIcon = typedArray.getResourceId(R.styleable.popupbtn_pressIcon, -1);
            typedArray.recycle();
@@ -68,10 +61,6 @@ public class PopupButton extends Button implements PopupWindow.OnDismissListener
      * 初始话各种按钮样式
      */
     private void initBtn(final Context context) {
-        paddingTop = this.getPaddingTop();
-        paddingLeft = this.getPaddingLeft();
-        paddingRight = this.getPaddingRight();
-        paddingBottom = this.getPaddingBottom();
         setNormal();
 
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -108,11 +97,11 @@ public class PopupButton extends Button implements PopupWindow.OnDismissListener
             public void onClick(View v) {
                 if(popupWindow == null) {
                     LinearLayout layout = new LinearLayout(context);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) (screenHeight * 0.6));
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                     view.setLayoutParams(params);
                     layout.addView(view);
                     layout.setBackgroundColor(Color.argb(60, 0, 0, 0));
-                    popupWindow = new PopupWindow(layout,screenWidth,screenHeight);
+                    popupWindow = new PopupWindow(layout,screenWidth,LinearLayout.LayoutParams.WRAP_CONTENT);
                     popupWindow.setFocusable(true);
                     popupWindow.setBackgroundDrawable(new BitmapDrawable());
                     popupWindow.setOutsideTouchable(true);
@@ -137,10 +126,7 @@ public class PopupButton extends Button implements PopupWindow.OnDismissListener
      * 设置选中时候的按钮状态
      */
     private void setPress() {
-        if (pressBg != -1) {
-            this.setBackgroundResource(pressBg);
-            this.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);
-        }
+
         if (pressIcon != -1) {
             Drawable drawable = getResources().getDrawable(pressIcon);
             /// 这一步必须要做,否则不会显示.
@@ -153,10 +139,7 @@ public class PopupButton extends Button implements PopupWindow.OnDismissListener
      * 设置正常模式下的按钮状态
      */
     private void setNormal() {
-        if (normalBg != -1) {
-            this.setBackgroundResource(normalBg);
-            this.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);
-        }
+
         if (normalIcon != -1) {
             Drawable drawable = getResources().getDrawable(normalIcon);
             /// 这一步必须要做,否则不会显示.

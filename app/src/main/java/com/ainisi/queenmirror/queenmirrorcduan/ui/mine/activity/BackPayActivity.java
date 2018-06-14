@@ -1,10 +1,14 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -12,6 +16,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.GetShareBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -24,7 +29,11 @@ import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import cz.msebera.android.httpclient.extras.Base64;
 
+/**
+ * 找回支付密码
+ */
 public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.title_title)
     TextView payBack;
@@ -36,11 +45,18 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
     EditText backVerification;
     @Bind(R.id.et_back_cureenpass)
     EditText backPaypass;
+    @Bind(R.id.et_graphics_validation)
+    EditText evValidateCode;
+    @Bind(R.id.re_graphics_validation)
+    RelativeLayout reValidation;
+    @Bind(R.id.iv_graphics_validation)
+    ImageView ivValidation;
     private String uuid;
     private String dataTime;
     private StringBuilder sb;
     private MyCountDownTimer myCountDownTimer;
     private LoginCeshiBean ceshiBean;
+    private boolean addvalidatecode=false;
 
     @Override
     protected int getLayoutId() {
@@ -56,7 +72,7 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
     @Override
     protected void initData() {
         super.initData();
-        initKey();
+
         myCountDownTimer = new MyCountDownTimer(60000, 1000);
     }
 
@@ -69,7 +85,7 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
         HttpUtils.doPost(ACTION.FORGOTPAYPASS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
-    @OnClick({R.id.title_back, R.id.tv_ok_submit, R.id.tv_validation
+    @OnClick({R.id.title_back, R.id.tv_ok_submit, R.id.tv_validation,R.id.iv_graphics_validation
     })
     public void click(View view) {
 
@@ -78,7 +94,7 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
                 finish();
                 break;
             case R.id.tv_ok_submit:
-
+                initKey();
                 initbackPay();
 
                 break;
@@ -89,6 +105,9 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
 
                     initValidation();
                 }
+                break;
+            case R.id.iv_graphics_validation:
+                initgetShape();
                 break;
         }
 
@@ -111,6 +130,7 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
         Log.e("字符串拼接", sb.toString());
     }
 
+    //获取验证码
     private void initValidation() {
         HashMap<String, String> params = new HashMap<>();
         params.put("telNo", backPhone.getText().toString().trim());
@@ -118,8 +138,28 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
         params.put("signature", MD5.md5(sb.toString()));
         params.put("sysflag", "2");
         params.put("frontType", "C");
+        if (addvalidatecode) {
+            String tvValidation = evValidateCode.getText().toString();
+            if (!TextUtils.isEmpty(tvValidation)) {
+                params.put("imgValidateCode", tvValidation);
+            } else {
+                T.show("请您输入图形验证码");
+            }
+        }
+
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+
+
     }
+
+    //获取图形验证码
+    private void initgetShape() {
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("telNo", backPhone.getText().toString().trim());
+        HttpUtils.doPost(ACTION.GETSHAPE, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+
 
     @Override
     public void onSuccess(int action, String res) {
@@ -127,17 +167,47 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
             case ACTION.FORGOTPAYPASS:
 
                 break;
-            case ACTION.VERIFY://获取验证码
+            //验证码获取
+            case ACTION.VERIFY:
                 ceshiBean = GsonUtil.toObj(res, LoginCeshiBean.class);
                 if (ceshiBean.isSuccess()) {
+                    reValidation.setVisibility(View.GONE);
                     myCountDownTimer.start();
                 } else {
-                    T.show("系统出错，请稍后再试");
+                    if (ceshiBean.getErrorCode().equals("3")) {
+                        reValidation.setVisibility(View.VISIBLE);
+                        initgetShape();
+                    }
+                }
+                break;
+            //获取图形验证码
+            case ACTION.GETSHAPE:
+                GetShareBean getShareBean=GsonUtil.toObj(res,GetShareBean.class);
+                if(getShareBean.isSuccess()){
+                    String imagestr = getShareBean.getBody().getImageStr();
+                    if(!TextUtils.isEmpty(imagestr)){
+                        Bitmap image = stringtoBitmap(imagestr);
+                        ivValidation.setImageBitmap(image);
+                        addvalidatecode=true;
+                    }
+                }else {
+                    T.show(getShareBean.getMsg());
                 }
                 break;
         }
     }
+    public static Bitmap stringtoBitmap(String string) {
+        Bitmap bitmap = null;
+        try {
+            byte[] bitmapArray;
+            bitmapArray = Base64.decode(string, Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return bitmap;
+    }
     @Override
     public void showLoadingDialog() {
 

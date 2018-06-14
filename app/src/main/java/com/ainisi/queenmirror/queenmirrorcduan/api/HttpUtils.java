@@ -17,7 +17,6 @@ import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Response;
-import retrofit2.http.Url;
 
 /**
  * 作者： jl
