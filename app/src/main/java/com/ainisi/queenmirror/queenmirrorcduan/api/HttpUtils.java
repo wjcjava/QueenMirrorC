@@ -656,6 +656,12 @@ public class HttpUtils {
             case ACTION.OSSGETTOKEN:
                 actionUrl = UrlConstants.OSSGETTOKEN;
                 break;
+            case ACTION.WEBVIEWAGREEMENT:
+                actionUrl = UrlConstants.WEBVIEWAGREEMENT;
+                break;
+            case ACTION.TUANDUILISTDATA:
+                actionUrl = UrlConstants.TUANDUILISTDATA;
+                break;
         }
         url.append(actionUrl);
         return url;

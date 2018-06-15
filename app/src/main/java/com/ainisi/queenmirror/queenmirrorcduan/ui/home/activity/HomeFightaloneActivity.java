@@ -45,18 +45,15 @@ public class HomeFightaloneActivity extends BaseNewActivity {
         titleFightalone.setText("拼团");
         for (int i = 0; i < tabName.length; i++) {
             tabList.add(tabName[i]);
-            pagerList.add(new HomeFightaloneFragment());
+            pagerList.add(new HomeFightaloneFragment().newInstance(i+""));
             tabFightalone.addTab(tabFightalone.newTab().setText(tabList.get(i)));
         }
-
         ViewPager viewPager = new ViewPager(getSupportFragmentManager(), pagerList, tabList);
         pagerFightalone.setAdapter(viewPager);
         tabFightalone.setupWithViewPager(pagerFightalone);
-
     }
 
-    @OnClick({R.id.title_back
-    })
+    @OnClick({R.id.title_back})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -64,7 +61,6 @@ public class HomeFightaloneActivity extends BaseNewActivity {
                 break;
             default:
                 break;
-
         }
     }
 }

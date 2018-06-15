@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
                 <RadioGroup
-
+                    android:id="@+id/rg_search_list_type"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/comment_22_dip"
                     android:layout_centerInParent="true"
@@ -53,6 +53,7 @@
                         android:background="@drawable/radiobutton_search_checked"
                         android:button="@null"
                         android:gravity="center"
+                        android:checked="true"
                         android:text="@string/shop"
                         android:textColor="@color/radiobutton_textcolor" />
 
@@ -64,11 +65,11 @@
                         android:background="@drawable/radiobutton_search_checked"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="@string/Nails"
+                        android:text="商品"
                         android:textColor="@color/radiobutton_textcolor" />
                 </RadioGroup>
                 <EditText
-                    android:id="@+id/et_title"
+                    android:id="@+id/et_search_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/comment_5_dip"
@@ -103,72 +104,72 @@
         android:id="@+id/re_search_footprint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/tv_hot_search_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginBottom="@dimen/comment_10_dip"
-        android:layout_marginLeft="@dimen/comment_10_dip"
-        android:layout_marginTop="@dimen/comment_10_dip"
-        android:text="@string/hot_search" />
-
-    <com.ainisi.queenmirror.queenmirrorcduan.utils.FlowLayout
-        android:id="@+id/his_flowLayout"
-        android:layout_below="@id/tv_hot_search_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/tv_history_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/his_flowLayout"
-        android:layout_marginBottom="@dimen/comment_10_dip"
-        android:layout_marginLeft="@dimen/comment_10_dip"
-        android:layout_marginTop="@dimen/comment_10_dip"
-        android:text="@string/historical_Search" />
-
-    <ScrollView
-        android:layout_below="@id/tv_history_search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_hot_search_txt"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/white"
+            android:layout_marginBottom="@dimen/comment_10_dip"
+            android:layout_marginLeft="@dimen/comment_10_dip"
+            android:layout_marginTop="@dimen/comment_10_dip"
+            android:text="@string/hot_search" />
 
-            <FrameLayout
+        <com.ainisi.queenmirror.queenmirrorcduan.utils.FlowLayout
+            android:id="@+id/his_flowLayout"
+            android:layout_below="@id/tv_hot_search_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_history_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/his_flowLayout"
+            android:layout_marginBottom="@dimen/comment_10_dip"
+            android:layout_marginLeft="@dimen/comment_10_dip"
+            android:layout_marginTop="@dimen/comment_10_dip"
+            android:text="@string/historical_Search" />
+
+        <ScrollView
+            android:layout_below="@id/tv_history_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/comment_10_dip"
-                android:paddingRight="@dimen/comment_10_dip">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_no_history_record"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/no_historical_Search"
-                    android:visibility="gone" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/search_recycler_view"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/comment_10_dip"
+                    android:paddingRight="@dimen/comment_10_dip">
 
-                </android.support.v7.widget.RecyclerView>
-            </FrameLayout>
+                    <TextView
+                        android:id="@+id/tv_no_history_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/no_historical_Search"
+                        android:visibility="gone" />
 
-            <Button
-                android:id="@+id/btn_clear_history_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/comment_10_dip"
-                android:layout_marginRight="@dimen/comment_10_dip"
-                android:text="清空搜索" />
-        </LinearLayout>
-    </ScrollView>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/search_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+                </FrameLayout>
+
+                <Button
+                    android:id="@+id/btn_clear_history_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/comment_10_dip"
+                    android:layout_marginRight="@dimen/comment_10_dip"
+                    android:text="清空搜索" />
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 </LinearLayout>

@@ -38,22 +38,22 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
 
     OrderMyAllOrderBean.BodyBean.ApiOrderListBean.IntfAnsOrderBean.ApiOrderDetailsListBean apiOrderDetailsListBean;
 
-
+    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> data;
     double amountNum = 0;
     String shopId,orderId;
 
     public OrderAllAdapter(Context context,int layoutResId, @Nullable List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> data) {
         super(layoutResId,data);
         this.context = context;
+        this.data = data;
     }
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void convert(final BaseViewHolder helper, final OrderMyAllOrderBean.BodyBean.ApiOrderListBean item) {
 
         if(item.getIntfAnsShopBasic().getShopName() == null||item.getIntfAnsShopBasic().getShopName().toString().equals("")){
-
         }else{
-
         }
        helper.setText(R.id.tv_shangpin,item.getIntfAnsShopBasic().getShopName());
 
@@ -397,4 +397,5 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
     public void showErrorMessage(String s) {
 
     }
+
 }

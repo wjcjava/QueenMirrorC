@@ -22,7 +22,6 @@
         android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_marginTop="@dimen/comment_14_dip"
         android:layout_toRightOf="@id/iv_weorkroom_title"
-
         android:textColor="@color/alpha_95_black"
         android:textSize="@dimen/comment_14_size" />
 
@@ -35,7 +34,6 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:layout_toRightOf="@id/iv_weorkroom_title"
-
         android:textSize="@dimen/comment_12_size"/>
 
     <RelativeLayout

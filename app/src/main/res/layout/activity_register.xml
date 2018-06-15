@@ -302,10 +302,12 @@
                     android:textSize="@dimen/comment_14_size" />
 
                 <TextView
+                    android:id="@+id/tv_regist_agreement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text"
                     android:layout_centerHorizontal="true"
+                    android:padding="3dp"
                     android:layout_marginBottom="@dimen/comment_25_dip"
                     android:text="@string/reg_agreement_name"
                     android:textColor="@color/gray_E7370C"

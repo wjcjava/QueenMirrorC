@@ -310,7 +310,7 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
                     sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                            Intent intent = new Intent(ShopClassificationActivity.this, ShopStoreActivity.class);
+                            Intent intent = new Intent(ShopClassificationActivity.this, WorkRoomDetailActivity.class);
                             intent.putExtra("shopName", apiShopList.get(position).getAnsShopBasic().getShopName());
                             intent.putExtra("shopId", apiShopList.get(position).getAnsShopBasic().getId());
                             startActivity(intent);
@@ -351,7 +351,7 @@ public class ShopClassificationActivity extends BaseActivity implements HttpCall
                     sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                            Intent intent = new Intent(ShopClassificationActivity.this, ShopStoreActivity.class);
+                            Intent intent = new Intent(ShopClassificationActivity.this, WorkRoomDetailActivity.class);
                             intent.putExtra("shopId", sortlist.get(position).getAnsShopBasic().getId());
                             intent.putExtra("shopName", sortlist.get(position).getAnsShopBasic().getShopName());
                             startActivity(intent);

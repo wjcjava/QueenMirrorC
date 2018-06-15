@@ -2,6 +2,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.home.fragment;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,13 +12,26 @@ import android.view.View;
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.PintuanListAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
+import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.PinTuanBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FightaloneActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.order.fragment.WholeFragment;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.zxing.WriterException;
+import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -26,78 +40,86 @@ import butterknife.Bind;
  * A simple {@link Fragment} subclass.
  * 拼团
  */
-public class HomeFightaloneFragment extends BaseFragment implements RefreshLoadMoreLayout.CallBack {
+public class HomeFightaloneFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.recycler_fragment_fightalone)
     RecyclerView reFightalone;
-    private List<SortBean> list = new ArrayList<>();
-    private Handler handler = new Handler();
-    @Bind(R.id.rlm)
-    RefreshLoadMoreLayout mRefreshLoadMoreLayout;
-    List<SortBean> sortlist = new ArrayList<>();
+    List<PinTuanBean.BodyBean.GroupActivityListDataBean> sortlist = new ArrayList<>();
+    String state = "0";
+    int pageNumber = 1;
 
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_home_fightalone;
     }
 
+    public HomeFightaloneFragment newInstance(String flag) {
+        Bundle bundle = new Bundle();
+        bundle.putString("state", flag);
+        HomeFightaloneFragment testFm = new HomeFightaloneFragment();
+        testFm.setArguments(bundle);
+        return testFm;
+    }
+
     @Override
     public void initPresenter() {
-        mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
-                .canLoadMore(true)
-                .autoLoadMore()
-                .showLastRefreshTime(
-                        RefreshLoadMoreLayout.class,
-                        "yyyy-MM-dd")
-                .multiTask());
     }
 
-    @Override
-    public void onRefresh() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                T.show("下拉成功");
-                mRefreshLoadMoreLayout.stopRefresh();
-            }
-        }, 200);
-    }
-
-    @Override
-    public void onLoadMore() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                T.show("上拉成功");
-                mRefreshLoadMoreLayout.stopLoadMore();
-            }
-        }, 1000);
-    }
 
     @Override
     protected void initView() {
-        initDate();
+        getData();
     }
 
-    private void initDate() {
-        for (int i = 0; i < 15; i++) {
-            SortBean sortBean = new SortBean();
-            sortBean.setName("MOCO美容美发沙龙");
-            sortBean.setTime("营业时间 9:00-20:00");
-            sortBean.setLogo(R.drawable.ic_sortrecyle_logo);
-            sortBean.setStars(R.drawable.icon_home_recommend);
-            sortBean.setDistance("875m");
-            list.add(sortBean);
+    /**
+     * 获取数据
+     */
+    private void getData() {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            state = bundle.getString("state");
         }
-        final MyAdapter sortAdapter = new MyAdapter(R.layout.re_home_fightalone, list);
-        reFightalone.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        reFightalone.setAdapter(sortAdapter);
-        sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getActivity(), FightaloneActivity.class));
-            }
-        });
+        HashMap<String, String> params = new HashMap<>();
+        params.put("groupStatus", "3");
+        params.put("pageNumber", pageNumber + "");
+        params.put("contentByTitle", state);
+        params.put("pageSize", "10");
+        HttpUtils.doPost(ACTION.TUANDUILISTDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    @Override
+    public void onSuccess(int action, String res) throws WriterException {
+        switch (action){
+            case ACTION.TUANDUILISTDATA:
+                PinTuanBean pinTuanBean = GsonUtil.toObj(res,PinTuanBean.class);
+
+                if(pinTuanBean.isSuccess()){
+
+                    sortlist = pinTuanBean.getBody().getGroupActivityListData();
+                    PintuanListAdapter pintuanListAdapter = new PintuanListAdapter(R.layout.re_home_fightalone,sortlist);
+                    reFightalone.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                    reFightalone.setAdapter(pintuanListAdapter);
+
+                    pintuanListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            startActivity(new Intent(getActivity(), FightaloneActivity.class));
+                        }
+                    });
+                }else{
+                    T.show("暂无相关信息");
+                }
+
+                break;
+        }
+    }
+
+    @Override
+    public void showLoadingDialog() {
 
     }
 
+    @Override
+    public void showErrorMessage(String s) {
+
+    }
 }

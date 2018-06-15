@@ -116,19 +116,23 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
         params.put("orderStatus", state);
         params.put("pageNumber", pageNumber + "");
         params.put("userId", SP.get(getActivity(), SpContent.UserId, "") + "");
-        params.put("pageSize", "10");
+        params.put("pageSize", "2");
         HttpUtils.doPost(ACTION.ALLOFMYORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
+
             case ACTION.ALLOFMYORDER:
 
                 OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res, OrderMyAllOrderBean.class);
                 if (orderMyAllOrderBean.isSuccess()) {
                     pageSum = orderMyAllOrderBean.getBody().getPageSum();
-                    apiOrderList = orderMyAllOrderBean.getBody().getApiOrderList();
+
+                    apiOrderList.addAll(orderMyAllOrderBean.getBody().getApiOrderList());
+
+                   // apiOrderList = orderMyAllOrderBean.getBody().getApiOrderList();
                     OrderAllAdapter sbmitWholeAdapter = new OrderAllAdapter(getActivity(), R.layout.item_sbmitrecycler, apiOrderList);
                     whole.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
                     whole.setAdapter(sbmitWholeAdapter);

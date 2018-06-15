@@ -80,6 +80,7 @@
             android:background="@color/alpha_05_black" />
 
         <TextView
+            android:id="@+id/tv_homepage_distance"
             android:layout_below="@id/view"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/comment_11_dip"

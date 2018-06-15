@@ -51,11 +51,18 @@ public class MineQueenActivity extends BaseActivity implements HttpCallBack{
     public void initPresenter() {
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inithttp();
+    }
+
     @Override
     public void initView() {
         queentitle.setText("我的女王卡");
-        inithttp();
     }
+
 
     @OnClick({R.id.title_back, R.id.bt_recharge,R.id.bt_see
     })

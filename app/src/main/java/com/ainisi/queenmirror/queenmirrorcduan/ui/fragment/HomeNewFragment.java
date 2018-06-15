@@ -480,7 +480,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 break;
             //搜索
             case R.id.iv_home_search:
-                SearchActivity.startActivity(getContext());
+                Intent intent = new Intent(getActivity(),SearchActivity.class);
+                intent.putExtra("shopCate","1");
+                startActivity(intent);
                 break;
             //消息
             case R.id.img_information:

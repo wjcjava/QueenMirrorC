@@ -59,6 +59,8 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     RelativeLayout reValidation;
     @Bind(R.id.iv_graphics_validation)
     ImageView ivValidation;
+    @Bind(R.id.tv_regist_agreement)
+    TextView tv_regist_agreement;
     private MyCountDownTimer myCountDownTimer;
     private boolean click;
     private LoginCeshiBean ceshiBean;
@@ -126,9 +128,13 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         registerTitle.setText(R.string.register);
     }
 
-    @OnClick({R.id.title_back, R.id.tv_validation, R.id.iv_remove_text, R.id.iv_login_see, R.id.bt_user_confirmregistration})
+    @OnClick({R.id.title_back, R.id.tv_validation, R.id.iv_remove_text, R.id.iv_login_see, R.id.bt_user_confirmregistration,R.id.tv_regist_agreement})
     public void click(View view) {
         switch (view.getId()) {
+            case R.id.tv_regist_agreement:
+                Intent intent = new Intent(this,RegistAgreementActivity.class);
+                startActivity(intent);
+                break;
             case R.id.title_back:
                 finish();
                 break;

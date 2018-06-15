@@ -80,7 +80,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
                         intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
                         context.startActivity(intent);
                     }else{
-                        Intent intent = new Intent(context, ShopStoreActivity.class);
+                        Intent intent = new Intent(context, WorkRoomDetailActivity.class);
                         intent.putExtra("shopName",ShopListData.get(position).getAnsShopBasic().getShopName());
                         intent.putExtra("shopId",ShopListData.get(position).getAnsShopBasic().getId());
 
@@ -109,12 +109,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
             mine_lat = SP.get(context,SpContent.UserLat,"")+"";
             shop_lon = ShopListData.get(position).getAnsShopBasic().getGeoX();
             shop_lat = ShopListData.get(position).getAnsShopBasic().getGeoY();
-
         }
-        L.e("*****   "+mine_lon+ "   "+mine_lat+"   "+shop_lon+"    "+shop_lat);
-        distance = (DistanceGet.getDistance(Double.parseDouble(mine_lon),Double.parseDouble(mine_lat),Double.parseDouble(shop_lon),Double.parseDouble(shop_lat)))/10;
-
-        holder.tv_homepage_distance.setText("相距 "+ distance +"km");
         return convertView;
 
     }

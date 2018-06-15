@@ -193,4 +193,8 @@ public interface ACTION {
 
     int OSSGETTOKEN = 0x154;//获取OSStoken
 
+    int WEBVIEWAGREEMENT = 0x155;//服务协议
+
+    int TUANDUILISTDATA = 0x156;//我要拼团列表
+
 }

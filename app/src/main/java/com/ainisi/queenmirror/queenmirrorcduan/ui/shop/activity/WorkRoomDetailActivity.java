@@ -101,6 +101,8 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     TextView textShop;
     @Bind(R.id.text_single)
     TextView textSingle;
+    @Bind(R.id.tv_submit)
+    TextView tv_submit;
     List<SortBean> sortlist = new ArrayList<>();
     List<String> tabList = new ArrayList<>();
     private WorkRoomAdapter listadapter;
@@ -197,6 +199,13 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         switch (action) {
             case ACTION.GETSHOPPINDCART:
                 shoppingCartBean = GsonUtil.toObj(res, ShoppingCartBean.class);
+
+                if(shoppingCartBean.getBody().getShopList().size()>0){
+                    tv_submit.setVisibility(View.VISIBLE);
+                }else{
+                    tv_submit.setVisibility(View.GONE);
+                }
+
                 break;
             case ACTION.ADDLIULAN://添加浏览量
                 SuccessBean successBeans = GsonUtil.toObj(res, SuccessBean.class);

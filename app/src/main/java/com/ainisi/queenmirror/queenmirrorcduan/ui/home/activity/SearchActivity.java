@@ -5,27 +5,36 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomepageGridViewAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.SearchGoodsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.GoodsListBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.GoodsSearchAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.ShopSearchAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.GoodsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.LabelBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ShopSearchBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.FlowLayout;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.StatusBarUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,8 +48,6 @@ import butterknife.OnClick;
 
 public class SearchActivity extends BaseNewActivity implements HttpCallBack {
 
-    @Bind(R.id.et_title)
-    TextView etTitle;
     @Bind(R.id.his_flowLayout)
     FlowLayout his_flowLayout;
     @Bind(R.id.search_radio_shop)
@@ -51,6 +58,21 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
     RelativeLayout footprineRelayout;
     @Bind(R.id.recycler_shopsearch)
     RecyclerView shopsearchRecycler;
+    @Bind(R.id.rg_search_list_type)
+    RadioGroup rg_search_list_type;
+    @Bind(R.id.et_search_title)
+    EditText et_search_title;
+    @Bind(R.id.search_recycler_view)
+    RecyclerView search_recycler_view;
+    @Bind(R.id.btn_clear_history_search)
+    Button btn_clear_history_search;
+    @Bind(R.id.tv_history_search)
+    TextView tv_history_search;
+
+    String shopCate;
+    ShopListHomeBean shopListHomeBean;
+    private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist = new ArrayList<>();
+    List<GoodsListBean.BodyBean.GoodsListDataBean> goodsListDataBeans = new ArrayList<>();
 
     public static void startActivity(Context context) {
         Intent in = new Intent(context, SearchActivity.class);
@@ -61,41 +83,34 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
     public int getLayoutId() {
         StatusBarUtil.getStatusBarLightMode(getWindow());
         return R.layout.activity_search;
-
     }
 
     @Override
     public void initView() {
+        Intent intent = this.getIntent();
+        shopCate = intent.getStringExtra("shopCate");
 
-        initHotTag();
         inithttp();
-
     }
 
-    private void initShopSearch() {
-        HashMap<String, String> parames = new HashMap<>();
-        parames.put("activityId", "111");//活动的ID
-        parames.put("shopCate", "1");//商铺状态ID 1.首页 2.异业
-        HttpUtils.doPost(ACTION.ACTIVITYSHOPS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-    }
-
-
-    @OnClick({R.id.title_back, R.id.title_search
-    })
+    @OnClick({R.id.title_back, R.id.title_search})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
             case R.id.title_search:
-                if (searchShop.isChecked()) {
-                    initShopSearch();
-                } else if (searchNails.isChecked()) {
-                    initNailsSearch();
-                } else {
-                    T.show("请选择条件进行搜索");
+                if(et_search_title.getText().toString().equals("")){
+                    T.show("请输入店铺或商品关键字");
+                }else{
+                    if (searchShop.isChecked()) {
+                        initShopSearch();
+                    } else if (searchNails.isChecked()) {
+                        initNailsSearch();
+                    } else {
+                        T.show("请选择条件进行搜索");
+                    }
                 }
-
                 break;
             default:
                 break;
@@ -103,19 +118,30 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
         }
     }
 
+    /**
+     * 搜索商品列表
+     */
     private void initNailsSearch() {
         HashMap<String, String> parames = new HashMap<>();
-        parames.put("activityId", "111");//活动的ID
-        parames.put("shopCate", "1");//商铺状态ID 1.首页 2.异业
-        HttpUtils.doPost(ACTION.ACTIVITYGOODS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+        parames.put("saleFlag", "2");//活动的ID
+        parames.put("pageNumber", "1");//商铺状态ID 1.首页 2.异业
+        parames.put("contentByTitle", et_search_title.getText().toString());
+        parames.put("shopCate",shopCate);
+        parames.put("pageSize","10");
+        HttpUtils.doPost(ACTION.GOODLIST, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
-     * 热门搜索
+     * 获取搜索店铺列表
      */
-    private void initHotTag() {
-
+    private void initShopSearch() {
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("pageNumber", "1");//活动的ID
+        parames.put("contentByTitle", et_search_title.getText().toString());//商铺状态ID 1.首页 2.异业
+        parames.put("shopCate",shopCate);
+        parames.put("pageSize","10");
+        HttpUtils.doPost(ACTION.SHOPLIST, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
 
     private void inithttp() {
         HashMap<String, String> params = new HashMap<>();
@@ -128,6 +154,48 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
+            case ACTION.GOODLIST:
+                /**
+                 * 获取搜索商品列表
+                 */
+                GoodsListBean goodsListBean = GsonUtil.toObj(res,GoodsListBean.class);
+
+                if(goodsListBean.isSuccess()){
+                    if(goodsListBean.getBody().getGoodsListData().size()>0){
+                        goodsListDataBeans = goodsListBean.getBody().getGoodsListData();
+                        shopsearchRecycler.setVisibility(View.GONE);
+                        btn_clear_history_search.setVisibility(View.GONE);
+                        tv_history_search.setVisibility(View.GONE);
+                        SearchGoodsAdapter searchGoodsAdapter = new SearchGoodsAdapter(R.layout.re_workroom_short,goodsListDataBeans);
+                        initstartAdapter(search_recycler_view, searchGoodsAdapter);
+                    }else{
+                        T.show("暂无商品信息");
+                    }
+                }else{
+                    T.show(goodsListBean.getMsg());
+                }
+
+                break;
+            /**
+             * 获取店铺列表
+             */
+            case ACTION.SHOPLIST:
+                shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
+                if (shopListHomeBean.isSuccess()) {
+                    if (shopListHomeBean.getBody().getShopList().size() > 0) {
+                        shoplist=shopListHomeBean.getBody().getShopList();
+                        shopsearchRecycler.setVisibility(View.GONE);
+                        btn_clear_history_search.setVisibility(View.GONE);
+                        tv_history_search.setVisibility(View.GONE);
+                        ShopSearchAdapter searchAdapter = new ShopSearchAdapter(R.layout.item_shopsearch, shoplist);
+                        initstartAdapter(search_recycler_view, searchAdapter);
+                    } else {
+                        T.show("暂无店铺信息");
+                    }
+                } else {
+                    T.show(shopListHomeBean.getMsg());
+                }
+                break;
             case ACTION.LABEL:
                 LabelBean labelBean = GsonUtil.toObj(res, LabelBean.class);
                 if (labelBean.isSuccess()) {
@@ -140,14 +208,14 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
                     his_flowLayout.setOnTagClickListener(new FlowLayout.OnTagClickListener() {
                         @Override
                         public void TagClick(String text) {
-                            etTitle.setText(text);
+                            et_search_title.setText(text);
                         }
                     });
                 } else {
                     T.show(labelBean.getMsg());
                 }
                 break;
-            case ACTION.ACTIVITYSHOPS:
+            /*case ACTION.ACTIVITYSHOPS:
                 ShopSearchBean shopSearchBean = GsonUtil.toObj(res, ShopSearchBean.class);
                 if (shopSearchBean.isSuccess()) {
                     shopsearchRecycler.setVisibility(View.VISIBLE);
@@ -159,7 +227,7 @@ public class SearchActivity extends BaseNewActivity implements HttpCallBack {
                 } else {
                     T.show(shopSearchBean.getMsg());
                 }
-                break;
+                break;*/
             case ACTION.ACTIVITYGOODS:
                 GoodsBean goodsBean = GsonUtil.toObj(res, GoodsBean.class);
                 if (goodsBean.isSuccess()) {

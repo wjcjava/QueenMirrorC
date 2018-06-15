@@ -77,7 +77,7 @@ public class HomeListViewAdapter extends BaseAdapter {
                         intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
                         context.startActivity(intent);
                     } else {
-                        Intent intent = new Intent(context, ShopStoreActivity.class);
+                        Intent intent = new Intent(context, WorkRoomDetailActivity.class);
                         intent.putExtra("shopName", ShopListData.get(position).getAnsShopBasic().getShopName());
                         intent.putExtra("shopId", ShopListData.get(position).getAnsShopBasic().getId());
 

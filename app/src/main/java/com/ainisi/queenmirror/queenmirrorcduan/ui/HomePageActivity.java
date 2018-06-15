@@ -50,12 +50,12 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
         HomeNewFragment homeOneFragment = new HomeNewFragment();
         ShopMallFragment categoryOneFragment = new ShopMallFragment();
         OrderFragment serviceOneFragment = new OrderFragment();
-        MasterFragment mineOneFragment = new MasterFragment();
+        /*MasterFragment mineOneFragment = new MasterFragment();*/
         MineFragment mineFragment = new MineFragment();
         mFragments.add(homeOneFragment);
         mFragments.add(categoryOneFragment);
         mFragments.add(serviceOneFragment);
-        mFragments.add(mineOneFragment);
+        //mFragments.add(mineOneFragment);
         mFragments.add(mineFragment);
     }
 
@@ -90,9 +90,9 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
                 }
 
                 break;
-            case 3:
+         /*   case 3:
                 tabSelected(ll_daka);
-                break;
+                break;*/
             case 4:
                 tabSelected(ll_mine);
                 break;
@@ -108,7 +108,7 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
         ll_category.setOnClickListener(this);
         ll_service.setOnClickListener(this);
         ll_mine.setOnClickListener(this);
-        ll_daka.setOnClickListener(this);
+       // ll_daka.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
     }
     @Override
@@ -131,10 +131,10 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
                     startActivity(intent);
                 }
                 break;
-            case R.id.ll_daka:
+          /*  case R.id.ll_daka:
                 viewPager.setCurrentItem(3);
                 tabSelected(ll_daka);
-                break;
+                break;*/
             case R.id.ll_mine:
                 viewPager.setCurrentItem(4);
                 tabSelected(ll_mine);
@@ -147,7 +147,7 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
         ll_home.setSelected(false);
         ll_category.setSelected(false);
         ll_service.setSelected(false);
-        ll_daka.setSelected(false);
+      //  ll_daka.setSelected(false);
         ll_mine.setSelected(false);
         linearLayout.setSelected(true);
     }
