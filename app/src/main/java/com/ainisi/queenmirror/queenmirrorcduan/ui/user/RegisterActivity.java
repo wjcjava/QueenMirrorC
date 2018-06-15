@@ -85,8 +85,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     protected void initView() {
         super.initView();
         myCountDownTimer = new MyCountDownTimer(60000, 1000);
-        inidTitle();
-
+        registerTitle.setText(R.string.register);
 
         Intent intent = this.getIntent();
         where = intent.getStringExtra("where");
@@ -115,7 +114,6 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
     private void initPinjie() {
         sb = new StringBuilder();
         sb.append("2").append(uuid).append(phoneNumber.getText().toString()).append(dataTime);
-
     }
 
     @Override
@@ -125,10 +123,6 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
         loginSee.setImageResource(R.drawable.icon_login_nosee);
         passWord.setTransformationMethod(PasswordTransformationMethod.getInstance());
-    }
-
-    private void inidTitle() {
-        registerTitle.setText(R.string.register);
     }
 
     @OnClick({R.id.title_back, R.id.tv_validation, R.id.iv_remove_text, R.id.iv_login_see,
@@ -167,9 +161,8 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
 
     private void initcheck() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("cellPhone", phoneNumber.getText().toString().trim());
+        params.put("cellPhone", phoneNumber.getText().toString());
         HttpUtils.doPost(ACTION.PHONECHECK, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-
     }
 
     private void initregister(){

@@ -179,7 +179,7 @@ public class HomeIndustryBean {
                 private Object updateDate;
                 private String tabType;
                 private String tabName;
-                private Object tabPic;
+                private String tabPic;
                 private String tabKeyword;
                 private String tabDesc;
                 private String tabSorts;
@@ -191,6 +191,22 @@ public class HomeIndustryBean {
                 private String openFlag;
                 private Object list;
                 private Object fatherName;
+
+                public boolean isNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setNewRecord(boolean newRecord) {
+                    isNewRecord = newRecord;
+                }
+
+                public String getTabPic() {
+                    return tabPic;
+                }
+
+                public void setTabPic(String tabPic) {
+                    this.tabPic = tabPic;
+                }
 
                 public String getId() {
                     return id;
@@ -246,14 +262,6 @@ public class HomeIndustryBean {
 
                 public void setTabName(String tabName) {
                     this.tabName = tabName;
-                }
-
-                public Object getTabPic() {
-                    return tabPic;
-                }
-
-                public void setTabPic(Object tabPic) {
-                    this.tabPic = tabPic;
                 }
 
                 public String getTabKeyword() {

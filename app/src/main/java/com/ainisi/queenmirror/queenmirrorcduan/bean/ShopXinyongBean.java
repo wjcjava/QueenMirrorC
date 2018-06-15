@@ -1,15 +1,13 @@
 package com.ainisi.queenmirror.queenmirrorcduan.bean;
 
-import java.util.List;
-
 public class ShopXinyongBean {
 
 
     /**
      * success : true
-     * errorCode : 0
-     * msg : 获取数据成功
-     * body : {"apiShopScoreList":[{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ecShopScore":{"id":"112","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"shopId":"111","goodsAppraiseate":"1","shopAppraise":"2","goodsScore":"1.0","shopScore":"1.0","sumScore":"2.0","sumStart":"2018-04-09 09:54:46","sumEnd":"2018-04-25 09:54:51","sumTime":"2018-04-18 09:54:55","newFlag":"1"},"shopIdName":null,"goodsAppraiseateLabel":null,"shopAppraiseLabel":null,"newFlagLabel":"有标志"}]}
+     * errorCode : 1
+     * msg : 没有数据
+     * body : {"apiShopScoreGet":{"avgTakeMinutes":"0","avgService":"0","avgEnvironment":"0","comScore":"0"}}
      */
 
     private boolean success;
@@ -50,275 +48,63 @@ public class ShopXinyongBean {
     }
 
     public static class BodyBean {
-        private List<ApiShopScoreListBean> apiShopScoreList;
+        /**
+         * apiShopScoreGet : {"avgTakeMinutes":"0","avgService":"0","avgEnvironment":"0","comScore":"0"}
+         */
 
-        public List<ApiShopScoreListBean> getApiShopScoreList() {
-            return apiShopScoreList;
+        private ApiShopScoreGetBean apiShopScoreGet;
+
+        public ApiShopScoreGetBean getApiShopScoreGet() {
+            return apiShopScoreGet;
         }
 
-        public void setApiShopScoreList(List<ApiShopScoreListBean> apiShopScoreList) {
-            this.apiShopScoreList = apiShopScoreList;
+        public void setApiShopScoreGet(ApiShopScoreGetBean apiShopScoreGet) {
+            this.apiShopScoreGet = apiShopScoreGet;
         }
 
-        public static class ApiShopScoreListBean {
+        public static class ApiShopScoreGetBean {
             /**
-             * id : null
-             * isNewRecord : true
-             * remarks : null
-             * createDate : null
-             * updateDate : null
-             * ecShopScore : {"id":"112","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"shopId":"111","goodsAppraiseate":"1","shopAppraise":"2","goodsScore":"1.0","shopScore":"1.0","sumScore":"2.0","sumStart":"2018-04-09 09:54:46","sumEnd":"2018-04-25 09:54:51","sumTime":"2018-04-18 09:54:55","newFlag":"1"}
-             * shopIdName : null
-             * goodsAppraiseateLabel : null
-             * shopAppraiseLabel : null
-             * newFlagLabel : 有标志
+             * avgTakeMinutes : 0
+             * avgService : 0
+             * avgEnvironment : 0
+             * comScore : 0
              */
 
-            private Object id;
-            private boolean isNewRecord;
-            private Object remarks;
-            private Object createDate;
-            private Object updateDate;
-            private EcShopScoreBean ecShopScore;
-            private Object shopIdName;
-            private Object goodsAppraiseateLabel;
-            private Object shopAppraiseLabel;
-            private String newFlagLabel;
+            private String avgTakeMinutes;
+            private String avgService;
+            private String avgEnvironment;
+            private String comScore;
 
-            public Object getId() {
-                return id;
+            public String getAvgTakeMinutes() {
+                return avgTakeMinutes;
             }
 
-            public void setId(Object id) {
-                this.id = id;
+            public void setAvgTakeMinutes(String avgTakeMinutes) {
+                this.avgTakeMinutes = avgTakeMinutes;
             }
 
-            public boolean isIsNewRecord() {
-                return isNewRecord;
+            public String getAvgService() {
+                return avgService;
             }
 
-            public void setIsNewRecord(boolean isNewRecord) {
-                this.isNewRecord = isNewRecord;
+            public void setAvgService(String avgService) {
+                this.avgService = avgService;
             }
 
-            public Object getRemarks() {
-                return remarks;
+            public String getAvgEnvironment() {
+                return avgEnvironment;
             }
 
-            public void setRemarks(Object remarks) {
-                this.remarks = remarks;
+            public void setAvgEnvironment(String avgEnvironment) {
+                this.avgEnvironment = avgEnvironment;
             }
 
-            public Object getCreateDate() {
-                return createDate;
+            public String getComScore() {
+                return comScore;
             }
 
-            public void setCreateDate(Object createDate) {
-                this.createDate = createDate;
-            }
-
-            public Object getUpdateDate() {
-                return updateDate;
-            }
-
-            public void setUpdateDate(Object updateDate) {
-                this.updateDate = updateDate;
-            }
-
-            public EcShopScoreBean getEcShopScore() {
-                return ecShopScore;
-            }
-
-            public void setEcShopScore(EcShopScoreBean ecShopScore) {
-                this.ecShopScore = ecShopScore;
-            }
-
-            public Object getShopIdName() {
-                return shopIdName;
-            }
-
-            public void setShopIdName(Object shopIdName) {
-                this.shopIdName = shopIdName;
-            }
-
-            public Object getGoodsAppraiseateLabel() {
-                return goodsAppraiseateLabel;
-            }
-
-            public void setGoodsAppraiseateLabel(Object goodsAppraiseateLabel) {
-                this.goodsAppraiseateLabel = goodsAppraiseateLabel;
-            }
-
-            public Object getShopAppraiseLabel() {
-                return shopAppraiseLabel;
-            }
-
-            public void setShopAppraiseLabel(Object shopAppraiseLabel) {
-                this.shopAppraiseLabel = shopAppraiseLabel;
-            }
-
-            public String getNewFlagLabel() {
-                return newFlagLabel;
-            }
-
-            public void setNewFlagLabel(String newFlagLabel) {
-                this.newFlagLabel = newFlagLabel;
-            }
-
-            public static class EcShopScoreBean {
-                /**
-                 * id : 112
-                 * isNewRecord : false
-                 * remarks : null
-                 * createDate : null
-                 * updateDate : null
-                 * shopId : 111
-                 * goodsAppraiseate : 1
-                 * shopAppraise : 2
-                 * goodsScore : 1.0
-                 * shopScore : 1.0
-                 * sumScore : 2.0
-                 * sumStart : 2018-04-09 09:54:46
-                 * sumEnd : 2018-04-25 09:54:51
-                 * sumTime : 2018-04-18 09:54:55
-                 * newFlag : 1
-                 */
-
-                private String id;
-                private boolean isNewRecord;
-                private Object remarks;
-                private Object createDate;
-                private Object updateDate;
-                private String shopId;
-                private String goodsAppraiseate;
-                private String shopAppraise;
-                private String goodsScore;
-                private String shopScore;
-                private String sumScore;
-                private String sumStart;
-                private String sumEnd;
-                private String sumTime;
-                private String newFlag;
-
-                public String getId() {
-                    return id;
-                }
-
-                public void setId(String id) {
-                    this.id = id;
-                }
-
-                public boolean isIsNewRecord() {
-                    return isNewRecord;
-                }
-
-                public void setIsNewRecord(boolean isNewRecord) {
-                    this.isNewRecord = isNewRecord;
-                }
-
-                public Object getRemarks() {
-                    return remarks;
-                }
-
-                public void setRemarks(Object remarks) {
-                    this.remarks = remarks;
-                }
-
-                public Object getCreateDate() {
-                    return createDate;
-                }
-
-                public void setCreateDate(Object createDate) {
-                    this.createDate = createDate;
-                }
-
-                public Object getUpdateDate() {
-                    return updateDate;
-                }
-
-                public void setUpdateDate(Object updateDate) {
-                    this.updateDate = updateDate;
-                }
-
-                public String getShopId() {
-                    return shopId;
-                }
-
-                public void setShopId(String shopId) {
-                    this.shopId = shopId;
-                }
-
-                public String getGoodsAppraiseate() {
-                    return goodsAppraiseate;
-                }
-
-                public void setGoodsAppraiseate(String goodsAppraiseate) {
-                    this.goodsAppraiseate = goodsAppraiseate;
-                }
-
-                public String getShopAppraise() {
-                    return shopAppraise;
-                }
-
-                public void setShopAppraise(String shopAppraise) {
-                    this.shopAppraise = shopAppraise;
-                }
-
-                public String getGoodsScore() {
-                    return goodsScore;
-                }
-
-                public void setGoodsScore(String goodsScore) {
-                    this.goodsScore = goodsScore;
-                }
-
-                public String getShopScore() {
-                    return shopScore;
-                }
-
-                public void setShopScore(String shopScore) {
-                    this.shopScore = shopScore;
-                }
-
-                public String getSumScore() {
-                    return sumScore;
-                }
-
-                public void setSumScore(String sumScore) {
-                    this.sumScore = sumScore;
-                }
-
-                public String getSumStart() {
-                    return sumStart;
-                }
-
-                public void setSumStart(String sumStart) {
-                    this.sumStart = sumStart;
-                }
-
-                public String getSumEnd() {
-                    return sumEnd;
-                }
-
-                public void setSumEnd(String sumEnd) {
-                    this.sumEnd = sumEnd;
-                }
-
-                public String getSumTime() {
-                    return sumTime;
-                }
-
-                public void setSumTime(String sumTime) {
-                    this.sumTime = sumTime;
-                }
-
-                public String getNewFlag() {
-                    return newFlag;
-                }
-
-                public void setNewFlag(String newFlag) {
-                    this.newFlag = newFlag;
-                }
+            public void setComScore(String comScore) {
+                this.comScore = comScore;
             }
         }
     }

@@ -246,7 +246,7 @@ public class AboutUsActivity extends BaseNewActivity implements HttpCallBack{
 
     private void downloadPicFromAliyunOSS(String securityAppKey, String securityAppSecret, String securityToken) {
         // 在移动端建议使用STS方式初始化OSSClient。
-// 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
+        // 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
         OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(JAYCEE_ACCESSKEYID, JAYCEE_ACCESSKEYSECRET, "");
         //该配置类如果不设置，会有默认配置，具体可看该类
         ClientConfiguration conf = new ClientConfiguration();

@@ -1,12 +1,10 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
-
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 
@@ -21,10 +19,6 @@ public class MinePaymentsettingActivity extends BaseNewActivity {
     @Bind(R.id.title_title)
     TextView settingTitle;
 
-    public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, MinePaymentsettingActivity.class));
-    }
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_mine_paymentsetting;
@@ -32,17 +26,12 @@ public class MinePaymentsettingActivity extends BaseNewActivity {
 
     @Override
     public void initView() {
-        initText();
-    }
-
-    private void initText() {
         settingTitle.setText(R.string.payment_setting);
         settingTitle.setTextColor(ContextCompat.getColor(this, R.color.alpha_95_black));
     }
 
     @OnClick({R.id.title_back, R.id.layout_setting})
-    public void click(View view) {
-
+    public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();

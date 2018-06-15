@@ -180,6 +180,18 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     ImageView ivPrize;
     @Bind(R.id.iv_queen_shop)
     ImageView ivQueenShop;
+
+    @Bind(R.id.iv_home_new_first)
+    ImageView iv_home_new_first;
+    @Bind(R.id.iv_home_new_two)
+    ImageView iv_home_new_two;
+    @Bind(R.id.iv_home_new_three)
+    ImageView iv_home_new_three;
+    @Bind(R.id.iv_home_new_four)
+    ImageView iv_home_new_four;
+    @Bind(R.id.iv_home_new_five)
+    ImageView iv_home_new_five;
+
     private HomeIndustryBean homeIndustryBean;
     private HomeHeadlinesBean homeHeadlinesBean;
     private HomeAdvertisingBean homeAdvertisingBean;
@@ -217,7 +229,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         parames.put("bannerStyle", "");
         HttpUtils.doPost(ACTION.PAGEBANNER, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 获取首页的行业分类
      * 首页的那我头条
@@ -474,7 +485,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             /**
              * 拼团
              */
-            case R.id.iv_home_freetrial:
+            case R.id.linear_home_freetrial:
                 startActivity(new Intent(getActivity(), HomeFightaloneActivity.class));
                 break;
             /**
@@ -740,10 +751,15 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 homeIndustryBean = GsonUtil.toObj(res, HomeIndustryBean.class);
                 if (homeIndustryBean.isSuccess()) {
                     tv_home_esthetics.setText(homeIndustryBean.getBody().getCategoryListData().get(0).getEcCategory().getTabName());
+                    Glide.with(this).load(homeIndustryBean.getBody().getCategoryListData().get(0).getEcCategory().getTabPic()).into(iv_home_new_first);
                     tv_home_nailart.setText(homeIndustryBean.getBody().getCategoryListData().get(1).getEcCategory().getTabName());
+                    Glide.with(this).load(homeIndustryBean.getBody().getCategoryListData().get(1).getEcCategory().getTabPic()).into(iv_home_new_two);
                     tv_home_haircustom.setText(homeIndustryBean.getBody().getCategoryListData().get(2).getEcCategory().getTabName());
+                    Glide.with(this).load(homeIndustryBean.getBody().getCategoryListData().get(2).getEcCategory().getTabPic()).into(iv_home_new_three);
                     tv_home_beauty.setText(homeIndustryBean.getBody().getCategoryListData().get(3).getEcCategory().getTabName());
+                    Glide.with(this).load(homeIndustryBean.getBody().getCategoryListData().get(3).getEcCategory().getTabPic()).into(iv_home_new_four);
                     tv_home_permanent.setText(homeIndustryBean.getBody().getCategoryListData().get(4).getEcCategory().getTabName());
+                    Glide.with(this).load(homeIndustryBean.getBody().getCategoryListData().get(4).getEcCategory().getTabPic()).into(iv_home_new_five);
                 } else {
                     T.show(homeIndustryBean.getMsg());
                 }
@@ -808,7 +824,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         }
 
                     }
-                    banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
                     banner.setImageLoader(new GlideImageLoader());
                     banner.setImages(images);
                     banner.start();

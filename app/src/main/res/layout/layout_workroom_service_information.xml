@@ -139,6 +139,7 @@
         android:id="@+id/tv_workroom_service_jubao"
         android:background="@color/white"
         android:text="举报商家"
+        android:visibility="invisible"
         android:layout_marginTop="@dimen/comment_83_dip"
         android:layout_below="@id/recycler"
         android:layout_centerHorizontal="true"

@@ -94,10 +94,7 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
                 break;
             default:
                 break;
-
         }
-
-
     }
     //判断是否有支付密码
     private void inithttpPass() {

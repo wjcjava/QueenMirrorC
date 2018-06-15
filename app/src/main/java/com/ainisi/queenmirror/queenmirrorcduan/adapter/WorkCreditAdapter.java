@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopXinyongBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomRatingBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,11 @@ import java.util.List;
 public class WorkCreditAdapter extends BaseAdapter {
     private final LayoutInflater inflater;
     private Context context;
-    List<ShopXinyongBean.BodyBean.ApiShopScoreListBean> apiShopScoreList = new ArrayList<>();
+    ShopXinyongBean.BodyBean.ApiShopScoreGetBean apiShopScoreGet = new ShopXinyongBean.BodyBean.ApiShopScoreGetBean();
 
-    public WorkCreditAdapter(Context context,List<ShopXinyongBean.BodyBean.ApiShopScoreListBean> apiShopScoreList) {
+    public WorkCreditAdapter(Context context,ShopXinyongBean.BodyBean.ApiShopScoreGetBean apiShopScoreGet) {
         this.context = context;
-        this.apiShopScoreList = apiShopScoreList;
+        this.apiShopScoreGet = apiShopScoreGet;
         inflater = LayoutInflater.from(context);
     }
     @Override
@@ -58,19 +59,26 @@ public class WorkCreditAdapter extends BaseAdapter {
             holder.tv_work_credit = convertView.findViewById(R.id.tv_work_credit);
             holder.tv_score_score = convertView.findViewById(R.id.tv_score_score);
             holder.tv_score_environment = convertView.findViewById(R.id.tv_score_environment);
+            holder.tv_work_order_time = convertView.findViewById(R.id.tv_work_order_time);
+            holder.tv_score_attitude = convertView.findViewById(R.id.tv_score_attitude);
+            holder.tv_score_environment = convertView.findViewById(R.id.tv_score_environment);
+            holder.score_work_evaluate = convertView.findViewById(R.id.score_work_evaluate);
+            holder.score_work_evaluate_two = convertView.findViewById(R.id.score_work_evaluate_two);
 
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.tv_work_credit.setText(apiShopScoreList.get(0).getEcShopScore().getSumScore());
-        holder.tv_score_score.setText(apiShopScoreList.get(0).getEcShopScore().getGoodsScore());
-        holder.tv_score_environment.setText(apiShopScoreList.get(0).getEcShopScore().getShopScore());
+        holder.tv_work_credit.setText(apiShopScoreGet.getComScore());
+        holder.tv_work_order_time.setText("接单时间"+apiShopScoreGet.getAvgTakeMinutes()+"单");
+        holder.tv_score_attitude.setText(apiShopScoreGet.getAvgService());
+        holder.tv_score_environment.setText(apiShopScoreGet.getAvgEnvironment());
 
+        holder.score_work_evaluate.setRating(Float.parseFloat(apiShopScoreGet.getAvgEnvironment()));
+        holder.score_work_evaluate_two.setRating(Float.parseFloat(apiShopScoreGet.getAvgService()));
         return convertView;
     }
-
 
     //就是View的持有
     public final class ViewHolder{
@@ -78,5 +86,8 @@ public class WorkCreditAdapter extends BaseAdapter {
         private TextView tv_work_credit;
         private TextView tv_score_score;
         private TextView tv_score_environment;
+        private TextView tv_work_order_time;
+        private TextView tv_score_attitude;
+        private CustomRatingBar score_work_evaluate,score_work_evaluate_two;
     }
 }

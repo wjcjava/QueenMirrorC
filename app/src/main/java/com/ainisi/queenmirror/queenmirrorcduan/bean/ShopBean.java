@@ -5,14 +5,14 @@ package com.ainisi.queenmirror.queenmirrorcduan.bean;
  */
 
 public class ShopBean {
-    int imageTitle;
+    String imageTitle;
     String textName;
 
-    public int getImageTitle() {
+    public String getImageTitle() {
         return imageTitle;
     }
 
-    public void setImageTitle(int imageTitle) {
+    public void setImageTitle(String imageTitle) {
         this.imageTitle = imageTitle;
     }
 

@@ -69,7 +69,6 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
     protected void initView() {
         super.initView();
         paymodify.setText("设置支付密码");
-
     }
 
     @Override

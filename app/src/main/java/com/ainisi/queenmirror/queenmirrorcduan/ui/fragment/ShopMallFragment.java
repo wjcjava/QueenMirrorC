@@ -43,6 +43,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopClassificationActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
@@ -67,12 +68,6 @@ import butterknife.OnClick;
 public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.banner)
     Banner banner;
-//    @Bind(R.id.iv_sort)
-//    ImageView ivsort;
-//    @Bind(R.id.iv_shop_sort1)
-//    ImageView ivsort1;
-//    @Bind(R.id.li_sort_bottom)
-//    LinearLayout li_sort_bottom;
     @Bind(R.id.li_home_screen)
     LinearLayout li_home_screen;
     @Bind(R.id.li_home_screen_bottom)
@@ -93,16 +88,12 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ImageView uspensionSurface;
     @Bind(R.id.shop_gridView)
     NoScrollGridView shop_gridView;
-//    @Bind(R.id.tv_shop_sort)
-//    TextView upSort;
     @Bind(R.id.tv_shop_sales)
     TextView upSales;
     @Bind(R.id.tv_shop_distance)
     TextView upDistance;
     @Bind(R.id.tv_shop_screen)
     TextView upScreen;
-//    @Bind(R.id.rb_sort)
-//    TextView bottomSort;
     @Bind(R.id.rb_sales)
     TextView bottomSales;
     @Bind(R.id.rb_screen)
@@ -161,7 +152,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         getYiyeData();
         initDate();
         initpopwindow();
-        initImgTitle();
         initshopList();
         inithttp();
 
@@ -221,10 +211,6 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         HttpUtils.doPost(ACTION.MERCHANTACTIVITY, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
         //商家特色（筛选）
         HttpUtils.doPost(ACTION.MERCHANTFEATURES, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-    }
-
-    private void initImgTitle() {
-
     }
 
     private void initpopwindow() {
@@ -592,14 +578,20 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 homeIndustryBean = GsonUtil.toObj(res, HomeIndustryBean.class);
 
                 shopList = new ArrayList<>();
-                for (int i = 0; i < 8; i++) {
+                for (int i = 0; i < homeIndustryBean.getBody().getCategoryListData().size(); i++) {
                     ShopBean shopBean = new ShopBean();
-                    shopBean.setImageTitle(imgTitle[i]);
+
+                    if(null == homeIndustryBean.getBody().getCategoryListData().get(i).getEcCategory().getTabPic()){
+                        shopBean.setImageTitle("");
+                    }else{
+                        shopBean.setImageTitle(homeIndustryBean.getBody().getCategoryListData().get(i).getEcCategory().getTabPic());
+                    }
+
                     shopBean.setTextName(homeIndustryBean.getBody().getCategoryListData().get(i).getEcCategory().getTabName());
                     shopList.add(shopBean);
                 }
 
-                MyShopAdapter myShopAdapter = new MyShopAdapter(R.layout.re_shopmall_shop, shopList);
+                MyShopAdapter myShopAdapter = new MyShopAdapter(getActivity(),R.layout.re_shopmall_shop, shopList);
                 shopRecycle.setLayoutManager(new GridLayoutManager(getActivity(), 4));
                 shopRecycle.setAdapter(myShopAdapter);
                 myShopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
