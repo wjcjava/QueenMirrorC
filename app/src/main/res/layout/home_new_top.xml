@@ -317,29 +317,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/home_middle_five"></ImageView>
+            android:background="@drawable/home_middle_five"/>
 
         <View
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
-            android:background="@color/home_shop_middle"></View>
+            android:background="@color/home_shop_middle"/>
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/home_middle_six"></ImageView>
+            android:background="@drawable/home_middle_six"/>
 
         <View
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
-            android:background="@color/home_shop_middle"></View>
+            android:background="@color/home_shop_middle"/>
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/home_middle_seven"></ImageView>
+            android:background="@drawable/home_middle_seven"/>
 
     </LinearLayout>
 
@@ -348,12 +348,12 @@
         android:layout_height="100dp"
         android:background="@drawable/home_middle_eight"
         android:focusable="false"
-        android:focusableInTouchMode="false"></ImageView>
+        android:focusableInTouchMode="false"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_10_dip"
-        android:background="@color/home_shop_middle"></View>
+        android:background="@color/home_shop_middle"/>
 
     <com.youth.banner.Banner
         android:id="@+id/banner_middle"
@@ -372,7 +372,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/everyday_new"></ImageView>
+            android:background="@drawable/everyday_new"/>
     </RelativeLayout>
 
     <com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView
@@ -381,7 +381,7 @@
         android:layout_height="wrap_content"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:paddingEnd="5dp"></com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView>
+        android:paddingEnd="5dp"/>
 
 
 </LinearLayout>

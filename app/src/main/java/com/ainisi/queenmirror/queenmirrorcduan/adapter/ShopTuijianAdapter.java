@@ -1,5 +1,6 @@
 package com.ainisi.queenmirror.queenmirrorcduan.adapter;
 
+import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class ShopTuijianAdapter extends BaseQuickAdapter<ShopTuijianBean.BodyBea
         .setText(R.id.tv_present_price,"￥"+item.getEcGoodsBasic().getGoodsPrice())
         .setText(R.id.original_price,"￥"+item.getEcGoodsBasic().getOfflinePrice());
 
+       @SuppressLint("WrongViewCast")
        TextView original_price = helper.convertView.findViewById(R.id.original_price);
         original_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
     }

@@ -25,13 +25,14 @@ import android.widget.TextView;
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
+import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeNewShopAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomepageGridViewAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.PopupAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.HomeNewShopBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.NewsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
@@ -49,6 +50,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PageBannerBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
@@ -191,9 +193,14 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Override
     public void initPresenter() {
     }
-
+    private void initBanner(){
+        HashMap<String,String> parames=new HashMap<>();
+        parames.put("bannerStyle","2");
+        HttpUtils.doPost(ACTION.PAGEBANNER,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+    }
     /**
-     * 获取首页顶部Banner图
+     * 获取首页的行业分类
+     * 首页的那我头条
      */
     private void getBannerData() {
 
@@ -202,7 +209,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         hashMap.put("tabFather", "0");
         HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
         HttpUtils.doPost(ACTION.HEADLINES, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//头条
-        HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//Banner
+        //HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//Banner
     }
 
     /**
@@ -234,21 +241,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         /**
          * 获取首页部分数据
          */
+        initBanner();
         getBannerData();
         getShopData();
-        for (int i = 0; i < 10; i++) {
-            SortBean sortBean = new SortBean();
-            sortlist.add(sortBean);
-        }
-        MyAdapter sortAdapter = new MyAdapter(R.layout.re_full_recommend, sortlist);
-        rv_home_new_every.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        rv_home_new_every.setAdapter(sortAdapter);
-        sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getActivity(), FullActivity.class));
-            }
-        });
+        initnewShop();
+
+
         sc_home_scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @SuppressLint("WrongConstant")
             @Override
@@ -275,6 +273,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         HttpUtils.doPost(ACTION.MERCHANTACTIVITY, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
         //商家特色（筛选）
         HttpUtils.doPost(ACTION.MERCHANTFEATURES, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
+    private void initnewShop() {
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("shopCate", "1");
+        HttpUtils.doPost(ACTION.NEWSHOPlIST, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     @Override
@@ -494,6 +498,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             case R.id.img_information:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
+
         }
     }
 
@@ -614,12 +619,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 cAdapter.notifyDataSetChanged();
                 bt2.setText(cValues.get(position));
                 bt.setText(cValues.get(position));
-                bt.hidePopup();
+                bt2.hidePopup();
             }
         });
 
 
-        bt.setPopupView(view2);
+        bt2.setPopupView(view2);
     }
 
     private void initshowdistance() {
@@ -752,13 +757,15 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 }
 
                 break;
-            //首页banner广告
-            case ACTION.ADVERTISING:
-                homeAdvertisingBean = GsonUtil.toObj(res, HomeAdvertisingBean.class);
-                if (homeAdvertisingBean.isSuccess()) {
+            //首页bannerl列表
+            //case ACTION.ADVERTISING:
+            case ACTION.PAGEBANNER:
+                PageBannerBean bannerBean=GsonUtil.toObj(res,PageBannerBean.class);
+                if(bannerBean.isSuccess()){
+                    List<PageBannerBean.BodyBean.BannerListDataBean> bannerList = bannerBean.getBody().getBannerListData();
                     List<String> images = new ArrayList<>();
-                    for (int i = 0; i < 4; i++) {
-                        images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
+                    for (int i = 0; i < bannerList.size(); i++) {
+                        images.add(bannerList.get(i).getBannerLogo());
                     }
                     banner.setImageLoader(new GlideImageLoader());
                     banner.setImages(images);
@@ -784,8 +791,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         }
                     });
 
-                } else {
-                    T.show(homeAdvertisingBean.getMsg());
+                }else {
+                    T.show(bannerBean.getMsg());
                 }
                 break;
             //商家活动（筛选）
@@ -805,6 +812,24 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     preferentialList = preferentialBean.getBody().getFeatureKeysListData();
                 } else {
                     T.show(preferentialBean.getMsg());
+                }
+                break;
+            //每日新店
+            case ACTION.NEWSHOPlIST:
+                HomeNewShopBean newShopBean=GsonUtil.toObj(res, HomeNewShopBean.class);
+                if(newShopBean.isSuccess()){
+                    List<HomeNewShopBean.BodyBean.NewShopListBean> shopList = newShopBean.getBody().getNewShopList();
+                    HomeNewShopAdapter shopAdapter = new HomeNewShopAdapter(R.layout.re_home_recommend,shopList,getActivity());
+                    rv_home_new_every.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+                    rv_home_new_every.setAdapter(shopAdapter);
+                    shopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            startActivity(new Intent(getActivity(), FullActivity.class));
+                        }
+                    });
+                }else {
+                    T.show(newShopBean.getMsg());
                 }
                 break;
         }

@@ -39,13 +39,11 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
@@ -418,8 +416,8 @@
             android:name=".ui.mine.activity.BackPayActivity"
             android:launchMode="singleTask" />
         <activity android:name=".ui.shop.activity.PayInShopActivity" />
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+        android:launchMode="singleTask"
+        android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.activity.PurchaseSelectActivity"
             android:launchMode="singleTask"
@@ -432,29 +430,29 @@
             android:name=".ui.shop.activity.CommentActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-       <!-- <activity
+        <!--
+            <activity
             android:name=".ui.shop.activity.PayInShopActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
--->
-        <!--友盟相关-->
+        -->
+        <!-- 友盟相关 -->
 
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5a13e4fbf29d982a16000037" />
 
-
-        <!--微信-->
+        <!-- 微信 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--qq-->
+        <!-- qq -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -471,7 +469,7 @@
         <activity
             android:name=".ui.shop.activity.PayInShopActivity"
             tools:ignore="DuplicateActivity" />
-        <activity android:name=".ui.home.activity.PurchaseNowActivity"/>
+        <activity android:name=".ui.home.activity.PurchaseNowActivity" />
         <activity
             android:name=".ui.mine.activity.AmentPayActivity"
             android:launchMode="singleTask"
@@ -490,7 +488,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.mine.activity.RealNameActivity" />
         <activity android:name=".ui.mine.activity.AboutUsActivity" />
-        <activity android:name=".ui.user.RegistAgreementActivity"/>
+        <activity android:name=".ui.user.RegistAgreementActivity" />
+        <activity android:name=".ui.home.activity.PageBannerActivity"></activity>
     </application>
 
 </manifest>

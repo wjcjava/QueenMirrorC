@@ -70,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@color/alpha_05_black"
             android:scrollbars="vertical">
 
             <include layout="@layout/home_new_top" />
@@ -88,18 +89,19 @@
                 android:id="@+id/gv_home_gridView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/alpha_05_black"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:numColumns="2"
                 android:visibility="visible" />
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="70dp"
                 android:gravity="center"
+
                 android:orientation="vertical">
 
                 <ImageView

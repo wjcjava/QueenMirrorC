@@ -15,10 +15,10 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.DistanceGet;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

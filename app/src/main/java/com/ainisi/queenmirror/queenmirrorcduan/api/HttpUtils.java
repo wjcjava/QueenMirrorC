@@ -661,6 +661,19 @@ public class HttpUtils {
             case ACTION.TUANDUILISTDATA:
                 actionUrl = UrlConstants.TUANDUILISTDATA;
                 break;
+            //获取图形验证码
+            case ACTION.GETSHAPE:
+                actionUrl = UrlConstants.GETSHAPE;
+                break;
+            //获取今日新店列表
+            case ACTION.NEWSHOPlIST:
+                actionUrl = UrlConstants.NEWSHOPlIST;
+                break;
+            //获取Banner信息数据
+            case ACTION.PAGEBANNER:
+                actionUrl=UrlConstants.PAGEBANNER;
+                break;
+
         }
         url.append(actionUrl);
         return url;

@@ -131,7 +131,8 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         registerTitle.setText(R.string.register);
     }
 
-    @OnClick({R.id.title_back, R.id.tv_validation, R.id.iv_remove_text, R.id.iv_login_see, R.id.bt_user_confirmregistration,R.id.tv_regist_agreement})
+    @OnClick({R.id.title_back, R.id.tv_validation, R.id.iv_remove_text, R.id.iv_login_see,
+            R.id.bt_user_confirmregistration,R.id.tv_regist_agreement,R.id.iv_graphics_validation})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.tv_regist_agreement:
@@ -147,7 +148,6 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 }
                 else {
                     initcheck();
-
                 }
                 break;
             case R.id.iv_remove_text:
@@ -158,6 +158,9 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                 break;
             case R.id.bt_user_confirmregistration:
                 initregister();
+                break;
+            case R.id.iv_graphics_validation:
+                initgetShape();
                 break;
         }
     }

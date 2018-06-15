@@ -35,7 +35,6 @@
         android:layout_below="@id/tv_praise"
         android:layout_marginStart="@dimen/comment_12_dip"
         android:layout_marginTop="@dimen/comment_2_dip"
-        android:layout_toRightOf="@id/tv_present_price"
         android:textColor="@color/alpha_05_black"
         app:srcCompat="@drawable/ic_sortrecyke_stars" />
 </RelativeLayout>

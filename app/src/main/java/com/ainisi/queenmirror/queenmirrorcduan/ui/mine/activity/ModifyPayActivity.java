@@ -78,17 +78,14 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
         super.initData();
         myCountDownTimer = new MyCountDownTimer(60000, 1000);
     }
-
     private void initPayPass() {
         HashMap<String, String> parames = new HashMap<>();
         parames.put("loginCellPhone", phoneText.getText().toString());
         parames.put("verifyCodeCust", verification.getText().toString());
         parames.put("loginPass", MD5.md5(loginPasstext.getText().toString() + "MYN888"));
         parames.put("payPass", MD5.md5(payPasstext.getText().toString() + "MYN888"));
-
         HttpUtils.doPost(ACTION.SETPAYPASS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     @OnClick({R.id.title_back, R.id.tv_ok_submit, R.id.tv_validation,R.id.iv_graphics_validation
     })
     public void click(View view) {
@@ -119,9 +116,7 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
                 initgetShape();
                 break;
         }
-
     }
-
     private void initKey() {
         //随机生成的UUID
         uuid = java.util.UUID.randomUUID().toString();
@@ -156,7 +151,6 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
         }
 
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-
     }
     //获取图形验证码
     private void initgetShape() {

@@ -15,11 +15,11 @@ public interface UrlConstants {
 
     //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
 
-    String BASE_URL = "http://192.168.30.155:7080/wg/a/";
+    //String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
-    //String BASE_URL = "http://58.210.102.70:7080/wg/a/";
+    String BASE_URL = "http://58.210.102.70:7080/wg/a/";
 
-    String ADVERTISING = "api/ec/common/advertisementList";//首页banner广告
+    String ADVERTISING = "api/ec/common/advertisementList";//首页广告
 
     String HEADLINES = "api/ec/common/topList";//首页的女王头条
 
@@ -212,4 +212,8 @@ public interface UrlConstants {
     String TUANDUILISTDATA = "ans/group/groupActivityList";//我要拼团列表
 
     String GETSHAPE="api/ans/login/imgValidateCodeGet";//获取图形验证码
+
+    String NEWSHOPlIST="api/ans/shop/newShopList";//获取今日新店列表
+
+    String PAGEBANNER="api/ec/common/topPageBannerList";//获取Banner信息数据
 }
