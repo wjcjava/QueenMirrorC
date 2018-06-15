@@ -99,7 +99,7 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
 
 
     }
-
+    //判断是否有支付密码
     private void inithttpPass() {
         HashMap<String, String> parames = new HashMap<>();
         parames.put("custId", SP.get(this, SpContent.UserId,"")+"");
@@ -115,7 +115,6 @@ public class MineMyWalletActivity extends BaseActivity implements HttpCallBack {
                     exists = whetherPassBean.getBody().getIsExists();
                     if (exists == 0) {
                         startActivity(new Intent(this, MinePaymentsettingActivity.class));
-                        inithttpPass();
                     } else {
                         MineSettingActivity.startActivity(this);
                     }

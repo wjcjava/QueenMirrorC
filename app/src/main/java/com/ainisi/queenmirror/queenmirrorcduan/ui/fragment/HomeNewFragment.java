@@ -65,10 +65,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView;
 import com.amap.api.location.AMapLocation;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
@@ -162,6 +164,22 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     PopupButton bt;
     @Bind(R.id.bt_up_home)
     PopupButton bt2;
+    @Bind(R.id.iv_home_newuserprg)
+    ImageView ivNewuserprg;
+    @Bind(R.id.iv_home_freetrial)
+    ImageView ivFreetrial;
+    @Bind(R.id.iv_home_goodshop)
+    ImageView ivGoodshop;
+    @Bind(R.id.iv_home_specialoffer)
+    ImageView ivSpecialoffer;
+    @Bind(R.id.iv_good_itemShop)
+    ImageView ivItemShop;
+    @Bind(R.id.iv_modou_convert)
+    ImageView ivConvert;
+    @Bind(R.id.iv_invitation_prize)
+    ImageView ivPrize;
+    @Bind(R.id.iv_queen_shop)
+    ImageView ivQueenShop;
     private HomeIndustryBean homeIndustryBean;
     private HomeHeadlinesBean homeHeadlinesBean;
     private HomeAdvertisingBean homeAdvertisingBean;
@@ -193,11 +211,13 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Override
     public void initPresenter() {
     }
-    private void initBanner(){
-        HashMap<String,String> parames=new HashMap<>();
-        parames.put("bannerStyle","2");
-        HttpUtils.doPost(ACTION.PAGEBANNER,parames,CacheMode.REQUEST_FAILED_READ_CACHE,true,this);
+
+    private void initBanner() {
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("bannerStyle", "");
+        HttpUtils.doPost(ACTION.PAGEBANNER, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     /**
      * 获取首页的行业分类
      * 首页的那我头条
@@ -208,7 +228,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         hashMap.put("tabType", "2");//type  2代表美业    4代表异业
         hashMap.put("tabFather", "0");
         HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
-        HttpUtils.doPost(ACTION.HEADLINES, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//头条
+        //HttpUtils.doPost(ACTION.HEADLINES, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//头条
         //HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//Banner
     }
 
@@ -255,7 +275,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 if (li_new_top.getVisibility() != 0) {
 
                 } else {
-                    if (i1 >= 3315) {
+                    if (i1 >= 3435) {
                         layout_stick_header_main.setVisibility(View.VISIBLE);
                     } else {
                         layout_stick_header_main.setVisibility(View.GONE);
@@ -357,7 +377,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         });
     }
 
-    @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.linear_home_freetrial,
+    @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.iv_home_freetrial,
             R.id.line_surface, R.id.line_uspension_surface, R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information, R.id.bt_app_home,
             R.id.bt_up_home, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom, R.id.li_home_screen, R.id.li_sales_bottom})
     public void onClick(View view) {
@@ -377,7 +397,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              * 按距离排序
              */
             case R.id.rb_distance:
-                sc_home_scroll.smoothScrollTo(0, 3315);
+                sc_home_scroll.smoothScrollTo(0, 3435);
                 initshowdistance();
                 break;
             case R.id.li_sales_bottom:
@@ -388,7 +408,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              */
             case R.id.rb_sales:
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                sc_home_scroll.smoothScrollTo(0, 3315);
+                sc_home_scroll.smoothScrollTo(0, 3435);
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -409,7 +429,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              */
             //case R.id.li_hime_sort:
             case R.id.bt_app_home:
-                sc_home_scroll.smoothScrollTo(0, 3315);
+                sc_home_scroll.smoothScrollTo(0, 3435);
                 inithomepop();
                 initpop1();
                 break;
@@ -454,7 +474,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             /**
              * 拼团
              */
-            case R.id.linear_home_freetrial:
+            case R.id.iv_home_freetrial:
                 startActivity(new Intent(getActivity(), HomeFightaloneActivity.class));
                 break;
             /**
@@ -490,8 +510,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 break;
             //搜索
             case R.id.iv_home_search:
-                Intent intent = new Intent(getActivity(),SearchActivity.class);
-                intent.putExtra("shopCate","1");
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                intent.putExtra("shopCate", "1");
                 startActivity(intent);
                 break;
             //消息
@@ -652,7 +672,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     }
 
     private void initScreentext() {
-        sc_home_scroll.smoothScrollTo(0, 3315);
+        sc_home_scroll.smoothScrollTo(0, 3435);
         tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -745,28 +765,50 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
                 break;
             //首页的女王头条
-            case ACTION.HEADLINES:
-                homeHeadlinesBean = GsonUtil.toObj(res, HomeHeadlinesBean.class);
-                if (homeHeadlinesBean.isSuccess()) {
-                    for (int i = 0; i < homeHeadlinesBean.getBody().getTopListData().size(); i++) {
-                        contntList.add(homeHeadlinesBean.getBody().getTopListData().get(i).getEcTop().getTopName());
-                    }
-                    mv_home_marqueeView.startWithList(contntList);
-                } else {
-                    T.show(homeHeadlinesBean.getMsg());
-                }
+//            case ACTION.HEADLINES:
+//                homeHeadlinesBean = GsonUtil.toObj(res, HomeHeadlinesBean.class);
+//                if (homeHeadlinesBean.isSuccess()) {
+//                    for (int i = 0; i < homeHeadlinesBean.getBody().getTopListData().size(); i++) {
+//                        contntList.add(homeHeadlinesBean.getBody().getTopListData().get(i).getEcTop().getTopName());
+//                    }
+//                    mv_home_marqueeView.startWithList(contntList);
+//                } else {
+//                    T.show(homeHeadlinesBean.getMsg());
+//                }
 
-                break;
+            // break;
             //首页bannerl列表
             //case ACTION.ADVERTISING:
             case ACTION.PAGEBANNER:
-                PageBannerBean bannerBean=GsonUtil.toObj(res,PageBannerBean.class);
-                if(bannerBean.isSuccess()){
-                    List<PageBannerBean.BodyBean.BannerListDataBean> bannerList = bannerBean.getBody().getBannerListData();
+                PageBannerBean bannerBean = GsonUtil.toObj(res, PageBannerBean.class);
+                if (bannerBean.isSuccess()) {
+                    final List<PageBannerBean.BodyBean.BannerListDataBean> bannerList = bannerBean.getBody().getBannerListData();
                     List<String> images = new ArrayList<>();
+                    List<String> imagesTwo = new ArrayList<>();
+                    List<String> bannerName = new ArrayList<>();
                     for (int i = 0; i < bannerList.size(); i++) {
-                        images.add(bannerList.get(i).getBannerLogo());
+                        if (bannerList.get(i).getPageLocation().equals("1")) {
+                            images.add(bannerList.get(i).getBannerLogo());
+
+                        } else if (bannerList.get(i).getPageLocation().equals("2")) {
+                            bannerName.add(bannerList.get(i).getBannerName());
+                            mv_home_marqueeView.startWithList(bannerName);
+                        } else if (bannerList.get(i).getPageLocation().equals("3")) {
+                            initShowSort(bannerList, i, 1, ivNewuserprg);
+                            initShowSort(bannerList, i, 2, ivFreetrial);
+                            initShowSort(bannerList, i, 3, ivSpecialoffer);
+                            initShowSort(bannerList, i, 4, ivGoodshop);
+                        } else if (bannerList.get(i).getPageLocation().equals("4")) {
+                            initShowSort(bannerList, i, 1, ivItemShop);
+                            initShowSort(bannerList, i, 2, ivConvert);
+                            initShowSort(bannerList, i, 3, ivPrize);
+                            initShowSort(bannerList, i, 4, ivQueenShop);
+                        }else if(bannerList.get(i).getPageLocation().equals("5")){
+                            imagesTwo.add(bannerList.get(i).getBannerLogo());
+                        }
+
                     }
+                    banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
                     banner.setImageLoader(new GlideImageLoader());
                     banner.setImages(images);
                     banner.start();
@@ -774,24 +816,24 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         @Override
                         public void OnBannerClick(int position) {
                             Intent intent = new Intent(getActivity(), HomeAdvertisingActivity.class);
-                            intent.putExtra("weburl", homeAdvertisingBean.getBody().getAdvertisementListData().get(0).getEcAdvertisement().getAdUrl());
+                            intent.putExtra("weburl", bannerList.get(position).getBannerUrl());
                             getActivity().startActivity(intent);
                         }
                     });
-
+                    banner_middle.setBannerStyle(BannerConfig.NOT_INDICATOR);
                     banner_middle.setImageLoader(new GlideImageLoader());
-                    banner_middle.setImages(images);
+                    banner_middle.setImages(imagesTwo);
                     banner_middle.start();
                     banner_middle.setOnBannerListener(new OnBannerListener() {
                         @Override
                         public void OnBannerClick(int position) {
                             Intent intent = new Intent(getActivity(), HomeAdvertisingActivity.class);
-                            intent.putExtra("weburl", homeAdvertisingBean.getBody().getAdvertisementListData().get(0).getEcAdvertisement().getAdUrl());
+                            intent.putExtra("weburl", bannerList.get(position).getBannerUrl());
                             getActivity().startActivity(intent);
                         }
                     });
 
-                }else {
+                } else {
                     T.show(bannerBean.getMsg());
                 }
                 break;
@@ -816,10 +858,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 break;
             //每日新店
             case ACTION.NEWSHOPlIST:
-                HomeNewShopBean newShopBean=GsonUtil.toObj(res, HomeNewShopBean.class);
-                if(newShopBean.isSuccess()){
+                HomeNewShopBean newShopBean = GsonUtil.toObj(res, HomeNewShopBean.class);
+                if (newShopBean.isSuccess()) {
                     List<HomeNewShopBean.BodyBean.NewShopListBean> shopList = newShopBean.getBody().getNewShopList();
-                    HomeNewShopAdapter shopAdapter = new HomeNewShopAdapter(R.layout.re_home_recommend,shopList,getActivity());
+                    HomeNewShopAdapter shopAdapter = new HomeNewShopAdapter(R.layout.re_home_recommend, shopList, getActivity());
                     rv_home_new_every.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                     rv_home_new_every.setAdapter(shopAdapter);
                     shopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -828,11 +870,21 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                             startActivity(new Intent(getActivity(), FullActivity.class));
                         }
                     });
-                }else {
+                } else {
                     T.show(newShopBean.getMsg());
                 }
                 break;
         }
+    }
+
+    private void initShowSort(List<PageBannerBean.BodyBean.BannerListDataBean> bannerList, int i, int sort, ImageView ivNewuserprg) {
+        if (bannerList.get(i).getShowSort() == sort) {
+            glideImage(bannerList.get(i).getBannerLogo(), ivNewuserprg);
+        }
+    }
+
+    private void glideImage(String url, ImageView img) {
+        Glide.with(this).load(url).into(img);
     }
 
 

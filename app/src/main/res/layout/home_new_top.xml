@@ -10,7 +10,7 @@
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/comment_125_dip"
+        android:layout_height="@dimen/comment_150_dip"
         android:background="@color/white" />
 
     <LinearLayout
@@ -202,17 +202,17 @@
         android:layout_marginTop="@dimen/comment_10_dip"
         android:background="@color/white">
 
-        <LinearLayout
-            android:id="@+id/li_home_newuserprg"
+        <ImageView
+            android:id="@+id/iv_home_newuserprg"
             android:layout_width="@dimen/comment_0_dip"
             android:layout_height="@dimen/comment_202_dip"
             android:layout_weight="1"
-            android:background="@drawable/home_middle_one"
+            android:src="@drawable/home_middle_one"
             android:gravity="center|top"
             android:orientation="vertical"
             android:paddingTop="@dimen/comment_10_dip">
 
-        </LinearLayout>
+        </ImageView>
 
         <View
             android:layout_width="1dp"
@@ -226,13 +226,13 @@
             android:gravity="center|top"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/linear_home_freetrial"
+            <ImageView
+                android:id="@+id/iv_home_freetrial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/home_middle_two"
+                android:src="@drawable/home_middle_two"
                 android:gravity="center"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"/>
 
             <View
                 android:layout_width="match_parent"
@@ -243,30 +243,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/li_home_specialoffer"
+                <ImageView
+                    android:id="@+id/iv_home_specialoffer"
                     android:layout_width="@dimen/comment_0_dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/home_middle_three"
+                   android:src="@drawable/home_middle_three"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                </LinearLayout>
+                </ImageView>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/home_shop_middle" />
 
-                <LinearLayout
-                    android:id="@+id/li_home_goodshop"
+                <ImageView
+                    android:id="@+id/iv_home_goodshop"
                     android:layout_width="@dimen/comment_0_dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/home_middle_four"
+                    android:src="@drawable/home_middle_four"
                     android:gravity="center"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -285,7 +285,7 @@
             android:layout_centerInParent="true"
             android:text="推荐活动"
             android:textColor="@color/alpha_85_black"
-            android:textSize="@dimen/comment_14_size"></TextView>
+            android:textSize="@dimen/comment_14_size"/>
 
         <View
             android:layout_width="@dimen/comment_50_dip"
@@ -293,7 +293,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:layout_toLeftOf="@id/middle_home"
-            android:background="@color/alpha_15_black"></View>
+            android:background="@color/alpha_15_black"/>
 
         <View
             android:layout_width="@dimen/comment_50_dip"
@@ -301,7 +301,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:layout_toRightOf="@id/middle_home"
-            android:background="@color/alpha_15_black"></View>
+            android:background="@color/alpha_15_black"/>
 
     </RelativeLayout>
 
@@ -314,6 +314,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/iv_good_itemShop"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -325,6 +326,7 @@
             android:background="@color/home_shop_middle"/>
 
         <ImageView
+            android:id="@+id/iv_modou_convert"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -336,6 +338,7 @@
             android:background="@color/home_shop_middle"/>
 
         <ImageView
+            android:id="@+id/iv_invitation_prize"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -344,6 +347,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/iv_queen_shop"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/home_middle_eight"
@@ -358,7 +362,7 @@
     <com.youth.banner.Banner
         android:id="@+id/banner_middle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/comment_125_dip"
+        android:layout_height="@dimen/comment_150_dip"
         android:background="@color/white"
         android:focusable="false"
         android:focusableInTouchMode="false" />

@@ -276,18 +276,9 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
                     if(ceshiBean.getErrorCode().equals("3")){
                         reValidation.setVisibility(View.VISIBLE);
                         initgetShape();
+                    }else {
+                        T.show(ceshiBean.getMsg());
                     }
-
-//                    String imageStr = ceshiBean.getBody().getImageStr();
-//                    errorCode =ceshiBean.getErrorCode();
-//                    if (TextUtils.isEmpty(imageStr)) {
-//                        return;
-//                    } else {
-//                        Bitmap image = stringtoBitmap(imageStr);
-//                        ivValidation.setImageBitmap(image);
-//                        addvalidatecode=true;
-//                    }
-//                    T.show(ceshiBean.getMsg());
                 }
                 break;
             case ACTION.REGIST://注册

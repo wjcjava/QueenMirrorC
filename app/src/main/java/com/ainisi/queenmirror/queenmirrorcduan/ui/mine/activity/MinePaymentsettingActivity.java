@@ -49,13 +49,8 @@ public class MinePaymentsettingActivity extends BaseNewActivity {
                 break;
             //设置支付密码
             case R.id.layout_setting:
-
                     Intent intent=new Intent(this, ModifyPayActivity.class);
-
                     startActivity(intent);
-
-
-
                 break;
             default:
                 break;

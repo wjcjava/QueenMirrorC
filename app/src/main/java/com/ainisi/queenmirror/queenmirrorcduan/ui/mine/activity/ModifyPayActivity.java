@@ -1,6 +1,5 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.CountDownTimer;
@@ -102,7 +101,8 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
                 }else if(TextUtils.isEmpty(payPasstext.getText())){
                     T.show("请输入支付密码");
                 }else {
-                initPayPass();}
+                initPayPass();
+                }
                 break;
             case R.id.tv_validation:
                 if (TextUtils.isEmpty(phoneText.getText())) {
@@ -166,7 +166,7 @@ public class ModifyPayActivity extends BaseNewActivity implements HttpCallBack {
                 SetPayPessBean payPessBean = GsonUtil.toObj(res, SetPayPessBean.class);
                 if (payPessBean.isSuccess()) {
                     T.show("支付密码设置成功");
-                    startActivity(new Intent(this,MineMyWalletActivity.class));
+                    finish();
                 } else {
                     T.show(payPessBean.getMsg());
                 }

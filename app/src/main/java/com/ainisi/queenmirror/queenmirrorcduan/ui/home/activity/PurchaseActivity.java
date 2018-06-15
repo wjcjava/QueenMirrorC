@@ -161,14 +161,12 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
     private void UploadData() {
         Gson gson = new Gson();
         String str = gson.toJson(orderPurchaseBeans);
-
         HashMap<String, String> params = new HashMap<>();
         params.put("orderInfo", str);
         params.put("userId", SP.get(PurchaseActivity.this, SpContent.UserId, "") + "");
         params.put("platform", "3");
         HttpUtils.doPost(ACTION.UPLOADORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
