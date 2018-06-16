@@ -129,7 +129,14 @@ public class HttpUtils {
                             }*/
                             //成功
 
-                            httpCallBack.onSuccess(action, s);
+                            JSONObject jsonObject = new JSONObject(s);
+                            String res = jsonObject.getString("errorCode");
+
+                            if(res.equals("0")){
+                                httpCallBack.onSuccess(action, s);
+                            }else{
+                                T.show("errorCode不等于0");
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

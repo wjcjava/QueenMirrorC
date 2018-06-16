@@ -20,7 +20,7 @@
         android:layout_marginTop="@dimen/comment_27_dip"
         android:text="综合评分"
         android:textSize="@dimen/comment_15_size"
-        android:layout_marginStart="@dimen/comment_6_dip"
+        android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_toRightOf="@id/tv_work_credit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -35,11 +35,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+
         android:id="@+id/tv_work_order_time"
         android:text="接单时间35分钟"
         android:layout_below="@id/tv_shop"
         android:textSize="@dimen/comment_10_size"
-        android:layout_marginStart="@dimen/comment_6_dip"
+        android:layout_marginStart="@dimen/comment_10_dip"
         android:layout_toRightOf="@id/tv_work_credit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -200,11 +200,15 @@ public class PurchaseNowActivity extends BaseNewActivity implements HttpCallBack
         switch (action){
             case ACTION.PAYNOWINPAY:
                 PurchaseNowBean purchaseNowBean = GsonUtil.toObj(res,PurchaseNowBean.class);
-                Intent intent = new Intent(PurchaseNowActivity.this, SubmitActivity.class);
-                intent.putExtra("businessIds", purchaseNowBean.getBody().getOrderId());
-                intent.putExtra("amount", goodPrice.substring(1,goodPrice.length()));
-                startActivity(intent);
-                finish();
+                if(purchaseNowBean.getErrorCode().equals("0")){
+                    Intent intent = new Intent(PurchaseNowActivity.this, SubmitActivity.class);
+                    intent.putExtra("businessIds", purchaseNowBean.getBody().getOrderId());
+                    intent.putExtra("amount", goodPrice.substring(1,goodPrice.length()));
+                    startActivity(intent);
+                    finish();
+                }else{
+
+                }
                 break;
         }
     }

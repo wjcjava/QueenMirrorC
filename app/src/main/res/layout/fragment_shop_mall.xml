@@ -48,15 +48,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:numColumns="2"/>
-            <TextView
-                android:id="@+id/tv_shop_data"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_marginStart="@dimen/comment_10_dip"
-                android:text="没有数据啦~！"
-                android:textSize="@dimen/comment_14_size"
-                android:textColor="@color/alpha_30_black"
-                android:layout_height="@dimen/comment_375_dip"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -7,15 +7,15 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 
 public interface UrlConstants {
 
-    //String BASE_URL = "192.168.50.32:8080/a/";
+    // String BASE_URL = "http://116.62.204.235:8080/";
 
-    String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
+    //String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
 
     //String BASE_URL = "http://192.168.50.137:8080/wg/a/";//测试路径    刘璇
 
     //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
 
-    //String BASE_URL = "http://netjipeng.nat300.top/wg/a/";
+    String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
     //String BASE_URL = "http://58.210.102.70:7080/wg/a/";
 

@@ -327,9 +327,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             GDLocationUtil.getCurrentLocation(new GDLocationUtil.MyLocationListener() {
                 @Override
                 public void result(AMapLocation location) {
-
-                    L.e("&&&   " + location.getCity() + "     " + location.getLatitude() + "   " + location.getLongitude());
-
                     if (TextUtils.isEmpty(location.getCity())) {
                         mLocation.setText("全国");
                     } else {
@@ -367,12 +364,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         problemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                //tv_shop_sort.setText(problem[position]);
-                //rb_sort.setText(problem[position]);
                 view_new_fragment_half.setVisibility(View.INVISIBLE);
                 li_home_paixu.setVisibility(View.VISIBLE);
-                //iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                //iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
                 popWindow.dismiss();
             }
         });

@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,12 +47,19 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/comment_151_dip"/>
-        <android.support.v7.widget.RecyclerView
+
+        <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView
+            android:id="@+id/re_shop_mall"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@drawable/et_shap"
+            android:numColumns="4"/>
+       <!-- <android.support.v7.widget.RecyclerView
             android:layout_marginTop="@dimen/comment_10_dip"
             android:background="@drawable/et_shap"
             android:id="@+id/re_shop_mall"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    <include layout="@layout/home_appbarlayout" />
+            android:layout_height="160dp"/>-->
+        <include layout="@layout/home_appbarlayout" />
     </LinearLayout>
 </LinearLayout>

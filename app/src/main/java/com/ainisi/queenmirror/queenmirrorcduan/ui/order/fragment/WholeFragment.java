@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.OrderAllAdapter;
@@ -21,23 +20,17 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.cjj.MaterialRefreshLayout;
-import com.cjj.MaterialRefreshListener;
 import com.lzy.okgo.cache.CacheMode;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import butterknife.Bind;
-import in.srain.cube.views.ptr.header.MaterialHeader;
 
 /**
  * Created by EWorld on 2018/3/6.
@@ -54,10 +47,12 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
     private List<SortBean> list = new ArrayList<>();
     private Handler handler = new Handler();
     double amountNum;
-    int pageSum, pageNumber = 1;
-    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> apiOrderList = new ArrayList();
+    int pageSum = 0, pageNumber = 1,pageIndex = 0;
+    List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean>apiOrderList = new ArrayList();
     String state;
     public static WholeFragment instance = null;
+
+    OrderAllAdapter sbmitWholeAdapter;
 
     @Override
     protected int getLayoutResource() {
@@ -85,11 +80,17 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
 
     @Override
     protected void initView() {
+
+        sbmitWholeAdapter = new OrderAllAdapter(getActivity(), R.layout.item_sbmitrecycler, apiOrderList);
+        whole.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
+        whole.setAdapter(sbmitWholeAdapter);
+
+
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 pageNumber = 1;
-
+                pageIndex = 0;
                 doFirstData();
                 refreshlayout.finishRefresh(2000);
             }
@@ -97,9 +98,16 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                pageNumber++;
-                doFirstData();
-                refreshlayout.finishLoadmore(2000);
+
+                if(pageSum < pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                    refreshlayout.finishLoadmore(2000);
+                    T.show("您已加载完全部数据");
+                }else{
+                    pageNumber++;
+                    doFirstData();
+                    refreshlayout.finishLoadmore(2000);
+                }
+
             }
         });
     }
@@ -116,7 +124,7 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
         params.put("orderStatus", state);
         params.put("pageNumber", pageNumber + "");
         params.put("userId", SP.get(getActivity(), SpContent.UserId, "") + "");
-        params.put("pageSize", "2");
+        params.put("pageSize", SpContent.pageSize);
         HttpUtils.doPost(ACTION.ALLOFMYORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -130,12 +138,15 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
                 if (orderMyAllOrderBean.isSuccess()) {
                     pageSum = orderMyAllOrderBean.getBody().getPageSum();
 
-                    apiOrderList.addAll(orderMyAllOrderBean.getBody().getApiOrderList());
+                    if(pageSum < pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                        refreshLayout.setEnableLoadmore(false);
+                        T.show("您已加载完全部数据");
+                    }else{
+                        refreshLayout.setEnableLoadmore(true);
+                    }
 
-                   // apiOrderList = orderMyAllOrderBean.getBody().getApiOrderList();
-                    OrderAllAdapter sbmitWholeAdapter = new OrderAllAdapter(getActivity(), R.layout.item_sbmitrecycler, apiOrderList);
-                    whole.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
-                    whole.setAdapter(sbmitWholeAdapter);
+                    loadMoreData(orderMyAllOrderBean.getBody().getApiOrderList());
+
                     sbmitWholeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -170,5 +181,24 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
     @Override
     public void showErrorMessage(String s) {
 
+    }
+
+    public void loadMoreData(List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> apiOrderListMore){
+
+        if(apiOrderList == null){
+            apiOrderList = new ArrayList<>();
+        }
+
+        if(pageIndex == 0){
+            sbmitWholeAdapter.setmDate(null);
+        }
+        apiOrderList.addAll(apiOrderListMore);
+
+        if(pageIndex == 0){
+            sbmitWholeAdapter.setmDate(apiOrderList);
+        }else{
+            sbmitWholeAdapter.notifyDataSetChanged();
+        }
+       pageIndex += Integer.parseInt(SpContent.pageSize);
     }
 }

@@ -5,6 +5,8 @@ package com.ainisi.queenmirror.queenmirrorcduan.utilnomal;
  */
 public class SpContent {
 
+    public static String pageSize = "10";
+
     public static String isLogin = "isLogin";//判断是否登录
 
     public static String UserId = "userId";//用户对应的ID
