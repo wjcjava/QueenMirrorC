@@ -17,6 +17,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -40,10 +41,10 @@ import butterknife.Bind;
 public class WholeFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.rc_whole)
     RecyclerView whole;
-   /* @Bind(R.id.order_main_refresh)
-    MaterialRefreshLayout order_main_refresh;*/
-   @Bind(R.id.refreshLayout)
-   SmartRefreshLayout refreshLayout;
+    /* @Bind(R.id.order_main_refresh)
+     MaterialRefreshLayout order_main_refresh;*/
+    @Bind(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
     private List<SortBean> list = new ArrayList<>();
     private Handler handler = new Handler();
     double amountNum;
@@ -75,16 +76,15 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
     @Override
     public void onResume() {
         super.onResume();
-        doFirstData();
+        pageIndex = 0;
     }
 
     @Override
     protected void initView() {
-
+        doFirstData();
         sbmitWholeAdapter = new OrderAllAdapter(getActivity(), R.layout.item_sbmitrecycler, apiOrderList);
         whole.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));
         whole.setAdapter(sbmitWholeAdapter);
-
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -99,7 +99,7 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
 
-                if(pageSum < pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                if(pageSum > pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
                     refreshlayout.finishLoadmore(2000);
                     T.show("您已加载完全部数据");
                 }else{
@@ -133,12 +133,11 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
         switch (action) {
 
             case ACTION.ALLOFMYORDER:
-
                 OrderMyAllOrderBean orderMyAllOrderBean = GsonUtil.toObj(res, OrderMyAllOrderBean.class);
                 if (orderMyAllOrderBean.isSuccess()) {
                     pageSum = orderMyAllOrderBean.getBody().getPageSum();
 
-                    if(pageSum < pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                    if(pageSum > pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
                         refreshLayout.setEnableLoadmore(false);
                         T.show("您已加载完全部数据");
                     }else{
@@ -188,17 +187,17 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
         if(apiOrderList == null){
             apiOrderList = new ArrayList<>();
         }
-
         if(pageIndex == 0){
-            sbmitWholeAdapter.setmDate(null);
+            sbmitWholeAdapter.Clear();
         }
-        apiOrderList.addAll(apiOrderListMore);
 
+        apiOrderList.addAll(apiOrderListMore);
         if(pageIndex == 0){
             sbmitWholeAdapter.setmDate(apiOrderList);
         }else{
             sbmitWholeAdapter.notifyDataSetChanged();
         }
-       pageIndex += Integer.parseInt(SpContent.pageSize);
+        pageIndex += Integer.parseInt(SpContent.pageSize);
+
     }
 }

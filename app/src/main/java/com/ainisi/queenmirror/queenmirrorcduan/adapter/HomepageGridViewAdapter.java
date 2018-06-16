@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
@@ -40,6 +41,17 @@ public class HomepageGridViewAdapter extends BaseAdapter{
         this.ShopListData = ShopListData;
         this.where = where;
     }
+
+    public void Clear(){
+        ShopListData.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setmDate(List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData) {
+        this.ShopListData = ShopListData;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return ShopListData.size();

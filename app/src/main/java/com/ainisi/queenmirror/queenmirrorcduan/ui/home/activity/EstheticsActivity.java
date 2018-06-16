@@ -26,6 +26,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.EstheticsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.popbutton.PopupButton;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
@@ -33,11 +34,16 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.customview.RefreshLoadMoreLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
 import com.qbw.log.XLog;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,8 +55,8 @@ import butterknife.OnClick;
 /**
  * 美学汇（美甲美手）
  */
-public class EstheticsActivity extends BaseActivity implements HttpCallBack,RefreshLoadMoreLayout.CallBack {
-//    @Bind(R.id.full_rb_sort)
+public class EstheticsActivity extends BaseActivity implements HttpCallBack {
+    //    @Bind(R.id.full_rb_sort)
 //    TextView hSort;
     @Bind(R.id.re_recommendable_projects)
     RecyclerView reProjects;
@@ -60,7 +66,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
     TextView hDistance;
     @Bind(R.id.full_rb_screen)
     TextView hscreen;
-//    @Bind(R.id.iv_sort)
+    //    @Bind(R.id.iv_sort)
 //    ImageView ivsort;
 //    @Bind(R.id.iv_sort1)
 //    ImageView ivsort1;
@@ -80,7 +86,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
     private List<ProblemBean> list = new ArrayList<>();
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
     String shop_name, categoryId;
-    int pageNumber = 1;
+    int pageNumber = 1,pageIndex = 0,pageSum = 0;
     EstheticsAdapter sortAdapter;
 
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
@@ -94,6 +100,10 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
     RefreshLoadMoreLayout mRefreshLoadMoreLayout;
     private ArrayList<String> cValues;
 
+    @Bind(R.id.esthetrics_refreshLayout)
+    SmartRefreshLayout esthetrics_refreshLayout;
+    FullShortAdapter sortAdapter_mal;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_esthetics;
@@ -101,14 +111,6 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
 
     @Override
     public void initPresenter() {
-        mRefreshLoadMoreLayout.init(new RefreshLoadMoreLayout.Config(this).canRefresh(true)
-                .canLoadMore(true)
-                .autoLoadMore()
-
-                .showLastRefreshTime(
-                        RefreshLoadMoreLayout.class,
-                        "yyyy-MM-dd")
-                .multiTask());
     }
 
     @Override
@@ -158,18 +160,23 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
                 ClassificationBean classificationBean = GsonUtil.toObj(res, ClassificationBean.class);
 
                 if (classificationBean.isSuccess()) {
-                    sortlist = classificationBean.getBody().getShopListData();
 
-                    FullShortAdapter sortAdapter = new FullShortAdapter(this, R.layout.item_shortrecycler, sortlist);
-                    recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-                    recycler.setAdapter(sortAdapter);
+                    pageSum = classificationBean.getBody().getShopListData().size();
+                    if(pageSum > pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                        esthetrics_refreshLayout.setEnableLoadmore(false);
+                        T.show("您已加载完全部数据");
+                    }else{
+                        esthetrics_refreshLayout.setEnableLoadmore(true);
+                    }
+
+                    loadMoreData(classificationBean.getBody().getShopListData());
+
                     sortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                             startActivity(new Intent(EstheticsActivity.this, WorkRoomDetailActivity.class));
                         }
                     });
-
                 } else {
                     T.show(classificationBean.getMsg());
                 }
@@ -182,6 +189,44 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
         shop_name = intent.getStringExtra("shop_name");
         newtitle_title.setText(shop_name);
         categoryId = intent.getStringExtra("categoryId");
+
+
+        sortAdapter_mal = new FullShortAdapter(this, R.layout.item_shortrecycler, sortlist);
+        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recycler.setAdapter(sortAdapter);
+
+        esthetrics_refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                pageNumber = 1;
+                pageIndex = 0;
+                /**
+                 * 获取首页部分数据
+                 */
+                getTuijianData();
+                initDate();
+
+                inithttp();
+                inithttpshop();
+                refreshlayout.finishRefresh(2000);
+            }
+        });
+        esthetrics_refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+
+                if(pageSum > pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                    refreshlayout.finishLoadmore(2000);
+                    T.show("您已加载完全部数据");
+                }else{
+                    pageNumber++;
+                    inithttpshop();
+                    refreshlayout.finishLoadmore(2000);
+                }
+
+            }
+        });
+
         getTuijianData();
         initDate();
 
@@ -280,7 +325,7 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
                 //ivsort1.setVisibility(View.VISIBLE);
                 initpop();
                 colorText(hscreen,hSales,hDistance,btSort);
-               // pop.showAsDropDown(hSort);
+                // pop.showAsDropDown(hSort);
 
                 break;
             //销量最高
@@ -377,29 +422,22 @@ public class EstheticsActivity extends BaseActivity implements HttpCallBack,Refr
 
     }
 
-    @Override
-    public void onRefresh() {
-        XLog.v("onRefresh");
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                T.show("下拉成功");
+    public void loadMoreData(List<ClassificationBean.BodyBean.ShopListDataBean> apiOrderListMore){
 
-                mRefreshLoadMoreLayout.stopRefresh();
-            }
-        }, 200);
-    }
+        if(sortlist == null){
+            sortlist = new ArrayList<>();
+        }
+        if(pageIndex == 0){
+            sortAdapter_mal.Clear();
+        }
 
-    @Override
-    public void onLoadMore() {
-        XLog.v("onLoadMore");
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                T.show("上拉成功");
+        sortlist.addAll(apiOrderListMore);
+        if(pageIndex == 0){
+            sortAdapter_mal.setmDate(sortlist);
+        }else{
+            sortAdapter_mal.notifyDataSetChanged();
+        }
+        pageIndex += Integer.parseInt(SpContent.pageSize);
 
-                mRefreshLoadMoreLayout.stopLoadMore();
-            }
-        }, 1000);
     }
 }

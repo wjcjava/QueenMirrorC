@@ -59,20 +59,31 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView
-        android:id="@+id/sc_home_scroll"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/home_refreshLayout"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-        android:layout_height="wrap_content"
-        android:layout_below="@id/app_bar"
-        android:scrollbars="none">
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_bar">
+
+            <com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView
+                android:id="@+id/sc_home_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/alpha_05_black"
-            android:scrollbars="none">
+            android:scrollbars="vertical">
 
             <include layout="@layout/home_new_top" />
 
@@ -137,6 +148,15 @@
 
         </LinearLayout>
     </com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView>
+
+        </RelativeLayout>
+
+
+        <com.scwang.smartrefresh.layout.footer.ballpulse.BallPulseView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
     <LinearLayout
@@ -245,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/comment_1_dip"
                     android:button="@null"
-                    android:drawableLeft="@drawable/icon_home_screen" />
+                    android:drawableLeft="@drawable/icon_home_screen"/>
             </LinearLayout>
 
             <LinearLayout
@@ -260,7 +280,8 @@
                     android:id="@+id/iv_uspension_surface"
                     android:layout_width="@dimen/comment_15_dip"
                     android:layout_height="@dimen/comment_12_dip"
-                    app:srcCompat="@drawable/icon_home_recycler" />
+                    app:srcCompat="@drawable/icon_home_recycler">
+                </ImageView>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

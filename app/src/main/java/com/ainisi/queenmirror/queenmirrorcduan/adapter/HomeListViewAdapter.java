@@ -39,6 +39,17 @@ public class HomeListViewAdapter extends BaseAdapter {
         this.where = where;
     }
 
+
+    public void Clear(){
+        ShopListData.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setmDate(List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData) {
+        this.ShopListData = ShopListData;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return ShopListData.size();

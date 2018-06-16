@@ -13,7 +13,7 @@
         android:layout_marginBottom="@dimen/comment_19_dip"
         android:layout_marginStart="@dimen/comment_11_dip"
         android:layout_marginTop="@dimen/comment_11_dip"
-        android:src="@drawable/ic_sortrecyle_logo" />
+        android:src="@drawable/dismiss" />
 
     <TextView
         android:id="@+id/tv_weorkroom_title"

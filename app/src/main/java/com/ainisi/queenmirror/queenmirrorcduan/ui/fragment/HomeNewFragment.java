@@ -34,6 +34,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.HomeNewShopBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.NewsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
@@ -68,6 +69,10 @@ import com.amap.api.location.AMapLocation;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.cache.CacheMode;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -193,10 +198,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     ImageView iv_home_new_five;
 
     private HomeIndustryBean homeIndustryBean;
-    private HomeHeadlinesBean homeHeadlinesBean;
-    private HomeAdvertisingBean homeAdvertisingBean;
-    List<String> contntList = new ArrayList<>();
-    List<SortBean> sortlist = new ArrayList<>();
 
     int hight;
     boolean type = false;
@@ -210,12 +211,20 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private MerchantsAdapter merchantsAdapter;
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
-    private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist;
+    private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist = new ArrayList<>();
     private PopupWindow popWindowdistance;
     private ArrayList<String> cValues;
     private String bannerDetails;
     private List<PageBannerBean.BodyBean.BannerListDataBean> bannerList;
 
+
+    @Bind(R.id.home_refreshLayout)
+    SmartRefreshLayout home_refreshLayout;
+
+    int pageNumber=1,pageIndex=0,pageSum = 0;
+
+    HomepageGridViewAdapter gridViewAdapter;
+    HomeListViewAdapter homeListViewAdapter;
 
     @Override
     protected int getLayoutResource() {
@@ -251,9 +260,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
      */
     private void getShopData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("pageNumber", "1");
+        params.put("pageNumber", pageNumber+"");
         params.put("contentByTitle", "");
-        params.put("pageSize", "10");
+        params.put("pageSize", SpContent.pageSize);
         params.put("shopCate", "1");
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
@@ -272,6 +281,46 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Override
     protected void initView() {
 
+        gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shoplist, "home");
+        gv_home_gridView.setAdapter(gridViewAdapter);
+
+        homeListViewAdapter = new HomeListViewAdapter(getActivity(), shoplist, "home");
+        nl_home_list_view.setAdapter(homeListViewAdapter);
+
+        home_refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                pageNumber = 1;
+                pageIndex = 0;
+                /**
+                 * 获取首页部分数据
+                 */
+                initBanner();
+                getBannerData();
+                getShopData();
+                initnewShop();
+                inithttp();
+
+                refreshlayout.finishRefresh(2000);
+            }
+        });
+        home_refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+
+                if(pageSum > pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                    refreshlayout.finishLoadmore(2000);
+                    T.show("您已加载完全部数据");
+                }else{
+                    pageNumber++;
+                    getShopData();
+                    refreshlayout.finishLoadmore(2000);
+                }
+
+            }
+        });
+
+
         /**
          * 获取首页部分数据
          */
@@ -279,7 +328,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         getBannerData();
         getShopData();
         initnewShop();
-
 
         sc_home_scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @SuppressLint("WrongConstant")
@@ -493,8 +541,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     gv_home_gridView.setVisibility(View.VISIBLE);
 
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shoplist, "home");
-                        gv_home_gridView.setAdapter(gridViewAdapter);
+                       /* HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shoplist, "home");
+                        gv_home_gridView.setAdapter(gridViewAdapter);*/
+
+                        loadData(shoplist);
                     } else {
 
                     }
@@ -506,8 +556,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                     gv_home_gridView.setVisibility(View.GONE);
 
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
-                        HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shoplist, "home");
+                       /* HomeListViewAdapter homeListViewAdapter = new HomeListViewAdapter(getActivity(), shoplist, "home");
                         nl_home_list_view.setAdapter(homeListViewAdapter);
+*/
+                        loadData(shoplist);
                     }
                 }
                 break;
@@ -761,9 +813,18 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
                 if (shopListHomeBean.isSuccess()) {
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
-                        shoplist = shopListHomeBean.getBody().getShopList();
-                        HomepageGridViewAdapter gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shoplist, "home");
-                        gv_home_gridView.setAdapter(gridViewAdapter);
+
+                        pageSum = shopListHomeBean.getBody().getShopList().size();
+
+                        if(pageSum < Integer.parseInt(SpContent.pageSize)){
+                            T.show("您已加载全部数据");
+                            home_refreshLayout.setEnableLoadmore(false);
+                        }else{
+                            home_refreshLayout.setEnableLoadmore(true);
+                        }
+
+                        loadMoreData(shopListHomeBean.getBody().getShopList());
+
                     } else {
                         T.show("暂无店铺信息");
                     }
@@ -949,4 +1010,38 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         super.onStop();
         mv_home_marqueeView.stopFlipping();
     }
+
+    public void loadData(List<ShopListHomeBean.BodyBean.ShopListBean> apiOrderListMore){
+        if(pageIndex == 0){
+            gridViewAdapter.setmDate(shoplist);
+            homeListViewAdapter.setmDate(shoplist);
+        }else{
+            gridViewAdapter.notifyDataSetChanged();
+            homeListViewAdapter.notifyDataSetChanged();
+        }
+    }
+
+
+    public void loadMoreData(List<ShopListHomeBean.BodyBean.ShopListBean> apiOrderListMore){
+
+        if(shoplist == null){
+            shoplist = new ArrayList<>();
+        }
+        if(pageIndex == 0){
+            gridViewAdapter.Clear();
+            homeListViewAdapter.Clear();
+        }
+
+        shoplist.addAll(apiOrderListMore);
+        if(pageIndex == 0){
+            gridViewAdapter.setmDate(shoplist);
+            homeListViewAdapter.setmDate(shoplist);
+        }else{
+            gridViewAdapter.notifyDataSetChanged();
+            homeListViewAdapter.notifyDataSetChanged();
+        }
+        pageIndex += Integer.parseInt(SpContent.pageSize);
+
+    }
+
 }

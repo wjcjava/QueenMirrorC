@@ -17,7 +17,7 @@
             android:layout_marginTop="@dimen/comment_27_dip"
             android:layout_width="@dimen/comment_67_dip"
             android:layout_height="@dimen/comment_67_dip"
-            android:src="@drawable/ic_sortrecyle_logo" />
+            android:src="@drawable/dismiss" />
         <ImageView
             android:id="@+id/iv_information_two"
             android:layout_toRightOf="@id/iv_information_one"
@@ -25,14 +25,24 @@
             android:layout_marginTop="@dimen/comment_27_dip"
             android:layout_width="@dimen/comment_67_dip"
             android:layout_height="@dimen/comment_67_dip"
-            android:src="@drawable/ic_sortrecyle_logo" />
+            android:src="@drawable/dismiss" />
         <ImageView
+            android:id="@+id/iv_information_three"
             android:layout_toRightOf="@id/iv_information_two"
             android:layout_marginStart="@dimen/comment_12_dip"
             android:layout_marginTop="@dimen/comment_27_dip"
             android:layout_width="@dimen/comment_67_dip"
             android:layout_height="@dimen/comment_67_dip"
-            android:src="@drawable/ic_sortrecyle_logo" />
+            android:src="@drawable/dismiss" />
+
+        <ImageView
+            android:id="@+id/iv_information_four"
+            android:layout_toRightOf="@id/iv_information_three"
+            android:layout_marginStart="@dimen/comment_12_dip"
+            android:layout_marginTop="@dimen/comment_27_dip"
+            android:layout_width="@dimen/comment_67_dip"
+            android:layout_height="@dimen/comment_67_dip"
+            android:src="@drawable/dismiss" />
         <TextView
             android:id="@+id/tv_industry_division"
             android:layout_below="@id/iv_information_one"

@@ -2,18 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:divider="@null"
-        android:layout_height="wrap_content">
-    </com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview>
-    <!--门店优惠券-->
-    <include
-        layout="@layout/layout_workroom_coupon"/>
 
-    <!--商家信息-->
-    <include
-        layout="@layout/layout_workroom_service_information"/>
+
+            <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:divider="@null"
+                android:layout_height="wrap_content">
+            </com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview>
+            <!--门店优惠券-->
+            <include
+                layout="@layout/layout_workroom_coupon"/>
+
+            <!--商家信息-->
+            <include
+                layout="@layout/layout_workroom_service_information"/>
+
 </RelativeLayout>

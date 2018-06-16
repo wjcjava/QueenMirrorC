@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
@@ -21,10 +22,12 @@ import java.util.List;
 public class FullShortAdapter extends BaseQuickAdapter<ClassificationBean.BodyBean.ShopListDataBean, BaseViewHolder> {
 
     Context context;
+    List<ClassificationBean.BodyBean.ShopListDataBean> data;
 
     public FullShortAdapter(Context context,int layoutResId, @Nullable List<ClassificationBean.BodyBean.ShopListDataBean> data) {
         super(layoutResId, data);
         this.context = context;
+        this.data = data;
     }
 
     @Override
@@ -42,6 +45,15 @@ public class FullShortAdapter extends BaseQuickAdapter<ClassificationBean.BodyBe
                 context.startActivity(intent);
             }
         });
+    }
 
+    public void Clear(){
+        data.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setmDate(List<ClassificationBean.BodyBean.ShopListDataBean> data) {
+        this.data = data;
+        this.notifyDataSetChanged();
     }
 }

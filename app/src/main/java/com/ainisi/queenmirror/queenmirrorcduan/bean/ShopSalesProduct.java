@@ -275,9 +275,9 @@ public class ShopSalesProduct {
                 private String goodsBrief;
                 private String serviceTime;
                 private Object goodsDetails;
-                private Object goodsThumb;
-                private Object goodsPic;
-                private Object goodsShow;
+                private String goodsThumb;
+                private String goodsPic;
+                private String goodsShow;
                 private String goodsTab;
                 private Object goodsStorage;
                 private String goodsPrice;
@@ -291,6 +291,38 @@ public class ShopSalesProduct {
                 private long endTime;
                 private Object goodsRemarks;
                 private String updatePgm;
+
+                public boolean isNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setNewRecord(boolean newRecord) {
+                    isNewRecord = newRecord;
+                }
+
+                public String getGoodsThumb() {
+                    return goodsThumb;
+                }
+
+                public void setGoodsThumb(String goodsThumb) {
+                    this.goodsThumb = goodsThumb;
+                }
+
+                public String getGoodsPic() {
+                    return goodsPic;
+                }
+
+                public void setGoodsPic(String goodsPic) {
+                    this.goodsPic = goodsPic;
+                }
+
+                public String getGoodsShow() {
+                    return goodsShow;
+                }
+
+                public void setGoodsShow(String goodsShow) {
+                    this.goodsShow = goodsShow;
+                }
 
                 public String getMarketPrice() {
                     return marketPrice;
@@ -394,30 +426,6 @@ public class ShopSalesProduct {
 
                 public void setGoodsDetails(Object goodsDetails) {
                     this.goodsDetails = goodsDetails;
-                }
-
-                public Object getGoodsThumb() {
-                    return goodsThumb;
-                }
-
-                public void setGoodsThumb(Object goodsThumb) {
-                    this.goodsThumb = goodsThumb;
-                }
-
-                public Object getGoodsPic() {
-                    return goodsPic;
-                }
-
-                public void setGoodsPic(Object goodsPic) {
-                    this.goodsPic = goodsPic;
-                }
-
-                public Object getGoodsShow() {
-                    return goodsShow;
-                }
-
-                public void setGoodsShow(Object goodsShow) {
-                    this.goodsShow = goodsShow;
                 }
 
                 public String getGoodsTab() {

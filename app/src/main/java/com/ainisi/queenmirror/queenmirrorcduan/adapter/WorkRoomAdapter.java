@@ -18,14 +18,17 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.bumptech.glide.Glide;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.ArrayList;
@@ -48,6 +51,17 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
         this.apiGoodsList = apiGoodsList;
         inflater = LayoutInflater.from(context);
     }
+
+    public void Clear(){
+        apiGoodsList.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setmDate(List<ShopSalesProduct.BodyBean.ApiGoodsListBean> ShopListData) {
+        this.apiGoodsList = ShopListData;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return apiGoodsList.size();
@@ -81,6 +95,7 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
             holder.tv_workroom_service_price = convertView.findViewById(R.id.tv_workroom_service_price);
             holder.iv_workroom_add_cat = convertView.findViewById(R.id.iv_workroom_add_cat);
             holder.rl_workroom_list = convertView.findViewById(R.id.rl_workroom_list);
+            holder.iv_weorkroom_title = convertView.findViewById(R.id.iv_weorkroom_title);
 
             convertView.setTag(holder);
         }else{
@@ -99,10 +114,17 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
                 holder.tv_browse.setText("浏览" + apiGoodsList.get(position).getEcGoodsBrowses().getBrowseCounts() + "次");
             }
         }
-
         holder.tv_price.setText("￥"+apiGoodsList.get(position).getEcGoodsBasic().getSalesPrice());
         holder.tv_workroom_service_price.setText("￥"+apiGoodsList.get(position).getEcGoodsBasic().getMarketPrice());
         holder.tv_workroom_service_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+
+
+        if(apiGoodsList.get(position).getEcGoodsBasic().getGoodsThumb() == null){
+
+        }else {
+            String[] split = apiGoodsList.get(position).getEcGoodsBasic().getGoodsThumb().split(",");
+            Glide.with(context).load(split[0]).into(holder.iv_weorkroom_title);
+        }
 
         holder.iv_workroom_add_cat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,8 +172,8 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
                 SuccessBean successBean = GsonUtil.toObj(res,SuccessBean.class);
                 if(successBean.isSuccess()){
                     T.show("加入购物车成功");
-                   WorkRoomDetailActivity.instance.getShopCartData();
-                   T.show("已成功添加到购物车");
+                    WorkRoomDetailActivity.instance.getShopCartData();
+                    T.show("已成功添加到购物车");
                 }else{
                     T.show(successBean.getMsg());
                 }
@@ -180,5 +202,6 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
         private TextView tv_workroom_service_price;
         private ImageView iv_workroom_add_cat;
         private RelativeLayout rl_workroom_list;
+        private ImageView iv_weorkroom_title;
     }
 }

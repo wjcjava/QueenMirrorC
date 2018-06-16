@@ -48,6 +48,11 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
         this.data = data;
     }
 
+    public void Clear(){
+        data.clear();
+        notifyDataSetChanged();
+    }
+
     public void setmDate(List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> data) {
         this.data = data;
         this.notifyDataSetChanged();

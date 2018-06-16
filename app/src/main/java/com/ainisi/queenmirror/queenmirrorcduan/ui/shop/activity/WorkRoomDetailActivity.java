@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopDetailDataBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopTuijianBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopXinyongBean;
@@ -36,7 +38,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
+import com.bumptech.glide.Glide;
 import com.lzy.okgo.cache.CacheMode;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -102,6 +109,16 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     TextView textSingle;
     @Bind(R.id.tv_submit)
     TextView tv_submit;
+
+    @Bind(R.id.iv_information_one)
+    ImageView iv_information_one;
+    @Bind(R.id.iv_information_two)
+    ImageView iv_information_two;
+    @Bind(R.id.iv_information_three)
+    ImageView iv_information_three;
+    @Bind(R.id.iv_information_four)
+    ImageView iv_information_four;
+
     List<SortBean> sortlist = new ArrayList<>();
     List<String> tabList = new ArrayList<>();
     private WorkRoomAdapter listadapter;
@@ -124,6 +141,10 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
     ShopXinyongBean.BodyBean.ApiShopScoreGetBean apiShopScoreGet = new ShopXinyongBean.BodyBean.ApiShopScoreGetBean();
 
+    @Bind(R.id.workroom_refreshLayout)
+    SmartRefreshLayout workroom_refreshLayout;
+    int pageIndex = 0;
+
     @Override
     protected int getLayoutId() {
         instance = this;
@@ -143,6 +164,36 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         tv_common_title.setText(shopName);
         whs_workroom_scroll.setOnScrollListener(this);
 
+        listadapter = new WorkRoomAdapter(WorkRoomDetailActivity.this, apiGoodsList);
+        listView.setAdapter(listadapter);
+
+        workroom_refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                pageNumber = 1;
+                pageIndex = 0;
+
+                doGetSaleShop();
+                refreshlayout.finishRefresh(2000);
+            }
+        });
+        workroom_refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+
+                if(pageSum > pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                    refreshlayout.finishLoadmore(2000);
+                    T.show("您已加载完全部数据");
+                }else{
+                    pageNumber++;
+                    doGetSaleShop();
+                    refreshlayout.finishLoadmore(2000);
+                }
+
+            }
+        });
+
+
         /**
          * 获取商家具体信息
          */
@@ -150,6 +201,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
 
         doAddliulanData();
         doFirstData();
+        /**
+         * 商家所卖商品
+         */
         doGetSaleShop();
         /**
          * 获取门店信用数据
@@ -185,7 +239,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
-            case ACTION.GETSHOPPINDCART:
+            case ACTION.GETSHOPPINDCART://购物车
                 shoppingCartBean = GsonUtil.toObj(res, ShoppingCartBean.class);
 
                 if(shoppingCartBean.getBody().getShopList().size()>0){
@@ -211,7 +265,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                     T.show(successBean1.getMsg());
                 }
                 break;
-            case ACTION.CANCELCOLLECTION:
+            case ACTION.CANCELCOLLECTION://取消收藏
                 isColl = false;
                 SuccessBean successBean2 = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean2.isSuccess()) {
@@ -229,10 +283,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                 break;
             case ACTION.SHOPSALEPRODUCT://获取商家所卖商品列表
                 ShopSalesProduct shopSalesProduct = GsonUtil.toObj(res, ShopSalesProduct.class);
-                apiGoodsList = shopSalesProduct.getBody().getApiGoodsList();
                 pageSum = shopSalesProduct.getBody().getPageSum();
-                listadapter = new WorkRoomAdapter(WorkRoomDetailActivity.this, apiGoodsList);
-                listView.setAdapter(listadapter);
+
+                loadMoreData(shopSalesProduct.getBody().getApiGoodsList());
                 break;
             case ACTION.SHOPXINYONG://获取门店信用
                 ShopXinyongBean shopXinyongBean = GsonUtil.toObj(res, ShopXinyongBean.class);
@@ -342,7 +395,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
         params.put("saleFlag", "2");//上架标记（2：上架）
         params.put("pageNumber", pageNumber + "");
         params.put("shopId", shopId);//商家ID
-        params.put("pageSize", "10");
+        params.put("pageSize", SpContent.pageSize);
         HttpUtils.doPost(ACTION.SHOPTUIJIANLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -414,8 +467,8 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         listView.setVisibility(View.VISIBLE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
-                        listadapter = new WorkRoomAdapter(WorkRoomDetailActivity.this, apiGoodsList);
-                        listView.setAdapter(listadapter);
+
+                        loadMoreData(apiGoodsList);
                         break;
                     //门店信用
                     case 1:
@@ -431,6 +484,28 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         listView.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.VISIBLE);
+                        String envPhoto = shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopEnvPhoto();
+
+                        String []envPhotos = envPhoto.split(",");
+
+                        if(envPhotos.length < 1){
+
+                        }else if(envPhotos.length < 2){
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[0]).into(iv_information_one);
+                        }else if(envPhotos.length < 3){
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[0]).into(iv_information_one);
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[1]).into(iv_information_two);
+                        }else if(envPhotos.length < 4){
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[0]).into(iv_information_one);
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[1]).into(iv_information_two);
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[2]).into(iv_information_three);
+                        }else if(envPhotos.length < 5){
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[0]).into(iv_information_one);
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[1]).into(iv_information_two);
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[2]).into(iv_information_three);
+                            Glide.with(WorkRoomDetailActivity.this).load(envPhotos[3]).into(iv_information_four);
+                        }
+
 
                         if(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab() == null ||shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab().equals("")){
 
@@ -557,4 +632,23 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     }
 
 
+
+    public void loadMoreData(List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiOrderListMore){
+
+        if(apiGoodsList == null){
+            apiGoodsList = new ArrayList<>();
+        }
+        if(pageIndex == 0){
+            listadapter.Clear();
+        }
+
+        apiGoodsList.addAll(apiOrderListMore);
+        if(pageIndex == 0){
+            listadapter.setmDate(apiGoodsList);
+        }else{
+            listadapter.notifyDataSetChanged();
+        }
+        pageIndex += Integer.parseInt(SpContent.pageSize);
+
+    }
 }
