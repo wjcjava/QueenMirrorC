@@ -131,6 +131,7 @@ public class RegisterActivity extends BaseNewActivity implements HttpCallBack {
         switch (view.getId()) {
             case R.id.tv_regist_agreement:
                 Intent intent = new Intent(this,RegistAgreementActivity.class);
+                intent.putExtra("queryTitle","女王魔镜用户协议与隐私条件");
                 startActivity(intent);
                 break;
             case R.id.title_back:

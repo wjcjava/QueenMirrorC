@@ -43,6 +43,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeAdvertisingActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.HomeFightaloneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PageBannerActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.MerchantsAdapter;
@@ -54,7 +55,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PageBannerBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
@@ -213,6 +213,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist;
     private PopupWindow popWindowdistance;
     private ArrayList<String> cValues;
+    private String bannerDetails;
+    private List<PageBannerBean.BodyBean.BannerListDataBean> bannerList;
+
 
     @Override
     protected int getLayoutResource() {
@@ -226,9 +229,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
     private void initBanner() {
         HashMap<String, String> parames = new HashMap<>();
-        parames.put("bannerStyle", "");
+        //parames.put("bannerStyle", "");
         HttpUtils.doPost(ACTION.PAGEBANNER, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     /**
      * 获取首页的行业分类
      * 首页的那我头条
@@ -239,7 +243,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         hashMap.put("tabType", "2");//type  2代表美业    4代表异业
         hashMap.put("tabFather", "0");
         HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
-        //HttpUtils.doPost(ACTION.HEADLINES, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//头条
         //HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//Banner
     }
 
@@ -475,12 +478,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 intent.putExtra("shop_name", tv_home_permanent.getText().toString());
                 startActivity(intent);
                 break;
-            /**
-             * 拼团
-             */
-            case R.id.linear_home_freetrial:
-                startActivity(new Intent(getActivity(), HomeFightaloneActivity.class));
-                break;
+
+
             /**
              * 展示形式改变
              */
@@ -773,73 +772,73 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 }
 
                 break;
-            //首页的女王头条
-//            case ACTION.HEADLINES:
-//                homeHeadlinesBean = GsonUtil.toObj(res, HomeHeadlinesBean.class);
-//                if (homeHeadlinesBean.isSuccess()) {
-//                    for (int i = 0; i < homeHeadlinesBean.getBody().getTopListData().size(); i++) {
-//                        contntList.add(homeHeadlinesBean.getBody().getTopListData().get(i).getEcTop().getTopName());
-//                    }
-//                    mv_home_marqueeView.startWithList(contntList);
-//                } else {
-//                    T.show(homeHeadlinesBean.getMsg());
-//                }
-
-            // break;
             //首页bannerl列表
             //case ACTION.ADVERTISING:
             case ACTION.PAGEBANNER:
                 PageBannerBean bannerBean = GsonUtil.toObj(res, PageBannerBean.class);
                 if (bannerBean.isSuccess()) {
-                    final List<PageBannerBean.BodyBean.BannerListDataBean> bannerList = bannerBean.getBody().getBannerListData();
+                    bannerList = bannerBean.getBody().getBannerListData();
                     List<String> images = new ArrayList<>();
                     List<String> imagesTwo = new ArrayList<>();
                     List<String> bannerName = new ArrayList<>();
                     for (int i = 0; i < bannerList.size(); i++) {
                         if (bannerList.get(i).getPageLocation().equals("1")) {
                             images.add(bannerList.get(i).getBannerLogo());
-
+                            banner.setImageLoader(new GlideImageLoader());
+                            banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
+                            banner.setImages(images);
+                            banner.start();
+                            initBannerOnClick(banner);
                         } else if (bannerList.get(i).getPageLocation().equals("2")) {
                             bannerName.add(bannerList.get(i).getBannerName());
                             mv_home_marqueeView.startWithList(bannerName);
+                            bannerDetails = bannerList.get(i).getBannerDetails();
+                            if (bannerList.get(i).getBannerStyle().equals("1")) {
+                                mv_home_marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(int position, TextView textView) {
+                                        Intent intent = new Intent(getActivity(), PageBannerActivity.class);
+                                        intent.putExtra("bannerDetails", bannerDetails);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
                         } else if (bannerList.get(i).getPageLocation().equals("3")) {
-                            initShowSort(bannerList, i, 1, ivNewuserprg);
-                            initShowSort(bannerList, i, 2, ivFreetrial);
-                            initShowSort(bannerList, i, 3, ivSpecialoffer);
-                            initShowSort(bannerList, i, 4, ivGoodshop);
+                            initShowSort(i, 1, ivNewuserprg);
+                            initShowSort(i, 2, ivFreetrial);
+                            initOnClick(i,1,ivNewuserprg);
+                            ivFreetrial.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(getActivity(), HomeFightaloneActivity.class));
+                                }
+                            });
+                            initShowSort(i, 3, ivSpecialoffer);
+                            initShowSort(i, 4, ivGoodshop);
+                            initOnClick(i,3,ivSpecialoffer);
+                            initOnClick(i,4,ivGoodshop);
                         } else if (bannerList.get(i).getPageLocation().equals("4")) {
-                            initShowSort(bannerList, i, 1, ivItemShop);
-                            initShowSort(bannerList, i, 2, ivConvert);
-                            initShowSort(bannerList, i, 3, ivPrize);
-                            initShowSort(bannerList, i, 4, ivQueenShop);
-                        }else if(bannerList.get(i).getPageLocation().equals("5")){
+                            initShowSort(i, 1, ivItemShop);
+                            initShowSort(i, 2, ivConvert);
+                            initShowSort(i, 3, ivPrize);
+                            initShowSort(i, 4, ivQueenShop);
+                            initOnClick(i,1,ivItemShop);
+                            initOnClick(i,2,ivConvert);
+                            initOnClick(i,3,ivPrize);
+                            initOnClick(i,4,ivQueenShop);
+                        } else if (bannerList.get(i).getPageLocation().equals("5")) {
                             imagesTwo.add(bannerList.get(i).getBannerLogo());
+                            banner_middle.setBannerStyle(BannerConfig.NOT_INDICATOR);
+                            banner_middle.setImageLoader(new GlideImageLoader());
+                            banner_middle.setImages(imagesTwo);
+                            banner_middle.start();
+                            initBannerOnClick(banner_middle);
+
+
                         }
 
                     }
-                    banner.setImageLoader(new GlideImageLoader());
-                    banner.setImages(images);
-                    banner.start();
-                    banner.setOnBannerListener(new OnBannerListener() {
-                        @Override
-                        public void OnBannerClick(int position) {
-                            Intent intent = new Intent(getActivity(), HomeAdvertisingActivity.class);
-                            intent.putExtra("weburl", bannerList.get(position).getBannerUrl());
-                            getActivity().startActivity(intent);
-                        }
-                    });
-                    banner_middle.setBannerStyle(BannerConfig.NOT_INDICATOR);
-                    banner_middle.setImageLoader(new GlideImageLoader());
-                    banner_middle.setImages(imagesTwo);
-                    banner_middle.start();
-                    banner_middle.setOnBannerListener(new OnBannerListener() {
-                        @Override
-                        public void OnBannerClick(int position) {
-                            Intent intent = new Intent(getActivity(), HomeAdvertisingActivity.class);
-                            intent.putExtra("weburl", bannerList.get(position).getBannerUrl());
-                            getActivity().startActivity(intent);
-                        }
-                    });
+
 
                 } else {
                     T.show(bannerBean.getMsg());
@@ -869,7 +868,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 HomeNewShopBean newShopBean = GsonUtil.toObj(res, HomeNewShopBean.class);
                 if (newShopBean.isSuccess()) {
                     List<HomeNewShopBean.BodyBean.NewShopListBean> shopList = newShopBean.getBody().getNewShopList();
-                    HomeNewShopAdapter shopAdapter = new HomeNewShopAdapter(R.layout.re_home_recommend, shopList, getActivity());
+                    HomeNewShopAdapter shopAdapter = new HomeNewShopAdapter(R.layout.re_home_recommend, shopList);
                     rv_home_new_every.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                     rv_home_new_every.setAdapter(shopAdapter);
                     shopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -885,14 +884,48 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         }
     }
 
-    private void initShowSort(List<PageBannerBean.BodyBean.BannerListDataBean> bannerList, int i, int sort, ImageView ivNewuserprg) {
+    private void initOnClick(final int i, final int sort, ImageView imageView) {
+        if(bannerList.get(i).getShowSort() == sort){
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), HomeAdvertisingActivity.class);
+                    intent.putExtra("bannerId", bannerList.get(i).getId());
+                    intent.putExtra("bannerStyle", bannerList.get(i).getBannerStyle());
+                    intent.putExtra("weburl", bannerList.get(i).getBannerUrl());
+                    intent.putExtra("bannerLogo", bannerList.get(i).getBannerLogo());
+                    intent.putExtra("bannerTitle", bannerList.get(i).getBannerName());
+                    getActivity().startActivity(intent);
+                }
+            });
+        }
+    }
+
+    private void initBannerOnClick(Banner banner) {
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Intent intent = new Intent(getActivity(), HomeAdvertisingActivity.class);
+                intent.putExtra("bannerId", bannerList.get(position).getId());
+                intent.putExtra("bannerStyle", bannerList.get(position).getBannerStyle());
+                intent.putExtra("weburl", bannerList.get(position).getBannerUrl());
+                intent.putExtra("bannerLogo", bannerList.get(position).getBannerLogo());
+                intent.putExtra("bannerTitle", bannerList.get(position).getBannerName());
+                getActivity().startActivity(intent);
+            }
+        });
+    }
+
+
+
+    private void initShowSort(int i, int sort, ImageView ivNewuserprg) {
         if (bannerList.get(i).getShowSort() == sort) {
             glideImage(bannerList.get(i).getBannerLogo(), ivNewuserprg);
         }
     }
 
     private void glideImage(String url, ImageView img) {
-        Glide.with(this).load(url).into(img);
+        Glide.with(this).load(url).centerCrop().into(img);
     }
 
 

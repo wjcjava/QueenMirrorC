@@ -2,20 +2,20 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 
 /**
  * 网络请求地址库
- * 作者： jl
+ * 作者： jc
  */
 
 public interface UrlConstants {
 
-    // String BASE_URL = "http://116.62.204.235:8080/";
+     String BASE_URL = "http://netjipeng.nat300.top/wg/a/";
 
     //String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
 
-    //String BASE_URL = "http://192.168.50.137:8080/wg/a/";//测试路径    刘璇
+    //String BASE_URL = "http://192.168.50.32:8080/a/";
 
     //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
 
-    String BASE_URL = "http://192.168.30.155:7080/wg/a/";
+    //String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
     //String BASE_URL = "http://58.210.102.70:7080/wg/a/";
 
@@ -207,13 +207,19 @@ public interface UrlConstants {
 
     String OSSGETTOKEN = "ans/oss/securityTokenApply";
 
-    String WEBVIEWAGREEMENT = "ans/protocal/query";//服务协议
+    String WEBVIEWAGREEMENT = "api/ans/protocal/query";//服务协议
 
-    String TUANDUILISTDATA = "ans/group/groupActivityList";//我要拼团列表
+    String TUANDUILISTDATA = "api/ans/group/groupActivityList";//我要拼团列表
 
     String GETSHAPE="api/ans/login/imgValidateCodeGet";//获取图形验证码
 
     String NEWSHOPlIST="api/ans/shop/newShopList";//获取今日新店列表
 
     String PAGEBANNER="api/ec/common/topPageBannerList";//获取Banner信息数据
+
+    String GOODSBANNER="api/ec/common/goodsListByBanner";//获取参与Banner商品数据
+
+    String SHOPSBANNER="api/ec/common/shopListByBanner";//获取参与Banner商家数据
+
+
 }

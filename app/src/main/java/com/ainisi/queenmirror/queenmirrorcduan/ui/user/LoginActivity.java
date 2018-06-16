@@ -1,10 +1,6 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.user;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -129,6 +125,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
         HashMap<String, String> params = new HashMap<>();
         params.put("deviceToken", SP.get(this,SpContent.UserToken,"")+"");
         params.put("cellPhone", et_login_pghone.getText().toString());
+        params.put("loginClient","1");
         params.put("userPass", MD5.md5(et_login_pass.getText().toString()+ "MYN888"));
         //doPost();  第一个参数：调用的方法       第二个：传递的参数   第三个：是否成功返回的样式    第四个：对话框     第五个：传入当前的activity
         HttpUtils.doPost(ACTION.LOGIN, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);

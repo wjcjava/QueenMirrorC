@@ -102,8 +102,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
         }
 
         if(ShopListData.get(position).getAnsShopBasic().getGeoX() == null|| ShopListData.get(position).getAnsShopBasic().getGeoY() == null){
-            mine_lon = SP.get(context, SpContent.UserLon,"0")+"";
-            mine_lat = SP.get(context,SpContent.UserLat,"0")+"";
+//
             shop_lon = "0";
             shop_lat = "0";
         }else{

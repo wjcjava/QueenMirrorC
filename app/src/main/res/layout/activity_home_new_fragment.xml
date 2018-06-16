@@ -62,16 +62,17 @@
     <com.ainisi.queenmirror.queenmirrorcduan.utils.ScrollInterceptScrollView
         android:id="@+id/sc_home_scroll"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_below="@id/app_bar"
-        android:scrollbars="vertical">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/alpha_05_black"
-            android:scrollbars="vertical">
+            android:scrollbars="none">
 
             <include layout="@layout/home_new_top" />
 

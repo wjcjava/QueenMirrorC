@@ -99,6 +99,10 @@ public interface ACTION {
 
     int PAGEBANNER=0x049;//获取Banner信息数据
 
+    int GOODSBANNER=0x050;//获取参与Banner商品数据
+
+    int SHOPSBANNER=0x051;//获取参与Banner商家数据
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表

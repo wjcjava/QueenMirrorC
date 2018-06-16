@@ -132,9 +132,9 @@ public class HttpUtils {
                             JSONObject jsonObject = new JSONObject(s);
                             String res = jsonObject.getString("errorCode");
 
-                            if(res.equals("0")){
+                            if (res.equals("0")) {
                                 httpCallBack.onSuccess(action, s);
-                            }else{
+                            } else {
                                 T.show("errorCode不等于0");
                             }
                         } catch (Exception e) {
@@ -678,8 +678,17 @@ public class HttpUtils {
                 break;
             //获取Banner信息数据
             case ACTION.PAGEBANNER:
-                actionUrl=UrlConstants.PAGEBANNER;
+                actionUrl = UrlConstants.PAGEBANNER;
                 break;
+            //获取banner商品列表数据
+            case ACTION.GOODSBANNER:
+                actionUrl = UrlConstants.GOODSBANNER;
+                break;
+            //获取参与Banner商家数据
+            case ACTION.SHOPSBANNER:
+                actionUrl=UrlConstants.SHOPSBANNER;
+                break;
+
 
         }
         url.append(actionUrl);

@@ -35,6 +35,7 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
     protected boolean isInit = false;
     protected boolean isLoad = false;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
