@@ -122,7 +122,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     List<SortBean> sortlist = new ArrayList<>();
     List<String> tabList = new ArrayList<>();
     private WorkRoomAdapter listadapter;
-    int pageNumber = 1, pageSum;
+    int pageNumber = 1, pageSum = 0;
     String shopName, shopId;
     private WorkCreditAdapter creditAdapter;
     String isLogin, userId;
@@ -181,7 +181,9 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
 
-                if(pageSum > pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                L.e("???????    "+pageIndex+"     "+pageSum);
+
+                if(pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
                     refreshlayout.finishLoadmore(2000);
                     T.show("您已加载完全部数据");
                 }else{
@@ -189,7 +191,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                     doGetSaleShop();
                     refreshlayout.finishLoadmore(2000);
                 }
-
             }
         });
 
@@ -506,7 +507,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                             Glide.with(WorkRoomDetailActivity.this).load(envPhotos[3]).into(iv_information_four);
                         }
 
-
                         if(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab() == null ||shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopTab().equals("")){
 
                         }else{
@@ -649,6 +649,5 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             listadapter.notifyDataSetChanged();
         }
         pageIndex += Integer.parseInt(SpContent.pageSize);
-
     }
 }

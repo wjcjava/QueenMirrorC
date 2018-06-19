@@ -185,7 +185,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     ImageView ivPrize;
     @Bind(R.id.iv_queen_shop)
     ImageView ivQueenShop;
-
     @Bind(R.id.iv_home_new_first)
     ImageView iv_home_new_first;
     @Bind(R.id.iv_home_new_two)
@@ -196,15 +195,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     ImageView iv_home_new_four;
     @Bind(R.id.iv_home_new_five)
     ImageView iv_home_new_five;
-
     private HomeIndustryBean homeIndustryBean;
-
     int hight;
     boolean type = false;
-
     ShopListHomeBean shopListHomeBean;
     Intent intent;
-
     public static HomeNewFragment instance = null;
 
     private PopupWindow popWindow;
@@ -217,12 +212,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private String bannerDetails;
     private List<PageBannerBean.BodyBean.BannerListDataBean> bannerList;
 
-
     @Bind(R.id.home_refreshLayout)
     SmartRefreshLayout home_refreshLayout;
-
     int pageNumber=1,pageIndex=0,pageSum = 0;
-
     HomepageGridViewAdapter gridViewAdapter;
     HomeListViewAdapter homeListViewAdapter;
 
@@ -231,11 +223,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         instance = this;
         return R.layout.activity_home_new_fragment;
     }
-
     @Override
     public void initPresenter() {
     }
-
     private void initBanner() {
         HashMap<String, String> parames = new HashMap<>();
         //parames.put("bannerStyle", "");
@@ -247,14 +237,12 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
      * 首页的那我头条
      */
     private void getBannerData() {
-
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("tabType", "2");//type  2代表美业    4代表异业
         hashMap.put("tabFather", "0");
         HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
         //HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//Banner
     }
-
     /**
      * 获取首页底部商家列表
      */
@@ -266,7 +254,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         params.put("shopCate", "1");
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 获取新消息提示
      */
@@ -276,17 +263,14 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         params.put("messageType", "");
         HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
 
         gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shoplist, "home");
         gv_home_gridView.setAdapter(gridViewAdapter);
-
         homeListViewAdapter = new HomeListViewAdapter(getActivity(), shoplist, "home");
         nl_home_list_view.setAdapter(homeListViewAdapter);
-
         home_refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
@@ -319,16 +303,18 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
             }
         });
-
-
         /**
          * 获取首页部分数据
          */
         initBanner();
         getBannerData();
-        getShopData();
-        initnewShop();
 
+        if(shoplist.size()==0){
+            getShopData();
+        }else{
+
+        }
+        initnewShop();
         sc_home_scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @SuppressLint("WrongConstant")
             @Override
@@ -347,7 +333,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         });
         inithttp();
     }
-
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
         parames.put("", "");
@@ -372,7 +357,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
             ActivityCompat.requestPermissions(getActivity()
                     , new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 100);
-
         } else {
             GDLocationUtil.init(getActivity());
             GDLocationUtil.getCurrentLocation(new GDLocationUtil.MyLocationListener() {
@@ -425,8 +409,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             public void onClick(View view) {
                 view_new_fragment_half.setVisibility(View.INVISIBLE);
                 li_home_paixu.setVisibility(View.VISIBLE);
-                //iv_home_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
-                //iv_shop_sort.setBackground(getActivity().getResources().getDrawable(R.drawable.arrow_dwon_blue));
                 popWindow.dismiss();
             }
         });
@@ -468,14 +450,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-//                bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-//                bt2.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
                 break;
             //case R.id.li_sort_bottom:
             case R.id.bt_up_home:
-
                 inithomepop();
                 initpop();
                 break;
@@ -526,8 +505,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 intent.putExtra("shop_name", tv_home_permanent.getText().toString());
                 startActivity(intent);
                 break;
-
-
             /**
              * 展示形式改变
              */
@@ -813,18 +790,14 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 shopListHomeBean = GsonUtil.toObj(res, ShopListHomeBean.class);
                 if (shopListHomeBean.isSuccess()) {
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
-
                         pageSum = shopListHomeBean.getBody().getShopList().size();
-
                         if(pageSum < Integer.parseInt(SpContent.pageSize)){
                             T.show("您已加载全部数据");
                             home_refreshLayout.setEnableLoadmore(false);
                         }else{
                             home_refreshLayout.setEnableLoadmore(true);
                         }
-
                         loadMoreData(shopListHomeBean.getBody().getShopList());
-
                     } else {
                         T.show("暂无店铺信息");
                     }
@@ -1021,7 +994,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         }
     }
 
-
     public void loadMoreData(List<ShopListHomeBean.BodyBean.ShopListBean> apiOrderListMore){
 
         if(shoplist == null){
@@ -1031,7 +1003,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             gridViewAdapter.Clear();
             homeListViewAdapter.Clear();
         }
-
         shoplist.addAll(apiOrderListMore);
         if(pageIndex == 0){
             gridViewAdapter.setmDate(shoplist);

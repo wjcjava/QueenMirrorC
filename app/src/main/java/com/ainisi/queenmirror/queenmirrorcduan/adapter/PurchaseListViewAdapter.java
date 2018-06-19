@@ -34,6 +34,8 @@ public class  PurchaseListViewAdapter extends BaseAdapter {
     private Context context;
     List<ShoppingCartBean.BodyBean.ShopListBean> shopList = new ArrayList<>();
 
+    int flag = 0;
+
     private boolean moudou = false;
 
     public PurchaseListViewAdapter(Context context,List<ShoppingCartBean.BodyBean.ShopListBean> shopList) {
@@ -75,6 +77,28 @@ public class  PurchaseListViewAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        if(flag < shopList.size()){
+            for(int i = 0;i<shopList.get(position).getApiAnsCustCartList().size();i++) {
+                // 2、获取组件，设置组件属性
+                View _view = LayoutInflater.from(context).inflate(R.layout.layout_upload_product, null);
+                // 3、在布局中添加组件，设置组件属性
+                holder.li_purchase_product.addView(_view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                TextView tv_purchase_name = _view.findViewById(R.id.tv_purchase_name);
+                tv_purchase_name.setText(shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getGoodsName());
+                TextView tv_purchase_presentprice = _view.findViewById(R.id.tv_purchase_presentprice);
+                tv_purchase_presentprice.setText("￥"+shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getSalesPrice());
+                TextView tv_purchase_originalprice = _view.findViewById(R.id.tv_purchase_originalprice);
+                tv_purchase_originalprice.setText("￥"+shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getMarketPrice());
+                tv_purchase_originalprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
+                TextView tv_purchase_adapter_number = _view.findViewById(R.id.tv_purchase_adapter_number);
+                tv_purchase_adapter_number.setText("X"+shopList.get(position).getApiAnsCustCartList().get(i).getAnsCustCart().getPurchaseNumber());
+            }
+            flag++;
+        }else{
+
+        }
+
         holder.purchase_shop_name.setText(shopList.get(position).getShopName());
         holder.tv_pur_youhui.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,22 +172,6 @@ public class  PurchaseListViewAdapter extends BaseAdapter {
                 }
             }
         });
-        for(int i = 0;i<shopList.get(position).getApiAnsCustCartList().size();i++) {
-            // 2、获取组件，设置组件属性
-            View _view = LayoutInflater.from(context).inflate(R.layout.layout_upload_product, null);
-            // 3、在布局中添加组件，设置组件属性
-            holder.li_purchase_product.addView(_view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            TextView tv_purchase_name = _view.findViewById(R.id.tv_purchase_name);
-            tv_purchase_name.setText(shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getGoodsName());
-            TextView tv_purchase_presentprice = _view.findViewById(R.id.tv_purchase_presentprice);
-            tv_purchase_presentprice.setText("￥"+shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getSalesPrice());
-            TextView tv_purchase_originalprice = _view.findViewById(R.id.tv_purchase_originalprice);
-            tv_purchase_originalprice.setText("￥"+shopList.get(position).getApiAnsCustCartList().get(i).getEcGoodsBasic().getMarketPrice());
-            tv_purchase_originalprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
-            TextView tv_purchase_adapter_number = _view.findViewById(R.id.tv_purchase_adapter_number);
-            tv_purchase_adapter_number.setText("X"+shopList.get(position).getApiAnsCustCartList().get(i).getAnsCustCart().getPurchaseNumber());
-        }
-
         return convertView;
     }
 

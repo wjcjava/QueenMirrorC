@@ -18,6 +18,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderPurchaseBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.SelectLinkPeopleActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -51,17 +52,13 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
     TextView tv_phone;
     @Bind(R.id.tv_shopping_cart_number)
     TextView tv_shopping_cart_number;
-
     ShoppingCartBean shoppingCartBean;
     List<ShoppingCartBean.BodyBean.ShopListBean> shopList = new ArrayList<>();
     String lick_name, lick_phone, link_sex, shopId;
-
     List<OrderDetailsListInfoBean> orderDetailsListInfo;
-
     List<OrderPurchaseBean> orderPurchaseBeans;
-
     List<String> orderIdList = new ArrayList<>();
-    double end_price = 0;
+    double end_price = 0,flag = 0;
     String cartId = "";
 
     @Override
@@ -75,13 +72,11 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
 
         Intent intent = this.getIntent();
         shoppingCartBean = (ShoppingCartBean) intent.getSerializableExtra("cartBean");
-        getShopCartData();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
 
         lick_name = SP.get(this, SpContent.Lickname, "") + "";
         lick_phone = SP.get(this, SpContent.LickPhone, "") + "";
@@ -94,6 +89,8 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
         }
         tv_sex.setText(link_sex);
         tv_phone.setText(lick_phone);
+
+        getShopCartData();
     }
 
     /**
@@ -101,11 +98,11 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
      */
     private void getShopCartData() {
         shopList = shoppingCartBean.getBody().getShopList();
-
         orderPurchaseBeans = new ArrayList<>();
+        orderDetailsListInfo = new ArrayList<>();
+
         for (int i = 0; i < shopList.size(); i++) {
             cartId = "";
-            orderDetailsListInfo = new ArrayList<>();
             for (int j = 0; j < shopList.get(i).getApiAnsCustCartList().size(); j++) {
 
                 end_price = end_price + (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getPurchaseNumber() * (double) shopList.get(i).getApiAnsCustCartList().get(j).getAnsCustCart().getUnitPrice();
@@ -134,9 +131,11 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
         DecimalFormat df = new DecimalFormat("0.00");
         String str = df.format(end_price);
         tv_shopping_cart_number.setText("￥" + str);
+
         listadapter = new PurchaseListViewAdapter(this, shopList);
         listOrder.setAdapter(listadapter);
         listadapter.notifyDataSetChanged();
+
     }
 
     @OnClick({R.id.tv_submit, R.id.title_back, R.id.rl_purchase_top})
@@ -176,11 +175,9 @@ public class PurchaseActivity extends BaseNewActivity implements HttpCallBack {
                 if (successBean.isSuccess()) {
                     String businessIds = "";
                     orderIdList = successBean.getBody().getOrderIdList();
-
                     for (int i = 0; i < orderIdList.size(); i++) {
                         businessIds = businessIds + orderIdList.get(i) + ",";
                     }
-
                     Intent intent = new Intent(PurchaseActivity.this, SubmitActivity.class);
                     intent.putExtra("businessIds", businessIds);
                     intent.putExtra("amount", tv_shopping_cart_number.getText().toString());

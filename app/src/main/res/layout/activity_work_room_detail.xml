@@ -38,6 +38,7 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/ic_setting_breake"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="去结算"
                 android:textColor="#fff" />
         </RelativeLayout>
