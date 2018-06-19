@@ -2,8 +2,6 @@ package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,12 +15,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.PurchaseNowBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.ShoppingCartBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.SelectLinkPeopleActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.google.zxing.WriterException;
 import com.lzy.okgo.cache.CacheMode;
 
@@ -95,17 +92,14 @@ public class PurchaseNowActivity extends BaseNewActivity implements HttpCallBack
         super.initView();
         title_title.setText("提交订单");
         Intent intent = this.getIntent();
-
         shopName = intent.getStringExtra("shopName");
         shopId = intent.getStringExtra("shopId");
         goodId = intent.getStringExtra("goodId");
         goodName = intent.getStringExtra("goodName");
         goodPrice = intent.getStringExtra("goodPrice");
         goodPriceSale = intent.getStringExtra("goodPriceSale");
-
         purchase_shop_name.setText(shopName);
         tv_shopping_cart_number_now.setText(goodPrice);
-
         View _view = LayoutInflater.from(this).inflate(R.layout.layout_upload_product, null);
         // 3、在布局中添加组件，设置组件属性
         li_purchase_product.addView(_view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -127,6 +121,7 @@ public class PurchaseNowActivity extends BaseNewActivity implements HttpCallBack
                 finish();
                 break;
             case R.id.tv_now_submit:
+                T.show("你点击了我！");
                 UploadData();
                 break;
             case R.id.rl_purchase_top:

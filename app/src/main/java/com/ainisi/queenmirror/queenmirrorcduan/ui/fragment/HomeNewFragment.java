@@ -34,10 +34,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.HomeNewShopBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.NewsBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.OrderMyAllOrderBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProblemBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.popbutton.PopupButton;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.EstheticsActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
@@ -48,8 +46,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PageBannerActivi
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.MerchantsAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeAdvertisingBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeHeadlinesBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PageBannerBean;
@@ -366,12 +362,14 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         mLocation.setText("全国");
                     } else {
                         mLocation.setText(location.getCity());
+                        String lon = location.getLongitude() + "";
+                        String lat = location.getLatitude() + "";
+                        SP.put(getActivity(), SpContent.UserLon, lon);
+                        SP.put(getActivity(), SpContent.UserLat, lat);
+
                     }
-                    mLocation.setText(location.getCity());
-                    String lon = location.getLongitude() + "";
-                    String lat = location.getLatitude() + "";
-                    SP.put(getActivity(), SpContent.UserLon, lon);
-                    SP.put(getActivity(), SpContent.UserLat, lat);
+
+
                 }
             });
         }
@@ -467,6 +465,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 inithomepop();
                 initpop1();
                 break;
+
             case R.id.tv_home_bustling:
                 intent = new Intent(getActivity(), SelectCityActivity.class);
                 startActivity(intent);
@@ -727,17 +726,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
     }
 
-    private void initdistancePop() {
-        popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
-        initview(popview);
-        popWindowdistance = new PopupWindow(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, CollapsingToolbarLayout.LayoutParams.MATCH_PARENT);
-        popWindowdistance.setContentView(popview);
-        popWindowdistance.setOutsideTouchable(true);
-        popWindowdistance.setAnimationStyle(R.style.CustomPopWindowStyle);
-        popWindowdistance.showAsDropDown(li_top_select, 0, 0);
-
-    }
-
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
@@ -866,8 +854,13 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                             banner_middle.setImages(imagesTwo);
                             banner_middle.start();
                             initBannerOnClick(banner_middle);
+
+
                         }
+
                     }
+
+
                 } else {
                     T.show(bannerBean.getMsg());
                 }
@@ -943,6 +936,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
+
+
 
     private void initShowSort(int i, int sort, ImageView ivNewuserprg) {
         if (bannerList.get(i).getShowSort() == sort) {

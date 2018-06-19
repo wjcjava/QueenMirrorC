@@ -49,6 +49,7 @@ public class HomeAdvertisingActivity extends BaseNewActivity implements HttpCall
     private String bannerLogo;
     private String bannerTitle;
     private String url;
+    private String pageLocation;
 
     @Override
     protected int getLayoutId() {
@@ -63,6 +64,7 @@ public class HomeAdvertisingActivity extends BaseNewActivity implements HttpCall
         bannerStyle = getIntent().getStringExtra("bannerStyle");
         bannerLogo = getIntent().getStringExtra("bannerLogo");
         bannerTitle = getIntent().getStringExtra("bannerTitle");
+        pageLocation = getIntent().getStringExtra("pageLocation");
         if(bannerStyle.equals("5")){
             bannerWeb.setVisibility(View.GONE);
             lineBanner.setVisibility(View.VISIBLE);

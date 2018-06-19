@@ -323,6 +323,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 break;
             //提交订单
             case R.id.tv_purchase:
+                T.show("你点击了我");
                 Intent intent = new Intent(FullActivity.this, PurchaseNowActivity.class);
                 intent.putExtra("shopName",shopName);
                 intent.putExtra("shopId",shopId);

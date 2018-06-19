@@ -682,7 +682,7 @@ public class HttpUtils {
             case ACTION.ADDPINTUAN:
                 actionUrl = UrlConstants.ADDPINTUAN;
                 break;
-     /*       //获取banner商品列表数据
+            //获取banner商品列表数据
             case ACTION.GOODSBANNER:
                 actionUrl = UrlConstants.GOODSBANNER;
                 break;
@@ -690,7 +690,7 @@ public class HttpUtils {
             case ACTION.SHOPSBANNER:
                 actionUrl=UrlConstants.SHOPSBANNER;
                 break;
-*/
+
 
         }
         url.append(actionUrl);

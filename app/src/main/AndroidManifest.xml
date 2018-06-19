@@ -370,7 +370,7 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="4f44efb5b1cf66088b2bba3153273dbb">
+            android:value="803cda72fd2fec3e777daff759c0f98c">
             //开发者申请的key</meta-data>
 
         <activity

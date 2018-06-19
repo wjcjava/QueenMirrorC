@@ -18,7 +18,6 @@ android {
             abiFilters 'armeabi', 'armeabi-v7a', 'x86'
         }
     }
-
     buildTypes {
         release {
             minifyEnabled false

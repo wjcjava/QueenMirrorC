@@ -7,11 +7,12 @@
     android:background="@color/alpha_05_black"
     android:orientation="vertical">
 
-    <com.youth.banner.Banner
+    <com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/comment_220_dip"
-        android:background="@color/white"/>
+        android:layout_height="@dimen/comment_150_dip"
+        android:focusable="true"
+        android:background="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -358,13 +359,13 @@
         android:layout_height="@dimen/comment_10_dip"
         android:background="@color/home_shop_middle"/>
 
-    <com.youth.banner.Banner
+    <com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.Banner
         android:id="@+id/banner_middle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_150_dip"
         android:background="@color/white"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        android:focusable="true"
+       />
 
     <RelativeLayout
         android:layout_width="match_parent"
