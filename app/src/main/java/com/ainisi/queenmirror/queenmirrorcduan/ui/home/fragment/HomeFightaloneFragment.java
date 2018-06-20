@@ -18,6 +18,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.PinTuanBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FightaloneActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.zxing.WriterException;
@@ -75,7 +76,7 @@ public class HomeFightaloneFragment extends BaseFragment implements HttpCallBack
         params.put("groupStatus", "3");
         params.put("pageNumber", pageNumber + "");
         params.put("contentByTitle", state);
-        params.put("pageSize", "10");
+        params.put("pageSize", SpContent.pageSize);
         HttpUtils.doPost(ACTION.TUANDUILISTDATA, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -95,7 +96,23 @@ public class HomeFightaloneFragment extends BaseFragment implements HttpCallBack
                     pintuanListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                            startActivity(new Intent(getActivity(), FightaloneActivity.class));
+                            /**
+                             * 这里需要传商品的相关信息的？
+                             */
+                            Intent intent = new Intent(getActivity(),FightaloneActivity.class);
+                            intent.putExtra("activityId",sortlist.get(position).getGpActivity().getId());
+                            intent.putExtra("goodsName",sortlist.get(position).getEcGoodsBasic().getGoodsName());
+                            intent.putExtra("goodsId",sortlist.get(position).getEcGoodsBasic().getId());
+                            intent.putExtra("goodsBrief",sortlist.get(position).getEcGoodsBasic().getGoodsBrief());
+                            intent.putExtra("goodsService",sortlist.get(position).getEcGoodsBasic().getServiceTime());
+                            intent.putExtra("goodsSales",sortlist.get(position).getEcGoodsBasic().getSalesPrice());
+                            if(sortlist.get(position).getEcGoodsBasic().getMarketPrice() == null){
+                                intent.putExtra("goodsMarket", "0");
+                            }else {
+                                intent.putExtra("goodsMarket", sortlist.get(position).getEcGoodsBasic().getMarketPrice());
+                            }
+                          //  intent.putExtra("goodsNumber",sortlist.get(position).getEcGoodsBasic().get)
+                            startActivity(intent);
                         }
                     });
                 }else{

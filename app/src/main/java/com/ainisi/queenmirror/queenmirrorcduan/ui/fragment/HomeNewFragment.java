@@ -467,7 +467,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 inithomepop();
                 initpop1();
                 break;
-
             case R.id.tv_home_bustling:
                 intent = new Intent(getActivity(), SelectCityActivity.class);
                 startActivity(intent);
@@ -867,13 +866,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                             banner_middle.setImages(imagesTwo);
                             banner_middle.start();
                             initBannerOnClick(banner_middle);
-
-
                         }
-
                     }
-
-
                 } else {
                     T.show(bannerBean.getMsg());
                 }

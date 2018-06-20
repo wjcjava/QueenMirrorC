@@ -25,4 +25,6 @@ public class SpContent {
 
     public static String UserLon = "userLon";//用户经度
     public static String UserLat = "userLat";//用户经度
+
+    public static String IsFirst = "isFirst";//是否第一次进入
 }

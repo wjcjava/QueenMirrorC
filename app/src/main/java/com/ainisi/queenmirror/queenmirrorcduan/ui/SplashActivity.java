@@ -8,8 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-
 import com.ainisi.queenmirror.queenmirrorcduan.R;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 
 /**
  * 启动画面
@@ -25,7 +26,6 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-
         handler.sendEmptyMessageDelayed(1,1000*3);
     }
 
@@ -36,8 +36,15 @@ public class SplashActivity extends AppCompatActivity {
             switch(msg.what)
             {
                 case 1:
-                    startActivity(new Intent(SplashActivity.this,HomePageActivity.class));
-                    SplashActivity.this.finish();
+
+                    if(SP.get(SplashActivity.this, SpContent.IsFirst,"0").equals("0")){
+                        startActivity(new Intent(SplashActivity.this,GuidePageActivity.class));
+                        SplashActivity.this.finish();
+                    }else{
+                        startActivity(new Intent(SplashActivity.this,HomePageActivity.class));
+                        SplashActivity.this.finish();
+                    }
+
                     break;
                 case 2:
                     break;

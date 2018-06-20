@@ -107,7 +107,6 @@ public class WholeFragment extends BaseFragment implements HttpCallBack {
                     doFirstData();
                     refreshlayout.finishLoadmore(2000);
                 }
-
             }
         });
     }

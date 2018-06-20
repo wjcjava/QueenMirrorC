@@ -71,12 +71,20 @@ public class WorkCreditAdapter extends BaseAdapter {
         }
 
         holder.tv_work_credit.setText(apiShopScoreGet.getComScore());
-        holder.tv_work_order_time.setText("接单时间"+apiShopScoreGet.getAvgTakeMinutes()+"单");
+        holder.tv_work_order_time.setText("接单时间"+apiShopScoreGet.getAvgTakeMinutes()+"分钟");
         holder.tv_score_attitude.setText(apiShopScoreGet.getAvgService());
         holder.tv_score_environment.setText(apiShopScoreGet.getAvgEnvironment());
 
-        holder.score_work_evaluate.setRating(Float.parseFloat(apiShopScoreGet.getAvgService()));
-        holder.score_work_evaluate_two.setRating(Float.parseFloat(apiShopScoreGet.getAvgEnvironment()));
+        if(apiShopScoreGet.getAvgService() == null){
+
+        }else{
+            holder.score_work_evaluate.setRating(Float.parseFloat(apiShopScoreGet.getAvgService()));
+        }
+        if(apiShopScoreGet.getAvgEnvironment() == null){
+
+        }else{
+            holder.score_work_evaluate_two.setRating(Float.parseFloat(apiShopScoreGet.getAvgEnvironment()));
+        }
         return convertView;
     }
 

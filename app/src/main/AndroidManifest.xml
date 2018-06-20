@@ -489,7 +489,8 @@
         <activity android:name=".ui.mine.activity.RealNameActivity" />
         <activity android:name=".ui.mine.activity.AboutUsActivity" />
         <activity android:name=".ui.user.RegistAgreementActivity" />
-        <activity android:name=".ui.home.activity.PageBannerActivity"></activity>
+        <activity android:name=".ui.home.activity.PageBannerActivity" />
+        <activity android:name=".ui.GuidePageActivity"></activity>
     </application>
 
 </manifest>

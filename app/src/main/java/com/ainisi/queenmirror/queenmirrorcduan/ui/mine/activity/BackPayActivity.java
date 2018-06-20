@@ -19,6 +19,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.GetShareBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
@@ -67,6 +68,8 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
     protected void initView() {
         super.initView();
         payBack.setText(getIntent().getStringExtra("payback"));
+
+        initKey();
     }
 
     @Override
@@ -94,15 +97,12 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
                 finish();
                 break;
             case R.id.tv_ok_submit:
-                initKey();
                 initbackPay();
-
                 break;
             case R.id.tv_validation:
                 if (TextUtils.isEmpty(backPhone.getText())) {
                     T.show("手机号不能为空");
                 } else {
-
                     initValidation();
                 }
                 break;
@@ -110,8 +110,6 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
                 initgetShape();
                 break;
         }
-
-
     }
 
     private void initKey() {
@@ -126,14 +124,15 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
 
     private void initPinjie() {
         sb = new StringBuilder();
-        sb.append(2).append(uuid).append(backPhone).append(dataTime);
-        Log.e("字符串拼接", sb.toString());
+        sb.append("2").append(uuid).append(backPhone.getText().toString()).append(dataTime);
+
+        L.e("%%%%    "+sb);
     }
 
     //获取验证码
     private void initValidation() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("telNo", backPhone.getText().toString().trim());
+        params.put("telNo", backPhone.getText().toString());
         params.put("salt", uuid);
         params.put("signature", MD5.md5(sb.toString()));
         params.put("sysflag", "2");
@@ -146,10 +145,7 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
                 T.show("请您输入图形验证码");
             }
         }
-
         HttpUtils.doPost(ACTION.VERIFY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
-
-
     }
 
     //获取图形验证码
@@ -158,8 +154,6 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
         parames.put("telNo", backPhone.getText().toString().trim());
         HttpUtils.doPost(ACTION.GETSHAPE, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
-
 
     @Override
     public void onSuccess(int action, String res) {
@@ -177,6 +171,8 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
                     if (ceshiBean.getErrorCode().equals("3")) {
                         reValidation.setVisibility(View.VISIBLE);
                         initgetShape();
+                    }else{
+                        T.show(ceshiBean.getMsg());
                     }
                 }
                 break;

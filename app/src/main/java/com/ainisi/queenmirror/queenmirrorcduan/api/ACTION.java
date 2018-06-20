@@ -207,4 +207,6 @@ public interface ACTION {
 
     int TUANDUILISTDATA = 0x156;//我要拼团列表
 
+    int GETPINTUANDATA = 0X157;//获取拼团之外的信息
+
 }

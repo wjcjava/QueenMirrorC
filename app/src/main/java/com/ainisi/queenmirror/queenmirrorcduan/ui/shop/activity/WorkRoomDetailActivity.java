@@ -181,8 +181,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
 
-                L.e("???????    "+pageIndex+"     "+pageSum);
-
                 if(pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
                     refreshlayout.finishLoadmore(2000);
                     T.show("您已加载完全部数据");
@@ -486,8 +484,12 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.VISIBLE);
                         String envPhoto = shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopEnvPhoto();
+                        String []envPhotos = new String[]{};
 
-                        String []envPhotos = envPhoto.split(",");
+                        if(envPhoto != null && envPhoto.length()>0){
+                            envPhotos = envPhoto.split(",");
+                        }else{
+                        }
 
                         if(envPhotos.length < 1){
 

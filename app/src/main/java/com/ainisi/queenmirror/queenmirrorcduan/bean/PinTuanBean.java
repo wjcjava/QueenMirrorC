@@ -580,7 +580,7 @@ public class PinTuanBean {
                 private Object goodsShow;
                 private String goodsTab;
                 private Object goodsStorage;
-                private Object marketPrice;
+                private String marketPrice;
                 private String salesPrice;
                 private Object goodsActivity;
                 private Object goodsBanner;
@@ -600,6 +600,22 @@ public class PinTuanBean {
                 private Object goodsTypeName;
                 private Object goodsCateName;
                 private Object ecPointsRule;
+
+                public boolean isNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setNewRecord(boolean newRecord) {
+                    isNewRecord = newRecord;
+                }
+
+                public String getMarketPrice() {
+                    return marketPrice;
+                }
+
+                public void setMarketPrice(String marketPrice) {
+                    this.marketPrice = marketPrice;
+                }
 
                 public String getId() {
                     return id;
@@ -736,15 +752,6 @@ public class PinTuanBean {
                 public void setGoodsStorage(Object goodsStorage) {
                     this.goodsStorage = goodsStorage;
                 }
-
-                public Object getMarketPrice() {
-                    return marketPrice;
-                }
-
-                public void setMarketPrice(Object marketPrice) {
-                    this.marketPrice = marketPrice;
-                }
-
                 public String getSalesPrice() {
                     return salesPrice;
                 }

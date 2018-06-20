@@ -25,6 +25,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.bean.CommentsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ProductDetailBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CommendGoodBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
@@ -38,6 +39,7 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
+import com.youth.banner.Banner;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -74,12 +76,18 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     TextView tv_time;
     @Bind(R.id.textView4)
     TextView textView4;
-    @Bind(R.id.tv_introduction)
-    TextView tv_introduction;
     @Bind(R.id.tv_full_shoppingcart)
     TextView tv_full_shoppingcart;
     @Bind(R.id.ttv_ping)
     TextView tvPing;
+    @Bind(R.id.banner_fullactivity)
+    Banner banner_fullactivity;
+    @Bind(R.id.re_full_shop)
+    RelativeLayout re_full_shop;
+
+    @Bind(R.id.tv_fullactivity_name)
+    TextView tv_fullactivity_name;
+
     private CommentsBean commentsBean;
     private CommendGoodBean goodBean;
     private FullGoodsAdapter myAdapter;
@@ -103,13 +111,9 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
         goodsId = intent.getStringExtra("goodsId");
         shopId = intent.getStringExtra("shopId");
         shopName = intent.getStringExtra("shopName");
-
         isLogin = SP.get(FullActivity.this, SpContent.isLogin, "0").toString();
-
         userId = SP.get(FullActivity.this, SpContent.UserId, "0").toString();
-
         inithttp();
-
         getProductDetailData();
 
         if(Build.VERSION.SDK_INT>=23){
@@ -120,7 +124,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
             ActivityCompat.requestPermissions(this,mPermissionList,123);
         }
 
-       mShareListener = new CustomShareListener(this);
+        mShareListener = new CustomShareListener(this);
         mShareAction = new ShareAction(FullActivity.this).setDisplayList(
                 SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
                 SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
@@ -175,7 +179,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
 
             }
         }
-
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
             if (platform != SHARE_MEDIA.MORE && platform != SHARE_MEDIA.SMS
@@ -191,12 +194,9 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                     && platform != SHARE_MEDIA.EVERNOTE) {
                 Toast.makeText(mActivity.get(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
             }
-
             if (t != null) {
                 L.e("throw", "throw:" + t.getMessage());
-
             }
-
         }
 
         @Override
@@ -299,10 +299,19 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
         tv_shopping_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 
-    @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart, R.id.rl_full_collection, R.id.title_photo})
+    @OnClick({R.id.tv_purchase, R.id.title_back, R.id.tv_full_shoppingcart, R.id.rl_full_collection, R.id.title_photo,R.id.re_full_shop})
 
     public void OnClick(View view) {
         switch (view.getId()) {
+            /**
+             * 点击底部店铺
+             */
+            case R.id.re_full_shop:
+                Intent intentr = new Intent(this, WorkRoomDetailActivity.class);
+                intentr.putExtra("shopName",shopName);
+                intentr.putExtra("shopId",shopId);
+                startActivity(intentr);
+                break;
             /**
              * 分享
              */
@@ -322,7 +331,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 intent.putExtra("goodPrice",full_cash.getText().toString());
                 intent.putExtra("goodPriceSale",tv_shopping_oldprice.getText().toString());
                 startActivity(intent);
-
                 break;
             //加入购物车
             case R.id.tv_full_shoppingcart:
@@ -378,12 +386,12 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 full_cash.setText("￥" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getSalesPrice());
                 tv_shopping_oldprice.setText("￥" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getMarketPrice());
                 tv_shopping_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
-
                 tv_brief.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsBrief());
                 tv_time.setText("服务时长：" + productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getServiceTime());
                 textView4.setText("已浏览：" + "200" + "次");
                 //  tv_introduction.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsDetails().toString());
                 fullTitle.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsName());
+                tv_fullactivity_name.setText(productDetailBean.getBody().getGoodsListData().getEcGoodsBasic().getGoodsName());
                 break;
             case ACTION.EVALUATION:
                 commentsBean = GsonUtil.toObj(res, CommentsBean.class);
@@ -401,7 +409,6 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
                 } else {
                     T.show(successBean1.getMsg());
                 }
-
                 break;
             //商家商品推荐
             case ACTION.COMMENDGOODS:

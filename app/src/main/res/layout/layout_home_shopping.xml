@@ -27,11 +27,18 @@
                 tools:layout_editor_absoluteX="@dimen/comment_8_dip"
                 tools:layout_editor_absoluteY="@dimen/comment_8_dip">
 
+                <com.youth.banner.Banner
+                    android:id="@+id/banner_fullactivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/comment_200_dip"
+                    android:background="@color/white"/>
+
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_214_dip"
                     android:scaleType="fitXY"
+                    android:visibility="gone"
                     android:src="@drawable/icon_full_chanpin" />
 
                 <RelativeLayout
@@ -46,7 +53,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/comment_27_dip"
-
                         android:textColor="@color/white"
                         android:textSize="@dimen/comment_18_size"
                         android:layout_centerVertical="true"
@@ -59,34 +65,40 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/comment_21_dip"
                         android:layout_toEndOf="@+id/full_cash"
-
                         android:textColor="@color/white"
                         android:textSize="@dimen/comment_12_size" />
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_fullactivity_top"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/et_shap">
 
+                    <TextView
+                        android:id="@+id/tv_fullactivity_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:text="产品名字"
+                        android:textSize="@dimen/comment_13_size"/>
 
                     <TextView
                         android:id="@+id/tv_brief"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/tv_time"
-                        android:layout_below="@+id/fullname"
                         android:layout_marginTop="3dp"
+                        android:text="简介"
+                        android:layout_below="@id/tv_fullactivity_name"
                         android:layout_marginStart="10dp"
-
-                        android:textSize="@dimen/comment_13_size"
-                        tools:ignore="NotSibling" />
+                        android:textSize="@dimen/comment_13_size"/>
 
                     <TextView
                         android:id="@+id/tv_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/fullname"
                         android:layout_below="@+id/tv_brief"
                         android:layout_marginBottom="@dimen/comment_15_dip"
                         android:layout_marginStart="10dp"
@@ -108,44 +120,34 @@
                         android:textSize="@dimen/comment_12_size" />
                 </RelativeLayout>
 
-            </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/comment_150_dip"
-                android:layout_marginTop="@dimen/comment_15_dip"
-                android:background="@drawable/et_shap">
-
-                <TextView
-
-                    android:id="@+id/tv_fullname"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/comment_15_dip"
                     android:layout_marginTop="@dimen/comment_15_dip"
-                    android:text="项目详情"
-                    android:textColor="@color/alpha_85_black"
-                    android:textSize="@dimen/comment_14_size" />
+                    android:padding="10dp"
+                    android:background="@drawable/et_shap">
 
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/comment_1_dip"
-                    android:layout_below="@id/tv_fullname"
-                    android:layout_marginTop="@dimen/comment_10_dip"
-                    android:background="@color/alpha_05_black" />
+                    <TextView
 
-                <TextView
-                    android:id="@+id/tv_introduction"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/comment_72_dip"
-                    android:layout_below="@+id/view"
-                    android:layout_marginEnd="@dimen/comment_13_dip"
-                    android:layout_marginStart="@dimen/comment_15_dip"
-                    android:layout_marginTop="@dimen/comment_14_dip"
-                    android:text="2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算."
-                    android:textSize="@dimen/comment_12_size" />
-            </RelativeLayout>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="项目详情"
+                        android:textColor="@color/alpha_85_black"
+                        android:textSize="@dimen/comment_14_size" />
+
+                    <ImageView android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow"
+                        android:layout_alignParentEnd="true">
+                    </ImageView>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/recycler_one"
@@ -212,17 +214,6 @@
                     android:layout_marginLeft="@dimen/comment_3_dip"
                     android:layout_marginTop="@dimen/comment_10_dip" />
 
-                <TextView
-                    android:id="@+id/fullname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignStart="@+id/ttv_ping"
-                    android:layout_marginBottom="260dp"
-                    android:visibility="gone"
-                    android:text="纯色美甲"
-                    android:textColor="@color/alpha_95_black"
-                    android:textSize="@dimen/comment_18_size" />
             </RelativeLayout>
 
             <RelativeLayout

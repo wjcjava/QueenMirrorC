@@ -129,14 +129,10 @@ public class HttpUtils {
                             }*/
                             //成功
 
-                            JSONObject jsonObject = new JSONObject(s);
-                            String res = jsonObject.getString("errorCode");
+                       /*     JSONObject jsonObject = new JSONObject(s);
+                            String res = jsonObject.getString("errorCode");*/
 
-                            if(res.equals("0")){
-                                httpCallBack.onSuccess(action, s);
-                            }else{
-                                //T.show("errorCode不等于0");
-                            }
+                            httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -679,6 +675,9 @@ public class HttpUtils {
             //获取Banner信息数据
             case ACTION.PAGEBANNER:
                 actionUrl = UrlConstants.PAGEBANNER;
+                break;
+            case ACTION.GETPINTUANDATA:
+                actionUrl = UrlConstants.GETPINTUANDATA;
                 break;
      /*       //获取banner商品列表数据
             case ACTION.GOODSBANNER:
