@@ -29,7 +29,6 @@
                     android:id="@+id/imageView4"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_214_dip"
-                    android:visibility="gone"
                     android:src="@drawable/icon_full_chanpin" />
 
                 <RelativeLayout
@@ -42,10 +41,9 @@
                         android:id="@+id/full_cash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/textView"
-                        android:layout_alignBottom="@+id/textView"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/comment_27_dip"
+                        android:layout_centerVertical="true"
                         android:drawableLeft="@drawable/icon_full_minbi"
                         android:textColor="@color/white"
                         android:textSize="@dimen/comment_20_size"
@@ -58,7 +56,6 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/comment_21_dip"
                         android:layout_toEndOf="@+id/full_cash"
-
                         android:textColor="@color/white"
                         android:textSize="@dimen/comment_16_size" />
                 </RelativeLayout>
@@ -126,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/comment_13_dip"
                     android:layout_marginTop="@dimen/comment_13_dip"
-                    android:text="63人在拼团，可直接参与"
+                    android:text="0人在拼团，可直接参与"
                     android:textColor="@color/alpha_95_black"
                     android:textSize="@dimen/comment_14_size" />
 
@@ -169,6 +166,7 @@
                     android:id="@+id/re_surplus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_below="@id/view_fightalone">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -188,7 +186,6 @@
                         android:layout_marginStart="@dimen/comment_8_dip"
                         android:layout_marginTop="@dimen/comment_20_dip"
                         android:layout_toRightOf="@id/iv_title"
-                        android:text="灰太狼的替身"
                         android:textSize="@dimen/comment_14_size" />
 
                     <TextView
@@ -198,17 +195,16 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="@dimen/comment_91_dip"
                         android:layout_marginTop="@dimen/comment_13_dip"
-                        android:text="还差1人拼成"
                         android:textColor="@color/alpha_95_black"
                         android:textSize="@dimen/comment_12_size" />
 
                     <TextView
+                        android:id="@+id/tv_fightalone_shengyu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_below="@id/tv_surplus"
                         android:layout_marginEnd="@dimen/comment_91_dip"
-                        android:text="剩余21:15:15.6"
                         android:textSize="@dimen/comment_10_size" />
 
                     <TextView
@@ -232,11 +228,13 @@
                     android:layout_marginEnd="@dimen/comment_13_dip"
                     android:layout_marginStart="@dimen/comment_13_dip"
                     android:layout_marginTop="@dimen/comment_12_dip"
+                    android:visibility="gone"
                     android:background="@color/alpha_05_black" />
                 <RelativeLayout
                     android:id="@+id/re_surplustwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_below="@id/view_fightaltwo">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -251,12 +249,12 @@
                         app:civ_border_color="@color/white" />
 
                     <TextView
+                        android:id="@+id/tv_fightalone_name2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/comment_8_dip"
                         android:layout_marginTop="@dimen/comment_20_dip"
                         android:layout_toRightOf="@id/iv_titletwo"
-                        android:text="灰太狼的替身"
                         android:textSize="@dimen/comment_14_size" />
 
                     <TextView
@@ -266,20 +264,20 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="@dimen/comment_91_dip"
                         android:layout_marginTop="@dimen/comment_13_dip"
-                        android:text="还差1人拼成"
                         android:textColor="@color/alpha_95_black"
                         android:textSize="@dimen/comment_12_size" />
 
                     <TextView
+                        android:id="@+id/tv_fightalone_shengyu2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_below="@id/tv_surplustwo"
                         android:layout_marginEnd="@dimen/comment_91_dip"
-                        android:text="剩余21:15:15.6"
                         android:textSize="@dimen/comment_10_size" />
 
                     <TextView
+                        android:id="@+id/tv_home_goShare1"
                         android:layout_width="@dimen/comment_69_dip"
                         android:layout_height="@dimen/comment_29_dip"
                         android:background="@drawable/icon_home_fightalone"
@@ -293,40 +291,30 @@
                 </RelativeLayout>
             </RelativeLayout>
 
+            <View android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/mine_back_gray"
+                android:layout_marginTop="10dp">
+            </View>
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/comment_150_dip"
-                android:layout_marginTop="@dimen/comment_15_dip"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:background="@drawable/et_shap">
 
                 <TextView
-
                     android:id="@+id/tv_tv_spell_shopname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/comment_15_dip"
-                    android:layout_marginTop="@dimen/comment_15_dip"
                     android:text="项目详情"
                     android:textSize="@dimen/comment_14_size" />
+                <ImageView android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/right_arrow"
+                    android:layout_alignParentEnd="true">
+                </ImageView>
 
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/comment_1_dip"
-                    android:layout_below="@id/tv_tv_spell_shopname"
-                    android:layout_marginTop="@dimen/comment_21_dip"
-                    android:background="@color/alpha_05_black" />
-
-                <TextView
-                    android:id="@+id/tv_spell_shopdetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/comment_72_dip"
-                    android:layout_below="@+id/view"
-                    android:layout_marginEnd="@dimen/comment_13_dip"
-                    android:layout_marginStart="@dimen/comment_15_dip"
-                    android:layout_marginTop="@dimen/comment_14_dip"
-                    android:text="2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算2016年4月18日,算是第三次修改了,这个项目也算."
-                    android:textSize="@dimen/comment_14_size" />
             </RelativeLayout>
 
             <RelativeLayout

@@ -87,7 +87,6 @@ public class HomePageActivity extends BaseOneActivity implements View.OnClickLis
                     Intent intent = new Intent(HomePageActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
-
                 break;
          /*   case 3:
                 tabSelected(ll_daka);

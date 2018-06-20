@@ -52,6 +52,8 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
     RelativeLayout reValidation;
     @Bind(R.id.iv_graphics_validation)
     ImageView ivValidation;
+    @Bind(R.id.tv_validation)
+    TextView tv_validation;
     private String uuid;
     private String dataTime;
     private StringBuilder sb;
@@ -81,7 +83,7 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
 
     private void initbackPay() {
         HashMap<String, String> parames = new HashMap<>();
-        parames.put("cellPhone", backPaypass.getText().toString());//手机号
+        parames.put("cellPhone", backPhone.getText().toString());//手机号
         parames.put("verifyCodeCust", backVerification.getText().toString());//验证码
         parames.put("userPass", MD5.md5(backLoginpass.getText().toString() + "MYN888"));//登录密码
         parames.put("payPass", MD5.md5(backPaypass.getText().toString() + "MYN888"));//新密码
@@ -124,9 +126,6 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
 
     private void initPinjie() {
         sb = new StringBuilder();
-        sb.append("2").append(uuid).append(backPhone.getText().toString()).append(dataTime);
-
-        L.e("%%%%    "+sb);
     }
 
     //获取验证码
@@ -134,7 +133,7 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
         HashMap<String, String> params = new HashMap<>();
         params.put("telNo", backPhone.getText().toString());
         params.put("salt", uuid);
-        params.put("signature", MD5.md5(sb.toString()));
+        params.put("signature", MD5.md5(sb.append("2").append(uuid).append(backPhone.getText().toString()).append(dataTime).toString()));
         params.put("sysflag", "2");
         params.put("frontType", "C");
         if (addvalidatecode) {
@@ -225,18 +224,18 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
         @Override
         public void onTick(long l) {
             //防止计时过程中重复点击
-            backVerification.setClickable(false);
-            backVerification.setText((l / 1000) + "s后重新获取");
+            tv_validation.setClickable(false);
+            tv_validation.setText((l / 1000) + "s后重新获取");
         }
 
         //计时完毕的方法
         @Override
         public void onFinish() {
             //重新给textview设置文字
-            backVerification.setText("重新获取验证码");
+            tv_validation.setText("重新获取验证码");
             //设置可点击
             //initValidation();
-            backVerification.setClickable(true);
+            tv_validation.setClickable(true);
         }
     }
 }

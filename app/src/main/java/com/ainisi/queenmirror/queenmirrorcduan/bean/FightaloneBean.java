@@ -1,8 +1,9 @@
 package com.ainisi.queenmirror.queenmirrorcduan.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class FightaloneBean {
+public class FightaloneBean implements Serializable{
 
 
     /**
@@ -49,7 +50,7 @@ public class FightaloneBean {
         this.body = body;
     }
 
-    public static class BodyBean {
+    public static class BodyBean  implements Serializable{
         /**
          * gpOrderList : [{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":null,"intfAnsOrder":null,"intfAnsCustBasic":null,"intfCpCreateInfo":null,"orderStatusList":null,"gpOrder":{"id":"b86f821e4da94724b99d63677d6c4ac4","isNewRecord":false,"remarks":null,"createDate":"2018-06-16 10:55:22","updateDate":"2018-06-16 10:55:22","orderNo":"1806100006105500","custId":"56b5afab46eb4b72ae1e1dd022fb1473","groupId":"1529117722291","groupType":"2","orderTime":"2018-06-16 10:56:35","orderAmount":1,"paymentMethod":null,"paymentKeys":null,"paymentTime":null,"orderStatus":"PT","ifRefund":"1","refundTime":null,"custRemarks":null,"transId":null,"qrcode":null,"updatePgm":"ApiOrderService","isOwner":0,"gpactId":"f24cb4d9c9df48bc85260fa6e91b6f48","endDate":"2018-06-22 11:55:22","joinNums":1},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"contractConfirm":null,"cellPhone":null,"deviceToken":null,"userName":"灰太狼的替身","userPass":null,"wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"completeFlag":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":null,"nickName":null,"loginIp":null,"logininTime":null,"loginoutTime":null,"loginFlag":null,"recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":null},"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null},{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"intfAnsShopBasic":null,"intfAnsOrder":null,"intfAnsCustBasic":null,"intfCpCreateInfo":null,"orderStatusList":null,"gpOrder":{"id":"ef8972f094f14076aff3636f65dce1b3","isNewRecord":false,"remarks":null,"createDate":"2018-06-15 16:51:58","updateDate":"2018-06-15 16:51:58","orderNo":"1806100005165100","custId":"56b5afab46eb4b72ae1e1dd022fb1473","groupId":"1529052718290","groupType":"2","orderTime":"2018-06-15 16:53:11","orderAmount":1,"paymentMethod":null,"paymentKeys":null,"paymentTime":null,"orderStatus":"PT","ifRefund":"1","refundTime":null,"custRemarks":null,"transId":null,"qrcode":null,"updatePgm":"ApiOrderService","isOwner":0,"gpactId":"f24cb4d9c9df48bc85260fa6e91b6f48","endDate":"2018-06-23 16:51:58","joinNums":1},"ansOrderDetails":null,"ecGoodsBasic":null,"ansShopBasic":null,"ansCustBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"contractConfirm":null,"cellPhone":null,"deviceToken":null,"userName":"灰太狼的替身","userPass":null,"wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"completeFlag":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":null,"nickName":null,"loginIp":null,"logininTime":null,"loginoutTime":null,"loginFlag":null,"recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":null},"paymentMethodLabel":null,"orderStatusLabel":null,"goodsCateLabel":null,"goodsTypeLabel":null,"saleFlagLabel":null,"shopCateLabel":null,"industryCateLabel":null,"businessFlagLabel":null,"enableFlagLabel":null}]
          * groupNums : 2
@@ -114,7 +115,7 @@ public class FightaloneBean {
             this.gpOrderList = gpOrderList;
         }
 
-        public static class ActivityBean {
+        public static class ActivityBean  implements Serializable{
             /**
              * id : f24cb4d9c9df48bc85260fa6e91b6f48
              * isNewRecord : false
@@ -163,8 +164,8 @@ public class FightaloneBean {
             private String groupThumb;
             private String groupPic;
             private String groupShow;
-            private int singlePrice;
-            private int groupPrice;
+            private String singlePrice;
+            private String groupPrice;
             private String groupStart;
             private String groupEnd;
             private int groupPeriod;
@@ -180,6 +181,30 @@ public class FightaloneBean {
             private String updatePgm;
             private int saleNums;
             private String contentTitle;
+
+            public boolean isNewRecord() {
+                return isNewRecord;
+            }
+
+            public void setNewRecord(boolean newRecord) {
+                isNewRecord = newRecord;
+            }
+
+            public String getSinglePrice() {
+                return singlePrice;
+            }
+
+            public void setSinglePrice(String singlePrice) {
+                this.singlePrice = singlePrice;
+            }
+
+            public String getGroupPrice() {
+                return groupPrice;
+            }
+
+            public void setGroupPrice(String groupPrice) {
+                this.groupPrice = groupPrice;
+            }
 
             public String getId() {
                 return id;
@@ -291,22 +316,6 @@ public class FightaloneBean {
 
             public void setGroupShow(String groupShow) {
                 this.groupShow = groupShow;
-            }
-
-            public int getSinglePrice() {
-                return singlePrice;
-            }
-
-            public void setSinglePrice(int singlePrice) {
-                this.singlePrice = singlePrice;
-            }
-
-            public int getGroupPrice() {
-                return groupPrice;
-            }
-
-            public void setGroupPrice(int groupPrice) {
-                this.groupPrice = groupPrice;
             }
 
             public String getGroupStart() {
@@ -430,7 +439,7 @@ public class FightaloneBean {
             }
         }
 
-        public static class EcGoodsBrowsesBean {
+        public static class EcGoodsBrowsesBean  implements Serializable{
             /**
              * id : ac7d91c470fa4f1b8070ca97d2865c6e
              * isNewRecord : false
@@ -516,7 +525,7 @@ public class FightaloneBean {
             }
         }
 
-        public static class EcGoodsBasicBean {
+        public static class EcGoodsBasicBean  implements Serializable{
             /**
              * id : 396636108b214507a0bdcb91731704c5
              * isNewRecord : false
@@ -574,8 +583,8 @@ public class FightaloneBean {
             private Object goodsShow;
             private String goodsTab;
             private int goodsStorage;
-            private int marketPrice;
-            private int salesPrice;
+            private String marketPrice;
+            private String salesPrice;
             private Object goodsActivity;
             private Object goodsBanner;
             private String shopId;
@@ -594,6 +603,30 @@ public class FightaloneBean {
             private Object goodsTypeName;
             private Object goodsCateName;
             private Object ecPointsRule;
+
+            public boolean isNewRecord() {
+                return isNewRecord;
+            }
+
+            public void setNewRecord(boolean newRecord) {
+                isNewRecord = newRecord;
+            }
+
+            public String getMarketPrice() {
+                return marketPrice;
+            }
+
+            public void setMarketPrice(String marketPrice) {
+                this.marketPrice = marketPrice;
+            }
+
+            public String getSalesPrice() {
+                return salesPrice;
+            }
+
+            public void setSalesPrice(String salesPrice) {
+                this.salesPrice = salesPrice;
+            }
 
             public String getId() {
                 return id;
@@ -729,22 +762,6 @@ public class FightaloneBean {
 
             public void setGoodsStorage(int goodsStorage) {
                 this.goodsStorage = goodsStorage;
-            }
-
-            public int getMarketPrice() {
-                return marketPrice;
-            }
-
-            public void setMarketPrice(int marketPrice) {
-                this.marketPrice = marketPrice;
-            }
-
-            public int getSalesPrice() {
-                return salesPrice;
-            }
-
-            public void setSalesPrice(int salesPrice) {
-                this.salesPrice = salesPrice;
             }
 
             public Object getGoodsActivity() {
@@ -892,7 +909,7 @@ public class FightaloneBean {
             }
         }
 
-        public static class GpOrderListBean {
+        public static class GpOrderListBean  implements Serializable{
             /**
              * id : null
              * isNewRecord : true
@@ -1137,7 +1154,7 @@ public class FightaloneBean {
                 this.enableFlagLabel = enableFlagLabel;
             }
 
-            public static class GpOrderBean {
+            public static class GpOrderBean  implements Serializable{
                 /**
                  * id : b86f821e4da94724b99d63677d6c4ac4
                  * isNewRecord : false
@@ -1191,6 +1208,24 @@ public class FightaloneBean {
                 private String gpactId;
                 private String endDate;
                 private int joinNums;
+
+                private String endTimes;
+
+                public boolean isNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setNewRecord(boolean newRecord) {
+                    isNewRecord = newRecord;
+                }
+
+                public String getEndTimes() {
+                    return endTimes;
+                }
+
+                public void setEndTimes(String endTimes) {
+                    this.endTimes = endTimes;
+                }
 
                 public String getId() {
                     return id;
@@ -1393,7 +1428,7 @@ public class FightaloneBean {
                 }
             }
 
-            public static class AnsCustBasicBean {
+            public static class AnsCustBasicBean  implements Serializable{
                 /**
                  * id : null
                  * isNewRecord : true

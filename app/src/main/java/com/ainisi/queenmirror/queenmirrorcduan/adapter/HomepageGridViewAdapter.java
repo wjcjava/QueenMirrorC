@@ -33,7 +33,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
     private Context context;
     List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
     private String where;
-    double distance;
+    double distance = 0;
     String mine_lon,mine_lat,shop_lon,shop_lat;
 
     public HomepageGridViewAdapter(Context context,List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData,String where) {
@@ -123,7 +123,7 @@ public class HomepageGridViewAdapter extends BaseAdapter{
             shop_lon = ShopListData.get(position).getAnsShopBasic().getGeoX();
             shop_lat = ShopListData.get(position).getAnsShopBasic().getGeoY();
         }
-        distance = (DistanceGet.getDistance(Double.parseDouble(mine_lon),Double.parseDouble(mine_lat),Double.parseDouble(shop_lon),Double.parseDouble(shop_lat)))/1000;
+        //distance = (DistanceGet.getDistance(Double.parseDouble(mine_lon),Double.parseDouble(mine_lat),Double.parseDouble(shop_lon),Double.parseDouble(shop_lat)))/1000;
 
         holder.tv_homepage_distance.setText("相距 "+ MD5.doubleToString(String.valueOf(distance)) +"km");
         return convertView;

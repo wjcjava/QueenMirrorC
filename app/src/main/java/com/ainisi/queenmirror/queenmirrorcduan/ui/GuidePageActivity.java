@@ -26,8 +26,7 @@ public class GuidePageActivity extends BaseNewActivity {
     @Bind(R.id.login)
     TextView login;
     SamplePagerAdapter adapter;
-    private int[] imgs = { R.mipmap.ic_splash, R.mipmap.ic_splash,
-            R.mipmap.ic_splash, R.mipmap.ic_splash };
+    private int[] imgs = { R.drawable.wecome1, R.drawable.wecome2,R.drawable.wecome3 };
 
 
     @Override
@@ -83,7 +82,7 @@ public class GuidePageActivity extends BaseNewActivity {
             photoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             photoView.setImageResource(imgs[position]);
             // Now just add PhotoView to ViewPager and return it
-            if(position == 3){
+            if(position == 2){
                 login.setVisibility(View.VISIBLE);
             }else{
                 login.setVisibility(View.INVISIBLE);

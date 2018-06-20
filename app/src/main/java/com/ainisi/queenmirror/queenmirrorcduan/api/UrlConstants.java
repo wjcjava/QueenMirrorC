@@ -7,11 +7,11 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 
 public interface UrlConstants {
 
-     String BASE_URL = "http://netjipeng.nat300.top/wg/a/";//孙继鹏
+     //String BASE_URL = "http://netjipeng.nat300.top/wg/a/";//孙继鹏
 
     //String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
 
-    //String BASE_URL = "http://192.168.50.32:8080/a/"; //拼团
+    String BASE_URL = "http://192.168.50.32:8080/a/"; //拼团
 
     //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
 
@@ -225,5 +225,5 @@ public interface UrlConstants {
 
     String GETPINTUANDATA = "api/ans/gporder/gporders";//获取拼团之外信息
 
-
+    String ADDPINTUAN = "api/ans/gporder/save";//开启拼团
 }

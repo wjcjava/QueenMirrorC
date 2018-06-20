@@ -209,4 +209,6 @@ public interface ACTION {
 
     int GETPINTUANDATA = 0X157;//获取拼团之外的信息
 
+    int ADDPINTUAN = 0x158;//开启拼团
+
 }

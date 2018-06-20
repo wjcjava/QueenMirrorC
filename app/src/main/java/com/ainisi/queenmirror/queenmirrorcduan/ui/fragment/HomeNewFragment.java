@@ -944,8 +944,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         });
     }
 
-
-
     private void initShowSort(int i, int sort, ImageView ivNewuserprg) {
         if (bannerList.get(i).getShowSort() == sort) {
             glideImage(bannerList.get(i).getBannerLogo(), ivNewuserprg);

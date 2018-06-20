@@ -106,10 +106,12 @@ public class HomeFightaloneFragment extends BaseFragment implements HttpCallBack
                             intent.putExtra("goodsBrief",sortlist.get(position).getEcGoodsBasic().getGoodsBrief());
                             intent.putExtra("goodsService",sortlist.get(position).getEcGoodsBasic().getServiceTime());
                             intent.putExtra("goodsSales",sortlist.get(position).getEcGoodsBasic().getSalesPrice());
+
                             if(sortlist.get(position).getEcGoodsBasic().getMarketPrice() == null){
                                 intent.putExtra("goodsMarket", "0");
                             }else {
                                 intent.putExtra("goodsMarket", sortlist.get(position).getEcGoodsBasic().getMarketPrice());
+
                             }
                           //  intent.putExtra("goodsNumber",sortlist.get(position).getEcGoodsBasic().get)
                             startActivity(intent);

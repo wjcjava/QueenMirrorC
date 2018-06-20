@@ -1,11 +1,13 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
@@ -14,10 +16,12 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.FightaloneAddBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.FightaloneBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SortBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.CollectionSpellBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.SpellDetailsBean;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.DateUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
@@ -26,8 +30,10 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.bumptech.glide.Glide;
 import com.lzy.okgo.cache.CacheMode;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
@@ -50,13 +56,8 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
     ImageView fullPhoto;
     @Bind(R.id.tv_spell_shopbrowse)
     TextView shopBrowse;
-    @Bind(R.id.tv_spell_shopdetails)
-    TextView shopDetails;
     @Bind(R.id.iv_spell_shopcollection)
     ImageView shopCollection;
-    //    @Bind(R.id.re_spell_shop)
-//    RecyclerView reShopspell;
-
 
     @Bind(R.id.full_cash)
     TextView full_cash;
@@ -70,17 +71,41 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
     TextView tv_spell_shoptime;
     @Bind(R.id.tv_collage)
     TextView tv_collage;
-    @Bind(R.id.iv_title)
-    CircleImageView iv_title;
+    /*@Bind(R.id.iv_title)
+    CircleImageView iv_title;*/
     @Bind(R.id.tv_fightalone_textname)
     TextView tv_fightalone_textname;
     @Bind(R.id.tv_surplus)
     TextView tv_surplus;
+    @Bind(R.id.tv_fightalone_shengyu)
+    TextView tv_fightalone_shengyu;
+    @Bind(R.id.tv_fightalone_name2)
+    TextView tv_fightalone_name2;
+    @Bind(R.id.tv_surplustwo)
+    TextView tv_surplustwo;
+    @Bind(R.id.tv_fightalone_shengyu2)
+    TextView tv_fightalone_shengyu2;
+    @Bind(R.id.re_surplus)
+    RelativeLayout re_surplus;
+    @Bind(R.id.view_fightaltwo)
+    View view_fightaltwo;
+    @Bind(R.id.re_surplustwo)
+    RelativeLayout re_surplustwo;
+    @Bind(R.id.tv_home_goShare)
+    TextView tv_home_goShare;
+    @Bind(R.id.tv_home_goShare1)
+    TextView tv_home_goShare1;
 
     private List<SortBean> fulllist = new ArrayList<>();
     private List<SortBean> fulllist2 = new ArrayList<>();
     private String isLogin,activityId,goodsName,goodsId,goodsBrief,goodsService,goodsSales,goodsMarket;
     private boolean iscomment = false;
+    String groupId = "",isOwner;
+
+    String groupOrderId;
+    String orderId;
+
+    FightaloneBean fightaloneBean;
 
     // private List<SortBean> list=new ArrayList<>();
     @Override
@@ -101,14 +126,13 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
         goodsMarket = intent.getStringExtra("goodsMarket");
 
         full_cash.setText(goodsSales);
-        textView.setText(goodsMarket);
+        textView.setText("￥"+goodsMarket);
+        textView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
         tv_spell_shopname.setText(goodsName);
         tv_spell_shopabstract.setText(goodsBrief);
         tv_spell_shoptime.setText("服务时长："+goodsService+"分钟");
 
-
         getFigHtData();
-
 
         isLogin = SP.get(this, SpContent.isLogin, "0").toString();
         for (int i = 0; i < 6; i++) {
@@ -150,7 +174,7 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
     @Override
     protected void initData() {
         super.initData();
-       // inithttp();
+       //inithttp();
     }
 
     private void initText() {
@@ -159,7 +183,7 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
         fullPhoto.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.title_back, R.id.relative_look_more, R.id.tv_home_goShare, R.id.tv_startspell, R.id.rl_spell_shopcollection})
+    @OnClick({R.id.title_back, R.id.relative_look_more, R.id.tv_home_goShare, R.id.tv_startspell, R.id.rl_spell_shopcollection,R.id.tv_home_goShare1})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -167,22 +191,41 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
                 break;
             //拼单剩余人数（查看更多）
             case R.id.relative_look_more:
+                    /**
+                     * 点击查看更多
+                     */
+
+                    Intent intent = new Intent(this, SpellOrderListActivity.class);
+                    intent.putExtra("bean",(Serializable)fightaloneBean);
+                    startActivity(intent);
+                   // startActivity(new Intent(this, SpellOrderListActivity.class));
+                break;
+            case R.id.tv_home_goShare1:
                 if (isLogin.equals("1")) {
-                    startActivity(new Intent(this, SpellOrderListActivity.class));
+                    isOwner = "1";
+                    groupId = fightaloneBean.getBody().getGpOrderList().get(1).getGpOrder().getGroupId();
+
+                    PinTuanData();
                 } else {
                     T.show("请登录");
                 }
-
                 break;
-
             case R.id.tv_home_goShare:
+                if (isLogin.equals("1")) {
+                    isOwner = "1";
+                    groupId = fightaloneBean.getBody().getGpOrderList().get(0).getGpOrder().getGroupId();
 
+                    PinTuanData();
+                } else {
+                    T.show("请登录");
+                }
                 break;
             //开启拼单
             case R.id.tv_startspell:
                 if (isLogin.equals("1")) {
-                    Intent intent = new Intent(this, SubmitActivity.class);
-                    startActivity(intent);
+                    isOwner = "0";
+                    groupId = "";
+                    PinTuanData();
                 } else {
                     T.show("请登录");
                 }
@@ -190,7 +233,6 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
                 break;
 
             case R.id.rl_spell_shopcollection:
-                T.show("你点击了我");
                 if (isLogin.equals("1")) {
                     if (iscomment) {
 
@@ -202,8 +244,28 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
                 }
                 break;
         }
+    }
 
-
+    /**
+     * 拼团Data(点击拼团)
+     */
+    private void PinTuanData() {
+        /**
+         * platform ：3”（固定值）  purchaseNumber ：1”（购买数量）  groupId：“”(建团不需要传值，参加拼团传拼团ID)
+         * grouptype：“2”（拼团模式固定值）
+         * ifrefund：“1”（固定值）   isOwner：“0”（是否房主    建团传0，参团传1）
+         */
+        HashMap<String, String> parames = new HashMap<>();
+        parames.put("goodsId", goodsId);//拼团商品的ID
+        parames.put("userId",SP.get(this,SpContent.UserId,"0")+"");
+        parames.put("platform","3");
+        parames.put("purchaseNumber","1");
+        parames.put("activityId",activityId);
+        parames.put("groupId",groupId);
+        parames.put("grouptype","2");
+        parames.put("ifrefund","1");
+        parames.put("isOwner",isOwner);
+        HttpUtils.doPost(ACTION.ADDPINTUAN, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
     /**
@@ -211,7 +273,7 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
      */
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
-        parames.put("groupId", "123");//拼团商品的ID
+        parames.put("groupId", goodsId);//拼团商品的ID
         HttpUtils.doPost(ACTION.SPELLDETAILS, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
@@ -229,32 +291,81 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
     public void onSuccess(int action, String res) {
         switch (action) {
             /**
+             * 点击拼团
+             */
+            case ACTION.ADDPINTUAN:
+
+                FightaloneAddBean fightaloneAddBean = GsonUtil.toObj(res,FightaloneAddBean.class);
+                if(fightaloneAddBean.isSuccess()&&fightaloneAddBean.getErrorCode().equals("0")){
+                    groupOrderId = fightaloneAddBean.getBody().getGroupOrderId();
+                    orderId = fightaloneAddBean.getBody().getOrderId();
+
+                    Intent intent = new Intent(this,SubmitActivity.class);
+                    intent.putExtra("businessIds",orderId);
+                    intent.putExtra("amount",goodsSales);
+                    startActivity(intent);
+                }else{
+                    T.show(fightaloneAddBean.getMsg());
+                }
+
+                break;
+            /**
              * 拼团之外的信息
              */
             case ACTION.GETPINTUANDATA:
-                L.e("*******    "+res);
 
-                FightaloneBean fightaloneBean = GsonUtil.toObj(res,FightaloneBean.class);
-
+                fightaloneBean = GsonUtil.toObj(res,FightaloneBean.class);
                 tv_collage.setText(fightaloneBean.getBody().getJoinSums()+"人在拼团");
-                tv_fightalone_textname.setText(fightaloneBean.getBody().getGpOrderList().get(0).getAnsCustBasic().getUserName());
 
-                tv_surplus.setText("还差"+(fightaloneBean.getBody().getGroupNums()-fightaloneBean.getBody().getGpOrderList().get(0).getGpOrder().getJoinNums())+"人拼成");
 
-                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");//这里想要只保留分秒可以写成"mm:ss"
-                formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
-                //String hms = formatter.format(fightaloneBean.getBody().getActivity().get);
+                if(fightaloneBean.getBody().getGpOrderList().size() == 0||fightaloneBean.getBody().getGpOrderList() == null||
+                        fightaloneBean.getBody().getJoinSums() == 0){
+                    re_surplus.setVisibility(View.GONE);
+                    view_fightaltwo.setVisibility(View.GONE);
+                    re_surplustwo.setVisibility(View.GONE);
+                }else if(fightaloneBean.getBody().getGpOrderList().size() == 1){
+                    re_surplus.setVisibility(View.VISIBLE);
+                    view_fightaltwo.setVisibility(View.GONE);
+                    re_surplustwo.setVisibility(View.GONE);
+
+                    tv_fightalone_textname.setText(fightaloneBean.getBody().getGpOrderList().get(0).getAnsCustBasic().getUserName());
+                    tv_surplus.setText("还差"+(fightaloneBean.getBody().getGroupNums()-fightaloneBean.getBody().getGpOrderList().get(0).getGpOrder().getJoinNums())+"人拼成");
+                    int second =Integer.parseInt(fightaloneBean.getBody().getGpOrderList().get(0).getGpOrder().getEndTimes().toString());
+                    Date date1 = new Date(second);
+                    SimpleDateFormat format1 = new SimpleDateFormat("HH:MM");
+                    tv_fightalone_shengyu.setText("剩余："+ format1.format(date1));
+                }else{
+                    re_surplus.setVisibility(View.VISIBLE);
+                    view_fightaltwo.setVisibility(View.VISIBLE);
+                    re_surplustwo.setVisibility(View.VISIBLE);
+                    tv_fightalone_textname.setText(fightaloneBean.getBody().getGpOrderList().get(0).getAnsCustBasic().getUserName());
+                    tv_surplus.setText("还差"+(fightaloneBean.getBody().getGroupNums()-fightaloneBean.getBody().getGpOrderList().get(0).getGpOrder().getJoinNums())+"人拼成");
+                    view_fightaltwo.setVisibility(View.VISIBLE);
+
+                    int second =Integer.parseInt(fightaloneBean.getBody().getGpOrderList().get(0).getGpOrder().getEndTimes().toString());
+                    Date date1 = new Date(second);
+                    SimpleDateFormat format1 = new SimpleDateFormat("HH:MM");
+                    tv_fightalone_shengyu.setText("剩余："+ format1.format(date1));
+
+                    tv_fightalone_name2.setText(fightaloneBean.getBody().getGpOrderList().get(1).getAnsCustBasic().getUserName());
+                    tv_surplustwo.setText("还差"+(fightaloneBean.getBody().getGroupNums()-fightaloneBean.getBody().getGpOrderList().get(1).getGpOrder().getJoinNums())+"人拼成");
+                    int second1 =Integer.parseInt(fightaloneBean.getBody().getGpOrderList().get(1).getGpOrder().getEndTimes().toString());
+
+                    Date date = new Date(second1);
+                    SimpleDateFormat format = new SimpleDateFormat("HH:MM");
+                    tv_fightalone_shengyu2.setText("剩余："+ format.format(date));
+                }
 
                 break;
             case ACTION.SPELLDETAILS:
                 SpellDetailsBean detailsBean = GsonUtil.toObj(res, SpellDetailsBean.class);
                 if (detailsBean.isSuccess()) {
-                    SpellDetailsBean.BodyBean.GroupActivityDataBean groupActivityData = detailsBean.getBody().getGroupActivityData();
+                 /*   SpellDetailsBean.BodyBean.GroupActivityDataBean groupActivityData = detailsBean.getBody().getGroupActivityData();
                     tv_spell_shopname.setText(groupActivityData.getGpActivity().getGroupName());
                     tv_spell_shopabstract.setText(groupActivityData.getGpActivity().getGroupBrief());
                     tv_spell_shoptime.setText(groupActivityData.getGpActivity().getGroupStart());
                     shopBrowse.setText(groupActivityData.getGpActivity().getCurrentNumber());
-                    shopDetails.setText(groupActivityData.getGpActivity().getGroupDetails());
+                    shopDetails.setText(groupActivityData.getGpActivity().getGroupDetails());*/
                     String isCollection = detailsBean.getBody().getGroupActivityData().getGpActivity().getShopId();
                     if (isCollection.equals("1")) {
                         iscomment = true;
