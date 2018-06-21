@@ -88,7 +88,7 @@
                 android:layout_marginStart="@dimen/comment_14_dip"
                 android:layout_marginTop="@dimen/comment_16_dip"
                 android:inputType="textPassword"
-                android:maxLength="11"
+                android:maxLength="16"
                 android:layout_toRightOf="@id/iv_password"
                 android:background="@color/white"
                 android:gravity="center|left"

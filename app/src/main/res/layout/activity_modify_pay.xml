@@ -64,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/comment_10_dip"
+            android:maxLength="16"
             android:layout_toRightOf="@id/tv_system_loginpass"
             android:background="@color/white"
             android:hint="@string/add_login_password"
@@ -207,6 +208,7 @@
             android:layout_toRightOf="@id/tv_system_password"
             android:background="@color/white"
             android:hint="@string/add_pay_password"
+            android:maxLength="16"
             android:inputType="numberPassword|number"
             android:textSize="@dimen/comment_14_size" />
     </RelativeLayout>

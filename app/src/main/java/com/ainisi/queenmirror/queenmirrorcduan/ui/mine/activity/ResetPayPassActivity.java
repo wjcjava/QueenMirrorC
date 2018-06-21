@@ -63,7 +63,7 @@ public class ResetPayPassActivity extends BaseNewActivity implements HttpCallBac
     private String dataTime;
     private StringBuilder sb;
     private MyCountDownTimer myCountDownTimer;
-    private boolean addvalidatecode=false;
+    private boolean addvalidatecode = false;
 
     @Override
     protected int getLayoutId() {
@@ -94,7 +94,18 @@ public class ResetPayPassActivity extends BaseNewActivity implements HttpCallBac
                 finish();
                 break;
             case R.id.tv_ok_submit:
-                inithttp();
+                if (TextUtils.isEmpty(resetLoginpass.getText())) {
+                    T.show("登陆密码不能为空");
+                } else if (TextUtils.isEmpty(resetVerification.getText())) {
+                    T.show("手机验证码不能为空");
+                } else if (TextUtils.isEmpty(rextOldpass.getText())) {
+                    T.show("请您输入旧密码");
+                } else if (TextUtils.isEmpty(rextNewpass.getText())) {
+                    T.show("请你输入新的支付密码");
+                } else {
+                    inithttp();
+                }
+
                 break;
             case R.id.tv_validation:
                 if (TextUtils.isEmpty(resetPhone.getText())) {
@@ -111,6 +122,7 @@ public class ResetPayPassActivity extends BaseNewActivity implements HttpCallBac
 
 
     }
+
     private void initKey() {
         //随机生成的UUID
         uuid = java.util.UUID.randomUUID().toString();
@@ -155,6 +167,7 @@ public class ResetPayPassActivity extends BaseNewActivity implements HttpCallBac
         parames.put("telNo", resetPhone.getText().toString().trim());
         HttpUtils.doPost(ACTION.GETSHAPE, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
         parames.put("cellPhone", resetPhone.getText().toString());
@@ -194,20 +207,21 @@ public class ResetPayPassActivity extends BaseNewActivity implements HttpCallBac
                 break;
             //获取图形验证码
             case ACTION.GETSHAPE:
-                GetShareBean getShareBean=GsonUtil.toObj(res,GetShareBean.class);
-                if(getShareBean.isSuccess()){
+                GetShareBean getShareBean = GsonUtil.toObj(res, GetShareBean.class);
+                if (getShareBean.isSuccess()) {
                     String imagestr = getShareBean.getBody().getImageStr();
-                    if(!TextUtils.isEmpty(imagestr)){
+                    if (!TextUtils.isEmpty(imagestr)) {
                         Bitmap image = stringtoBitmap(imagestr);
                         ivValidation.setImageBitmap(image);
-                        addvalidatecode=true;
+                        addvalidatecode = true;
                     }
-                }else {
+                } else {
                     T.show(getShareBean.getMsg());
                 }
                 break;
         }
     }
+
     public static Bitmap stringtoBitmap(String string) {
         Bitmap bitmap = null;
         try {
@@ -220,6 +234,7 @@ public class ResetPayPassActivity extends BaseNewActivity implements HttpCallBac
 
         return bitmap;
     }
+
     @Override
     public void showLoadingDialog() {
 
@@ -229,6 +244,7 @@ public class ResetPayPassActivity extends BaseNewActivity implements HttpCallBac
     public void showErrorMessage(String s) {
 
     }
+
     //复写倒计时
     private class MyCountDownTimer extends CountDownTimer {
 

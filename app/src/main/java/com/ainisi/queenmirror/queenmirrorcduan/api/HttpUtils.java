@@ -128,11 +128,8 @@ public class HttpUtils {
                                 return;
                             }*/
                             //成功
+                                httpCallBack.onSuccess(action, s);
 
-                       /*     JSONObject jsonObject = new JSONObject(s);
-                            String res = jsonObject.getString("errorCode");*/
-
-                            httpCallBack.onSuccess(action, s);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

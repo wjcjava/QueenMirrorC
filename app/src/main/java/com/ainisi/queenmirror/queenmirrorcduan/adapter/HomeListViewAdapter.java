@@ -15,9 +15,12 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
-import com.bumptech.glide.Glide;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.MapUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,8 @@ public class HomeListViewAdapter extends BaseAdapter {
     private Context context;
     List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData = new ArrayList<>();
     private String where;
+    String mine_lon, mine_lat, shop_lon, shop_lat;
+    private double distance;
 
     public HomeListViewAdapter(Context context, List<ShopListHomeBean.BodyBean.ShopListBean> ShopListData, String where) {
         this.context = context;
@@ -40,7 +45,7 @@ public class HomeListViewAdapter extends BaseAdapter {
     }
 
 
-    public void Clear(){
+    public void Clear() {
         ShopListData.clear();
         notifyDataSetChanged();
     }
@@ -77,6 +82,7 @@ public class HomeListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_shortrecycler, parent, false);
             holder.sort_time = convertView.findViewById(R.id.tv_sort_time);
             holder.sort_name = convertView.findViewById(R.id.tv_sort_name);
+            holder.sort_distance = convertView.findViewById(R.id.sort_distance);
             holder.iv_homepage_shop_listview = convertView.findViewById(R.id.iv_homepage_shop_listview);
 
             convertView.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +109,35 @@ public class HomeListViewAdapter extends BaseAdapter {
         holder.sort_time.setText("营业时间：" + ShopListData.get(position).getAnsShopBasic().getOpenTime() + "-" + ShopListData.get(position).getAnsShopBasic().getCloseTime());
         holder.sort_name.setText(ShopListData.get(position).getAnsShopBasic().getShopName());
 
-        if(ShopListData.get(position).getAnsShopBasic().getShopLogo() == null || ShopListData.get(position).getAnsShopBasic().getShopLogo().equals("")){
+        if (ShopListData.get(position).getAnsShopBasic().getShopLogo() == null || ShopListData.get(position).getAnsShopBasic().getShopLogo().equals("")) {
 
-        }else{
+        } else {
             Glide.with(context).load(ShopListData.get(position).getAnsShopBasic().getShopLogo()).into(holder.iv_homepage_shop_listview
 
             );
+        }
+        if (ShopListData.get(position).getAnsShopBasic().getGeoX() == null || ShopListData.get(position).getAnsShopBasic().getGeoY() == null ||
+                ShopListData.get(position).getAnsShopBasic().getGeoX().equals("") || ShopListData.get(position).getAnsShopBasic().getGeoY().equals("")) {
+            shop_lon = "0";
+            shop_lat = "0";
+            mine_lon = SP.get(context, SpContent.UserLon, "0") + "";
+            mine_lat = SP.get(context, SpContent.UserLat, "0") + "";
+
+        } else {
+            mine_lon = SP.get(context, SpContent.UserLon, "0") + "";
+            mine_lat = SP.get(context, SpContent.UserLat, "0") + "";
+            shop_lon = ShopListData.get(position).getAnsShopBasic().getGeoX();
+            shop_lat = ShopListData.get(position).getAnsShopBasic().getGeoY();
+        }
+        if (mine_lat.equals("0") || mine_lon.equals("0")) {
+            holder.sort_distance.setVisibility(View.INVISIBLE);
+        } else {
+//            double d = Math.acos(Math.sin(Double.parseDouble(mine_lat)) * Math.sin(Double.parseDouble(shop_lat)) + Math.cos(Double.parseDouble(mine_lat)) * Math.cos(Double.parseDouble(shop_lat)) * Math.cos(Double.parseDouble(shop_lon) - Double.parseDouble(mine_lon)));
+//            holder.sort_distance.setText("相距 " + MD5.doubleToString(String.valueOf(d)) + "km");
+            double d= MapUtil.GetDistance(Double.parseDouble(mine_lat),Double.parseDouble(mine_lon),Double.parseDouble(shop_lat),Double.parseDouble(shop_lon));
+            holder.sort_distance.setText("相距 " + MD5.doubleToString(String.valueOf(d)) + "km");
+
+
         }
 
         return convertView;
@@ -117,8 +146,11 @@ public class HomeListViewAdapter extends BaseAdapter {
     //就是View的持有
     public final class ViewHolder {
         private LinearLayout li_home_short;
-        private TextView sort_name;
+        private TextView sort_name, sort_distance;
         private TextView sort_time;
         private ImageView iv_homepage_shop_listview;
+
     }
+
+
 }

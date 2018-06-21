@@ -2,7 +2,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 
 /**
  * 网络请求地址库
- * 作者： jc
+ * 作者： junchao
  */
 
 public interface UrlConstants {
@@ -15,9 +15,9 @@ public interface UrlConstants {
 
     //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
 
-    String BASE_URL = "http://192.168.30.155:7080/wg/a/";
+   // String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
-    //String BASE_URL = "http://58.210.102.70:7080/wg/a/";
+    String BASE_URL = "http://58.210.102.70:7080/wg/a/";
 
     String ADVERTISING = "api/ec/common/advertisementList";//首页广告
 

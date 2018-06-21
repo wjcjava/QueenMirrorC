@@ -67,12 +67,12 @@
             android:id="@+id/et_back_loginpass"
             android:layout_width="match_parent"
             android:layout_height="@dimen/comment_50_dip"
-
             android:layout_marginStart="@dimen/comment_10_dip"
             android:layout_toRightOf="@id/tv_back_loginpass"
             android:background="@color/white"
             android:hint="@string/add_login_password"
             android:inputType="textPassword"
+            android:maxLength="16"
             android:textSize="@dimen/comment_14_size" />
     </RelativeLayout>
 
@@ -142,11 +142,12 @@
         android:layout_marginLeft="@dimen/comment_20_dip"
         android:layout_marginRight="@dimen/comment_20_dip"
         android:background="@color/alpha_20_black" />
+
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/re_graphics_validation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <RelativeLayout
 
@@ -180,14 +181,15 @@
         </RelativeLayout>
 
         <View
-            android:layout_below="@+id/re_validation"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_below="@+id/re_validation"
             android:layout_marginLeft="@dimen/comment_20_dip"
             android:layout_marginRight="@dimen/comment_20_dip"
             android:background="@color/alpha_20_black" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -205,13 +207,12 @@
             android:id="@+id/et_back_cureenpass"
             android:layout_width="match_parent"
             android:layout_height="@dimen/comment_50_dip"
-
             android:layout_marginStart="@dimen/comment_10_dip"
-
             android:layout_toRightOf="@id/tv_back_cureenpass"
             android:background="@color/white"
             android:hint="@string/add_currentpay_password"
             android:inputType="numberPassword|number"
+            android:maxLength="16"
             android:textSize="@dimen/comment_14_size" />
     </RelativeLayout>
 

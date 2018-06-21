@@ -62,8 +62,6 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     protected void initView() {
         super.initView();
         initTitle();
-        choice.setChecked(true);
-
     }
 
     private void initTitle() {

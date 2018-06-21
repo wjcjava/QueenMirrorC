@@ -15,14 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_45_dip"
         android:layout_gravity="center_horizontal"
-        android:background="@color/home_shop_middle"
         android:gravity="center_vertical"
-        android:paddingStart="@dimen/comment_10_dip"
+        android:paddingStart="@dimen/comment_16_dip"
+        android:paddingBottom="@dimen/comment_10_dip"
+        android:paddingTop="@dimen/comment_10_dip"
         tools:ignore="RtlSymmetry">
 
         <ImageView
-            android:layout_width="@dimen/comment_70_dip"
-            android:layout_height="@dimen/comment_30_dip"
+            android:layout_width="@dimen/comment_58_dip"
+            android:layout_height="@dimen/comment_14_dip"
             android:src="@drawable/icon_home_recommend" />
 
         <TextView
@@ -30,6 +31,7 @@
             android:layout_height="@dimen/comment_30_dip"
             android:layout_marginStart="@dimen/comment_8_dip"
             android:gravity="center|left"
+            android:textSize="@dimen/comment_10_size"
             android:text="@string/satisfy"
             android:textColor="@color/home_queen_full" />
     </LinearLayout>

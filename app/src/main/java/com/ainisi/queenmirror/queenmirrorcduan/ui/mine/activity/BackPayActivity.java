@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +18,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.GetShareBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.bean.LoginCeshiBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.lzy.okgo.cache.CacheMode;
@@ -99,7 +97,15 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
                 finish();
                 break;
             case R.id.tv_ok_submit:
-                initbackPay();
+                if(TextUtils.isEmpty(backLoginpass.getText())){
+                    T.show("登录密码不能为空");
+                }else if(TextUtils.isEmpty(backVerification.getText())){
+                    T.show("手机验证码不能为空");
+                }else if(TextUtils.isEmpty(backPaypass.getText())){
+                    T.show("当前密码补鞥为空");
+                }else {
+                    initbackPay();
+                }
                 break;
             case R.id.tv_validation:
                 if (TextUtils.isEmpty(backPhone.getText())) {
@@ -112,6 +118,8 @@ public class BackPayActivity extends BaseNewActivity implements HttpCallBack {
                 initgetShape();
                 break;
         }
+
+
     }
 
     private void initKey() {

@@ -50,8 +50,10 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PageBannerBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.Banner;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.ScreenPoputil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.ScrollRecyclerView;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
@@ -70,7 +72,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sunfusheng.marqueeview.MarqueeView;
-import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -88,7 +89,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @Bind(R.id.banner)
     Banner banner;
     @Bind(R.id.banner_middle)
-    Banner banner_middle;
+    com.youth.banner.Banner banner_middle;
     @Bind(R.id.tv_home_esthetics)
     TextView tv_home_esthetics;
     @Bind(R.id.tv_home_nailart)
@@ -203,25 +204,27 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
     private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist = new ArrayList<>();
-    private PopupWindow popWindowdistance;
     private ArrayList<String> cValues;
     private String bannerDetails;
     private List<PageBannerBean.BodyBean.BannerListDataBean> bannerList;
 
     @Bind(R.id.home_refreshLayout)
     SmartRefreshLayout home_refreshLayout;
-    int pageNumber=1,pageIndex=0,pageSum = 0;
+    int pageNumber = 1, pageIndex = 0, pageSum = 0;
     HomepageGridViewAdapter gridViewAdapter;
     HomeListViewAdapter homeListViewAdapter;
+    private int i;
 
     @Override
     protected int getLayoutResource() {
         instance = this;
         return R.layout.activity_home_new_fragment;
     }
+
     @Override
     public void initPresenter() {
     }
+
     private void initBanner() {
         HashMap<String, String> parames = new HashMap<>();
         //parames.put("bannerStyle", "");
@@ -239,17 +242,19 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
         //HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//Banner
     }
+
     /**
      * 获取首页底部商家列表
      */
     private void getShopData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("pageNumber", pageNumber+"");
+        params.put("pageNumber", pageNumber + "");
         params.put("contentByTitle", "");
         params.put("pageSize", SpContent.pageSize);
         params.put("shopCate", "1");
         HttpUtils.doPost(ACTION.SHOPLIST, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     /**
      * 获取新消息提示
      */
@@ -259,6 +264,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         params.put("messageType", "");
         HttpUtils.doPost(ACTION.GETNEWNEWS, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
@@ -280,7 +286,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 getShopData();
                 initnewShop();
                 inithttp();
-
                 refreshlayout.finishRefresh(2000);
             }
         });
@@ -288,10 +293,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
 
-                if(pageSum > pageIndex && pageSum <= (pageIndex+Integer.parseInt(SpContent.pageSize))){
+                if (pageSum > pageIndex && pageSum <= (pageIndex + Integer.parseInt(SpContent.pageSize))) {
                     refreshlayout.finishLoadmore(2000);
                     T.show("您已加载完全部数据");
-                }else{
+                } else {
                     pageNumber++;
                     getShopData();
                     refreshlayout.finishLoadmore(2000);
@@ -307,7 +312,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
         if(shoplist.size()==0){
             getShopData();
-        }else{
+        } else {
 
         }
         initnewShop();
@@ -329,6 +334,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         });
         inithttp();
     }
+
     private void inithttp() {
         HashMap<String, String> parames = new HashMap<>();
         parames.put("", "");
@@ -366,10 +372,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         String lat = location.getLatitude() + "";
                         SP.put(getActivity(), SpContent.UserLon, lon);
                         SP.put(getActivity(), SpContent.UserLat, lat);
-
+                        loadData(shoplist);
                     }
-
-
                 }
             });
         }
@@ -610,15 +614,13 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 cAdapter.setPressPostion(position);
                 cAdapter.notifyDataSetChanged();
-                bt2.setText(cValues.get(position));
-                bt.setText(cValues.get(position));
                 bt2.hidePopup();
                 bt.hidePopup();
             }
         });
 
+      //  bt2.setPopupView(view2);
         bt2.setPopupView(view2);
-        bt.setPopupView(view2);
     }
 
     private void initpop1() {
@@ -667,8 +669,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 cAdapter.setPressPostion(position);
                 cAdapter.notifyDataSetChanged();
-                bt2.setText(cValues.get(position));
-                bt.setText(cValues.get(position));
                 bt2.hidePopup();
             }
         });
@@ -778,10 +778,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 if (shopListHomeBean.isSuccess()) {
                     if (shopListHomeBean.getBody().getShopList().size() > 0) {
                         pageSum = shopListHomeBean.getBody().getShopList().size();
-                        if(pageSum < Integer.parseInt(SpContent.pageSize)){
+                        if (pageSum < Integer.parseInt(SpContent.pageSize)) {
                             T.show("您已加载全部数据");
                             home_refreshLayout.setEnableLoadmore(false);
-                        }else{
+                        } else {
                             home_refreshLayout.setEnableLoadmore(true);
                         }
                         loadMoreData(shopListHomeBean.getBody().getShopList());
@@ -793,8 +793,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 }
 
                 break;
-            //首页bannerl列表
-            //case ACTION.ADVERTISING:
             case ACTION.PAGEBANNER:
                 PageBannerBean bannerBean = GsonUtil.toObj(res, PageBannerBean.class);
                 if (bannerBean.isSuccess()) {
@@ -808,6 +806,9 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                             banner.setImageLoader(new GlideImageLoader());
                             banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
                             banner.setImages(images);
+                            banner.setViewPagerIsScroll(true);
+                            banner.setFocusable(true);
+                            banner.requestFocus();
                             banner.start();
                             initBannerOnClick(banner);
                         } else if (bannerList.get(i).getPageLocation().equals("2")) {
@@ -827,7 +828,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         } else if (bannerList.get(i).getPageLocation().equals("3")) {
                             initShowSort(i, 1, ivNewuserprg);
                             initShowSort(i, 2, ivFreetrial);
-                            initOnClick(i,1,ivNewuserprg);
+                            initOnClick(i, 1, ivNewuserprg);
                             ivFreetrial.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -836,31 +837,45 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                             });
                             initShowSort(i, 3, ivSpecialoffer);
                             initShowSort(i, 4, ivGoodshop);
-                            initOnClick(i,3,ivSpecialoffer);
-                            initOnClick(i,4,ivGoodshop);
+                            initOnClick(i, 3, ivSpecialoffer);
+                            initOnClick(i, 4, ivGoodshop);
                         } else if (bannerList.get(i).getPageLocation().equals("4")) {
                             initShowSort(i, 1, ivItemShop);
                             initShowSort(i, 2, ivConvert);
                             initShowSort(i, 3, ivPrize);
                             initShowSort(i, 4, ivQueenShop);
-                            initOnClick(i,1,ivItemShop);
-                            initOnClick(i,2,ivConvert);
-                            initOnClick(i,3,ivPrize);
-                            initOnClick(i,4,ivQueenShop);
+                            initOnClick(i, 1, ivItemShop);
+                            initOnClick(i, 2, ivConvert);
+                            initOnClick(i, 3, ivPrize);
+                            initOnClick(i, 4, ivQueenShop);
                         } else if (bannerList.get(i).getPageLocation().equals("5")) {
                             imagesTwo.add(bannerList.get(i).getBannerLogo());
                             banner_middle.setBannerStyle(BannerConfig.NOT_INDICATOR);
                             banner_middle.setImageLoader(new GlideImageLoader());
                             banner_middle.setImages(imagesTwo);
+                            banner_middle.setViewPagerIsScroll(true);
+                            banner_middle.setFocusable(true);
+                            banner_middle.requestFocus();
+//                            final String id = bannerList.get(i).getId();
+//                            final String style = bannerList.get(i).getBannerStyle();
+//                            final String url = bannerList.get(i).getBannerUrl();
+//                            final String name = bannerList.get(i).getBannerName();
                             banner_middle.start();
-                            initBannerOnClick(banner_middle);
+                            banner_middle.setOnBannerListener(new OnBannerListener() {
+                                @Override
+                                public void OnBannerClick(int position) {
+                                    L.e("======================" + bannerList.get(position).getBannerName());
+                                    Intent intent = new Intent(getActivity(), HomeAdvertisingActivity.class);
+                                    intent.putExtra("bannerId", bannerList.get(position).getId());
+                                    intent.putExtra("bannerStyle", bannerList.get(position).getBannerStyle());
+                                    intent.putExtra("weburl", bannerList.get(position).getBannerUrl());
+                                    intent.putExtra("bannerTitle", bannerList.get(position).getBannerName());
+                                    getActivity().startActivity(intent);
 
-
+                                }
+                            });
                         }
-
                     }
-
-
                 } else {
                     T.show(bannerBean.getMsg());
                 }
@@ -906,7 +921,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     }
 
     private void initOnClick(final int i, final int sort, ImageView imageView) {
-        if(bannerList.get(i).getShowSort() == sort){
+        if (bannerList.get(i).getShowSort() == sort) {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -932,6 +947,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 intent.putExtra("weburl", bannerList.get(position).getBannerUrl());
                 intent.putExtra("bannerLogo", bannerList.get(position).getBannerLogo());
                 intent.putExtra("bannerTitle", bannerList.get(position).getBannerName());
+
+
                 getActivity().startActivity(intent);
             }
         });
@@ -971,30 +988,30 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         mv_home_marqueeView.stopFlipping();
     }
 
-    public void loadData(List<ShopListHomeBean.BodyBean.ShopListBean> apiOrderListMore){
-        if(pageIndex == 0){
+    public void loadData(List<ShopListHomeBean.BodyBean.ShopListBean> apiOrderListMore) {
+        if (pageIndex == 0) {
             gridViewAdapter.setmDate(shoplist);
             homeListViewAdapter.setmDate(shoplist);
-        }else{
+        } else {
             gridViewAdapter.notifyDataSetChanged();
             homeListViewAdapter.notifyDataSetChanged();
         }
     }
 
-    public void loadMoreData(List<ShopListHomeBean.BodyBean.ShopListBean> apiOrderListMore){
+    public void loadMoreData(List<ShopListHomeBean.BodyBean.ShopListBean> apiOrderListMore) {
 
-        if(shoplist == null){
+        if (shoplist == null) {
             shoplist = new ArrayList<>();
         }
-        if(pageIndex == 0){
+        if (pageIndex == 0) {
             gridViewAdapter.Clear();
             homeListViewAdapter.Clear();
         }
         shoplist.addAll(apiOrderListMore);
-        if(pageIndex == 0){
+        if (pageIndex == 0) {
             gridViewAdapter.setmDate(shoplist);
             homeListViewAdapter.setmDate(shoplist);
-        }else{
+        } else {
             gridViewAdapter.notifyDataSetChanged();
             homeListViewAdapter.notifyDataSetChanged();
         }

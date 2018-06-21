@@ -60,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_50_dip"
         android:layout_marginStart="@dimen/comment_10_dip"
+        android:maxLength="16"
         android:layout_toRightOf="@id/tv_rest_loginpass"
         android:background="@color/white"
         android:hint="@string/add_login_password"
@@ -191,7 +192,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_50_dip"
         android:layout_marginStart="@dimen/comment_10_dip"
-
+        android:maxLength="16"
         android:layout_toRightOf="@id/tv_rest_cureenpass"
         android:background="@color/white"
         android:hint="@string/add_currentpay_password"
@@ -224,10 +225,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_50_dip"
         android:layout_marginStart="@dimen/comment_20_dip"
-
         android:layout_toRightOf="@id/tv_rest_new_password"
         android:background="@color/white"
         android:hint="@string/add_pay_password"
+        android:maxLength="16"
         android:inputType="numberPassword|number"
         android:textSize="@dimen/comment_14_size" />
     </RelativeLayout>
