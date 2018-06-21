@@ -45,7 +45,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.MessageActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.PageBannerActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SearchActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SelectCityActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.adapter.MerchantsAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PageBannerBean;
@@ -198,9 +197,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     ShopListHomeBean shopListHomeBean;
     Intent intent;
     public static HomeNewFragment instance = null;
-
     private PopupWindow popWindow;
-    private MerchantsAdapter merchantsAdapter;
     private List<MerchantsBean.BodyBean.ActivityKeysListDataBean> merchantsList;
     private List<PreferentialBean.BodyBean.FeatureKeysListDataBean> preferentialList;
     private List<ShopListHomeBean.BodyBean.ShopListBean> shoplist = new ArrayList<>();
@@ -227,10 +224,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
 
     private void initBanner() {
         HashMap<String, String> parames = new HashMap<>();
-        //parames.put("bannerStyle", "");
         HttpUtils.doPost(ACTION.PAGEBANNER, parames, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
-
     /**
      * 获取首页的行业分类
      * 首页的那我头条
@@ -240,7 +235,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         hashMap.put("tabType", "2");//type  2代表美业    4代表异业
         hashMap.put("tabFather", "0");
         HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
-        //HttpUtils.doPost(ACTION.ADVERTISING, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//Banner
+
     }
 
     /**
@@ -268,7 +263,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
-
         gridViewAdapter = new HomepageGridViewAdapter(getActivity(), shoplist, "home");
         gv_home_gridView.setAdapter(gridViewAdapter);
         homeListViewAdapter = new HomeListViewAdapter(getActivity(), shoplist, "home");
@@ -672,11 +666,8 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 bt2.hidePopup();
             }
         });
-
-
         bt2.setPopupView(view2);
     }
-
     private void initshowdistance() {
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
 //        bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
