@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mine_back_gray"
+    android:orientation="vertical"
+    tools:context=".ui.home.activity.MinePinTuanActivity">
+    <include layout="@layout/layout_title"/>
+
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView android:layout_width="@dimen/comment_120_dip"
+                android:layout_height="@dimen/comment_110_dip"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_pintuan_success">
+            </ImageView>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="还差"
+                    android:textSize="@dimen/comment_14_size"
+                    android:textColor="@color/alpha_95_black">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="@dimen/comment_14_size"
+                    android:textColor="@color/material_red">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="人，人满才算拼团成功"
+                    android:textSize="@dimen/comment_14_size"
+                    android:textColor="@color/alpha_95_black">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/comment_32_dip"
+                        android:layout_height="@dimen/comment_32_dip"
+                        android:backgroundTintMode="@color/white"
+                        android:src="@drawable/ic_pintuan_people"
+                        android:layout_marginStart="52dp"
+                        app:civ_border_color="@color/alpha_95_black"
+                        app:civ_border_width="@dimen/comment_2_dip" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/comment_32_dip"
+                        android:layout_height="@dimen/comment_32_dip"
+                        android:backgroundTintMode="@color/white"
+                        android:src="@drawable/ic_pintuan_people"
+                        android:layout_marginStart="@dimen/comment_30_dip"
+                        app:civ_border_color="@color/alpha_95_black"
+                        app:civ_border_width="@dimen/comment_2_dip" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/comment_32_dip"
+                        android:layout_height="@dimen/comment_32_dip"
+                        android:backgroundTintMode="@color/white"
+                        android:src="@drawable/icon_portrait"
+                        android:layout_marginStart="@dimen/comment_10_dip"
+                        app:civ_border_color="@color/alpha_95_black"
+                        app:civ_border_width="@dimen/comment_2_dip" />
+
+                    <ImageView android:layout_width="@dimen/comment_26_dip"
+                        android:layout_height="@dimen/comment_14_dip"
+                        android:src="@drawable/ic_pinzhu">
+                    </ImageView>
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已参团人数"
+                            android:textSize="@dimen/comment_14_size"
+                            android:textColor="@color/alpha_95_black">
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="@dimen/comment_14_size"
+                            android:textColor="@color/material_red">
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="人"
+                            android:textSize="@dimen/comment_14_size"
+                            android:textColor="@color/alpha_95_black">
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="商品名称"
+                        android:textSize="@dimen/comment_14_size"
+                        android:textColor="@color/alpha_95_black">
+                    </TextView>
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="纯色美甲"
+                            android:textSize="@dimen/comment_14_size"
+                            android:textColor="@color/alpha_95_black">
+                        </TextView>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="拼团须知"
+                        android:textSize="@dimen/comment_14_size"
+                        android:textColor="@color/alpha_95_black">
+                    </TextView>
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="人满成功 人不满退款"
+                            android:textSize="@dimen/comment_14_size"
+                            android:textColor="@color/alpha_95_black">
+                        </TextView>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_marginTop="15dp"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="精品推荐"
+                    android:textSize="@dimen/comment_16_size"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/alpha_violet">
+                </TextView>
+
+                <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView
+                    android:id="@+id/gv_home_gridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:layout_marginTop="10dp"
+                    android:focusableInTouchMode="false"
+                    android:numColumns="2"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

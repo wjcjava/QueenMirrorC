@@ -1,7 +1,14 @@
 package com.ainisi.queenmirror.queenmirrorcduan.api;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+
+import com.ainisi.queenmirror.queenmirrorcduan.ui.user.LoginActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
+import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
@@ -17,12 +24,19 @@ import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import retrofit2.http.Url;
 
 /**
  * 作者： jl
  */
 
 public class HttpUtils {
+
+    public static Activity mactivity;
+
+    public HttpUtils(Activity activity) {
+        this.mactivity = activity;
+    }
 
     public static void doGet(final int action, Map<String, String> params, CacheMode cacheMode, final boolean showLoadingDialog, final HttpCallBack httpCallBack) {
         String url = getGetUrl(action, params);
@@ -122,14 +136,17 @@ public class HttpUtils {
                     public void onSuccess(String s, Call call, Response response) {
                         try {
 
-                          /*  //失败
-                            if (state != 200) {
-                                httpCallBack.showErrorMessage(res);
-                                return;
-                            }*/
-                            //成功
-                                httpCallBack.onSuccess(action, s);
+                            JSONObject jsonObject = new JSONObject(s);
+                            String res = jsonObject.getString("errorCode");
+                            if(res.equals("2")){
+                                T.show("账号验证失败，请重新登录");
 
+                                Intent intent = new Intent(mactivity, LoginActivity.class);
+                                mactivity.startActivity(intent);
+
+                            }else {
+                                httpCallBack.onSuccess(action, s);
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -678,6 +695,9 @@ public class HttpUtils {
                 break;
             case ACTION.ADDPINTUAN:
                 actionUrl = UrlConstants.ADDPINTUAN;
+                break;
+            case ACTION.GETPINTUANAFTER:
+                actionUrl = UrlConstants.GETPINTUANAFTER;
                 break;
             //获取banner商品列表数据
             case ACTION.GOODSBANNER:

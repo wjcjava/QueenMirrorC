@@ -1,5 +1,8 @@
 package com.ainisi.queenmirror.queenmirrorcduan.utilnomal;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DateUtil {
 
     /**
@@ -11,6 +14,16 @@ public class DateUtil {
      * 一分钟的秒数
      */
     private static final int MINUTE_SECOND = 60;
+
+    public static String getCurrentDateTime(String format) {
+
+        SimpleDateFormat myFmt=new SimpleDateFormat(format);
+
+        Date now=new Date();
+
+        return myFmt.format(now);
+    }
+
 
     /**
      * 根据秒数获取时间串

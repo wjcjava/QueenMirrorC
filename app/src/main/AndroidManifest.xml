@@ -490,7 +490,14 @@
         <activity android:name=".ui.mine.activity.AboutUsActivity" />
         <activity android:name=".ui.user.RegistAgreementActivity" />
         <activity android:name=".ui.home.activity.PageBannerActivity" />
-        <activity android:name=".ui.GuidePageActivity"></activity>
+        <activity android:name=".ui.GuidePageActivity" />
+        <activity android:name=".ui.home.activity.MinePinTuanActivity"></activity>
+
+        <activity
+            android:name=".ui.home.activity.SubmitPinTuanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent" />
     </application>
 
 </manifest>

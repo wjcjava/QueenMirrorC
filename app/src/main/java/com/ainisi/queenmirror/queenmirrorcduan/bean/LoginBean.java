@@ -7,7 +7,7 @@ public class LoginBean {
      * success : true
      * errorCode : 0
      * msg : 登录成功
-     * body : {"apiAnsCustBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustBasic":{"id":"a80cda1d69b8498493ec345ceda5efa6","isNewRecord":false,"remarks":null,"createDate":"2018-05-18 08:55:09","updateDate":"2018-05-18 08:55:09","contractConfirm":"1","cellPhone":"13405024815","deviceToken":null,"userName":"13405024815","userPass":"e10adc3949ba59abbe56e057f20f883e","wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":1526604909000,"nickName":null,"loginIp":null,"logininTime":null,"loginoutTime":null,"loginFlag":"1","recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":"ApiUserRegisterController"},"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"delFlagLabel":null,"contractConfirmLabel":null}}
+     * body : {"apiAnsCustBasic":{"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustBasic":{"id":"ef488bc5182a4e3cb6a097903652d05a","isNewRecord":false,"remarks":null,"createDate":"2018-06-20 10:18:39","updateDate":"2018-06-20 10:18:39","contractConfirm":"0","cellPhone":"13405024815","deviceToken":"Aud22RtBrz4OtAcEUQ7Qk9elX2eF5qLilPYngsRBHa5g","userName":"13405024815","userPass":"02eaf3a6d2b2afebb5a00c78ebe1579b","wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"completeFlag":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":1529461119000,"nickName":null,"loginIp":"192.168.50.246","logininTime":1529489054000,"loginoutTime":null,"loginFlag":"1","recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":"ApiUserRegisterController"},"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"delFlagLabel":null,"contractConfirmLabel":null},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1Mjk2MzAyNTMsInVzZXJJRCI6ImVmNDg4YmM1MTgyYTRlM2NiNmEwOTc5MDM2NTJkMDVhIiwiaWF0IjoxNTI5NTQzODUzfQ.fqHskWcoiySBSfNfXSf2Zf4b7kA1MNbfcktcVn0nR8s","userId":"ef488bc5182a4e3cb6a097903652d05a"}
      */
 
     private boolean success;
@@ -49,10 +49,14 @@ public class LoginBean {
 
     public static class BodyBean {
         /**
-         * apiAnsCustBasic : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustBasic":{"id":"a80cda1d69b8498493ec345ceda5efa6","isNewRecord":false,"remarks":null,"createDate":"2018-05-18 08:55:09","updateDate":"2018-05-18 08:55:09","contractConfirm":"1","cellPhone":"13405024815","deviceToken":null,"userName":"13405024815","userPass":"e10adc3949ba59abbe56e057f20f883e","wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":1526604909000,"nickName":null,"loginIp":null,"logininTime":null,"loginoutTime":null,"loginFlag":"1","recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":"ApiUserRegisterController"},"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"delFlagLabel":null,"contractConfirmLabel":null}
+         * apiAnsCustBasic : {"id":null,"isNewRecord":true,"remarks":null,"createDate":null,"updateDate":null,"ansCustBasic":{"id":"ef488bc5182a4e3cb6a097903652d05a","isNewRecord":false,"remarks":null,"createDate":"2018-06-20 10:18:39","updateDate":"2018-06-20 10:18:39","contractConfirm":"0","cellPhone":"13405024815","deviceToken":"Aud22RtBrz4OtAcEUQ7Qk9elX2eF5qLilPYngsRBHa5g","userName":"13405024815","userPass":"02eaf3a6d2b2afebb5a00c78ebe1579b","wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"completeFlag":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":1529461119000,"nickName":null,"loginIp":"192.168.50.246","logininTime":1529489054000,"loginoutTime":null,"loginFlag":"1","recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":"ApiUserRegisterController"},"nameIdentifyLabel":null,"sexLabel":null,"loginFlagLabel":null,"delFlagLabel":null,"contractConfirmLabel":null}
+         * token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1Mjk2MzAyNTMsInVzZXJJRCI6ImVmNDg4YmM1MTgyYTRlM2NiNmEwOTc5MDM2NTJkMDVhIiwiaWF0IjoxNTI5NTQzODUzfQ.fqHskWcoiySBSfNfXSf2Zf4b7kA1MNbfcktcVn0nR8s
+         * userId : ef488bc5182a4e3cb6a097903652d05a
          */
 
         private ApiAnsCustBasicBean apiAnsCustBasic;
+        private String token;
+        private String userId;
 
         public ApiAnsCustBasicBean getApiAnsCustBasic() {
             return apiAnsCustBasic;
@@ -62,6 +66,22 @@ public class LoginBean {
             this.apiAnsCustBasic = apiAnsCustBasic;
         }
 
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
         public static class ApiAnsCustBasicBean {
             /**
              * id : null
@@ -69,7 +89,7 @@ public class LoginBean {
              * remarks : null
              * createDate : null
              * updateDate : null
-             * ansCustBasic : {"id":"a80cda1d69b8498493ec345ceda5efa6","isNewRecord":false,"remarks":null,"createDate":"2018-05-18 08:55:09","updateDate":"2018-05-18 08:55:09","contractConfirm":"1","cellPhone":"13405024815","deviceToken":null,"userName":"13405024815","userPass":"e10adc3949ba59abbe56e057f20f883e","wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":1526604909000,"nickName":null,"loginIp":null,"logininTime":null,"loginoutTime":null,"loginFlag":"1","recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":"ApiUserRegisterController"}
+             * ansCustBasic : {"id":"ef488bc5182a4e3cb6a097903652d05a","isNewRecord":false,"remarks":null,"createDate":"2018-06-20 10:18:39","updateDate":"2018-06-20 10:18:39","contractConfirm":"0","cellPhone":"13405024815","deviceToken":"Aud22RtBrz4OtAcEUQ7Qk9elX2eF5qLilPYngsRBHa5g","userName":"13405024815","userPass":"02eaf3a6d2b2afebb5a00c78ebe1579b","wechatId":null,"wechatToken":null,"qqId":null,"qqToken":null,"completeFlag":null,"headPic":null,"lastName":null,"firstName":null,"idCard":null,"nameIdentify":null,"sex":null,"birthday":null,"registerDate":1529461119000,"nickName":null,"loginIp":"192.168.50.246","logininTime":1529489054000,"loginoutTime":null,"loginFlag":"1","recommendUser":null,"recommendCode":null,"updatBy":null,"updatePgm":"ApiUserRegisterController"}
              * nameIdentifyLabel : null
              * sexLabel : null
              * loginFlagLabel : null
@@ -179,20 +199,21 @@ public class LoginBean {
 
             public static class AnsCustBasicBean {
                 /**
-                 * id : a80cda1d69b8498493ec345ceda5efa6
+                 * id : ef488bc5182a4e3cb6a097903652d05a
                  * isNewRecord : false
                  * remarks : null
-                 * createDate : 2018-05-18 08:55:09
-                 * updateDate : 2018-05-18 08:55:09
-                 * contractConfirm : 1
+                 * createDate : 2018-06-20 10:18:39
+                 * updateDate : 2018-06-20 10:18:39
+                 * contractConfirm : 0
                  * cellPhone : 13405024815
-                 * deviceToken : null
+                 * deviceToken : Aud22RtBrz4OtAcEUQ7Qk9elX2eF5qLilPYngsRBHa5g
                  * userName : 13405024815
-                 * userPass : e10adc3949ba59abbe56e057f20f883e
+                 * userPass : 02eaf3a6d2b2afebb5a00c78ebe1579b
                  * wechatId : null
                  * wechatToken : null
                  * qqId : null
                  * qqToken : null
+                 * completeFlag : null
                  * headPic : null
                  * lastName : null
                  * firstName : null
@@ -200,10 +221,10 @@ public class LoginBean {
                  * nameIdentify : null
                  * sex : null
                  * birthday : null
-                 * registerDate : 1526604909000
+                 * registerDate : 1529461119000
                  * nickName : null
-                 * loginIp : null
-                 * logininTime : null
+                 * loginIp : 192.168.50.246
+                 * logininTime : 1529489054000
                  * loginoutTime : null
                  * loginFlag : 1
                  * recommendUser : null
@@ -219,13 +240,14 @@ public class LoginBean {
                 private String updateDate;
                 private String contractConfirm;
                 private String cellPhone;
-                private Object deviceToken;
+                private String deviceToken;
                 private String userName;
                 private String userPass;
                 private Object wechatId;
                 private Object wechatToken;
                 private Object qqId;
                 private Object qqToken;
+                private Object completeFlag;
                 private Object headPic;
                 private Object lastName;
                 private Object firstName;
@@ -235,10 +257,10 @@ public class LoginBean {
                 private Object birthday;
                 private long registerDate;
                 private Object nickName;
-                private Object loginIp;
-                private Object logininTime;
+                private String loginIp;
+                private long logininTime;
                 private Object loginoutTime;
-                private String loginFlag;           //判断用户是否可以登录（后台进行设置）
+                private String loginFlag;
                 private Object recommendUser;
                 private Object recommendCode;
                 private Object updatBy;
@@ -300,11 +322,11 @@ public class LoginBean {
                     this.cellPhone = cellPhone;
                 }
 
-                public Object getDeviceToken() {
+                public String getDeviceToken() {
                     return deviceToken;
                 }
 
-                public void setDeviceToken(Object deviceToken) {
+                public void setDeviceToken(String deviceToken) {
                     this.deviceToken = deviceToken;
                 }
 
@@ -354,6 +376,14 @@ public class LoginBean {
 
                 public void setQqToken(Object qqToken) {
                     this.qqToken = qqToken;
+                }
+
+                public Object getCompleteFlag() {
+                    return completeFlag;
+                }
+
+                public void setCompleteFlag(Object completeFlag) {
+                    this.completeFlag = completeFlag;
                 }
 
                 public Object getHeadPic() {
@@ -428,19 +458,19 @@ public class LoginBean {
                     this.nickName = nickName;
                 }
 
-                public Object getLoginIp() {
+                public String getLoginIp() {
                     return loginIp;
                 }
 
-                public void setLoginIp(Object loginIp) {
+                public void setLoginIp(String loginIp) {
                     this.loginIp = loginIp;
                 }
 
-                public Object getLogininTime() {
+                public long getLogininTime() {
                     return logininTime;
                 }
 
-                public void setLogininTime(Object logininTime) {
+                public void setLogininTime(long logininTime) {
                     this.logininTime = logininTime;
                 }
 

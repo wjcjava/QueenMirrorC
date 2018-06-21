@@ -22,12 +22,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
-import com.ainisi.queenmirror.queenmirrorcduan.api.UrlConstants;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.OSSSTSModel;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.ClientException;
@@ -142,14 +138,14 @@ public class AboutUsActivity extends BaseNewActivity implements HttpCallBack{
         switch (action){
             case ACTION.OSSGETTOKEN:
 
-                OSSSTSModel ossstsModel = GsonUtil.toObj(res,OSSSTSModel.class);
+            /*    OSSSTSModel ossstsModel = GsonUtil.toObj(res,OSSSTSModel.class);
 
                 if(ossstsModel.isSuccess()){
                     securityToken = ossstsModel.getBody().getSecurityToken();
                     securityAppKey = ossstsModel.getBody().getAccessKeyId();
                     securityAccessKeySecret = ossstsModel.getBody().getAccessKeySecret();
                     securityExpiration = ossstsModel.getBody().getExpiration();
-                }
+                }*/
                 break;
         }
     }
@@ -227,7 +223,6 @@ public class AboutUsActivity extends BaseNewActivity implements HttpCallBack{
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
                 // Request exception
-                L.e("?????????????   "+serviceException.getErrorCode()+"  "+serviceException.getRawMessage());
                 if (clientExcepion != null) {
                     // Local exception, such as a network exception
                     clientExcepion.printStackTrace();

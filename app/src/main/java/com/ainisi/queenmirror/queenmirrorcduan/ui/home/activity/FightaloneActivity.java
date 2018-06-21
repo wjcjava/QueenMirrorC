@@ -300,9 +300,10 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
                     groupOrderId = fightaloneAddBean.getBody().getGroupOrderId();
                     orderId = fightaloneAddBean.getBody().getOrderId();
 
-                    Intent intent = new Intent(this,SubmitActivity.class);
+                    Intent intent = new Intent(this,SubmitPinTuanActivity.class);
                     intent.putExtra("businessIds",orderId);
                     intent.putExtra("amount",goodsSales);
+                    intent.putExtra("groupId",groupId);
                     startActivity(intent);
                 }else{
                     T.show(fightaloneAddBean.getMsg());
@@ -316,7 +317,6 @@ public class FightaloneActivity extends BaseNewActivity implements HttpCallBack 
 
                 fightaloneBean = GsonUtil.toObj(res,FightaloneBean.class);
                 tv_collage.setText(fightaloneBean.getBody().getJoinSums()+"人在拼团");
-
 
                 if(fightaloneBean.getBody().getGpOrderList().size() == 0||fightaloneBean.getBody().getGpOrderList() == null||
                         fightaloneBean.getBody().getJoinSums() == 0){

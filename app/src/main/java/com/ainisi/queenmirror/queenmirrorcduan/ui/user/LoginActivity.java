@@ -121,7 +121,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
     private void LoginData() {
         //传参数
         HashMap<String, String> params = new HashMap<>();
-        params.put("deviceToken", SP.get(this,SpContent.UserToken,"")+"");
+        params.put("deviceToken", SP.get(this,SpContent.UmengToken,"")+"");
         params.put("cellPhone", et_login_pghone.getText().toString());
         params.put("loginClient","1");
         params.put("userPass", MD5.md5(et_login_pass.getText().toString()+ "MYN888"));
@@ -143,6 +143,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                     SP.put(LoginActivity.this,SpContent.UserCall,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getCellPhone());
                     SP.put(LoginActivity.this,SpContent.UserName,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getUserName());
                     SP.put(LoginActivity.this,SpContent.isLogin,"1");
+                    SP.put(LoginActivity.this,SpContent.UserToken,loginBean.getBody().getToken());
                     Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                     startActivity(intent);
                 }else{
@@ -158,6 +159,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                     SP.put(LoginActivity.this,SpContent.UserCall,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getCellPhone());
                     SP.put(LoginActivity.this,SpContent.UserName,loginBean1.getBody().getApiAnsCustBasic().getAnsCustBasic().getUserName());
                     SP.put(LoginActivity.this,SpContent.isLogin,"1");
+                    SP.put(LoginActivity.this,SpContent.UserToken,loginBean1.getBody().getToken());
                     Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                     startActivity(intent);
                 }else{

@@ -11,7 +11,7 @@ package com.ainisi.queenmirror.queenmirrorcduan.bean;
  */
 
 
-public class OSSSTSModel {
+public class OSSRespContent {
 
 
     /**

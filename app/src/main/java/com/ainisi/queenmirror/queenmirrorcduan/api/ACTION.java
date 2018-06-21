@@ -211,4 +211,6 @@ public interface ACTION {
 
     int ADDPINTUAN = 0x158;//开启拼团
 
+    int GETPINTUANAFTER = 0x159;//获取拼团后的数据
+
 }

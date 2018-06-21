@@ -101,7 +101,6 @@ public class App extends MultiDexApplication {
             Class<?> aClass = Class.forName("com.umeng.commonsdk.UMConfigure");
             Field[] fs = aClass.getDeclaredFields();
             for (Field f:fs){
-                Log.e("xxxxxx","ff="+f.getName()+"   "+f.getType().getName());
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -225,16 +224,14 @@ public class App extends MultiDexApplication {
         mPushAgent.register(new IUmengRegisterCallback() {
             @Override
             public void onSuccess(String deviceToken) {
-                Log.i(TAG, "device token: " + deviceToken);
                 sendBroadcast(new Intent(UPDATE_STATUS_ACTION));
 
-                SP.put(context, SpContent.UserToken,deviceToken);
+                SP.put(context, SpContent.UmengToken,deviceToken);
 
             }
 
             @Override
             public void onFailure(String s, String s1) {
-                Log.i(TAG, "register failed: " + s + " " + s1);
                 sendBroadcast(new Intent(UPDATE_STATUS_ACTION));
             }
         });

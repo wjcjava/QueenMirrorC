@@ -2,22 +2,24 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 
 /**
  * 网络请求地址库
- * 作者： junchao
+ * 作者： jc
  */
 
 public interface UrlConstants {
 
-     //String BASE_URL = "http://netjipeng.nat300.top/wg/a/";
+     //String BASE_URL = "http://netjipeng.nat300.top/wg/a/";//孙继鹏
 
     //String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
 
-    //String BASE_URL = "http://192.168.50.32:8080/a/";
+   // String BASE_URL = "http://192.168.50.32:8080/a/"; //拼团
 
     //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
 
-   // String BASE_URL = "http://192.168.30.155:7080/wg/a/";
+    //String BASE_URL = "http://192.168.50.137:8080/wg/a/";//刘璇
 
-    String BASE_URL = "http://58.210.102.70:7080/wg/a/";
+    String BASE_URL = "http://192.168.30.155:7080/wg/a/";
+
+    //String BASE_URL = "http://58.210.102.70:7080/wg/a/";
 
     String ADVERTISING = "api/ec/common/advertisementList";//首页广告
 
@@ -224,4 +226,6 @@ public interface UrlConstants {
     String GETPINTUANDATA = "api/ans/gporder/gporders";//获取拼团之外信息
 
     String ADDPINTUAN = "api/ans/gporder/save";//开启拼团
+
+    String GETPINTUANAFTER = "api/ans/gporder/detailsBySelf";//获取拼团后的数据
 }

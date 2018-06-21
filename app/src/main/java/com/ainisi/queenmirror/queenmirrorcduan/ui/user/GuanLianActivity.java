@@ -122,6 +122,8 @@ public class GuanLianActivity extends BaseNewActivity implements HttpCallBack{
                     SP.put(this,SpContent.UserCall,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getCellPhone());
                     SP.put(this,SpContent.UserName,nickName);
                     SP.put(this,SpContent.isLogin,"1");
+
+                    SP.put(this,SpContent.UserToken,loginBean.getBody().getToken());
                     Intent intent = new Intent(this, HomePageActivity.class);
                     startActivity(intent);
                 }else{
