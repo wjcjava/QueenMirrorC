@@ -56,7 +56,6 @@ public class MasterFragment extends BaseFragment implements HttpCallBack {
         super.onResume();
         //  getNewNewsData();
     }
-
     /**
      * 获取新消息提示
      */

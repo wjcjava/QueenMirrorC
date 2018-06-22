@@ -1,13 +1,11 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.fragment;
 
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,7 +23,6 @@ import com.ainisi.queenmirror.common.base.BaseFragment;
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomeListViewAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.HomepageGridViewAdapter;
-import com.ainisi.queenmirror.queenmirrorcduan.adapter.MyShopAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.PopupAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ProblemAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ShopMallAdapter;
@@ -42,12 +39,9 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.ClassificationBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.HomeIndustryBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.MerchantsBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.bean.PreferentialBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopClassificationActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
-import com.ainisi.queenmirror.queenmirrorcduan.utils.CustomPopWindow;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.GlideImageLoader;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview;
@@ -115,15 +109,14 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
     ClassificationBean classificationBean;
     ShopListHomeBean shopListHomeBean;
     private HomeIndustryBean homeIndustryBean;
-    private CustomPopWindow customPopWindow;
     private PopupWindow pop;
     private View popview1;
     private List<ShopBean> shopList;
     private List<ProblemBean> list = new ArrayList<>();
-    private int[] imgTitle = {R.drawable.icon_shop_entertainment, R.drawable.icon_shop_bank_insurance,
-            R.drawable.icon_shop_jewellery, R.drawable.icon_shop_medicalcare, R.drawable.icon_shop_motion,
-            R.drawable.icon_shop_photography, R.drawable.icon_shop_service, R.drawable.icon_shop_train
-    };
+//    private int[] imgTitle = {R.drawable.icon_shop_entertainment, R.drawable.icon_shop_bank_insurance,
+//            R.drawable.icon_shop_jewellery, R.drawable.icon_shop_medicalcare, R.drawable.icon_shop_motion,
+//            R.drawable.icon_shop_photography, R.drawable.icon_shop_service, R.drawable.icon_shop_train
+//    };
     String[] problem = {"销量最高", "价格最低", "距离最近", "优惠最多", "满减优惠", "新用最好", "用户最好"};
 
     int hight, pageNumber = 1,pageIndex = 0,pageSum = 0;//标记ScrollView移动的距离
@@ -395,7 +388,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
                 initSorttext();
                 break;
             case R.id.bt_app_home:
-                initpop1();
+                initpop();
                 sc_home_scroll.smoothScrollTo(0, 1180);
                 //pop.showAsDropDown(upSort);
                 initSorttext();
@@ -492,63 +485,7 @@ public class ShopMallFragment extends BaseFragment implements HttpCallBack {
         bt2.setPopupView(view2);
         bt.setPopupView(view2);
     }
-    private void initpop1() {
-        View view2 = LayoutInflater.from(getActivity()).inflate(R.layout.popup2,null);
-        ListView pLv = view2.findViewById(R.id.parent_lv);
-        final ListView cLv =view2.findViewById(R.id.child_lv);
-        List<String> pList = new ArrayList<>();
-        final List<List<String>> cList = new ArrayList<>();
-        pList.add("姑苏区");
-        pList.add("虎丘区");
-        pList.add("吴中区");
-        pList.add("相城区");
-        for (int i = 0; i < pList.size(); i++) {
-            List<String> citylist = new ArrayList<>();
-            citylist.add("1千米");
-            citylist.add("3千米");
-            citylist.add("5千米");
-            citylist.add("1千米");
-            citylist.add("全城");
-            cList.add(citylist);
-        }
 
-        cValues = new ArrayList<>();
-        cValues.addAll(cList.get(0));
-        final PopupAdapter pAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,pList,R.drawable.normal,R.drawable.press2);
-        final PopupAdapter cAdapter = new PopupAdapter(getActivity(),R.layout.popup_item, cValues,R.drawable.normal,R.drawable.press);
-        pAdapter.setPressPostion(0);
-
-        pLv.setAdapter(pAdapter);
-        cLv.setAdapter(cAdapter);
-
-        pLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                pAdapter.setPressPostion(position);
-                pAdapter.notifyDataSetChanged();
-                cValues.clear();
-                cValues.addAll(cList.get(position));
-                cAdapter.notifyDataSetChanged();
-                cAdapter.setPressPostion(-1);
-                cLv.setSelection(0);
-            }
-        });
-
-        cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                cAdapter.setPressPostion(position);
-                cAdapter.notifyDataSetChanged();
-                bt2.setText(cValues.get(position));
-                bt.setText(cValues.get(position));
-                bt2.hidePopup();
-
-            }
-        });
-
-        bt2.setPopupView(view2);
-
-    }
     private void initDistancepop() {
         popview = View.inflate(getActivity(), R.layout.pop_myitem, null);
         //initview(popview);

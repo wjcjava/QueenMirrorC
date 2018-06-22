@@ -89,12 +89,10 @@
     <color name="home_bottom_radio">#F2F2F2</color>
     <color name="home_bottom_radio_text">#2D2D2D</color>
     <color name="order_bottom">#FF989898</color>
-
     <color name="search_color">#C471F5</color>
     <color name="search_search">#ECECEC</color>
     <color name="search_text_color">#656565</color>
     <color name="search_text_biankuang">#DFDFDF</color>
-
     <color name="shop_detail_text">#000000</color>
     <color name="grey_color2">#666666</color>
     <color name="grey_color1">#333333</color>

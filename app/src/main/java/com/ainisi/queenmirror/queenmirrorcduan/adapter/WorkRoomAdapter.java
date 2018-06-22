@@ -18,13 +18,11 @@ import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.FullActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -45,6 +43,7 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
     List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiGoodsList = new ArrayList<>();
 
     int pos_cart;
+    private String[] split;
 
     public WorkRoomAdapter(Context context,List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiGoodsList ) {
         this.context = context;
@@ -122,7 +121,7 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
         if(apiGoodsList.get(position).getEcGoodsBasic().getGoodsThumb() == null){
 
         }else {
-            String[] split = apiGoodsList.get(position).getEcGoodsBasic().getGoodsThumb().split(",");
+            split = apiGoodsList.get(position).getEcGoodsBasic().getGoodsThumb().split(",");
             Glide.with(context).load(split[0]).into(holder.iv_weorkroom_title);
         }
 
@@ -146,6 +145,9 @@ public class WorkRoomAdapter extends BaseAdapter implements HttpCallBack{
                 intent.putExtra("goodsId",apiGoodsList.get(position).getEcGoodsBasic().getId()+"");
                 intent.putExtra("shopId",apiGoodsList.get(position).getEcGoodsBasic().getShopId()+"");
                 intent.putExtra("shopName",apiGoodsList.get(position).getShopIdName());
+                split = apiGoodsList.get(position).getEcGoodsBasic().getGoodsThumb().split(",");
+                intent.putExtra("shopLogo",split[0]);
+
                 context.startActivity(intent);
             }
         });

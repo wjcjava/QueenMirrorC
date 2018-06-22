@@ -17,8 +17,8 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.SubmitActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ArefundActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.OrderDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.order.activity.ScoreActivity;
+import com.ainisi.queenmirror.queenmirrorcduan.ui.order.bean.OrderNoBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -41,6 +41,10 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
     List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> data;
     double amountNum = 0;
     String shopId,orderId;
+    private String orderNo;
+    private TextView order_tuikuan;
+    private String goodId;
+    private TextView textView;
 
     public OrderAllAdapter(Context context,int layoutResId, @Nullable List<OrderMyAllOrderBean.BodyBean.ApiOrderListBean> data) {
         super(layoutResId,data);
@@ -83,19 +87,12 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                         .setText(R.id.tv_order_again, "取消")
                         .setVisible(R.id.tv_order_like, false)
                         .setText(R.id.tv_submit, "待付款");
-
-                helper.setOnClickListener(R.id.tv_order_tuikuan, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        TextView textView = helper.getView(R.id.tv_jiage);
-                        String number = textView.getText().toString().substring(1, textView.getText().toString().length());
-                        Intent intent = new Intent(context, SubmitActivity.class);
-                        intent.putExtra("businessIds", item.getIntfAnsOrder().getId());
-                        intent.putExtra("amount", number + "");
-                        context.startActivity(intent);
-                    }
-                });
+                orderNo =item.getIntfAnsOrder().getOrderNo();
+                goodId =item.getIntfAnsOrder().getId();
+                order_tuikuan = helper.getView(R.id.tv_order_tuikuan);
+                textView = helper.getView(R.id.tv_jiage);
+              
+                shopPayCheck();
 
                 helper.setOnClickListener(R.id.tv_order_again, new View.OnClickListener() {
                     @Override
@@ -146,7 +143,6 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                         .setText(R.id.tv_order_again, "退款")
                         .setVisible(R.id.tv_order_like, false)
                         .setText(R.id.tv_submit, "已接单");
-
                 helper.setOnClickListener(R.id.tv_order_tuikuan, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -388,6 +384,14 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
         HttpUtils.doPost(ACTION.CANCLEORDER, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }
 
+    /**
+     * 待付款订单付款前的校验
+     */
+    private void shopPayCheck(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("orderNo",orderNo);
+        HttpUtils.doPost(ACTION.SHOPPAYCHECK, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
     @Override
     public void onSuccess(int action, String res) {
         switch (action){
@@ -407,6 +411,32 @@ public class OrderAllAdapter extends BaseQuickAdapter<OrderMyAllOrderBean.BodyBe
                     T.show(successBeans.getMsg());
                 }
                 break;
+            case ACTION.SHOPPAYCHECK:
+                final OrderNoBean orderNoBean=GsonUtil.toObj(res,OrderNoBean.class);
+                if(orderNoBean.getErrorCode().equals("0")){
+                    order_tuikuan.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String number = textView.getText().toString().substring(1, textView.getText().toString().length());
+                            T.show(orderNoBean.getMsg());
+                            Intent intent = new Intent(context, SubmitActivity.class);
+                            intent.putExtra("businessIds", goodId);
+                            intent.putExtra("amount", number + "");
+                            context.startActivity(intent);
+                        }
+                    });
+                }else if(orderNoBean.getErrorCode().equals("1")){
+                    //待付款订单付款前的校验
+                    order_tuikuan.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            T.show(orderNoBean.getMsg());
+                        }
+                    });
+
+                }
+                break;
+
         }
     }
 

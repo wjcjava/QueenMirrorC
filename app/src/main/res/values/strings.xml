@@ -68,7 +68,7 @@
     ]
     <string name="recharge_amount_one">充值金额</string>
     <string name="actual_acquisition">实际获得</string>
-    <string name="element">元</string>
+    <string name="element">币</string>
     <string name="payment_method">支付方式：</string>
     <string name="wechat">微信</string>
     <string name="input_recharge_amount">请输入您需要充值的金额</string>

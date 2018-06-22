@@ -31,6 +31,7 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.bumptech.glide.Glide;
 import com.lzy.okgo.cache.CacheMode;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -39,7 +40,6 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
-import com.youth.banner.Banner;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -81,7 +81,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     @Bind(R.id.ttv_ping)
     TextView tvPing;
     @Bind(R.id.banner_fullactivity)
-    Banner banner_fullactivity;
+    ImageView banner_fullactivity;
     @Bind(R.id.re_full_shop)
     RelativeLayout re_full_shop;
 
@@ -98,6 +98,7 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
     CustomShareListener mShareListener;
     ShareAction mShareAction;
     private int pageSum;
+    private String shopLogo;
 
     @Override
     public int getLayoutId() {
@@ -111,6 +112,8 @@ public class FullActivity extends BaseNewActivity implements HttpCallBack {
         goodsId = intent.getStringExtra("goodsId");
         shopId = intent.getStringExtra("shopId");
         shopName = intent.getStringExtra("shopName");
+        shopLogo =intent.getStringExtra("shopLogo");
+        Glide.with(this).load(shopLogo).into(banner_fullactivity);
         isLogin = SP.get(FullActivity.this, SpContent.isLogin, "0").toString();
         userId = SP.get(FullActivity.this, SpContent.UserId, "0").toString();
         inithttp();

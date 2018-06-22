@@ -27,19 +27,21 @@
                 tools:layout_editor_absoluteX="@dimen/comment_8_dip"
                 tools:layout_editor_absoluteY="@dimen/comment_8_dip">
 
-                <com.youth.banner.Banner
+                <ImageView
                     android:id="@+id/banner_fullactivity"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_200_dip"
-                    android:background="@color/white"/>
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:scaleType="fitXY" />
 
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/comment_214_dip"
                     android:scaleType="fitXY"
-                    android:visibility="gone"
-                    android:src="@drawable/icon_full_chanpin" />
+                    android:src="@drawable/icon_full_chanpin"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:id="@+id/recycler"
@@ -81,19 +83,19 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:layout_marginStart="10dp"
-                        android:textStyle="bold"
                         android:text="产品名字"
-                        android:textSize="@dimen/comment_13_size"/>
+                        android:textSize="@dimen/comment_13_size"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_brief"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="简介"
                         android:layout_below="@id/tv_fullactivity_name"
                         android:layout_marginStart="10dp"
-                        android:textSize="@dimen/comment_13_size"/>
+                        android:layout_marginTop="3dp"
+                        android:text="简介"
+                        android:textSize="@dimen/comment_13_size" />
 
                     <TextView
                         android:id="@+id/tv_time"
@@ -125,8 +127,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/comment_15_dip"
-                    android:padding="10dp"
-                    android:background="@drawable/et_shap">
+                    android:background="@drawable/et_shap"
+                    android:padding="10dp">
 
                     <TextView
 
@@ -137,12 +139,12 @@
                         android:textColor="@color/alpha_85_black"
                         android:textSize="@dimen/comment_14_size" />
 
-                    <ImageView android:layout_width="20dp"
+                    <ImageView
+                        android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow"
-                        android:layout_alignParentEnd="true">
-                    </ImageView>
+                        android:src="@drawable/right_arrow"></ImageView>
 
 
                 </RelativeLayout>
@@ -165,28 +167,36 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="@dimen/comment_12_dip"
                     android:layout_marginTop="@dimen/comment_15_dip"
-
                     android:text="评价（0）"
                     android:textSize="@dimen/comment_14_dip"
                     android:textColor="@color/gray_E7370C" />
 
-                <ImageView
-                    android:id="@+id/img_pingfen"
-                    android:layout_width="@dimen/comment_70_dip"
-                    android:layout_height="@dimen/comment_12_dip"
+                <com.ainisi.queenmirror.queenmirrorcduan.utils.CustomRatingBar
+                    android:id="@+id/score_work_evaluate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_service_attitude"
                     android:layout_marginStart="@dimen/comment_230_dip"
                     android:layout_marginTop="@dimen/comment_19_dip"
-                    app:srcCompat="@drawable/ic_sortrecyke_stars" />
+                    android:layout_toRightOf="@id/tv_service_attitude"
+                    app:mode="random"
+                    app:ratingProgress="0"
+                    app:starDistance="@dimen/comment_6_dip"
+                    app:starEmpty="@mipmap/empty"
+                    app:starFill="@mipmap/fill"
+                    app:starNum="5"
+                    app:starSize="@dimen/comment_10_dip"
+                    app:touchAble="false" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/tv_ratingbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/comment_10_dip"
-                    android:layout_marginTop="@dimen/comment_18_dip"
-                    android:layout_toEndOf="@id/img_pingfen"
                     android:layout_marginStart="3dp"
-                    android:text="4.5"
+                    android:layout_marginTop="@dimen/comment_15_dip"
+                    android:layout_toEndOf="@id/score_work_evaluate"
+                    android:text="0"
                     android:textColor="@color/gray_E7370C"
                     android:textSize="@dimen/comment_12_size" />
 
@@ -198,13 +208,7 @@
                     android:layout_marginTop="@dimen/comment_19_dip"
                     android:src="@drawable/icon_full_right" />
 
-                <View
-                    android:id="@+id/view_two"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@id/img_pingfen"
-                    android:layout_marginTop="@dimen/comment_21_dip"
-                    android:background="@color/alpha_05_black" />
+
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/full_recyclertwo"
@@ -229,8 +233,9 @@
                     android:layout_marginStart="@dimen/comment_12_dip"
                     android:layout_marginTop="@dimen/comment_15_dip"
                     android:text="精品推荐"
-                    android:textSize="@dimen/comment_14_dip"
-                    android:textColor="@color/gray_E7370C" />
+                    android:textColor="@color/gray_E7370C"
+                    android:textSize="@dimen/comment_14_dip" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/full_recycler"
                     android:layout_width="match_parent"

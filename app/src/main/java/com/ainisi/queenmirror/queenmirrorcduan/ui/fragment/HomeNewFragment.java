@@ -123,7 +123,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     TextView mLocation;
     @Bind(R.id.img_information)
     ImageView img_information;
-
     @Bind(R.id.li_hime_sort)
     LinearLayout li_hime_sort;
     @Bind(R.id.li_new_top)
@@ -136,11 +135,11 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     View view_new_fragment_half;
     @Bind(R.id.li_sort_bottom)
     LinearLayout li_sort_bottom;
-    //    @Bind(R.id.tv_shop_sort)
+//    @Bind(R.id.tv_shop_sort)
 //    TextView tv_shop_sort;
     @Bind(R.id.li_top_select)
     LinearLayout li_top_select;
-    //    @Bind(R.id.rb_sort)
+//    @Bind(R.id.rb_sort)
 //    TextView rb_sort;
 //    @Bind(R.id.iv_home_sort)
 //    ImageView iv_home_sort;
@@ -211,7 +210,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     int pageNumber = 1, pageIndex = 0, pageSum = 0;
     HomepageGridViewAdapter gridViewAdapter;
     HomeListViewAdapter homeListViewAdapter;
-    private int i;
 
     @Override
     protected int getLayoutResource() {
@@ -232,11 +230,10 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
      * 首页的那我头条
      */
     private void getBannerData() {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("tabType", "2");//type  2代表美业    4代表异业
-        hashMap.put("tabFather", "0");
-        HttpUtils.doPost(ACTION.INDUSTRY, hashMap, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
-
+        HashMap<String, String> params= new HashMap<>();
+        params.put("tabType", "2");//type  2代表美业    4代表异业
+        params.put("tabFather", "0");
+        HttpUtils.doPost(ACTION.INDUSTRY, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);//首页的行业分类
     }
 
     /**
@@ -287,7 +284,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
         home_refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-
                 if (pageSum > pageIndex && pageSum <= (pageIndex + Integer.parseInt(SpContent.pageSize))) {
                     refreshlayout.finishLoadmore(2000);
                     T.show("您已加载完全部数据");
@@ -319,7 +315,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                 if (li_new_top.getVisibility() != 0) {
 
                 } else {
-                    if (i1 >= 3435) {
+                    if (i1 >= 2935) {
                         layout_stick_header_main.setVisibility(View.VISIBLE);
                     } else {
                         layout_stick_header_main.setVisibility(View.GONE);
@@ -367,6 +363,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
                         String lat = location.getLatitude() + "";
                         SP.put(getActivity(), SpContent.UserLon, lon);
                         SP.put(getActivity(), SpContent.UserLat, lat);
+
                         loadData(shoplist);
                     }
                 }
@@ -410,7 +407,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
             }
         });
     }
-
     @OnClick({R.id.li_home_esthetics, R.id.li_home_nailart, R.id.li_home_haircustom, R.id.li_home_beauty, R.id.li_home_permanent, R.id.iv_home_freetrial,
             R.id.line_surface, R.id.line_uspension_surface, R.id.tv_home_bustling, R.id.iv_home_search, R.id.img_information, R.id.bt_app_home,
             R.id.bt_up_home, R.id.rb_sales, R.id.rb_distance, R.id.li_home_screen_bottom, R.id.li_home_screen, R.id.li_sales_bottom})
@@ -431,7 +427,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              * 按距离排序
              */
             case R.id.rb_distance:
-                sc_home_scroll.smoothScrollTo(0, 3435);
+                sc_home_scroll.smoothScrollTo(0, 2935);
                 initshowdistance();
                 break;
             case R.id.li_sales_bottom:
@@ -442,7 +438,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              */
             case R.id.rb_sales:
                 tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-                sc_home_scroll.smoothScrollTo(0, 3435);
+                sc_home_scroll.smoothScrollTo(0, 2935);
                 rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 tv_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
                 rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -460,7 +456,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
              */
             //case R.id.li_hime_sort:
             case R.id.bt_app_home:
-                sc_home_scroll.smoothScrollTo(0, 3435);
+                sc_home_scroll.smoothScrollTo(0, 2935);
                 inithomepop();
                 initpop1();
                 break;
@@ -671,8 +667,6 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     }
     private void initshowdistance() {
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-//        bt.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
-//        bt2.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
         rb_distance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         tvdistance.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));
@@ -694,7 +688,7 @@ public class HomeNewFragment extends BaseFragment implements HttpCallBack {
     }
 
     private void initScreentext() {
-        sc_home_scroll.smoothScrollTo(0, 3435);
+        sc_home_scroll.smoothScrollTo(0, 2935);
         tvScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         textScreen.setTextColor(getActivity().getResources().getColor(R.color.alpha_violet01));
         rb_sales.setTextColor(getActivity().getResources().getColor(R.color.alpha_55_black));

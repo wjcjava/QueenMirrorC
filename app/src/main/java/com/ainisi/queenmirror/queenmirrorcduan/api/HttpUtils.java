@@ -2,13 +2,10 @@ package com.ainisi.queenmirror.queenmirrorcduan.api;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 import com.ainisi.queenmirror.queenmirrorcduan.ui.user.LoginActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
@@ -24,7 +21,6 @@ import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Response;
-import retrofit2.http.Url;
 
 /**
  * 作者： jl
@@ -710,6 +706,11 @@ public class HttpUtils {
             case ACTION.HEADPICUPLOAD:
                 actionUrl = UrlConstants.HEADPICUPLOAD;
                 break;
+            //待付款订单付款前的校验
+            case ACTION.SHOPPAYCHECK:
+                actionUrl=UrlConstants.SHOPPAYCHECK;
+                break;
+
 
         }
         url.append(actionUrl);

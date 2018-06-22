@@ -54,7 +54,6 @@ public class RegistAgreementActivity extends BaseNewActivity implements HttpCall
      */
     private void getAgreementData() {
         HashMap<String, String> params = new HashMap<>();
-
         params.put("title",queryTitle);
         HttpUtils.doPost(ACTION.WEBVIEWAGREEMENT, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
     }

@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
-import com.ainisi.queenmirror.queenmirrorcduan.ui.home.util.MapUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.ShopStoreActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.activity.WorkRoomDetailActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
+import com.ainisi.queenmirror.queenmirrorcduan.utils.DistanceGet;
 import com.ainisi.queenmirror.queenmirrorcduan.utils.MD5;
 import com.bumptech.glide.Glide;
 
@@ -108,8 +108,13 @@ public class HomepageGridViewAdapter extends BaseAdapter {
         holder.tv_shop_time.setText("营业时间：" + ShopListData.get(position).getAnsShopBasic().getOpenTime() + "-" + ShopListData.get(position).getAnsShopBasic().getCloseTime());
 
         if (ShopListData.get(position).getAnsShopBasic().getShopLogo() == null || ShopListData.get(position).getAnsShopBasic().getShopLogo().equals("")) {
+
         } else {
-            Glide.with(context).load(ShopListData.get(position).getAnsShopBasic().getShopLogo()).into(holder.iv_homepage_shop);
+            String shopLogo = ShopListData.get(position).getAnsShopBasic().getShopLogo();
+            String[] split = shopLogo.split(",");
+            for (String s : split) {
+                Glide.with(context).load(s).into(holder.iv_homepage_shop);
+            }
         }
 
         if (ShopListData.get(position).getAnsShopBasic().getGeoX() == null || ShopListData.get(position).getAnsShopBasic().getGeoY() == null ||
@@ -128,13 +133,12 @@ public class HomepageGridViewAdapter extends BaseAdapter {
         }
         if (mine_lat.equals("0") || mine_lon.equals("0")) {
             holder.tv_homepage_distance.setVisibility(View.INVISIBLE);
-        } else {
-//        distance = (DistanceGet.getDistance(Double.parseDouble(shop_lat), Double.parseDouble(shop_lon), Double.parseDouble(mine_lat), Double.parseDouble(mine_lon))) / 1000;
-//        holder.tv_homepage_distance.setText("相距 " + MD5.doubleToString(String.valueOf(distance)) + "km");
-            //double d = Math.acos(Math.sin(Double.parseDouble(mine_lat)) * Math.sin(Double.parseDouble(shop_lat)) + Math.cos(Double.parseDouble(mine_lat)) * Math.cos(Double.parseDouble(shop_lat)) * Math.cos(Double.parseDouble(shop_lon) - Double.parseDouble(mine_lon)));
 
-            double d=MapUtil.GetDistance(Double.parseDouble(mine_lat),Double.parseDouble(mine_lon),Double.parseDouble(shop_lat),Double.parseDouble(shop_lon));
-            holder.tv_homepage_distance.setText("相距 " + MD5.doubleToString(String.valueOf(d)) + "km");
+        } else {
+            holder.tv_homepage_distance.setVisibility(View.VISIBLE);
+            distance = (DistanceGet.getDistance(Double.parseDouble(shop_lat), Double.parseDouble(shop_lon), Double.parseDouble(mine_lat), Double.parseDouble(mine_lon))) / 1000;
+            holder.tv_homepage_distance.setText("相距 " + MD5.doubleToString(String.valueOf(distance)) + "km");
+
         }
 
         return convertView;

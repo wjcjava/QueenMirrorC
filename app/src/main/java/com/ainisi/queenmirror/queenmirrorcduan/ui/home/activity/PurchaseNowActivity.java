@@ -121,7 +121,6 @@ public class PurchaseNowActivity extends BaseNewActivity implements HttpCallBack
                 finish();
                 break;
             case R.id.tv_now_submit:
-                T.show("你点击了我！");
                 UploadData();
                 break;
             case R.id.rl_purchase_top:
@@ -201,8 +200,8 @@ public class PurchaseNowActivity extends BaseNewActivity implements HttpCallBack
                     intent.putExtra("amount", goodPrice.substring(1,goodPrice.length()));
                     startActivity(intent);
                     finish();
-                }else{
-
+                }else if(purchaseNowBean.getErrorCode().equals("1")){
+                    T.show(purchaseNowBean.getMsg());
                 }
                 break;
         }

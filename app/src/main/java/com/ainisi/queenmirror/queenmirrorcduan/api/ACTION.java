@@ -103,6 +103,8 @@ public interface ACTION {
 
     int SHOPSBANNER=0x051;//获取参与Banner商家数据
 
+    int SHOPPAYCHECK=0X052;//待付款订单付款前的校验
+
     int ALLOFMYORDER = 0x105;//获取我的全部订单
 
     int SHOPLIST = 0x106;//商城中商家列表
