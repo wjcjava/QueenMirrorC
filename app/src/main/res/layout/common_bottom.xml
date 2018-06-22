@@ -11,6 +11,14 @@
                 android:divider="@null"
                 android:layout_height="wrap_content">
             </com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview>
+
+    <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview
+        android:id="@+id/listView_xinyong"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:layout_height="wrap_content">
+    </com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollListview>
             <!--门店优惠券-->
             <include
                 layout="@layout/layout_workroom_coupon"/>

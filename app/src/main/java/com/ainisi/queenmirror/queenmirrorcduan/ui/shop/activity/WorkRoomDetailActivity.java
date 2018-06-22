@@ -74,6 +74,8 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
     private int searchLayoutTop;
     @Bind(R.id.listView)
     NoScrollListview listView;
+    @Bind(R.id.listView_xinyong)
+    NoScrollListview listView_xinyong;
     @Bind(R.id.tv_shop)
     TextView tvShop;
     @Bind(R.id.list_shop)
@@ -461,6 +463,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                     //门店服务
                     case 0:
                         listView.setVisibility(View.VISIBLE);
+                        listView_xinyong.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
 
@@ -468,16 +471,18 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         break;
                     //门店信用
                     case 1:
-                        listView.setVisibility(View.VISIBLE);
+                        listView.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
+                        listView_xinyong.setVisibility(View.VISIBLE);
 
                         creditAdapter = new WorkCreditAdapter(WorkRoomDetailActivity.this, apiShopScoreGet);
-                        listView.setAdapter(creditAdapter);
+                        listView_xinyong.setAdapter(creditAdapter);
                         break;
                     //商家信息
                     case 2:
                         listView.setVisibility(View.GONE);
+                        listView_xinyong.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.GONE);
                         reMassage.setVisibility(View.VISIBLE);
                         String envPhoto = shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopEnvPhoto();
@@ -530,6 +535,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         listView.setVisibility(View.GONE);
                         reMassage.setVisibility(View.GONE);
                         reCoupu.setVisibility(View.VISIBLE);
+                        listView_xinyong.setVisibility(View.GONE);
 
                         /**
                          * 商家优惠券
@@ -624,8 +630,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
             }
         }
     }
-
-
 
     public void loadMoreData(List<ShopSalesProduct.BodyBean.ApiGoodsListBean> apiOrderListMore){
 
