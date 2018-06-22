@@ -9,6 +9,7 @@ public interface UrlConstants {
 
      //String BASE_URL = "http://netjipeng.nat300.top/wg/a/";//孙继鹏
 
+
     //String BASE_URL = "http://192.168.50.145:8080/wg/a/";//测试路径     张作西
 
    // String BASE_URL = "http://192.168.50.32:8080/a/"; //拼团
