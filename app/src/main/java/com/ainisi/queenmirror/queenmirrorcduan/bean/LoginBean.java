@@ -248,7 +248,7 @@ public class LoginBean {
                 private Object qqId;
                 private Object qqToken;
                 private Object completeFlag;
-                private Object headPic;
+                private String headPic;
                 private Object lastName;
                 private Object firstName;
                 private Object idCard;
@@ -265,6 +265,22 @@ public class LoginBean {
                 private Object recommendCode;
                 private Object updatBy;
                 private String updatePgm;
+
+                public boolean isNewRecord() {
+                    return isNewRecord;
+                }
+
+                public void setNewRecord(boolean newRecord) {
+                    isNewRecord = newRecord;
+                }
+
+                public String getHeadPic() {
+                    return headPic;
+                }
+
+                public void setHeadPic(String headPic) {
+                    this.headPic = headPic;
+                }
 
                 public String getId() {
                     return id;
@@ -384,14 +400,6 @@ public class LoginBean {
 
                 public void setCompleteFlag(Object completeFlag) {
                     this.completeFlag = completeFlag;
-                }
-
-                public Object getHeadPic() {
-                    return headPic;
-                }
-
-                public void setHeadPic(Object headPic) {
-                    this.headPic = headPic;
                 }
 
                 public Object getLastName() {

@@ -142,6 +142,7 @@ public class LoginActivity extends BaseNewActivity implements HttpCallBack {
                     SP.put(LoginActivity.this,SpContent.UserId ,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getId());
                     SP.put(LoginActivity.this,SpContent.UserCall,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getCellPhone());
                     SP.put(LoginActivity.this,SpContent.UserName,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getUserName());
+                    SP.put(LoginActivity.this,SpContent.userHeadPic,loginBean.getBody().getApiAnsCustBasic().getAnsCustBasic().getHeadPic());
                     SP.put(LoginActivity.this,SpContent.isLogin,"1");
                     SP.put(LoginActivity.this,SpContent.UserToken,loginBean.getBody().getToken());
                     Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);

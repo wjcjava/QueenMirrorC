@@ -7,6 +7,7 @@ public class SpContent {
 
     public static String pageSize = "10";
     public static String ENDPOINT = "http://oss-cn-hangzhou.aliyuncs.com";
+    public static String ENDPOINTS = "oss-cn-hangzhou.aliyuncs.com";
     public static String BUCKET = "nwptest";
 
     public static String isLogin = "isLogin";//判断是否登录
@@ -19,6 +20,7 @@ public class SpContent {
     public static String Lickname = "linkName";//联系人姓名
     public static String LickPhone = "linkPhone";//联系人电话
     public static String LickSex = "lickSex";//联系人性别
+    public static String userHeadPic = "userHeadpic";//用户头像
 
     public static String Remember="remember";//记住密码
 

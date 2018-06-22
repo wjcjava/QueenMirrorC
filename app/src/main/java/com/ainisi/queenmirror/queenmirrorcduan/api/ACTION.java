@@ -213,4 +213,6 @@ public interface ACTION {
 
     int GETPINTUANAFTER = 0x159;//获取拼团后的数据
 
+    int HEADPICUPLOAD = 0x160;//头像上传
+
 }

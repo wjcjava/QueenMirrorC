@@ -39,12 +39,14 @@ import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
+import com.bumptech.glide.Glide;
 import com.lzy.okgo.cache.CacheMode;
 
 import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
@@ -60,8 +62,10 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
     ImageView img_information;
     @Bind(R.id.tv_mine_modou)
     TextView tv_mine_modou;
+    @Bind(R.id.iv_mine_title)
+    CircleImageView iv_mine_title;
     boolean isLogin = false;
-    private String service_tel = "120";
+    private String service_tel = "120",head_pic="";
     int moDou = 0;
 
     @Override
@@ -79,6 +83,8 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
         if (SP.get(getActivity(), SpContent.isLogin, "0").toString().equals("1")) {
             isLogin = true;
             tv_mine_uername.setText(SP.get(getActivity(), SpContent.UserName, "") + "");
+            head_pic = SP.get(getActivity(),SpContent.userHeadPic,"")+"";
+            Glide.with(getActivity()).load(head_pic).into(iv_mine_title);
         } else {
             isLogin = false;
             tv_mine_uername.setText("点击登录");
@@ -114,7 +120,7 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
     protected void initView() {
     }
 
-    @OnClick({R.id.iv_title, R.id.iv_install, R.id.img_information,
+    @OnClick({R.id.iv_mine_title, R.id.iv_install, R.id.img_information,
             R.id.layout_collection, R.id.layout_follow, R.id.layout_foot,
             R.id.layout_evaluate, R.id.img_position, R.id.img_friends,
             R.id.ly_mine_discount, R.id.ly_mine_foot, R.id.ly_mine_bean,
@@ -135,7 +141,7 @@ public class MineFragment extends BaseFragment implements HttpCallBack {
                 MineAuthenticationActivity.startActivity(getActivity());
                 break;
             //更改头像和个人信息
-            case R.id.iv_title:
+            case R.id.iv_mine_title:
                 //PortraitActivity.startActivity(getActivity());
                 if (isLogin) {
                     startActivity(new Intent(getContext(), PortraitActivity.class));

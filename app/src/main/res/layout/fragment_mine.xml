@@ -15,7 +15,7 @@
         android:background="@drawable/ic_setting_breake">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_title"
+            android:id="@+id/iv_mine_title"
             android:layout_width="@dimen/comment_57_dip"
             android:layout_height="@dimen/comment_57_dip"
             android:layout_marginStart="@dimen/comment_25_dip"
@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/comment_10_dip"
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/comment_70_dip"
-            android:layout_toRightOf="@+id/iv_title"
+            android:layout_toRightOf="@+id/iv_mine_title"
             android:text="点击登录"
             />
 

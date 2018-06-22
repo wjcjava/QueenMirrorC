@@ -1,27 +1,18 @@
 package com.ainisi.queenmirror.queenmirrorcduan.ui.mine.activity;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
-
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.api.ACTION;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.SuccessBean;
+import com.ainisi.queenmirror.queenmirrorcduan.bean.UploadPicBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.DateUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.OSSRespContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.OSSUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
@@ -37,17 +28,11 @@ import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.bumptech.glide.Glide;
 import com.lzy.okgo.cache.CacheMode;
 import com.ufo.imageselector.DWImages;
-
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-import kr.co.namee.permissiongen.PermissionFail;
-import kr.co.namee.permissiongen.PermissionGen;
-import kr.co.namee.permissiongen.PermissionSuccess;
 
 //我的账号
 public class PortraitActivity extends BaseNewActivity implements View.OnClickListener, HttpCallBack {
@@ -65,12 +50,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
     TextView tv_userphone;
     private CustomPopWindow popWindow;
 
-    private String securityToken;
-    private String securityAppKey;
-
-    private String securityAccessKeySecret;
-
-    private String securityExpiration;
+    String head_pic = "";
 
 
     public static void startActivity(Context context) {
@@ -87,6 +67,8 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
         tv_portrait_username.setText(SP.get(this, SpContent.UserName, "") + "");
         tv_portrait_nickname.setText(SP.get(this,SpContent.UserName,"")+"");
         tv_userphone.setText(SP.get(this,SpContent.UserCall,"")+"");
+
+        Glide.with(this).load(SP.get(this,SpContent.userHeadPic,"")+"").into(iv_portrait_head);
     }
 
     @Override
@@ -110,9 +92,7 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.layout_userimg:
-
                 getOSSToken();
-
                 break;
             //修改用户名
             case R.id.layout_username:
@@ -167,32 +147,56 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
             public void onResult(List<String> images) {
                 // Log.d(TAG, "onResult:--> : images: " + images.size());
 
-                String objectKey = DateUtil.getCurrentDateTime("yyyyMMddhhmmssSSS") + ((int) ((Math.random() * 9 + 1) * 10000) + "") + ".jpg";
+                final String objectKey = DateUtil.getCurrentDateTime("yyyyMMddhhmmssSSS") + ((int) ((Math.random() * 9 + 1) * 10000) + "") + ".jpg";
 
                 OSSUtil.getInstance().setBucket("nwptest").asyncPutImage(objectKey, images.get(0), new OSSProgressCallback<PutObjectRequest>() {
                     @Override
                     public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-
                     }
                 }, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
                     @Override
                     public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-
-                        Log.i("这里是显示是否上传成功返回值    ：   ", "上传成功---" + result.toString());
+                        head_pic = head_pic+("https://" + SpContent.BUCKET + "." + SpContent.ENDPOINTS + "/" + objectKey);
+                        /**
+                         *这里应该把路径传入后台
+                         */
+                        UploadHeadData();
                     }
-
                     @Override
                     public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
-
                     }
                 });
             }
         });
     }
 
+    /**
+     * 上传头像
+     */
+    private void UploadHeadData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("picName", head_pic);
+        params.put("userId",SP.get(this,SpContent.UserId,"")+"");
+        HttpUtils.doPost(ACTION.HEADPICUPLOAD, params, CacheMode.REQUEST_FAILED_READ_CACHE, true, this);
+    }
+
     @Override
     public void onSuccess(int action, String res) {
         switch (action) {
+            /**
+             * 上传头像
+             */
+            case ACTION.HEADPICUPLOAD:
+
+                UploadPicBean uploadPicBean = GsonUtil.toObj(res,UploadPicBean.class);
+                if(uploadPicBean.isSuccess()&&uploadPicBean.getErrorCode().toString().equals("0")){
+                    Glide.with(this).load(uploadPicBean.getBody().getHeadPic()).into(iv_portrait_head);
+
+                    SP.put(this,SpContent.userHeadPic,uploadPicBean.getBody().getHeadPic());
+                }else{
+                    T.show(uploadPicBean.getMsg());
+                }
+                break;
             case ACTION.LOGINOUT:
                 SuccessBean successBean = GsonUtil.toObj(res, SuccessBean.class);
                 if (successBean.isSuccess()) {
@@ -208,12 +212,11 @@ public class PortraitActivity extends BaseNewActivity implements View.OnClickLis
 
                 OSSRespContent ossstsModel = GsonUtil.toObj(res,OSSRespContent.class);
 
-                L.e("%%%%%%%      "+res);
-
                 if(ossstsModel.isSuccess()){
                     OSSUtil.getInstance().initOSS(PortraitActivity.this, SpContent.ENDPOINT, ossstsModel);
                     DWImages.getImages(this, DWImages.ACTION_ALBUM, 1);
                 }
+                break;
         }
     }
 

@@ -130,7 +130,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="@dimen/comment_15_dip"
                     android:layout_marginTop="@dimen/comment_15_dip"
-                    android:text="评价(123)"
+                    android:text="评价（0）"
                     android:textColor="@color/alpha_95_black"
                     android:textSize="@dimen/comment_15_size" />
 

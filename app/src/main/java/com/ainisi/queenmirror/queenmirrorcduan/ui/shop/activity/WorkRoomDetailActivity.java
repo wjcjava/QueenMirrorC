@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.ainisi.queenmirror.queenmirrorcduan.R;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.ShopTuijianAdapter;
 import com.ainisi.queenmirror.queenmirrorcduan.adapter.WorkCreditAdapter;
@@ -21,7 +20,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.api.HttpCallBack;
 import com.ainisi.queenmirror.queenmirrorcduan.api.HttpUtils;
 import com.ainisi.queenmirror.queenmirrorcduan.base.BaseNewActivity;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopDetailDataBean;
-import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopListHomeBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopSalesProduct;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopTuijianBean;
 import com.ainisi.queenmirror.queenmirrorcduan.bean.ShopXinyongBean;
@@ -33,7 +31,6 @@ import com.ainisi.queenmirror.queenmirrorcduan.ui.home.activity.ShoppingCartActi
 import com.ainisi.queenmirror.queenmirrorcduan.ui.shop.bean.ShopDiscounBean;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.GsonUtil;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.HoveringScrollview;
-import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.L;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SP;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.SpContent;
 import com.ainisi.queenmirror.queenmirrorcduan.utilnomal.T;
@@ -521,7 +518,7 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         }
 
                         if(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief() == null ||shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief().toString().equals("")){
-                            tv_work_detail_introduce.setText("等待商家补成");
+                            tv_work_detail_introduce.setText("等待商家补充");
                         }else{
                             tv_work_detail_introduce.setText(shopDetailDataBean.getBody().getApiShop().getAnsShopBasic().getShopBrief());
                         }
@@ -541,15 +538,11 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
                         break;
                 }
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }
@@ -580,7 +573,6 @@ public class WorkRoomDetailActivity extends BaseNewActivity implements HttpCallB
              */
             case R.id.tv_work_detail_guanzhu:
                 if (isLogin.equals("1")) {
-
                     userId = (String) SP.get(WorkRoomDetailActivity.this, SpContent.UserId, "");
                     if (tv_work_detail_guanzhu.getText().equals("关注")) {
                         guanzhuData();//关注

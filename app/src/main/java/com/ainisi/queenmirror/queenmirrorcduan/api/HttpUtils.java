@@ -707,7 +707,9 @@ public class HttpUtils {
             case ACTION.SHOPSBANNER:
                 actionUrl=UrlConstants.SHOPSBANNER;
                 break;
-
+            case ACTION.HEADPICUPLOAD:
+                actionUrl = UrlConstants.HEADPICUPLOAD;
+                break;
 
         }
         url.append(actionUrl);

@@ -15,7 +15,7 @@ public interface UrlConstants {
 
     //String BASE_URL = "http://192.168.50.130:8080/wg/a/";//马总测试路径
 
-    //String BASE_URL = "http://192.168.50.137:8080/wg/a/";//刘璇
+   // String BASE_URL = "http://192.168.50.137:8080/wg/a/";//刘璇
 
     String BASE_URL = "http://192.168.30.155:7080/wg/a/";
 
@@ -207,7 +207,7 @@ public interface UrlConstants {
 
     String COMMENTINPUT = "api/ec/goods/goodsCommentsReply";//评论回复
 
-    String OSSGETTOKEN = "ans/oss/securityTokenApply";
+    String OSSGETTOKEN = "api/ans/oss/securityTokenApply";
 
     String WEBVIEWAGREEMENT = "api/ans/protocal/query";//服务协议
 
@@ -228,4 +228,6 @@ public interface UrlConstants {
     String ADDPINTUAN = "api/ans/gporder/save";//开启拼团
 
     String GETPINTUANAFTER = "api/ans/gporder/detailsBySelf";//获取拼团后的数据
+
+    String HEADPICUPLOAD = "api/ans/cust/userHeaderUpload";//头像上传
 }

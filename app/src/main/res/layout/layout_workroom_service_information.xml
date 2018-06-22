@@ -125,7 +125,6 @@
             android:layout_marginEnd="@dimen/comment_13_dip"
             android:layout_height="@dimen/comment_2_dip"/>
         <TextView
-
             android:id="@+id/tv_business_profile"
             android:layout_below="@id/view_three"
             android:layout_width="wrap_content"
@@ -140,6 +139,11 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/comment_22_dip"
             android:layout_alignParentRight="true"
+
+
+
+            android:layout_toLeftOf="@id/tv_business_profile"
+            android:layout_marginStart="10dp"
             android:layout_marginBottom="@dimen/comment_77_dip"
             android:layout_marginEnd="@dimen/comment_15_dip"
             android:text="专注美业15年，服务好，质量好！"

@@ -166,7 +166,7 @@
                     android:layout_marginStart="@dimen/comment_12_dip"
                     android:layout_marginTop="@dimen/comment_15_dip"
 
-                    android:text="评价（3）"
+                    android:text="评价（0）"
                     android:textSize="@dimen/comment_14_dip"
                     android:textColor="@color/gray_E7370C" />
 

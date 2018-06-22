@@ -82,20 +82,34 @@
         android:paddingTop="@dimen/comment_15_dip"
         android:textSize="@dimen/comment_13_size" />
 
-    <ImageView
+  <!--  <ImageView
         android:id="@+id/iv_add"
         android:layout_width="@dimen/comment_80_dip"
         android:layout_height="@dimen/comment_80_dip"
         android:layout_below="@id/et_score_order"
         android:layout_marginStart="@dimen/comment_20_dip"
         android:layout_marginTop="@dimen/comment_14_dip"
-        android:src="@mipmap/icon_order_add" />
+        android:src="@mipmap/icon_order_add" />-->
+
+    <com.ainisi.queenmirror.queenmirrorcduan.utils.NoScrollGridView
+        android:id="@+id/gv_comment_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:layout_below="@id/et_score_order"
+        android:layout_marginTop="@dimen/comment_10_dip"
+        android:layout_marginStart="@dimen/comment_20_dip"
+        android:layout_marginEnd="@dimen/comment_20_dip"
+        android:layout_marginBottom="@dimen/comment_10_dip"
+        android:focusableInTouchMode="false"
+        android:verticalSpacing="10dp"
+        android:numColumns="3"/>
 
     <View
         android:id="@+id/view_one"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_2_dip"
-        android:layout_below="@id/iv_add"
+        android:layout_below="@id/gv_comment_gridView"
         android:layout_marginTop="@dimen/comment_14_dip"
         android:background="@color/alpha_05_black" />
 
